@@ -1,0 +1,27 @@
+{
+  "name": "react-native-render-html",
+  "version": "1.0.0",
+  "author": "Maxime Bertonnier",
+  "license": "BSD-2-Clause",
+  "repository": "https://github.com/Exilz/react-native-render-html",
+  "description": "React Native component that renders HTML as native views",
+  "keywords": [
+    "react-native",
+    "react-component",
+    "react-native-component",
+    "html",
+    "render-html"
+  ],
+  "dependencies": {
+    "buffer": "^4.5.1",
+    "events": "^1.1.0",
+    "html-entities": "^1.2.0",
+    "htmlparser2": "^3.9.0",
+    "stream": "0.0.2"
+  },
+  "peerDependencies": {
+    "react": ">=0.14.8",
+    "react-native": ">=0.24.0",
+    "react-addons-shallow-compare": ">=0.14.8"
+  }
+}
