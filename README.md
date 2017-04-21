@@ -5,7 +5,7 @@ This is based on the work of [Thomas Beverley](https://github.com/Thomas101).
 
 It seems that he stopped updating his repo, so instead of keeping my fork up-to-date, here's a brand new module. Thanks a lot for the original work !
 
-<center>![react-native-render-html](http://i.giphy.com/26tkmjBLvThP0TSak.gif)</center>
+![react-native-render-html](http://i.giphy.com/26tkmjBLvThP0TSak.gif)
 
 ## Add it to your project
 
@@ -16,7 +16,7 @@ npm install react-native-render-html --save
 ## Usage
 
 ```js
-import HTML from 'react-render-html'
+import HTML from 'react-native-render-html'
 
 ...
 
