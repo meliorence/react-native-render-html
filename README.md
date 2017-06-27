@@ -61,11 +61,12 @@ render() {
 			// Callback for when the user taps on a link. Oh look! You
 			// get the href passed back. Handy if you want to send
 			// someone somewhere :-)
-			onLinkPress={(evt, href) => console.log(href)} />
+			onLinkPress={(evt, href) => console.log(href)}
 
 			// Renderers to use for rendering specific HTML elements.
 			// Default renderers are pre-provided in HTMLRenderers.js.
 			renderers={renderers}
+		/>
 	)
 }
 ```
