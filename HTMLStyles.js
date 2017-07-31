@@ -123,6 +123,16 @@ class HTMLStyles {
                 marginBottom: BASE_FONT_SIZE / 2,
                 height: 1,
                 backgroundColor: '#CCC'
+            },
+            sub: {
+                textAlignVertical: 'top',
+                fontSize: BASE_FONT_SIZE * 0.8,
+                marginTop: BASE_FONT_SIZE / 2,
+            },
+            sup: {
+                textAlignVertical: 'top',
+                fontSize: BASE_FONT_SIZE * 0.8,
+                marginBottom: BASE_FONT_SIZE / 2,
             }
         });
     }
