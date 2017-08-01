@@ -46,6 +46,8 @@ export default {
   * @return a RN element that represents an image tag
   */
     img: (htmlAttribs, children, passProps) => {
+        if (!htmlAttribs.src) { return null; }
+        
         // Build our styles
         const style = []
         .concat(
