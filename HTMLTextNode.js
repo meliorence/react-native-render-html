@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types'
 import { Text } from 'react-native';
-import shallowCompare from 'react-addons-shallow-compare';
 import { AllHtmlEntities } from 'html-entities';
 import { RE, TEXT_TAG_NAMES, PRE_TAG_NAMES } from './HTMLUtils';
 
-export default class HTMLTextNode extends React.Component {
+export default class HTMLTextNode extends PureComponent {
   /* ****************************************************************************/
   // Class
   /* ****************************************************************************/
 
     static propTypes = {
-        children: React.PropTypes.string.isRequired
+        children: PropTypes.string.isRequired
     }
 
   /**
@@ -40,14 +40,6 @@ export default class HTMLTextNode extends React.Component {
                 }
             }
         }
-    }
-
-  /* ****************************************************************************/
-  // Data Lifecycle
-  /* ****************************************************************************/
-
-    shouldComponentUpdate (nextProps, nextState) {
-        return shallowCompare(this, nextProps, nextState);
     }
 
   /* ****************************************************************************/

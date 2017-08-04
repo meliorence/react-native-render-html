@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types'
 import { View } from 'react-native';
-import shallowCompare from 'react-addons-shallow-compare';
 import htmlparser2 from 'htmlparser2';
 import HTMLElement from './HTMLElement';
 import HTMLTextNode from './HTMLTextNode';
@@ -8,18 +8,18 @@ import HTMLRenderers from './HTMLRenderers';
 import HTMLStyles from './HTMLStyles';
 import { TEXT_TAG_NAMES } from './HTMLUtils';
 
-export default class HTML extends React.Component {
+export default class HTML extends PureComponent {
   /* ****************************************************************************/
   // Class
   /* ****************************************************************************/
 
     static propTypes = {
-        html: React.PropTypes.string.isRequired,
-        htmlStyles: React.PropTypes.object,
+        html: PropTypes.string.isRequired,
+        htmlStyles: PropTypes.object,
         containerStyle: View.propTypes.style,
-        onLinkPress: React.PropTypes.func,
-        imagesMaxWidth: React.PropTypes.number,
-        renderers: React.PropTypes.object.isRequired
+        onLinkPress: PropTypes.func,
+        imagesMaxWidth: PropTypes.number,
+        renderers: PropTypes.object.isRequired
     }
 
     static defaultProps = {
@@ -33,14 +33,6 @@ export default class HTML extends React.Component {
             ...(this.props.renderers || {})
         };
         this.imgsToRender = [];
-    }
-
-  /* ****************************************************************************/
-  // Data Lifecycle
-  /* ****************************************************************************/
-
-    shouldComponentUpdate (nextProps, nextState) {
-        return shallowCompare(this, nextProps, nextState);
     }
 
   /* ****************************************************************************/

@@ -1,10 +1,11 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
 import { Image } from 'react-native';
+import PropTypes from 'prop-types'
 
 const DEFAULT_WIDTH = 100;
 const DEFAULT_HEIGHT = 100;
 
-export default class HTMLImage extends Component {
+export default class HTMLImage extends PureComponent {
 
     constructor (props) {
         super(props);

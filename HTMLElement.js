@@ -1,31 +1,23 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types'
 import { Text, View } from 'react-native';
-import shallowCompare from 'react-addons-shallow-compare';
 import HTMLStyles from './HTMLStyles';
 
-class HTMLElement extends React.Component {
+class HTMLElement extends PureComponent {
   /* ****************************************************************************/
   // Class
   /* ****************************************************************************/
 
     static propTypes = {
-        tagName: React.PropTypes.string.isRequired,
-        renderers: React.PropTypes.object.isRequired,
-        groupInfo: React.PropTypes.object,
-        parentTagName: React.PropTypes.string,
-        htmlStyles: React.PropTypes.object,
-        htmlAttibs: React.PropTypes.object,
-        onLinkPress: React.PropTypes.func,
-        children: React.PropTypes.node,
-        parentIsText: React.PropTypes.bool.isRequired
-    }
-
-  /* ****************************************************************************/
-  // Data Lifecycle
-  /* ****************************************************************************/
-
-    shouldComponentUpdate (nextProps, nextState) {
-        return shallowCompare(this, nextProps, nextState);
+        tagName: PropTypes.string.isRequired,
+        renderers: PropTypes.object.isRequired,
+        groupInfo: PropTypes.object,
+        parentTagName: PropTypes.string,
+        htmlStyles: PropTypes.object,
+        htmlAttibs: PropTypes.object,
+        onLinkPress: PropTypes.func,
+        children: PropTypes.node,
+        parentIsText: PropTypes.bool.isRequired
     }
 
   /* ****************************************************************************/
