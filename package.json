@@ -20,8 +20,22 @@
     "stream": "0.0.2"
   },
   "peerDependencies": {
+    "prop-types": ">=15.5.10",
     "react": ">=16.0.0-alpha.26",
-    "react-native": ">=0.43.2",
-    "react-addons-shallow-compare": ">=15.3.2"
+    "react-native": ">=0.43.2"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "globals": [
+      "describe",
+      "it",
+      "expect",
+      "fetch",
+      "navigator",
+      "__DEV__",
+      "XMLHttpRequest",
+      "FormData",
+      "React$Element"
+    ]
   }
 }
