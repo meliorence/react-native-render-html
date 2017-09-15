@@ -1,3 +1,4 @@
-import HTML from './HTML'
+import HTML from './src/HTML';
 
-export default HTML
+export default HTML;
+
