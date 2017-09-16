@@ -180,13 +180,15 @@ class HTMLStyles {
 
       const testStyle = {}
       testStyle[key] = value
-      if (PropTypes.checkPropTypes(styleProps[key], testStyle, key, 'react-native-render-html')) {
+      const styleProp = {}
+      styleProp[key] = styleProps[key];
+      if (PropTypes.checkPropTypes(styleProp, testStyle, key, 'react-native-render-html')) {
       // See if we can convert a 20px to a 20 automagically
         if (styleProps[key] === PropTypes.number) {
           const numericValue = parseFloat(value.replace('px', ''))
           if (!isNaN(numericValue)) {
             testStyle[key] = numericValue
-            if (!PropTypes.checkPropTypes(styleProps[key], testStyle, key, 'react-native-render-html')) {
+            if (!PropTypes.checkPropTypes(styleProp, testStyle, key, 'react-native-render-html')) {
               return [key, numericValue]
             }
           }
