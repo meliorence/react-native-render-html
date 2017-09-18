@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Image } from 'react-native';
+import { Image, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 const DEFAULT_WIDTH = 100;
@@ -23,26 +23,41 @@ export default class HTMLImage extends PureComponent {
     componentDidMount () {
         const { source, imagesMaxWidth } = this.props;
 
-        Image.getSize(source.uri, (width, height) => {
-            this.setState({
-                width: imagesMaxWidth && width > imagesMaxWidth ? imagesMaxWidth : width,
-                height: imagesMaxWidth && width > imagesMaxWidth ? height / (width / imagesMaxWidth) : height
-            });
-        });
+        Image.getSize(
+            source.uri,
+            (width, height) => {
+                this.setState({
+                    width: imagesMaxWidth && width > imagesMaxWidth ? imagesMaxWidth : width,
+                    height: imagesMaxWidth && width > imagesMaxWidth ? height / (width / imagesMaxWidth) : height
+                });
+            },
+            () => {
+                console.log('failed getsize for', source);
+                this.setState({ error: true });
+            }
+        );
+    }
+
+    validImage (source, style, props = {}) { 
+        return (
+            <Image
+              source={source}
+              style={[ style, { width: this.state.width, height: this.state.height, resizeMode: 'cover' }]}
+              {...props}
+            />
+        );
+    }
+
+    get errorImage () {
+        return (
+            <View style={{ width: 50, height: 50, borderWidth: 1, borderColor: 'lightgray' }} />
+        );
     }
 
     render () {
         const { source, style, passProps } = this.props;
+        console.log('HTMLImage', this);
 
-        return (
-          <Image
-            source={source}
-            style={[
-                style,
-                { width: this.state.width, height: this.state.height, resizeMode: 'cover' }
-            ]}
-            {...passProps}
-          />
-        );
+        return !this.state.error ? this.validImage(source, style, passProps) : this.errorImage;
     }
 }
