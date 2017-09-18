@@ -59,7 +59,7 @@ export default {
                 HTMLStyles.defaultStyles.img,
                 passProps.htmlStyles ? passProps.htmlStyles.img : undefined,
                 htmlAttribs.style ?
-                    HTMLStyles.cssStringToRNStyle(htmlAttribs.style, HTMLStyles.STYLESETS.IMAGE) :
+                    HTMLStyles.cssStringToRNStyle(htmlAttribs.style, HTMLStyles.STYLESETS.IMAGE, { parentTag: 'img' }) :
                     undefined
             )
             .filter((s) => s !== undefined);
