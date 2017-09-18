@@ -158,6 +158,10 @@ class HTMLStyles {
                 if (PropTypes.checkPropTypes(styleProps[key], testStyle, key, 'react-native-render-html')) {
                     // See if we can convert a 20px to a 20 automagically
                     if (styleProps[key] === PropTypes.number) {
+                        if (value.search('em') !== -1) {
+                            const pxSize = parseFloat(value.replace('em', '')) * emSize;
+                            return [key, pxSize];
+                        }
                         const numericValue = parseFloat(value.replace('px', ''));
                         if (!isNaN(numericValue)) {
                             testStyle[key] = numericValue;

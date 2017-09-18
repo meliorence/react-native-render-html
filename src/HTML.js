@@ -12,15 +12,17 @@ export default class HTML extends PureComponent {
 
     static propTypes = {
         html: PropTypes.string.isRequired,
+        renderers: PropTypes.object.isRequired,
         htmlStyles: PropTypes.object,
         containerStyle: View.propTypes.style,
         onLinkPress: PropTypes.func,
         imagesMaxWidth: PropTypes.number,
-        renderers: PropTypes.object.isRequired
+        emSize: PropTypes.number.isRequired
     }
 
     static defaultProps = {
-        renderers: HTMLRenderers
+        renderers: HTMLRenderers,
+        emSize: 14
     }
 
     constructor (props) {
@@ -41,18 +43,20 @@ export default class HTML extends PureComponent {
      * @parentIsText: bool
      */
     createElement (node, index, groupInfo, parentTagName, parentIsText) {
+        const { htmlStyles, imagesMaxWidth, onLinkPress, emSize } = this.props;
         return (
             <HTMLElement
               key={index}
-              htmlStyles={this.props.htmlStyles}
-              imagesMaxWidth={this.props.imagesMaxWidth}
+              htmlStyles={htmlStyles}
+              imagesMaxWidth={imagesMaxWidth}
               htmlAttribs={node.attribs}
               tagName={node.name}
               groupInfo={groupInfo}
               parentTagName={parentTagName}
               parentIsText={parentIsText}
-              onLinkPress={this.props.onLinkPress}
-              renderers={this.renderers}>
+              onLinkPress={onLinkPress}
+              renderers={this.renderers}
+              emSize={emSize}>
                 { this.renderHtmlAsRN(node.children, node.name, !HTMLStyles.blockElements.has(node.name)) }
             </HTMLElement>
         );
