@@ -149,28 +149,24 @@ class HTMLStyles {
                     value];
             })
             .map(([key, value]) => {
-                if (!styleProps[key]) {
-                    return undefined;
-                }
+                if (!styleProps[key]) { return undefined; }
 
                 const testStyle = {};
                 testStyle[key] = value;
-                if (PropTypes.checkPropTypes(styleProps[key], testStyle, key, 'react-native-render-html')) {
-                    // See if we can convert a 20px to a 20 automagically
-                    if (styleProps[key] === PropTypes.number) {
                         if (value.search('em') !== -1) {
                             const pxSize = parseFloat(value.replace('em', '')) * emSize;
                             return [key, pxSize];
                         }
+                        // See if we can convert a 20px to a 20 automagically
                         const numericValue = parseFloat(value.replace('px', ''));
                         if (!isNaN(numericValue)) {
                             testStyle[key] = numericValue;
-                            if (!PropTypes.checkPropTypes(styleProps[key], testStyle, key, 'react-native-render-html')) {
+                            if (PropTypes.checkPropTypes(styleProp, testStyle, key, 'react-native-render-html') == null) {
                                 return [key, numericValue];
                             }
                         }
                     }
-                    return undefined;
+                    return [key, value];
                 }
                 return [key, value];
             })
