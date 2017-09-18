@@ -13,11 +13,14 @@ const RNViewStylePropTypes = Object.keys(_RNViewStylePropTypes)
 const RNImageStylePropTypes = Object.keys(_RNImageStylePropTypes)
     .reduce((acc, k) => { acc[k] = _RNImageStylePropTypes[k]; return acc; }, {});
 
-const STYLESETS = Object.freeze({
-    VIEW: 'view',
-    TEXT: 'text',
-    IMAGE: 'image'
-});
+const STYLESETS = Object.freeze({ VIEW: 'view', TEXT: 'text', IMAGE: 'image' });
+
+const PERC_SUPPORTED_STYLES = [
+    'width', 'height',
+    'top', 'bottom', 'left', 'right',
+    'margin', 'marginBottom', 'marginTop', 'marginLeft', 'marginRight', 'marginHorizontal', 'marginVertical',
+    'padding', 'paddingBottom', 'paddingTop', 'paddingLeft', 'paddingRight', 'paddingHorizontal', 'paddingVertical'
+];
 
 const stylePropTypes = {};
 stylePropTypes[STYLESETS.VIEW] = Object.assign({}, RNViewStylePropTypes);
@@ -135,7 +138,7 @@ class HTMLStyles {
   * @param styleset: the styleset to convert the styles against
   * @return an object of react native styles
   */
-    cssToRNStyle (css, styleset) {
+    cssToRNStyle (css, styleset, { parentTag, emSize }) {
         const styleProps = stylePropTypes[styleset];
         return Object.keys(css)
             .map((key) => [key, css[key]])
@@ -153,6 +156,14 @@ class HTMLStyles {
 
                 const testStyle = {};
                 testStyle[key] = value;
+                const styleProp = {};
+                styleProp[key] = styleProps[key];
+                if (PropTypes.checkPropTypes(styleProp, testStyle, key, 'react-native-render-html') == null) {
+                    if (typeof value === 'string') {
+                        // See if we can use the percentage directly
+                        if (value.search('%') !== -1 && PERC_SUPPORTED_STYLES.indexOf(key) !== -1) {
+                            return [key, value];
+                        }
                         if (value.search('em') !== -1) {
                             const pxSize = parseFloat(value.replace('em', '')) * emSize;
                             return [key, pxSize];
@@ -182,8 +193,8 @@ class HTMLStyles {
   * @param styleset=STYLESETS.TEXT: the styleset to convert the styles against
   * @return a react native style object
   */
-    cssStringToRNStyle (str, styleset = STYLESETS.TEXT) {
-        return this.cssToRNStyle(this.cssStringToObject(str), styleset);
+    cssStringToRNStyle (str, styleset = STYLESETS.TEXT, options) {
+        return this.cssToRNStyle(this.cssStringToObject(str), styleset, options);
     }
 }
 
