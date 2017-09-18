@@ -34,6 +34,12 @@ export default class HTML extends PureComponent {
         this.imgsToRender = [];
     }
 
+    componentWillReceiveProps (nextProps) {
+        if (this.props.html !== nextProps.html) {
+            this.imgsToRender = [];
+        }
+    }
+
     /**
      * Returns an RN element from the HTML node being parsed
      * @param node: object
