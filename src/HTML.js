@@ -177,7 +177,7 @@ export default class HTML extends PureComponent {
                     ElementsToRender = Element;
                 }
 
-                if (node.name === 'img' && parentIsText) {
+                if (node.name === 'img' && parentIsText && parentTagName !== 'a') {
                     this.imgsToRender.push({ ...Element, firstLoopIndex: index });
                     return false;
                 }
