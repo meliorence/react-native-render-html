@@ -14,6 +14,7 @@ export default class HTML extends PureComponent {
         html: PropTypes.string.isRequired,
         renderers: PropTypes.object.isRequired,
         ignoredTags: PropTypes.array.isRequired,
+        ignoredStyles: PropTypes.array.isRequired,
         htmlStyles: PropTypes.object,
         containerStyle: View.propTypes.style,
         onLinkPress: PropTypes.func,
@@ -25,6 +26,7 @@ export default class HTML extends PureComponent {
         renderers: HTMLRenderers,
         emSize: 14,
         ignoredTags: [],
+        ignoredStyles: []
     }
 
     constructor (props) {

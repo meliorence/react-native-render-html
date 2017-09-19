@@ -139,9 +139,10 @@ class HTMLStyles {
   * @param styleset: the styleset to convert the styles against
   * @return an object of react native styles
   */
-    cssToRNStyle (css, styleset, { parentTag, emSize }) {
+    cssToRNStyle (css, styleset, { parentTag, emSize, ignoredStyles }) {
         const styleProps = stylePropTypes[styleset];
         return Object.keys(css)
+            .filter((key) => (ignoredStyles || []).indexOf(key) === -1)
             .map((key) => [key, css[key]])
             .map(([key, value]) => {
                 // Key convert
@@ -153,7 +154,9 @@ class HTMLStyles {
                     value];
             })
             .map(([key, value]) => {
-                if (!styleProps[key]) { return undefined; }
+                if (!styleProps[key]) {
+                    return undefined;
+                }
 
                 const testStyle = {};
                 testStyle[key] = value;

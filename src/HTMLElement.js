@@ -9,6 +9,7 @@ export default class HTMLElement extends PureComponent {
         tagName: PropTypes.string.isRequired,
         renderers: PropTypes.object.isRequired,
         emSize: PropTypes.number.isRequired,
+        ignoredStyles: PropTypes.array.isRequired,
         groupInfo: PropTypes.object,
         parentTagName: PropTypes.string,
         htmlStyles: PropTypes.object,
@@ -62,7 +63,7 @@ export default class HTMLElement extends PureComponent {
     }
 
     render () {
-        const { htmlStyles, tagName, htmlAttribs, renderers, children, emSize, ...passProps } = this.props;
+        const { htmlStyles, tagName, htmlAttribs, renderers, children, emSize, ignoredStyles, ...passProps } = this.props;
 
         if (renderers[tagName]) {
             const copyProps = [
@@ -84,7 +85,7 @@ export default class HTMLElement extends PureComponent {
                 .concat(
                     HTMLStyles.defaultStyles[tagName],
                     htmlStyles ? htmlStyles[tagName] : undefined,
-                    htmlAttribs.style ? HTMLStyles.cssStringToRNStyle(htmlAttribs.style, styleset, { parentTag: tagName, emSize }) : undefined
+                    htmlAttribs.style ? HTMLStyles.cssStringToRNStyle(htmlAttribs.style, styleset, { parentTag: tagName, emSize, ignoredStyles }) : undefined
                 )
                 .filter((s) => s !== undefined);
 
