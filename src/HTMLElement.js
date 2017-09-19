@@ -65,6 +65,17 @@ export default class HTMLElement extends PureComponent {
     render () {
         const { htmlStyles, tagName, htmlAttribs, renderers, children, emSize, ignoredStyles, ...passProps } = this.props;
 
+        const RNElem = this.elementClass();
+        const styleset = RNElem === Text ? HTMLStyles.STYLESETS.TEXT : HTMLStyles.STYLESETS.VIEW;
+        const convertedCSSStyles =
+            htmlAttribs.style ?
+                HTMLStyles.cssStringToRNStyle(
+                    htmlAttribs.style,
+                    styleset,
+                    { parentTag: tagName, emSize, ignoredStyles }
+                ) :
+                {};
+
         if (renderers[tagName]) {
             const copyProps = [
                 'htmlStyles',
@@ -77,15 +88,13 @@ export default class HTMLElement extends PureComponent {
                 acc[k] = this.props[k];
                 return acc;
             }, {});
-            return renderers[tagName](htmlAttribs, children, copyProps);
+            return renderers[tagName](htmlAttribs, children, convertedCSSStyles, copyProps);
         } else {
-            const RNElem = this.elementClass();
-            const styleset = RNElem === Text ? HTMLStyles.STYLESETS.TEXT : HTMLStyles.STYLESETS.VIEW;
             const style = []
                 .concat(
                     HTMLStyles.defaultStyles[tagName],
                     htmlStyles ? htmlStyles[tagName] : undefined,
-                    htmlAttribs.style ? HTMLStyles.cssStringToRNStyle(htmlAttribs.style, styleset, { parentTag: tagName, emSize, ignoredStyles }) : undefined
+                    convertedCSSStyles
                 )
                 .filter((s) => s !== undefined);
 
