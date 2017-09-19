@@ -11,10 +11,11 @@ import { TEXT_TAG_NAMES } from './HTMLUtils';
 export default class HTML extends PureComponent {
 
     static propTypes = {
-        html: PropTypes.string.isRequired,
         renderers: PropTypes.object.isRequired,
         ignoredTags: PropTypes.array.isRequired,
         ignoredStyles: PropTypes.array.isRequired,
+        html: PropTypes.string,
+        uri: PropTypes.string,
         htmlStyles: PropTypes.object,
         containerStyle: View.propTypes.style,
         onLinkPress: PropTypes.func,
@@ -25,12 +26,13 @@ export default class HTML extends PureComponent {
     static defaultProps = {
         renderers: HTMLRenderers,
         emSize: 14,
-        ignoredTags: [],
+        ignoredTags: ['head', 'scripts'],
         ignoredStyles: []
     }
 
     constructor (props) {
         super(props);
+        this.state = {};
         this.renderers = {
             ...HTMLRenderers,
             ...(this.props.renderers || {})
@@ -40,17 +42,38 @@ export default class HTML extends PureComponent {
 
     componentWillMount () {
         this.registerIgnoredTags();
+        this.registerDOM();
     }
 
     componentWillReceiveProps (nextProps) {
-        if (this.props.html !== nextProps.html) {
+        if (this.props.html !== nextProps.html || this.props.uri !== nextProps.uri) {
             this.imgsToRender = [];
+            this.registerDOM(nextProps);
         }
         if (this.props.ignoredTags !== nextProps.ignoredTags) {
             this.registerIgnoredTags(nextProps);
         }
         if (this.props.renderers !== nextProps.renderers) {
             this.renderers = { ...HTMLRenderers, ...(nextProps.renderers || {}) };
+        }
+    }
+
+    async registerDOM (props = this.props) {
+        const { html, uri } = props;
+        if (html) {
+            this.setState({ dom: props.html });
+        } else if (props.uri) {
+            try {
+                // WIP : This should render a loader and html prop should not be set in state
+                // Error handling would be nice, too.
+                let response = await fetch(uri);
+                this.setState({ dom: response._bodyText });
+            } catch (err) {
+                console.warn('react-native-render-html', `Couldn't fetch remote HTML from uri : ${uri}`);
+                return false;
+            }
+        } else {
+            console.warn('react-native-render-html', 'Please provide the html or uri prop.');
         }
     }
 
@@ -93,45 +116,13 @@ export default class HTML extends PureComponent {
    * if none is found, don't render it (a single img or an empty p for instance)
    */
     shouldRenderNode (node) {
-        if (!node.children || !node.children.length) {
+        const textType = TEXT_TAG_NAMES.has(node.type);
+        const hasChildren = node.children.length;
+
+        if (textType && !hasChildren) {
             return false;
         }
-        for (let i = 0; i < node.children.length; i++) {
-            if (node.children[i].type === 'text') {
-                return true;
-            } else if (TEXT_TAG_NAMES.has(node.children[i].name)) {
-                if (this.shouldRenderNode(node.children[i])) {
-                    return true;
-                } else {
-                    continue;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Loop on a HTML node and look for imgs that need
-     * to be rendered outside this node (ie : img outside
-     * of text elements)
-     */
-    addImgsToRenderList (node, index, groupInfo, parentTagName, parentIsText) {
-        if (!node.children || !node.children.length) {
-            return;
-        }
-        for (let i = 0; i < node.children.length; i++) {
-            if (node.children[i].name === 'img') {
-                this.imgsToRender.push(
-                    this.createElement(
-                        node.children[i],
-                        index,
-                        groupInfo,
-                        parentTagName,
-                        parentIsText
-                    )
-                );
-            }
-        }
+        return true;
     }
 
     /**
@@ -186,14 +177,12 @@ export default class HTML extends PureComponent {
                     ElementsToRender = Element;
                 }
 
-                if (node.name === 'img') {
-                    this.imgsToRender.push(Element);
+                if (node.name === 'img' && parentIsText) {
+                    this.imgsToRender.push({ ...Element, firstLoopIndex: index });
                     return false;
                 }
 
                 if (TEXT_TAG_NAMES.has(node.name)) {
-                    this.addImgsToRenderList(node, index, groupInfo, parentTagName, parentIsText);
-
                     if (!this.shouldRenderNode(node)) {
                         return false;
                     }
@@ -206,13 +195,17 @@ export default class HTML extends PureComponent {
     }
 
     render () {
+        const { dom } = this.state;
+        if (!dom) {
+            return false;
+        }
         let rnNodes;
         const parser = new htmlparser2.Parser(
             new htmlparser2.DomHandler((_err, dom) => {
                 rnNodes = this.renderHtmlAsRN(dom, 'body', false);
             })
         );
-        parser.write(this.props.html);
+        parser.write(dom);
         parser.done();
 
         return (
