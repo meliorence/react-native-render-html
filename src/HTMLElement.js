@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View } from 'react-native';
-import HTMLStyles from './HTMLStyles';
+import { blockElements, STYLESETS, cssStringToRNStyle, defaultStyles } from './HTMLStyles';
 
 export default class HTMLElement extends PureComponent {
 
@@ -47,12 +47,12 @@ export default class HTMLElement extends PureComponent {
      * @return the class for this node
     */
     elementClass () {
-        if (HTMLStyles.blockElements.has(this.props.tagName)) {
+        if (blockElements.has(this.props.tagName)) {
             if (this.props.parentIsText) {
                 console.warn([
                     'You are trying to nest a non-text HTML element inside a text element.',
                     'The following nodes can only be rendered within themselves and not within text nodes:'
-                ].concat(Array.from(HTMLStyles.blockElements)).join('\n'));
+                ].concat(Array.from(blockElements)).join('\n'));
                 return Text;
             } else {
                 return View;
@@ -66,10 +66,10 @@ export default class HTMLElement extends PureComponent {
         const { htmlStyles, tagName, htmlAttribs, renderers, children, emSize, ignoredStyles, ...passProps } = this.props;
 
         const RNElem = this.elementClass();
-        const styleset = RNElem === Text ? HTMLStyles.STYLESETS.TEXT : HTMLStyles.STYLESETS.VIEW;
+        const styleset = RNElem === Text ? STYLESETS.TEXT : STYLESETS.VIEW;
         const convertedCSSStyles =
             htmlAttribs.style ?
-                HTMLStyles.cssStringToRNStyle(
+                cssStringToRNStyle(
                     htmlAttribs.style,
                     styleset,
                     { parentTag: tagName, emSize, ignoredStyles }
@@ -92,7 +92,7 @@ export default class HTMLElement extends PureComponent {
         } else {
             const style = []
                 .concat(
-                    HTMLStyles.defaultStyles[tagName],
+                    defaultStyles[tagName],
                     htmlStyles ? htmlStyles[tagName] : undefined,
                     convertedCSSStyles
                 )

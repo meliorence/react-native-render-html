@@ -4,8 +4,8 @@ import { View } from 'react-native';
 import htmlparser2 from 'htmlparser2';
 import HTMLElement from './HTMLElement';
 import HTMLTextNode from './HTMLTextNode';
-import HTMLRenderers from './HTMLRenderers';
-import HTMLStyles from './HTMLStyles';
+import * as HTMLRenderers from './HTMLRenderers';
+import { blockElements } from './HTMLStyles';
 import { TEXT_TAG_NAMES } from './HTMLUtils';
 
 export default class HTML extends PureComponent {
@@ -105,7 +105,7 @@ export default class HTML extends PureComponent {
               renderers={this.renderers}
               emSize={emSize}
               ignoredStyles={ignoredStyles}>
-                { this.renderHtmlAsRN(node.children, node.name, !HTMLStyles.blockElements.has(node.name)) }
+                { this.renderHtmlAsRN(node.children, node.name, !blockElements.has(node.name)) }
             </HTMLElement>
         );
     }
