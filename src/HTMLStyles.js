@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import PropTypes from 'prop-types';
 import checkPropTypes from './checkPropTypes';
 
 // We have to do some munging here as the objects are wrapped
@@ -34,7 +33,7 @@ class HTMLStyles {
         this.defaultStyles = this._generateDefaultStyles();
 
     // RN doesn't support css 'display:inline|block' so we have to treat these differently
-        this.blockElements = ['div', 'ol', 'ul']
+        this.blockElements = ['div', 'ol', 'ul', 'aside', 'header', 'body', 'header', 'blockquote', 'html']
             .reduce((acc, n) => { acc.add(n); return acc; }, new Set());
     }
 
