@@ -31,14 +31,14 @@ export default class Demo extends Component {
     }
 
     get examplesList () {
-        const examples = EXAMPLES.map((example, index) => {
+        const examples = Object.keys(EXAMPLES).map((snippetId, index) => {
             return (
                 <TouchableOpacity
                   key={`example-btn-${index}`}
-                  onPress={() => this.setCurrentExample(example.id)}
+                  onPress={() => this.setCurrentExample(snippetId)}
                   style={styles.exampleBtn}
                   >
-                    <Text style={styles.exampleBtnLabel}>{ example.name }</Text>
+                    <Text style={styles.exampleBtnLabel}>{ EXAMPLES[snippetId].name }</Text>
                 </TouchableOpacity>
             );
         });
@@ -53,7 +53,8 @@ export default class Demo extends Component {
         );
     }
 
-    renderSnippet (snippetId, additionalProps = {}) {
+    renderSnippet (snippetId) {
+        const additionalProps = EXAMPLES[snippetId].props || {};
         return (
             <HTML
               {...DEFAULT_PROPS}

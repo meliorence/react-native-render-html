@@ -1,5 +1,5 @@
 const simpleLorem = `
-    <p style="font-size:2em;">Nunc vero inanes flatus quorundam vile esse quicquid extra urbis pomerium nascitur aestimant praeter orbos et caelibes, nec credi potest qua obsequiorum diversitate coluntur homines sine liberis Romae.</p>
+    <p>Nunc vero inanes flatus quorundam vile esse quicquid extra urbis pomerium nascitur aestimant praeter orbos et caelibes, nec credi potest qua obsequiorum diversitate coluntur homines sine liberis Romae.</p>
     <p>Eo adducta re per Isauriam, rege Persarum bellis finitimis inligato repellenteque a conlimitiis suis ferocissimas gentes, quae mente quadam versabili hostiliter eum saepe incessunt et in nos arma moventem aliquotiens iuvant, Nohodares quidam nomine e numero optimatum, incursare Mesopotamiam quotiens copia dederit ordinatus, explorabat nostra sollicite, si repperisset usquam locum vi subita perrupturus.</p>
     <p>Quod cum ita sit, paucae domus studiorum seriis cultibus antea celebratae nunc ludibriis ignaviae torpentis exundant, vocali sonu, perflabili tinnitu fidium resultantes. denique pro philosopho cantor et in locum oratoris doctor artium ludicrarum accitur et bybliothecis sepulcrorum ritu in perpetuum clausis organa fabricantur hydraulica, et lyrae ad speciem carpentorum ingentes tibiaeque et histrionici gestus instrumenta non levia.</p>
 `;
@@ -50,12 +50,22 @@ const layoutStyles = `
     </div>
 `;
 
-export const snippets = { simpleLorem, simpleLoremWithImages, imagesWithinParagraphs, images404, trickyStuff, layoutStyles };
-export const EXAMPLES = [
-    { id: 'simpleLorem', name: 'Simple lorem' },
-    { id: 'simpleLoremWithImages', name: 'Simple lorem (images)' },
-    { id: 'imagesWithinParagraphs', name: 'Images within paragraphs' },
-    { id: 'images404', name: '404 images' },
-    { id: 'trickyStuff', name: 'Tricky stuff' },
-    { id: 'layoutStyles', name: 'Layout styles' }
-];
+const ignoringTagsAndStyles = `
+    <p>The following tag (h2) is ignored with the "ignoredTags" prop</p>
+    <h2>This shouldn't be rendered !</h2>
+    <p>^^^ no title there ? great.</p>
+    <p>The next div has a red background. It should be ignored with the "ignoredStyles" prop.</p>
+    <div style="background-color:red;height:200px;width:200px;border-width:1px;"></div>
+`;
+
+export const snippets = { simpleLorem, simpleLoremWithImages, imagesWithinParagraphs, images404, trickyStuff, layoutStyles, ignoringTagsAndStyles };
+
+export const EXAMPLES = {
+    simpleLorem: { name: 'Simple lorem' },
+    simpleLoremWithImages: { name: 'Simple lorem (images)' },
+    imagesWithinParagraphs: { name: 'Images within paragraphs' },
+    images404: { name: '404 images' },
+    trickyStuff: { name: 'Tricky stuff' },
+    layoutStyles: { name: 'Layout styles' },
+    ignoringTagsAndStyles: { name: 'Ignoring tags & styles', props: { ignoredTags: ['h2'], ignoredStyles: ['background-color'] } }
+};
