@@ -112,6 +112,10 @@ class HTMLStyles {
                 textAlignVertical: 'top',
                 fontSize: BASE_FONT_SIZE * 0.8,
                 marginBottom: BASE_FONT_SIZE / 2
+            },
+            iframe: {
+                width: 200,
+                height: 200
             }
         });
     }

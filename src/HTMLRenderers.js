@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity, Text, WebView } from 'react-native';
 import HTMLStyles from './HTMLStyles';
 import HTMLImage from './HTMLImage';
 
@@ -11,7 +11,7 @@ export default {
     * @param passProps: other props that are to be passed into the element
     * @return a RN element that represents an anchor tag
     */
-    a: (htmlAttribs, children, passProps) => {
+    a: (htmlAttribs, children, convertedCSSStyles, passProps) => {
         const style = []
             .concat(
                 HTMLStyles.defaultStyles.a,
@@ -48,9 +48,9 @@ export default {
     * @param passProps: other props that are to be passed into the element
     * @return a RN element that represents an image tag
     */
-    img: (htmlAttribs, children, passProps) => {
+    img: (htmlAttribs, children, convertedCSSStyles, passProps) => {
         if (!htmlAttribs.src) {
-            return null;
+            return false;
         }
 
         // Build our styles
@@ -70,6 +70,26 @@ export default {
               style={style}
               {...passProps}
             />
+        );
+    },
+
+    iframe: (htmlAttribs, children, convertedCSSStyles, passProps) => {
+        if (!htmlAttribs.src) {
+            return false;
+        }
+
+        const style = [
+            HTMLStyles.defaultStyles.iframe,
+            passProps.htmlStyles ? passProps.htmlStyles.iframe : {},
+            htmlAttribs.style ?
+                HTMLStyles.cssStringToRNStyle(htmlAttribs.style, HTMLStyles.STYLESETS.IMAGE, { parentTag: 'iframe' }) :
+                {},
+            htmlAttribs.height ? { height: parseInt(htmlAttribs.height, 10) } : {},
+            htmlAttribs.width ? { width: parseInt(htmlAttribs.width, 10) } : {}
+        ];
+
+        return (
+            <WebView source={{ uri: htmlAttribs.src }} style={style} {...passProps} />
         );
     }
 };
