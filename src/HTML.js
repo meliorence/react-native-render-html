@@ -13,6 +13,7 @@ export default class HTML extends PureComponent {
     static propTypes = {
         html: PropTypes.string.isRequired,
         renderers: PropTypes.object.isRequired,
+        ignoredTags: PropTypes.array.isRequired,
         htmlStyles: PropTypes.object,
         containerStyle: View.propTypes.style,
         onLinkPress: PropTypes.func,
@@ -22,7 +23,8 @@ export default class HTML extends PureComponent {
 
     static defaultProps = {
         renderers: HTMLRenderers,
-        emSize: 14
+        emSize: 14,
+        ignoredTags: [],
     }
 
     constructor (props) {
@@ -34,10 +36,21 @@ export default class HTML extends PureComponent {
         this.imgsToRender = [];
     }
 
+    componentWillMount () {
+        this.registerIgnoredTags();
+    }
+
     componentWillReceiveProps (nextProps) {
         if (this.props.html !== nextProps.html) {
             this.imgsToRender = [];
         }
+        if (this.props.ignoredTags !== nextProps.ignoredTags) {
+            this.registerIgnoredTags(nextProps);
+        }
+    }
+
+    registerIgnoredTags (props = this.props) {
+        this._ignoredTags = props.ignoredTags.map((tag) => tag.toLowerCase());
     }
 
     /**
@@ -49,7 +62,7 @@ export default class HTML extends PureComponent {
      * @parentIsText: bool
      */
     createElement (node, index, groupInfo, parentTagName, parentIsText) {
-        const { htmlStyles, imagesMaxWidth, onLinkPress, emSize } = this.props;
+        const { htmlStyles, imagesMaxWidth, onLinkPress, emSize, ignoredStyles } = this.props;
         return (
             <HTMLElement
               key={index}
@@ -62,7 +75,8 @@ export default class HTML extends PureComponent {
               parentIsText={parentIsText}
               onLinkPress={onLinkPress}
               renderers={this.renderers}
-              emSize={emSize}>
+              emSize={emSize}
+              ignoredStyles={ignoredStyles}>
                 { this.renderHtmlAsRN(node.children, node.name, !HTMLStyles.blockElements.has(node.name)) }
             </HTMLElement>
         );
@@ -124,12 +138,15 @@ export default class HTML extends PureComponent {
     */
     renderHtmlAsRN (htmlElements, parentTagName, parentIsText) {
         return htmlElements.map((node, index, list) => {
+            if (this._ignoredTags.indexOf(node.name) !== -1) {
+                return false;
+            }
             if (node.type === 'text') {
                 const str = HTMLTextNode.removeWhitespaceListHTML(node.data, index, parentTagName);
                 if (str.length) {
                     return (<HTMLTextNode key={index}>{str}</HTMLTextNode>);
                 } else {
-                    return undefined;
+                    return false;
                 }
             } else if (node.type === 'tag') {
                 // Generate grouping info if we are a group-type element
