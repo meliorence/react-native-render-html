@@ -49,6 +49,9 @@ export default class HTML extends PureComponent {
         if (this.props.ignoredTags !== nextProps.ignoredTags) {
             this.registerIgnoredTags(nextProps);
         }
+        if (this.props.renderers !== nextProps.renderers) {
+            this.renderers = { ...HTMLRenderers, ...(nextProps.renderers || {}) };
+        }
     }
 
     registerIgnoredTags (props = this.props) {
