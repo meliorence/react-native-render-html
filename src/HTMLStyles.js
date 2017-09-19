@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+import checkPropTypes from './checkPropTypes';
 
 // We have to do some munging here as the objects are wrapped
 import _RNTextStylePropTypes from 'react-native/Libraries/Text/TextStylePropTypes';
@@ -158,7 +159,7 @@ class HTMLStyles {
                 testStyle[key] = value;
                 const styleProp = {};
                 styleProp[key] = styleProps[key];
-                if (PropTypes.checkPropTypes(styleProp, testStyle, key, 'react-native-render-html') == null) {
+                if (checkPropTypes(styleProp, testStyle, key, 'react-native-render-html') == null) {
                     if (typeof value === 'string') {
                         // See if we can use the percentage directly
                         if (value.search('%') !== -1 && PERC_SUPPORTED_STYLES.indexOf(key) !== -1) {
@@ -172,7 +173,7 @@ class HTMLStyles {
                         const numericValue = parseFloat(value.replace('px', ''));
                         if (!isNaN(numericValue)) {
                             testStyle[key] = numericValue;
-                            if (PropTypes.checkPropTypes(styleProp, testStyle, key, 'react-native-render-html') == null) {
+                            if (checkPropTypes(styleProp, testStyle, key, 'react-native-render-html') == null) {
                                 return [key, numericValue];
                             }
                         }
