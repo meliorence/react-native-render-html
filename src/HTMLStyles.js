@@ -27,7 +27,7 @@ stylePropTypes[STYLESETS.VIEW] = Object.assign({}, RNViewStylePropTypes);
 stylePropTypes[STYLESETS.TEXT] = Object.assign({}, RNViewStylePropTypes, RNTextStylePropTypes);
 stylePropTypes[STYLESETS.IMAGE] = Object.assign({}, RNViewStylePropTypes, RNImageStylePropTypes);
 
-export const blockElements = ['div', 'ol', 'ul', 'aside', 'header', 'body', 'header', 'blockquote', 'html']
+export const blockElements = ['div', 'ol', 'ul', 'aside', 'header', 'body', 'header', 'blockquote', 'html', 'li', 'dl', 'dt', 'a']
     .reduce((acc, n) => { acc.add(n); return acc; }, new Set());
 
 /**
@@ -60,6 +60,7 @@ export const defaultStyles = StyleSheet.create({
     },
     u: { textDecorationLine: 'underline' },
     em: { fontStyle: 'italic' },
+    i: { fontStyle: 'italic' },
     b: { fontWeight: 'bold' },
     strong: { fontWeight: 'bold' },
     big: { fontSize: BASE_FONT_SIZE * 1.2 },
