@@ -10,6 +10,7 @@ export default class HTMLElement extends PureComponent {
         renderers: PropTypes.object.isRequired,
         emSize: PropTypes.number.isRequired,
         ignoredStyles: PropTypes.array.isRequired,
+        htmlAttribs: PropTypes.object,
         groupInfo: PropTypes.object,
         parentTagName: PropTypes.string,
         htmlStyles: PropTypes.object,
@@ -90,13 +91,12 @@ export default class HTMLElement extends PureComponent {
             }, {});
             return renderers[tagName](htmlAttribs, children, convertedCSSStyles, copyProps);
         } else {
-            const style = []
-                .concat(
-                    defaultStyles[tagName],
-                    htmlStyles ? htmlStyles[tagName] : undefined,
-                    convertedCSSStyles
-                )
-                .filter((s) => s !== undefined);
+            const style = [
+                defaultStyles[tagName],
+                htmlStyles ? htmlStyles[tagName] : undefined,
+                convertedCSSStyles
+            ]
+            .filter((s) => s !== undefined);
 
             return (
                 <RNElem {...passProps} style={style}>
