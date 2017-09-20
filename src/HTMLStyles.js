@@ -126,6 +126,22 @@ function cssStringToObject (str) {
         }, {});
 }
 
+export function _constructStyles ({ tagName, htmlAttribs, passProps, additionalStyles, styleSet = 'VIEW' }) {
+    return [
+        (styleSet === 'VIEW' ? defaultBlockStyles : defaultTextStyles)[tagName],
+        passProps.htmlStyles ? passProps.htmlStyles[tagName] : undefined,
+        _getElementClassStyles(htmlAttribs, passProps.classesStyles),
+        htmlAttribs.style ?
+            cssStringToRNStyle(
+                htmlAttribs.style,
+                STYLESETS[styleSet],
+                { parentTag: tagName }
+            ) :
+            undefined,
+        additionalStyles || undefined
+    ]
+    .filter((style) => style !== undefined);
+}
 /**
  * Converts a html style to its equavalent react native style
 * @param: css: object of key value css strings

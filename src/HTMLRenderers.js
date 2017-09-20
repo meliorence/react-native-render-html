@@ -1,6 +1,6 @@
 import React from 'react';
-import { TouchableOpacity, Text, WebView } from 'react-native';
-import { defaultStyles, cssStringToRNStyle, STYLESETS } from './HTMLStyles';
+import { TouchableOpacity, Text, View, WebView } from 'react-native';
+import { _constructStyles } from './HTMLStyles';
 import HTMLImage from './HTMLImage';
 
 export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
@@ -68,20 +68,4 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
     return (
         <WebView source={{ uri: htmlAttribs.src }} style={style} {...passProps} />
     );
-}
-
-export function _constructStyles ({ tagName, htmlAttribs, passProps, additionalStyles, styleSet = 'VIEW' }) {
-    return [
-        defaultStyles[tagName],
-        passProps.htmlStyles ? passProps.htmlStyles[tagName] : undefined,
-        htmlAttribs.style ?
-            cssStringToRNStyle(
-                htmlAttribs.style,
-                STYLESETS[styleSet],
-                { parentTag: tagName }
-            ) :
-            undefined,
-        additionalStyles || undefined
-    ]
-    .filter((style) => style !== undefined);
 }
