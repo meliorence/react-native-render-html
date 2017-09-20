@@ -121,7 +121,7 @@ export default class HTML extends PureComponent {
    */
     shouldRenderNode (node) {
         const textType = TEXT_TAG_NAMES.has(node.type);
-        const hasChildren = node.children.length;
+        const hasChildren = node.children.filter((node) => node !== undefined && node !== false).length;
 
         if (textType && !hasChildren) {
             return false;
