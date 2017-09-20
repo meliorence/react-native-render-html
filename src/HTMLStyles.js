@@ -142,6 +142,25 @@ export function _constructStyles ({ tagName, htmlAttribs, passProps, additionalS
     ]
     .filter((style) => style !== undefined);
 }
+
+export function _getElementClassStyles (htmlAttribs, classesStyles) {
+    const elementClasses = _getElementCSSClasses(htmlAttribs);
+    let styles = {};
+    elementClasses.forEach((className) => {
+        if (classesStyles[className]) {
+            styles = { ...styles, ...classesStyles[className] };
+        }
+    });
+    return styles;
+}
+
+export function _getElementCSSClasses (htmlAttribs) {
+    if (!htmlAttribs || !htmlAttribs.class) {
+        return [];
+    }
+    return htmlAttribs.class.split(' ');
+}
+
 /**
  * Converts a html style to its equavalent react native style
 * @param: css: object of key value css strings
