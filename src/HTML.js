@@ -14,6 +14,7 @@ export default class HTML extends PureComponent {
         renderers: PropTypes.object.isRequired,
         ignoredTags: PropTypes.array.isRequired,
         ignoredStyles: PropTypes.array.isRequired,
+        ignoreNodesFunction: PropTypes.func,
         html: PropTypes.string,
         uri: PropTypes.string,
         tagsStyles: PropTypes.object,
@@ -109,7 +110,7 @@ export default class HTML extends PureComponent {
               renderers={this.renderers}
               emSize={emSize}
               ignoredStyles={ignoredStyles}>
-                { this.renderHtmlAsRN(node.children, node.name, !blockElements.has(node.name)) }
+                { this.renderHtmlAsRN(node.children, node.name, !blockElements.has(node.name), node.attribs, node.name) }
             </HTMLElement>
         );
     }
@@ -136,8 +137,12 @@ export default class HTML extends PureComponent {
     * @param parentIsText: true if the parent element was a text-y element
     * @return the equivalent RN elements
     */
-    renderHtmlAsRN (htmlElements, parentTagName, parentIsText) {
+    renderHtmlAsRN (htmlElements, parentTagName, parentIsText, htmlAttribs, tagName) {
+        const { ignoreNodesFunction } = this.props;
         return htmlElements.map((node, index, list) => {
+            if (ignoreNodesFunction && ignoreNodesFunction(node, parentTagName, parentIsText) === true) {
+                return false;
+            }
             if (this._ignoredTags.indexOf(node.name) !== -1) {
                 return false;
             }
