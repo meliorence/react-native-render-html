@@ -13,7 +13,8 @@ export default class HTMLElement extends PureComponent {
         htmlAttribs: PropTypes.object,
         groupInfo: PropTypes.object,
         parentTagName: PropTypes.string,
-        htmlStyles: PropTypes.object,
+        tagsStyles: PropTypes.object,
+        classesStyles: PropTypes.object,
         htmlAttibs: PropTypes.object,
         onLinkPress: PropTypes.func,
         children: PropTypes.node,
@@ -64,7 +65,7 @@ export default class HTMLElement extends PureComponent {
     }
 
     render () {
-        const { htmlStyles, tagName, htmlAttribs, renderers, children, emSize, ignoredStyles, ...passProps } = this.props;
+        const { tagsStyles, classesStyles, tagName, htmlAttribs, renderers, children, emSize, ignoredStyles, ...passProps } = this.props;
 
         const RNElem = this.elementClass();
         const styleset = RNElem === Text ? STYLESETS.TEXT : STYLESETS.VIEW;
@@ -76,10 +77,12 @@ export default class HTMLElement extends PureComponent {
                     { parentTag: tagName, emSize, ignoredStyles }
                 ) :
                 {};
+        const classStyles = _getElementClassStyles(htmlAttribs, classesStyles);
 
         if (renderers[tagName]) {
             const copyProps = [
-                'htmlStyles',
+                'tagsStyles',
+                'classesStyles',
                 'groupInfo',
                 'parentTagName',
                 'onLinkPress',
@@ -92,9 +95,10 @@ export default class HTMLElement extends PureComponent {
             return renderers[tagName](htmlAttribs, children, convertedCSSStyles, copyProps);
         } else {
             const style = [
-                defaultStyles[tagName],
-                htmlStyles ? htmlStyles[tagName] : undefined,
-                convertedCSSStyles
+                (RNElem === Text ? defaultTextStyles : defaultBlockStyles)[tagName],
+                tagsStyles ? tagsStyles[tagName] : undefined,
+                convertedCSSStyles,
+                classStyles
             ]
             .filter((s) => s !== undefined);
 

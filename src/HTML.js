@@ -16,7 +16,8 @@ export default class HTML extends PureComponent {
         ignoredStyles: PropTypes.array.isRequired,
         html: PropTypes.string,
         uri: PropTypes.string,
-        htmlStyles: PropTypes.object,
+        tagsStyles: PropTypes.object,
+        classesStyles: PropTypes.object,
         containerStyle: View.propTypes.style,
         onLinkPress: PropTypes.func,
         imagesMaxWidth: PropTypes.number,
@@ -27,7 +28,9 @@ export default class HTML extends PureComponent {
         renderers: HTMLRenderers,
         emSize: 14,
         ignoredTags: ['head', 'scripts'],
-        ignoredStyles: []
+        ignoredStyles: [],
+        tagsStyles: {},
+        classesStyles: {}
     }
 
     constructor (props) {
@@ -90,11 +93,12 @@ export default class HTML extends PureComponent {
      * @parentIsText: bool
      */
     createElement (node, index, groupInfo, parentTagName, parentIsText) {
-        const { htmlStyles, imagesMaxWidth, onLinkPress, emSize, ignoredStyles } = this.props;
+        const { tagsStyles, classesStyles, imagesMaxWidth, onLinkPress, emSize, ignoredStyles } = this.props;
         return (
             <HTMLElement
               key={index}
-              htmlStyles={htmlStyles}
+              tagsStyles={tagsStyles}
+              classesStyles={classesStyles}
               imagesMaxWidth={imagesMaxWidth}
               htmlAttribs={node.attribs}
               tagName={node.name}
