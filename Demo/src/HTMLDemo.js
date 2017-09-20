@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Dimensions, Linking } from 'react-native';
 import HTML from 'react-native-render-html';
-import { EXAMPLES, snippets } from './snippets';
+import EXAMPLES, * as snippets from './snippets';
 import styles from './styles';
 
 const IMAGES_MAX_WIDTH = Dimensions.get('window').width - 50;
@@ -10,14 +10,15 @@ const CUSTOM_RENDERERS = {};
 const DEFAULT_PROPS = {
     htmlStyles: CUSTOM_STYLES,
     renderers: CUSTOM_RENDERERS,
-    imagesMaxWidth: IMAGES_MAX_WIDTH
+    imagesMaxWidth: IMAGES_MAX_WIDTH,
+    onLinkPress: (evt, href) => { Linking.openURL(href); }
 };
 
 export default class Demo extends Component {
 
     constructor (props) {
         super(props);
-        this.state = { currentExample: 'simpleLorem' };
+        this.state = { currentExample: 'paragraphs' };
 
         this.setCurrentExample = this.setCurrentExample.bind(this);
     }
