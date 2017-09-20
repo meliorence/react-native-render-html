@@ -1,6 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, View, WebView } from 'react-native';
 import { _constructStyles } from './HTMLStyles';
+import { shouldWrapWithText } from './HTMLElement';
 import HTMLImage from './HTMLImage';
 
 export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
@@ -12,7 +13,7 @@ export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
         styleSet: parentIsText ? 'TEXT' : 'VIEW'
     });
 
-    if (passProps.parentIsText) {
+    if (shouldWrapWithText(children, 'a')) {
         return (
             <Text
               {...passProps}
@@ -23,12 +24,11 @@ export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
             </Text>
         );
     } else {
-        const Element = children.length === 1 && children[0].props && typeof children[0].props.children === 'string' ? Text : View;
         return (
             <TouchableOpacity
               onPress={(evt) => { passProps.onLinkPress && passProps.onLinkPress(evt, htmlAttribs.href); }}
             >
-                <Element {...passProps} style={style}>{ children }</Element>
+                <View {...passProps} style={style}>{ children }</View>
             </TouchableOpacity>
         );
     }
