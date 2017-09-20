@@ -144,7 +144,15 @@ export default class HTML extends PureComponent {
             if (node.type === 'text') {
                 const str = HTMLTextNode.removeWhitespaceListHTML(node.data, index, parentTagName);
                 if (str.length) {
-                    return (<HTMLTextNode key={index}>{str}</HTMLTextNode>);
+                    return (
+                        <HTMLTextNode
+                          key={index}
+                          htmlAttribs={htmlAttribs}
+                          tagName={tagName}
+                        >
+                            {str}
+                        </HTMLTextNode>
+                    );
                 } else {
                     return false;
                 }

@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import { Text } from 'react-native';
 import { AllHtmlEntities } from 'html-entities';
 import { RE, TEXT_TAG_NAMES, PRE_TAG_NAMES } from './HTMLUtils';
+import { _constructStyles } from './HTMLStyles';
 
 export default class HTMLTextNode extends PureComponent {
 
     static propTypes = {
-        children: PropTypes.string.isRequired
+        children: PropTypes.string.isRequired,
+        tagName: PropTypes.string.isRequired,
+        htmlAttribs: PropTypes.object
     }
 
     /**
@@ -40,8 +43,16 @@ export default class HTMLTextNode extends PureComponent {
     }
 
     render () {
+        const { tagName, htmlAttribs } = this.props;
+        const style = _constructStyles({
+            tagName,
+            htmlAttribs,
+            passProps: {},
+            htmlStyles: {},
+            styleSet: 'TEXT'
+        });
         return (
-            <Text {...this.props}>
+            <Text {...this.props} style={style}>
                 { AllHtmlEntities.decode(this.props.children) }
             </Text>
         );

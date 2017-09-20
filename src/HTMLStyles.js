@@ -138,7 +138,7 @@ export function _constructStyles ({ tagName, htmlAttribs, passProps, additionalS
     .filter((style) => style !== undefined);
 }
 
-export function _getElementClassStyles (htmlAttribs, classesStyles) {
+export function _getElementClassStyles (htmlAttribs, classesStyles = {}) {
     const elementClasses = _getElementCSSClasses(htmlAttribs);
     let styles = {};
     elementClasses.forEach((className) => {
