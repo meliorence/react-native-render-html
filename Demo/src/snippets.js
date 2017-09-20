@@ -1,12 +1,18 @@
-const simpleLorem = `
-    <p>Nunc vero inanes flatus quorundam vile esse quicquid extra urbis pomerium nascitur aestimant praeter orbos et caelibes, nec credi potest qua obsequiorum diversitate coluntur homines sine liberis Romae.</p>
-    <p>Eo adducta re per Isauriam, rege Persarum bellis finitimis inligato repellenteque a conlimitiis suis ferocissimas gentes, quae mente quadam versabili hostiliter eum saepe incessunt et in nos arma moventem aliquotiens iuvant, Nohodares quidam nomine e numero optimatum, incursare Mesopotamiam quotiens copia dederit ordinatus, explorabat nostra sollicite, si repperisset usquam locum vi subita perrupturus.</p>
-    <p>Quod cum ita sit, paucae domus studiorum seriis cultibus antea celebratae nunc ludibriis ignaviae torpentis exundant, vocali sonu, perflabili tinnitu fidium resultantes. denique pro philosopho cantor et in locum oratoris doctor artium ludicrarum accitur et bybliothecis sepulcrorum ritu in perpetuum clausis organa fabricantur hydraulica, et lyrae ad speciem carpentorum ingentes tibiaeque et histrionici gestus instrumenta non levia.</p>
+import React from 'react';
+import { View } from 'react-native';
+import { _constructStyles } from 'react-native-render-html/HTMLStyles';
+
+export const paragraphs = `
+    <p style="font-size:1.3rem;">This paragraph is styled a font size set in em !</p>
+    <em>This one showcases the default renderer for the "em" HTML tag.</em>
+    <p style="padding:10%;">This one features a padding <strong>in percentage !</strong></p>
+    <i>Here, we have a style set on the "i" tag with the "tagsStyles" prop.</i>
+    <p class="last-paragraph">Finally, this paragraph is style through the classesStyles prop</p>
 `;
 
 export const simpleLoremWithImages = `
     <p>This first image's dimensions are set in its style attributes.</p>
-    <img style="width:50%;height:100px;" src="https://i.imgur.com/gSmWCJF.jpg" />
+    <img style="width: 50%; height: 100px; align-self: center;" src="https://i.imgur.com/gSmWCJF.jpg" />
     <p>The next image will be sized automatically thanks to the "imagesMaxWidth" prop.</p>
     <img src="https://i.imgur.com/XP2BE7q.jpg" />    
     <p>Quod cum ita sit, paucae domus studiorum seriis cultibus antea celebratae nunc ludibriis ignaviae torpentis exundant, vocali sonu, perflabili tinnitu fidium resultantes. denique pro philosopho cantor et in locum oratoris doctor artium ludicrarum accitur et bybliothecis sepulcrorum ritu in perpetuum clausis organa fabricantur hydraulica, et lyrae ad speciem carpentorum ingentes tibiaeque et histrionici gestus instrumenta non levia.</p>
@@ -56,6 +62,12 @@ export const ignoringTagsAndStyles = `
     <p>^^^ no title there ? great.</p>
     <p>The next div has a red background. It should be ignored with the "ignoredStyles" prop.</p>
     <div style="background-color:red;height:200px;width:200px;border-width:1px;"></div>
+    <p>You can also use a function to ignore nodes if you need to be even more specific.</p>
+    <p>Let's ignore "a" tags nested inside "divs"</p>
+    <p><a href="http://google.com">This link</a> works since it's nested inside a paragraph.</p>
+    <div style="backgroundColor: teal; padding: 10px; color: white; text-align: center;">
+        <a href="http://google.com">you're a noisy one, aren't you ?</a>Saw the link in this div ? It has been ignored !
+    </div>
 `;
 
 export const customHTMLTags = `
@@ -106,7 +118,16 @@ export default {
     images404: { name: '404 images' },
     trickyStuff: { name: 'Tricky stuff' },
     layoutStyles: { name: 'Layout styles' },
-    ignoringTagsAndStyles: { name: 'Ignoring tags & styles', props: { ignoredTags: ['h2'], ignoredStyles: ['background-color'] } },
+    ignoringTagsAndStyles: {
+        name: 'Ignoring tags & styles',
+        props: {
+            ignoredTags: ['h2'],
+            ignoredStyles: ['background-color'],
+            ignoreNodesFunction: (node, parentTagName, parentIsText) => {
+                return node.parent && node.parent.name === 'a' && node.parent.parent && node.parent.parent.name === 'div';
+            }
+        }
+    },
     customHTMLTags: {
         name: 'Custom HTML tags',
         props: {
