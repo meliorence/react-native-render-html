@@ -32,7 +32,8 @@ export default class HTMLElement extends PureComponent {
     * @return prefix nodes if applicable
     */
     prefixNode () {
-        if (this.props.tagName === 'li') {
+        const { children } = this.props;
+        if (this.props.tagName === 'li' || this.props.tagName === 'dt') {
             if (this.props.parentTagName === 'ol') {
                 return <Text>{`\n${this.props.groupInfo.index + 1}). `}</Text>;
             } else {

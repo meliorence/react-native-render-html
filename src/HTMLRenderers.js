@@ -23,11 +23,12 @@ export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
             </Text>
         );
     } else {
+        const Element = children.length === 1 && children[0].props && typeof children[0].props.children === 'string' ? Text : View;
         return (
             <TouchableOpacity
               onPress={(evt) => { passProps.onLinkPress && passProps.onLinkPress(evt, htmlAttribs.href); }}
             >
-                <Text {...passProps} style={style}>{ children }</Text>
+                <Element {...passProps} style={style}>{ children }</Element>
             </TouchableOpacity>
         );
     }

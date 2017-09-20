@@ -27,7 +27,7 @@ stylePropTypes[STYLESETS.VIEW] = Object.assign({}, RNViewStylePropTypes);
 stylePropTypes[STYLESETS.TEXT] = Object.assign({}, RNViewStylePropTypes, RNTextStylePropTypes);
 stylePropTypes[STYLESETS.IMAGE] = Object.assign({}, RNViewStylePropTypes, RNImageStylePropTypes);
 
-export const blockElements = ['div', 'ol', 'ul', 'aside', 'header', 'body', 'header', 'blockquote', 'html', 'li', 'dl', 'dt', 'a']
+export const blockElements = ['div', 'ol', 'ul', 'aside', 'header', 'body', 'header', 'blockquote', 'html', 'dl', 'a', 'li']
     .reduce((acc, n) => { acc.add(n); return acc; }, new Set());
 
 /**
@@ -46,13 +46,29 @@ function _generateHeadingStyle (baseFontSize, fontMultiplier, marginMultiplier) 
     };
 }
 
-// These styles are mainly adapted from
-// https://chromium.googlesource.com/chromium/blink/+/master/Source/core/css/html.css
 const BASE_FONT_SIZE = 14;
-export const defaultStyles = StyleSheet.create({
-    // Block level elements
+export const defaultBlockStyles = StyleSheet.create({
     div: { },
-    // Typography
+    ul: {
+        paddingLeft: 40,
+        marginBottom: BASE_FONT_SIZE
+    },
+    ol: {
+        paddingLeft: 40,
+        marginBottom: BASE_FONT_SIZE
+    },
+    iframe: {
+        width: 200,
+        height: 200
+    },
+    hr: {
+        marginTop: BASE_FONT_SIZE / 2,
+        marginBottom: BASE_FONT_SIZE / 2,
+        height: 1,
+        backgroundColor: '#CCC'
+    }
+});
+export const defaultTextStyles = StyleSheet.create({
     p: {
         fontSize: BASE_FONT_SIZE,
         marginTop: BASE_FONT_SIZE,
@@ -69,30 +85,13 @@ export const defaultStyles = StyleSheet.create({
         textDecorationLine: 'underline',
         color: '#245dc1'
     },
-    // Typography : Headers
     h1: _generateHeadingStyle(BASE_FONT_SIZE, 2, 0.67),
     h2: _generateHeadingStyle(BASE_FONT_SIZE, 1.5, 0.83),
     h3: _generateHeadingStyle(BASE_FONT_SIZE, 1.17, 1),
     h4: _generateHeadingStyle(BASE_FONT_SIZE, 1, 1.33),
     h5: _generateHeadingStyle(BASE_FONT_SIZE, 0.83, 1.67),
     h6: _generateHeadingStyle(BASE_FONT_SIZE, 0.67, 2.33),
-    // Typography : Lists
-    ul: {
-        paddingLeft: 40,
-        marginBottom: BASE_FONT_SIZE
-    },
-    ol: {
-        paddingLeft: 40,
-        marginBottom: BASE_FONT_SIZE
-    },
-    // Typography : Breaks
     br: {},
-    hr: {
-        marginTop: BASE_FONT_SIZE / 2,
-        marginBottom: BASE_FONT_SIZE / 2,
-        height: 1,
-        backgroundColor: '#CCC'
-    },
     sub: {
         textAlignVertical: 'top',
         fontSize: BASE_FONT_SIZE * 0.8,
@@ -102,10 +101,6 @@ export const defaultStyles = StyleSheet.create({
         textAlignVertical: 'top',
         fontSize: BASE_FONT_SIZE * 0.8,
         marginBottom: BASE_FONT_SIZE / 2
-    },
-    iframe: {
-        width: 200,
-        height: 200
     }
 });
 
