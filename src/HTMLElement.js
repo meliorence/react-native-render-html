@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View } from 'react-native';
-import { blockElements, STYLESETS, cssStringToRNStyle, defaultStyles } from './HTMLStyles';
+import { blockElements, STYLESETS, cssStringToRNStyle, defaultBlockStyles, defaultTextStyles, _getElementClassStyles } from './HTMLStyles';
 
 export default class HTMLElement extends PureComponent {
 
@@ -50,19 +50,50 @@ export default class HTMLElement extends PureComponent {
      * @return the class for this node
     */
     elementClass () {
-        if (blockElements.has(this.props.tagName)) {
-            if (this.props.parentIsText) {
-                console.warn([
-                    'You are trying to nest a non-text HTML element inside a text element.',
-                    'The following nodes can only be rendered within themselves and not within text nodes:'
-                ].concat(Array.from(blockElements)).join('\n'));
-                return Text;
-            } else {
-                return View;
-            }
-        } else {
-            return Text;
+        const { children, tagName } = this.props;
+        const Element = this.wrapWithText(children, tagName) ? Text : View;
+        // let Element = Text;
+        // if (blockElements.has(this.props.tagName)) {
+        //     if (this.props.parentIsText) {
+        //         console.warn([
+        //             'You are trying to nest a non-text HTML element inside a text element.',
+        //             'The following nodes can only be rendered within themselves and not within text nodes:'
+        //         ].concat(Array.from(blockElements)).join('\n'));
+        //         Element = Text;
+        //     } else {
+        //         Element = View;
+        //     }
+        // } else {
+        //     Element = Text;
+        // }
+        return Element;
+    }
+
+    wrapWithText (children, tagName) {
+        if (tagName === 'img') {
+            return true;
         }
+        if (typeof children === 'string') {
+            return true;
+        }
+        if (!children || typeof children !== 'object' || (typeof children.length !== 'undefined' && children.length === 0)) {
+            return false;
+        }
+
+        for (let i = 0; i < children.length; i++) {
+            const child = children[i];
+            let childIsText = child.type === 'HTMLTextNode'; // we know for sure this child is text
+            if (!childIsText) {
+                // Check recursively for children of this child to make sure this isn't a nested text
+                childIsText = this.wrapWithText(child.props && child.props.children);
+            }
+            if (!childIsText) {
+                // We know for sure this isn't a Text
+                return false;
+            }
+        }
+        // We never reached an early return, meaning all children are Texts
+        return true;
     }
 
     render () {
