@@ -7,7 +7,7 @@ export const RE = Object.freeze({
 });
 
 export const TEXT_TAG_NAMES = [
-    'p', 'span', 'li', 'a',
+    'p', 'span', 'a',
     'em', 'i', 'u', 'b', 'strong', 'big', 'small',
     'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'sub', 'sup'
 ].reduce((acc, n) => { acc.add(n); return acc; }, new Set());

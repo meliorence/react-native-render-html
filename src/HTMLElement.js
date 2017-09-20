@@ -100,7 +100,7 @@ export default class HTMLElement extends PureComponent {
 
             return (
                 <RNElem {...passProps} style={style}>
-                    {this.prefixNode()}
+                    { this.prefixNode() }
                     {this.props.children}
                 </RNElem>
             );
