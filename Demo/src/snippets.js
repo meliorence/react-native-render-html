@@ -6,6 +6,7 @@ export const paragraphs = `
     <p style="font-size:1.3rem;">This paragraph is styled a font size set in em !</p>
     <em>This one showcases the default renderer for the "em" HTML tag.</em>
     <p style="padding:10%;">This one features a padding <strong>in percentage !</strong></p>
+    <hr />
     <i>Here, we have a style set on the "i" tag with the "tagsStyles" prop.</i>
     <p class="last-paragraph">Finally, this paragraph is style through the classesStyles prop</p>
 `;
@@ -105,7 +106,6 @@ export const iframes = `
 `;
 
 export default {
-    toast: { name: 'Toast' },
     paragraphs: {
         name: 'Paragraphs',
         props: {
