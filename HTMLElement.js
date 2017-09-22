@@ -64,6 +64,9 @@ class HTMLElement extends PureComponent {
         ].concat(Array.from(HTMLStyles.blockElements)).join('\n'))
         return Text
       } else {
+        if (this.props.children.length === 1 && !this.props.children[0].props.tagName) {
+          return Text
+        }
         return View
       }
     } else {
