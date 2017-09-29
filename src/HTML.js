@@ -212,11 +212,13 @@ export default class HTML extends PureComponent {
         const { tagsStyles, classesStyles, onLinkPress, imagesMaxWidth, emSize, ignoredStyles } = this.props;
         return RNElements && RNElements.length ? RNElements.map((element, index) => {
             const { attribs, data, tagName, parentTag, children, nodeIndex, wrapper } = element;
+            const Wrapper = wrapper === 'Text' ? Text : View;
+            const key = `${wrapper}-${parentIndex}-${nodeIndex}-${index}`;
             const convertedCSSStyles =
                 attribs && attribs.style ?
                     cssStringToRNStyle(
                         attribs.style,
-                        Wrapper === Text ? STYLESETS.TEXT : STYLESETS.VIEW,
+                        Wrapper === Text ? STYLESETS.TEXT : STYLESETS.VIEW, // proper prop-types validation
                         { parentTag: tagName, emSize, ignoredStyles }
                     ) :
                     {};
@@ -226,6 +228,7 @@ export default class HTML extends PureComponent {
                 false;
 
             if (this.renderers[tagName]) {
+                // If a custom renderer is available for this tag
                 return this.renderers[tagName](
                     attribs,
                     childElements,
@@ -238,6 +241,8 @@ export default class HTML extends PureComponent {
                         imagesMaxWidth,
                         parentTag,
                         nodeIndex,
+                        emSize,
+                        key,
                         rawChildren: children
                     });
             }
@@ -254,7 +259,7 @@ export default class HTML extends PureComponent {
             .filter((s) => s !== undefined);
 
             return (
-                <Wrapper key={`${wrapper}-${parentIndex}-${nodeIndex}-${index}`} style={style}>
+                <Wrapper key={key} style={style}>
                     { textElement }
                     { childElements }
                 </Wrapper>
