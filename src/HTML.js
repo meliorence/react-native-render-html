@@ -10,7 +10,7 @@ const BLOCK_TAGS = ['address', 'article', 'aside', 'footer', 'hgroup', 'nav', 's
     'img', 'map', 'center'];
 
 const TEXT_TAGS = ['a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'figcaption', 'p', 'pre', 'abbr', 'b', 'bdi', 'bdo', 'code',
-    'dfn', 'i', 'kbd', 'mark', 'q', 'rt', 's', 'samp', 'small', 'span', 'strong', 'sub', 'sup', 'time', 'u', 'var', 'wbr',
+    'dfn', 'i', 'kbd', 'mark', 'q', 'rt', 's', 'samp', 'small', 'big', 'span', 'strong', 'sub', 'sup', 'time', 'u', 'var', 'wbr',
     'del', 'ins', 'blink', 'font', 'em', 'bold'];
 
 const IGNORED_TAGS = ['head', 'scripts', 'audio', 'video', 'track', 'embed', 'object', 'param', 'source', 'canvas', 'noscript',
@@ -137,7 +137,6 @@ export default class HTML extends PureComponent {
                     };
                 }
             }
-            continue;
         }
         return children;
     }
@@ -200,29 +199,6 @@ export default class HTML extends PureComponent {
             }
             return { ...parsedNode, nodeIndex };
         });
-        // RNElements.forEach((parsedNode, nodeIndex) => {
-        //     const { tagName, data, parent, parentTag } = parsedNode;
-        //     if (tagName === 'rawtext' && data && data[data.length - 1] !== '↵' && RNElements[nodeIndex + 1] && RNElements[nodeIndex + 1].wrapper === 'Text' && !parent) {
-        //         console.info('NODE TO MERGE @' + nodeIndex, parsedNode);
-        //         console.info('... WITH', destinationNode);
-        //         let destinationNode = RNElements[nodeIndex + 1];
-        //         RNElements.splice(
-        //             nodeIndex,
-        //             0,
-        //             { Wrapper: 'Text', children: [parsedNode, destinationNode], attribs: {}, nodeIndex, parent, parentTag, tagName: 'p' }
-        //         );
-        //         // console.log('FOUND RAW TEXT TO MERGE', parsedNode);
-        //         // console.log('INTO', RNElements[nodeIndex + 1]);
-        //         // if (destinationNode.children) {
-        //         //     destinationNode.children = [parsedNode, ...destinationNode.children];
-        //         // }
-        //         RNElements[nodeIndex + 1] = false;
-        //         destinationNode = false;
-        //     }
-        // });
-
-        // RNElements = RNElements.filter((parsedNode) => parsedNode !== false);
-        // console.info('RNElements', RNElements);
         return this.associateRawTexts(RNElements);
     }
 
@@ -260,9 +236,7 @@ export default class HTML extends PureComponent {
                     });
             }
 
-            const Wrapper = wrapper === 'Text' ? Text : View;
             const textElement = data ? <Text>{ data }</Text> : false;
-
 
             const classStyles = _getElementClassStyles(attribs, classesStyles);
             const style = [
@@ -270,7 +244,6 @@ export default class HTML extends PureComponent {
                 tagsStyles ? tagsStyles[tagName] : undefined,
                 convertedCSSStyles,
                 classStyles
-                // wrapper === 'Text' ? { flexDirection: 'row' } : undefined
             ]
             .filter((s) => s !== undefined);
 
@@ -295,14 +268,15 @@ export default class HTML extends PureComponent {
                 console.log('Parsed nodes', this.mapDOMNodesTORNElements(dom));
                 const RNElements = this.mapDOMNodesTORNElements(dom);
                 RNNodes = this.renderRNElements(RNElements);
-                // console.log('RNNodes', RNNodes);
             })
         );
         parser.write(dom);
         parser.done();
 
         return (
-            <View style={this.props.containerStyle || {}}>{RNNodes}</View>
+            <View style={this.props.containerStyle || {}}>
+                { RNNodes }
+            </View>
         );
     }
 }
