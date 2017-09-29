@@ -15,6 +15,7 @@ const RNImageStylePropTypes = Object.keys(_RNImageStylePropTypes)
 
 export const STYLESETS = Object.freeze({ VIEW: 'view', TEXT: 'text', IMAGE: 'image' });
 
+// As of react-native 0.48, this might change in the future
 const PERC_SUPPORTED_STYLES = [
     'width', 'height',
     'top', 'bottom', 'left', 'right',
@@ -26,9 +27,6 @@ const stylePropTypes = {};
 stylePropTypes[STYLESETS.VIEW] = Object.assign({}, RNViewStylePropTypes);
 stylePropTypes[STYLESETS.TEXT] = Object.assign({}, RNViewStylePropTypes, RNTextStylePropTypes);
 stylePropTypes[STYLESETS.IMAGE] = Object.assign({}, RNViewStylePropTypes, RNImageStylePropTypes);
-
-export const blockElements = ['div', 'ol', 'ul', 'aside', 'header', 'body', 'header', 'blockquote', 'html', 'dl', 'a', 'li']
-    .reduce((acc, n) => { acc.add(n); return acc; }, new Set());
 
 /**
 * Small utility for generating heading styles
@@ -68,6 +66,7 @@ export const defaultBlockStyles = StyleSheet.create({
         backgroundColor: '#CCC'
     }
 });
+
 export const defaultTextStyles = StyleSheet.create({
     p: {
         fontSize: BASE_FONT_SIZE,
@@ -91,7 +90,6 @@ export const defaultTextStyles = StyleSheet.create({
     h4: _generateHeadingStyle(BASE_FONT_SIZE, 1, 1.33),
     h5: _generateHeadingStyle(BASE_FONT_SIZE, 0.83, 1.67),
     h6: _generateHeadingStyle(BASE_FONT_SIZE, 0.67, 2.33),
-    br: {},
     sub: {
         textAlignVertical: 'top',
         fontSize: BASE_FONT_SIZE * 0.8,
