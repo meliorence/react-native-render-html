@@ -178,7 +178,7 @@ export default class HTML extends PureComponent {
                 return { wrapper: 'View', children, attribs, parent, tagName: name, parentTag };
             }
         })
-        .filter((parsedNode) => parsedNode !== false) // remove useless nodes
+        .filter((parsedNode) => parsedNode !== false && parsedNode !== undefined) // remove useless nodes
         .map((parsedNode, nodeIndex) => {
             const { wrapper, children, attribs, tagName } = parsedNode;
             const firstChild = children && children[0];
