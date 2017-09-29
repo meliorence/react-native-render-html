@@ -109,9 +109,8 @@ export default class HTML extends PureComponent {
     associateRawTexts (children) {
         for (let i = 0; i < children.length; i++) {
             const child = children[i];
-            if (child.tagName === 'rawtext' && children.length > 1 && (!child.parent || child.parent.name !== 'p')) {
-                // Raw texts with siblings
-                // console.log('raw w/ siblings', child);
+            if ((child.wrapper === 'Text' && child.tagName !== 'p') && children.length > 1 && (!child.parent || child.parent.name !== 'p')) {
+                // Texts outside <p> or not <p> themselves (with siblings)
                 let wrappedTexts = [];
                 for (let j = i; j < children.length; j++) {
                     // Loop on its next siblings and store them in an array
