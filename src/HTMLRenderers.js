@@ -128,3 +128,9 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
         <WebView source={{ uri: htmlAttribs.src }} style={style} {...passProps} />
     );
 }
+
+export function br (htlmAttribs, children, convertedCSSStyles, passProps) {
+    return (
+        <View style={{ height: 1.2 * passProps.emSize }} key={passProps.key} />
+    );
+}
