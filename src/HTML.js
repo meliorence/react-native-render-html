@@ -1,12 +1,22 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
+import { STYLESETS, cssStringToRNStyle, defaultBlockStyles, defaultTextStyles, _getElementClassStyles } from './HTMLStyles';
 import htmlparser2 from 'htmlparser2';
-import HTMLElement from './HTMLElement';
-import HTMLTextNode from './HTMLTextNode';
 import * as HTMLRenderers from './HTMLRenderers';
-import { blockElements } from './HTMLStyles';
-import { TEXT_TAG_NAMES } from './HTMLUtils';
+
+const BLOCK_TAGS = ['address', 'article', 'aside', 'footer', 'hgroup', 'nav', 'section', 'blockquote', 'dd', 'div',
+    'dl', 'dt', 'figure', 'hr', 'li', 'main', 'ol', 'ul', 'br', 'cite', 'data', 'rp', 'rtc', 'ruby', 'area',
+    'img', 'map', 'center'];
+
+const TEXT_TAGS = ['a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'figcaption', 'p', 'pre', 'abbr', 'b', 'bdi', 'bdo', 'code',
+    'dfn', 'i', 'kbd', 'mark', 'q', 'rt', 's', 'samp', 'small', 'span', 'strong', 'sub', 'sup', 'time', 'u', 'var', 'wbr',
+    'del', 'ins', 'blink', 'font', 'em', 'bold'];
+
+const IGNORED_TAGS = ['head', 'scripts', 'audio', 'video', 'track', 'embed', 'object', 'param', 'source', 'canvas', 'noscript',
+    'caption', 'col', 'colgroup', 'table', 'tbody', 'td', 'tfoot', 'th', 'thead', 'tr', 'button', 'datalist', 'fieldset', 'form',
+    'input', 'label', 'legend', 'meter', 'optgroup', 'option', 'output', 'progress', 'select', 'textarea', 'details', 'diaglog',
+    'menu', 'menuitem', 'summary'];
 
 export default class HTML extends PureComponent {
 
@@ -28,7 +38,7 @@ export default class HTML extends PureComponent {
     static defaultProps = {
         renderers: HTMLRenderers,
         emSize: 14,
-        ignoredTags: ['head', 'scripts'],
+        ignoredTags: IGNORED_TAGS,
         ignoredStyles: [],
         tagsStyles: {},
         classesStyles: {}
@@ -85,130 +95,192 @@ export default class HTML extends PureComponent {
         this._ignoredTags = props.ignoredTags.map((tag) => tag.toLowerCase());
     }
 
-    /**
-     * Returns an RN element from the HTML node being parsed
-     * @param node: object
-     * @param index: number
-     * @param groupInfo: object
-     * @param parentTagName: string
-     * @parentIsText: bool
-     */
-    createElement (node, index, groupInfo, parentTagName, parentIsText) {
-        const { tagsStyles, classesStyles, imagesMaxWidth, onLinkPress, emSize, ignoredStyles } = this.props;
-        return (
-            <HTMLElement
-              key={index}
-              tagsStyles={tagsStyles}
-              classesStyles={classesStyles}
-              imagesMaxWidth={imagesMaxWidth}
-              htmlAttribs={node.attribs}
-              tagName={node.name}
-              groupInfo={groupInfo}
-              parentTagName={parentTagName}
-              parentIsText={parentIsText}
-              onLinkPress={onLinkPress}
-              renderers={this.renderers}
-              emSize={emSize}
-              ignoredStyles={ignoredStyles}>
-                { this.renderHtmlAsRN(node.children, node.name, !blockElements.has(node.name), node.attribs, node.name) }
-            </HTMLElement>
-        );
-    }
-
-  /**
-   * Returns if a text node is worth being rendered.
-   * Loop on it and its children and look for actual text to display,
-   * if none is found, don't render it (a single img or an empty p for instance)
-   */
-    shouldRenderNode (node) {
-        const textType = TEXT_TAG_NAMES.has(node.type);
-        const hasChildren = node.children.filter((node) => node !== undefined && node !== false).length;
-
-        if (textType && !hasChildren) {
-            return false;
+    childrenNeedAView (children) {
+        for (let i = 0; i < children.length; i++) {
+            if (children[i].wrapper === 'View') {
+                // If we find at least one View, it has to be nested in one
+                return true;
+            }
         }
-        return true;
+        // We didn't find a single view, it can be wrapped in a Text
+        return false;
     }
 
-    /**
-    * Converts the html elements to RN elements
-    * @param htmlElements: the array of html elements
-    * @param parentTagName='body': the parent html element if any
-    * @param parentIsText: true if the parent element was a text-y element
-    * @return the equivalent RN elements
-    */
-    renderHtmlAsRN (htmlElements, parentTagName, parentIsText, htmlAttribs, tagName) {
+    associateRawTexts (children) {
+        for (let i = 0; i < children.length; i++) {
+            const child = children[i];
+            if (child.tagName === 'rawtext' && children.length > 1 && (!child.parent || child.parent.name !== 'p')) {
+                // Raw texts with siblings
+                // console.log('raw w/ siblings', child);
+                let wrappedTexts = [];
+                for (let j = i; j < children.length; j++) {
+                    // Loop on its next siblings and store them in an array
+                    // until we encounter a block or a <p>
+                    let nextSibling = children[j];
+                    if (nextSibling.wrapper !== 'Text' || nextSibling.tagName === 'p') {
+                        break;
+                    }
+                    wrappedTexts.push(nextSibling);
+                    // Remove the child that has been nested
+                    children[j] = false;
+                }
+                // Replace the raw text with a <p> that has wrappedTexts as its children
+                if (wrappedTexts.length) {
+                    children[i] = {
+                        attribs: {},
+                        children: wrappedTexts,
+                        nodeIndex: i,
+                        parent: child.parent,
+                        parentTag: child.parentTag,
+                        tagName: 'p',
+                        wrapper: 'Text'
+                    };
+                }
+            }
+            continue;
+        }
+        return children;
+    }
+
+    mapDOMNodesTORNElements (DOMNodes, parentTag = false) {
         const { ignoreNodesFunction } = this.props;
-        return htmlElements.map((node, index, list) => {
-            if (ignoreNodesFunction && ignoreNodesFunction(node, parentTagName, parentIsText) === true) {
+        let RNElements = DOMNodes.map((node, nodeIndex) => {
+            const { type, attribs, name, data, parent } = node;
+            let { children } = node;
+            if (ignoreNodesFunction && ignoreNodesFunction(node, parentTag) === true) {
                 return false;
             }
             if (this._ignoredTags.indexOf(node.name) !== -1) {
                 return false;
             }
-            if (node.type === 'text') {
-                const str = HTMLTextNode.removeWhitespaceListHTML(node.data, index, parentTagName);
-                if (str.length) {
-                    return (
-                        <HTMLTextNode
-                          key={index}
-                          htmlAttribs={htmlAttribs}
-                          tagName={tagName}
-                        >
-                            {str}
-                        </HTMLTextNode>
-                    );
-                } else {
+            // Remove whitespaces to check if it's just a blank text
+            const strippedData = data && data.replace(/\s/g, '');
+            if (type === 'text') {
+                if (!strippedData || !strippedData.length) {
+                    // This is blank, don't render an useless additional component
                     return false;
                 }
-            } else if (node.type === 'tag') {
-                // Generate grouping info if we are a group-type element
-                let groupInfo;
-                if (node.name === 'li') {
-                    groupInfo = {
-                        index: htmlElements.reduce((acc, e) => {
-                            if (e === node) {
-                                acc.found = true;
-                            } else if (!acc.found && e.type === 'tag' && e.name === 'li') {
-                                acc.index++;
-                            }
-                            return acc;
-                        },
-                        { index: 0, found: false }).index,
-                        count: htmlElements.filter((e) => e.type === 'tag' && e.name === 'li').length
-                    };
+                // Text without tags or line breaks, this can be mapped to the Text
+                // wrapper without any modification
+                return { wrapper: 'Text', data, attribs, parent, tagName: name || 'rawtext' };
+            }
+            if (type === 'tag') {
+                if (children) {
+                    // Recursively map all children with this method
+                    children = this.associateRawTexts(this.mapDOMNodesTORNElements(children, name));
                 }
-
-                let ElementsToRender;
-                const Element = this.createElement(node, index, groupInfo, parentTagName, parentIsText);
-
-                if (this.imgsToRender.length && !parentIsText) {
-                    ElementsToRender = (
-                        <View key={index}>
-                            { this.imgsToRender.map((img, imgIndex) => <View key={`view-${index}-image-${imgIndex}`}>{ img }</View>) }
-                            { Element }
-                        </View>
-                    );
-                    this.imgsToRender = [];
-                } else {
-                    ElementsToRender = Element;
+                if (this.childrenNeedAView(children) || BLOCK_TAGS.indexOf(name.toLowerCase()) !== -1) {
+                    // If children cannot be nested in a Text, or if the tag
+                    // maps to a block element, use a view
+                    return { wrapper: 'View', children, attribs, parent, tagName: name, parentTag };
+                } else if (TEXT_TAGS.indexOf(name.toLowerCase()) !== -1) {
+                    // We are able to nest its children inside a Text
+                    return { wrapper: 'Text', children, attribs, parent, tagName: name, parentTag };
                 }
-
-                if (node.name === 'img' && parentIsText && parentTagName !== 'a') {
-                    this.imgsToRender.push({ ...Element, firstLoopIndex: index });
-                    return false;
-                }
-
-                if (TEXT_TAG_NAMES.has(node.name)) {
-                    if (!this.shouldRenderNode(node)) {
-                        return false;
-                    }
-                }
-
-                return ElementsToRender;
+                return { wrapper: 'View', children, attribs, parent, tagName: name, parentTag };
             }
         })
-        .filter((e) => e !== undefined);
+        .filter((parsedNode) => parsedNode !== false) // remove useless nodes
+        .map((parsedNode, nodeIndex) => {
+            const { wrapper, children, attribs, tagName } = parsedNode;
+            const firstChild = children && children[0];
+            if (firstChild &&
+                children.length === 1 &&
+                attribs === firstChild.attribs &&
+                firstChild.wrapper === wrapper && (tagName === firstChild.tagName || firstChild.tagName === 'rawtext')) {
+                // If the only child of a node is using the same wrapper, merge them into one
+                return {
+                    ...parsedNode,
+                    attribs: { ...attribs, ...firstChild.attribs },
+                    data: firstChild.data,
+                    children: [],
+                    tagName,
+                    nodeIndex
+                };
+            }
+            return { ...parsedNode, nodeIndex };
+        });
+        // RNElements.forEach((parsedNode, nodeIndex) => {
+        //     const { tagName, data, parent, parentTag } = parsedNode;
+        //     if (tagName === 'rawtext' && data && data[data.length - 1] !== '↵' && RNElements[nodeIndex + 1] && RNElements[nodeIndex + 1].wrapper === 'Text' && !parent) {
+        //         console.info('NODE TO MERGE @' + nodeIndex, parsedNode);
+        //         console.info('... WITH', destinationNode);
+        //         let destinationNode = RNElements[nodeIndex + 1];
+        //         RNElements.splice(
+        //             nodeIndex,
+        //             0,
+        //             { Wrapper: 'Text', children: [parsedNode, destinationNode], attribs: {}, nodeIndex, parent, parentTag, tagName: 'p' }
+        //         );
+        //         // console.log('FOUND RAW TEXT TO MERGE', parsedNode);
+        //         // console.log('INTO', RNElements[nodeIndex + 1]);
+        //         // if (destinationNode.children) {
+        //         //     destinationNode.children = [parsedNode, ...destinationNode.children];
+        //         // }
+        //         RNElements[nodeIndex + 1] = false;
+        //         destinationNode = false;
+        //     }
+        // });
+
+        // RNElements = RNElements.filter((parsedNode) => parsedNode !== false);
+        // console.info('RNElements', RNElements);
+        return this.associateRawTexts(RNElements);
+    }
+
+    renderRNElements (RNElements, parentWrapper = 'root', parentIndex = 0) {
+        const { tagsStyles, classesStyles, onLinkPress, imagesMaxWidth, emSize, ignoredStyles } = this.props;
+        return RNElements && RNElements.length ? RNElements.map((element, index) => {
+            const { attribs, data, tagName, parentTag, children, nodeIndex, wrapper } = element;
+            const convertedCSSStyles =
+                attribs && attribs.style ?
+                    cssStringToRNStyle(
+                        attribs.style,
+                        Wrapper === Text ? STYLESETS.TEXT : STYLESETS.VIEW,
+                        { parentTag: tagName, emSize, ignoredStyles }
+                    ) :
+                    {};
+
+            const childElements = children && children.length ?
+                children.map((child, childIndex) => this.renderRNElements([child], wrapper, index)) :
+                false;
+
+            if (this.renderers[tagName]) {
+                return this.renderers[tagName](
+                    attribs,
+                    childElements,
+                    convertedCSSStyles,
+                    {
+                        parentWrapper: wrapper,
+                        tagsStyles,
+                        classesStyles,
+                        onLinkPress,
+                        imagesMaxWidth,
+                        parentTag,
+                        nodeIndex,
+                        rawChildren: children
+                    });
+            }
+
+            const Wrapper = wrapper === 'Text' ? Text : View;
+            const textElement = data ? <Text>{ data }</Text> : false;
+
+
+            const classStyles = _getElementClassStyles(attribs, classesStyles);
+            const style = [
+                (Wrapper === Text ? defaultTextStyles : defaultBlockStyles)[tagName],
+                tagsStyles ? tagsStyles[tagName] : undefined,
+                convertedCSSStyles,
+                classStyles
+                // wrapper === 'Text' ? { flexDirection: 'row' } : undefined
+            ]
+            .filter((s) => s !== undefined);
+
+            return (
+                <Wrapper key={`${wrapper}-${parentIndex}-${nodeIndex}-${index}`} style={style}>
+                    { textElement }
+                    { childElements }
+                </Wrapper>
+            );
+        }) : false;
     }
 
     render () {
@@ -216,17 +288,21 @@ export default class HTML extends PureComponent {
         if (!dom) {
             return false;
         }
-        let rnNodes;
+        let RNNodes;
         const parser = new htmlparser2.Parser(
             new htmlparser2.DomHandler((_err, dom) => {
-                rnNodes = this.renderHtmlAsRN(dom, 'body', false);
+                console.log('DOMNodes', dom);
+                console.log('Parsed nodes', this.mapDOMNodesTORNElements(dom));
+                const RNElements = this.mapDOMNodesTORNElements(dom);
+                RNNodes = this.renderRNElements(RNElements);
+                // console.log('RNNodes', RNNodes);
             })
         );
         parser.write(dom);
         parser.done();
 
         return (
-            <View style={this.props.containerStyle || {}}>{rnNodes}</View>
+            <View style={this.props.containerStyle || {}}>{RNNodes}</View>
         );
     }
 }
