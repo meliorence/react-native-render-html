@@ -48,30 +48,37 @@ export function img (htmlAttribs, children, convertedCSSStyles, passProps = {}) 
 }
 
 export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
-    const { rawChildren } = passProps;
+    const { rawChildren, nodeIndex, key } = passProps;
     children = children.map((child, index) => {
         const rawChild = rawChildren[index];
         let prefix = false;
         if (rawChild) {
             if (rawChild.parentTag === 'ul') {
                 prefix = (
-                    <View style={{ alignSelf: 'center', marginRight: 10, width: 5, height: 5, borderRadius: 2.5, backgroundColor: 'black' }} />
+                    <View style={{
+                        alignSelf: 'center',
+                        marginRight: 10,
+                        width: 5,
+                        height: 5,
+                        borderRadius: 2.5,
+                        backgroundColor: 'black'
+                    }} />
                 );
             } else if (rawChild.parentTag === 'ol') {
                 prefix = (
-                    <Text>{ index + 1 })</Text>
+                    <Text style={{ alignSelf: 'center', marginRight: 5 }}>{ index + 1 })</Text>
                 );
             }
         }
         return (
-            <View key={`blu-${index}`} style={{ flexDirection: 'row' }}>
+            <View key={`list-${nodeIndex}-${index}`} style={{ flexDirection: 'row' }}>
                 { prefix }
-                { child }
+                <View style={{ flex: 1 }}>{ child }</View>
             </View>
         );
     });
     return (
-        <View style={{ paddingLeft: 20 }}>
+        <View style={{ paddingLeft: 20 }} key={key}>
             { children }
         </View>
     );
