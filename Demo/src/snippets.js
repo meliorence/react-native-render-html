@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { _constructStyles } from 'react-native-render-html/HTMLStyles';
 
 export const paragraphs = `
-    <p style="font-size:1.3rem;">This paragraph is styled a font size set in em !</p>
+    <p style="font-size:1.3em;">This paragraph is styled a font size set in em !</p>
     <em>This one showcases the default renderer for the "em" HTML tag.</em>
     <p style="padding:10%;">This one features a padding <strong>in percentage !</strong></p>
     <hr />
@@ -26,7 +26,7 @@ export const lists = `
     <br />
     <p>Here is an <em>ol</em> tag</p>    
     <ol>
-        <li>Sneaky</li>
+        <li style="color:red;">Sneaky</li>
         <li>Beaky</li>
         <li>Like</li>
     </ol>
@@ -177,9 +177,11 @@ function blueCircleRenderer (htmlAttribs, children, convertedCSSStyles, passProp
         styleSet: 'VIEW'
     });
     return (
-        <View style={[
-            { width: 50, height: 50, borderRadius: 25, backgroundColor: 'blue' },
-            style
-        ]} />
+        <View
+          key={passProps.key}
+          style={[
+              { width: 50, height: 50, borderRadius: 25, backgroundColor: 'blue' },
+              style
+          ]} />
     );
 }
