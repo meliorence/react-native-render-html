@@ -13,23 +13,20 @@ export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
         styleSet: parentWrapper === 'Text' ? 'TEXT' : 'VIEW'
     });
 
+    const onPress = (evt) => onLinkPress && htmlAttribs && htmlAttribs.href ?
+        onLinkPress(evt, htmlAttribs.href) :
+        undefined;
+
     if (parentWrapper === 'Text') {
         return (
-            <Text
-              {...passProps}
-              style={style}
-              onPress={(evt) => { onLinkPress && onLinkPress(evt, htmlAttribs.href); }}
-            >
+            <Text {...passProps} style={style} onPress={onPress} key={key}>
                 { children }
             </Text>
         );
     } else {
         return (
-            <TouchableOpacity
-              onPress={(evt) => { onLinkPress && onLinkPress(evt, htmlAttribs.href); }}
-            >
+            <TouchableOpacity onPress={onPress} key={key}>
                 { children }
-                {/* <View {...passProps} style={style}>{ children }</View>} */}
             </TouchableOpacity>
         );
     }
