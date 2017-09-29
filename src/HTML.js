@@ -182,19 +182,26 @@ export default class HTML extends PureComponent {
         .map((parsedNode, nodeIndex) => {
             const { wrapper, children, attribs, tagName } = parsedNode;
             const firstChild = children && children[0];
-            if (firstChild &&
-                children.length === 1 &&
-                attribs === firstChild.attribs &&
-                firstChild.wrapper === wrapper && (tagName === firstChild.tagName || firstChild.tagName === 'rawtext')) {
-                // If the only child of a node is using the same wrapper, merge them into one
-                return {
-                    ...parsedNode,
-                    attribs: { ...attribs, ...firstChild.attribs },
-                    data: firstChild.data,
-                    children: [],
-                    tagName,
-                    nodeIndex
-                };
+            if (firstChild && children.length === 1) {
+                // Specific tweaks for wrappers with a single child
+                if (attribs === firstChild.attribs &&
+                    firstChild.wrapper === wrapper &&
+                    (tagName === firstChild.tagName || firstChild.tagName === 'rawtext')) {
+                    // If the only child of a node is using the same wrapper, merge them into one
+                    return {
+                        ...parsedNode,
+                        attribs: { ...attribs, ...firstChild.attribs },
+                        data: firstChild.data,
+                        children: [],
+                        tagName,
+                        nodeIndex
+                    };
+                } else if (firstChild.tagName === 'rawtext' && wrapper === 'View') {
+                    // If the only child of a View node, assign its attributes to it so the
+                    // text styles are applied properly even when they're not the direct target
+                    firstChild.attribs = attribs;
+                    parsedNode.attribs = {};
+                }
             }
             return { ...parsedNode, nodeIndex };
         });
