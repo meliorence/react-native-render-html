@@ -26,7 +26,7 @@ export const lists = `
     <br />
     <p>Here is an <em>ol</em> tag</p>    
     <ol>
-        <li style="color:red;">Sneaky</li>
+        <li>Sneaky</li>
         <li>Beaky</li>
         <li>Like</li>
     </ol>
@@ -103,9 +103,9 @@ export const customHTMLTags = `
     <p>That demonstrates how easily we can override styles. In ascending priority :</p>
     Style from the class with the <em>classesStyles</em> prop (green)
     <ul>
-        <li>Default style for the custom component (blue)</li>
-        <li>Style from the class with the <em>classesStyles</em> prop (green)</li>
-        <li>Converted CSS to RN style from the <em>style</em> attribute in HTML (red)</li>
+        <li style="color:blue;">Default style for the custom component (blue)</li>
+        <li style="color:green;">Style from the class with the <em>classesStyles</em> prop (green)</li>
+        <li style="color:red;">Converted CSS to RN style from the <em>style</em> attribute in HTML (red)</li>
     </ul>
 `;
 
