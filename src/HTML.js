@@ -131,13 +131,13 @@ export default class HTML extends PureComponent {
                         nodeIndex: i,
                         parent: child.parent,
                         parentTag: child.parentTag,
-                        tagName: 'p',
+                        tagName: child.parent && child.parent.name === 'li' ? 'textwrapper' : 'p',
                         wrapper: 'Text'
                     };
                 }
             }
         }
-        return children;
+        return children.filter((parsedNode) => parsedNode !== false && parsedNode !== undefined);
     }
 
     mapDOMNodesTORNElements (DOMNodes, parentTag = false) {
@@ -196,7 +196,7 @@ export default class HTML extends PureComponent {
                         tagName,
                         nodeIndex
                     };
-                } else if (firstChild.tagName === 'rawtext' && wrapper === 'View') {
+                } else if (['rawtext', 'textwrapper'].indexOf(firstChild.tagName) !== -1 && wrapper === 'View') {
                     // If the only child of a View node, assign its attributes to it so the
                     // text styles are applied properly even when they're not the direct target
                     firstChild.attribs = attribs;

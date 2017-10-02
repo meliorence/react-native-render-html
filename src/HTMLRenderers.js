@@ -111,3 +111,9 @@ export function br (htlmAttribs, children, convertedCSSStyles, passProps) {
         <View style={{ height: 1.2 * passProps.emSize }} key={passProps.key} />
     );
 }
+
+export function textwrapper (htmlAttribs, children, convertedCSSStyles) {
+    return (
+        <Text style={convertedCSSStyles}>{ children }</Text>
+    );
+}
