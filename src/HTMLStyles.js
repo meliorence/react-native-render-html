@@ -28,8 +28,8 @@ function cssStringToObject (str) {
  * @returns {object}
  */
 export function _constructStyles ({ tagName, htmlAttribs, passProps, additionalStyles, styleSet = 'VIEW', baseFontSize }) {
-    let defaultTextStyles = generateDefaultTextStyles(this.props.baseFontSize);
-    let defaultBlockStyles = generateDefaultBlockStyles(this.props.baseFontSize);
+    let defaultTextStyles = generateDefaultTextStyles(baseFontSize);
+    let defaultBlockStyles = generateDefaultBlockStyles(baseFontSize);
     return [
         (styleSet === 'VIEW' ? defaultBlockStyles : defaultTextStyles)[tagName],
         passProps.htmlStyles ? passProps.htmlStyles[tagName] : undefined,
