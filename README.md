@@ -143,13 +143,21 @@ Please note that all of these behaviours are implemented in the default `<img>` 
 
 ## Ignoring HTML content
 
-Right now this module can't, and most likely will never be able to render *any* HTML you throw at it. HTML is a completely forgiving description language and you'll probably have no way to ensure the contributors of your application supply you with 100% perfect W3C compliant markup.
-
-This is why there are 3 different props dedicated to ignoring some part of the markup, to prevent your app from crashing when rendering this random `<iframe>` nested inside a `<div>` nested inside a `<p>` ¯/\_(ツ)_/¯
+You can't expect native components to be able to render *everything* you can find in your browser. And you might not entirely trust your contributors, so here are 3 props allowing you to prevent disasters without sanitizing your HTML on the server-side (that doesn't mean you shouldn't !).
 
 * `ignoredTags` : array of ignored HTML tags, by default `head` and `scripts` are removed
 * `ignoredStyles` : array of ignored CSS rules. Nothing is ignored by default
 * `ignoreNodesFunction` : this is a cumbersome, yet powerful, way of ignoring very specific stuff.
+
+**Please note** that if you supply `ignoredTags`, you will override the default ignored ones. There are *a lot* of them, if you want to keep them and add you own, you can do something like : 
+
+```javascript
+import { IGNORED_TAGS } from 'react-native-render-html/HTMLUtils';
+...
+
+// your props
+ignoredTags={[ ...IGNORED_TAGS, 'tag1', 'tag2']}
+```
 
 `ignoreNodesFunction` receives 3 parameters : `node`, `parentTagName` and `parentIsText`.
 
