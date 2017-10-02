@@ -1,22 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
-import { STYLESETS, cssStringToRNStyle, defaultBlockStyles, defaultTextStyles, _getElementClassStyles } from './HTMLStyles';
+import { BLOCK_TAGS, TEXT_TAGS, IGNORED_TAGS, STYLESETS } from './HTMLUtils';
+import { cssStringToRNStyle, _getElementClassStyles } from './HTMLStyles';
+import { defaultBlockStyles, defaultTextStyles } from './HTMLDefaultStyles';
 import htmlparser2 from 'htmlparser2';
 import * as HTMLRenderers from './HTMLRenderers';
-
-const BLOCK_TAGS = ['address', 'article', 'aside', 'footer', 'hgroup', 'nav', 'section', 'blockquote', 'dd', 'div',
-    'dl', 'dt', 'figure', 'hr', 'li', 'main', 'ol', 'ul', 'br', 'cite', 'data', 'rp', 'rtc', 'ruby', 'area',
-    'img', 'map', 'center'];
-
-const TEXT_TAGS = ['a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'figcaption', 'p', 'pre', 'abbr', 'b', 'bdi', 'bdo', 'code',
-    'dfn', 'i', 'kbd', 'mark', 'q', 'rt', 's', 'samp', 'small', 'big', 'span', 'strong', 'sub', 'sup', 'time', 'u', 'var', 'wbr',
-    'del', 'ins', 'blink', 'font', 'em', 'bold'];
-
-const IGNORED_TAGS = ['head', 'scripts', 'audio', 'video', 'track', 'embed', 'object', 'param', 'source', 'canvas', 'noscript',
-    'caption', 'col', 'colgroup', 'table', 'tbody', 'td', 'tfoot', 'th', 'thead', 'tr', 'button', 'datalist', 'fieldset', 'form',
-    'input', 'label', 'legend', 'meter', 'optgroup', 'option', 'output', 'progress', 'select', 'textarea', 'details', 'diaglog',
-    'menu', 'menuitem', 'summary'];
 
 export default class HTML extends PureComponent {
 
@@ -275,8 +264,8 @@ export default class HTML extends PureComponent {
         let RNNodes;
         const parser = new htmlparser2.Parser(
             new htmlparser2.DomHandler((_err, dom) => {
-                console.log('DOMNodes', dom);
-                console.log('Parsed nodes', this.mapDOMNodesTORNElements(dom));
+                // console.log('DOMNodes', dom);
+                // console.log('Parsed nodes', this.mapDOMNodesTORNElements(dom));
                 const RNElements = this.mapDOMNodesTORNElements(dom);
                 RNNodes = this.renderRNElements(RNElements);
             })
