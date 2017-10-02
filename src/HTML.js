@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 import { BLOCK_TAGS, TEXT_TAGS, IGNORED_TAGS, STYLESETS } from './HTMLUtils';
 import { cssStringToRNStyle, _getElementClassStyles } from './HTMLStyles';
-import { defaultBlockStyles, defaultTextStyles } from './HTMLDefaultStyles';
+import { generateDefaultBlockStyles, generateDefaultTextStyles } from './HTMLDefaultStyles';
 import htmlparser2 from 'htmlparser2';
 import * as HTMLRenderers from './HTMLRenderers';
 
@@ -22,13 +22,15 @@ export default class HTML extends PureComponent {
         containerStyle: View.propTypes.style,
         onLinkPress: PropTypes.func,
         imagesMaxWidth: PropTypes.number,
-        emSize: PropTypes.number.isRequired
+        emSize: PropTypes.number.isRequired,
+        baseFontSize: PropTypes.number.isRequired
     }
 
     static defaultProps = {
         renderers: HTMLRenderers,
         decodeEntities: true,
         emSize: 14,
+        baseFontSize: 14,
         ignoredTags: IGNORED_TAGS,
         ignoredStyles: [],
         tagsStyles: {},
@@ -234,7 +236,7 @@ export default class HTML extends PureComponent {
      * @memberof HTML
      */
     renderRNElements (RNElements, parentWrapper = 'root', parentIndex = 0) {
-        const { tagsStyles, classesStyles, onLinkPress, imagesMaxWidth, emSize, ignoredStyles } = this.props;
+        const { tagsStyles, classesStyles, onLinkPress, imagesMaxWidth, emSize, ignoredStyles, baseFontSize } = this.props;
         return RNElements && RNElements.length ? RNElements.map((element, index) => {
             const { attribs, data, tagName, parentTag, children, nodeIndex, wrapper } = element;
             const Wrapper = wrapper === 'Text' ? Text : View;
@@ -267,14 +269,17 @@ export default class HTML extends PureComponent {
                         parentTag,
                         nodeIndex,
                         emSize,
+                        baseFontSize,
                         key,
                         rawChildren: children
                     });
             }
 
-            const textElement = data ? <Text>{ data }</Text> : false;
+            const textElement = data ? <Text style={{fontSize: baseFontSize}}>{ data }</Text> : false;
 
             const classStyles = _getElementClassStyles(attribs, classesStyles);
+            let defaultTextStyles = generateDefaultTextStyles(this.props.baseFontSize);
+            let defaultBlockStyles = generateDefaultBlockStyles(this.props.baseFontSize);
             const style = [
                 (Wrapper === Text ? defaultTextStyles : defaultBlockStyles)[tagName],
                 tagsStyles ? tagsStyles[tagName] : undefined,

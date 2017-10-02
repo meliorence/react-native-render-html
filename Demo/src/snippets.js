@@ -174,7 +174,8 @@ function blueCircleRenderer (htmlAttribs, children, convertedCSSStyles, passProp
         tagName: 'bluecircle',
         htmlAttribs,
         passProps,
-        styleSet: 'VIEW'
+        styleSet: 'VIEW',
+        baseFontSize: 14,
     });
     return (
         <View

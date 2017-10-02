@@ -62,6 +62,7 @@ Prop | Description | Type | Required/Default
 `classesStyles` | Provide your styles for specific HTML classes, see [styling](#styling) | `object` | Optional
 `containerStyle` | Custom style for the container of the renderered HTML | `object` | Optional
 `emSize` | The default value in pixels for `1em` | `number` | `14`
+`baseFontSize` | The default fontSize applied to `<Text>` components | `number` | `14`
 `ignoredTags` | HTML tags you don't want rendered, see [ignoring HTML content](#ignoring-html-content) | `array` | Optional, `['head', 'scripts']`
 `ignoredStyles` | CSS styles from the `style` attribute you don't want rendered, see [ignoring HTML content](#ignoring-html-content) | `array` | Optional
 `ignoreNodesFunction` | Return true in this custom function to ignore nodes very precisely, see [ignoring HTML content](#ignoring-html-content) | `function` | Optional

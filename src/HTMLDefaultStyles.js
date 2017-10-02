@@ -2,62 +2,65 @@ import { StyleSheet } from 'react-native';
 
 const BASE_FONT_SIZE = 14;
 
-export const defaultBlockStyles = StyleSheet.create({
+export function generateDefaultBlockStyles(baseFontSize = BASE_FONT_SIZE) {
+  return StyleSheet.create({
     div: { },
     ul: {
         paddingLeft: 40,
-        marginBottom: BASE_FONT_SIZE
+        marginBottom: baseFontSize
     },
     ol: {
         paddingLeft: 40,
-        marginBottom: BASE_FONT_SIZE
+        marginBottom: baseFontSize
     },
     iframe: {
         width: 200,
         height: 200
     },
     hr: {
-        marginTop: BASE_FONT_SIZE / 2,
-        marginBottom: BASE_FONT_SIZE / 2,
+        marginTop: baseFontSize / 2,
+        marginBottom: baseFontSize / 2,
         height: 1,
         backgroundColor: '#CCC'
-    }
-});
-
-export const defaultTextStyles = StyleSheet.create({
-    p: {
-        fontSize: BASE_FONT_SIZE,
-        marginTop: BASE_FONT_SIZE,
-        marginBottom: BASE_FONT_SIZE
     },
+    p: {
+        marginTop: baseFontSize,
+        marginBottom: baseFontSize
+    }
+  });
+}
+
+export function generateDefaultTextStyles(baseFontSize = BASE_FONT_SIZE) {
+  return StyleSheet.create({
     u: { textDecorationLine: 'underline' },
     em: { fontStyle: 'italic' },
     i: { fontStyle: 'italic' },
     b: { fontWeight: 'bold' },
     strong: { fontWeight: 'bold' },
-    big: { fontSize: BASE_FONT_SIZE * 1.2 },
-    small: { fontSize: BASE_FONT_SIZE * 0.8 },
+    big: { fontSize: baseFontSize * 1.2 },
+    small: { fontSize: baseFontSize * 0.8 },
     a: {
         textDecorationLine: 'underline',
         color: '#245dc1'
     },
-    h1: _generateHeadingStyle(BASE_FONT_SIZE, 2, 0.67),
-    h2: _generateHeadingStyle(BASE_FONT_SIZE, 1.5, 0.83),
-    h3: _generateHeadingStyle(BASE_FONT_SIZE, 1.17, 1),
-    h4: _generateHeadingStyle(BASE_FONT_SIZE, 1, 1.33),
-    h5: _generateHeadingStyle(BASE_FONT_SIZE, 0.83, 1.67),
-    h6: _generateHeadingStyle(BASE_FONT_SIZE, 0.67, 2.33),
+    h1: _generateHeadingStyle(baseFontSize, 2, 0.67),
+    h2: _generateHeadingStyle(baseFontSize, 1.5, 0.83),
+    h3: _generateHeadingStyle(baseFontSize, 1.17, 1),
+    h4: _generateHeadingStyle(baseFontSize, 1, 1.33),
+    h5: _generateHeadingStyle(baseFontSize, 0.83, 1.67),
+    h6: _generateHeadingStyle(baseFontSize, 0.67, 2.33),
     sub: {
         textAlignVertical: 'top',
-        fontSize: BASE_FONT_SIZE * 0.8,
-        marginTop: BASE_FONT_SIZE / 2
+        fontSize: baseFontSize * 0.8,
+        marginTop: baseFontSize / 2
     },
     sup: {
         textAlignVertical: 'top',
-        fontSize: BASE_FONT_SIZE * 0.8,
-        marginBottom: BASE_FONT_SIZE / 2
+        fontSize: baseFontSize * 0.8,
+        marginBottom: baseFontSize / 2
     }
-});
+  });
+}
 
 /**
 * Small utility for generating heading styles
