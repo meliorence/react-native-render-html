@@ -55,6 +55,7 @@ Prop | Description | Type | Required/Default
 `renderers` | Your [custom renderers](#creating-custom-renderers) | `object` | Optional, some default ones are supplied (`<a>`, `<img>`...)
 `html` | HTML string to parse and render | `string` | Required
 `uri` | *(experimental)* remote website to parse and render | `string` | Optional
+`decodeEntities` | Decode HTML entities of your content | `bool` | Optional, defaults to `true`
 `imagesMaxWidth` | Resize your images to this maximum width, see [images](#images) | `number` | Optional
 `onLinkPress` | Fired with the event and the href as its arguments when tapping a link | `function` | Optional
 `tagsStyles` | Provide your styles for specific HTML tags, see [styling](#styling) | `object` | Optional
