@@ -3,12 +3,12 @@ import _RNViewStylePropTypes from 'react-native/Libraries/Components/View/ViewSt
 import _RNImageStylePropTypes from 'react-native/Libraries/Image/ImageStylePropTypes';
 
 export const BLOCK_TAGS = ['address', 'article', 'aside', 'footer', 'hgroup', 'nav', 'section', 'blockquote', 'dd', 'div',
-'dl', 'dt', 'figure', 'hr', 'li', 'main', 'ol', 'ul', 'br', 'cite', 'data', 'rp', 'rtc', 'ruby', 'area',
+'dl', 'dt', 'figure', 'hr', 'li', 'main', 'ol', 'ul', 'cite', 'data', 'rp', 'rtc', 'ruby', 'area',
 'img', 'map', 'center'];
 
 export const TEXT_TAGS = ['a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'figcaption', 'p', 'pre', 'abbr', 'b', 'bdi', 'bdo', 'code',
 'dfn', 'i', 'kbd', 'mark', 'q', 'rt', 's', 'samp', 'small', 'big', 'span', 'strong', 'sub', 'sup', 'time', 'u', 'var', 'wbr',
-'del', 'ins', 'blink', 'font', 'em', 'bold'];
+'del', 'ins', 'blink', 'font', 'em', 'bold', 'br'];
 
 export const IGNORED_TAGS = ['head', 'scripts', 'audio', 'video', 'track', 'embed', 'object', 'param', 'source', 'canvas', 'noscript',
 'caption', 'col', 'colgroup', 'table', 'tbody', 'td', 'tfoot', 'th', 'thead', 'tr', 'button', 'datalist', 'fieldset', 'form',

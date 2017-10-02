@@ -108,7 +108,7 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
 
 export function br (htlmAttribs, children, convertedCSSStyles, passProps) {
     return (
-        <View style={{ height: 1.2 * passProps.emSize }} key={passProps.key} />
+        <Text style={{ height: 1.2 * passProps.emSize, flex: 1 }} key={passProps.key}>{"\n"}</Text>
     );
 }
 
