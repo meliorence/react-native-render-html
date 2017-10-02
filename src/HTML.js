@@ -13,6 +13,7 @@ export default class HTML extends PureComponent {
         renderers: PropTypes.object.isRequired,
         ignoredTags: PropTypes.array.isRequired,
         ignoredStyles: PropTypes.array.isRequired,
+        decodeEntities: PropTypes.bool.isRequired,
         ignoreNodesFunction: PropTypes.func,
         html: PropTypes.string,
         uri: PropTypes.string,
@@ -26,6 +27,7 @@ export default class HTML extends PureComponent {
 
     static defaultProps = {
         renderers: HTMLRenderers,
+        decodeEntities: true,
         emSize: 14,
         ignoredTags: IGNORED_TAGS,
         ignoredStyles: [],
@@ -302,7 +304,8 @@ export default class HTML extends PureComponent {
                 // console.log('Parsed nodes', this.mapDOMNodesTORNElements(dom));
                 const RNElements = this.mapDOMNodesTORNElements(dom);
                 RNNodes = this.renderRNElements(RNElements);
-            })
+            }),
+            { decodeEntities: this.props.decodeEntities }
         );
         parser.write(dom);
         parser.done();
