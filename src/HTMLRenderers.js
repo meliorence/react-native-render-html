@@ -56,22 +56,22 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
             if (rawChild.parentTag === 'ul') {
                 prefix = (
                     <View style={{
-                        alignSelf: 'center',
                         marginRight: 10,
                         width: 5,
                         height: 5,
+                        marginTop: 5,
                         borderRadius: 2.5,
                         backgroundColor: 'black'
                     }} />
                 );
             } else if (rawChild.parentTag === 'ol') {
                 prefix = (
-                    <Text style={{ alignSelf: 'center', marginRight: 5 }}>{ index + 1 })</Text>
+                    <Text style={{ marginRight: 5 }}>{ index + 1 })</Text>
                 );
             }
         }
         return (
-            <View key={`list-${nodeIndex}-${index}`} style={{ flexDirection: 'row' }}>
+            <View key={`list-${nodeIndex}-${index}`} style={{ flexDirection: 'row', marginBottom: 10 }}>
                 { prefix }
                 <View style={{ flex: 1 }}>{ child }</View>
             </View>
