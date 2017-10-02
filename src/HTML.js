@@ -84,6 +84,12 @@ export default class HTML extends PureComponent {
         this._ignoredTags = props.ignoredTags.map((tag) => tag.toLowerCase());
     }
 
+    /**
+     * Loop on children and return whether if their parent needs to be a <View>
+     * @param {any} children
+     * @returns {boolean}
+     * @memberof HTML
+     */
     childrenNeedAView (children) {
         for (let i = 0; i < children.length; i++) {
             if (children[i].wrapper === 'View') {
@@ -95,6 +101,14 @@ export default class HTML extends PureComponent {
         return false;
     }
 
+    /**
+     * Loops on children an find texts that need to be wrapped so we don't render line breaks
+     * The wrapper can either be a <p> when it should be a paragraph, or a custom tag named
+     * "textwrapper", which renders a plain <Text> component.
+     * @param {any} children
+     * @returns {array}
+     * @memberof HTML
+     */
     associateRawTexts (children) {
         for (let i = 0; i < children.length; i++) {
             const child = children[i];
@@ -129,6 +143,16 @@ export default class HTML extends PureComponent {
         return children.filter((parsedNode) => parsedNode !== false && parsedNode !== undefined);
     }
 
+    /**
+     * Maps the DOM nodes parsed by htmlparser2 into a simple structure that will be easy to render with
+     * native components. It removes ignored tags, chooses the right wrapper for each set of children
+     * to ensure we're not wrapping views inside texts and improves the structure recursively
+     * to prevent erratic rendering.
+     * @param {array} DOMNodes
+     * @param {boolean} [parentTag=false]
+     * @returns
+     * @memberof HTML
+     */
     mapDOMNodesTORNElements (DOMNodes, parentTag = false) {
         const { ignoreNodesFunction } = this.props;
         let RNElements = DOMNodes.map((node, nodeIndex) => {
@@ -197,6 +221,16 @@ export default class HTML extends PureComponent {
         return this.associateRawTexts(RNElements);
     }
 
+    /**
+     * Takes the parsed nodes from mapDOMNodesTORNElements and actually renders native components.
+     * Calls the utils that convert the CSS into react-native compatible styles and renders custom
+     * components when needed.
+     * @param {boolean} RNElements
+     * @param {string} [parentWrapper='root']
+     * @param {number} [parentIndex=0]
+     * @returns {array}
+     * @memberof HTML
+     */
     renderRNElements (RNElements, parentWrapper = 'root', parentIndex = 0) {
         const { tagsStyles, classesStyles, onLinkPress, imagesMaxWidth, emSize, ignoredStyles } = this.props;
         return RNElements && RNElements.length ? RNElements.map((element, index) => {

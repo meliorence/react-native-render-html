@@ -19,6 +19,14 @@ function cssStringToObject (str) {
         }, {});
 }
 
+/**
+ * Helper that composes styles with the default style for a tag, the "style" attribute and
+ * any given addiitional style. Checks everything against the style sets of views, images,
+ * or texts with prop-types.
+ * @export
+ * @param {any} { tagName, htmlAttribs, passProps, additionalStyles, styleSet = 'VIEW' }
+ * @returns {object}
+ */
 export function _constructStyles ({ tagName, htmlAttribs, passProps, additionalStyles, styleSet = 'VIEW' }) {
     return [
         (styleSet === 'VIEW' ? defaultBlockStyles : defaultTextStyles)[tagName],
@@ -36,6 +44,13 @@ export function _constructStyles ({ tagName, htmlAttribs, passProps, additionalS
     .filter((style) => style !== undefined);
 }
 
+/**
+ * Creates a set of style from an array of classes asosciated to a node.
+ * @export
+ * @param {any} htmlAttribs
+ * @param {any} [classesStyles={}]
+ * @returns {object}
+ */
 export function _getElementClassStyles (htmlAttribs, classesStyles = {}) {
     const elementClasses = _getElementCSSClasses(htmlAttribs);
     let styles = {};
@@ -47,6 +62,12 @@ export function _getElementClassStyles (htmlAttribs, classesStyles = {}) {
     return styles;
 }
 
+/**
+ * Simple helper that returns an array of classes of a node.
+ * @export
+ * @param {any} htmlAttribs
+ * @returns {array}
+ */
 export function _getElementCSSClasses (htmlAttribs) {
     if (!htmlAttribs || !htmlAttribs.class) {
         return [];
@@ -56,10 +77,11 @@ export function _getElementCSSClasses (htmlAttribs) {
 
 /**
  * Converts a html style to its equavalent react native style
-* @param: css: object of key value css strings
-* @param styleset: the styleset to convert the styles against
-* @return an object of react native styles
-*/
+ * @param {object} css: object of key value css strings
+ * @param {string} styleset: the styleset to convert the styles against
+ * @param {object} { parentTag, emSize, ignoredStyles }
+ * @returns {object}
+ */
 function cssToRNStyle (css, styleset, { parentTag, emSize, ignoredStyles }) {
     const styleProps = stylePropTypes[styleset];
     return Object.keys(css)
