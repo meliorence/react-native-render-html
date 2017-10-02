@@ -278,8 +278,8 @@ export default class HTML extends PureComponent {
             const textElement = data ? <Text style={{fontSize: baseFontSize}}>{ data }</Text> : false;
 
             const classStyles = _getElementClassStyles(attribs, classesStyles);
-            let defaultTextStyles = generateDefaultTextStyles(this.props.baseFontSize);
-            let defaultBlockStyles = generateDefaultBlockStyles(this.props.baseFontSize);
+            let defaultTextStyles = generateDefaultTextStyles(baseFontSize);
+            let defaultBlockStyles = generateDefaultBlockStyles(baseFontSize);
             const style = [
                 (Wrapper === Text ? defaultTextStyles : defaultBlockStyles)[tagName],
                 tagsStyles ? tagsStyles[tagName] : undefined,
