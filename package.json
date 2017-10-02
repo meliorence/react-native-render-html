@@ -1,9 +1,9 @@
 {
   "name": "react-native-render-html",
-  "version": "2.1.0",
-  "author": "Maxime Bertonnier",
+  "version": "3.0.0",
+  "author": "Archriss",
   "license": "BSD-2-Clause",
-  "repository": "https://github.com/Exilz/react-native-render-html",
+  "repository": "https://github.com/archriss/react-native-render-html",
   "description": "React Native component that renders HTML as native views",
   "keywords": [
     "react-native",
@@ -21,21 +21,7 @@
   },
   "peerDependencies": {
     "prop-types": ">=15.5.10",
-    "react": ">=16.0.0-alpha.12",
-    "react-native": ">=0.43.2"
-  },
-  "standard": {
-    "parser": "babel-eslint",
-    "globals": [
-      "describe",
-      "it",
-      "expect",
-      "fetch",
-      "navigator",
-      "__DEV__",
-      "XMLHttpRequest",
-      "FormData",
-      "React$Element"
-    ]
+    "react": "*",
+    "react-native": "*"
   }
 }
