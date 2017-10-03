@@ -50,18 +50,24 @@ export default class HTML extends PureComponent {
     componentWillMount () {
         this.registerIgnoredTags();
         this.registerDOM();
+        this.generateDefaultStyles();
     }
 
     componentWillReceiveProps (nextProps) {
-        if (this.props.html !== nextProps.html || this.props.uri !== nextProps.uri) {
+        const { html, uri, ignoredTags, renderers, baseFontSize } = this.props;
+
+        if (html !== nextProps.html || uri !== nextProps.uri) {
             this.imgsToRender = [];
             this.registerDOM(nextProps);
         }
-        if (this.props.ignoredTags !== nextProps.ignoredTags) {
+        if (ignoredTags !== nextProps.ignoredTags) {
             this.registerIgnoredTags(nextProps);
         }
-        if (this.props.renderers !== nextProps.renderers) {
+        if (renderers !== nextProps.renderers) {
             this.renderers = { ...HTMLRenderers, ...(nextProps.renderers || {}) };
+        }
+        if (baseFontSize !== nextProps.baseFontSize) {
+            this.generateDefaultStyles(nextProps.baseFontSize);
         }
     }
 
@@ -82,6 +88,11 @@ export default class HTML extends PureComponent {
         } else {
             console.warn('react-native-render-html', 'Please provide the html or uri prop.');
         }
+    }
+
+    generateDefaultStyles (baseFontSize = this.props.baseFontSize) {
+        this.defaultBlockStyles = generateDefaultBlockStyles(baseFontSize);
+        this.defaultTextStyles = generateDefaultTextStyles(baseFontSize);
     }
 
     registerIgnoredTags (props = this.props) {
@@ -278,10 +289,8 @@ export default class HTML extends PureComponent {
             const textElement = data ? <Text style={{fontSize: baseFontSize}}>{ data }</Text> : false;
 
             const classStyles = _getElementClassStyles(attribs, classesStyles);
-            let defaultTextStyles = generateDefaultTextStyles(baseFontSize);
-            let defaultBlockStyles = generateDefaultBlockStyles(baseFontSize);
             const style = [
-                (Wrapper === Text ? defaultTextStyles : defaultBlockStyles)[tagName],
+                (Wrapper === Text ? this.defaultTextStyles : this.defaultBlockStyles)[tagName],
                 tagsStyles ? tagsStyles[tagName] : undefined,
                 convertedCSSStyles,
                 classStyles
