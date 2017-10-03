@@ -186,9 +186,13 @@ export default class HTML extends PureComponent {
                     // This is blank, don't render an useless additional component
                     return false;
                 }
-                // Text without tags or line breaks, this can be mapped to the Text
-                // wrapper without any modification
-                return { wrapper: 'Text', data, attribs, parent, tagName: name || 'rawtext' };
+                // Text without tags, these can be mapped to the Text wrapper
+                return {
+                    wrapper: 'Text',
+                    data: data.replace(/(\r\n|\n|\r)/gm, ''), // remove linebreaks
+                    attribs, parent,
+                    tagName: name || 'rawtext'
+                };
             }
             if (type === 'tag') {
                 if (children) {
@@ -286,7 +290,7 @@ export default class HTML extends PureComponent {
                     });
             }
 
-            const textElement = data ? <Text style={{fontSize: baseFontSize}}>{ data }</Text> : false;
+            const textElement = data ? <Text style={{ fontSize: baseFontSize }}>{ data }</Text> : false;
 
             const classStyles = _getElementClassStyles(attribs, classesStyles);
             const style = [
