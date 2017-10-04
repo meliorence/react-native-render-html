@@ -1,5 +1,5 @@
 import { PERC_SUPPORTED_STYLES, STYLESETS, stylePropTypes } from './HTMLUtils';
-import { defaultBlockStyles, defaultTextStyles } from './HTMLDefaultStyles';
+import { generateDefaultBlockStyles, generateDefaultTextStyles } from './HTMLDefaultStyles';
 import checkPropTypes from './checkPropTypes';
 
 /**
@@ -27,7 +27,9 @@ function cssStringToObject (str) {
  * @param {any} { tagName, htmlAttribs, passProps, additionalStyles, styleSet = 'VIEW' }
  * @returns {object}
  */
-export function _constructStyles ({ tagName, htmlAttribs, passProps, additionalStyles, styleSet = 'VIEW' }) {
+export function _constructStyles ({ tagName, htmlAttribs, passProps, additionalStyles, styleSet = 'VIEW', baseFontSize }) {
+    let defaultTextStyles = generateDefaultTextStyles(baseFontSize);
+    let defaultBlockStyles = generateDefaultBlockStyles(baseFontSize);
     return [
         (styleSet === 'VIEW' ? defaultBlockStyles : defaultTextStyles)[tagName],
         passProps.htmlStyles ? passProps.htmlStyles[tagName] : undefined,

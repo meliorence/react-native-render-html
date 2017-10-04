@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 import { BLOCK_TAGS, TEXT_TAGS, IGNORED_TAGS, STYLESETS } from './HTMLUtils';
 import { cssStringToRNStyle, _getElementClassStyles } from './HTMLStyles';
-import { defaultBlockStyles, defaultTextStyles } from './HTMLDefaultStyles';
+import { generateDefaultBlockStyles, generateDefaultTextStyles } from './HTMLDefaultStyles';
 import htmlparser2 from 'htmlparser2';
 import * as HTMLRenderers from './HTMLRenderers';
 
@@ -22,13 +22,15 @@ export default class HTML extends PureComponent {
         containerStyle: View.propTypes.style,
         onLinkPress: PropTypes.func,
         imagesMaxWidth: PropTypes.number,
-        emSize: PropTypes.number.isRequired
+        emSize: PropTypes.number.isRequired,
+        baseFontSize: PropTypes.number.isRequired
     }
 
     static defaultProps = {
         renderers: HTMLRenderers,
         decodeEntities: true,
         emSize: 14,
+        baseFontSize: 14,
         ignoredTags: IGNORED_TAGS,
         ignoredStyles: [],
         tagsStyles: {},
@@ -48,18 +50,24 @@ export default class HTML extends PureComponent {
     componentWillMount () {
         this.registerIgnoredTags();
         this.registerDOM();
+        this.generateDefaultStyles();
     }
 
     componentWillReceiveProps (nextProps) {
-        if (this.props.html !== nextProps.html || this.props.uri !== nextProps.uri) {
+        const { html, uri, ignoredTags, renderers, baseFontSize } = this.props;
+
+        if (html !== nextProps.html || uri !== nextProps.uri) {
             this.imgsToRender = [];
             this.registerDOM(nextProps);
         }
-        if (this.props.ignoredTags !== nextProps.ignoredTags) {
+        if (ignoredTags !== nextProps.ignoredTags) {
             this.registerIgnoredTags(nextProps);
         }
-        if (this.props.renderers !== nextProps.renderers) {
+        if (renderers !== nextProps.renderers) {
             this.renderers = { ...HTMLRenderers, ...(nextProps.renderers || {}) };
+        }
+        if (baseFontSize !== nextProps.baseFontSize) {
+            this.generateDefaultStyles(nextProps.baseFontSize);
         }
     }
 
@@ -80,6 +88,11 @@ export default class HTML extends PureComponent {
         } else {
             console.warn('react-native-render-html', 'Please provide the html or uri prop.');
         }
+    }
+
+    generateDefaultStyles (baseFontSize = this.props.baseFontSize) {
+        this.defaultBlockStyles = generateDefaultBlockStyles(baseFontSize);
+        this.defaultTextStyles = generateDefaultTextStyles(baseFontSize);
     }
 
     registerIgnoredTags (props = this.props) {
@@ -173,9 +186,13 @@ export default class HTML extends PureComponent {
                     // This is blank, don't render an useless additional component
                     return false;
                 }
-                // Text without tags or line breaks, this can be mapped to the Text
-                // wrapper without any modification
-                return { wrapper: 'Text', data, attribs, parent, tagName: name || 'rawtext' };
+                // Text without tags, these can be mapped to the Text wrapper
+                return {
+                    wrapper: 'Text',
+                    data: data.replace(/(\r\n|\n|\r)/gm, ''), // remove linebreaks
+                    attribs, parent,
+                    tagName: name || 'rawtext'
+                };
             }
             if (type === 'tag') {
                 if (children) {
@@ -234,7 +251,7 @@ export default class HTML extends PureComponent {
      * @memberof HTML
      */
     renderRNElements (RNElements, parentWrapper = 'root', parentIndex = 0) {
-        const { tagsStyles, classesStyles, onLinkPress, imagesMaxWidth, emSize, ignoredStyles } = this.props;
+        const { tagsStyles, classesStyles, onLinkPress, imagesMaxWidth, emSize, ignoredStyles, baseFontSize } = this.props;
         return RNElements && RNElements.length ? RNElements.map((element, index) => {
             const { attribs, data, tagName, parentTag, children, nodeIndex, wrapper } = element;
             const Wrapper = wrapper === 'Text' ? Text : View;
@@ -267,16 +284,17 @@ export default class HTML extends PureComponent {
                         parentTag,
                         nodeIndex,
                         emSize,
+                        baseFontSize,
                         key,
                         rawChildren: children
                     });
             }
 
-            const textElement = data ? <Text>{ data }</Text> : false;
+            const textElement = data ? <Text style={{ fontSize: baseFontSize }}>{ data }</Text> : false;
 
             const classStyles = _getElementClassStyles(attribs, classesStyles);
             const style = [
-                (Wrapper === Text ? defaultTextStyles : defaultBlockStyles)[tagName],
+                (Wrapper === Text ? this.defaultTextStyles : this.defaultBlockStyles)[tagName],
                 tagsStyles ? tagsStyles[tagName] : undefined,
                 convertedCSSStyles,
                 classStyles

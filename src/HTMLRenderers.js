@@ -48,7 +48,7 @@ export function img (htmlAttribs, children, convertedCSSStyles, passProps = {}) 
 }
 
 export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
-    const { rawChildren, nodeIndex, key } = passProps;
+    const { rawChildren, nodeIndex, key, baseFontSize } = passProps;
     children = children.map((child, index) => {
         const rawChild = rawChildren[index];
         let prefix = false;
@@ -57,16 +57,16 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
                 prefix = (
                     <View style={{
                         marginRight: 10,
-                        width: 5,
-                        height: 5,
-                        marginTop: 5,
-                        borderRadius: 2.5,
+                        width: baseFontSize / 2.8,
+                        height: baseFontSize / 2.8,
+                        marginTop: baseFontSize / 2,
+                        borderRadius: baseFontSize / 2.8,
                         backgroundColor: 'black'
                     }} />
                 );
             } else if (rawChild.parentTag === 'ol') {
                 prefix = (
-                    <Text style={{ marginRight: 5 }}>{ index + 1 })</Text>
+                    <Text style={{ marginRight: 5, fontSize: baseFontSize }}>{ index + 1 })</Text>
                 );
             }
         }
@@ -108,7 +108,7 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
 
 export function br (htlmAttribs, children, convertedCSSStyles, passProps) {
     return (
-        <View style={{ height: 1.2 * passProps.emSize }} key={passProps.key} />
+        <Text style={{ height: 1.2 * passProps.emSize, flex: 1 }} key={passProps.key}>{"\n"}</Text>
     );
 }
 
