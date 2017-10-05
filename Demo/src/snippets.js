@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { _constructStyles } from 'react-native-render-html/HTMLStyles';
+import { _constructStyles } from 'react-native-render-html/src/HTMLStyles';
 
 export const paragraphs = `
     <p style="font-size:1.3em;">This paragraph is styled a font size set in em !</p>
