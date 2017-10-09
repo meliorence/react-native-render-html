@@ -60,7 +60,8 @@ Prop | Description | Type | Required/Default
 `onLinkPress` | Fired with the event and the href as its arguments when tapping a link | `function` | Optional
 `tagsStyles` | Provide your styles for specific HTML tags, see [styling](#styling) | `object` | Optional
 `classesStyles` | Provide your styles for specific HTML classes, see [styling](#styling) | `object` | Optional
-`containerStyle` | Custom style for the container of the renderered HTML | `object` | Optional
+`containerStyle` | Custom style for the default container of the renderered HTML | `object` | Optional
+`customWrapper` | Replace the default wrapper with a function that takes your content as the first parameter | `function` | Optional
 `emSize` | The default value in pixels for `1em` | `number` | `14`
 `baseFontSize` | The default fontSize applied to `<Text>` components | `number` | `14`
 `ignoredTags` | HTML tags you don't want rendered, see [ignoring HTML content](#ignoring-html-content) | `array` | Optional, `['head', 'scripts']`
