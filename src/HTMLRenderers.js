@@ -49,7 +49,7 @@ export function img (htmlAttribs, children, convertedCSSStyles, passProps = {}) 
 
 export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
     const { rawChildren, nodeIndex, key, baseFontSize } = passProps;
-    children = children.map((child, index) => {
+    children = children && children.map((child, index) => {
         const rawChild = rawChildren[index];
         let prefix = false;
         if (rawChild) {
