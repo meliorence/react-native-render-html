@@ -20,6 +20,7 @@ export default class HTML extends PureComponent {
         tagsStyles: PropTypes.object,
         classesStyles: PropTypes.object,
         containerStyle: ViewPropTypes ? ViewPropTypes.style : View.propTypes.style,
+        customWrapper: PropTypes.func,
         onLinkPress: PropTypes.func,
         imagesMaxWidth: PropTypes.number,
         emSize: PropTypes.number.isRequired,
@@ -311,6 +312,7 @@ export default class HTML extends PureComponent {
     }
 
     render () {
+        const { decodeEntities, customWrapper } = this.props;
         const { dom } = this.state;
         if (!dom) {
             return false;
@@ -323,12 +325,12 @@ export default class HTML extends PureComponent {
                 const RNElements = this.mapDOMNodesTORNElements(dom);
                 RNNodes = this.renderRNElements(RNElements);
             }),
-            { decodeEntities: this.props.decodeEntities }
+            { decodeEntities: decodeEntities }
         );
         parser.write(dom);
         parser.done();
 
-        return (
+        return customWrapper ? customWrapper(RNNodes) : (
             <View style={this.props.containerStyle || {}}>
                 { RNNodes }
             </View>
