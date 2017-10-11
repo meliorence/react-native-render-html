@@ -15,6 +15,8 @@ export default class HTML extends PureComponent {
         ignoredStyles: PropTypes.array.isRequired,
         decodeEntities: PropTypes.bool.isRequired,
         ignoreNodesFunction: PropTypes.func,
+        alterData: PropTypes.func,
+        alterChildren: PropTypes.func,
         html: PropTypes.string,
         uri: PropTypes.string,
         tagsStyles: PropTypes.object,
@@ -170,15 +172,23 @@ export default class HTML extends PureComponent {
      * @memberof HTML
      */
     mapDOMNodesTORNElements (DOMNodes, parentTag = false) {
-        const { ignoreNodesFunction } = this.props;
+        const { ignoreNodesFunction, alterData, alterChildren } = this.props;
         let RNElements = DOMNodes.map((node, nodeIndex) => {
-            const { type, attribs, name, data, parent } = node;
-            let { children } = node;
+            const { type, attribs, name, parent } = node;
+            let { children, data } = node;
             if (ignoreNodesFunction && ignoreNodesFunction(node, parentTag) === true) {
                 return false;
             }
             if (this._ignoredTags.indexOf(node.name) !== -1) {
                 return false;
+            }
+            if (alterData && data) {
+                const alteredData = alterData(node);
+                data = alteredData || data;
+            }
+            if (alterChildren && children) {
+                const alteredChildren = alterChildren(node);
+                children = alteredChildren || children;
             }
             // Remove whitespaces to check if it's just a blank text
             const strippedData = data && data.replace(/\s/g, '');
