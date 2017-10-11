@@ -17,6 +17,9 @@ An iOS/Android pure javascript react-native component that renders your HTML int
     - [Creating custom renderers](#creating-custom-renderers)
     - [Styling](#styling)
     - [Images](#images)
+    - [Altering content](#altering-content)
+        - [alterData](#alterdata)
+        - [alterChildren](#alterchildren)
     - [Ignoring HTML content](#ignoring-html-content)
 
 ## Install
@@ -64,6 +67,8 @@ Prop | Description | Type | Required/Default
 `customWrapper` | Replace the default wrapper with a function that takes your content as the first parameter | `function` | Optional
 `emSize` | The default value in pixels for `1em` | `number` | `14`
 `baseFontSize` | The default fontSize applied to `<Text>` components | `number` | `14`
+`alterData` | Target some specific texts and change their content, see [altering content](#altering-content) | `function` | Optional
+`alterChildren` | Target some specific nested nodes and change them, see [altering content](#altering-content) | `function` | Optional
 `ignoredTags` | HTML tags you don't want rendered, see [ignoring HTML content](#ignoring-html-content) | `array` | Optional, `['head', 'scripts']`
 `ignoredStyles` | CSS styles from the `style` attribute you don't want rendered, see [ignoring HTML content](#ignoring-html-content) | `array` | Optional
 `ignoreNodesFunction` | Return true in this custom function to ignore nodes very precisely, see [ignoring HTML content](#ignoring-html-content) | `function` | Optional
@@ -143,6 +148,53 @@ Please note that if you set width AND height through any mean of styling, `image
 Images with broken links will render an empty square with a thin border, similar to what safari renders in a webview.
 
 Please note that all of these behaviours are implemented in the default `<img>` renderer. If you want to provide your own `<img>` renderer, you'll have to make this happen by yourself. You can use the `img` function in `HTMLRenderers.js` as a starting point.
+
+## Altering content
+
+`alterData` and `alterChildren` props are very useful to make some modifications on the structure of your HTML before it's actually rendered with react components.
+
+They both are functions that receive the parsed `node` as their first and only parameter. You must return your changes : a `string` with `alterData` and an `array` with `alterChildren` or a falsy value if you don't need to change anything.
+
+### alterData
+
+`alterData` allows you to change the text content of your nodes. For instance, you can customize the content of `<h1>` and `<h2>` to render your titles in uppercase.
+
+Here's how you would do that :
+
+```javascript
+// ... your props
+alterData: (node) => {
+    let { parent, data } = node;
+    if (parent && parent.name === 'h1') {
+        // Texts elements are always children of wrappers, this is why we check the tag
+        // with "parent.name" and not "name"
+        return data.toUpperCase();
+    } else {
+        // Return a falsy value for anything else than the <h1> tag so nothing is altered
+        return false;
+    }
+}
+```
+
+### alterChildren
+
+`alterChildren` allows you to change the children wrapped in any node. For instance, you might want to change the content of a a list.
+
+Here's an example :
+
+```javascript
+// ... your props
+alterChildren: (node) => {
+    const { children, name } = node;
+    if (name === 'ol' && children && children.length) {
+        // Keep only the first two elements of the list
+        return children.splice(0, 2);
+    } else {
+        // Return a falsy value for anything else than the <ol> tag so nothing is altered
+        return false;
+    }
+}
+```
 
 ## Ignoring HTML content
 
