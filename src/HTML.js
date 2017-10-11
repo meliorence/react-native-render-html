@@ -15,6 +15,8 @@ export default class HTML extends PureComponent {
         ignoredStyles: PropTypes.array.isRequired,
         decodeEntities: PropTypes.bool.isRequired,
         ignoreNodesFunction: PropTypes.func,
+        alterData: PropTypes.func,
+        alterChildren: PropTypes.func,
         html: PropTypes.string,
         uri: PropTypes.string,
         tagsStyles: PropTypes.object,
@@ -100,6 +102,17 @@ export default class HTML extends PureComponent {
         this._ignoredTags = props.ignoredTags.map((tag) => tag.toLowerCase());
     }
 
+    shouldApplyBaseFontSize (parent, classStyles) {
+        const { tagsStyles } = this.props;
+        const notOverridenByStyleAttribute =
+            !parent || !parent.attribs || !parent.attribs.style || (parent.attribs.style.search('font-size') === -1);
+        const notOverridenByTagsStyles =
+            !parent || !parent.name || !tagsStyles[parent.name] || !tagsStyles[parent.name]['fontSize'];
+        const notOverrideByClassesStyle = !classStyles || !classStyles['fontSize'];
+
+        return notOverridenByStyleAttribute && notOverridenByTagsStyles && notOverrideByClassesStyle;
+    }
+
     /**
      * Loop on children and return whether if their parent needs to be a <View>
      * @param {any} children
@@ -170,15 +183,23 @@ export default class HTML extends PureComponent {
      * @memberof HTML
      */
     mapDOMNodesTORNElements (DOMNodes, parentTag = false) {
-        const { ignoreNodesFunction } = this.props;
+        const { ignoreNodesFunction, alterData, alterChildren } = this.props;
         let RNElements = DOMNodes.map((node, nodeIndex) => {
-            const { type, attribs, name, data, parent } = node;
-            let { children } = node;
+            const { type, attribs, name, parent } = node;
+            let { children, data } = node;
             if (ignoreNodesFunction && ignoreNodesFunction(node, parentTag) === true) {
                 return false;
             }
             if (this._ignoredTags.indexOf(node.name) !== -1) {
                 return false;
+            }
+            if (alterData && data) {
+                const alteredData = alterData(node);
+                data = alteredData || data;
+            }
+            if (alterChildren && children) {
+                const alteredChildren = alterChildren(node);
+                children = alteredChildren || children;
             }
             // Remove whitespaces to check if it's just a blank text
             const strippedData = data && data.replace(/\s/g, '');
@@ -254,7 +275,7 @@ export default class HTML extends PureComponent {
     renderRNElements (RNElements, parentWrapper = 'root', parentIndex = 0) {
         const { tagsStyles, classesStyles, onLinkPress, imagesMaxWidth, emSize, ignoredStyles, baseFontSize } = this.props;
         return RNElements && RNElements.length ? RNElements.map((element, index) => {
-            const { attribs, data, tagName, parentTag, children, nodeIndex, wrapper } = element;
+            const { attribs, data, tagName, parent, parentTag, children, nodeIndex, wrapper } = element;
             const Wrapper = wrapper === 'Text' ? Text : View;
             const key = `${wrapper}-${parentIndex}-${nodeIndex}-${index}`;
             const convertedCSSStyles =
@@ -291,14 +312,18 @@ export default class HTML extends PureComponent {
                     });
             }
 
-            const textElement = data ? <Text style={{ fontSize: baseFontSize }}>{ data }</Text> : false;
-
             const classStyles = _getElementClassStyles(attribs, classesStyles);
+            // Base fontSize should be applied only if nothing else overrides it
+            const applyBaseFontSize = this.shouldApplyBaseFontSize(parent, classStyles);
+            const textElement = data ?
+                <Text style={applyBaseFontSize ? { fontSize: baseFontSize } : {}}>{ data }</Text> :
+                false;
+
             const style = [
                 (Wrapper === Text ? this.defaultTextStyles : this.defaultBlockStyles)[tagName],
+                classStyles,
                 tagsStyles ? tagsStyles[tagName] : undefined,
-                convertedCSSStyles,
-                classStyles
+                convertedCSSStyles
             ]
             .filter((s) => s !== undefined);
 
