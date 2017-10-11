@@ -126,18 +126,33 @@ export const iframes = `
     <p style="text-align:center;"><em>We've just rendered a meme</em></p>
 `;
 
+export const alteration = `
+    <p><em>alterData</em> and <em>alterChildren</em> props are very useful to make some modifications on the structure of your HTML before it's actually rendered into react components.</p>
+    <h2>Using alterData</h2>
+    <p>For instance, you can alter the content of <em>h1, h2, h3...</em> titles to make them uppercase or remove the last child of a list.</p>
+    <p>The next title is written in lowercase in the HTML snippet, but it will be displayed in uppercase.</p>
+    <h1>title</h1>
+    <p><em>alterData</em> is simple, you get the parsed <em>node</em> as the first parameter of your function, so you can make the data whatever you want and return it. Just bear in mind that if you don't want to change a node, you have to return a falsy value.</p>
+    <h2>Using alterChildren</h2>
+    <p>Let's remove the first two elements of the next ordered list</p>
+    <ol><li>One</li><li>Two</li><li>Three</li><li>Four</li></ol>
+`;
+
 export default {
     paragraphs: {
         name: 'Paragraphs',
         props: {
-            tagsStyles: { i: { textAlign: 'center', fontStyle: 'italic', color: 'grey' } },
+            baseFontSize: 14,
+            tagsStyles: {
+                i: { textAlign: 'center', fontStyle: 'italic', color: 'grey' }
+            },
             classesStyles: { 'last-paragraph': { textAlign: 'right', color: 'teal', fontWeight: '800' } }
         }
     },
-    lists: { name: 'Lists' },
-    simpleLoremWithImages: { name: 'Simple lorem (images)' },
+    lists: { name: 'Lists', props: { baseFontSize: 14 } },
+    simpleLoremWithImages: { name: 'Simple lorem (images)', props: { baseFontSize: 20 } },
     imagesWithinParagraphs: { name: 'Images within paragraphs' },
-    images404: { name: '404 images' },
+    images404: { name: '404 images', props: { baseFontSize: 20 } },
     trickyStuff: { name: 'Tricky stuff' },
     layoutStyles: { name: 'Layout styles' },
     ignoringTagsAndStyles: {
@@ -159,7 +174,28 @@ export default {
     },
     invalidHTML: { name: 'Invalid HTML' },
     parseRemoteHTML: { name: 'Remote HTML', props: { html: undefined, uri: 'http://motherfuckingwebsite.com', ignoredTags: ['script'] } },
-    iframes: { name: 'Iframes' }
+    iframes: { name: 'Iframes' },
+    alteration: {
+        name: 'Altering data & chlidren',
+        props: {
+            alterData: (node) => {
+                let { parent, data } = node;
+                if (parent && parent.name === 'h1') {
+                    return data.toUpperCase();
+                } else {
+                    return false;
+                }
+            },
+            alterChildren: (node) => {
+                const { children, name } = node;
+                if (name === 'ol' && children && children.length) {
+                    return children.splice(0, 2);
+                } else {
+                    return false;
+                }
+            }
+        }
+    }
 };
 
 function blueCircleRenderer (htmlAttribs, children, convertedCSSStyles, passProps) {
@@ -175,7 +211,7 @@ function blueCircleRenderer (htmlAttribs, children, convertedCSSStyles, passProp
         htmlAttribs,
         passProps,
         styleSet: 'VIEW',
-        baseFontSize: 14,
+        baseFontSize: 14
     });
     return (
         <View
