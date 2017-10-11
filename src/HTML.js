@@ -102,6 +102,17 @@ export default class HTML extends PureComponent {
         this._ignoredTags = props.ignoredTags.map((tag) => tag.toLowerCase());
     }
 
+    shouldApplyBaseFontSize (parent, classStyles) {
+        const { tagsStyles } = this.props;
+        const notOverridenByStyleAttribute =
+            !parent || !parent.attribs || !parent.attribs.style || (parent.attribs.style.search('font-size') === -1);
+        const notOverridenByTagsStyles =
+            !parent || !parent.name || !tagsStyles[parent.name] || !tagsStyles[parent.name]['fontSize'];
+        const notOverrideByClassesStyle = !classStyles || !classStyles['fontSize'];
+
+        return notOverridenByStyleAttribute && notOverridenByTagsStyles && notOverrideByClassesStyle;
+    }
+
     /**
      * Loop on children and return whether if their parent needs to be a <View>
      * @param {any} children
@@ -264,7 +275,7 @@ export default class HTML extends PureComponent {
     renderRNElements (RNElements, parentWrapper = 'root', parentIndex = 0) {
         const { tagsStyles, classesStyles, onLinkPress, imagesMaxWidth, emSize, ignoredStyles, baseFontSize } = this.props;
         return RNElements && RNElements.length ? RNElements.map((element, index) => {
-            const { attribs, data, tagName, parentTag, children, nodeIndex, wrapper } = element;
+            const { attribs, data, tagName, parent, parentTag, children, nodeIndex, wrapper } = element;
             const Wrapper = wrapper === 'Text' ? Text : View;
             const key = `${wrapper}-${parentIndex}-${nodeIndex}-${index}`;
             const convertedCSSStyles =
@@ -301,14 +312,18 @@ export default class HTML extends PureComponent {
                     });
             }
 
-            const textElement = data ? <Text style={{ fontSize: baseFontSize }}>{ data }</Text> : false;
-
             const classStyles = _getElementClassStyles(attribs, classesStyles);
+            // Base fontSize should be applied only if nothing else overrides it
+            const applyBaseFontSize = this.shouldApplyBaseFontSize(parent, classStyles);
+            const textElement = data ?
+                <Text style={applyBaseFontSize ? { fontSize: baseFontSize } : {}}>{ data }</Text> :
+                false;
+
             const style = [
                 (Wrapper === Text ? this.defaultTextStyles : this.defaultBlockStyles)[tagName],
+                classStyles,
                 tagsStyles ? tagsStyles[tagName] : undefined,
-                convertedCSSStyles,
-                classStyles
+                convertedCSSStyles
             ]
             .filter((s) => s !== undefined);
 
