@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, ViewPropTypes } from 'react-native';
-import { BLOCK_TAGS, TEXT_TAGS, IGNORED_TAGS, STYLESETS } from './HTMLUtils';
+import { BLOCK_TAGS, TEXT_TAGS, IGNORED_TAGS, TEXT_TAGS_IGNORING_ASSOCIATION, STYLESETS } from './HTMLUtils';
 import { cssStringToRNStyle, _getElementClassStyles } from './HTMLStyles';
 import { generateDefaultBlockStyles, generateDefaultTextStyles } from './HTMLDefaultStyles';
 import htmlparser2 from 'htmlparser2';
 import * as HTMLRenderers from './HTMLRenderers';
 
 export default class HTML extends PureComponent {
-
     static propTypes = {
         renderers: PropTypes.object.isRequired,
         ignoredTags: PropTypes.array.isRequired,
@@ -144,14 +143,14 @@ export default class HTML extends PureComponent {
     associateRawTexts (children) {
         for (let i = 0; i < children.length; i++) {
             const child = children[i];
-            if ((child.wrapper === 'Text' && child.tagName !== 'p') && children.length > 1 && (!child.parent || child.parent.name !== 'p')) {
+            if ((child.wrapper === 'Text' && TEXT_TAGS_IGNORING_ASSOCIATION.indexOf(child.tagName) === -1) && children.length > 1 && (!child.parent || child.parent.name !== 'p')) {
                 // Texts outside <p> or not <p> themselves (with siblings)
                 let wrappedTexts = [];
                 for (let j = i; j < children.length; j++) {
                     // Loop on its next siblings and store them in an array
                     // until we encounter a block or a <p>
                     let nextSibling = children[j];
-                    if (nextSibling.wrapper !== 'Text' || nextSibling.tagName === 'p') {
+                    if (nextSibling.wrapper !== 'Text' || TEXT_TAGS_IGNORING_ASSOCIATION.indexOf(nextSibling.tagName) === -1) {
                         break;
                     }
                     wrappedTexts.push(nextSibling);
