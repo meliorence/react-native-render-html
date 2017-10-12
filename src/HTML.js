@@ -14,6 +14,7 @@ export default class HTML extends PureComponent {
         ignoredTags: PropTypes.array.isRequired,
         ignoredStyles: PropTypes.array.isRequired,
         decodeEntities: PropTypes.bool.isRequired,
+        debug: PropTypes.bool.isRequired,
         ignoreNodesFunction: PropTypes.func,
         alterData: PropTypes.func,
         alterChildren: PropTypes.func,
@@ -31,6 +32,7 @@ export default class HTML extends PureComponent {
 
     static defaultProps = {
         renderers: HTMLRenderers,
+        debug: false,
         decodeEntities: true,
         emSize: 14,
         baseFontSize: 14,
@@ -337,7 +339,7 @@ export default class HTML extends PureComponent {
     }
 
     render () {
-        const { decodeEntities, customWrapper } = this.props;
+        const { decodeEntities, customWrapper, debug } = this.props;
         const { dom } = this.state;
         if (!dom) {
             return false;
@@ -345,10 +347,12 @@ export default class HTML extends PureComponent {
         let RNNodes;
         const parser = new htmlparser2.Parser(
             new htmlparser2.DomHandler((_err, dom) => {
-                // console.log('DOMNodes', dom);
-                // console.log('Parsed nodes', this.mapDOMNodesTORNElements(dom));
                 const RNElements = this.mapDOMNodesTORNElements(dom);
                 RNNodes = this.renderRNElements(RNElements);
+                if (debug) {
+                    console.log('DOMNodes from htmlparser2', dom);
+                    console.log('RNElements from render-html', RNElements);
+                }
             }),
             { decodeEntities: decodeEntities }
         );
