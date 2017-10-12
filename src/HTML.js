@@ -15,6 +15,7 @@ export default class HTML extends PureComponent {
         ignoredStyles: PropTypes.array.isRequired,
         decodeEntities: PropTypes.bool.isRequired,
         debug: PropTypes.bool.isRequired,
+        listsPrefixesRenderers: PropTypes.object,
         ignoreNodesFunction: PropTypes.func,
         alterData: PropTypes.func,
         alterChildren: PropTypes.func,
@@ -214,7 +215,8 @@ export default class HTML extends PureComponent {
                 return {
                     wrapper: 'Text',
                     data: data.replace(/(\r\n|\n|\r)/gm, ''), // remove linebreaks
-                    attribs, parent,
+                    attribs,
+                    parent,
                     tagName: name || 'rawtext'
                 };
             }
@@ -275,7 +277,10 @@ export default class HTML extends PureComponent {
      * @memberof HTML
      */
     renderRNElements (RNElements, parentWrapper = 'root', parentIndex = 0) {
-        const { tagsStyles, classesStyles, onLinkPress, imagesMaxWidth, emSize, ignoredStyles, baseFontSize } = this.props;
+        const {
+            tagsStyles, classesStyles, onLinkPress, imagesMaxWidth, emSize, ignoredStyles, baseFontSize,
+            listsPrefixesRenderers
+        } = this.props;
         return RNElements && RNElements.length ? RNElements.map((element, index) => {
             const { attribs, data, tagName, parent, parentTag, children, nodeIndex, wrapper } = element;
             const Wrapper = wrapper === 'Text' ? Text : View;
@@ -310,6 +315,7 @@ export default class HTML extends PureComponent {
                         emSize,
                         baseFontSize,
                         key,
+                        listsPrefixesRenderers,
                         rawChildren: children
                     });
             }

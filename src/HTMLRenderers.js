@@ -48,13 +48,13 @@ export function img (htmlAttribs, children, convertedCSSStyles, passProps = {}) 
 }
 
 export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
-    const { rawChildren, nodeIndex, key, baseFontSize } = passProps;
+    const { rawChildren, nodeIndex, key, baseFontSize, listsPrefixesRenderers } = passProps;
     children = children && children.map((child, index) => {
         const rawChild = rawChildren[index];
         let prefix = false;
         if (rawChild) {
             if (rawChild.parentTag === 'ul') {
-                prefix = (
+                prefix = listsPrefixesRenderers && listsPrefixesRenderers.ul ? listsPrefixesRenderers.ul(...arguments) : (
                     <View style={{
                         marginRight: 10,
                         width: baseFontSize / 2.8,
@@ -65,7 +65,7 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
                     }} />
                 );
             } else if (rawChild.parentTag === 'ol') {
-                prefix = (
+                prefix = listsPrefixesRenderers && listsPrefixesRenderers.ol ? listsPrefixesRenderers.ol(...arguments) : (
                     <Text style={{ marginRight: 5, fontSize: baseFontSize }}>{ index + 1 })</Text>
                 );
             }
