@@ -32,7 +32,7 @@ export function _constructStyles ({ tagName, htmlAttribs, passProps, additionalS
     let defaultBlockStyles = generateDefaultBlockStyles(baseFontSize);
     return [
         (styleSet === 'VIEW' ? defaultBlockStyles : defaultTextStyles)[tagName],
-        passProps.htmlStyles ? passProps.htmlStyles[tagName] : undefined,
+        passProps.tagsStyles ? passProps.tagsStyles[tagName] : undefined,
         _getElementClassStyles(htmlAttribs, passProps.classesStyles),
         htmlAttribs.style ?
             cssStringToRNStyle(
