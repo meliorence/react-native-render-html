@@ -242,7 +242,7 @@ export default class HTML extends PureComponent {
             const firstChild = children && children[0];
             if (firstChild && children.length === 1) {
                 // Specific tweaks for wrappers with a single child
-                if (attribs === firstChild.attribs &&
+                if ((attribs === firstChild.attribs || !firstChild.attribs) &&
                     firstChild.wrapper === wrapper &&
                     (tagName === firstChild.tagName || firstChild.tagName === 'rawtext')) {
                     // If the only child of a node is using the same wrapper, merge them into one
