@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Image, View } from 'react-native';
+import { Image, View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 const DEFAULT_WIDTH = 100;
@@ -16,6 +16,7 @@ export default class HTMLImage extends PureComponent {
 
     static propTypes = {
         source: PropTypes.object.isRequired,
+        alt: PropTypes.string,
         style: Image.propTypes.style,
         imagesMaxWidth: PropTypes.number
     }
@@ -77,7 +78,9 @@ export default class HTMLImage extends PureComponent {
 
     get errorImage () {
         return (
-            <View style={{ width: 50, height: 50, borderWidth: 1, borderColor: 'lightgray' }} />
+            <View style={{ width: 50, height: 50, borderWidth: 1, borderColor: 'lightgray', overflow: 'hidden', justifyContent: 'center' }}>
+                { this.props.alt ? <Text style={{ textAlign: 'center', fontStyle: 'italic' }}>{ this.props.alt }</Text> : false }
+            </View>
         );
     }
 
