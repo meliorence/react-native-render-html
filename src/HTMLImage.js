@@ -53,12 +53,13 @@ export default class HTMLImage extends PureComponent {
         // Fetch image dimensions only if they aren't supplied or if with or height is missing
         Image.getSize(
             source.uri,
-            (width, height) => {
-                this.setState({
-                    width: imagesMaxWidth && width > imagesMaxWidth ? imagesMaxWidth : width,
-                    height: imagesMaxWidth && width > imagesMaxWidth ? height / (width / imagesMaxWidth) : height,
-                    error: false
-                });
+            (originalWidth, originalHeight) => {
+                if (!imagesMaxWidth) {
+                    return this.setState({ width: originalWidth, height: originalHeight });
+                }
+                const optimalWidth = imagesMaxWidth <= originalWidth ? imagesMaxWidth : originalWidth;
+                const optimalHeight = (optimalWidth * originalHeight) / originalWidth;
+                this.setState({ width: optimalWidth, height: optimalHeight, error: false });
             },
             () => {
                 this.setState({ error: true });
