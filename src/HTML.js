@@ -5,6 +5,7 @@ import { BLOCK_TAGS, TEXT_TAGS, IGNORED_TAGS, TEXT_TAGS_IGNORING_ASSOCIATION, ST
 import { cssStringToRNStyle, _getElementClassStyles } from './HTMLStyles';
 import { generateDefaultBlockStyles, generateDefaultTextStyles } from './HTMLDefaultStyles';
 import htmlparser2 from 'htmlparser2';
+import _isEqual from 'lodash.isequal';
 import * as HTMLRenderers from './HTMLRenderers';
 
 export default class HTML extends PureComponent {
@@ -27,7 +28,7 @@ export default class HTML extends PureComponent {
         onLinkPress: PropTypes.func,
         imagesMaxWidth: PropTypes.number,
         emSize: PropTypes.number.isRequired,
-        baseFontSize: PropTypes.number.isRequired
+        baseFontStyle: PropTypes.object.isRequired
     }
 
     static defaultProps = {
@@ -35,9 +36,9 @@ export default class HTML extends PureComponent {
         debug: false,
         decodeEntities: true,
         emSize: 14,
-        baseFontSize: 14,
         ignoredTags: IGNORED_TAGS,
         ignoredStyles: [],
+        baseFontStyle: { fontSize: 14 },
         tagsStyles: {},
         classesStyles: {}
     }
@@ -59,7 +60,7 @@ export default class HTML extends PureComponent {
     }
 
     componentWillReceiveProps (nextProps) {
-        const { html, uri, ignoredTags, renderers, baseFontSize } = this.props;
+        const { html, uri, ignoredTags, renderers, baseFontStyle } = this.props;
 
         if (html !== nextProps.html || uri !== nextProps.uri) {
             this.imgsToRender = [];
@@ -71,8 +72,8 @@ export default class HTML extends PureComponent {
         if (renderers !== nextProps.renderers) {
             this.renderers = { ...HTMLRenderers, ...(nextProps.renderers || {}) };
         }
-        if (baseFontSize !== nextProps.baseFontSize) {
-            this.generateDefaultStyles(nextProps.baseFontSize);
+        if (!_isEqual(baseFontStyle, nextProps.baseFontStyle)) {
+            this.generateDefaultStyles(nextProps.baseFontStyle);
         }
     }
 
@@ -95,24 +96,41 @@ export default class HTML extends PureComponent {
         }
     }
 
-    generateDefaultStyles (baseFontSize = this.props.baseFontSize) {
-        this.defaultBlockStyles = generateDefaultBlockStyles(baseFontSize);
-        this.defaultTextStyles = generateDefaultTextStyles(baseFontSize);
+    generateDefaultStyles (baseFontStyle = this.props.baseFontStyle) {
+        this.defaultBlockStyles = generateDefaultBlockStyles(baseFontStyle.fontSize || 14);
+        this.defaultTextStyles = generateDefaultTextStyles(baseFontStyle.fontSize || 14);
     }
 
     registerIgnoredTags (props = this.props) {
         this._ignoredTags = props.ignoredTags.map((tag) => tag.toLowerCase());
     }
 
-    shouldApplyBaseFontSize (parent, classStyles) {
-        const { tagsStyles } = this.props;
-        const notOverridenByStyleAttribute =
-            !parent || !parent.attribs || !parent.attribs.style || (parent.attribs.style.search('font-size') === -1);
-        const notOverridenByTagsStyles =
-            !parent || !parent.name || !tagsStyles[parent.name] || !tagsStyles[parent.name]['fontSize'];
-        const notOverrideByClassesStyle = !classStyles || !classStyles['fontSize'];
+    filterBaseFontStyles (element, classStyles) {
+        const { tagsStyles, baseFontStyle } = this.props;
+        const { tagName, parentTag, parent, attribs } = element;
+        const styles = Object.keys(baseFontStyle);
+        let appliedStyles = {};
 
-        return notOverridenByStyleAttribute && notOverridenByTagsStyles && notOverrideByClassesStyle;
+        for (let i = 0; i < styles.length; i++) {
+            const styleAttribute = styles[i];
+            const styleAttributeWithCSSDashes = styleAttribute.replace(/[A-Z]/, (match) => { return `-${match.toLowerCase()}`; });
+            const overridenFromStyle = attribs && attribs.style && attribs.style.search(styleAttributeWithCSSDashes) !== -1;
+            const overridenFromParentStyle = parent && parent.attribs && parent.attribs.style && parent.attribs.style.search(styleAttributeWithCSSDashes) !== -1;
+
+            const overridenFromTagStyle = tagName && tagsStyles[tagName] && tagsStyles[tagName][styleAttribute];
+            const overridenFromParentTagStyle = parentTag && tagsStyles[parentTag] && tagsStyles[parentTag][styleAttribute];
+
+            const overridenFromClassStyles = classStyles && classStyles[styleAttribute];
+
+            const notOverriden = !overridenFromStyle && !overridenFromParentStyle &&
+                !overridenFromTagStyle && !overridenFromParentTagStyle &&
+                !overridenFromClassStyles;
+
+            if (notOverriden) {
+                appliedStyles[styleAttribute] = baseFontStyle[styleAttribute];
+            }
+        }
+        return appliedStyles;
     }
 
     /**
@@ -277,13 +295,13 @@ export default class HTML extends PureComponent {
      */
     renderRNElements (RNElements, parentWrapper = 'root', parentIndex = 0) {
         const {
-            tagsStyles, classesStyles, onLinkPress, imagesMaxWidth, emSize, ignoredStyles, baseFontSize,
+            tagsStyles, classesStyles, onLinkPress, imagesMaxWidth, emSize, ignoredStyles, baseFontStyle,
             listsPrefixesRenderers
         } = this.props;
         return RNElements && RNElements.length ? RNElements.map((element, index) => {
-            const { attribs, data, tagName, parent, parentTag, children, nodeIndex, wrapper } = element;
+            const { attribs, data, tagName, parentTag, children, nodeIndex, wrapper } = element;
             const Wrapper = wrapper === 'Text' ? Text : View;
-            const key = `${wrapper}-${parentIndex}-${nodeIndex}-${index}`;
+            const key = `${wrapper}-${parentIndex}-${nodeIndex}-${tagName}-${index}-${parentTag}`;
             const convertedCSSStyles =
                 attribs && attribs.style ?
                     cssStringToRNStyle(
@@ -311,19 +329,19 @@ export default class HTML extends PureComponent {
                         imagesMaxWidth,
                         parentTag,
                         nodeIndex,
+                        parentIndex,
                         emSize,
-                        baseFontSize,
+                        baseFontStyle,
                         key,
+                        data,
                         listsPrefixesRenderers,
                         rawChildren: children
                     });
             }
 
             const classStyles = _getElementClassStyles(attribs, classesStyles);
-            // Base fontSize should be applied only if nothing else overrides it
-            const applyBaseFontSize = this.shouldApplyBaseFontSize(parent, classStyles);
             const textElement = data ?
-                <Text style={applyBaseFontSize ? { fontSize: baseFontSize } : {}}>{ data }</Text> :
+                <Text style={this.filterBaseFontStyles(element, classStyles)}>{ data }</Text> :
                 false;
 
             const style = [
