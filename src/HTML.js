@@ -168,7 +168,7 @@ export default class HTML extends PureComponent {
                     // Loop on its next siblings and store them in an array
                     // until we encounter a block or a <p>
                     let nextSibling = children[j];
-                    if (nextSibling.wrapper !== 'Text' || TEXT_TAGS_IGNORING_ASSOCIATION.indexOf(nextSibling.tagName) === -1) {
+                    if (nextSibling.wrapper !== 'Text' || TEXT_TAGS_IGNORING_ASSOCIATION.indexOf(nextSibling.tagName) !== -1) {
                         break;
                     }
                     wrappedTexts.push(nextSibling);
