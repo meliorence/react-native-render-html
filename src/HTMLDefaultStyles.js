@@ -27,7 +27,7 @@ export function generateDefaultBlockStyles (baseFontSize = BASE_FONT_SIZE) {
 }
 
 export function generateDefaultTextStyles (baseFontSize = BASE_FONT_SIZE) {
-    return StyleSheet.create({
+    return {
         u: { textDecorationLine: 'underline' },
         em: { fontStyle: 'italic' },
         i: { fontStyle: 'italic' },
@@ -59,7 +59,7 @@ export function generateDefaultTextStyles (baseFontSize = BASE_FONT_SIZE) {
             marginTop: baseFontSize,
             marginBottom: baseFontSize
         }
-    });
+    };
 }
 
 /**
