@@ -4,7 +4,7 @@ import { _constructStyles } from './HTMLStyles';
 import HTMLImage from './HTMLImage';
 
 export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
-    const { parentWrapper, onLinkPress, key } = passProps;
+    const { parentWrapper, onLinkPress, key, data } = passProps;
     const style = _constructStyles({
         tagName: 'a',
         htmlAttribs,
@@ -19,13 +19,13 @@ export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
     if (parentWrapper === 'Text') {
         return (
             <Text {...passProps} style={style} onPress={onPress} key={key}>
-                { children }
+                { children || data }
             </Text>
         );
     } else {
         return (
             <TouchableOpacity onPress={onPress} key={key}>
-                { children }
+                { children || data }
             </TouchableOpacity>
         );
     }
