@@ -345,7 +345,7 @@ export default class HTML extends PureComponent {
                 false;
 
             const style = [
-                (Wrapper === Text ? this.defaultTextStyles : this.defaultBlockStyles)[tagName],
+                (!tagsStyles || !tagsStyles[tagName]) ? (Wrapper === Text ? this.defaultTextStyles : this.defaultBlockStyles)[tagName] : undefined,
                 classStyles,
                 tagsStyles ? tagsStyles[tagName] : undefined,
                 convertedCSSStyles
