@@ -48,7 +48,8 @@ export function img (htmlAttribs, children, convertedCSSStyles, passProps = {}) 
 }
 
 export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
-    const { rawChildren, nodeIndex, key, baseFontSize, listsPrefixesRenderers } = passProps;
+    const { rawChildren, nodeIndex, key, baseFontStyle, listsPrefixesRenderers } = passProps;
+    const baseFontSize = baseFontStyle.fontSize || 14;
     children = children && children.map((child, index) => {
         const rawChild = rawChildren[index];
         let prefix = false;
@@ -71,7 +72,7 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
             }
         }
         return (
-            <View key={`list-${nodeIndex}-${index}`} style={{ flexDirection: 'row', marginBottom: 10 }}>
+            <View key={`list-${nodeIndex}-${index}-${key}`} style={{ flexDirection: 'row', marginBottom: 10 }}>
                 { prefix }
                 <View style={{ flex: 1 }}>{ child }</View>
             </View>
