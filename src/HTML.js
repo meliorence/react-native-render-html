@@ -26,6 +26,7 @@ export default class HTML extends PureComponent {
         containerStyle: ViewPropTypes ? ViewPropTypes.style : View.propTypes.style,
         customWrapper: PropTypes.func,
         onLinkPress: PropTypes.func,
+        onParsed: PropTypes.func,
         imagesMaxWidth: PropTypes.number,
         emSize: PropTypes.number.isRequired,
         baseFontStyle: PropTypes.object.isRequired
@@ -55,8 +56,8 @@ export default class HTML extends PureComponent {
 
     componentWillMount () {
         this.registerIgnoredTags();
-        this.registerDOM();
         this.generateDefaultStyles();
+        this.registerDOM();
     }
 
     componentWillReceiveProps (nextProps) {
@@ -80,13 +81,13 @@ export default class HTML extends PureComponent {
     async registerDOM (props = this.props) {
         const { html, uri } = props;
         if (html) {
-            this.setState({ dom: props.html });
+            this.parseDOM(html);
         } else if (props.uri) {
             try {
                 // WIP : This should render a loader and html prop should not be set in state
                 // Error handling would be nice, too.
                 let response = await fetch(uri);
-                this.setState({ dom: response._bodyText });
+                this.parseDOM(response._bodyText);
             } catch (err) {
                 console.warn('react-native-render-html', `Couldn't fetch remote HTML from uri : ${uri}`);
                 return false;
@@ -94,6 +95,24 @@ export default class HTML extends PureComponent {
         } else {
             console.warn('react-native-render-html', 'Please provide the html or uri prop.');
         }
+    }
+
+    parseDOM (dom) {
+        const { decodeEntities, debug, onParsed } = this.props;
+        const parser = new htmlparser2.Parser(
+            new htmlparser2.DomHandler((_err, dom) => {
+                const RNElements = this.mapDOMNodesTORNElements(dom);
+                onParsed && onParsed(dom, RNElements);
+                this.setState({ RNNodes: this.renderRNElements(RNElements) });
+                if (debug) {
+                    console.log('DOMNodes from htmlparser2', dom);
+                    console.log('RNElements from render-html', RNElements);
+                }
+            }),
+            { decodeEntities: decodeEntities }
+        );
+        parser.write(dom);
+        parser.done();
     }
 
     generateDefaultStyles (baseFontStyle = this.props.baseFontStyle) {
@@ -362,25 +381,11 @@ export default class HTML extends PureComponent {
     }
 
     render () {
-        const { decodeEntities, customWrapper, debug } = this.props;
-        const { dom } = this.state;
-        if (!dom) {
+        const { customWrapper } = this.props;
+        const { RNNodes } = this.state;
+        if (!RNNodes) {
             return false;
         }
-        let RNNodes;
-        const parser = new htmlparser2.Parser(
-            new htmlparser2.DomHandler((_err, dom) => {
-                const RNElements = this.mapDOMNodesTORNElements(dom);
-                RNNodes = this.renderRNElements(RNElements);
-                if (debug) {
-                    console.log('DOMNodes from htmlparser2', dom);
-                    console.log('RNElements from render-html', RNElements);
-                }
-            }),
-            { decodeEntities: decodeEntities }
-        );
-        parser.write(dom);
-        parser.done();
 
         return customWrapper ? customWrapper(RNNodes) : (
             <View style={this.props.containerStyle || {}}>
