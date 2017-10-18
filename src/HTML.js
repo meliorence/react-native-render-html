@@ -365,8 +365,8 @@ export default class HTML extends PureComponent {
 
             const style = [
                 (!tagsStyles || !tagsStyles[tagName]) ? (Wrapper === Text ? this.defaultTextStyles : this.defaultBlockStyles)[tagName] : undefined,
-                classStyles,
                 tagsStyles ? tagsStyles[tagName] : undefined,
+                classStyles,
                 convertedCSSStyles
             ]
             .filter((s) => s !== undefined);
