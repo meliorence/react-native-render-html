@@ -111,7 +111,7 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
     });
 
     return (
-        <WebView source={{ uri: htmlAttribs.src }} style={style} {...passProps} />
+        <WebView key={passProps.key} source={{ uri: htmlAttribs.src }} style={style} {...passProps} />
     );
 }
 
@@ -121,8 +121,8 @@ export function br (htlmAttribs, children, convertedCSSStyles, passProps) {
     );
 }
 
-export function textwrapper (htmlAttribs, children, convertedCSSStyles) {
+export function textwrapper (htmlAttribs, children, convertedCSSStyles, { key }) {
     return (
-        <Text style={convertedCSSStyles}>{ children }</Text>
+        <Text key={key} style={convertedCSSStyles}>{ children }</Text>
     );
 }
