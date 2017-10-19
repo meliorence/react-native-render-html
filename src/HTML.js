@@ -55,20 +55,19 @@ export default class HTML extends PureComponent {
     }
 
     componentWillMount () {
-        this.registerIgnoredTags();
         this.generateDefaultStyles();
+    }
+
+    componentDidMount () {
         this.registerDOM();
     }
 
     componentWillReceiveProps (nextProps) {
-        const { html, uri, ignoredTags, renderers, baseFontStyle } = this.props;
+        const { html, uri, renderers, baseFontStyle } = this.props;
 
         if (html !== nextProps.html || uri !== nextProps.uri) {
             this.imgsToRender = [];
             this.registerDOM(nextProps);
-        }
-        if (ignoredTags !== nextProps.ignoredTags) {
-            this.registerIgnoredTags(nextProps);
         }
         if (renderers !== nextProps.renderers) {
             this.renderers = { ...HTMLRenderers, ...(nextProps.renderers || {}) };
@@ -78,16 +77,22 @@ export default class HTML extends PureComponent {
         }
     }
 
+    componentDidUpdate (prevProps, prevState) {
+        if (this.state.dom !== prevState.dom) {
+            this.parseDOM(this.state.dom);
+        }
+    }
+
     async registerDOM (props = this.props) {
         const { html, uri } = props;
         if (html) {
-            this.parseDOM(html);
+            this.setState({ dom: html });
         } else if (props.uri) {
             try {
                 // WIP : This should render a loader and html prop should not be set in state
                 // Error handling would be nice, too.
                 let response = await fetch(uri);
-                this.parseDOM(response._bodyText);
+                this.setState({ dom: response._bodyText });
             } catch (err) {
                 console.warn('react-native-render-html', `Couldn't fetch remote HTML from uri : ${uri}`);
                 return false;
@@ -118,10 +123,6 @@ export default class HTML extends PureComponent {
     generateDefaultStyles (baseFontStyle = this.props.baseFontStyle) {
         this.defaultBlockStyles = generateDefaultBlockStyles(baseFontStyle.fontSize || 14);
         this.defaultTextStyles = generateDefaultTextStyles(baseFontStyle.fontSize || 14);
-    }
-
-    registerIgnoredTags (props = this.props) {
-        this._ignoredTags = props.ignoredTags.map((tag) => tag.toLowerCase());
     }
 
     filterBaseFontStyles (element, classStyles) {
@@ -222,14 +223,14 @@ export default class HTML extends PureComponent {
      * @memberof HTML
      */
     mapDOMNodesTORNElements (DOMNodes, parentTag = false) {
-        const { ignoreNodesFunction, alterData, alterChildren } = this.props;
+        const { ignoreNodesFunction, ignoredTags, alterData, alterChildren } = this.props;
         let RNElements = DOMNodes.map((node, nodeIndex) => {
             const { type, attribs, name, parent } = node;
             let { children, data } = node;
             if (ignoreNodesFunction && ignoreNodesFunction(node, parentTag) === true) {
                 return false;
             }
-            if (this._ignoredTags.indexOf(node.name) !== -1) {
+            if (ignoredTags.map((tag) => tag.toLowerCase()).indexOf(node.name && node.name.toLowerCase()) !== -1) {
                 return false;
             }
             if (alterData && data) {
