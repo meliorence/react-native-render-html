@@ -9,7 +9,7 @@
   "dependencies": {
     "react": "16.0.0-alpha.12",
     "react-native": "0.48.3",
-    "react-native-render-html": "3.4.0"
+    "react-native-render-html": "3.5.0-rc.1"
   },
   "devDependencies": {
     "babel-jest": "21.0.2",
