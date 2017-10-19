@@ -17,6 +17,8 @@ export default class HTMLImage extends PureComponent {
     static propTypes = {
         source: PropTypes.object.isRequired,
         alt: PropTypes.string,
+        height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         style: Image.propTypes.style,
         imagesMaxWidth: PropTypes.number
     }
@@ -29,26 +31,33 @@ export default class HTMLImage extends PureComponent {
         this.getImageSize(nextProps);
     }
 
-    getDimensionsFromStyle (style) {
-        let width;
-        let height;
+    getDimensionsFromStyle (style, height, width) {
+        let styleWidth;
+        let styleHeight;
+
+        if (height) {
+            styleHeight = height;
+        }
+        if (width) {
+            styleWidth = width;
+        }
         style.forEach((styles) => {
-            if (styles['width']) {
-                width = styles['width'];
+            if (!width && styles['width']) {
+                styleWidth = styles['width'];
             }
-            if (styles['height']) {
-                height = styles['height'];
+            if (!height && styles['height']) {
+                styleHeight = styles['height'];
             }
         });
-        return { width, height };
+        return { styleWidth, styleHeight };
     }
 
     getImageSize (props = this.props) {
-        const { source, imagesMaxWidth, style } = props;
-        const { width, height } = this.getDimensionsFromStyle(style);
+        const { source, imagesMaxWidth, style, height, width } = props;
+        const { styleWidth, styleHeight } = this.getDimensionsFromStyle(style, height, width);
 
-        if (width && height) {
-            return this.setState({ width, height });
+        if (styleWidth && styleHeight) {
+            return this.setState({ width: parseInt(styleWidth, 10), height: parseInt(styleHeight, 10) });
         }
         // Fetch image dimensions only if they aren't supplied or if with or height is missing
         Image.getSize(

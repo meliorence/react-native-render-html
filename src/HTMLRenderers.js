@@ -32,7 +32,8 @@ export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
 }
 
 export function img (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
-    if (!htmlAttribs.src) {
+    const { src, alt, width, height } = htmlAttribs;
+    if (!src) {
         return false;
     }
 
@@ -43,7 +44,14 @@ export function img (htmlAttribs, children, convertedCSSStyles, passProps = {}) 
         styleSet: 'IMAGE'
     });
     return (
-        <HTMLImage source={{ uri: htmlAttribs.src }} alt={htmlAttribs.alt} style={style} {...passProps} />
+        <HTMLImage
+          source={{ uri: src }}
+          alt={alt}
+          width={width}
+          height={height}
+          style={style}
+          {...passProps}
+        />
     );
 }
 
