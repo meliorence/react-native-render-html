@@ -30,7 +30,7 @@ function cssStringToObject (str) {
 export function _constructStyles ({ tagName, htmlAttribs, passProps, additionalStyles, styleSet = 'VIEW', baseFontSize }) {
     let defaultTextStyles = generateDefaultTextStyles(baseFontSize);
     let defaultBlockStyles = generateDefaultBlockStyles(baseFontSize);
-    return [
+    let style = [
         (styleSet === 'VIEW' ? defaultBlockStyles : defaultTextStyles)[tagName],
         passProps.tagsStyles ? passProps.tagsStyles[tagName] : undefined,
         _getElementClassStyles(htmlAttribs, passProps.classesStyles),
@@ -40,10 +40,14 @@ export function _constructStyles ({ tagName, htmlAttribs, passProps, additionalS
                 STYLESETS[styleSet],
                 { parentTag: tagName }
             ) :
-            undefined,
-        additionalStyles || undefined
-    ]
-    .filter((style) => style !== undefined);
+            undefined
+    ];
+
+    if (additionalStyles) {
+        style = style.concat(!additionalStyles.length ? [additionalStyles] : additionalStyles);
+    }
+
+    return style.filter((style) => style !== undefined);
 }
 
 /**
