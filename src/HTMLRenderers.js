@@ -61,9 +61,19 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
     children = children && children.map((child, index) => {
         const rawChild = rawChildren[index];
         let prefix = false;
+        const rendererArgs = [
+            htmlAttribs,
+            children,
+            convertedCSSStyles,
+            {
+                ...passProps,
+                index
+            }
+        ];
+
         if (rawChild) {
             if (rawChild.parentTag === 'ul') {
-                prefix = listsPrefixesRenderers && listsPrefixesRenderers.ul ? listsPrefixesRenderers.ul(...arguments) : (
+                prefix = listsPrefixesRenderers && listsPrefixesRenderers.ul ? listsPrefixesRenderers.ul(...rendererArgs) : (
                     <View style={{
                         marginRight: 10,
                         width: baseFontSize / 2.8,
@@ -74,7 +84,7 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
                     }} />
                 );
             } else if (rawChild.parentTag === 'ol') {
-                prefix = listsPrefixesRenderers && listsPrefixesRenderers.ol ? listsPrefixesRenderers.ol(...arguments) : (
+                prefix = listsPrefixesRenderers && listsPrefixesRenderers.ol ? listsPrefixesRenderers.ol(...rendererArgs) : (
                     <Text style={{ marginRight: 5, fontSize: baseFontSize }}>{ index + 1 })</Text>
                 );
             }
