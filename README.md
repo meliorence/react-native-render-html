@@ -62,6 +62,7 @@ Prop | Description | Type | Required/Default
 `uri` | *(experimental)* remote website to parse and render | `string` | Optional
 `decodeEntities` | Decode HTML entities of your content | `bool` | Optional, defaults to `true`
 `imagesMaxWidth` | Resize your images to this maximum width, see [images](#images) | `number` | Optional
+`imagesInitialDimensions` | Default width and height to display while image's dimensions are being retrieved, see [images](#images) | `{ width: 100, height: 100 }` | Optional
 `onLinkPress` | Fired with the event and the href as its arguments when tapping a link | `function` | Optional
 `onParsed` | Fired when your HTML content has been parsed, 1st arg is `dom` from htmlparser2, 2nd is `RNElements` from this module | `function` | Optional
 `tagsStyles` | Provide your styles for specific HTML tags, see [styling](#styling) | `object` | Optional
@@ -154,7 +155,7 @@ Here's an usage example
 
 const html = `
     <i>Here, we have a style set on the "i" tag with the "tagsStyles" prop.</i>
-    <p class="last-paragraph">Finally, this paragraph is style through the classesStyles prop</p>`;
+    <p class="last-paragraph">Finally, this paragraph is styled through the classesStyles prop</p>`;
 ```
 
 ![](https://puu.sh/xF7Jx/e4b395975d.png)
@@ -168,6 +169,8 @@ If you can't set the dimension of each image in your content, you might find the
 A nice trick, demonstrated in the [basic usage of this module](#basic-usage) is to use the `Dimensions` API of react-native : `imagesMaxWidth={Dimensions.get('window').width}`. You could substract a value to it to make a margin.
 
 Please note that if you set width AND height through any mean of styling, `imagesMaxWidth` will be ignored.
+
+Before their dimensions have been properly retrieved, images will temporarily be rendered in 100px wide squares. You can override this default value with prop `imagesInitialDimensions`.
 
 Images with broken links will render an empty square with a thin border, similar to what safari renders in a webview.
 
@@ -228,7 +231,7 @@ You can't expect native components to be able to render *everything* you can fin
 * `ignoredStyles` : array of ignored CSS rules. Nothing is ignored by default
 * `ignoreNodesFunction` : this is a cumbersome, yet powerful, way of ignoring very specific stuff.
 
-**Please note** that if you supply `ignoredTags`, you will override the default ignored ones. There are *a lot* of them, if you want to keep them and add you own, you can do something like : 
+**Please note** that if you supply `ignoredTags`, you will override the default ignored ones. There are *a lot* of them, if you want to keep them and add you own, you can do something like :
 
 ```javascript
 import { IGNORED_TAGS } from 'react-native-render-html/HTMLUtils';

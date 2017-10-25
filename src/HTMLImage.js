@@ -2,15 +2,12 @@ import React, { PureComponent } from 'react';
 import { Image, View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 
-const DEFAULT_WIDTH = 100;
-const DEFAULT_HEIGHT = 100;
-
 export default class HTMLImage extends PureComponent {
     constructor (props) {
         super(props);
         this.state = {
-            width: DEFAULT_WIDTH,
-            height: DEFAULT_HEIGHT
+            width: props.imagesInitialDimensions.width,
+            height: props.imagesInitialDimensions.height
         };
     }
 
@@ -20,7 +17,18 @@ export default class HTMLImage extends PureComponent {
         height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         style: Image.propTypes.style,
-        imagesMaxWidth: PropTypes.number
+        imagesMaxWidth: PropTypes.number,
+        imagesInitialDimensions: PropTypes.shape({
+            width: PropTypes.number,
+            height: PropTypes.number
+        })
+    }
+
+    static defaultProps = {
+        imagesInitialDimensions: {
+            width: 100,
+            height: 100
+        }
     }
 
     componentDidMount () {

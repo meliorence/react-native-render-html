@@ -28,6 +28,10 @@ export default class HTML extends PureComponent {
         onLinkPress: PropTypes.func,
         onParsed: PropTypes.func,
         imagesMaxWidth: PropTypes.number,
+        imagesInitialDimensions: PropTypes.shape({
+            width: PropTypes.number,
+            height: PropTypes.number
+        }),
         emSize: PropTypes.number.isRequired,
         baseFontStyle: PropTypes.object.isRequired
     }
@@ -314,10 +318,7 @@ export default class HTML extends PureComponent {
      * @memberof HTML
      */
     renderRNElements (RNElements, parentWrapper = 'root', parentIndex = 0) {
-        const {
-            tagsStyles, classesStyles, onLinkPress, imagesMaxWidth, emSize, ignoredStyles, baseFontStyle,
-            listsPrefixesRenderers
-        } = this.props;
+        const { tagsStyles, classesStyles, emSize, ignoredStyles } = this.props;
         return RNElements && RNElements.length ? RNElements.map((element, index) => {
             const { attribs, data, tagName, parentTag, children, nodeIndex, wrapper } = element;
             const Wrapper = wrapper === 'Text' ? Text : View;
@@ -342,19 +343,13 @@ export default class HTML extends PureComponent {
                     childElements,
                     convertedCSSStyles,
                     {
+                        ...this.props,
                         parentWrapper: wrapper,
-                        tagsStyles,
-                        classesStyles,
-                        onLinkPress,
-                        imagesMaxWidth,
                         parentTag,
                         nodeIndex,
                         parentIndex,
-                        emSize,
-                        baseFontStyle,
                         key,
                         data,
-                        listsPrefixesRenderers,
                         rawChildren: children
                     });
             }
