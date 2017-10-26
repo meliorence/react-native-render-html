@@ -2,6 +2,13 @@ import TextStylesPropTypes from 'react-native/Libraries/Text/TextStylePropTypes'
 import ViewStylesPropTypes from 'react-native/Libraries/Components/View/ViewStylePropTypes';
 import ImageStylesPropTypes from 'react-native/Libraries/Image/ImageStylePropTypes';
 
+// Filter prop-types that are only applicable to <Text> and not <View>
+export let TextOnlyPropTypes = {};
+Object.keys(TextStylesPropTypes).forEach((prop) => {
+    if (!ViewStylesPropTypes[prop]) {
+        TextOnlyPropTypes[prop] = TextStylesPropTypes[prop];
+    }
+});
 
 // These tags should ALWAYS be mapped to View wrappers
 export const BLOCK_TAGS = ['address', 'article', 'aside', 'footer', 'hgroup', 'nav', 'section', 'blockquote', 'dd',
