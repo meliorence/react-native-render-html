@@ -7,7 +7,7 @@ import checkPropTypes from './checkPropTypes';
 * @param str: the style string
 * @return the style as an obect
 */
-function cssStringToObject (str) {
+export function cssStringToObject (str) {
     return str
         .split(';')
         .map((prop) => prop.split(':'))
@@ -17,6 +17,14 @@ function cssStringToObject (str) {
             }
             return acc;
         }, {});
+}
+
+export function cssObjectToString (obj) {
+    let string = '';
+    Object.keys(obj).forEach((style) => {
+        string += `${style}:${obj[style]};`;
+    });
+    return string;
 }
 
 /**
