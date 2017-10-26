@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, ViewPropTypes } from 'react-native';
-import { BLOCK_TAGS, TEXT_TAGS, IGNORED_TAGS, TEXT_TAGS_IGNORING_ASSOCIATION, STYLESETS } from './HTMLUtils';
-import { cssStringToRNStyle, _getElementClassStyles } from './HTMLStyles';
+import { BLOCK_TAGS, TEXT_TAGS, MIXED_TAGS, IGNORED_TAGS, TEXT_TAGS_IGNORING_ASSOCIATION, STYLESETS, TextOnlyPropTypes } from './HTMLUtils';
+import { cssStringToRNStyle, _getElementClassStyles, cssStringToObject, cssObjectToString } from './HTMLStyles';
 import { generateDefaultBlockStyles, generateDefaultTextStyles } from './HTMLDefaultStyles';
 import htmlparser2 from 'htmlparser2';
 import _isEqual from 'lodash.isequal';
@@ -174,6 +174,15 @@ export default class HTML extends PureComponent {
         return false;
     }
 
+    wrapperHasTextChild (children) {
+        for (let i = 0; i < children.length; i++) {
+            if (children[i].wrapper === 'Text') {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Loops on children an find texts that need to be wrapped so we don't render line breaks
      * The wrapper can either be a <p> when it should be a paragraph, or a custom tag named
@@ -227,7 +236,7 @@ export default class HTML extends PureComponent {
      * @memberof HTML
      */
     mapDOMNodesTORNElements (DOMNodes, parentTag = false) {
-        const { ignoreNodesFunction, ignoredTags, alterData, alterChildren } = this.props;
+        const { ignoreNodesFunction, ignoredTags, alterData, alterChildren, tagsStyles, classesStyles } = this.props;
         let RNElements = DOMNodes.map((node, nodeIndex) => {
             const { type, attribs, name, parent } = node;
             let { children, data } = node;
@@ -295,14 +304,55 @@ export default class HTML extends PureComponent {
                         tagName,
                         nodeIndex
                     };
-                } else if (['rawtext', 'textwrapper'].indexOf(firstChild.tagName) !== -1 && wrapper === 'View') {
-                    // If the only child of a View node, assign its attributes to it so the
-                    // text styles are applied properly even when they're not the direct target
-                    firstChild.attribs = attribs;
-                    parsedNode.attribs = {};
                 }
             }
             return { ...parsedNode, nodeIndex };
+        })
+        .map((parsedNode, nodeIndex) => {
+            const { wrapper, attribs, tagName, children } = parsedNode;
+            if (wrapper === 'View' && attribs && this.wrapperHasTextChild(children)) {
+                // When encountering a View wrapper that has some styles and also Text children,
+                // let's filter out text-only styles and apply those to *all* Text children and
+                // remove them from the wrapper, mimicking browsers' behaviour better.
+                const wrapperStyles = {
+                    ...(tagsStyles[tagName] || {}),
+                    ...(_getElementClassStyles(attribs, classesStyles)),
+                    ...cssStringToObject(attribs.style || '')
+                };
+
+                let textChildrenInheritedStyles = {};
+                Object.keys(wrapperStyles).forEach((styleKey) => {
+                    // Extract text-only styles
+                    if (TextOnlyPropTypes[styleKey]) {
+                        textChildrenInheritedStyles[styleKey] = wrapperStyles[styleKey];
+                        delete wrapperStyles[styleKey];
+                    }
+                });
+                if (Object.keys(textChildrenInheritedStyles).length === 0) {
+                    // No style to apply to text children, avoid unecessary loops
+                    return parsedNode;
+                }
+                // Re-write wrapper's styles as a string
+                parsedNode.attribs.style = cssObjectToString(wrapperStyles);
+                for (let i = 0; i < children.length; i++) {
+                    const child = children[i];
+                    const { wrapper, attribs } = child;
+
+                    if (wrapper === 'Text') {
+                        // Set (or merge) the inherited text styles extracted from the wrapper for
+                        // each Text child
+                        if (!attribs.style) {
+                            child.attribs.style = cssObjectToString(textChildrenInheritedStyles);
+                        } else {
+                            child.attribs.style = cssObjectToString({
+                                ...textChildrenInheritedStyles,
+                                ...cssStringToObject(child.attribs.style)
+                            });
+                        }
+                    }
+                }
+            }
+            return parsedNode;
         });
         return this.associateRawTexts(RNElements);
     }
