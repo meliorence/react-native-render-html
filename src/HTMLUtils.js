@@ -13,6 +13,9 @@ export const TEXT_TAGS = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'figcaption', 'p',
     'dfn', 'i', 'kbd', 'mark', 'q', 'rt', 's', 'samp', 'small', 'big', 'span', 'strong', 'sub', 'sup', 'time', 'u', 'var', 'wbr',
     'del', 'ins', 'blink', 'font', 'em', 'bold', 'br'];
 
+// These tags can either be mapped to View or Text wrappers, depending solely on their children
+export const MIXED_TAGS = ['a'];
+
 // These text tags shouldn't be associated with their siblings in the associateRawTags method
 export const TEXT_TAGS_IGNORING_ASSOCIATION = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 

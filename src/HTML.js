@@ -270,7 +270,7 @@ export default class HTML extends PureComponent {
                     // If children cannot be nested in a Text, or if the tag
                     // maps to a block element, use a view
                     return { wrapper: 'View', children, attribs, parent, tagName: name, parentTag };
-                } else if (TEXT_TAGS.indexOf(name.toLowerCase()) !== -1) {
+                } else if (TEXT_TAGS.indexOf(name.toLowerCase()) !== -1 || MIXED_TAGS.indexOf(name.toLowerCase()) !== -1) {
                     // We are able to nest its children inside a Text
                     return { wrapper: 'Text', children, attribs, parent, tagName: name, parentTag };
                 }
