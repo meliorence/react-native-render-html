@@ -11,7 +11,8 @@ const DEFAULT_PROPS = {
     htmlStyles: CUSTOM_STYLES,
     renderers: CUSTOM_RENDERERS,
     imagesMaxWidth: IMAGES_MAX_WIDTH,
-    onLinkPress: (evt, href) => { Linking.openURL(href); }
+    onLinkPress: (evt, href) => { Linking.openURL(href); },
+    debug: true
 };
 
 export default class Demo extends Component {

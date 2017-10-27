@@ -1,9 +1,7 @@
-import { StyleSheet } from 'react-native';
-
 const BASE_FONT_SIZE = 14;
 
 export function generateDefaultBlockStyles (baseFontSize = BASE_FONT_SIZE) {
-    return StyleSheet.create({
+    return {
         div: { },
         ul: {
             paddingLeft: 40,
@@ -14,7 +12,6 @@ export function generateDefaultBlockStyles (baseFontSize = BASE_FONT_SIZE) {
             marginBottom: baseFontSize
         },
         iframe: {
-            width: 200,
             height: 200
         },
         hr: {
@@ -23,11 +20,11 @@ export function generateDefaultBlockStyles (baseFontSize = BASE_FONT_SIZE) {
             height: 1,
             backgroundColor: '#CCC'
         }
-    });
+    };
 }
 
 export function generateDefaultTextStyles (baseFontSize = BASE_FONT_SIZE) {
-    return StyleSheet.create({
+    return {
         u: { textDecorationLine: 'underline' },
         em: { fontStyle: 'italic' },
         i: { fontStyle: 'italic' },
@@ -59,7 +56,7 @@ export function generateDefaultTextStyles (baseFontSize = BASE_FONT_SIZE) {
             marginTop: baseFontSize,
             marginBottom: baseFontSize
         }
-    });
+    };
 }
 
 /**

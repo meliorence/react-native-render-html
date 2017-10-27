@@ -15,6 +15,8 @@ An iOS/Android pure javascript react-native component that renders your HTML int
     - [Props](#props)
     - [Demo](#demo)
     - [Creating custom renderers](#creating-custom-renderers)
+        - [Custom HTML tags](#custom-html-tags)
+        - [Lists prefixes](#lists-prefixes)
     - [Styling](#styling)
     - [Images](#images)
     - [Altering content](#altering-content)
@@ -60,18 +62,24 @@ Prop | Description | Type | Required/Default
 `uri` | *(experimental)* remote website to parse and render | `string` | Optional
 `decodeEntities` | Decode HTML entities of your content | `bool` | Optional, defaults to `true`
 `imagesMaxWidth` | Resize your images to this maximum width, see [images](#images) | `number` | Optional
+`imagesInitialDimensions` | Default width and height to display while image's dimensions are being retrieved, see [images](#images) | `{ width: 100, height: 100 }` | Optional
 `onLinkPress` | Fired with the event and the href as its arguments when tapping a link | `function` | Optional
+`onParsed` | Fired when your HTML content has been parsed, 1st arg is `dom` from htmlparser2, 2nd is `RNElements` from this module | `function` | Optional
 `tagsStyles` | Provide your styles for specific HTML tags, see [styling](#styling) | `object` | Optional
 `classesStyles` | Provide your styles for specific HTML classes, see [styling](#styling) | `object` | Optional
+`listsPrefixesRenderers` | Your custom renderers from `ul` and `ol` bullets, see [lists prefixes](#lists-prefixes) | `object` | Optional
 `containerStyle` | Custom style for the default container of the renderered HTML | `object` | Optional
 `customWrapper` | Replace the default wrapper with a function that takes your content as the first parameter | `function` | Optional
+`remoteLoadingView` | Replace the default loader while fetching a remote website's content | `function` | Optional
+`remoteErrorView` | Replace the default error if a remote website's content could not be fetched | `function` | Optional
 `emSize` | The default value in pixels for `1em` | `number` | `14`
-`baseFontSize` | The default fontSize applied to `<Text>` components | `number` | `14`
+`baseFontStyle` | The default style applied to `<Text>` components | `number` | `14`
 `alterData` | Target some specific texts and change their content, see [altering content](#altering-content) | `function` | Optional
 `alterChildren` | Target some specific nested nodes and change them, see [altering content](#altering-content) | `function` | Optional
-`ignoredTags` | HTML tags you don't want rendered, see [ignoring HTML content](#ignoring-html-content) | `array` | Optional, `['head', 'scripts']`
+`ignoredTags` | HTML tags you don't want rendered, see [ignoring HTML content](#ignoring-html-content) | `array` | Optional, `['head', 'scripts', ...]`
 `ignoredStyles` | CSS styles from the `style` attribute you don't want rendered, see [ignoring HTML content](#ignoring-html-content) | `array` | Optional
 `ignoreNodesFunction` | Return true in this custom function to ignore nodes very precisely, see [ignoring HTML content](#ignoring-html-content) | `function` | Optional
+`debug` | Prints the parsing result from htmlparser2 and render-html after the initial render | `bool` | Optional, defaults to `false`
 
 ## Demo
 
@@ -84,6 +92,8 @@ Feel free to write more advanced examples and submit a pull-request for it, it w
 ## Creating custom renderers
 
 This is very useful if you want to make some very specific styling of your HTML content, or even implement custom HTML tags.
+
+### Custom HTML tags
 
 Just pass an object to the `renderers` prop with the tag name as the key, an a function as its value, like so :
 
@@ -113,6 +123,21 @@ Your renderers functions receive several arguments that will be very useful to m
 * `convertedCSSStyles` : conversion of the `style` attribute from CSS to react-native's stylesheet
 * `passProps` : various useful information : `groupInfo`, `parentTagName`, `parentIsText`...
 
+### Lists prefixes
+
+The default renderer of the `<ul>` and `<ol>` tags will either render a bullet or the count of your elements. If you wish to change this without having to re-write the whole list rendering implementation, you can use the `listsPrefixesRenderers` prop.
+
+Just like with the `renderers` prop, supply an object with `ul` and/or `ul` as functions that recevie the [same arguments as your custom HTML tags](#custom-html-tags). For instance, you can swap the default black bullet of `<ul>` with a blue cross :
+
+```javascript
+// ... your props
+ul: (htmlAttribs, children, convertedCSSStyles, passProps) => {
+    return (
+        <Text style={{ color: 'blue', fontSize: 16 }}>+</Text>
+    );
+}
+```
+
 ## Styling
 
 In addition to your custom renderers, you can apply specific styles to HTML tags (`tagsStyles`) or HTML classes (`classesStyles`). You can also combine these styles with your custom renderers.
@@ -120,6 +145,8 @@ In addition to your custom renderers, you can apply specific styles to HTML tags
 Styling options override thesmelves, so you might render a custom HTML tag with a [custom renderer](#creating-custom-renderers) like `<bluecircle>`, make it green with a class `<bluecircle class="make-me-green">` or make it red by styling the tag itself.
 
 The default style of your custom renderer will be merged to the one from your `classesStyles` which will also be merged by the `style` attribute.
+
+> **IMPORTANT NOTE : Do NOT use the `StyleSheet` API to create the styles you're going to feed to `tagsStyle` and `classesStyles`. Although it might look like it's working at first, the caching logic of `react-native` makes it impossible for this module to deep check each of your style to properly apply the precedence and priorities of your nested tags' styles.**
 
 Here's an usage example
 
@@ -130,7 +157,7 @@ Here's an usage example
 
 const html = `
     <i>Here, we have a style set on the "i" tag with the "tagsStyles" prop.</i>
-    <p class="last-paragraph">Finally, this paragraph is style through the classesStyles prop</p>`;
+    <p class="last-paragraph">Finally, this paragraph is styled through the classesStyles prop</p>`;
 ```
 
 ![](https://puu.sh/xF7Jx/e4b395975d.png)
@@ -144,6 +171,8 @@ If you can't set the dimension of each image in your content, you might find the
 A nice trick, demonstrated in the [basic usage of this module](#basic-usage) is to use the `Dimensions` API of react-native : `imagesMaxWidth={Dimensions.get('window').width}`. You could substract a value to it to make a margin.
 
 Please note that if you set width AND height through any mean of styling, `imagesMaxWidth` will be ignored.
+
+Before their dimensions have been properly retrieved, images will temporarily be rendered in 100px wide squares. You can override this default value with prop `imagesInitialDimensions`.
 
 Images with broken links will render an empty square with a thin border, similar to what safari renders in a webview.
 
@@ -204,7 +233,7 @@ You can't expect native components to be able to render *everything* you can fin
 * `ignoredStyles` : array of ignored CSS rules. Nothing is ignored by default
 * `ignoreNodesFunction` : this is a cumbersome, yet powerful, way of ignoring very specific stuff.
 
-**Please note** that if you supply `ignoredTags`, you will override the default ignored ones. There are *a lot* of them, if you want to keep them and add you own, you can do something like : 
+**Please note** that if you supply `ignoredTags`, you will override the default ignored ones. There are *a lot* of them, if you want to keep them and add you own, you can do something like :
 
 ```javascript
 import { IGNORED_TAGS } from 'react-native-render-html/HTMLUtils';
