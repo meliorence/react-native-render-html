@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, View, WebView } from 'react-native';
+import { TouchableOpacity, Text, View, WebView, Dimensions } from 'react-native';
 import { _constructStyles } from './HTMLStyles';
 import HTMLImage from './HTMLImage';
 
@@ -109,19 +109,28 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
         return false;
     }
 
+    const viewportWidth = Dimensions.get('window').width;
     const style = _constructStyles({
         tagName: 'iframe',
         htmlAttribs,
         passProps,
         styleSet: 'VIEW',
         additionalStyles: [
-            htmlAttribs.height ? { height: parseInt(htmlAttribs.height, 10) } : {},
-            htmlAttribs.width ? { width: parseInt(htmlAttribs.width, 10) } : {}
+            {
+                height: htmlAttribs.height ?
+                    parseInt(htmlAttribs.height, 10) :
+                    undefined
+            },
+            {
+                width: htmlAttribs.width && htmlAttribs.width <= viewportWidth ?
+                    parseInt(htmlAttribs.width, 10) :
+                    viewportWidth
+            }
         ]
     });
 
     return (
-        <WebView key={passProps.key} source={{ uri: htmlAttribs.src }} style={style} {...passProps} />
+        <WebView key={passProps.key} source={{ uri: htmlAttribs.src }} style={style} />
     );
 }
 
