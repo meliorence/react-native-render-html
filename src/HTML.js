@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, ViewPropTypes } from 'react-native';
+import { View, Text, ViewPropTypes, ActivityIndicator } from 'react-native';
 import { BLOCK_TAGS, TEXT_TAGS, MIXED_TAGS, IGNORED_TAGS, TEXT_TAGS_IGNORING_ASSOCIATION, STYLESETS, TextOnlyPropTypes } from './HTMLUtils';
 import { cssStringToRNStyle, _getElementClassStyles, cssStringToObject, cssObjectToString } from './HTMLStyles';
 import { generateDefaultBlockStyles, generateDefaultTextStyles } from './HTMLDefaultStyles';
@@ -90,13 +90,19 @@ export default class HTML extends PureComponent {
     async registerDOM (props = this.props) {
         const { html, uri } = props;
         if (html) {
-            this.setState({ dom: html });
+            this.setState({ dom: html, loadingRemoteURL: false, errorLoadingRemoteURL: false });
         } else if (props.uri) {
             try {
                 // WIP : This should render a loader and html prop should not be set in state
                 // Error handling would be nice, too.
-                let response = await fetch(uri);
-                this.setState({ dom: response._bodyText });
+                try {
+                    this.setState({ loadingRemoteURL: true, errorLoadingRemoteURL: false });
+                    let response = await fetch(uri);
+                    this.setState({ dom: response._bodyText, loadingRemoteURL: false });
+                } catch (err) {
+                    console.warn(err);
+                    this.setState({ errorLoadingRemoteURL: true, loadingRemoteURL: false });
+                }
             } catch (err) {
                 console.warn('react-native-render-html', `Couldn't fetch remote HTML from uri : ${uri}`);
                 return false;
@@ -427,10 +433,26 @@ export default class HTML extends PureComponent {
     }
 
     render () {
-        const { customWrapper } = this.props;
-        const { RNNodes } = this.state;
-        if (!RNNodes) {
+        const { customWrapper, remoteLoadingView, remoteErrorView } = this.props;
+        const { RNNodes, loadingRemoteURL, errorLoadingRemoteURL } = this.state;
+        if (!RNNodes && !loadingRemoteURL) {
             return false;
+        } else if (loadingRemoteURL) {
+            return remoteLoadingView ?
+                remoteLoadingView(this.props, this.state) :
+                (
+                    <View style={{ flex: 1, alignItems: 'center' }}>
+                        <ActivityIndicator />
+                    </View>
+                );
+        } else if (errorLoadingRemoteURL) {
+            return remoteErrorView ?
+                remoteErrorView(this.props, this.state) :
+                (
+                    <View style={{ flex: 1, alignItems: 'center' }}>
+                        <Text style={{ fontStyle: 'italic', fontSize: 16 }}>Could not load { this.props.uri }</Text>
+                    </View>
+                );
         }
 
         return customWrapper ? customWrapper(RNNodes) : (
