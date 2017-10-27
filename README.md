@@ -70,6 +70,8 @@ Prop | Description | Type | Required/Default
 `listsPrefixesRenderers` | Your custom renderers from `ul` and `ol` bullets, see [lists prefixes](#lists-prefixes) | `object` | Optional
 `containerStyle` | Custom style for the default container of the renderered HTML | `object` | Optional
 `customWrapper` | Replace the default wrapper with a function that takes your content as the first parameter | `function` | Optional
+`remoteLoadingView` | Replace the default loader while fetching a remote website's content | `function` | Optional
+`remoteErrorView` | Replace the default error if a remote website's content could not be fetched | `function` | Optional
 `emSize` | The default value in pixels for `1em` | `number` | `14`
 `baseFontStyle` | The default style applied to `<Text>` components | `number` | `14`
 `alterData` | Target some specific texts and change their content, see [altering content](#altering-content) | `function` | Optional
