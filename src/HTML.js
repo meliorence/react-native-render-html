@@ -271,7 +271,7 @@ export default class HTML extends PureComponent {
                 return {
                     wrapper: 'Text',
                     data: data.replace(/(\r\n|\n|\r)/gm, ''), // remove linebreaks
-                    attribs,
+                    attribs: attribs || {},
                     parent,
                     tagName: name || 'rawtext'
                 };
