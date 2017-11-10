@@ -7,6 +7,7 @@ import { generateDefaultBlockStyles, generateDefaultTextStyles } from './HTMLDef
 import htmlparser2 from 'htmlparser2';
 import _isEqual from 'lodash.isequal';
 import * as HTMLRenderers from './HTMLRenderers';
+import randomstring from 'randomstring';
 
 export default class HTML extends PureComponent {
     static propTypes = {
@@ -378,7 +379,7 @@ export default class HTML extends PureComponent {
         return RNElements && RNElements.length ? RNElements.map((element, index) => {
             const { attribs, data, tagName, parentTag, children, nodeIndex, wrapper } = element;
             const Wrapper = wrapper === 'Text' ? Text : View;
-            const key = `${wrapper}-${parentIndex}-${nodeIndex}-${tagName}-${index}-${parentTag}`;
+            const key = `${wrapper}-${parentIndex}-${nodeIndex}-${tagName}-${index}-${parentTag}-${randomstring.generate()}`;
             const convertedCSSStyles =
                 attribs && attribs.style ?
                     cssStringToRNStyle(
