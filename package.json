@@ -18,6 +18,7 @@
     "html-entities": "^1.2.0",
     "htmlparser2": "^3.9.0",
     "lodash.isequal": "4.5.0",
+    "react-native-uuid": "^1.4.9",
     "stream": "0.0.2"
   },
   "peerDependencies": {
