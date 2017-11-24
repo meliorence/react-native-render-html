@@ -46,7 +46,7 @@ export function _constructStyles ({ tagName, htmlAttribs, passProps, additionalS
             cssStringToRNStyle(
                 htmlAttribs.style,
                 STYLESETS[styleSet],
-                { parentTag: tagName }
+                { ...passProps, parentTag: tagName }
             ) :
             undefined
     ];
