@@ -19,6 +19,7 @@ export default class HTML extends PureComponent {
         ignoreNodesFunction: PropTypes.func,
         alterData: PropTypes.func,
         alterChildren: PropTypes.func,
+        alterNode: PropTypes.func,
         html: PropTypes.string,
         uri: PropTypes.string,
         tagsStyles: PropTypes.object,
@@ -242,9 +243,8 @@ export default class HTML extends PureComponent {
      * @memberof HTML
      */
     mapDOMNodesTORNElements (DOMNodes, parentTag = false) {
-        const { ignoreNodesFunction, ignoredTags, alterData, alterChildren, tagsStyles, classesStyles } = this.props;
+        const { ignoreNodesFunction, ignoredTags, alterNode, alterData, alterChildren, tagsStyles, classesStyles } = this.props;
         let RNElements = DOMNodes.map((node, nodeIndex) => {
-            const { type, attribs, name, parent } = node;
             let { children, data } = node;
             if (ignoreNodesFunction && ignoreNodesFunction(node, parentTag) === true) {
                 return false;
@@ -252,6 +252,13 @@ export default class HTML extends PureComponent {
             if (ignoredTags.map((tag) => tag.toLowerCase()).indexOf(node.name && node.name.toLowerCase()) !== -1) {
                 return false;
             }
+
+            if (alterNode) {
+                const alteredNode = alterNode(node);
+                node = alteredNode || node;
+            }
+            const { type, attribs, name, parent } = node;
+
             if (alterData && data) {
                 const alteredData = alterData(node);
                 data = alteredData || data;
