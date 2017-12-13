@@ -295,6 +295,8 @@ export default class HTML extends PureComponent {
                 } else if (TEXT_TAGS.indexOf(name.toLowerCase()) !== -1 || MIXED_TAGS.indexOf(name.toLowerCase()) !== -1) {
                     // We are able to nest its children inside a Text
                     return { wrapper: 'Text', children, attribs, parent, tagName: name, parentTag };
+                } else if (this.renderers[name] && this.renderers[name].wrapper) {
+                    return { wrapper: this.renderers[name].wrapper, children, attribs, parent, tagName: name, parentTag };
                 }
                 return { wrapper: 'View', children, attribs, parent, tagName: name, parentTag };
             }
@@ -400,8 +402,17 @@ export default class HTML extends PureComponent {
                 false;
 
             if (this.renderers[tagName]) {
+                const customRenderer =
+                    typeof this.renderers[tagName] === 'function' ?
+                        this.renderers[tagName] :
+                        this.renderers[tagName].renderer;
+
+                if (!customRenderer || typeof customRenderer !== 'function') {
+                    console.warn(`Custom renderer for ${tagName} supplied incorrectly. Please check out the docs.`);
+                    return undefined;
+                }
                 // If a custom renderer is available for this tag
-                return this.renderers[tagName](
+                return customRenderer(
                     attribs,
                     childElements,
                     convertedCSSStyles,
