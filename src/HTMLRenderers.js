@@ -58,6 +58,14 @@ export function img (htmlAttribs, children, convertedCSSStyles, passProps = {}) 
 export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
     const { rawChildren, nodeIndex, key, baseFontStyle, listsPrefixesRenderers } = passProps;
     const baseFontSize = baseFontStyle.fontSize || 14;
+
+    const style = _constructStyles({
+        tagName: 'ul',
+        htmlAttribs,
+        passProps,
+        styleSet: 'VIEW'
+    });
+
     children = children && children.map((child, index) => {
         const rawChild = rawChildren[index];
         let prefix = false;
@@ -97,7 +105,7 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
         );
     });
     return (
-        <View style={{ paddingLeft: 20 }} key={key}>
+        <View style={style} key={key}>
             { children }
         </View>
     );

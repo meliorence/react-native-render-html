@@ -4,11 +4,11 @@ export function generateDefaultBlockStyles (baseFontSize = BASE_FONT_SIZE) {
     return {
         div: { },
         ul: {
-            paddingLeft: 40,
+            paddingLeft: 20,
             marginBottom: baseFontSize
         },
         ol: {
-            paddingLeft: 40,
+            paddingLeft: 20,
             marginBottom: baseFontSize
         },
         iframe: {
