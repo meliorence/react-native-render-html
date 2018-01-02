@@ -22,7 +22,9 @@ An iOS/Android pure javascript react-native component that renders your HTML int
     - [Altering content](#altering-content)
         - [alterData](#alterdata)
         - [alterChildren](#alterchildren)
+        - [alterNode](#alternode)
     - [Ignoring HTML content](#ignoring-html-content)
+    - [Useful functions](#useful-functions)
 
 ## Install
 
@@ -75,7 +77,8 @@ Prop | Description | Type | Required/Default
 `emSize` | The default value in pixels for `1em` | `number` | `14`
 `baseFontStyle` | The default style applied to `<Text>` components | `number` | `14`
 `alterData` | Target some specific texts and change their content, see [altering content](#altering-content) | `function` | Optional
-`alterChildren` | Target some specific nested nodes and change them, see [altering content](#altering-content) | `function` | Optional
+`alterChildren` | Target some specific nested children and change them, see [altering content](#altering-content) | `function` | Optional
+`alterNode` | Target a specific node and change it, see [altering content](#altering-content) | `function` | Optional
 `ignoredTags` | HTML tags you don't want rendered, see [ignoring HTML content](#ignoring-html-content) | `array` | Optional, `['head', 'scripts', ...]`
 `ignoredStyles` | CSS styles from the `style` attribute you don't want rendered, see [ignoring HTML content](#ignoring-html-content) | `array` | Optional
 `ignoreNodesFunction` | Return true in this custom function to ignore nodes very precisely, see [ignoring HTML content](#ignoring-html-content) | `function` | Optional
@@ -198,10 +201,8 @@ alterData: (node) => {
         // Texts elements are always children of wrappers, this is why we check the tag
         // with "parent.name" and not "name"
         return data.toUpperCase();
-    } else {
-        // Return a falsy value for anything else than the <h1> tag so nothing is altered
-        return false;
     }
+    // Don't return anything (eg a falsy value) for anything else than the <h1> tag so nothing is altered
 }
 ```
 
@@ -218,10 +219,28 @@ alterChildren: (node) => {
     if (name === 'ol' && children && children.length) {
         // Keep only the first two elements of the list
         return children.splice(0, 2);
-    } else {
-        // Return a falsy value for anything else than the <ol> tag so nothing is altered
-        return false;
     }
+    // Don't return anything (eg a falsy value) for anything else than the <ol> tag so nothing is altered
+}
+```
+
+### alterNode
+
+`alterNode` allows you to change the values parsed from your HTML before it's rendered. It's extremely powerful as a last resort to add some very specific styling or circumvent rendering problems.
+
+Here's an advanced example where you would change the color of links inside a `<blockquote>` :
+
+```javascript
+alterNode: (node) => {
+    const { name, parent } = node;
+    // If the tag is an <a> and we've found a parent to be a blockquote
+    // (see the utils part of this documentation to know more about getParentsTagsRecursively)
+    if (name === 'a' && getParentsTagsRecursively(parent).indexOf('blockquote') !== -1) {
+        // Let's assign a specific color to the node's attribs (if there already are)
+        node.attribs = { ...(node.attribs || {}), style: `color:lightblue;` };
+        return node;
+    }
+    // Don't return anything (eg a falsy value) for anything else so nothing is altered
 }
 ```
 
@@ -246,3 +265,18 @@ ignoredTags={[ ...IGNORED_TAGS, 'tag1', 'tag2']}
 `ignoreNodesFunction` receives 3 parameters : `node`, `parentTagName` and `parentIsText`.
 
 `node` is the result of the HTML parsing, which allows you to look for children, check the parent's markup and much more. `parentTagName` is a conveniant way to access the parent of your node, and `parentIsText` is a great way to make sure you won't be rendering a `<View>` inside a `<Text>` which, right now, makes react-native crash.
+
+## Useful functions
+
+The API is exposing some functions you can use to write advanced behaviors more easily.
+You can import them like so :
+
+```javascript
+import { functionName } from 'react-native-render-html/src/HTMLUtils';
+```
+
+* `getParentsTagsRecursively(node)`
+    * Description : Returns an array with the tagname of every parent of a node or an empty array if nothing is found.
+    * Parameters : - `node` : a parsed HTML node from `alterChildren` for example
+    * Returns : An empty array or an array of strings.
+    * Notes : this is very useful to check if a node is nested in a specific parent. See [alterNode](#alterNode) for an advanced example.
