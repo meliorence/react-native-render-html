@@ -16,6 +16,7 @@ An iOS/Android pure javascript react-native component that renders your HTML int
     - [Demo](#demo)
     - [Creating custom renderers](#creating-custom-renderers)
         - [Custom HTML tags](#custom-html-tags)
+        - [Making your custom component block or inline](#making-your-custom-component-block-or-inline)
         - [Lists prefixes](#lists-prefixes)
     - [Styling](#styling)
     - [Images](#images)
@@ -125,6 +126,21 @@ Your renderers functions receive several arguments that will be very useful to m
 * `children` : array with the children of the node
 * `convertedCSSStyles` : conversion of the `style` attribute from CSS to react-native's stylesheet
 * `passProps` : various useful information : `groupInfo`, `parentTagName`, `parentIsText`...
+
+### Making your custom component block or inline
+
+By default, a custom renderer behaves like a block. So if you're rendering it between texts inside a `<p>`, you'll break your line.
+
+If you want it to be inline, you can slightly change the way you declare it, like this :
+
+```javascript
+renderers: {
+    mytag: { renderer: myTagRenderer, wrapper: 'Text' }, // new way, is inline
+    myothertag: myOtherTagRenderer // old regular way (still valid, behaves like a block)
+}
+```
+
+> Note : the only values for `wrapper` are `Text` or `View` (default). Those don't represent the `<View>` and `<Text>` component of react-native but are instead used in the parser to prevent crashes and properly render every HTML markup.
 
 ### Lists prefixes
 
