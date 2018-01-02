@@ -1,6 +1,7 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { _constructStyles } from 'react-native-render-html/src/HTMLStyles';
+import { getParentsTagsRecursively } from 'react-native-render-html/src/HTMLUtils';
 
 export const paragraphs = `
 <p style="font-size:1.3em;">This paragraph is styled a font size set in em !</p>
@@ -161,7 +162,29 @@ export const alteration = `
     <h2>Using alterChildren</h2>
     <p>Let's remove the first two elements of the next ordered list</p>
     <ol><li>One</li><li>Two</li><li>Three</li><li>Four</li></ol>
+    <h2>Using alterNode</h2>
+    <p>alterNode lets you change the values parsed from your HTML before it's rendered. It's extremely powerful as a last resort to add some very specific styling or circumvent rendering problems</p>
+    <p>Let's make the color of links inside a <em>div</em> red !</p>
+    <p><a href="http://google.fr">This is a lame link inside a paragraph.</a></p>
+    <div><a href="http://google.fr">This is a very cool link inside a div</a></div>
 `;
+
+export const inlineCustomTags = `
+    <p>Foo <MyTag></MyTag> Baz </p>
+    <p>Foo <myothertag></myothertag> baz</p>
+`;
+
+function myTagRenderer (htmlAttribs, children) {
+    return (
+        <Text>Bar</Text>
+    );
+}
+
+function myOtherTagRenderer () {
+    return (
+        <Text>this should break the line</Text>
+    );
+}
 
 export default {
     paragraphs: {
@@ -209,7 +232,7 @@ export default {
     parseRemoteHTML: { name: 'Remote HTML', props: { html: undefined, uri: 'http://motherfuckingwebsite.com', ignoredTags: ['script'] } },
     iframes: { name: 'Iframes' },
     alteration: {
-        name: 'Altering data & chlidren',
+        name: 'Altering data, chlidren & nodes',
         props: {
             alterData: (node) => {
                 let { parent, data } = node;
@@ -226,6 +249,22 @@ export default {
                 } else {
                     return false;
                 }
+            },
+            alterNode: (node) => {
+                const { name, parent } = node;
+                if (name === 'a' && parent && parent.name === 'div') {
+                    node.attribs = { ...(node.attribs || {}), style: 'color:red;' };
+                    return node;
+                }
+            }
+        }
+    },
+    inlineCustomTags: {
+        name: 'Inline custom tags',
+        props: {
+            renderers: {
+                mytag: { renderer: myTagRenderer, wrapper: 'Text' },
+                myothertag: myOtherTagRenderer
             }
         }
     }
