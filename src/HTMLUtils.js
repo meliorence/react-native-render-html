@@ -53,3 +53,23 @@ export const stylePropTypes = {};
 stylePropTypes[STYLESETS.VIEW] = Object.assign({}, RNViewStylePropTypes);
 stylePropTypes[STYLESETS.TEXT] = Object.assign({}, RNViewStylePropTypes, RNTextStylePropTypes);
 stylePropTypes[STYLESETS.IMAGE] = Object.assign({}, RNViewStylePropTypes, RNImageStylePropTypes);
+
+/**
+ * Returns an array with the tagname of every parent of a node.
+ * Returns an empty array if nothing is found.
+ * @export
+ * @param {any} parent a parsed HTML node, from alterChildren for example
+ * @param {any} tags you don't need to supply this yourself
+ * @returns {array}
+ */
+export function getParentsTagsRecursively (parent, tags = []) {
+    if (!parent) {
+        return tags;
+    }
+    parent.name && tags.push(parent.name);
+    if (parent.parent) {
+        return getParentsTagsRecursively(parent.parent, tags);
+    } else {
+        return tags;
+    }
+}
