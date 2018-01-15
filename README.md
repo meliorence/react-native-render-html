@@ -24,6 +24,7 @@ An iOS/Android pure javascript react-native component that renders your HTML int
         - [alterData](#alterdata)
         - [alterChildren](#alterchildren)
         - [alterNode](#alternode)
+        - [onParsed](#onparsed)
     - [Ignoring HTML content](#ignoring-html-content)
     - [Useful functions](#useful-functions)
 
@@ -67,7 +68,7 @@ Prop | Description | Type | Required/Default
 `imagesMaxWidth` | Resize your images to this maximum width, see [images](#images) | `number` | Optional
 `imagesInitialDimensions` | Default width and height to display while image's dimensions are being retrieved, see [images](#images) | `{ width: 100, height: 100 }` | Optional
 `onLinkPress` | Fired with the event and the href as its arguments when tapping a link | `function` | Optional
-`onParsed` | Fired when your HTML content has been parsed, 1st arg is `dom` from htmlparser2, 2nd is `RNElements` from this module | `function` | Optional
+`onParsed` | Fired when your HTML content has been parsed. Also useful to tweak your rendering, see [onParsed](#onparsed) | `function` | Optional
 `tagsStyles` | Provide your styles for specific HTML tags, see [styling](#styling) | `object` | Optional
 `classesStyles` | Provide your styles for specific HTML classes, see [styling](#styling) | `object` | Optional
 `listsPrefixesRenderers` | Your custom renderers from `ul` and `ol` bullets, see [lists prefixes](#lists-prefixes) | `object` | Optional
@@ -257,6 +258,29 @@ alterNode: (node) => {
         return node;
     }
     // Don't return anything (eg a falsy value) for anything else so nothing is altered
+}
+```
+
+### onParsed
+
+`onParsed` is a callback and lets you know when your HTML has been parsed. Its first argument is the `dom` array from htmlparser2, its second is `RNElements` which is the result of the parsing of this module.
+
+If you want to tweak the parsed values, you can change `RNElements` and return it. For instance, you could insert one of your custom component although it was not in your HTML content, like this :
+
+```javascript
+onHTMLParsed = (dom, RNElements) => {
+    // Find the index of the first paragraph
+    const ad = {
+        wrapper: 'View',
+        tagName: 'mycustomblock',
+        attribs: {},
+        parent: false,
+        parentTag: false,
+        nodeIndex: 4
+    };
+    // Insert the component
+    RNElements.splice(4, 0, ad);
+    return RNElements;
 }
 ```
 

@@ -117,8 +117,13 @@ export default class HTML extends PureComponent {
         const { decodeEntities, debug, onParsed } = this.props;
         const parser = new htmlparser2.Parser(
             new htmlparser2.DomHandler((_err, dom) => {
-                const RNElements = this.mapDOMNodesTORNElements(dom);
-                onParsed && onParsed(dom, RNElements);
+                let RNElements = this.mapDOMNodesTORNElements(dom);
+                if (onParsed) {
+                    const alteredRNElements = onParsed(dom, RNElements);
+                    if (alteredRNElements) {
+                        RNElements = alteredRNElements;
+                    }
+                }
                 this.setState({ RNNodes: this.renderRNElements(RNElements) });
                 if (debug) {
                     console.log('DOMNodes from htmlparser2', dom);
@@ -280,6 +285,7 @@ export default class HTML extends PureComponent {
                     data: data.replace(/(\r\n|\n|\r)/gm, ''), // remove linebreaks
                     attribs: attribs || {},
                     parent,
+                    parentTag: parent && parent.name,
                     tagName: name || 'rawtext'
                 };
             }
