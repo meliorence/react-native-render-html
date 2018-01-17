@@ -295,7 +295,7 @@ You can't expect native components to be able to render *everything* you can fin
 **Please note** that if you supply `ignoredTags`, you will override the default ignored ones. There are *a lot* of them, if you want to keep them and add you own, you can do something like :
 
 ```javascript
-import { IGNORED_TAGS } from 'react-native-render-html/HTMLUtils';
+import { IGNORED_TAGS } from 'react-native-render-html/src/HTMLUtils';
 ...
 
 // your props
