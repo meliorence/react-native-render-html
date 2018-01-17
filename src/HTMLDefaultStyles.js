@@ -29,6 +29,7 @@ export function generateDefaultTextStyles (baseFontSize = BASE_FONT_SIZE) {
         em: { fontStyle: 'italic' },
         i: { fontStyle: 'italic' },
         b: { fontWeight: 'bold' },
+        s: { textDecorationLine: 'line-through' },
         strong: { fontWeight: 'bold' },
         big: { fontSize: baseFontSize * 1.2 },
         small: { fontSize: baseFontSize * 0.8 },
