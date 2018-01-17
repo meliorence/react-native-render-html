@@ -83,7 +83,7 @@ export default class HTML extends PureComponent {
     }
 
     componentDidUpdate (prevProps, prevState) {
-        if (this.state.dom !== prevState.dom) {
+        if (this.state.dom !== prevState.dom || this.props.imagesMaxWidth !== prevProps.imagesMaxWidth) {
             this.parseDOM(this.state.dom);
         }
     }
