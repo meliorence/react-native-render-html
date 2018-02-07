@@ -8,10 +8,11 @@ export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
         tagName: 'a',
         htmlAttribs,
         passProps,
-        styleSet: parentWrapper === 'Text' ? 'TEXT' : 'VIEW'
+        styleSet: passProps.parentWrapper === 'Text' ? 'TEXT' : 'VIEW'
     });
+    // !! This deconstruction needs to happen after the styles construction since
+    // the passed props might be altered by it !!
     const { parentWrapper, onLinkPress, key, data } = passProps;
-
     const onPress = (evt) => onLinkPress && htmlAttribs && htmlAttribs.href ?
         onLinkPress(evt, htmlAttribs.href) :
         undefined;
@@ -56,7 +57,6 @@ export function img (htmlAttribs, children, convertedCSSStyles, passProps = {}) 
 }
 
 export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
-    const baseFontSize = baseFontStyle.fontSize || 14;
     const style = _constructStyles({
         tagName: 'ul',
         htmlAttribs,
@@ -64,6 +64,7 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
         styleSet: 'VIEW'
     });
     const { rawChildren, nodeIndex, key, baseFontStyle, listsPrefixesRenderers } = passProps;
+    const baseFontSize = baseFontStyle.fontSize || 14;
 
     children = children && children.map((child, index) => {
         const rawChild = rawChildren[index];
