@@ -121,6 +121,9 @@ function cssToRNStyle (css, styleset, { parentTag, emSize, ignoredStyles }) {
             styleProp[key] = styleProps[key];
             if (checkPropTypes(styleProp, testStyle, key, 'react-native-render-html') == null) {
                 if (typeof value === 'string') {
+                    if (value.search('inherit') !== -1) {
+                        return undefined;
+                    }
                     // See if we can use the percentage directly
                     if (value.search('%') !== -1 && PERC_SUPPORTED_STYLES.indexOf(key) !== -1) {
                         return [key, value];
