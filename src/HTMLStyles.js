@@ -38,6 +38,11 @@ export function cssObjectToString (obj) {
 export function _constructStyles ({ tagName, htmlAttribs, passProps, additionalStyles, styleSet = 'VIEW', baseFontSize }) {
     let defaultTextStyles = generateDefaultTextStyles(baseFontSize);
     let defaultBlockStyles = generateDefaultBlockStyles(baseFontSize);
+
+    passProps.ignoredStyles.forEach((ignoredStyle) => {
+        htmlAttribs[ignoredStyle] && delete htmlAttribs[ignoredStyle];
+    });
+
     let style = [
         (styleSet === 'VIEW' ? defaultBlockStyles : defaultTextStyles)[tagName],
         passProps.tagsStyles ? passProps.tagsStyles[tagName] : undefined,

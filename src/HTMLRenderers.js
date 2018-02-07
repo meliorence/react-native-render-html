@@ -4,13 +4,13 @@ import { _constructStyles } from './HTMLStyles';
 import HTMLImage from './HTMLImage';
 
 export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
-    const { parentWrapper, onLinkPress, key, data } = passProps;
     const style = _constructStyles({
         tagName: 'a',
         htmlAttribs,
         passProps,
         styleSet: parentWrapper === 'Text' ? 'TEXT' : 'VIEW'
     });
+    const { parentWrapper, onLinkPress, key, data } = passProps;
 
     const onPress = (evt) => onLinkPress && htmlAttribs && htmlAttribs.href ?
         onLinkPress(evt, htmlAttribs.href) :
@@ -32,8 +32,7 @@ export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
 }
 
 export function img (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
-    const { src, alt, width, height } = htmlAttribs;
-    if (!src) {
+    if (!htmlAttribs.src) {
         return false;
     }
 
@@ -43,6 +42,7 @@ export function img (htmlAttribs, children, convertedCSSStyles, passProps = {}) 
         passProps,
         styleSet: 'IMAGE'
     });
+    const { src, alt, width, height } = htmlAttribs;
     return (
         <HTMLImage
           source={{ uri: src }}
@@ -56,15 +56,14 @@ export function img (htmlAttribs, children, convertedCSSStyles, passProps = {}) 
 }
 
 export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
-    const { rawChildren, nodeIndex, key, baseFontStyle, listsPrefixesRenderers } = passProps;
     const baseFontSize = baseFontStyle.fontSize || 14;
-
     const style = _constructStyles({
         tagName: 'ul',
         htmlAttribs,
         passProps,
         styleSet: 'VIEW'
     });
+    const { rawChildren, nodeIndex, key, baseFontStyle, listsPrefixesRenderers } = passProps;
 
     children = children && children.map((child, index) => {
         const rawChild = rawChildren[index];
