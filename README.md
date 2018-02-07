@@ -320,3 +320,7 @@ import { functionName } from 'react-native-render-html/src/HTMLUtils';
     * Parameters : - `node` : a parsed HTML node from `alterChildren` for example
     * Returns : An empty array or an array of strings.
     * Notes : this is very useful to check if a node is nested in a specific parent. See [alterNode](#alterNode) for an advanced example.
+* `getClosestNodeParentByTag(node, tag)`
+    * Description: Returns the closest parent of a node with a specific tag.
+    * Parameters : - `node` : a parsed HTML node from `alterChildren` for example
+    * Returns : An HTML node if found.
