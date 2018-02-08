@@ -151,18 +151,20 @@ export default class HTML extends PureComponent {
 
         for (let i = 0; i < styles.length; i++) {
             const styleAttribute = styles[i];
+            const tagToCheck = tagName === 'rawtext' ? parentTag : tagName;
             const styleAttributeWithCSSDashes = styleAttribute.replace(/[A-Z]/, (match) => { return `-${match.toLowerCase()}`; });
             const overridenFromStyle = attribs && attribs.style && attribs.style.search(styleAttributeWithCSSDashes) !== -1;
             const overridenFromParentStyle = parent && parent.attribs && parent.attribs.style && parent.attribs.style.search(styleAttributeWithCSSDashes) !== -1;
 
-            const overridenFromTagStyle = tagName && tagsStyles[tagName] && tagsStyles[tagName][styleAttribute];
+            const overridenFromTagStyle = tagToCheck && tagsStyles[tagToCheck] && tagsStyles[tagToCheck][styleAttribute];
             const overridenFromParentTagStyle = parentTag && tagsStyles[parentTag] && tagsStyles[parentTag][styleAttribute];
 
             const overridenFromClassStyles = classStyles && classStyles[styleAttribute];
+            const overridenFromDefaultStyles = this.defaultTextStyles[tagToCheck] && this.defaultTextStyles[tagToCheck][styleAttribute];
 
             const notOverriden = !overridenFromStyle && !overridenFromParentStyle &&
                 !overridenFromTagStyle && !overridenFromParentTagStyle &&
-                !overridenFromClassStyles;
+                !overridenFromClassStyles && !overridenFromDefaultStyles;
 
             if (notOverriden) {
                 appliedStyles[styleAttribute] = baseFontStyle[styleAttribute];
