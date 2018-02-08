@@ -78,6 +78,7 @@ Prop | Description | Type | Required/Default
 `remoteErrorView` | Replace the default error if a remote website's content could not be fetched | `function` | Optional
 `emSize` | The default value in pixels for `1em` | `number` | `14`
 `baseFontStyle` | The default style applied to `<Text>` components | `number` | `14`
+`textSelectable` | Allow all texts to be selected | `boolean` | `false`
 `alterData` | Target some specific texts and change their content, see [altering content](#altering-content) | `function` | Optional
 `alterChildren` | Target some specific nested children and change them, see [altering content](#altering-content) | `function` | Optional
 `alterNode` | Target a specific node and change it, see [altering content](#altering-content) | `function` | Optional
