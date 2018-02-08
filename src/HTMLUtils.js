@@ -73,3 +73,20 @@ export function getParentsTagsRecursively (parent, tags = []) {
         return tags;
     }
 }
+
+/**
+ * Returns the closest parent of a node with a specific tag.
+ * @export
+ * @param {any} node
+ * @param {string} tag
+ * @returns {HTMLNode?}
+ */
+export function getClosestNodeParentByTag (node, tag) {
+    if (!node || !node.parent) {
+        return undefined;
+    }
+    if (node.parent.name === tag) {
+        return node.parent;
+    }
+    return getClosestNodeParentByTag(node.parent, tag);
+}

@@ -5,7 +5,6 @@ import { BLOCK_TAGS, TEXT_TAGS, MIXED_TAGS, IGNORED_TAGS, TEXT_TAGS_IGNORING_ASS
 import { cssStringToRNStyle, _getElementClassStyles, cssStringToObject, cssObjectToString } from './HTMLStyles';
 import { generateDefaultBlockStyles, generateDefaultTextStyles } from './HTMLDefaultStyles';
 import htmlparser2 from 'htmlparser2';
-import _isEqual from 'lodash.isequal';
 import * as HTMLRenderers from './HTMLRenderers';
 
 export default class HTML extends PureComponent {
@@ -34,7 +33,8 @@ export default class HTML extends PureComponent {
             height: PropTypes.number
         }),
         emSize: PropTypes.number.isRequired,
-        baseFontStyle: PropTypes.object.isRequired
+        baseFontStyle: PropTypes.object.isRequired,
+        textSelectable: PropTypes.bool
     }
 
     static defaultProps = {
@@ -46,7 +46,8 @@ export default class HTML extends PureComponent {
         ignoredStyles: [],
         baseFontStyle: { fontSize: 14 },
         tagsStyles: {},
-        classesStyles: {}
+        classesStyles: {},
+        textSelectable: false
     }
 
     constructor (props) {
@@ -56,7 +57,6 @@ export default class HTML extends PureComponent {
             ...HTMLRenderers,
             ...(this.props.renderers || {})
         };
-        this.imgsToRender = [];
     }
 
     componentWillMount () {
@@ -68,17 +68,19 @@ export default class HTML extends PureComponent {
     }
 
     componentWillReceiveProps (nextProps) {
-        const { html, uri, renderers, baseFontStyle } = this.props;
+        const { html, uri, renderers } = this.props;
 
-        if (html !== nextProps.html || uri !== nextProps.uri) {
-            this.imgsToRender = [];
-            this.registerDOM(nextProps);
-        }
+        this.generateDefaultStyles(nextProps.baseFontStyle);
         if (renderers !== nextProps.renderers) {
             this.renderers = { ...HTMLRenderers, ...(nextProps.renderers || {}) };
         }
-        if (!_isEqual(baseFontStyle, nextProps.baseFontStyle)) {
-            this.generateDefaultStyles(nextProps.baseFontStyle);
+        if (html !== nextProps.html || uri !== nextProps.uri) {
+            // If the source changed, register the new HTML and parse it
+            this.registerDOM(nextProps);
+        } else {
+            // If it didn't, let's just parse the current DOM and re-render the nodes
+            // to compute potential style changes
+            this.parseDOM(this.state.dom, nextProps);
         }
     }
 
@@ -88,7 +90,7 @@ export default class HTML extends PureComponent {
         }
     }
 
-    async registerDOM (props = this.props) {
+    async registerDOM (props = this.props, cb) {
         const { html, uri } = props;
         if (html) {
             this.setState({ dom: html, loadingRemoteURL: false, errorLoadingRemoteURL: false });
@@ -113,18 +115,18 @@ export default class HTML extends PureComponent {
         }
     }
 
-    parseDOM (dom) {
+    parseDOM (dom, props = this.props) {
         const { decodeEntities, debug, onParsed } = this.props;
         const parser = new htmlparser2.Parser(
             new htmlparser2.DomHandler((_err, dom) => {
-                let RNElements = this.mapDOMNodesTORNElements(dom);
+                let RNElements = this.mapDOMNodesTORNElements(dom, false, props);
                 if (onParsed) {
                     const alteredRNElements = onParsed(dom, RNElements);
                     if (alteredRNElements) {
                         RNElements = alteredRNElements;
                     }
                 }
-                this.setState({ RNNodes: this.renderRNElements(RNElements) });
+                this.setState({ RNNodes: this.renderRNElements(RNElements, 'root', 0, props) });
                 if (debug) {
                     console.log('DOMNodes from htmlparser2', dom);
                     console.log('RNElements from render-html', RNElements);
@@ -141,8 +143,8 @@ export default class HTML extends PureComponent {
         this.defaultTextStyles = generateDefaultTextStyles(baseFontStyle.fontSize || 14);
     }
 
-    filterBaseFontStyles (element, classStyles) {
-        const { tagsStyles, baseFontStyle } = this.props;
+    filterBaseFontStyles (element, classStyles, props = this.props) {
+        const { tagsStyles, baseFontStyle } = props;
         const { tagName, parentTag, parent, attribs } = element;
         const styles = Object.keys(baseFontStyle);
         let appliedStyles = {};
@@ -247,8 +249,8 @@ export default class HTML extends PureComponent {
      * @returns
      * @memberof HTML
      */
-    mapDOMNodesTORNElements (DOMNodes, parentTag = false) {
-        const { ignoreNodesFunction, ignoredTags, alterNode, alterData, alterChildren, tagsStyles, classesStyles } = this.props;
+    mapDOMNodesTORNElements (DOMNodes, parentTag = false, props = this.props) {
+        const { ignoreNodesFunction, ignoredTags, alterNode, alterData, alterChildren, tagsStyles, classesStyles } = props;
         let RNElements = DOMNodes.map((node, nodeIndex) => {
             let { children, data } = node;
             if (ignoreNodesFunction && ignoreNodesFunction(node, parentTag) === true) {
@@ -388,8 +390,8 @@ export default class HTML extends PureComponent {
      * @returns {array}
      * @memberof HTML
      */
-    renderRNElements (RNElements, parentWrapper = 'root', parentIndex = 0) {
-        const { tagsStyles, classesStyles, emSize, ignoredStyles } = this.props;
+    renderRNElements (RNElements, parentWrapper = 'root', parentIndex = 0, props = this.props) {
+        const { tagsStyles, classesStyles, emSize, ignoredStyles } = props;
         return RNElements && RNElements.length ? RNElements.map((element, index) => {
             const { attribs, data, tagName, parentTag, children, nodeIndex, wrapper } = element;
             const Wrapper = wrapper === 'Text' ? Text : View;
@@ -404,7 +406,7 @@ export default class HTML extends PureComponent {
                     {};
 
             const childElements = children && children.length ?
-                children.map((child, childIndex) => this.renderRNElements([child], wrapper, index)) :
+                children.map((child, childIndex) => this.renderRNElements([child], wrapper, index, props)) :
                 false;
 
             if (this.renderers[tagName]) {
@@ -423,7 +425,7 @@ export default class HTML extends PureComponent {
                     childElements,
                     convertedCSSStyles,
                     {
-                        ...this.props,
+                        ...props,
                         parentWrapper: wrapper,
                         parentTag,
                         nodeIndex,
@@ -435,8 +437,9 @@ export default class HTML extends PureComponent {
             }
 
             const classStyles = _getElementClassStyles(attribs, classesStyles);
+            const textElementStyles = this.filterBaseFontStyles(element, classStyles, props);
             const textElement = data ?
-                <Text style={this.filterBaseFontStyles(element, classStyles)}>{ data }</Text> :
+                <Text style={textElementStyles}>{ data }</Text> :
                 false;
 
             const style = [
@@ -447,8 +450,10 @@ export default class HTML extends PureComponent {
             ]
             .filter((s) => s !== undefined);
 
+            const extraProps = {};
+            if (Wrapper === Text) extraProps.selectable = this.props.textSelectable;
             return (
-                <Wrapper key={key} style={style}>
+                <Wrapper key={key} style={style} {...extraProps}>
                     { textElement }
                     { childElements }
                 </Wrapper>

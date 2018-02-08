@@ -78,6 +78,7 @@ Prop | Description | Type | Required/Default
 `remoteErrorView` | Replace the default error if a remote website's content could not be fetched | `function` | Optional
 `emSize` | The default value in pixels for `1em` | `number` | `14`
 `baseFontStyle` | The default style applied to `<Text>` components | `number` | `14`
+`textSelectable` | Allow all texts to be selected | `boolean` | `false`
 `alterData` | Target some specific texts and change their content, see [altering content](#altering-content) | `function` | Optional
 `alterChildren` | Target some specific nested children and change them, see [altering content](#altering-content) | `function` | Optional
 `alterNode` | Target a specific node and change it, see [altering content](#altering-content) | `function` | Optional
@@ -295,7 +296,7 @@ You can't expect native components to be able to render *everything* you can fin
 **Please note** that if you supply `ignoredTags`, you will override the default ignored ones. There are *a lot* of them, if you want to keep them and add you own, you can do something like :
 
 ```javascript
-import { IGNORED_TAGS } from 'react-native-render-html/HTMLUtils';
+import { IGNORED_TAGS } from 'react-native-render-html/src/HTMLUtils';
 ...
 
 // your props
@@ -320,3 +321,7 @@ import { functionName } from 'react-native-render-html/src/HTMLUtils';
     * Parameters : - `node` : a parsed HTML node from `alterChildren` for example
     * Returns : An empty array or an array of strings.
     * Notes : this is very useful to check if a node is nested in a specific parent. See [alterNode](#alterNode) for an advanced example.
+* `getClosestNodeParentByTag(node, tag)`
+    * Description: Returns the closest parent of a node with a specific tag.
+    * Parameters : - `node` : a parsed HTML node from `alterChildren` for example
+    * Returns : An HTML node if found.

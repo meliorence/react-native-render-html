@@ -38,6 +38,11 @@ export function cssObjectToString (obj) {
 export function _constructStyles ({ tagName, htmlAttribs, passProps, additionalStyles, styleSet = 'VIEW', baseFontSize }) {
     let defaultTextStyles = generateDefaultTextStyles(baseFontSize);
     let defaultBlockStyles = generateDefaultBlockStyles(baseFontSize);
+
+    passProps.ignoredStyles.forEach((ignoredStyle) => {
+        htmlAttribs[ignoredStyle] && delete htmlAttribs[ignoredStyle];
+    });
+
     let style = [
         (styleSet === 'VIEW' ? defaultBlockStyles : defaultTextStyles)[tagName],
         passProps.tagsStyles ? passProps.tagsStyles[tagName] : undefined,
@@ -121,6 +126,9 @@ function cssToRNStyle (css, styleset, { parentTag, emSize, ignoredStyles }) {
             styleProp[key] = styleProps[key];
             if (checkPropTypes(styleProp, testStyle, key, 'react-native-render-html') == null) {
                 if (typeof value === 'string') {
+                    if (value.search('inherit') !== -1) {
+                        return undefined;
+                    }
                     // See if we can use the percentage directly
                     if (value.search('%') !== -1 && PERC_SUPPORTED_STYLES.indexOf(key) !== -1) {
                         return [key, value];
