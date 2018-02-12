@@ -66,6 +66,7 @@ Prop | Description | Type | Required/Default
 `uri` | *(experimental)* remote website to parse and render | `string` | Optional
 `decodeEntities` | Decode HTML entities of your content | `bool` | Optional, defaults to `true`
 `imagesMaxWidth` | Resize your images to this maximum width, see [images](#images) | `number` | Optional
+`staticContentMaxWidth` | Set a maximum width to non-responsive content (`<iframe> for instance`) | `number` | Optional
 `imagesInitialDimensions` | Default width and height to display while image's dimensions are being retrieved, see [images](#images) | `{ width: 100, height: 100 }` | Optional
 `onLinkPress` | Fired with the event, the href and an object with all attributes of the tag as its arguments when tapping a link | `function` | Optional
 `onParsed` | Fired when your HTML content has been parsed. Also useful to tweak your rendering, see [onParsed](#onparsed) | `function` | Optional
