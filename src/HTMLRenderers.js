@@ -116,8 +116,7 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
     if (!htmlAttribs.src) {
         return false;
     }
-
-    const viewportWidth = Dimensions.get('window').width;
+    const { staticContentMaxWidth } = passProps;
     const style = _constructStyles({
         tagName: 'iframe',
         htmlAttribs,
@@ -130,9 +129,9 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
                     undefined
             },
             {
-                width: htmlAttribs.width && htmlAttribs.width <= viewportWidth ?
+                width: staticContentMaxWidth && htmlAttribs.width && htmlAttribs.width <= staticContentMaxWidth ?
                     parseInt(htmlAttribs.width, 10) :
-                    viewportWidth
+                    staticContentMaxWidth
             }
         ]
     });

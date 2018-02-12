@@ -29,6 +29,7 @@ export default class HTML extends PureComponent {
         onLinkPress: PropTypes.func,
         onParsed: PropTypes.func,
         imagesMaxWidth: PropTypes.number,
+        staticContentMaxWidth: PropTypes.number,
         imagesInitialDimensions: PropTypes.shape({
             width: PropTypes.number,
             height: PropTypes.number
