@@ -24,8 +24,8 @@ export default class Demo extends Component {
         this.setCurrentExample = this.setCurrentExample.bind(this);
     }
 
-    onLinkPress (evt, href) {
-        alert(`Opened ${href} !`);
+    onLinkPress (evt, href, htmlAttribs) {
+        alert(`Opened ${href} ! Attributes:`, htmlAttribs);
     }
 
     setCurrentExample (currentExample) {
