@@ -9,7 +9,7 @@ export const paragraphs = `
 <p style="padding:10%;">This one features a padding <strong>in percentage !</strong></p>
 <hr />
 <i>Here, we have a style set on the "i" tag with the "tagsStyles" prop.</i>
-<p>And <a href="http://google.fr">This is a link !</a></p>
+<p>And <a href="http://google.fr" title="Google FR">This is a link !</a></p>
 <a href="http://google.fr"><div style="background-color: red; height: 20px; width:40px;"></div></a>
 <p class="last-paragraph">Finally, this paragraph is styled through the classesStyles prop</p>
 `;
