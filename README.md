@@ -4,6 +4,13 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 
 > Based on the original work of [Thomas Beverley](https://github.com/Thomas101), props to him.
 
+![platforms](https://img.shields.io/badge/platforms-Android%20%7C%20iOS-brightgreen.svg?style=flat-square&colorB=191A17)
+[![npm](https://img.shields.io/npm/v/react-native-render-html.svg?style=flat-square)](https://www.npmjs.com/package/react-native-render-html)
+[![npm](https://img.shields.io/npm/dm/react-native-render-html.svg?style=flat-square&colorB=007ec6)](https://www.npmjs.com/package/react-native-render-html)
+<!-- [![github release](https://img.shields.io/github/release/archriss/react-native-render-html.svg?style=flat-square)](https://github.com/archriss/react-native-render-html/releases) -->
+[![github issues](https://img.shields.io/github/issues/archriss/react-native-render-html.svg?style=flat-square)](https://github.com/archriss/react-native-render-html/issues)
+[![github closed issues](https://img.shields.io/github/issues-closed/archriss/react-native-render-html.svg?style=flat-square&colorB=44cc11)](https://github.com/archriss/react-native-render-html/issues?q=is%3Aissue+is%3Aclosed)
+
 ![react-native-render-html](http://i.giphy.com/26tkmjBLvThP0TSak.gif)
 
 ## Table of contents
