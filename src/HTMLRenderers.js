@@ -117,7 +117,7 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
         return false;
     }
 
-    const viewportWidth = Dimensions.get('window').width;
+    const viewportWidth = passProps.iframeMaxWidth || Dimensions.get('window').width;
     const style = _constructStyles({
         tagName: 'iframe',
         htmlAttribs,
