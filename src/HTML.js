@@ -12,6 +12,7 @@ export default class HTML extends PureComponent {
         renderers: PropTypes.object.isRequired,
         ignoredTags: PropTypes.array.isRequired,
         ignoredStyles: PropTypes.array.isRequired,
+        allowedStyles: PropTypes.array,
         decodeEntities: PropTypes.bool.isRequired,
         debug: PropTypes.bool.isRequired,
         listsPrefixesRenderers: PropTypes.object,
@@ -28,6 +29,7 @@ export default class HTML extends PureComponent {
         onLinkPress: PropTypes.func,
         onParsed: PropTypes.func,
         imagesMaxWidth: PropTypes.number,
+        staticContentMaxWidth: PropTypes.number,
         imagesInitialDimensions: PropTypes.shape({
             width: PropTypes.number,
             height: PropTypes.number
@@ -393,7 +395,7 @@ export default class HTML extends PureComponent {
      * @memberof HTML
      */
     renderRNElements (RNElements, parentWrapper = 'root', parentIndex = 0, props = this.props) {
-        const { tagsStyles, classesStyles, emSize, ignoredStyles } = props;
+        const { tagsStyles, classesStyles, emSize, ignoredStyles, allowedStyles } = props;
         return RNElements && RNElements.length ? RNElements.map((element, index) => {
             const { attribs, data, tagName, parentTag, children, nodeIndex, wrapper } = element;
             const Wrapper = wrapper === 'Text' ? Text : View;
@@ -403,7 +405,7 @@ export default class HTML extends PureComponent {
                     cssStringToRNStyle(
                         attribs.style,
                         Wrapper === Text ? STYLESETS.TEXT : STYLESETS.VIEW, // proper prop-types validation
-                        { parentTag: tagName, emSize, ignoredStyles }
+                        { parentTag: tagName, emSize, ignoredStyles, allowedStyles }
                     ) :
                     {};
 

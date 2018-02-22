@@ -101,9 +101,10 @@ export function _getElementCSSClasses (htmlAttribs) {
  * @param {object} { parentTag, emSize, ignoredStyles }
  * @returns {object}
  */
-function cssToRNStyle (css, styleset, { parentTag, emSize, ignoredStyles }) {
+function cssToRNStyle (css, styleset, { parentTag, emSize, ignoredStyles, allowedStyles }) {
     const styleProps = stylePropTypes[styleset];
     return Object.keys(css)
+        .filter((key) => allowedStyles ? allowedStyles.indexOf(key) !== -1 : true)
         .filter((key) => (ignoredStyles || []).indexOf(key) === -1)
         .map((key) => [key, css[key]])
         .map(([key, value]) => {

@@ -4,6 +4,13 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 
 > Based on the original work of [Thomas Beverley](https://github.com/Thomas101), props to him.
 
+![platforms](https://img.shields.io/badge/platforms-Android%20%7C%20iOS-brightgreen.svg?style=flat-square&colorB=191A17)
+[![npm](https://img.shields.io/npm/v/react-native-render-html.svg?style=flat-square)](https://www.npmjs.com/package/react-native-render-html)
+[![npm](https://img.shields.io/npm/dm/react-native-render-html.svg?style=flat-square&colorB=007ec6)](https://www.npmjs.com/package/react-native-render-html)
+<!-- [![github release](https://img.shields.io/github/release/archriss/react-native-render-html.svg?style=flat-square)](https://github.com/archriss/react-native-render-html/releases) -->
+[![github issues](https://img.shields.io/github/issues/archriss/react-native-render-html.svg?style=flat-square)](https://github.com/archriss/react-native-render-html/issues)
+[![github closed issues](https://img.shields.io/github/issues-closed/archriss/react-native-render-html.svg?style=flat-square&colorB=44cc11)](https://github.com/archriss/react-native-render-html/issues?q=is%3Aissue+is%3Aclosed)
+
 ![react-native-render-html](http://i.giphy.com/26tkmjBLvThP0TSak.gif)
 
 ## Table of contents
@@ -66,8 +73,9 @@ Prop | Description | Type | Required/Default
 `uri` | *(experimental)* remote website to parse and render | `string` | Optional
 `decodeEntities` | Decode HTML entities of your content | `bool` | Optional, defaults to `true`
 `imagesMaxWidth` | Resize your images to this maximum width, see [images](#images) | `number` | Optional
+`staticContentMaxWidth` | Set a maximum width to non-responsive content (`<iframe> for instance`) | `number` | Optional
 `imagesInitialDimensions` | Default width and height to display while image's dimensions are being retrieved, see [images](#images) | `{ width: 100, height: 100 }` | Optional
-`onLinkPress` | Fired with the event and the href as its arguments when tapping a link | `function` | Optional
+`onLinkPress` | Fired with the event, the href and an object with all attributes of the tag as its arguments when tapping a link | `function` | Optional
 `onParsed` | Fired when your HTML content has been parsed. Also useful to tweak your rendering, see [onParsed](#onparsed) | `function` | Optional
 `tagsStyles` | Provide your styles for specific HTML tags, see [styling](#styling) | `object` | Optional
 `classesStyles` | Provide your styles for specific HTML classes, see [styling](#styling) | `object` | Optional
@@ -83,6 +91,7 @@ Prop | Description | Type | Required/Default
 `alterChildren` | Target some specific nested children and change them, see [altering content](#altering-content) | `function` | Optional
 `alterNode` | Target a specific node and change it, see [altering content](#altering-content) | `function` | Optional
 `ignoredTags` | HTML tags you don't want rendered, see [ignoring HTML content](#ignoring-html-content) | `array` | Optional, `['head', 'scripts', ...]`
+`allowedStyles`| Allow render only certain CSS style properties and ignore every other. If you have some property both in `allowedStyles` and `ignoredStyles`, it will be ignored anyway. | `array` | Optional, everything is allowed by default
 `ignoredStyles` | CSS styles from the `style` attribute you don't want rendered, see [ignoring HTML content](#ignoring-html-content) | `array` | Optional
 `ignoreNodesFunction` | Return true in this custom function to ignore nodes very precisely, see [ignoring HTML content](#ignoring-html-content) | `function` | Optional
 `debug` | Prints the parsing result from htmlparser2 and render-html after the initial render | `bool` | Optional, defaults to `false`
