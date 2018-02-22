@@ -25,7 +25,7 @@ export default class Demo extends Component {
     }
 
     onLinkPress (evt, href, htmlAttribs) {
-        alert(`Opened ${href} ! Attributes:`, htmlAttribs);
+        alert(`Opened ${href} ! Attributes: ${JSON.stringify(htmlAttribs)}`);
     }
 
     setCurrentExample (currentExample) {
