@@ -95,6 +95,8 @@ Prop | Description | Type | Required/Default
 `ignoredStyles` | CSS styles from the `style` attribute you don't want rendered, see [ignoring HTML content](#ignoring-html-content) | `array` | Optional
 `ignoreNodesFunction` | Return true in this custom function to ignore nodes very precisely, see [ignoring HTML content](#ignoring-html-content) | `function` | Optional
 `debug` | Prints the parsing result from htmlparser2 and render-html after the initial render | `bool` | Optional, defaults to `false`
+`width` | Sets a fixed width to a component (It will just work for iframes at this moment | `number` |	Optional
+`height` | Sets a fixed height to a component (It will just work for iframes at this moment | `number` | Optional
 
 ## Demo
 
