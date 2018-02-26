@@ -116,7 +116,8 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
     if (!htmlAttribs.src) {
         return false;
     }
-    const { staticContentMaxWidth } = passProps;
+
+    const { staticContentMaxWidth, height, width } = passProps;
     const style = _constructStyles({
         tagName: 'iframe',
         htmlAttribs,
@@ -124,14 +125,16 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
         styleSet: 'VIEW',
         additionalStyles: [
             {
-                height: htmlAttribs.height ?
-                    parseInt(htmlAttribs.height, 10) :
-                    undefined
+                height: height ? height :
+			  (htmlAttribs.height ?
+			      parseInt(htmlAttribs.height, 10) :
+			      undefined)
             },
             {
-                width: staticContentMaxWidth && htmlAttribs.width && htmlAttribs.width <= staticContentMaxWidth ?
+                width: width ? width : 
+		  (staticContentMaxWidth && htmlAttribs.width && htmlAttribs.width <= staticContentMaxWidth ?
                     parseInt(htmlAttribs.width, 10) :
-                    staticContentMaxWidth
+                    staticContentMaxWidth)
             }
         ]
     });
