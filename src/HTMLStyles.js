@@ -140,7 +140,7 @@ function cssToRNStyle (css, styleset, { parentTag, emSize, ignoredStyles, allowe
                     }
                     // See if we can convert a 20px to a 20 automagically
                     const numericValue = parseFloat(value.replace('px', ''));
-                    if (!isNaN(numericValue)) {
+                    if (key !== 'fontWeight' && !isNaN(numericValue)) {
                         testStyle[key] = numericValue;
                         if (checkPropTypes(styleProp, testStyle, key, 'react-native-render-html') == null) {
                             return [key, numericValue];
