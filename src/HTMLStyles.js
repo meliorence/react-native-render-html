@@ -142,9 +142,6 @@ function cssToRNStyle (css, styleset, { parentTag, emSize, ptSize, ignoredStyles
                         const pxSize = parseFloat(value.replace('pt', '')) * ptSize;
                         return [key, pxSize];
                     }
-                    if (key === 'fontSize') {
-                        return mapAbsoluteFontSize(key, value);
-                    }
                     // See if we can convert a 20px to a 20 automagically
                     const numericValue = parseFloat(value.replace('px', ''));
                     if (!isNaN(numericValue)) {
@@ -152,6 +149,9 @@ function cssToRNStyle (css, styleset, { parentTag, emSize, ptSize, ignoredStyles
                         if (checkPropTypes(styleProp, testStyle, key, 'react-native-render-html') == null) {
                             return [key, numericValue];
                         }
+                    }
+                    if (key === 'fontSize') {
+                        return mapAbsoluteFontSize(key, value);
                     }
                 }
                 return [key, value];
