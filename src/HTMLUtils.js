@@ -26,6 +26,21 @@ export const MIXED_TAGS = ['a'];
 // These text tags shouldn't be associated with their siblings in the associateRawTags method
 export const TEXT_TAGS_IGNORING_ASSOCIATION = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
+export const ABSOLUTE_FONT_SIZE = {
+    'medium': 14,
+    'xx-small': 8.5,
+    'x-small': 10,
+    'small': 12,
+    'large': 17,
+    'x-large': 20,
+    'xx-large': 24,
+    'smaller': 13.3,
+    'larger': 16,
+    'length': null,
+    'initial': null,
+    'inherit': null
+};
+
 export const IGNORED_TAGS = ['head', 'scripts', 'audio', 'video', 'track', 'embed', 'object', 'param', 'source', 'canvas', 'noscript',
     'caption', 'col', 'colgroup', 'table', 'tbody', 'td', 'tfoot', 'th', 'thead', 'tr', 'button', 'datalist', 'fieldset', 'form',
     'input', 'label', 'legend', 'meter', 'optgroup', 'option', 'output', 'progress', 'select', 'textarea', 'details', 'diaglog',
