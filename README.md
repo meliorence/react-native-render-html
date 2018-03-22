@@ -85,6 +85,7 @@ Prop | Description | Type | Required/Default
 `remoteLoadingView` | Replace the default loader while fetching a remote website's content | `function` | Optional
 `remoteErrorView` | Replace the default error if a remote website's content could not be fetched | `function` | Optional
 `emSize` | The default value in pixels for `1em` | `number` | `14`
+`ptSize` | The default value in pixels for `1pt` | `number` | `1.3`
 `baseFontStyle` | The default style applied to `<Text>` components | `number` | `14`
 `textSelectable` | Allow all texts to be selected | `boolean` | `false`
 `alterData` | Target some specific texts and change their content, see [altering content](#altering-content) | `function` | Optional
