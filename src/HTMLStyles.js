@@ -130,6 +130,7 @@ function cssToRNStyle (css, styleset, { parentTag, emSize, ptSize, ignoredStyles
                     if (value.search('inherit') !== -1) {
                         return undefined;
                     }
+                    value = value.replace('!important', '');
                     // See if we can use the percentage directly
                     if (value.search('%') !== -1 && PERC_SUPPORTED_STYLES.indexOf(key) !== -1) {
                         return [key, value];
