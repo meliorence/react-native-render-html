@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, ViewPropTypes, ActivityIndicator } from 'react-native';
+import { View, Text, ViewPropTypes, ActivityIndicator, Dimensions } from 'react-native';
 import { BLOCK_TAGS, TEXT_TAGS, MIXED_TAGS, IGNORED_TAGS, TEXT_TAGS_IGNORING_ASSOCIATION, STYLESETS, TextOnlyPropTypes } from './HTMLUtils';
 import { cssStringToRNStyle, _getElementClassStyles, cssStringToObject, cssObjectToString } from './HTMLStyles';
 import { generateDefaultBlockStyles, generateDefaultTextStyles } from './HTMLDefaultStyles';
@@ -46,6 +46,8 @@ export default class HTML extends PureComponent {
         decodeEntities: true,
         emSize: 14,
         ptSize: 1.3,
+        staticContentMaxWidth: Dimensions.get('window').width,
+        imagesMaxWidth: Dimensions.get('window').width,
         ignoredTags: IGNORED_TAGS,
         ignoredStyles: [],
         baseFontStyle: { fontSize: 14 },
