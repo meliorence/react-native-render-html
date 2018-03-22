@@ -116,7 +116,8 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
     if (!htmlAttribs.src) {
         return false;
     }
-    const { staticContentMaxWidth } = passProps;
+
+    const { staticContentMaxWidth, height, width } = passProps;
     const style = _constructStyles({
         tagName: 'iframe',
         htmlAttribs,
@@ -124,14 +125,10 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
         styleSet: 'VIEW',
         additionalStyles: [
             {
-                height: htmlAttribs.height ?
-                    parseInt(htmlAttribs.height, 10) :
-                    undefined
+                height: _getHeightForIframe(htmlAttribs, passProps)
             },
             {
-                width: staticContentMaxWidth && htmlAttribs.width && htmlAttribs.width <= staticContentMaxWidth ?
-                    parseInt(htmlAttribs.width, 10) :
-                    staticContentMaxWidth
+                width: _getWidthForIframe(htmlAttribs, passProps)
             }
         ]
     });
@@ -140,6 +137,41 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
         <WebView key={passProps.key} source={{ uri: htmlAttribs.src }} style={style} />
     );
 }
+
+function _getHeightForIframe(htmlAttribs, passProps) {
+  let { height } = passProps
+
+  if(!height) {
+    if(htmlAttribs.height) {
+      height = parseInt(htmlAttribs.height, 10)
+    }
+    else {
+      height = undefined
+    }
+  }
+
+  return height
+}
+
+function _getWidthForIframe(htmlAttribs, passProps) {
+  const { staticContextMaxWidth } = passProps
+  let { width } = passProps
+
+  if(!width) {
+    if(staticContextMaxWidth) {
+      width = staticContextMaxWidth
+    } 
+    else if(htmlAttribs.width) {
+      width = parseInt(htmlAttribs.width, 10)
+    }
+    else {
+      width = undefined
+    }
+  }
+
+  return width
+}
+
 
 export function br (htlmAttribs, children, convertedCSSStyles, passProps) {
     return (
