@@ -1,6 +1,6 @@
 {
   "name": "react-native-render-html",
-  "version": "3.9.0",
+  "version": "3.9.1",
   "author": "Archriss",
   "license": "BSD-2-Clause",
   "repository": "https://github.com/archriss/react-native-render-html",
@@ -23,5 +23,17 @@
     "prop-types": ">=15.5.10",
     "react": "*",
     "react-native": "*"
+  },
+  "devDependencies": {
+    "babel-eslint": "8.2.2",
+    "eslint": "4.18.2",
+    "eslint-config-standard": "11.0.0",
+    "eslint-config-standard-jsx": "5.0.0",
+    "eslint-config-standard-react": "6.0.0",
+    "eslint-plugin-import": "2.9.0",
+    "eslint-plugin-node": "6.0.1",
+    "eslint-plugin-promise": "3.7.0",
+    "eslint-plugin-react": "7.7.0",
+    "eslint-plugin-standard": "3.0.1"
   }
 }

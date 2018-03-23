@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, ViewPropTypes, ActivityIndicator } from 'react-native';
+import { View, Text, ViewPropTypes, ActivityIndicator, Dimensions } from 'react-native';
 import { BLOCK_TAGS, TEXT_TAGS, MIXED_TAGS, IGNORED_TAGS, TEXT_TAGS_IGNORING_ASSOCIATION, STYLESETS, TextOnlyPropTypes } from './HTMLUtils';
 import { cssStringToRNStyle, _getElementClassStyles, cssStringToObject, cssObjectToString } from './HTMLStyles';
 import { generateDefaultBlockStyles, generateDefaultTextStyles } from './HTMLDefaultStyles';
@@ -35,6 +35,7 @@ export default class HTML extends PureComponent {
             height: PropTypes.number
         }),
         emSize: PropTypes.number.isRequired,
+        ptSize: PropTypes.number.isRequired,
         baseFontStyle: PropTypes.object.isRequired,
         textSelectable: PropTypes.bool
     }
@@ -44,6 +45,9 @@ export default class HTML extends PureComponent {
         debug: false,
         decodeEntities: true,
         emSize: 14,
+        ptSize: 1.3,
+        staticContentMaxWidth: Dimensions.get('window').width,
+        imagesMaxWidth: Dimensions.get('window').width,
         ignoredTags: IGNORED_TAGS,
         ignoredStyles: [],
         baseFontStyle: { fontSize: 14 },
@@ -395,7 +399,7 @@ export default class HTML extends PureComponent {
      * @memberof HTML
      */
     renderRNElements (RNElements, parentWrapper = 'root', parentIndex = 0, props = this.props) {
-        const { tagsStyles, classesStyles, emSize, ignoredStyles, allowedStyles } = props;
+        const { tagsStyles, classesStyles, emSize, ptSize, ignoredStyles, allowedStyles } = props;
         return RNElements && RNElements.length ? RNElements.map((element, index) => {
             const { attribs, data, tagName, parentTag, children, nodeIndex, wrapper } = element;
             const Wrapper = wrapper === 'Text' ? Text : View;
@@ -405,7 +409,7 @@ export default class HTML extends PureComponent {
                     cssStringToRNStyle(
                         attribs.style,
                         Wrapper === Text ? STYLESETS.TEXT : STYLESETS.VIEW, // proper prop-types validation
-                        { parentTag: tagName, emSize, ignoredStyles, allowedStyles }
+                        { parentTag: tagName, emSize, ptSize, ignoredStyles, allowedStyles }
                     ) :
                     {};
 

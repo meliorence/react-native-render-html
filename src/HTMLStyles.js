@@ -1,4 +1,4 @@
-import { PERC_SUPPORTED_STYLES, STYLESETS, stylePropTypes } from './HTMLUtils';
+import { PERC_SUPPORTED_STYLES, STYLESETS, ABSOLUTE_FONT_SIZE, stylePropTypes } from './HTMLUtils';
 import { generateDefaultBlockStyles, generateDefaultTextStyles } from './HTMLDefaultStyles';
 import checkPropTypes from './checkPropTypes';
 
@@ -101,7 +101,7 @@ export function _getElementCSSClasses (htmlAttribs) {
  * @param {object} { parentTag, emSize, ignoredStyles }
  * @returns {object}
  */
-function cssToRNStyle (css, styleset, { parentTag, emSize, ignoredStyles, allowedStyles }) {
+function cssToRNStyle (css, styleset, { parentTag, emSize, ptSize, ignoredStyles, allowedStyles }) {
     const styleProps = stylePropTypes[styleset];
     return Object.keys(css)
         .filter((key) => allowedStyles ? allowedStyles.indexOf(key) !== -1 : true)
@@ -130,6 +130,7 @@ function cssToRNStyle (css, styleset, { parentTag, emSize, ignoredStyles, allowe
                     if (value.search('inherit') !== -1) {
                         return undefined;
                     }
+                    value = value.replace('!important', '');
                     // See if we can use the percentage directly
                     if (value.search('%') !== -1 && PERC_SUPPORTED_STYLES.indexOf(key) !== -1) {
                         return [key, value];
@@ -138,13 +139,20 @@ function cssToRNStyle (css, styleset, { parentTag, emSize, ignoredStyles, allowe
                         const pxSize = parseFloat(value.replace('em', '')) * emSize;
                         return [key, pxSize];
                     }
+                    if (value.search('pt') !== -1) {
+                        const pxSize = parseFloat(value.replace('pt', '')) * ptSize;
+                        return [key, pxSize];
+                    }
                     // See if we can convert a 20px to a 20 automagically
                     const numericValue = parseFloat(value.replace('px', ''));
-                    if (!isNaN(numericValue)) {
+                    if (key !== 'fontWeight' && !isNaN(numericValue)) {
                         testStyle[key] = numericValue;
                         if (checkPropTypes(styleProp, testStyle, key, 'react-native-render-html') == null) {
                             return [key, numericValue];
                         }
+                    }
+                    if (key === 'fontSize') {
+                        return mapAbsoluteFontSize(key, value);
                     }
                 }
                 return [key, value];
@@ -156,6 +164,19 @@ function cssToRNStyle (css, styleset, { parentTag, emSize, ignoredStyles, allowe
             acc[key] = value;
             return acc;
         }, {});
+}
+
+/**
+* @param {string} key: the key of style
+* @param {string} value: the value of style
+* @return {array}
+*/
+function mapAbsoluteFontSize (key, value) {
+    let fontSize = value;
+    if (ABSOLUTE_FONT_SIZE.hasOwnProperty(value)) {
+        fontSize = ABSOLUTE_FONT_SIZE[value];
+    }
+    return [key, fontSize];
 }
 
 /**

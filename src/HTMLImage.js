@@ -49,14 +49,24 @@ export default class HTMLImage extends PureComponent {
         if (width) {
             styleWidth = width;
         }
-        style.forEach((styles) => {
-            if (!width && styles['width']) {
-                styleWidth = styles['width'];
+        if (Array.isArray(style)) {
+            style.forEach((styles) => {
+                if (!width && styles['width']) {
+                    styleWidth = styles['width'];
+                }
+                if (!height && styles['height']) {
+                    styleHeight = styles['height'];
+                }
+            });
+        } else {
+            if (!width && style['width']) {
+                styleWidth = style['width'];
             }
-            if (!height && styles['height']) {
-                styleHeight = styles['height'];
+            if (!height && style['height']) {
+                styleHeight = style['height'];
             }
-        });
+        }
+
         return { styleWidth, styleHeight };
     }
 

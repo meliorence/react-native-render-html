@@ -85,7 +85,8 @@ Prop | Description | Type | Required/Default
 `remoteLoadingView` | Replace the default loader while fetching a remote website's content | `function` | Optional
 `remoteErrorView` | Replace the default error if a remote website's content could not be fetched | `function` | Optional
 `emSize` | The default value in pixels for `1em` | `number` | `14`
-`baseFontStyle` | The default style applied to `<Text>` components | `number` | `14`
+`ptSize` | The default value in pixels for `1pt` | `number` | `1.3`
+`baseFontStyle` | The default style applied to `<Text>` components | `object` | `{ fontSize: 14 }`
 `textSelectable` | Allow all texts to be selected | `boolean` | `false`
 `alterData` | Target some specific texts and change their content, see [altering content](#altering-content) | `function` | Optional
 `alterChildren` | Target some specific nested children and change them, see [altering content](#altering-content) | `function` | Optional
@@ -157,7 +158,7 @@ renderers: {
 
 The default renderer of the `<ul>` and `<ol>` tags will either render a bullet or the count of your elements. If you wish to change this without having to re-write the whole list rendering implementation, you can use the `listsPrefixesRenderers` prop.
 
-Just like with the `renderers` prop, supply an object with `ul` and/or `ul` as functions that recevie the [same arguments as your custom HTML tags](#custom-html-tags). For instance, you can swap the default black bullet of `<ul>` with a blue cross :
+Just like with the `renderers` prop, supply an object with `ul` and/or `ul` as functions that receive the [same arguments as your custom HTML tags](#custom-html-tags). For instance, you can swap the default black bullet of `<ul>` with a blue cross :
 
 ```javascript
 // ... your props
@@ -172,13 +173,13 @@ ul: (htmlAttribs, children, convertedCSSStyles, passProps) => {
 
 In addition to your custom renderers, you can apply specific styles to HTML tags (`tagsStyles`) or HTML classes (`classesStyles`). You can also combine these styles with your custom renderers.
 
-Styling options override thesmelves, so you might render a custom HTML tag with a [custom renderer](#creating-custom-renderers) like `<bluecircle>`, make it green with a class `<bluecircle class="make-me-green">` or make it red by styling the tag itself.
+Styling options override themselves, so you might render a custom HTML tag with a [custom renderer](#creating-custom-renderers) like `<bluecircle>`, make it green with a class `<bluecircle class="make-me-green">` or make it red by styling the tag itself.
 
 The default style of your custom renderer will be merged to the one from your `classesStyles` which will also be merged by the `style` attribute.
 
 > **IMPORTANT NOTE : Do NOT use the `StyleSheet` API to create the styles you're going to feed to `tagsStyle` and `classesStyles`. Although it might look like it's working at first, the caching logic of `react-native` makes it impossible for this module to deep check each of your style to properly apply the precedence and priorities of your nested tags' styles.**
 
-Here's an usage example
+Here's a usage example
 
 ```javascript
 // props
@@ -194,11 +195,11 @@ const html = `
 
 ## Images
 
-By default, unstyled images will be rendered with their respective height and width without resizing. You can force their dimensions by using the `style` attribute in your HTML content, or [style](#styling) them with a class or through the `<img>` tag.
+By default, unstyled images will be rendered with their respective height and width without resizing. You can force their dimensions by using the `style` attribute in your HTML content or [style](#styling) them with a class or through the `<img>` tag.
 
 If you can't set the dimension of each image in your content, you might find the `imagesMaxWidth` prop useful. It resizes (and keeps proportions) your images to a maximum width, ensuring that your images won't overflow out of your viewport.
 
-A nice trick, demonstrated in the [basic usage of this module](#basic-usage) is to use the `Dimensions` API of react-native : `imagesMaxWidth={Dimensions.get('window').width}`. You could substract a value to it to make a margin.
+A nice trick, demonstrated in the [basic usage of this module](#basic-usage) is to use the `Dimensions` API of react-native : `imagesMaxWidth={Dimensions.get('window').width}`. You could subtract a value to it to make a margin.
 
 Please note that if you set width AND height through any mean of styling, `imagesMaxWidth` will be ignored.
 
@@ -206,13 +207,13 @@ Before their dimensions have been properly retrieved, images will temporarily be
 
 Images with broken links will render an empty square with a thin border, similar to what safari renders in a webview.
 
-Please note that all of these behaviours are implemented in the default `<img>` renderer. If you want to provide your own `<img>` renderer, you'll have to make this happen by yourself. You can use the `img` function in `HTMLRenderers.js` as a starting point.
+Please note that all of these behaviors are implemented in the default `<img>` renderer. If you want to provide your own `<img>` renderer, you'll have to make this happen by yourself. You can use the `img` function in `HTMLRenderers.js` as a starting point.
 
 ## Altering content
 
 `alterData` and `alterChildren` props are very useful to make some modifications on the structure of your HTML before it's actually rendered with react components.
 
-They both are functions that receive the parsed `node` as their first and only parameter. You must return your changes : a `string` with `alterData` and an `array` with `alterChildren` or a falsy value if you don't need to change anything.
+They both are functions that receive the parsed `node` as their first and only parameter. You must return your changes: a `string` with `alterData` and an `array` with `alterChildren` or a falsy value if you don't need to change anything.
 
 ### alterData
 
@@ -235,7 +236,7 @@ alterData: (node) => {
 
 ### alterChildren
 
-`alterChildren` allows you to change the children wrapped in any node. For instance, you might want to change the content of a a list.
+`alterChildren` allows you to change the children wrapped in any node. For instance, you might want to change the content of a list.
 
 Here's an example :
 
@@ -302,7 +303,7 @@ You can't expect native components to be able to render *everything* you can fin
 * `ignoredStyles` : array of ignored CSS rules. Nothing is ignored by default
 * `ignoreNodesFunction` : this is a cumbersome, yet powerful, way of ignoring very specific stuff.
 
-**Please note** that if you supply `ignoredTags`, you will override the default ignored ones. There are *a lot* of them, if you want to keep them and add you own, you can do something like :
+**Please note** that if you supply `ignoredTags`, you will override the default ignored ones. There are *a lot* of them, if you want to keep them and add your own, you can do something like :
 
 ```javascript
 import { IGNORED_TAGS } from 'react-native-render-html/src/HTMLUtils';
@@ -314,7 +315,7 @@ ignoredTags={[ ...IGNORED_TAGS, 'tag1', 'tag2']}
 
 `ignoreNodesFunction` receives 3 parameters : `node`, `parentTagName` and `parentIsText`.
 
-`node` is the result of the HTML parsing, which allows you to look for children, check the parent's markup and much more. `parentTagName` is a conveniant way to access the parent of your node, and `parentIsText` is a great way to make sure you won't be rendering a `<View>` inside a `<Text>` which, right now, makes react-native crash.
+`node` is the result of the HTML parsing, which allows you to look for children, check the parent's markup and much more. `parentTagName` is a convenient way to access the parent of your node, and `parentIsText` is a great way to make sure you won't be rendering a `<View>` inside a `<Text>` which, right now, makes react-native crash.
 
 ## Useful functions
 
