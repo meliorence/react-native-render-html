@@ -216,7 +216,11 @@ export default class HTML extends PureComponent {
     associateRawTexts (children) {
         for (let i = 0; i < children.length; i++) {
             const child = children[i];
-            if ((child.wrapper === 'Text' && TEXT_TAGS_IGNORING_ASSOCIATION.indexOf(child.tagName) === -1) && children.length > 1 && (!child.parent || child.parent.name !== 'p')) {
+            if (
+                (child.wrapper === 'Text' && TEXT_TAGS_IGNORING_ASSOCIATION.indexOf(child.tagName) === -1) &&
+                children.length > 1 &&
+                (!child.parent || TEXT_TAGS_IGNORING_ASSOCIATION.indexOf(child.parent.name) === -1)
+            ) {
                 // Texts outside <p> or not <p> themselves (with siblings)
                 let wrappedTexts = [];
                 for (let j = i; j < children.length; j++) {
@@ -238,7 +242,7 @@ export default class HTML extends PureComponent {
                         nodeIndex: i,
                         parent: child.parent,
                         parentTag: child.parentTag,
-                        tagName: child.parent && child.parent.name === 'li' ? 'textwrapper' : 'p',
+                        tagName: 'textwrapper',
                         wrapper: 'Text'
                     };
                 }
