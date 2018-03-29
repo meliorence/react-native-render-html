@@ -45,7 +45,8 @@ export default class HTML extends PureComponent {
         emSize: PropTypes.number.isRequired,
         ptSize: PropTypes.number.isRequired,
         baseFontStyle: PropTypes.object.isRequired,
-        textSelectable: PropTypes.bool
+        textSelectable: PropTypes.bool,
+        renderersProps: PropTypes.object
     }
 
     static defaultProps = {
@@ -454,12 +455,12 @@ export default class HTML extends PureComponent {
             ]
             .filter((s) => s !== undefined);
 
-            const extraProps = {};
+            const renderersProps = {};
             if (Wrapper === Text) {
-                extraProps.selectable = this.props.textSelectable;
+                renderersProps.selectable = this.props.textSelectable;
             }
             return (
-                <Wrapper key={key} style={style} {...extraProps}>
+                <Wrapper key={key} style={style} {...renderersProps}>
                     { textElement }
                     { childElements }
                 </Wrapper>
