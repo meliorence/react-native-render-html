@@ -69,6 +69,7 @@ export default class Demo extends Component {
 Prop | Description | Type | Required/Default
 ------ | ------ | ------ | ------
 `renderers` | Your [custom renderers](#creating-custom-renderers) | `object` | Optional, some default ones are supplied (`<a>`, `<img>`...)
+`renderersProps` | Set of props accessible into your [custom renderers](#creating-custom-renderers) in `passProps` (4th argument) | `object` | Optional
 `html` | HTML string to parse and render | `string` | Required
 `uri` | *(experimental)* remote website to parse and render | `string` | Optional
 `decodeEntities` | Decode HTML entities of your content | `bool` | Optional, defaults to `true`
@@ -137,7 +138,7 @@ Your renderers functions receive several arguments that will be very useful to m
 * `htmlAttribs`: attributes attached to the node, parsed in a react-native way
 * `children` : array with the children of the node
 * `convertedCSSStyles` : conversion of the `style` attribute from CSS to react-native's stylesheet
-* `passProps` : various useful information : `groupInfo`, `parentTagName`, `parentIsText`...
+* `passProps` : various useful information :  your `renderersProps`, `groupInfo`, `parentTagName`, `parentIsText`...
 
 ### Making your custom component block or inline
 
