@@ -113,9 +113,6 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
 export const ol = ul;
 
 export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
-    if (!htmlAttribs.src) {
-        return false;
-    }
     const { staticContentMaxWidth, tagsStyles, classesStyles } = passProps;
 
     const tagStyleHeight = tagsStyles.iframe && tagsStyles.iframe.height;
@@ -139,8 +136,10 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
         additionalStyles: [{ height, width }]
     });
 
+    const source = htmlAttribs.srcdoc ? { html: htmlAttribs.srcdoc } : { uri: htmlAttribs.src };
+
     return (
-        <WebView key={passProps.key} source={{ uri: htmlAttribs.src }} style={style} />
+        <WebView key={passProps.key} source={source} style={style} />
     );
 }
 
