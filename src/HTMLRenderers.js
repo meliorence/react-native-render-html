@@ -80,7 +80,7 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
         ];
 
         if (rawChild) {
-            if (rawChild.parentTag === 'ul') && rawChild.tagName === 'li' {
+            if (rawChild.parentTag === 'ul' && rawChild.tagName === 'li') {
                 prefix = listsPrefixesRenderers && listsPrefixesRenderers.ul ? listsPrefixesRenderers.ul(...rendererArgs) : (
                     <View style={{
                         marginRight: 10,
