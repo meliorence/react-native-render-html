@@ -80,7 +80,7 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
         ];
 
         if (rawChild) {
-            if (rawChild.parentTag === 'ul') {
+            if (rawChild.parentTag === 'ul') && rawChild.tagName === 'li' {
                 prefix = listsPrefixesRenderers && listsPrefixesRenderers.ul ? listsPrefixesRenderers.ul(...rendererArgs) : (
                     <View style={{
                         marginRight: 10,
@@ -91,7 +91,7 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
                         backgroundColor: 'black'
                     }} />
                 );
-            } else if (rawChild.parentTag === 'ol') {
+            } else if (rawChild.parentTag === 'ol' && rawChild.tagName === 'li') {
                 prefix = listsPrefixesRenderers && listsPrefixesRenderers.ol ? listsPrefixesRenderers.ol(...rendererArgs) : (
                     <Text style={{ marginRight: 5, fontSize: baseFontSize }}>{ index + 1 })</Text>
                 );
