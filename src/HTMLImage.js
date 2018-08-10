@@ -1,13 +1,14 @@
 import React, { PureComponent } from 'react';
 import { Image, View, Text } from 'react-native';
 import PropTypes from 'prop-types';
+import FastImage from '../../../node_modules/react-native-fast-image';
 
 export default class HTMLImage extends PureComponent {
     constructor (props) {
         super(props);
         this.state = {
             width: props.imagesInitialDimensions.width,
-            height: props.imagesInitialDimensions.height
+            height: props.imagesInitialDimensions.height,
         };
     }
 
@@ -17,6 +18,7 @@ export default class HTMLImage extends PureComponent {
         height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         style: Image.propTypes.style,
+        resizeMode: PropTypes.string,
         imagesMaxWidth: PropTypes.number,
         imagesInitialDimensions: PropTypes.shape({
             width: PropTypes.number,
@@ -28,7 +30,8 @@ export default class HTMLImage extends PureComponent {
         imagesInitialDimensions: {
             width: 100,
             height: 100
-        }
+        },
+        resizeMode: 'cover',
     }
 
     componentDidMount () {
@@ -99,9 +102,10 @@ export default class HTMLImage extends PureComponent {
 
     validImage (source, style, props = {}) {
         return (
-            <Image
+            <FastImage
               source={source}
-              style={[style, { width: this.state.width, height: this.state.height, resizeMode: 'cover' }]}
+              resizeMode={this.props.resizeMode || 'cover'}
+              style={[{ width: this.state.width, height: this.state.height }, style,]}
               {...props}
             />
         );

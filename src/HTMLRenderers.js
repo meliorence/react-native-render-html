@@ -44,6 +44,13 @@ export function img (htmlAttribs, children, convertedCSSStyles, passProps = {}) 
         styleSet: 'IMAGE'
     });
     const { src, alt, width, height } = htmlAttribs;
+    var hasImgProps = () => {
+        try{
+            if (typeof passProps['tagsStyles']['img']['resizeMode'] !== 'undefined'){
+                return passProps.tagsStyles.img
+            }
+        } catch(e){}
+    }
     return (
         <HTMLImage
           source={{ uri: src }}
@@ -51,6 +58,7 @@ export function img (htmlAttribs, children, convertedCSSStyles, passProps = {}) 
           width={width}
           height={height}
           style={style}
+          { ...hasImgProps() }
           {...passProps}
         />
     );
