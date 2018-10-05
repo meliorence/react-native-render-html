@@ -16,8 +16,7 @@
     "buffer": "^4.5.1",
     "events": "^1.1.0",
     "html-entities": "^1.2.0",
-    "htmlparser2": "^3.9.0",
-    "stream": "0.0.2"
+    "htmlparser2": "^3.9.0"
   },
   "peerDependencies": {
     "prop-types": ">=15.5.10",
