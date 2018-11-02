@@ -75,9 +75,16 @@ export default class HTMLImage extends PureComponent {
         const { styleWidth, styleHeight } = this.getDimensionsFromStyle(style, height, width);
 
         if (styleWidth && styleHeight) {
+            let width = typeof styleWidth === 'string' && styleWidth.search('%') !== -1 ? styleWidth : parseInt(styleWidth, 10)
+            let height = typeof styleHeight === 'string' && styleHeight.search('%') !== -1 ? styleHeight : parseInt(styleHeight, 10)
+            if (imagesMaxWidth && typeof width != "string" && typeof height != "string") {
+                const optimalWidth = imagesMaxWidth <= width ? imagesMaxWidth : width;
+                const optimalHeight = (optimalWidth * height) / width;
+                return this.setState({ width: optimalWidth, height: optimalHeight, error: false });
+            }
             return this.setState({
-                width: typeof styleWidth === 'string' && styleWidth.search('%') !== -1 ? styleWidth : parseInt(styleWidth, 10),
-                height: typeof styleHeight === 'string' && styleHeight.search('%') !== -1 ? styleHeight : parseInt(styleHeight, 10)
+                width: width,
+                height: height
             });
         }
         // Fetch image dimensions only if they aren't supplied or if with or height is missing
