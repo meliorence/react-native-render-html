@@ -81,20 +81,22 @@ export default class HTMLImage extends PureComponent {
             });
         }
         // Fetch image dimensions only if they aren't supplied or if with or height is missing
-        Image.getSize(
-            source.uri,
-            (originalWidth, originalHeight) => {
-                if (!imagesMaxWidth) {
-                    return this.setState({ width: originalWidth, height: originalHeight });
+        setTimeout(() => {
+            Image.getSize(
+                source.uri,
+                (originalWidth, originalHeight) => {
+                    if (!imagesMaxWidth) {
+                        return this.setState({ width: originalWidth, height: originalHeight });
+                    }
+                    const optimalWidth = imagesMaxWidth <= originalWidth ? imagesMaxWidth : originalWidth;
+                    const optimalHeight = (optimalWidth * originalHeight) / originalWidth;
+                    this.setState({ width: optimalWidth, height: optimalHeight, error: false });
+                },
+                () => {
+                    this.setState({ error: true });
                 }
-                const optimalWidth = imagesMaxWidth <= originalWidth ? imagesMaxWidth : originalWidth;
-                const optimalHeight = (optimalWidth * originalHeight) / originalWidth;
-                this.setState({ width: optimalWidth, height: optimalHeight, error: false });
-            },
-            () => {
-                this.setState({ error: true });
-            }
-        );
+            );
+        }, 0);
     }
 
     validImage (source, style, props = {}) {
