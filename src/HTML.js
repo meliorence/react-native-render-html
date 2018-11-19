@@ -9,7 +9,8 @@ import {
     IGNORED_TAGS,
     TEXT_TAGS_IGNORING_ASSOCIATION,
     STYLESETS,
-    TextOnlyPropTypes
+    TextOnlyPropTypes,
+    PREFORMATTED_TAGS
 } from './HTMLUtils';
 import { generateDefaultBlockStyles, generateDefaultTextStyles } from './HTMLDefaultStyles';
 import htmlparser2 from 'htmlparser2';
@@ -274,10 +275,20 @@ export default class HTML extends PureComponent {
                     // This is blank, don't render an useless additional component
                     return false;
                 }
+
+                if (
+                    node.parent &&
+                    node.parent.name &&
+                    PREFORMATTED_TAGS.indexOf(node.parent.name) === -1
+                ) {
+                    // Remove line breaks in non-pre-formatted tags
+                    data = data.replace(/(\r\n|\n|\r)/gm, '');
+                }
+
                 // Text without tags, these can be mapped to the Text wrapper
                 return {
                     wrapper: 'Text',
-                    data: data.replace(/(\r\n|\n|\r)/gm, ''), // remove linebreaks
+                    data: data,
                     attribs: attribs || {},
                     parent,
                     parentTag: parent && parent.name,
