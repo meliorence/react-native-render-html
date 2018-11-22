@@ -191,6 +191,11 @@ function cssToRNStyle (css, styleset, { emSize, ptSize, ignoredStyles, allowedSt
                         return undefined;
                     }
                     value = value.replace('!important', '');
+
+                    if (value.search('calc') !== -1) {
+                        return [key, '100%'];
+                    }
+
                     // See if we can use the percentage directly
                     if (value.search('%') !== -1 && PERC_SUPPORTED_STYLES.indexOf(key) !== -1) {
                         return [key, value];
