@@ -486,8 +486,8 @@ export default class HTML extends PureComponent {
     render () {
         const { allowFontScaling, customWrapper, remoteLoadingView, remoteErrorView } = this.props;
         const { RNNodes, loadingRemoteURL, errorLoadingRemoteURL } = this.state;
-        if (!RNNodes && !loadingRemoteURL) {
-            return false;
+        if (!RNNodes && !loadingRemoteURL && !errorLoadingRemoteURL) {
+            return null;
         } else if (loadingRemoteURL) {
             return remoteLoadingView ?
                 remoteLoadingView(this.props, this.state) :
