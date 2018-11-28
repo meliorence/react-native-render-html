@@ -58,7 +58,7 @@ export const PERC_SUPPORTED_STYLES = [
 const RNTextStylePropTypes = Object.keys(TextStylesPropTypes)
     .reduce((acc, k) => { acc[k] = TextStylesPropTypes[k]; return acc; }, {});
 const RNViewStylePropTypes = Object.keys(DeprecatedViewStylePropTypes)
-    .reduce((acc, k) => { acc[k] = ViewStylesPropTypes[k]; return acc; }, {});
+    .reduce((acc, k) => { acc[k] = DeprecatedViewStylePropTypes[k]; return acc; }, {});
 const RNImageStylePropTypes = Object.keys(DeprecatedImageStylesPropTypes)
     .reduce((acc, k) => { acc[k] = DeprecatedImageStylesPropTypes[k]; return acc; }, {});
 
