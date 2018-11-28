@@ -1,6 +1,6 @@
 import TextStylesPropTypes from 'react-native/Libraries/Text/TextStylePropTypes';
 import DeprecatedViewStylePropTypes from 'react-native/Libraries/DeprecatedPropTypes/DeprecatedViewStylePropTypes';
-import ImageStylesPropTypes from 'react-native/Libraries/Image/ImageStylePropTypes';
+import DeprecatedImageStylesPropTypes from 'react-native/Libraries/DeprecatedPropTypes/DeprecatedImageStylePropTypes';
 
 // Filter prop-types that are only applicable to <Text> and not <View>
 export let TextOnlyPropTypes = {};
@@ -59,8 +59,8 @@ const RNTextStylePropTypes = Object.keys(TextStylesPropTypes)
     .reduce((acc, k) => { acc[k] = TextStylesPropTypes[k]; return acc; }, {});
 const RNViewStylePropTypes = Object.keys(DeprecatedViewStylePropTypes)
     .reduce((acc, k) => { acc[k] = ViewStylesPropTypes[k]; return acc; }, {});
-const RNImageStylePropTypes = Object.keys(ImageStylesPropTypes)
-    .reduce((acc, k) => { acc[k] = ImageStylesPropTypes[k]; return acc; }, {});
+const RNImageStylePropTypes = Object.keys(DeprecatedImageStylesPropTypes)
+    .reduce((acc, k) => { acc[k] = DeprecatedImageStylesPropTypes[k]; return acc; }, {});
 
 export const STYLESETS = Object.freeze({ VIEW: 'view', TEXT: 'text', IMAGE: 'image' });
 
