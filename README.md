@@ -120,7 +120,7 @@ renderers: {
 }
 ```
 
-Here, we have overriden the default `<br />` renderer and made it a blue line.
+Here, we have overriden the default `<hr />` renderer and made it a blue line.
 
 You can also create your own tags and use them in your HTML content :
 
