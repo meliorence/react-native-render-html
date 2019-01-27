@@ -22,7 +22,8 @@
   "peerDependencies": {
     "prop-types": ">=15.5.10",
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-fast-image": "*"
   },
   "devDependencies": {
     "babel-eslint": "8.2.2",
