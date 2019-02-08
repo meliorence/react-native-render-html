@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, View, WebView, Dimensions } from 'react-native';
+import { TouchableOpacity, Text, View, WebView, Platform } from 'react-native';
 import { _constructStyles, _getElementClassStyles } from './HTMLStyles';
 import HTMLImage from './HTMLImage';
 
@@ -63,7 +63,7 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
         passProps,
         styleSet: 'VIEW'
     });
-    const { rawChildren, nodeIndex, key, baseFontStyle, listsPrefixesRenderers } = passProps;
+    const { allowFontScaling, rawChildren, nodeIndex, key, baseFontStyle, listsPrefixesRenderers } = passProps;
     const baseFontSize = baseFontStyle.fontSize || 14;
 
     children = children && children.map((child, index) => {
@@ -80,7 +80,7 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
         ];
 
         if (rawChild) {
-            if (rawChild.parentTag === 'ul') {
+            if (rawChild.parentTag === 'ul' && rawChild.tagName === 'li') {
                 prefix = listsPrefixesRenderers && listsPrefixesRenderers.ul ? listsPrefixesRenderers.ul(...rendererArgs) : (
                     <View style={{
                         marginRight: 10,
@@ -91,9 +91,9 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
                         backgroundColor: 'black'
                     }} />
                 );
-            } else if (rawChild.parentTag === 'ol') {
+            } else if (rawChild.parentTag === 'ol' && rawChild.tagName === 'li') {
                 prefix = listsPrefixesRenderers && listsPrefixesRenderers.ol ? listsPrefixesRenderers.ol(...rendererArgs) : (
-                    <Text style={{ marginRight: 5, fontSize: baseFontSize }}>{ index + 1 })</Text>
+                    <Text allowFontScaling={allowFontScaling} style={{ marginRight: 5, fontSize: baseFontSize }}>{ index + 1 })</Text>
                 );
             }
         }
@@ -113,9 +113,6 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
 export const ol = ul;
 
 export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
-    if (!htmlAttribs.src) {
-        return false;
-    }
     const { staticContentMaxWidth, tagsStyles, classesStyles } = passProps;
 
     const tagStyleHeight = tagsStyles.iframe && tagsStyles.iframe.height;
@@ -139,19 +136,37 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
         additionalStyles: [{ height, width }]
     });
 
+    const source = htmlAttribs.srcdoc ? { html: htmlAttribs.srcdoc } : { uri: htmlAttribs.src };
+
     return (
-        <WebView key={passProps.key} source={{ uri: htmlAttribs.src }} style={style} />
+        <WebView key={passProps.key} source={source} style={style} />
+    );
+}
+
+export function pre (htlmAttribs, children, convertedCSSStyles, passProps) {
+    return (
+        <Text
+          key={passProps.key}
+          style={{ fontFamily: Platform.OS === 'android' ? 'monospace' : 'Menlo' }}>
+            { children }
+        </Text>
     );
 }
 
 export function br (htlmAttribs, children, convertedCSSStyles, passProps) {
     return (
-        <Text style={{ height: 1.2 * passProps.emSize, flex: 1 }} key={passProps.key}>{"\n"}</Text>
+        <Text
+            allowFontScaling={passProps.allowFontScaling}
+            style={{ height: 1.2 * passProps.emSize, flex: 1 }}
+            key={passProps.key}
+        >
+            {"\n"}
+        </Text>
     );
 }
 
-export function textwrapper (htmlAttribs, children, convertedCSSStyles, { key }) {
+export function textwrapper (htmlAttribs, children, convertedCSSStyles, { allowFontScaling, key }) {
     return (
-        <Text key={key} style={convertedCSSStyles}>{ children }</Text>
+        <Text allowFontScaling={allowFontScaling} key={key} style={convertedCSSStyles}>{ children }</Text>
     );
 }

@@ -1,6 +1,6 @@
 {
   "name": "react-native-render-html",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "author": "Archriss",
   "license": "BSD-2-Clause",
   "repository": "https://github.com/archriss/react-native-render-html",
@@ -16,8 +16,7 @@
     "buffer": "^4.5.1",
     "events": "^1.1.0",
     "html-entities": "^1.2.0",
-    "htmlparser2": "^3.9.0",
-    "stream": "0.0.2"
+    "htmlparser2": "^3.9.0"
   },
   "peerDependencies": {
     "prop-types": ">=15.5.10",

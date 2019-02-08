@@ -16,24 +16,24 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 ## Table of contents
 
 - [react-native-render-html](#react-native-render-html)
-    - [Table of contents](#table-of-contents)
-    - [Install](#install)
-    - [Basic usage](#basic-usage)
-    - [Props](#props)
-    - [Demo](#demo)
-    - [Creating custom renderers](#creating-custom-renderers)
-        - [Custom HTML tags](#custom-html-tags)
-        - [Making your custom component block or inline](#making-your-custom-component-block-or-inline)
-        - [Lists prefixes](#lists-prefixes)
-    - [Styling](#styling)
-    - [Images](#images)
-    - [Altering content](#altering-content)
-        - [alterData](#alterdata)
-        - [alterChildren](#alterchildren)
-        - [alterNode](#alternode)
-        - [onParsed](#onparsed)
-    - [Ignoring HTML content](#ignoring-html-content)
-    - [Useful functions](#useful-functions)
+  - [Table of contents](#table-of-contents)
+  - [Install](#install)
+  - [Basic usage](#basic-usage)
+  - [Props](#props)
+  - [Demo](#demo)
+  - [Creating custom renderers](#creating-custom-renderers)
+    - [Custom HTML tags](#custom-html-tags)
+    - [Making your custom component block or inline](#making-your-custom-component-block-or-inline)
+    - [Lists prefixes](#lists-prefixes)
+  - [Styling](#styling)
+  - [Images](#images)
+  - [Altering content](#altering-content)
+    - [alterData](#alterdata)
+    - [alterChildren](#alterchildren)
+    - [alterNode](#alternode)
+    - [onParsed](#onparsed)
+  - [Ignoring HTML content](#ignoring-html-content)
+  - [Useful functions](#useful-functions)
 
 ## Install
 
@@ -88,6 +88,7 @@ Prop | Description | Type | Required/Default
 `emSize` | The default value in pixels for `1em` | `number` | `14`
 `ptSize` | The default value in pixels for `1pt` | `number` | `1.3`
 `baseFontStyle` | The default style applied to `<Text>` components | `object` | `{ fontSize: 14 }`
+`allowFontScaling` | Specifies whether fonts should scale to respect Text Size accessibility settings | `boolean` | `true`
 `textSelectable` | Allow all texts to be selected | `boolean` | `false`
 `alterData` | Target some specific texts and change their content, see [altering content](#altering-content) | `function` | Optional
 `alterChildren` | Target some specific nested children and change them, see [altering content](#altering-content) | `function` | Optional
@@ -120,7 +121,7 @@ renderers: {
 }
 ```
 
-Here, we have overriden the default `<br />` renderer and made it a blue line.
+Here, we have overriden the default `<hr />` renderer and made it a blue line.
 
 You can also create your own tags and use them in your HTML content :
 
