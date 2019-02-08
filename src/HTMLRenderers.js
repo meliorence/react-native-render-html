@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, View, WebView, Dimensions } from 'react-native';
+import { TouchableOpacity, Text, View, WebView, Platform } from 'react-native';
 import { _constructStyles, _getElementClassStyles } from './HTMLStyles';
 import HTMLImage from './HTMLImage';
 
@@ -141,6 +141,16 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
 
     return (
         <WebView key={passProps.key} source={{ uri: htmlAttribs.src }} style={style} />
+    );
+}
+
+export function pre (htlmAttribs, children, convertedCSSStyles, passProps) {
+    return (
+        <Text
+          key={passProps.key}
+          style={{ fontFamily: Platform.OS === 'android' ? 'monospace' : 'Menlo' }}>
+            { children }
+        </Text>
     );
 }
 
