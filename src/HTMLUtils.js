@@ -38,7 +38,8 @@ export const ABSOLUTE_FONT_SIZE = {
     'larger': 16,
     'length': null,
     'initial': null,
-    'inherit': null
+    'inherit': null,
+    'unset': null
 };
 
 export const IGNORED_TAGS = ['head', 'scripts', 'audio', 'video', 'track', 'embed', 'object', 'param', 'source', 'canvas', 'noscript',

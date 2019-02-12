@@ -182,6 +182,9 @@ function cssToRNStyle (css, styleset, { emSize, ptSize, ignoredStyles, allowedSt
             }
 
             if (typeof value === 'string') {
+                if (value.search('inherit') !== -1 || value.search('calc') !== -1 || value.search('normal') !== -1) {
+                    return undefined;
+                }
                 value = value.replace('!important', '');
                 // See if we can use the percentage directly
                 if (value.search('%') !== -1 && PERC_SUPPORTED_STYLES.indexOf(key) !== -1) {
