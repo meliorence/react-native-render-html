@@ -1,6 +1,5 @@
 import { PERC_SUPPORTED_STYLES, STYLESETS, ABSOLUTE_FONT_SIZE, stylePropTypes } from './HTMLUtils';
 import { generateDefaultBlockStyles, generateDefaultTextStyles } from './HTMLDefaultStyles';
-import checkPropTypes from './checkPropTypes';
 
 /**
 * Converts a html style string to an object
@@ -174,48 +173,41 @@ function cssToRNStyle (css, styleset, { emSize, ptSize, ignoredStyles, allowedSt
                     .split('-')
                     .map((item, index) => index === 0 ? item : item[0].toUpperCase() + item.substr(1))
                     .join(''),
-                value];
+                value
+            ];
         })
         .map(([key, value]) => {
-            if (!styleProps[key]) {
+            if (styleProps.indexOf(key) === -1) {
                 return undefined;
             }
 
-            const testStyle = {};
-            testStyle[key] = value;
-            const styleProp = {};
-            styleProp[key] = styleProps[key];
-            if (checkPropTypes(styleProp, testStyle, key, 'react-native-render-html') == null) {
-                if (typeof value === 'string') {
-                    if (value.search('inherit') !== -1) {
-                        return undefined;
-                    }
-                    value = value.replace('!important', '');
-                    // See if we can use the percentage directly
-                    if (value.search('%') !== -1 && PERC_SUPPORTED_STYLES.indexOf(key) !== -1) {
-                        return [key, value];
-                    }
-                    if (value.search('em') !== -1) {
-                        const pxSize = parseFloat(value.replace('em', '')) * emSize;
-                        return [key, pxSize];
-                    }
-                    if (value.search('pt') !== -1) {
-                        const pxSize = parseFloat(value.replace('pt', '')) * ptSize;
-                        return [key, pxSize];
-                    }
-                    // See if we can convert a 20px to a 20 automagically
-                    const numericValue = parseFloat(value.replace('px', ''));
-                    if (key !== 'fontWeight' && !isNaN(numericValue)) {
-                        testStyle[key] = numericValue;
-                        if (checkPropTypes(styleProp, testStyle, key, 'react-native-render-html') == null) {
-                            return [key, numericValue];
-                        }
-                    }
-                    if (key === 'fontSize') {
-                        return mapAbsoluteFontSize(key, value);
+            if (typeof value === 'string') {
+                if (value.search('inherit') !== -1 || value.search('calc') !== -1 || value.search('normal') !== -1) {
+                    return undefined;
+                }
+                value = value.replace('!important', '');
+                // See if we can use the percentage directly
+                if (value.search('%') !== -1 && PERC_SUPPORTED_STYLES.indexOf(key) !== -1) {
+                    return [key, value];
+                }
+                if (value.search('em') !== -1) {
+                    const pxSize = parseFloat(value.replace('em', '')) * emSize;
+                    return [key, pxSize];
+                }
+                if (value.search('pt') !== -1) {
+                    const pxSize = parseFloat(value.replace('pt', '')) * ptSize;
+                    return [key, pxSize];
+                }
+                // See if we can convert a 20px to a 20 automagically
+                const numericValue = parseFloat(value.replace('px', ''));
+                if (key !== 'fontWeight' && !isNaN(numericValue)) {
+                    if (styleProps.indexOf(key) !== -1) {
+                        return [key, numericValue];
                     }
                 }
-                return [key, value];
+                if (key === 'fontSize') {
+                    return mapAbsoluteFontSize(key, value);
+                }
             }
             return [key, value];
         })
