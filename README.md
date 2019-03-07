@@ -139,7 +139,7 @@ Your renderers functions receive several arguments that will be very useful to m
 * `htmlAttribs`: attributes attached to the node, parsed in a react-native way
 * `children` : array with the children of the node
 * `convertedCSSStyles` : conversion of the `style` attribute from CSS to react-native's stylesheet
-* `passProps` : various useful information :  your `renderersProps`, `groupInfo`, `parentTagName`, `parentIsText`...
+* `passProps` : various useful information :  your `renderersProps`, `groupInfo`, `parentTag`, `parentIsText`...
 
 ### Making your custom component block or inline
 
