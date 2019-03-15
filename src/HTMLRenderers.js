@@ -126,15 +126,20 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
     const attrHeight = htmlAttribs.height ? parseInt(htmlAttribs.height) : false;
     const attrWidth = htmlAttribs.width ? parseInt(htmlAttribs.width) : false;
 
-    const height = attrHeight || classStyleHeight || tagStyleHeight || 200;
-    const width = attrWidth || classStyleWidth || tagStyleWidth || staticContentMaxWidth;
+    const iframeHeight = attrHeight || classStyleHeight || tagStyleHeight || 200;
+    const iframeWidth = attrWidth || classStyleWidth || tagStyleWidth;
+
+    let actualWidth = iframeWidth;
+    if(staticContentMaxWidth) {
+        actualWidth = (iframeHeight / iframeWidth) * staticContentMaxWidth;
+    } 
 
     const style = _constructStyles({
         tagName: 'iframe',
         htmlAttribs,
         passProps,
         styleSet: 'VIEW',
-        additionalStyles: [{ height, width }]
+        additionalStyles: [{ iframeHeight, actualWidth }]
     });
 
     const source = htmlAttribs.srcdoc ? { html: htmlAttribs.srcdoc } : { uri: htmlAttribs.src };
