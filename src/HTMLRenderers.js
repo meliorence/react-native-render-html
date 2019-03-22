@@ -130,7 +130,7 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
     const iframeWidth = attrWidth || classStyleWidth || tagStyleWidth;
 
     let actualWidth = iframeWidth;
-    if(staticContentMaxWidth) {
+    if(staticContentMaxWidth && iframeWidth) {
         actualWidth = (iframeHeight / iframeWidth) * staticContentMaxWidth;
     } 
 
