@@ -139,7 +139,7 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
         htmlAttribs,
         passProps,
         styleSet: 'VIEW',
-        additionalStyles: [{ iframeHeight, actualWidth }]
+        additionalStyles: [{ height: iframeHeight, width: actualWidth }]
     });
 
     const source = htmlAttribs.srcdoc ? { html: htmlAttribs.srcdoc } : { uri: htmlAttribs.src };
