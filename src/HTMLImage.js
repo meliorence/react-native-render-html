@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
-import { Image, View, Text } from 'react-native';
+import { Image, View, Text, Dimensions} from 'react-native';
 import PropTypes from 'prop-types';
+
+const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
 
 export default class HTMLImage extends PureComponent {
     constructor (props) {
@@ -81,14 +83,24 @@ export default class HTMLImage extends PureComponent {
 
         if (styleWidth && styleHeight) {
             return this.mounted && this.setState({
-                width: typeof styleWidth === 'string' && styleWidth.search('%') !== -1 ? styleWidth : parseInt(styleWidth, 10),
-                height: typeof styleHeight === 'string' && styleHeight.search('%') !== -1 ? styleHeight : parseInt(styleHeight, 10)
+                width: this.parseDimension(styleWidth, screenWidth),
+                height: this.parseDimension(styleHeight, screenHeight)
             });
         }
         // Fetch image dimensions only if they aren't supplied or if with or height is missing
         Image.getSize(
             source.uri,
             (originalWidth, originalHeight) => {
+                if (styleWidth) {
+                    const parsedWidth = this.parseDimension(styleWidth, screenWidth)
+                    const optimalHeight = (parsedWidth * originalHeight) / originalWidth;
+                    return this.mounted && this.setState({ width: parsedWidth, height: optimalHeight, error: false });
+                }
+                if (styleHeight) {
+                    const parsedHeight = this.parseDimension(styleHeight, screenHeight)
+                    const optimalWidth = (parsedHeight * originalWidth) / originalHeight;
+                    return this.mounted && this.setState({ width: optimalWidth, height: parsedHeight, error: false });
+                }
                 if (!imagesMaxWidth) {
                     return this.mounted && this.setState({ width: originalWidth, height: originalHeight });
                 }
@@ -100,6 +112,16 @@ export default class HTMLImage extends PureComponent {
                 this.mounted && this.setState({ error: true });
             }
         );
+    }
+
+    parseDimension (dimension, screenSize) {
+        if (typeof dimension === 'string' && !dimension.includes('%')) {
+            return parseInt(dimension, 10)
+        }
+        if (typeof dimension === 'string' && dimension.includes('%')) {
+            return parseInt(dimension, 10) * screenSize / 100
+        }
+        return dimension
     }
 
     validImage (source, style, props = {}) {
