@@ -130,8 +130,10 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
     const iframeWidth = attrWidth || classStyleWidth || tagStyleWidth;
 
     let actualWidth = iframeWidth;
+    let actualHeight = iframeHeight;
     if(staticContentMaxWidth && iframeWidth) {
-        actualWidth = (iframeHeight / iframeWidth) * staticContentMaxWidth;
+        actualHeight = (iframeHeight / iframeWidth) * staticContentMaxWidth;
+        actualWidth = Math.min(staticContentMaxWidth, iframeWidth);
     } 
 
     const style = _constructStyles({
@@ -139,7 +141,7 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
         htmlAttribs,
         passProps,
         styleSet: 'VIEW',
-        additionalStyles: [{ height: iframeHeight, width: actualWidth }]
+        additionalStyles: [{ height: actualHeight, width: actualWidth }]
     });
 
     const source = htmlAttribs.srcdoc ? { html: htmlAttribs.srcdoc } : { uri: htmlAttribs.src };
