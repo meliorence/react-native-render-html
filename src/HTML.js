@@ -416,6 +416,12 @@ export default class HTML extends PureComponent {
                 children.map((child, childIndex) => this.renderRNElements([child], wrapper, index, props)) :
                 false;
 
+            const renderersProps = {};
+            if (Wrapper === Text) {
+                renderersProps.allowFontScaling = allowFontScaling;
+                renderersProps.selectable = this.props.textSelectable;
+            }
+
             if (this.renderers[tagName]) {
                 const customRenderer =
                     typeof this.renderers[tagName] === 'function' ?
@@ -439,7 +445,8 @@ export default class HTML extends PureComponent {
                         parentIndex,
                         key,
                         data,
-                        rawChildren: children
+                        rawChildren: children,
+                        ...renderersProps
                     });
             }
 
@@ -472,11 +479,6 @@ export default class HTML extends PureComponent {
             ]
             .filter((s) => s !== undefined);
 
-            const renderersProps = {};
-            if (Wrapper === Text) {
-                renderersProps.allowFontScaling = allowFontScaling;
-                renderersProps.selectable = textSelectable;
-            }
             return (
                 <Wrapper key={key} style={style} {...renderersProps}>
                     { textElement }
