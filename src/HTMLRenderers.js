@@ -166,8 +166,8 @@ export function br (htlmAttribs, children, convertedCSSStyles, passProps) {
     );
 }
 
-export function textwrapper (htmlAttribs, children, convertedCSSStyles, { allowFontScaling, key }) {
+export function textwrapper (htmlAttribs, children, convertedCSSStyles, { allowFontScaling, key, selectable }) {
     return (
-        <Text allowFontScaling={allowFontScaling} key={key} style={convertedCSSStyles}>{ children }</Text>
+        <Text selectable={selectable} allowFontScaling={allowFontScaling} key={key} style={convertedCSSStyles}>{ children }</Text>
     );
 }
