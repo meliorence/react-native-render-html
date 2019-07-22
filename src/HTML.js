@@ -300,15 +300,16 @@ export default class HTML extends PureComponent {
                     // Recursively map all children with this method
                     children = this.associateRawTexts(this.mapDOMNodesTORNElements(children, name));
                 }
-                if (this.childrenNeedAView(children) || BLOCK_TAGS.indexOf(name.toLowerCase()) !== -1) {
+                if (this.renderers[name] && this.renderers[name].wrapper) {
+                    // Prefer custom wrapper if present in renderer
+                    return { wrapper: this.renderers[name].wrapper, children, attribs, parent, tagName: name, parentTag };
+                } else if (this.childrenNeedAView(children) || BLOCK_TAGS.indexOf(name.toLowerCase()) !== -1) {
                     // If children cannot be nested in a Text, or if the tag
                     // maps to a block element, use a view
                     return { wrapper: 'View', children, attribs, parent, tagName: name, parentTag };
                 } else if (TEXT_TAGS.indexOf(name.toLowerCase()) !== -1 || MIXED_TAGS.indexOf(name.toLowerCase()) !== -1) {
                     // We are able to nest its children inside a Text
                     return { wrapper: 'Text', children, attribs, parent, tagName: name, parentTag };
-                } else if (this.renderers[name] && this.renderers[name].wrapper) {
-                    return { wrapper: this.renderers[name].wrapper, children, attribs, parent, tagName: name, parentTag };
                 }
                 return { wrapper: 'View', children, attribs, parent, tagName: name, parentTag };
             }
