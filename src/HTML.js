@@ -296,17 +296,17 @@ export default class HTML extends PureComponent {
                     // Recursively map all children with this method
                     children = this.associateRawTexts(this.mapDOMNodesTORNElements(children, name));
                 }
-                if (this.childrenNeedAView(children) || BLOCK_TAGS.indexOf(name.toLowerCase()) !== -1) {
-                    // If children cannot be nested in a Text, or if the tag
-                    // maps to a block element, use a view
-                    return { wrapper: 'View', children, attribs, parent, tagName: name, parentTag };
+                let wrapper = "View";
+                if (this.childrenNeedAView(children)) {
+                    wrapper = "View";
+                } else if (this.renderers[name] && this.renderers[name].wrapper) {
+                    wrapper = this.renderers[name].wrapper;
+                } else if (BLOCK_TAGS.indexOf(name.toLowerCase()) !== -1) {
+                    wrapper = "View";
                 } else if (TEXT_TAGS.indexOf(name.toLowerCase()) !== -1 || MIXED_TAGS.indexOf(name.toLowerCase()) !== -1) {
-                    // We are able to nest its children inside a Text
-                    return { wrapper: 'Text', children, attribs, parent, tagName: name, parentTag };
-                } else if (this.renderers[name] && this.renderers[name].wrapper) {
-                    return { wrapper: this.renderers[name].wrapper, children, attribs, parent, tagName: name, parentTag };
+                    wrapper = "Text";
                 }
-                return { wrapper: 'View', children, attribs, parent, tagName: name, parentTag };
+                return { wrapper, children, attribs, parent, tagName: name, parentTag };
             }
         })
         .filter((parsedNode) => parsedNode !== false && parsedNode !== undefined) // remove useless nodes
