@@ -75,9 +75,6 @@ export default class HTML extends PureComponent {
             ...HTMLRenderers,
             ...(this.props.renderers || {})
         };
-    }
-
-    componentWillMount () {
         this.generateDefaultStyles();
     }
 
@@ -85,26 +82,19 @@ export default class HTML extends PureComponent {
         this.registerDOM();
     }
 
-    componentWillReceiveProps (nextProps) {
-        const { html, uri, renderers } = this.props;
-
-        this.generateDefaultStyles(nextProps.baseFontStyle);
-        if (renderers !== nextProps.renderers) {
-            this.renderers = { ...HTMLRenderers, ...(nextProps.renderers || {}) };
-        }
-        if (html !== nextProps.html || uri !== nextProps.uri) {
-            // If the source changed, register the new HTML and parse it
-            this.registerDOM(nextProps);
-        } else {
-            // If it didn't, let's just parse the current DOM and re-render the nodes
-            // to compute potential style changes
-            this.parseDOM(this.state.dom, nextProps);
-        }
-    }
-
     componentDidUpdate (prevProps, prevState) {
+        const { html, uri, renderers } = prevProps;
+
+        this.generateDefaultStyles(this.props.baseFontStyle);
+        if (renderers !== this.props.renderers) {
+            this.renderers = { ...HTMLRenderers, ...(this.props.renderers || {}) };
+        }
+        if (html !== this.props.html || uri !== this.props.uri) {
+            // If the source changed, register the new HTML and parse it
+            this.registerDOM(this.props);
+        }
         if (this.state.dom !== prevState.dom) {
-            this.parseDOM(this.state.dom);
+            this.parseDOM(this.state.dom, this.props);
         }
     }
 
