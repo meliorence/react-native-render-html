@@ -27,6 +27,7 @@ An iOS/Android pure javascript react-native component that renders your HTML int
     - [Lists prefixes](#lists-prefixes)
   - [Styling](#styling)
   - [Images](#images)
+  - [IFrames](#iframes)
   - [Altering content](#altering-content)
     - [alterData](#alterdata)
     - [alterChildren](#alterchildren)
@@ -70,6 +71,7 @@ Prop | Description | Type | Required/Default
 ------ | ------ | ------ | ------
 `renderers` | Your [custom renderers](#creating-custom-renderers) | `object` | Optional, some default ones are supplied (`<a>`, `<img>`...)
 `renderersProps` | Set of props accessible into your [custom renderers](#creating-custom-renderers) in `passProps` (4th argument) | `object` | Optional
+`WebView`| Sets the WebView component to use when rendering `<iframe>` elements | `Component` | Optional
 `html` | HTML string to parse and render | `string` | Required
 `uri` | *(experimental)* remote website to parse and render | `string` | Optional
 `decodeEntities` | Decode HTML entities of your content | `bool` | Optional, defaults to `true`
@@ -210,6 +212,27 @@ Before their dimensions have been properly retrieved, images will temporarily be
 Images with broken links will render an empty square with a thin border, similar to what safari renders in a webview.
 
 Please note that all of these behaviors are implemented in the default `<img>` renderer. If you want to provide your own `<img>` renderer, you'll have to make this happen by yourself. You can use the `img` function in `HTMLRenderers.js` as a starting point.
+
+## IFrames
+
+In order to render `<iframe>` elements, a WebView component needs to be imported and passed to the `<HTML>` element.
+
+```javascript
+import React from 'react';
+import HTML from 'react-native-render-html';
+import { WebView } from 'react-native-webview';
+
+const htmlContent = `
+    <p>Yes you read that right, those damn iframes can render with this plugin.</p>
+    <p>Check this out</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/ZZ5LpwO-An4" frameborder="0" allowfullscreen></iframe>
+    <p style="text-align:center;"><em>We've just rendered a meme</em></p>
+`;
+
+export default IFrameDemo = () => (
+    <HTML html={htmlContent} WebView={WebView}/>
+);
+```
 
 ## Altering content
 

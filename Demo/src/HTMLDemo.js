@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Dimensions, Linking } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Dimensions, Linking, WebView } from 'react-native';
 import HTML from 'react-native-render-html';
 import EXAMPLES, * as snippets from './snippets';
 import styles from './styles';
@@ -10,6 +10,7 @@ const CUSTOM_RENDERERS = {};
 const DEFAULT_PROPS = {
     htmlStyles: CUSTOM_STYLES,
     renderers: CUSTOM_RENDERERS,
+    WebView: WebView,
     imagesMaxWidth: IMAGES_MAX_WIDTH,
     onLinkPress: (evt, href) => { Linking.openURL(href); },
     debug: true

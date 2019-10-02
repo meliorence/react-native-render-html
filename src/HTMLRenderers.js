@@ -1,6 +1,5 @@
 import React from 'react';
 import { TouchableOpacity, Text, View, Platform } from 'react-native';
-import { WebView } from 'react-native-webview';
 import { _constructStyles, _getElementClassStyles } from './HTMLStyles';
 import HTMLImage from './HTMLImage';
 
@@ -114,7 +113,7 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
 export const ol = ul;
 
 export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
-    const { staticContentMaxWidth, tagsStyles, classesStyles } = passProps;
+    const { staticContentMaxWidth, tagsStyles, classesStyles, WebView } = passProps;
 
     const tagStyleHeight = tagsStyles.iframe && tagsStyles.iframe.height;
     const tagStyleWidth = tagsStyles.iframe && tagsStyles.iframe.width;
@@ -138,6 +137,11 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
     });
 
     const source = htmlAttribs.srcdoc ? { html: htmlAttribs.srcdoc } : { uri: htmlAttribs.src };
+
+    if (!WebView) {
+        console.warn('react-native-render-html', 'Unable to render <iframe>, please specify the `WebView` prop in <HTML>')
+        return null;
+    }
 
     return (
         <WebView key={passProps.key} source={source} style={style} />
