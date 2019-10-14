@@ -48,7 +48,8 @@ export default class HTML extends PureComponent {
         baseFontStyle: PropTypes.object.isRequired,
         textSelectable: PropTypes.bool,
         renderersProps: PropTypes.object,
-        allowFontScaling: PropTypes.bool
+        allowFontScaling: PropTypes.bool,
+        textBreakStrategy: PropTypes.oneOf[('simple', 'highQuality', 'balanced')]
     }
 
     static defaultProps = {
@@ -65,7 +66,8 @@ export default class HTML extends PureComponent {
         tagsStyles: {},
         classesStyles: {},
         textSelectable: false,
-        allowFontScaling: true
+        allowFontScaling: true,
+        textBreakStrategy: 'highQuality'
     }
 
     constructor (props) {
@@ -484,6 +486,7 @@ export default class HTML extends PureComponent {
             if (Wrapper === Text) {
                 renderersProps.allowFontScaling = allowFontScaling;
                 renderersProps.selectable = textSelectable;
+                renderersProps.textBreakStrategy = textBreakStrategy;
             }
             return (
                 <Wrapper key={key} style={style} {...renderersProps}>
