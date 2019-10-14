@@ -406,7 +406,8 @@ export default class HTML extends PureComponent {
             ignoredStyles,
             ptSize,
             tagsStyles,
-            textSelectable
+            textSelectable,
+            textBreakStrategy
         } = props;
 
         return RNElements && RNElements.length ? RNElements.map((element, index) => {
