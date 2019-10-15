@@ -16,7 +16,7 @@
     "buffer": "^5.4.3",
     "events": "^3.0.0",
     "html-entities": "^1.2.0",
-    "htmlparser2": "^4.0.0",
+    "htmlparser2": "^3.10.1",
     "react-native-webview": "^7.4.2"
   },
   "peerDependencies": {
