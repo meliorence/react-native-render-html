@@ -77,7 +77,7 @@ export default class HTML extends PureComponent {
         };
     }
 
-    componentWillMount () {
+    UNSAFE_componentWillMount () {
         this.generateDefaultStyles();
     }
 
@@ -85,7 +85,7 @@ export default class HTML extends PureComponent {
         this.registerDOM();
     }
 
-    componentWillReceiveProps (nextProps) {
+    UNSAFE_componentWillReceiveProps (nextProps) {
         const { html, uri, renderers } = this.props;
 
         this.generateDefaultStyles(nextProps.baseFontStyle);
