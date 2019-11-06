@@ -105,24 +105,49 @@ export default class HTMLImage extends PureComponent {
     }
 
     validImage(source, style, props = {}) {
+        let maxWidth = this.props.imagesMaxWidth - 35;
         return (
-          <ImageZoom
+            <ImageZoom
             cropWidth={Dimensions.get('window').width}
             cropHeight={Dimensions.get('window').height}
             imageWidth={200}
             imageHeight={200}
           >
-            <Image
-              source={source}
-              style={[
-                style,
-                { width: this.state.width, height: this.state.height, resizeMode: 'cover' },
-              ]}
-              {...props}
-            />
-          </ImageZoom>
+          <Image
+            source={source}
+            style={[
+              {
+                width: this.state.width,
+                height: this.state.height,
+                resizeMode: 'contain',
+                maxWidth: maxWidth,
+              },
+              { ...props },
+            ]}
+          />
+           </ImageZoom>
         );
       }
+
+    // validImage(source, style, props = {}) {
+    //     return (
+    //       <ImageZoom
+    //         cropWidth={Dimensions.get('window').width}
+    //         cropHeight={Dimensions.get('window').height}
+    //         imageWidth={200}
+    //         imageHeight={200}
+    //       >
+    //         <Image
+    //           source={source}
+    //           style={[
+    //             style,
+    //             { width: this.state.width, height: this.state.height, resizeMode: 'cover' },
+    //           ]}
+    //           {...props}
+    //         />
+    //       </ImageZoom>
+    //     );
+    //   }
 
     get errorImage () {
         return (
