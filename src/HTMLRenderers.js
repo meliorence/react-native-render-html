@@ -51,7 +51,6 @@ export function img (htmlAttribs, children, convertedCSSStyles, passProps = {}) 
           alt={alt}
           width={width}
           height={height}
-          style={style}
           {...passProps}
         />
     );
