@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Dimensions, Image, View, Text } from 'react-native';
+import { Dimensions, Image, Text, View } from 'react-native';
 import ImageZoom from 'react-native-image-pan-zoom';
 
 import PropTypes from 'prop-types';
@@ -107,47 +107,28 @@ export default class HTMLImage extends PureComponent {
     validImage(source, style, props = {}) {
         let maxWidth = this.props.imagesMaxWidth - 35;
         return (
-            <ImageZoom
+          <ImageZoom
+            enableHorizontalBounce={false}
             cropWidth={Dimensions.get('window').width}
-            cropHeight={Dimensions.get('window').height}
-            imageWidth={200}
-            imageHeight={200}
+            cropHeight={this.state.height}
+            imageWidth={Dimensions.get('window').width}
+            imageHeight={this.state.height}
           >
-          <Image
-            source={source}
-            style={[
-              {
-                width: this.state.width,
-                height: this.state.height,
-                resizeMode: 'contain',
-                maxWidth: maxWidth,
-              },
-              { ...props },
-            ]}
-          />
-           </ImageZoom>
+            <Image
+              source={source}
+              style={[
+                {
+                  width: this.state.width,
+                  height: this.state.height,
+                  resizeMode: 'contain',
+                  maxWidth: maxWidth,
+                },
+                { ...props },
+              ]}
+            />
+          </ImageZoom>
         );
       }
-
-    // validImage(source, style, props = {}) {
-    //     return (
-    //       <ImageZoom
-    //         cropWidth={Dimensions.get('window').width}
-    //         cropHeight={Dimensions.get('window').height}
-    //         imageWidth={200}
-    //         imageHeight={200}
-    //       >
-    //         <Image
-    //           source={source}
-    //           style={[
-    //             style,
-    //             { width: this.state.width, height: this.state.height, resizeMode: 'cover' },
-    //           ]}
-    //           {...props}
-    //         />
-    //       </ImageZoom>
-    //     );
-    //   }
 
     get errorImage () {
         return (
