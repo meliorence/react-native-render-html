@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Image, View, Text } from 'react-native';
+import { Dimensions, Image, View, Text } from 'react-native';
 import ImageZoom from 'react-native-image-pan-zoom';
 
 import PropTypes from 'prop-types';
