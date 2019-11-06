@@ -103,7 +103,7 @@ export default class HTMLImage extends PureComponent {
     }
 
     validImage(source, style, props = {}) {
-    let maxWidth = this.props.imagesMaxWidth - 25;
+    let maxWidth = this.props.imagesMaxWidth - 35;
     return (
       <Image
         source={source}
