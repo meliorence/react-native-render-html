@@ -136,7 +136,7 @@ export default class HTML extends PureComponent {
     }
 
     parseDOM (dom, props = this.props) {
-        const { decodeEntities, debug, onParsed } = this.props;
+        const { decodeEntities, debug, onParsed, recognizeSelfClosing } = this.props;
         const parser = new htmlparser2.Parser(
             new htmlparser2.DomHandler((_err, dom) => {
                 let RNElements = this.mapDOMNodesTORNElements(dom, false, props);
