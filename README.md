@@ -39,6 +39,8 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 
 `npm install react-native-render-html --save` or `yarn add react-native-render-html`
 
+Then, you must install and link [react-native-webview](https://github.com/react-native-community/react-native-webview/blob/master/docs/Getting-Started.md) packet to you project
+
 ## Basic usage
 
 ```javascript
