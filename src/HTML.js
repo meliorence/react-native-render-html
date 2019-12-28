@@ -86,7 +86,8 @@ export default class HTML extends PureComponent {
     }
 
     componentWillReceiveProps (nextProps) {
-        const { html, uri, renderers } = this.props;
+        let { html, uri, renderers } = this.props;
+        html = html.split('text-decoration').join( 'textDecorationLine');
 
         this.generateDefaultStyles(nextProps.baseFontStyle);
         if (renderers !== nextProps.renderers) {
@@ -109,7 +110,9 @@ export default class HTML extends PureComponent {
     }
 
     async registerDOM (props = this.props, cb) {
-        const { html, uri } = props;
+        let { html, uri } = props;
+        html = html.split('text-decoration').join( 'textDecorationLine');
+        
         if (html) {
             this.setState({ dom: html, loadingRemoteURL: false, errorLoadingRemoteURL: false });
         } else if (props.uri) {
