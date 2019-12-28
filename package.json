@@ -5,6 +5,7 @@
   "license": "BSD-2-Clause",
   "repository": "https://github.com/archriss/react-native-render-html",
   "description": "React Native component that renders HTML as native views",
+  "homepage": "https://github.com/guilouro/react-native-render-html#readme",
   "keywords": [
     "react-native",
     "react-component",
