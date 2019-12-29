@@ -9,6 +9,7 @@ export default class HTMLImage extends PureComponent {
             width: props.imagesInitialDimensions.width,
             height: props.imagesInitialDimensions.height
         };
+        this.mounted = false;
     }
 
     static propTypes = {
@@ -34,14 +35,6 @@ export default class HTMLImage extends PureComponent {
     componentDidMount () {
         this.getImageSize();
         this.mounted = true;
-    }
-
-    componentWillUnmount () {
-        this.mounted = false;
-    }
-
-    componentWillReceiveProps (nextProps) {
-        this.getImageSize(nextProps);
     }
 
     getDimensionsFromStyle (style, height, width) {
