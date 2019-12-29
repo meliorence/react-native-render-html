@@ -13,7 +13,7 @@ import {
     PREFORMATTED_TAGS
 } from './HTMLUtils';
 import { generateDefaultBlockStyles, generateDefaultTextStyles } from './HTMLDefaultStyles';
-import htmlparser2 from 'htmlparser2';
+import { DomHandler, Parser } from 'htmlparser2';
 import * as HTMLRenderers from './HTMLRenderers';
 
 export default class HTML extends PureComponent {
@@ -127,8 +127,8 @@ export default class HTML extends PureComponent {
 
     parseDOM (dom, props = this.props) {
         const { decodeEntities, debug, onParsed } = this.props;
-        const parser = new htmlparser2.Parser(
-            new htmlparser2.DomHandler((_err, dom) => {
+        const parser = new Parser(
+            new DomHandler((_err, dom) => {
                 let RNElements = this.mapDOMNodesTORNElements(dom, false, props);
                 if (onParsed) {
                     const alteredRNElements = onParsed(dom, RNElements);
