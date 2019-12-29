@@ -34,6 +34,7 @@ export function generateDefaultTextStyles (baseFontSize = BASE_FONT_SIZE) {
         big: { fontSize: baseFontSize * 1.2 },
         small: { fontSize: baseFontSize * 0.8 },
         a: {
+            fontSize: baseFontSize,
             textDecorationLine: 'underline',
             color: '#245dc1'
         },
