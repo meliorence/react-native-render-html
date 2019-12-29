@@ -1,3 +1,6 @@
+# NOTES
+This is a fork from https://github.com/archriss/react-native-render-html
+
 # react-native-render-html
 
 An iOS/Android pure javascript react-native component that renders your HTML into 100% native views. It's made to be extremely customizable and easy to use and aims at being able to render anything you throw at it.
@@ -37,7 +40,7 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 
 ## Install
 
-`npm install react-native-render-html --save` or `yarn add react-native-render-html`
+`npm install @rizkisunaryo/react-native-render-html --save` or `yarn add @rizkisunaryo/react-native-render-html`
 
 ## Basic usage
 

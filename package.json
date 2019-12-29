@@ -1,9 +1,9 @@
 {
-  "name": "react-native-render-html",
-  "version": "4.1.2",
+  "name": "@rizkisunaryo/react-native-render-html",
+  "version": "4.1.3",
   "author": "Archriss",
   "license": "BSD-2-Clause",
-  "repository": "https://github.com/archriss/react-native-render-html",
+  "repository": "https://github.com/rizkisunaryo/react-native-render-html",
   "description": "React Native component that renders HTML as native views",
   "keywords": [
     "react-native",
