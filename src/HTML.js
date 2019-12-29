@@ -77,11 +77,8 @@ export default class HTML extends PureComponent {
         };
     }
 
-    componentWillMount () {
-        this.generateDefaultStyles();
-    }
-
     componentDidMount () {
+        this.generateDefaultStyles();
         this.registerDOM();
     }
 
