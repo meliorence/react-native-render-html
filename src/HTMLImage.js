@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Image, View, Text } from 'react-native';
+import { Image, View, Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
 export default class HTMLImage extends PureComponent {
@@ -17,6 +17,7 @@ export default class HTMLImage extends PureComponent {
         height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         style: Image.propTypes.style,
+        onImagePress: PropTypes.func,
         imagesMaxWidth: PropTypes.number,
         imagesInitialDimensions: PropTypes.shape({
             width: PropTypes.number,
@@ -40,7 +41,7 @@ export default class HTMLImage extends PureComponent {
         this.mounted = false;
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate (prevProps, prevState) {
         this.getImageSize(this.props);
     }
 
@@ -102,12 +103,26 @@ export default class HTMLImage extends PureComponent {
         );
     }
 
-    validImage (source, style, props = {}) {
+    validImage (source, style, onImagePress, props = {}) {
+        if (onImagePress) {
+            return (
+                <View style={{ width: this.state.width, height: this.state.height }}>
+                    <TouchableOpacity onPress={() => onImagePress(source.uri)}>
+                        <Image
+                            source={source}
+                            style={[style, { width: this.state.width, height: this.state.height, resizeMode: 'cover' }]}
+                            {...props}
+                        />
+                    </TouchableOpacity>
+                </View>
+            );
+        }
+
         return (
             <Image
-              source={source}
-              style={[style, { width: this.state.width, height: this.state.height, resizeMode: 'cover' }]}
-              {...props}
+                source={source}
+                style={[style, { width: this.state.width, height: this.state.height, resizeMode: 'cover' }]}
+                {...props}
             />
         );
     }
@@ -121,8 +136,8 @@ export default class HTMLImage extends PureComponent {
     }
 
     render () {
-        const { source, style, passProps } = this.props;
+        const { source, style, onImagePress, passProps } = this.props;
 
-        return !this.state.error ? this.validImage(source, style, passProps) : this.errorImage;
+        return !this.state.error ? this.validImage(source, style, onImagePress, passProps) : this.errorImage;
     }
 }
