@@ -5,6 +5,10 @@
   "license": "BSD-2-Clause",
   "repository": "https://github.com/archriss/react-native-render-html",
   "description": "React Native component that renders HTML as native views",
+  "types": "types/react-native-render-html/index.d.ts",
+  "scripts": {
+    "test:ts": "dtslint types/react-native-render-html"
+  },
   "keywords": [
     "react-native",
     "react-component",
@@ -25,7 +29,11 @@
     "react-native-webview": "*"
   },
   "devDependencies": {
+    "@types/react": "^16.9.19",
+    "@types/react-native": "^0.61.10",
     "babel-eslint": "8.2.2",
+    "conditional-type-checks": "^1.0.5",
+    "dtslint": "^2.0.5",
     "eslint": "4.18.2",
     "eslint-config-standard": "11.0.0",
     "eslint-config-standard-jsx": "5.0.0",
