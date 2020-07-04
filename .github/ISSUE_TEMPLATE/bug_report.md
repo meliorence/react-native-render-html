@@ -1,22 +1,18 @@
+---
+name: Bug Report
+about: If you have found a bug, you should chose this template.
+title: ''
+labels: bug
+---
+
 <!--
   MAKE SURE TO READ AND FOLLOW THIS TEMPLATE CLOSELY OR YOUR ISSUE WILL BE CLOSED WITHOUT NOTICE
 -->
 
-### Is this a bug report or a feature request?
-
-(Write your answer here.)
-
 <!--
-  If you answered "Bug report":
-
-    We expect that it will take you about 30 minutes to produce a high-quality bug report.
-    While this may seem like a lot, putting care into issues helps us fix them faster.
-    For bug reports, it is REQUIRED to fill the rest of this template, or the issue will be closed.
-
-  If you answered "Feature request":
-
-    Make sure to describe as precisely as possible the feature you'd like to see implemented. When relevant, provide visual examples (screenshots, screencasts, diagrams...).
-    You can ignore the next steps as long as you've made sure that your description is as clear, thorough and illustrated as possible.
+  We expect that it will take you about 30 minutes to produce a high-quality bug report.
+  While this may seem like a lot, putting care into issues helps us fix them faster.
+  For bug reports, it is REQUIRED to fill the rest of this template, or the issue will be closed.
 -->
 
 ### Have you read [the guidelines](https://github.com/archriss/react-native-render-html/blob/master/CONTRIBUTING.md) regarding bug report?
@@ -35,7 +31,7 @@
 
 (Write your answer here and specify the iOS/Android versions on which you've been able to reproduce the issue.)
 
-### Is the bug reproductible in a production environment (not a debug one)?
+### Is the bug reproducible in a production environment (not a debug one)?
 
 (Write your answer here.)
 

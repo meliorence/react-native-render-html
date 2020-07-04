@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Stackoverflow 
+    url: https://stackoverflow.com/questions/tagged/react-native-render-html
+    about: Please request assistance here.
