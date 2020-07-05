@@ -2,9 +2,11 @@
 
 > This project is the result of countless hours of work and is maintained for free on our spare time. Show some love and respect by making it easier for us to help you!
 
-If you would like to report a problem, take a look around and see if someone already opened an issue about it. If you a are certain this is a new, unreported bug, you can submit a bug report by [opening a new issue](https://github.com/archriss/react-native-render-html/issues/new).
+If you would like to report a problem, take a look around and see if someone already opened an issue about it. If you a are certain this is a new, unreported bug, you can submit a bug report by [opening a new issue](https://github.com/archriss/react-native-render-html/issues/new/choose).
 
-:warning: When doing so, you need to fill out [the issue template](https://raw.githubusercontent.com/archriss/react-native-render-html/master/ISSUE_TEMPLATE.md). **This step is mandatory!** Not doing so will result in your issue getting closed. Don't take this personally if this happens, and feel free to open a new issue once you've gathered all the information required by the template.
+:warning: If you need help, take a look at [stackoverflow.com/questions/tagged/react-native-render-html](https://stackoverflow.com/questions/tagged/react-native-render-html). 
+
+:warning: When doing so, you need to fill out the appropriate issue template. **This step is mandatory!** Not doing so will result in your issue getting closed. Don't take this personally if this happens, and feel free to open a new issue once you've gathered all the information required by the template.
 
 * **One issue, one bug:** Please report a single bug per issue.
 * **Provide reproduction steps:** List all the steps necessary to reproduce the issue. Provide a Snack, share the relevant source code or upload a sample project to GitHub. We should be able to follow these steps to reproduce your issue with minimal effort.
