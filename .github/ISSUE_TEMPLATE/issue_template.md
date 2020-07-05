@@ -1,10 +1,3 @@
----
-name: Other
-about: Anything else!
-title: ''
-labels: ''
----
-
 <!--
   MAKE SURE TO READ AND FOLLOW THIS TEMPLATE CLOSELY OR YOUR ISSUE WILL BE
   CLOSED WITHOUT NOTICE
