@@ -2,9 +2,10 @@
 
 > This project is the result of countless hours of work and is maintained for free on our spare time. Show some love and respect by making it easier for us to help you!
 
-If you would like to report a problem, take a look around and see if someone already opened an issue about it. If you a are certain this is a new, unreported bug, you can submit a bug report by [opening a new issue](https://github.com/archriss/react-native-render-html/issues/new/choose).
 
-:warning: If you need help, take a look at [stackoverflow.com/questions/tagged/react-native-render-html](https://stackoverflow.com/questions/tagged/react-native-render-html). 
+:warning: **If you need help, take a look at [stackoverflow.com/questions/tagged/react-native-render-html](https://stackoverflow.com/questions/tagged/react-native-render-html).** We will get notifications when you post a question here. Our issue tracker is not meant for assistance.
+
+If you would like to report a problem, take a look around and see if someone already opened an issue about it. If you a are certain this is a new, unreported bug, you can submit a bug report by [opening a new issue](https://github.com/archriss/react-native-render-html/issues/new/choose).
 
 :warning: When doing so, you need to fill out the appropriate issue template. **This step is mandatory!** Not doing so will result in your issue getting closed. Don't take this personally if this happens, and feel free to open a new issue once you've gathered all the information required by the template.
 
