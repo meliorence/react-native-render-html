@@ -132,8 +132,8 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
     let actualWidth = iframeWidth;
     let actualHeight = iframeHeight;
     if(staticContentMaxWidth && iframeWidth) {
-        actualHeight = (iframeHeight / iframeWidth) * staticContentMaxWidth;
         actualWidth = Math.min(staticContentMaxWidth, iframeWidth);
+        actualHeight = (iframeHeight / iframeWidth) * actualWidth;
     } 
 
     const style = _constructStyles({
