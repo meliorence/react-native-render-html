@@ -49,7 +49,7 @@ export default class HTML extends PureComponent {
         textSelectable: PropTypes.bool,
         renderersProps: PropTypes.object,
         allowFontScaling: PropTypes.bool,
-        recognizeSelfClosing: PropTypes.bool
+        recognizeSelfClosingTags: PropTypes.bool
     }
 
     static defaultProps = {
@@ -67,7 +67,7 @@ export default class HTML extends PureComponent {
         classesStyles: {},
         textSelectable: false,
         allowFontScaling: true,
-        recognizeSelfClosing: false,
+        recognizeSelfClosingTags: false,
     }
 
     constructor (props) {
@@ -136,7 +136,7 @@ export default class HTML extends PureComponent {
     }
 
     parseDOM (dom, props = this.props) {
-        const { decodeEntities, debug, onParsed, recognizeSelfClosing } = this.props;
+        const { decodeEntities, debug, onParsed, recognizeSelfClosingTags } = this.props;
         const parser = new htmlparser2.Parser(
             new htmlparser2.DomHandler((_err, dom) => {
                 let RNElements = this.mapDOMNodesTORNElements(dom, false, props);
@@ -152,7 +152,7 @@ export default class HTML extends PureComponent {
                     console.log('RNElements from render-html', RNElements);
                 }
             }),
-            { decodeEntities: decodeEntities, recognizeSelfClosing: recognizeSelfClosing }
+            { decodeEntities: decodeEntities, recognizeSelfClosingTags: recognizeSelfClosingTags }
         );
         parser.write(dom);
         parser.done();
