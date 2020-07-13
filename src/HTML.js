@@ -261,7 +261,7 @@ export default class HTML extends PureComponent {
                 children = alteredChildren || children;
             }
             // Remove whitespaces to check if it's just a blank text
-            const strippedData = data && data.replace(/\s/g, '');
+            const strippedData = data && data.replace(/\s+/g, ' ');
             if (type === 'text') {
                 if (!strippedData || !strippedData.length) {
                     // This is blank, don't render an useless additional component
