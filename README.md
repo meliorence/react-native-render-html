@@ -95,7 +95,7 @@ Prop | Description | Type | Required/Default
 `alterData` | Target some specific texts and change their content, see [altering content](#altering-content) | `function` | Optional
 `alterChildren` | Target some specific nested children and change them, see [altering content](#altering-content) | `function` | Optional
 `alterNode` | Target a specific node and change it, see [altering content](#altering-content) | `function` | Optional
-`ignoredTags` | HTML tags you don't want rendered, see [ignoring HTML content](#ignoring-html-content) | `array` | Optional, `['head', 'scripts', ...]`
+`ignoredTags` | HTML tags you don't want rendered, see [ignoring HTML content](#ignoring-html-content) | `array` | Optional, `['head', 'script', ...]`
 `allowedStyles`| Allow render only certain CSS style properties and ignore every other. If you have some property both in `allowedStyles` and `ignoredStyles`, it will be ignored anyway. | `array` | Optional, everything is allowed by default
 `ignoredStyles` | CSS styles from the `style` attribute you don't want rendered, see [ignoring HTML content](#ignoring-html-content) | `array` | Optional
 `ignoreNodesFunction` | Return true in this custom function to ignore nodes very precisely, see [ignoring HTML content](#ignoring-html-content) | `function` | Optional
