@@ -32,8 +32,8 @@ export default class HTMLImage extends PureComponent {
     }
 
     componentDidMount () {
-        this.getImageSize();
         this.mounted = true;
+        this.getImageSize();
     }
 
     componentWillUnmount () {
