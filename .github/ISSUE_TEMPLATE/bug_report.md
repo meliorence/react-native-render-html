@@ -11,8 +11,7 @@ labels: bug
   
   We expect that it will take you about 30 minutes to produce a high-quality
   bug report.  While this may seem like a lot, putting care into issues helps
-  us fix them faster. For bug reports, it is REQUIRED to fill the rest of this
-  template, or the issue will be closed.
+  us fix them faster.
 -->
 
 ### Have you read [the guidelines](https://github.com/archriss/react-native-render-html/blob/master/CONTRIBUTING.md) regarding bug report?
