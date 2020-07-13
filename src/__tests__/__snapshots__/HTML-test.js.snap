@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={Object {}}
+>
+  <Text
+    allowFontScaling={true}
+    selectable={false}
+    style={
+      Array [
+        Object {},
+        Object {},
+      ]
+    }
+  >
+    <Text
+      allowFontScaling={true}
+      selectable={false}
+      style={
+        Array [
+          Object {},
+          Object {},
+        ]
+      }
+    >
+      <Text
+        allowFontScaling={true}
+        style={
+          Object {
+            "fontSize": 14,
+          }
+        }
+      >
+        Hello world
+      </Text>
+    </Text>
+  </Text>
+</View>
+`;
