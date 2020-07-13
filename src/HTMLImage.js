@@ -16,7 +16,7 @@ export default class HTMLImage extends PureComponent {
         alt: PropTypes.string,
         height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        style: Image.propTypes.style,
+        style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
         imagesMaxWidth: PropTypes.number,
         imagesInitialDimensions: PropTypes.shape({
             width: PropTypes.number,
