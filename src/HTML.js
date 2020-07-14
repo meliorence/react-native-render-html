@@ -66,7 +66,7 @@ export default class HTML extends PureComponent {
         textWrapperProps: {},
     }
 
-    constructor(props) {
+    constructor (props) {
         super(props);
         this.state = {};
         this.renderers = {
@@ -77,7 +77,7 @@ export default class HTML extends PureComponent {
         this.generateDefaultStyles(props.baseFontStyle);
     }
 
-    componentDidMount() {
+    componentDidMount () {
         this.registerDOM();
     }
 
@@ -98,7 +98,7 @@ export default class HTML extends PureComponent {
         }
     }
 
-    async registerDOM(props = this.props, cb) {
+    async registerDOM (props = this.props, cb) {
         const { html, uri } = props;
         if (html) {
             this.setState({ dom: html, loadingRemoteURL: false, errorLoadingRemoteURL: false });
@@ -123,7 +123,7 @@ export default class HTML extends PureComponent {
         }
     }
 
-    parseDOM(dom, props = this.props) {
+    parseDOM (dom, props = this.props) {
         const { decodeEntities, debug, onParsed } = this.props;
         const parser = new Parser(
             new DomHandler((_err, dom) => {
@@ -146,7 +146,7 @@ export default class HTML extends PureComponent {
         parser.done();
     }
 
-    generateDefaultStyles(baseFontStyle = this.props.baseFontStyle) {
+    generateDefaultStyles (baseFontStyle = this.props.baseFontStyle) {
         this.defaultBlockStyles = generateDefaultBlockStyles(baseFontStyle.fontSize || 14);
         this.defaultTextStyles = generateDefaultTextStyles(baseFontStyle.fontSize || 14);
     }
@@ -157,7 +157,7 @@ export default class HTML extends PureComponent {
      * @returns {boolean}
      * @memberof HTML
      */
-    childrenNeedAView(children) {
+    childrenNeedAView (children) {
         for (let i = 0; i < children.length; i++) {
             if (children[i].wrapper === 'View') {
                 // If we find at least one View, it has to be nested in one
@@ -168,7 +168,7 @@ export default class HTML extends PureComponent {
         return false;
     }
 
-    wrapperHasTextChild(children) {
+    wrapperHasTextChild (children) {
         for (let i = 0; i < children.length; i++) {
             if (children[i].wrapper === 'Text') {
                 return true;
@@ -185,7 +185,7 @@ export default class HTML extends PureComponent {
      * @returns {array}
      * @memberof HTML
      */
-    associateRawTexts(children) {
+    associateRawTexts (children) {
         for (let i = 0; i < children.length; i++) {
             const child = children[i];
             if (
@@ -233,7 +233,7 @@ export default class HTML extends PureComponent {
      * @returns
      * @memberof HTML
      */
-    mapDOMNodesTORNElements(DOMNodes, parentTag = false, props = this.props) {
+    mapDOMNodesTORNElements (DOMNodes, parentTag = false, props = this.props) {
         const { ignoreNodesFunction, ignoredTags, alterNode, alterData, alterChildren, tagsStyles, classesStyles } = props;
         let RNElements = DOMNodes.map((node, nodeIndex) => {
             let { children, data } = node;
@@ -384,7 +384,7 @@ export default class HTML extends PureComponent {
      * @returns {array}
      * @memberof HTML
      */
-    renderRNElements(RNElements, parentWrapper = 'root', parentIndex = 0, props = this.props) {
+    renderRNElements (RNElements, parentWrapper = 'root', parentIndex = 0, props = this.props) {
         const {
             allowedStyles,
             baseFontStyle,
@@ -475,8 +475,8 @@ export default class HTML extends PureComponent {
             }
             return (
                 <Wrapper key={key} style={style} {...renderersProps}>
-                    {textElement}
-                    {childElements}
+                    { textElement }
+                    { childElements }
                 </Wrapper>
             );
         }) : false;
@@ -507,7 +507,7 @@ export default class HTML extends PureComponent {
 
         return customWrapper ? customWrapper(RNNodes) : (
             <View style={this.props.containerStyle || {}}>
-                {RNNodes}
+                { RNNodes }
             </View>
         );
     }
