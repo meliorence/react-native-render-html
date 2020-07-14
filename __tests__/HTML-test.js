@@ -1,6 +1,6 @@
 import React from "react";
 import { Text } from "react-native";
-import HTML from "../HTML";
+import HTML from "../index";
 import renderer from "react-test-renderer";
 
 function extractTextFromInstance(instance) {
