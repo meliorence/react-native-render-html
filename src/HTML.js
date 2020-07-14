@@ -443,18 +443,18 @@ export default class HTML extends PureComponent {
             const classStyles = _getElementClassStyles(attribs, classesStyles);
             const textElement = data ?
                 <Text
-                  style={computeTextStyles(
-                      element,
-                      {
-                          defaultTextStyles: this.defaultTextStyles,
-                          tagsStyles,
-                          classesStyles,
-                          baseFontStyle,
-                          emSize,
-                          ptSize,
-                          ignoredStyles,
-                          allowedStyles
-                      })}
+                    style={computeTextStyles(
+                        element,
+                        {
+                            defaultTextStyles: this.defaultTextStyles,
+                            tagsStyles,
+                            classesStyles,
+                            baseFontStyle,
+                            emSize,
+                            ptSize,
+                            ignoredStyles,
+                            allowedStyles
+                        })}
                     {...textWrapperProps}
                 >
                     {data}
@@ -471,7 +471,7 @@ export default class HTML extends PureComponent {
 
             const renderersProps = {};
             if (Wrapper === Text) {
-                renderersProps = textWrapperProps;
+                Object.keys(textWrapperProps).map(propName => { renderersProps[propName] = textWrapperProps[propName] });
             }
             return (
                 <Wrapper key={key} style={style} {...renderersProps}>
