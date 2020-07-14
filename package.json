@@ -9,7 +9,7 @@
   "scripts": {
     "test": "npm run test:js && npm run test:ts",
     "test:ts": "dtslint types/react-native-render-html",
-    "test:js": "jest src/"
+    "test:js": "jest"
   },
   "keywords": [
     "react-native",
@@ -57,6 +57,7 @@
     "react-test-renderer": "16.13.1"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "testRegex": "src/.*(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$"
   }
 }
