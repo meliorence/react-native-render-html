@@ -1,7 +1,7 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import HTML from "../index";
-import Renderer from "react-test-renderer";
+import { render } from "react-native-testing-library";
 
 /**
  * https://github.com/archriss/react-native-render-html/issues/343
@@ -11,7 +11,7 @@ describe("HTML component", () => {
     letterSpacing: 2,
   };
   const letterSpacing3 = {
-    letterSpacing: 3
+    letterSpacing: 3,
   };
   const tagsStylesInstance1 = {
     a: letterSpacing2,
@@ -20,13 +20,13 @@ describe("HTML component", () => {
     a: letterSpacing3,
   };
   it("should pass regression #343 regarding tagsStyles prop", () => {
-    const testRenderer = Renderer.create(
+    const { getByText, update } = render(
       <HTML html={"<a>hello world</a>"} tagsStyles={tagsStylesInstance1} />
     );
-    testRenderer.update(
+    update(
       <HTML html={"<a>hello world</a>"} tagsStyles={tagsStylesInstance2} />
     );
-    const text = testRenderer.root.findByType(Text);
+    const text = getByText("hello world");
     expect(StyleSheet.flatten(text.props.style)).toMatchObject(letterSpacing3);
   });
 });

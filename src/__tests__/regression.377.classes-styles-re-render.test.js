@@ -1,7 +1,7 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import HTML from "../index";
-import Renderer from "react-test-renderer";
+import { render } from "react-native-testing-library";
 
 /**
  * https://github.com/archriss/react-native-render-html/issues/377
@@ -20,19 +20,19 @@ describe("HTML component", () => {
     highlight: colorGreen,
   };
   it("should pass regression #377 regarding classesStyles prop", () => {
-    const testRenderer = Renderer.create(
+    const { getByText, update } = render(
       <HTML
         html={'<p class="highlight">hello world</p>'}
         classesStyles={tagsStylesInstance1}
       />
     );
-    testRenderer.update(
+    update(
       <HTML
         html={'<p class="highlight">hello world</p>'}
         classesStyles={tagsStylesInstance2}
       />
     );
-    const text = testRenderer.root.findByType(Text);
+    const text = getByText("hello world");
     expect(StyleSheet.flatten(text.props.style)).toMatchObject(colorGreen);
   });
 });
