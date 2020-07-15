@@ -8,7 +8,7 @@ import { extractTextFromInstance } from "./utils";
  */
 // Skip because a fix is not ready yet
 describe.skip("HTML component", () => {
-  it("should pass regression #118", () => {
+  it("should pass regression #118 regarding handling of CSS white-space", () => {
     const testRenderer = renderer.create(
       <HTML html={"  <div>  foo\n\nbar  baz  </div>"} />
     );
