@@ -29,12 +29,11 @@ function testCollapseRuleForCharacter(character, name) {
 };
 
 /**
- * This test covers white-space CSS rule, and more precisely, the
- * normal behavior, i.e.  
+ * This serie covers white-space CSS rule, normal behavior, i.e.  
  * 
  *     white-space: normal;
  * 
- * CSS rule, as documented here: https://www.w3.org/TR/css-text-3
+ * as documented here: https://www.w3.org/TR/css-text-3 (sections 3 and 4)
  */  
 describe("HTML component regarding CSS white-space: normal rule", () => {
   describe("involving spaces", () => {
