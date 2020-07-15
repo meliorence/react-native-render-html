@@ -18,9 +18,8 @@
 
 ### Identifiers
 
-
-| domain     | identifier                  |
-| ---------- | --------------------------- |
-| w3c        | _standard_._rule_           |
-| custom     |                             |
-| regression | _qualifier_._issue-number_ |
+| domain     | identifier                 |
+| ---------- | -------------------------- |
+| w3c        | _standard_._rule_          |
+| custom     |                            |
+| regression | _issue-number_._qualifier_ |
