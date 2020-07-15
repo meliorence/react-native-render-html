@@ -23,4 +23,4 @@
 | ---------- | --------------------------- |
 | w3c        | _standard_._rule_           |
 | custom     |                             |
-| regression | “_qualifier_._issue-number_ |
+| regression | _qualifier_._issue-number_ |
