@@ -3,6 +3,9 @@ import HTML from "../index";
 import renderer from "react-test-renderer";
 import { extractTextFromInstance } from "./utils";
 
+/**
+ * https://github.com/archriss/react-native-render-html/issues/118
+ */
 // Skip because a fix is not ready yet
 describe.skip("HTML component", () => {
   it("should pass regression #118", () => {
