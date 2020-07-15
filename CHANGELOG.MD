@@ -1,10 +1,10 @@
-# v4.2.1
+# v4.2.1
 
 ## Improvements
 
 * Add typescript definitions #341 (thanks @jsamr and to everyone that helped him !)
 
-# v4.2.0
+# v4.2.0
 
 **⚠️ `react-native-webview` is now a peer dependency**. As a result, you need to install it yourself. Please follow [the plugin's instructions](https://github.com/react-native-community/react-native-webview/blob/master/docs/Getting-Started.md).
 
@@ -15,7 +15,7 @@
 - Upgraded demo app to RN 0.59.10 (fixes build issues on XCode 11) (thanks [@IjzerenHein](https://github.com/IjzerenHein))
 - Use `baseFontSize` for `<a>` tags
 
-# v4.1.1
+# v4.1.1
 
 ## Important note
 
