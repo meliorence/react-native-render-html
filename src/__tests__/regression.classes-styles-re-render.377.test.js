@@ -19,7 +19,7 @@ describe("HTML component", () => {
   const tagsStylesInstance2 = {
     highlight: colorGreen,
   };
-  it("should pass regression #343 regarding classesStyles prop", () => {
+  it("should pass regression #377 regarding classesStyles prop", () => {
     const testRenderer = Renderer.create(
       <HTML
         html={'<p class="highlight">hello world</p>'}
