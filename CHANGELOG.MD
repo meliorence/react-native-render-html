@@ -26,7 +26,7 @@
 * Prevent crash when encountering css functions like `style="calc(100% - 20px);"`
 * Prevent crash when encountering `normal` and `unset` keys
 
-# v4.1.0
+# v4.1.0
 
 ## Features
 
@@ -94,7 +94,7 @@ const renderers = {
  
 * Minor fix with the npm release, no code change from the previous version.
 
-# v3.9.1
+# v3.9.1
 
 ## Features
 
