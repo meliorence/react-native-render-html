@@ -27,6 +27,14 @@ export function expectTranslatedInlineCSSToMatchObject({ cssInlineRules, reactNa
   });
 }
 
+export function expectTranslatedInlineCSSValueToEqual({ cssInlineRules, reactNativePropStyleName, render, value }) {
+      expectTranslatedInlineCSSRuleTo({
+        cssInlineRules,
+        render,
+        test: (style) => expect(style[reactNativePropStyleName]).toEqual(value),
+      });
+}
+
 export function expectTranslatedInlineCSSValueToBeInt({ cssInlineRules, reactNativePropStyleName, render }) {
   expectTranslatedInlineCSSRuleTo({ render, cssInlineRules, test: (flatStyle) =>
     expect(flatStyle[reactNativePropStyleName]).toEqual(expect.any(Number))
