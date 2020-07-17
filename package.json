@@ -11,7 +11,7 @@
     "test:ts": "dtslint types/react-native-render-html",
     "test:js": "jest",
     "test:lint": "eslint src/",
-    "fixlint": "eslint src/ --fix"
+    "fixlint": "prettier --write src/"
   },
   "keywords": [
     "react-native",
