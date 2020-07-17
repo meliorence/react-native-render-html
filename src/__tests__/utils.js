@@ -13,30 +13,53 @@ export function extractTextFromInstance(instance) {
   return textChunks.join("");
 }
 
-export function expectTranslatedInlineCSSRuleTo({ cssInlineRules, test, render }) {
+export function expectTranslatedInlineCSSRuleTo({
+  cssInlineRules,
+  test,
+  render,
+}) {
   const { getByText } = render(
     <HTML html={`<p style="${cssInlineRules}">hello world</p>`} />
   );
   const text = getByText("hello world");
+  // eslint-disable-next-line jest/no-disabled-tests
   test(StyleSheet.flatten(text.props.style));
 }
 
-export function expectTranslatedInlineCSSToMatchObject({ cssInlineRules, reactNativeStyle, render }) {
-  expectTranslatedInlineCSSRuleTo({ render, cssInlineRules, test: (flatStyle) =>
-    expect(flatStyle).toMatchObject(reactNativeStyle)
+export function expectTranslatedInlineCSSToMatchObject({
+  cssInlineRules,
+  reactNativeStyle,
+  render,
+}) {
+  expectTranslatedInlineCSSRuleTo({
+    render,
+    cssInlineRules,
+    test: (flatStyle) => expect(flatStyle).toMatchObject(reactNativeStyle),
   });
 }
 
-export function expectTranslatedInlineCSSValueToEqual({ cssInlineRules, reactNativePropStyleName, render, value }) {
-      expectTranslatedInlineCSSRuleTo({
-        cssInlineRules,
-        render,
-        test: (style) => expect(style[reactNativePropStyleName]).toEqual(value),
-      });
+export function expectTranslatedInlineCSSValueToEqual({
+  cssInlineRules,
+  reactNativePropStyleName,
+  render,
+  value,
+}) {
+  expectTranslatedInlineCSSRuleTo({
+    cssInlineRules,
+    render,
+    test: (style) => expect(style[reactNativePropStyleName]).toEqual(value),
+  });
 }
 
-export function expectTranslatedInlineCSSValueToBeInt({ cssInlineRules, reactNativePropStyleName, render }) {
-  expectTranslatedInlineCSSRuleTo({ render, cssInlineRules, test: (flatStyle) =>
-    expect(flatStyle[reactNativePropStyleName]).toEqual(expect.any(Number))
+export function expectTranslatedInlineCSSValueToBeInt({
+  cssInlineRules,
+  reactNativePropStyleName,
+  render,
+}) {
+  expectTranslatedInlineCSSRuleTo({
+    render,
+    cssInlineRules,
+    test: (flatStyle) =>
+      expect(flatStyle[reactNativePropStyleName]).toEqual(expect.any(Number)),
   });
 }
