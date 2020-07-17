@@ -182,7 +182,10 @@ function cssToRNStyle (css, styleset, { emSize, ptSize, ignoredStyles, allowedSt
             }
 
             if (typeof value === 'string') {
-                if (value.search('inherit') !== -1 || value.search('calc') !== -1 || value.search('normal') !== -1) {
+                if (key === 'display' && ['flex', 'none'].indexOf(value) === -1) {
+                    return [key, 'flex'];
+                }
+                if (value.search('inherit') !== -1 || value.search('calc') !== -1 || value.search('normal') !== -1 || value.search('none') !== -1) {
                     return undefined;
                 }
                 value = value.replace('!important', '');
@@ -207,9 +210,6 @@ function cssToRNStyle (css, styleset, { emSize, ptSize, ignoredStyles, allowedSt
                 }
                 if (key === 'fontSize') {
                     return mapAbsoluteFontSize(key, value);
-                }
-                if (key === 'display' && ['flex', 'none'].indexOf(value) === -1) {
-                    return [key, 'flex'];
                 }
             }
             return [key, value];
