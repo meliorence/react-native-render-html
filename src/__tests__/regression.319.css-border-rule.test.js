@@ -1,7 +1,5 @@
 import { render } from "react-native-testing-library";
-import {
-  expectTranslatedInlineCSSRuleTo,
-} from "./utils";
+import { expectTranslatedInlineCSSRuleTo } from "./utils";
 
 /**
  * https://github.com/archriss/react-native-render-html/issues/319

@@ -16,8 +16,10 @@ describe("HTML component regarding <pre> tags behaviors", () => {
       console.log("let's go");
       console.log("let's go");
     }
-    `
-    const testRenderer = renderer.create(<HTML html={`<pre>${preContent}</pre>`} />);
+    `;
+    const testRenderer = renderer.create(
+      <HTML html={`<pre>${preContent}</pre>`} />
+    );
     const renderedText = extractTextFromInstance(testRenderer.root);
     expect(renderedText).toEqual(preContent);
   });
