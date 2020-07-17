@@ -185,6 +185,18 @@ function cssToRNStyle (css, styleset, { emSize, ptSize, ignoredStyles, allowedSt
                 if (key === 'display' && ['flex', 'none'].indexOf(value) === -1) {
                     return [key, 'flex'];
                 }
+                if (key === 'textAlign') {
+                    if (['left', 'right', 'justify', 'auto', 'center'].indexOf(value) !== -1) {
+                        return [key, value];
+                    }
+                    if (value === 'start') {
+                        return [key, 'left'];
+                    }
+                    if (value === 'end') {
+                        return [key, 'right'];
+                    }
+                    return undefined;
+                }
                 if (value.search('inherit') !== -1 || value.search('calc') !== -1 || value.search('normal') !== -1 || value.search('none') !== -1) {
                     return undefined;
                 }
