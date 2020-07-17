@@ -43,6 +43,7 @@
     "conditional-type-checks": "^1.0.5",
     "dtslint": "^2.0.5",
     "eslint": "^7.4.0",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-react": "^7.20.3",
     "jest": "^25.5.4",
     "metro-react-native-babel-preset": "^0.59.0",
