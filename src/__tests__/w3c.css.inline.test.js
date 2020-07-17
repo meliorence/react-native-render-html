@@ -26,4 +26,31 @@ describe("HTML component regarding inline CSS styles", () => {
       });
     });
   });
+
+  function testDirective(directive) {
+    it(`${directive} directives`, () => {
+      expectTranslatedInlineCSSToMatchObject({
+        cssInlineRules: `font-family: Arial;!${directive}`,
+        reactNativeStyle: { fontFamily: "Arial" },
+        render,
+      });
+    });
+    it(`${directive} directives with spaces`, () => {
+      expectTranslatedInlineCSSToMatchObject({
+        cssInlineRules: `font-family: Arial;!  ${directive}`,
+        reactNativeStyle: { fontFamily: "Arial" },
+        render,
+      });
+    });
+    it(`${directive} directives before semicolons`, () => {
+      expectTranslatedInlineCSSToMatchObject({
+        cssInlineRules: `font-family: Arial !${directive};`,
+        reactNativeStyle: { fontFamily: "Arial" },
+        render,
+      });
+    });
+  }
+  describe("should handle CSS directives", () => {
+    testDirective("important");
+  });
 });
