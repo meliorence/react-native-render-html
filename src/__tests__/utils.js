@@ -63,3 +63,13 @@ export function expectTranslatedInlineCSSValueToBeInt({
       expect(flatStyle[reactNativePropStyleName]).toEqual(expect.any(Number)),
   });
 }
+
+export function elementHasAncestorOfType(element, Type) {
+  let el = element;
+  while((el = el.parent) != undefined) {
+    if (el.type === Type) {
+      return true
+    }
+  }
+  return false
+}
