@@ -73,3 +73,17 @@ export function elementHasAncestorOfType(element, Type) {
   }
   return false;
 }
+
+export function getLastAncestorOfType(element, Type) {
+  let el = element;
+  const elsOfType = [];
+  while ((el = el.parent) != null) {
+    if (el.type === Type) {
+      elsOfType.push(el);
+    }
+  }
+  if (elsOfType.length > 0) {
+    return elsOfType[elsOfType.length - 1];
+  }
+  return null;
+}
