@@ -56,7 +56,7 @@ describe("HTML component should honor formatting context of the DOM tree", () =>
     expect(anonymousText.parent).toBe(img.parent);
     expect(b.parent.children[1]).toBe(img);
     expect(img.parent.children[2]).toBe(anonymousText);
-    expect(elementHasAncestorOfType(img, 'Text')).toBe(false);
+    expect(elementHasAncestorOfType(img, "Text")).toBe(false);
   });
 
   /*
@@ -68,7 +68,7 @@ describe("HTML component should honor formatting context of the DOM tree", () =>
    * Root /-Text(hello world)
    *      \
    *       \
-   *        View --HTMLImage 
+   *        View --HTMLImage
    */
   it("should cut embedded images inside inline formatting context provided by a custom Text-wrapped renderer into boxes", () => {
     const Custom = ({ children, ...props }) => (
@@ -90,6 +90,6 @@ describe("HTML component should honor formatting context of the DOM tree", () =>
     );
     const img = UNSAFE_getByType(HTMLImage);
     expect(img.parent.type).toBe("View");
-    expect(elementHasAncestorOfType(img, 'Text')).toBe(false);
+    expect(elementHasAncestorOfType(img, "Text")).toBe(false);
   });
 });

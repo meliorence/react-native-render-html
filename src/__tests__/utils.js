@@ -66,10 +66,10 @@ export function expectTranslatedInlineCSSValueToBeInt({
 
 export function elementHasAncestorOfType(element, Type) {
   let el = element;
-  while((el = el.parent) != undefined) {
+  while ((el = el.parent) != null) {
     if (el.type === Type) {
-      return true
+      return true;
     }
   }
-  return false
+  return false;
 }
