@@ -34,10 +34,9 @@ export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
     const onPress = (evt) => onLinkPress && htmlAttribs && htmlAttribs.href ?
         onLinkPress(evt, htmlAttribs.href, htmlAttribs) :
         undefined;
-
     if (parentWrapper === 'Text') {
         return (
-            <Text {...textProps} style={style} onPress={onPress} key={key}>
+            <Text testID="a-renderer" {...textProps} style={style} onPress={onPress} key={key}>
                 { children || data }
             </Text>
         );
