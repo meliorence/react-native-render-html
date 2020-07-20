@@ -12,6 +12,14 @@ function getTextProps(passProps) {
     }
 }
 
+function getImgProps(passProps) {
+  const { imagesMaxWidth, imagesInitialDimensions } = passProps;
+  return {
+    imagesMaxWidth,
+    imagesInitialDimensions,
+  };
+}
+
 export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
     const style = _constructStyles({
         tagName: 'a',
@@ -42,7 +50,7 @@ export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
     }
 }
 
-export function img (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
+export function img (htmlAttribs, children, convertedCSSStyles, { key, ...passProps } = {}) {
     if (!htmlAttribs.src) {
         return false;
     }
@@ -61,7 +69,8 @@ export function img (htmlAttribs, children, convertedCSSStyles, passProps = {}) 
           width={width}
           height={height}
           style={style}
-          {...passProps}
+          key={key}
+          {...getImgProps(passProps)}
         />
     );
 }
