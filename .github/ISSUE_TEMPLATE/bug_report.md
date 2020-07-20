@@ -14,64 +14,109 @@ labels: bug
   us fix them faster.
 -->
 
-### Have you read [the guidelines](https://github.com/archriss/react-native-render-html/blob/master/CONTRIBUTING.md) regarding bug report?
+### Oath
 
-(Write your answer here.)
+I swear that I have completed these tasks before submitting:
 
-### Have you read [the documentation](https://github.com/archriss/react-native-render-html/blob/master/README.md) in its entirety?
+- [ ] I have read the guidelines here: https://git.io/JJchR
+- [ ] I have read the documentation here: https://git.io/JJcAl 
+- [ ] I have checked that the bug has not been reported yet
 
-(Write your answer here.)
-
-### Have you made sure that your issue hasn't already been reported/solved?
-
-(Write your answer here.)
-
-### Is the bug specific to iOS or Android? Or can it be reproduced on both platforms?
-
-(Write your answer here and specify the iOS/Android versions on which you've
-been able to reproduce the issue.)
-
-### Is the bug reproducible in a production environment (not a debug one)?
-
-(Write your answer here.)
-
-### Have you been able to reproduce the bug in [the provided example](https://github.com/archriss/react-native-render-html/tree/master/Demo)?
-
-(Write your answer here.)
+### Decision table
 
 <!--
-  If you haven't been able to reproduce the issue in the example, chances are
-  that your code is to blame.  Take the time to import your code in it bit by
-  bit until you figure out what's wrong.  If you're positive that it has to do
-  with the plugin rather than with React Native or your own code, then you may
-  continue filling out this template and post an issue.
+  A good amount of Bug Reports are actually feature requests. To help you with
+  that, read and check all the boxes to make sure you really need to fill the
+  full template.
+
+  IF YOU LEAVE AT LEAST ONE BOX UNCHECKED, YOU SHOULD INSTEAD OPEN A FEATURE
+  REQUEST HERE: https://git.io/JJCeo
 -->
 
-### Environment
+- [ ] My issue does not look like “The HTML attribute 'start' is not respected” 
+- [ ] My issue does not look like “The HTML element `<video>` is not rendered”
+
+### Bug Report
+
+
+#### Setup
 
 <!--
-  Provide information about your current environment. At the very least, it
-  should include the following:
+  REMARK: you can skip and delete the React Native section if you are providing
+  a full reproduction in a snack or git repository which are using the latest
+  versions of React Native or Expo SDK.
+-->
+##### React Native
 
-  Environment:
-    React: 16.0.0-beta.5
-    React native: 0.49.2
-    react-native-render-html: 3.9.0
-
-  Target Platform:
-    Android (6.0)
-    iOS (10.3)
+<!--
+  Paste the result of running “npx react-native info” or “expo diagnostics”
+  inside the backtics.
 -->
 
-(Write your answer here.)
+```
 
-### Steps to Reproduce
+```
+
+<!--
+  REMARK: you can skip and delete the Libraries section if you are providing
+  a full reproduction in a snack or git repository which are using the latest
+  versions of react-native-webview and react-native-render-html.
+-->
+##### Libraries
+
+<!--
+  Print the versions of each library. You are expected to always test the
+  latest version of react-native-render-html.
+-->
+
+- react-native-render-html:
+- react-native-webview:
+
+<!--
+  REMARK: you can skip and delete the Devices section if your issue meets at
+  least one of the following criterion:
+
+  - it does not happen on a device, e.g. during bundling or testing with jest;
+  - you have demonstrated with a test or a debugging tool that the bug resides
+    in the rendering tree (at React level) and not at native level, and thus is
+    platform-independent.
+-->
+#### Devices
+
+<!--
+  Give the details of the devices in which you have tested the issue. Please
+  also include devices in which you could not reproduce the issue! You are
+  welcome to mention simulators and emulators.
+
+  It is required that you test on at least one Android and iOS device. If you
+  can reproduce the issue for one device, set "Diagnostic" to "reproduction",
+  otherwise set it to "negative".
+
+  If you had a chance to test the issue in production, please add new devices
+  entries for each of these, and set the "Environment" value to "production".
+-->
+
+- Device 1 <!-- emulator (Google Pixel 3a) -->
+  * OS: <!-- Android 9.0 -->
+  * Diagnostic: <!-- reproduction / negative -->
+  * Environment: <!-- production / development -->
+- Device 2 <!-- simulator (iPhone X) -->
+  * OS: <!-- iOS 13.0 -->
+  * Diagnostic: <!-- reproduction / negative -->
+  * Environment: <!-- production / development -->
+
+#### Reproduction
+
+##### Description
 
 <!--
   How would you describe your issue to someone who doesn’t know you or your
   project?  Try to write a sequence of steps that anybody can repeat to see
   the issue.  Be specific! If the bug cannot be reproduced, your issue may be
   closed.
+
+  You must also provide a description of the expected outcome and compare with
+  the observed outcome.
 -->
 
 (Write your steps here:)
@@ -80,28 +125,11 @@ been able to reproduce the issue.)
 2.
 3.
 
-### Expected Behavior
+(Describe the expected outcome, and compare it to the observed outcome. You are
+encouraged to join screenshots and screencasts, or pictures of the rendering
+tree from debugging tools such as flipper)
 
-<!--
-  How did you expect your project to behave?  It’s fine if you’re not sure
-  your understanding is correct.  Just write down what you thought would
-  happen.
--->
-
-(Write what you thought would happen.)
-
-### Actual Behavior
-
-<!--
-  Did something go wrong?
-  Is something broken, or not behaving as you expected?
-  Describe this section in detail, and attach screencasts (or screenshots) if
-  possible.  Don't just say "it doesn't work"!
--->
-
-(Write what happened. Add screencasts/screenshots!)
-
-### Reproducible Demo
+##### Reproducible Demo
 
 <!--
   Please share a project that reproduces the issue.  There are two ways to do
@@ -121,7 +149,8 @@ been able to reproduce the issue.)
 -->
 
 (Paste the link to an example project or paste the entirety of the relevant
-source code. Then provide instructions to reproduce the issue.)
+source code. When deemed appropriate, provide instructions to reproduce the
+issue.)
 
 <!--
   What happens if you skip this step?

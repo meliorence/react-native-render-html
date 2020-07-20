@@ -5,18 +5,31 @@ title: ''
 labels: 'enhancement'
 ---
 
+
+### Oath
+
+I swear that I have completed these tasks before submitting:
+
+- [ ] I have read the guidelines here: https://git.io/JJchR
+- [ ] I have read the documentation here: https://git.io/JJcAl 
+- [ ] I have checked that the enhancement has not been asked yet
+
+### Decision table
+
 <!--
-  MAKE SURE TO READ AND FOLLOW THIS TEMPLATE CLOSELY OR YOUR ISSUE WILL BE
-  CLOSED WITHOUT NOTICE
+  The difference between feature request and enhancements might seem subtle. To
+  help you with that, read and check all the boxes to make sure you're not
+  asking for a feature request.
+  
+  IF YOU LEAVE AT LEAST ONE BOX UNCHECKED, YOU SHOULD INSTEAD OPEN A FEATURE
+  REQUEST HERE: https://git.io/JJCeo
 -->
 
-### Have you read [the documentation](https://github.com/archriss/react-native-render-html/blob/master/README.md) in its entirety?
-
-(Write your answer here.)
-
-### Have you made sure that your issue hasn't already been reported/solved?
-
-(Write your answer here.)
+- [ ] The change I am requesting is not a new prop
+- [ ] The change I am requesting does not provide support for a HTML element,
+  attribute, CSS rule or anything related to HTML and CSS standards
+- [ ] The change I am requesting  does not provide support for a React Native
+  feature
 
 ### Enhancement
 

@@ -10,13 +10,31 @@ labels: 'new feature'
   CLOSED WITHOUT NOTICE
 -->
 
-### Have you read [the documentation](https://github.com/archriss/react-native-render-html/blob/master/README.md) in its entirety?
+### Oath
 
-(Write your answer here.)
+I swear that I have completed these tasks before submitting:
 
-### Have you made sure that your issue hasn't already been reported/solved?
+- [ ] I have read the guidelines here: https://git.io/JJchR
+- [ ] I have read the documentation here: https://git.io/JJcAl 
+- [ ] I have checked that the feature request has not been offered yet
 
-(Write your answer here.)
+### Decision table
+
+<!--
+  The difference between feature request and enhancement might seem subtle. To
+  help you with that, read and check all the boxes to make sure you're not
+  asking for an enhancement.
+  
+  IF YOU LEAVE AT LEAST ONE BOX UNCHECKED, YOU SHOULD INSTEAD OPEN AN
+  ENHANCEMENT TICKET HERE: https://git.io/JJCeo
+-->
+
+- [ ] The change I am requesting does not concern performance
+- [ ] The change I am requesting does not concern security
+- [ ] The change I am requesting does not concern code style
+- [ ] The change I am requesting does not concern development tooling and
+  packaging and other “meta” features
+- [ ] The change I am requesting does not concern third-party deprecations  
 
 ### Feature
 
