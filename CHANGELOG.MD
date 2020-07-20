@@ -1,3 +1,31 @@
+# v4.2.2
+
+## Bugfixes
+
+- Translated elements bloated with HTML component props ([#384](https://github.com/archriss/react-native-render-html/issues/384), [#383](https://github.com/archriss/react-native-render-html/issues/383))
+- Unable to resolve stream module ([#244](https://github.com/archriss/react-native-render-html/issues/244))
+- `textSelectable` not working for tagName `textwrapper` ([#193](https://github.com/archriss/react-native-render-html/issues/193)), thanks [@brsaylor2](https://github.com/brsaylor2)
+- CSS font-family values ignored because of false positive match ([#266](https://github.com/archriss/react-native-render-html/issues/266))
+- CSS text-align unrecognized value ([#252](https://github.com/archriss/react-native-render-html/issues/252))
+- Stricter handling of CSS rules !important directives stripping
+- CSS inline rules with "none" values ([#319](https://github.com/archriss/react-native-render-html/issues/319))
+- CSS restrict display attribute to flex and none ([#257](https://github.com/archriss/react-native-render-html/issues/257))
+- Typos in IGNORED_TAGS arrays ([#249](https://github.com/archriss/react-native-render-html/issues/249), [#272](https://github.com/archriss/react-native-render-html/issues/272))
+- Re-render after classesStyles and tagsStyles updates ([#343](https://github.com/archriss/react-native-render-html/issues/343), [#377](https://github.com/archriss/react-native-render-html/issues/377)), thanks [jorgemasta](https://github.com/jorgemasta)
+- Image size computed after HTMLImage component marked as mounted, thanks [laurynas](lhttps://github.com/laurynas)
+
+## Enhancements
+
+- Replace deprecated references to RN PropTypes with loose types, thanks [denissb](https://github.com/denissb)
+- “Dumb” support for `acronym` tag, thanks [Brainyoo](https://github.com/Brainyoo)
+
+## Miscellaneous
+
+- Added a [CHANGELOG](https://github.com/archriss/react-native-render-html/tree/v4.2.2/CHANGELOG.MD) (#314)
+- Each fix [has his regression test implemented along](https://github.com/archriss/react-native-render-html/tree/v4.2.2/src/__tests__)
+- Some behaviors have been tested to prepare the ground for future refactorings
+- Upgraded lint tooling to prepare for PR guidelines and CI
+
 # v4.2.1
 
 ## Improvements
