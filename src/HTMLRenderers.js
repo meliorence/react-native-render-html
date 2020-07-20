@@ -4,6 +4,14 @@ import { WebView } from 'react-native-webview';
 import { _constructStyles, _getElementClassStyles } from './HTMLStyles';
 import HTMLImage from './HTMLImage';
 
+function getTextProps(passProps) {
+    const { selectable, allowFontScaling } = passProps;
+    return {
+        selectable,
+        allowFontScaling
+    }
+}
+
 export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
     const style = _constructStyles({
         tagName: 'a',
@@ -14,13 +22,14 @@ export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
     // !! This deconstruction needs to happen after the styles construction since
     // the passed props might be altered by it !!
     const { parentWrapper, onLinkPress, key, data } = passProps;
+    const textProps = getTextProps(passProps);
     const onPress = (evt) => onLinkPress && htmlAttribs && htmlAttribs.href ?
         onLinkPress(evt, htmlAttribs.href, htmlAttribs) :
         undefined;
 
     if (parentWrapper === 'Text') {
         return (
-            <Text {...passProps} style={style} onPress={onPress} key={key}>
+            <Text {...textProps} style={style} onPress={onPress} key={key}>
                 { children || data }
             </Text>
         );
@@ -64,9 +73,9 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
         passProps,
         styleSet: 'VIEW'
     });
-    const { allowFontScaling, rawChildren, nodeIndex, key, baseFontStyle, listsPrefixesRenderers } = passProps;
+    const { rawChildren, nodeIndex, key, baseFontStyle, listsPrefixesRenderers } = passProps;
     const baseFontSize = baseFontStyle.fontSize || 14;
-
+    const textProps = getTextProps(passProps);
     children = children && children.map((child, index) => {
         const rawChild = rawChildren[index];
         let prefix = false;
@@ -94,7 +103,7 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
                 );
             } else if (rawChild.parentTag === 'ol' && rawChild.tagName === 'li') {
                 prefix = listsPrefixesRenderers && listsPrefixesRenderers.ol ? listsPrefixesRenderers.ol(...rendererArgs) : (
-                    <Text allowFontScaling={allowFontScaling} style={{ marginRight: 5, fontSize: baseFontSize }}>{ index + 1 })</Text>
+                    <Text {...textProps} style={{ marginRight: 5, fontSize: baseFontSize }}>{ index + 1 })</Text>
                 );
             }
         }
@@ -148,6 +157,7 @@ export function pre (htlmAttribs, children, convertedCSSStyles, passProps) {
     return (
         <Text
           key={passProps.key}
+          {...getTextProps(passProps)}
           style={{ fontFamily: Platform.OS === 'android' ? 'monospace' : 'Menlo' }}>
             { children }
         </Text>
@@ -157,7 +167,7 @@ export function pre (htlmAttribs, children, convertedCSSStyles, passProps) {
 export function br (htlmAttribs, children, convertedCSSStyles, passProps) {
     return (
         <Text
-            allowFontScaling={passProps.allowFontScaling}
+            {...getTextProps(passProps)}
             style={{ height: 1.2 * passProps.emSize, flex: 1 }}
             key={passProps.key}
         >
@@ -166,8 +176,8 @@ export function br (htlmAttribs, children, convertedCSSStyles, passProps) {
     );
 }
 
-export function textwrapper (htmlAttribs, children, convertedCSSStyles, { allowFontScaling, key, selectable }) {
+export function textwrapper (htmlAttribs, children, convertedCSSStyles, { key, ...passProps }) {
     return (
-        <Text selectable={selectable} allowFontScaling={allowFontScaling} key={key} style={convertedCSSStyles}>{ children }</Text>
+        <Text {...getTextProps(passProps)} key={key} style={convertedCSSStyles}>{ children }</Text>
     );
 }
