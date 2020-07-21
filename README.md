@@ -4,17 +4,20 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 
 > Based on the original work of [Thomas Beverley](https://github.com/Thomas101), props to him.  
 
-![platforms](https://img.shields.io/badge/platforms-Android%20%7C%20iOS-brightgreen.svg?style=flat-square&colorB=191A17)
+[![platforms](https://img.shields.io/badge/platforms-Android%20%7C%20iOS-brightgreen.svg?style=flat-square&colorB=191A17)](#)
 [![npm](https://img.shields.io/npm/v/react-native-render-html/latest?style=flat-square)](https://www.npmjs.com/package/react-native-render-html)
-![](https://img.shields.io/npm/v/react-native-render-html/next?style=flat-square)
+[![](https://img.shields.io/npm/v/react-native-render-html/next?style=flat-square)](#)
 [![npm](https://img.shields.io/npm/dm/react-native-render-html.svg?style=flat-square&colorB=007ec6)](https://www.npmjs.com/package/react-native-render-html)
 [![github issues](https://img.shields.io/github/issues/archriss/react-native-render-html.svg?style=flat-square)](https://github.com/archriss/react-native-render-html/issues)
 [![github closed issues](https://img.shields.io/github/issues-closed/archriss/react-native-render-html.svg?style=flat-square&colorB=44cc11)](https://github.com/archriss/react-native-render-html/issues?q=is%3Aissue+is%3Aclosed)
 
-![react-native-render-html](http://i.giphy.com/26tkmjBLvThP0TSak.gif)
+<p align="center">
+    <a href="#"><img src="http://i.giphy.com/26tkmjBLvThP0TSak.gif"></a>
+</p>
 
 > ## :city_sunrise:
 > To try out pre-releases up-to-date with master, including many fixes, you are encouraged to install the `next` tag versions.  With our (new) test-first approach, the fixes and features in this branch will have been tested, so the chances you encounter a bug is pretty low. If you encounter any issue on a pre-release, you don't need to fill a full bug report. Just [comment our latest release thread](https://github.com/archriss/react-native-render-html/issues?q=is%3Aissue+is%3Aopen+label%3Arelease). To install the `next` version: <pre>npm i --save react-native-render-html@next</pre>
+
 
 ## Table of contents
 
