@@ -16,6 +16,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Cache .dts
+      id: cache-dts
+      uses: actions/cache@v2
+      with:
+        path: .dts
+        key: ${{ runner.os }}-dts
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
