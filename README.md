@@ -13,7 +13,7 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 
 ![react-native-render-html](http://i.giphy.com/26tkmjBLvThP0TSak.gif)
 
-> :warning: To test releases up-to-date with master, including many fixes which are systematically tested, you are encouraged to install the `next` tag version: <pre>npm i --save react-native-render-html@next</pre>
+> :bulb: To try out pre-releases up-to-date with master, including many fixes, you are encouraged to install the `next` tag versions: <pre>npm i --save react-native-render-html@next</pre> With our (new) test-first approach, the fixes and features in this branch will have been tested, so the chances you encounter a bug is pretty low. If you encounter any issue on a pre-release, you don't need to fill a full bug report. Just [comment our latest release thread](https://github.com/archriss/react-native-render-html/issues?q=is%3Aissue+is%3Aopen+label%3Arelease).
 
 ## Table of contents
 
