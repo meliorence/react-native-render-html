@@ -75,12 +75,21 @@ export default class HTML extends PureComponent {
             ...HTMLRenderers,
             ...(this.props.renderers || {})
         };
-
+        this.mounted = false;
         this.generateDefaultStyles(props.baseFontStyle);
     }
 
+    setStateSafe(...args) {
+        this.mounted && this.setState(...args);
+    }
+
     componentDidMount () {
+        this.mounted = true;
         this.registerDOM();
+    }
+
+    componentWillUnmount() {
+        this.mounted = false;
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -107,19 +116,19 @@ export default class HTML extends PureComponent {
     async registerDOM (props = this.props, cb) {
         const { html, uri } = props;
         if (html) {
-            this.setState({ dom: html, loadingRemoteURL: false, errorLoadingRemoteURL: false });
+            this.setStateSafe({ dom: html, loadingRemoteURL: false, errorLoadingRemoteURL: false });
         } else if (props.uri) {
             try {
                 // WIP : This should render a loader and html prop should not be set in state
                 // Error handling would be nice, too.
                 try {
-                    this.setState({ loadingRemoteURL: true, errorLoadingRemoteURL: false });
+                    this.setStateSafe({ loadingRemoteURL: true, errorLoadingRemoteURL: false });
                     const response = await fetch(uri);
                     const dom = await response.text();
-                    this.setState({ dom, loadingRemoteURL: false });
+                    this.setStateSafe({ dom, loadingRemoteURL: false });
                 } catch (err) {
                     console.warn(err);
-                    this.setState({ errorLoadingRemoteURL: true, loadingRemoteURL: false });
+                    this.setStateSafe({ errorLoadingRemoteURL: true, loadingRemoteURL: false });
                 }
             } catch (err) {
                 console.warn('react-native-render-html', `Couldn't fetch remote HTML from uri : ${uri}`);
@@ -141,7 +150,7 @@ export default class HTML extends PureComponent {
                         RNElements = alteredRNElements;
                     }
                 }
-                this.setState({ RNNodes: this.renderRNElements(RNElements, 'root', 0, props) });
+                this.setStateSafe({ RNNodes: this.renderRNElements(RNElements, 'root', 0, props) });
                 if (debug) {
                     console.log('DOMNodes from htmlparser2', dom);
                     console.log('RNElements from render-html', RNElements);
