@@ -1,3 +1,4 @@
 Demo/
-__tests__/
 /assets
+__tests__/
+__mocks__/
