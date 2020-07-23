@@ -17,7 +17,7 @@ describe("HTMLImage component should pass regression test #141", () => {
     const imageLayout = queryByTestId("image-layout")
     expect(imageLayout).toBeFalsy();
     await expect(
-        findByTestId("image-layout", { timeout: 10 })
+        findByTestId("image-layout", { timeout: 100 })
     ).resolves.toBeTruthy();
   });
 });
