@@ -37,8 +37,10 @@ export default class HTML extends PureComponent {
         customWrapper: PropTypes.func,
         onLinkPress: PropTypes.func,
         onParsed: PropTypes.func,
-        imagesMaxWidth: PropTypes.number,
+        computeImagesMaxWidth: PropTypes.func,
         staticContentMaxWidth: PropTypes.number,
+        contentWidth: PropTypes.number,
+        enableExperimentalPercentWidth: PropTypes.bool,
         imagesInitialDimensions: PropTypes.shape({
             width: PropTypes.number,
             height: PropTypes.number
@@ -57,8 +59,9 @@ export default class HTML extends PureComponent {
         decodeEntities: true,
         emSize: 14,
         ptSize: 1.3,
+        contentWidth: Dimensions.get('window').width,
         staticContentMaxWidth: Dimensions.get('window').width,
-        imagesMaxWidth: Dimensions.get('window').width,
+        enableExperimentalPercentWidth: false,
         ignoredTags: IGNORED_TAGS,
         ignoredStyles: [],
         baseFontStyle: { fontSize: 14 },
@@ -86,6 +89,16 @@ export default class HTML extends PureComponent {
     componentDidMount () {
         this.mounted = true;
         this.registerDOM();
+        if (__DEV__ && typeof this.props.contentWidth !== 'number') {
+            console.warn(
+                "You should always pass contentWidth prop to properly handle screen rotations " +
+                "and have a seemless support for images scaling. " +
+                "In the meantime, HTML will fallback to Dimensions.window().width, but its " +
+                "layout will become inconsistent after screen rotations. " +
+                "You are encouraged to use useWindowDimensions hook, see: " +
+                "https://reactnative.dev/docs/usewindowdimensions"
+            );
+        }
     }
 
     componentWillUnmount() {
@@ -93,8 +106,13 @@ export default class HTML extends PureComponent {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        const { html, uri, renderers, tagsStyles, classesStyles } = prevProps;
-        let doParseDOM = false;
+        const { html, uri, renderers, tagsStyles, classesStyles, contentWidth, staticContentMaxWidth, computeImagesMaxWidth } = prevProps;
+        let shouldParseDOM = tagsStyles !== this.props.tagsStyles ||
+                             classesStyles !== this.props.classesStyles ||
+                             contentWidth !== this.props.contentWidth ||
+                             staticContentMaxWidth !== this.props.staticContentMaxWidth ||
+                             computeImagesMaxWidth !== this.props.computeImagesMaxWidth ||
+                             this.state.dom !== prevState.dom;
 
         this.generateDefaultStyles(this.props.baseFontStyle);
         if (renderers !== this.props.renderers) {
@@ -104,11 +122,7 @@ export default class HTML extends PureComponent {
             // If the source changed, register the new HTML and parse it
             this.registerDOM(this.props);
         }
-        if (tagsStyles !== this.props.tagsStyles || classesStyles !== this.props.classesStyles) {
-            // If the tagsStyles changed, render again
-            this.parseDOM(this.state.dom, this.props);
-        }
-        if (this.state.dom !== prevState.dom) {
+        if (shouldParseDOM) {
             this.parseDOM(this.state.dom, this.props);
         }
     }
