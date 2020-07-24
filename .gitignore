@@ -38,4 +38,6 @@ node_modules/
 npm-debug.log
 yarn.lock
 
-Demo/package-lock.json
+# Specific to this project
+/Demo/package-lock.json
+/coverage/
