@@ -62,6 +62,7 @@
     "coverageReporters": [
       "html",
       "text"
-    ]
+    ],
+    "coveragePathIgnorePatterns": ["/node_modules/", "/src/__tests__"]
   }
 }
