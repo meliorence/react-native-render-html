@@ -1,0 +1,150 @@
+:hide-uri-scheme:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+= A User's Guide to Getting Help
+
+== Decision table
+
+Please read all the entries bellow before choosing the one that best fits your
+case, and proceed with the recommendations.
+
+[col=1*,options=header,frame=topbot]]
+|===
+|Issue
+|<<failure>>
+|<<standard>>
+|<<misbehavior>>
+|<<feature>>
+|<<understand>>
+|===
+
+[[failure]]
+=== I am encountering a failure.
+
+I am using `react-native-render-html` and I am witnessing a failure such as:
+
+- A Red screen of death during development that is caused by an object of this library;
+- A failure while building the app for production;
+- A crash or exception when rendering a component of this library.
+
+[sidebar]
+.__Recommendations__
+--
+1. Read the <<common-issues>> section bellow.
+2. Take a look at
+https://stackoverflow.com/questions/tagged/react-native-render-html for similar
+questions.
+3. Take a look at
+https://github.com/archriss/react-native-render-html/issues[our issue tracker]
+for similar questions.
+4. If you still don't have a solution, you can choose one or more:
++
+A. Submitting a <<CONTRIBUTING.adoc#tickets,Bug Report>>.
+B. Going to https://discord.gg/dbEMMJM[our Discord #support channel].
+--
+
+[[standard]]
+=== The library is not honoring an area of the CSS/HTML standard.
+
+For example, it doesn't render tag YYY or replicate the behavior of attribute
+XXX. This library is not meant for an exact compliance with the standard. First
+and foremost, because React Native imposes some constrains that we cannot
+overcome, and secondly, because the philosophy of the library is to let you
+customize rendering to fit your needs rather than strictly honoring the
+standards. Finally, because the https://github.com/react-native-community/react-native-webview[`react-native-webview`] library fits this purpose.
+
+However, we are always open to feature requests and propositions for
+enhancement regarding better compliance with the standards. You're more than
+welcomed to <<CONTRIBUTING.adoc#tickets,open a 
+ticket>> and discuss the feature on https://discord.gg/dbEMMJM[our #general
+Discord channel].
+
+[[misbehavior]]
+=== The library is not behaving as it claims or should.
+
+For example:
+
+A. The documentation says something, but the behavior differs.
+B. The library should obviously have the behavior I'm expecting, but it
+doesn't.
+
+[sidebar]
+.__Recommendations__
+--
+1. Make sure your issue isn't covered
+https://github.com/archriss/react-native-render-html/blob/master/README.md[by
+the docs].
+2. Read the <<common-issues>> section bellow.
+3. Take a look at
+https://stackoverflow.com/questions/tagged/react-native-render-html for similar
+questions.
+4. Take a look at
+https://github.com/archriss/react-native-render-html/issues[our issue tracker]
+for similar questions.
+5. If you still don't have a solution, you can choose one or more:
++
+A. Submitting a <<CONTRIBUTING.adoc#tickets,Bug Report>>.
+B. Going to https://discord.gg/dbEMMJM[our Discord #support channel]. Please
+note that if your issue is not trivial, we will probably ask you to fill a bug
+report anyway.
+--
+
+[[feature]]
+=== I want to do X with this library, is it possible?
+
+[sidebar]
+.__Recommendations__
+--
+1. Make sure the feature isn't covered
+https://github.com/archriss/react-native-render-html/blob/master/README.md[by
+the docs].
+2. Read the <<common-issues>> section bellow.
+3. Take a look at
+https://stackoverflow.com/questions/tagged/react-native-render-html for similar
+questions.
+4. Take a look at
+https://github.com/archriss/react-native-render-html/issues[our issue tracker]
+for similar questions.
+5. If you still don't have an answer, you can choose one or more:
++
+A. https://stackoverflow.com/questions/ask[Opening a StackOverflow post] with the
+`react-native-render-html` tag.
+B. Submitting a <<CONTRIBUTING.adoc#features,Feature Request>>.
+C. Going to https://discord.gg/dbEMMJM[our Discord #support channel].
+--
+
+[[understand]]
+=== I am having trouble to understand how to use a specific feature of this library.
+
+[sidebar]
+.__Recommendations__
+--
+1. Carefully
+https://github.com/archriss/react-native-render-html/blob/master/README.md[read
+the docs].
+2. Read the <<common-issues>> section bellow.
+3. If you still find difficult to use this feature, then we are lacking good
+documentation and we should fix it. Go to https://discord.gg/dbEMMJM[our
+Discord #support channel] and we will help you out.
+--
+
+[[common-issues]]
+== Common Issues
+
+[cols=2*,options=header,frame=topbot]
+|===
+|Issue
+|Solution
+
+|Unable to resolve XXX from node_modules/YYY
+|https://stackoverflow.com/a/63111913/2779871
+
+|How to open the browser when a link is pressed?
+|https://stackoverflow.com/q/63114501/2779871
+|===

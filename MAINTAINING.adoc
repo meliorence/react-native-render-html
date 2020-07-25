@@ -1,0 +1,242 @@
+:hide-uri-scheme:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+= A Maintainers' Guide
+
+== Semantic Versioning
+
+We _must_ follow Semantic Versioning rules when publishing packages, and
+especially:
+
+- Never publish breaking changes, including regarding tooling and installation,
+  between two versions of the same MAJOR.
+- Keep the semantics right between MINOR and PATCHES. MINORs convey new
+  features while patches convey fixes.
+
+If you have a doubt, read the Semantic Versioning standard,
+v2.0 at https://semver.org. It's not that long.
+
+[[branching]]
+== Branching
+
+=== Development branches
+
+The branching system is highly coupled with Semantic Versioning. We support
+backporting fixes to different MAJOR versions. To do so, we adopt the following
+conventions:
+
+- `master` is the ultimate development branch for the upmost MAJOR, accepting
+  PRs, fixes, new features... etc.
+- Any development branch for a MAJOR strictly inferior to master's MAJOR will
+have a name composed with the following pattern:
++
+```
+dev/MAJOR.x
+```
+
+These development branches will be used to cherry-pick backports from `master`.
+
+=== Release branches
+
+NOTE: Release branches target a MAJOR.MINOR release. Patches within
+this minor will get merged. This is especially useful to hold references to
+documentation for a specific release while accounting for the fact it can be a
+moving target.
+
+Release branches have a name composed with the following pattern:
+
+```
+release/MAJOR.MINOR
+```
+
+=== Transient branches
+
+[WARNING]
+Transient branches should never be worked on by more than one person at a
+time, unless authors are completely aware of their collaboration.
+
+[NOTE]
+Transient branches should be based on master and rebased before merging to `master`.
+They should be deleted after merged to master.
+
+These branches are meant for short-term development cycles such as pull
+requests. These branches' names should follow the following pattern:
+
+```
+PREFIX/QUALIFIER
+```
+
+[cols=4*,options=header,frame=topbot]
+|===
+|PREFIX
+|Description
+|QUALIFIER
+|Examples
+
+|`feat`
+|New features
+|The issue number this feat will cover, or a slug summarizing the feature
+|`feat/001` +
+`feat/inline-css`
+
+|`fix`
+|Bug fixes
+|The issue number this fix will address, or a slug summarizing this fix.
+|`fix/001` +
+`fix/start-attribute`
+
+|`reg`
+|(Anti) regression tests
+|The issue number this test will reproduce.
+|`reg/001`
+
+|`tests`
+|Coverage or other tests
+|A slug summarizing the areas covered by the test(s).
+|`tests/image-renderer`
+
+|`rfc`
+|Requests For Comments
+|A slug summarizing the area covered by the RFC.
+|`rfc/whitespaces`
+
+|`opt`
+|Optimizations
+|The issue number this optimization will address, or a slug summarizing the
+optimization.
+|`opt/103` +
+`opt/rendering-cycles`
+|===
+
+== Publishing
+
+[CAUTION]
+Pre-releases should be prepared from `master` or `dev/MINOR.x` (cf,
+xref:branching[Branching]).
+
+The publishing cycle entails pre-releases, which are usually tagged on npm with
+`next`. The table below describes the relationship between releases names,
+npm tags and their semantics. Custom npm tags can also be used to denote a new
+MAJOR version in early-stage development.
+
+[cols=4*,options=header,frame=topbot]
+|===
+|Release type
+|Npm tag
+|Version suffix
+|Description
+
+|Unstable
+|`unstable`
+|`-alpha.x`
+|Features and API can evolve.
+
+|Frozen
+|`next`
+|`-beta.x`
+|Features are frozen. Eventually, new fixes and optimizations can be merged.
+
+|Stable
+|`latest` +
+`release/MAJOR.MINOR`
+|_none_
+|Stable releases.
+|===
+
+=== Pre-releases
+
+==== Prerequisites
+
+- [ ] Tests are passing;
+- [ ] I'm on the `master` (or a `dev/MINOR.x` branch if I'm backporting fixes);
+- [ ] If the release is frozen, I've updated the changelog with a `next` entry;
+- [ ] I have changed the version in  `package.json`;
+- [ ] I have commited my changes;
+- [ ] I have tagged this very commit with `v<semver>`, replacing `<semver>`
+with the version in `package.json`.
+
+==== Steps
+
+1. Consider the appropriate npm `tag` for this version with the table above.
+2. Run the following command--replace `<tag>` with your tag:
++
+```
+npm publish --tag <tag>
+```
+3. Publish your changes to origin
++
+```
+git push
+```
+4. Publish the new git tag to origin
++
+```
+git push --tags
+```
+5. Create a new issue on Github to be pinned, asking for feedback for this
+pre-release. This issue must have the `release` label.
+6. Create a new pre-release on github, and copy and paste the content of the
+CHANGELOG. Also, link the issue previously created to ask for feedback.
+
+=== Releases
+
+==== Prerequisites
+
+- [ ] Tests are passing;
+- [ ] I'm on the `master` (or a `dev/MINOR.x` branch if I'm backporting fixes);
+- [ ] I've updated the changelog with a `<version>` entry;
+- [ ] I have changed the version in `package.json`;
+- [ ] I have commited my changes;
+- [ ] I have tagged this very commit with `v<semver>`, replacing `<semver>`
+with the version in `package.json`.
+
+==== Steps
+
+1. Publish to npm:
++
+```
+npm publish
+```
+2. Update the `release/MAJOR.MINOR` npm tag (this tag is important for documentation)
++
+```
+npm dist-tag add react-native-render-html@MAJOR.MINOR.VERSION release/MAJOR.MINOR 
+```
+3. Publish your changes to origin
++
+```
+git push
+```
+4. Publish the new git tag to origin
++
+```
+git push --tags
+```
+5. Create a new release on github, and copy and paste the content of the
+approriate section in the CHANGELOG.
+
+
+*If this publication was a backport (from a `dev/MINOR.x` branch), you must
+cherry-pick the version commit into master.*
+
+A. Checkout and pull master
++
+```
+git switch master
+git pull
+```
+B. Cherry-pick the commit you have previously made on `dev/MINOR.x` branch.
++
+```
+git cherry-pick <commit-id>
+```
+If you must resolve conflicts, make sure:
+
+- [ ] The new changelog entry is positionned in the approriate order;
+- [ ] The `package.json` version remains the upmost.

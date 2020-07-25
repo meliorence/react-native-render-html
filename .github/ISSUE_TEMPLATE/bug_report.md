@@ -8,19 +8,15 @@ labels: bug
 <!--
   MAKE SURE TO READ AND FOLLOW THIS TEMPLATE CLOSELY OR YOUR ISSUE WILL BE
   CLOSED WITHOUT NOTICE
-  
-  We expect that it will take you about 30 minutes to produce a high-quality
-  bug report.  While this may seem like a lot, putting care into issues helps
-  us fix them faster.
 -->
 
 ### Oath
 
 I swear that I have completed these tasks before submitting:
 
-- [ ] I have read the guidelines here: https://git.io/JJchR
+- [ ] I have read the contribution guidelines here: https://git.io/JJ0Pg
 - [ ] I have read the documentation here: https://git.io/JJcAl 
-- [ ] I have checked that the bug has not been reported yet
+- [ ] I have confirmed that this bug has not been reported yet
 
 ### Decision table
 
@@ -33,8 +29,9 @@ I swear that I have completed these tasks before submitting:
   REQUEST HERE: https://git.io/JJCeo
 -->
 
-- [ ] My issue does not look like “The HTML attribute 'start' is not respected” 
-- [ ] My issue does not look like “The HTML element `<video>` is not rendered”
+- [ ] My issue does not look like “The HTML attribute 'xxx' is ignored” (unless
+  we claim support for it),
+- [ ] My issue does not look like “The HTML element `<yyy>` is not rendered”
 
 ### Bug Report
 
@@ -45,6 +42,8 @@ I swear that I have completed these tasks before submitting:
   REMARK: you can skip and delete the React Native section if you are providing
   a full reproduction in a snack or git repository which are using the latest
   versions of React Native or Expo SDK.
+  
+  You can also skip if you are planning to provide a regression test.
 -->
 ##### React Native
 
@@ -61,6 +60,8 @@ I swear that I have completed these tasks before submitting:
   REMARK: you can skip and delete the Libraries section if you are providing
   a full reproduction in a snack or git repository which are using the latest
   versions of react-native-webview and react-native-render-html.
+
+  You can also skip if you are planning to provide a regression test.
 -->
 ##### Libraries
 
@@ -76,6 +77,7 @@ I swear that I have completed these tasks before submitting:
   REMARK: you can skip and delete the Devices section if your issue meets at
   least one of the following criterion:
 
+  - you are planning to provide a regression test;
   - it does not happen on a device, e.g. during bundling or testing with jest;
   - you have demonstrated with a test or a debugging tool that the bug resides
     in the rendering tree (at React level) and not at native level, and thus is
@@ -132,8 +134,10 @@ tree from debugging tools such as flipper)
 ##### Reproducible Demo
 
 <!--
-  Please share a project that reproduces the issue.  There are two ways to do
+  Please share a project that reproduces the issue.  There are three ways to do
   it:
+
+    * Provide a Regression Test PR.
 
     * Create a new app using https://snack.expo.io/ and try to reproduce the
       issue in it.  This is useful if you roughly know where the problem is,
@@ -151,6 +155,10 @@ tree from debugging tools such as flipper)
 (Paste the link to an example project or paste the entirety of the relevant
 source code. When deemed appropriate, provide instructions to reproduce the
 issue.)
+
+(If you plan to provide a Regression Test PR, just leave a line written
+*Planned Regression Test* and link it here when it's ready. We will be happy to
+provide you help with crafting the test on our Discord #contributing channel.)
 
 <!--
   What happens if you skip this step?
