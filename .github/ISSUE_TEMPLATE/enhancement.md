@@ -5,14 +5,18 @@ title: ''
 labels: 'enhancement'
 ---
 
+<!--
+  MAKE SURE TO READ AND FOLLOW THIS TEMPLATE CLOSELY OR YOUR ISSUE WILL BE
+  CLOSED WITHOUT NOTICE
+-->
 
 ### Oath
 
 I swear that I have completed these tasks before submitting:
 
-- [ ] I have read the guidelines here: https://git.io/JJchR
+- [ ] I have read the contribution guidelines here: https://git.io/JJ0Pg
 - [ ] I have read the documentation here: https://git.io/JJcAl 
-- [ ] I have checked that the enhancement has not been asked yet
+- [ ] I have checked that this enhancement has not been asked yet
 
 ### Decision table
 

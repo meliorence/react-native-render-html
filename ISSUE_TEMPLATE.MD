@@ -2,22 +2,17 @@
   MAKE SURE TO READ AND FOLLOW THIS TEMPLATE CLOSELY OR YOUR ISSUE WILL BE
   CLOSED WITHOUT NOTICE
   
-  THIS IS NOT A PLACE FOR ASSISTANCE. IF YOU NEED HELP, TAKE A LOOK AT
-  STACKOVERFLOW
-
-  https://stackoverflow.com/questions/tagged/react-native-render-html
-
-  If you post on stackoverflow with the “react-native-render-html” tag, we
-  will get notifications an be happy to help you out.
+  THIS IS NOT A PLACE FOR ASSISTANCE. IF YOU NEED HELP, READ OUR DEDICATED
+  GUIDE: https://git.io/JJ0y3
 -->
 
-### Have you read [the documentation](https://github.com/archriss/react-native-render-html/blob/master/README.md) in its entirety?
+### Oath
 
-(Write your answer here.)
+I swear that I have completed these tasks before submitting:
 
-### Have you made sure that your issue hasn't already been reported/solved?
-
-(Write your answer here.)
+- [ ] I have read the help guide here: https://git.io/JJ0y3
+- [ ] I have read the contribution guidelines here: https://git.io/JJ0Pg
+- [ ] I have read the documentation here: https://git.io/JJcAl 
 
 ------------
 
