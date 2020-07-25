@@ -2,7 +2,7 @@
 
 ## Bugfixes
 
-- Rendered HTML with uri prop displays “undefined” ([#256](https://github.com/archriss/react-native-render-html/issues/256)
+- Rendered HTML with uri prop displays “undefined” ([#256](https://github.com/archriss/react-native-render-html/issues/256))
 - Custom wrapper ignored ([#276](https://github.com/archriss/react-native-render-html/issues/276)), thanks [@tomdaniel-it](https://github.com/tomdaniel-it)
 
 ## Enhancements
