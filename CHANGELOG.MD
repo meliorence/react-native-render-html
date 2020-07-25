@@ -6,6 +6,17 @@
 > We have since deliberately [committed to Semantic
 > Versioning](MAINTAINING.adoc#semantic-versioning).
 
+# next (v4.2.3)
+
+## Bugfixes
+
+- Rendered HTML with uri prop displays “undefined” ([#256](https://github.com/archriss/react-native-render-html/issues/256)
+- Custom wrapper ignored ([#276](https://github.com/archriss/react-native-render-html/issues/276)), thanks [@tomdaniel-it](https://github.com/tomdaniel-it)
+
+## Enhancements
+
+- `HTML`: use a proxy method `setStateSafe` to avoid updating while unmounted.
+
 # v4.2.2
 
 ## Bugfixes
