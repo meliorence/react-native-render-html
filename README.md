@@ -1,8 +1,3 @@
-# react-native-render-html
-
-An iOS/Android pure javascript react-native component that renders your HTML into 100% native views. It's made to be extremely customizable and easy to use and aims at being able to render anything you throw at it.
-
-> Based on the original work of [Thomas Beverley](https://github.com/Thomas101), props to him.
 
 [![platforms](https://img.shields.io/badge/platforms-Android%20%7C%20iOS-brightgreen.svg?colorB=191A17)](#)
 [![npm](https://img.shields.io/npm/v/react-native-render-html/latest)](https://www.npmjs.com/package/react-native-render-html)
@@ -12,6 +7,19 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 [![npm](https://img.shields.io/npm/dm/react-native-render-html.svg?colorB=007ec6)](https://www.npmjs.com/package/react-native-render-html)
 [![github issues](https://img.shields.io/github/issues/archriss/react-native-render-html.svg)](https://github.com/archriss/react-native-render-html/issues)
 [![github closed issues](https://img.shields.io/github/issues-closed/archriss/react-native-render-html.svg?colorB=44cc11)](https://github.com/archriss/react-native-render-html/issues?q=is%3Aissue+is%3Aclosed)
+[![](https://img.shields.io/discord/736906960041148476?label=discord)](https://discord.gg/dbEMMJM)
+
+<hr/>
+
+<p align="center">
+    <a href="#"><img width=150 height=150 src="assets/logo.svg"></a>
+</p>
+<h1 align="center">react-native-render-html</h1>
+<p align="center">
+  <small>Based on the original work of <a href="https://github.com/Thomas101">Thomas Beverley</a>, props to him.</small>
+</p>
+
+An iOS/Android pure javascript react-native component that renders your HTML into 100% native views. It's made to be extremely customizable and easy to use and aims at being able to render anything you throw at it.
 
 <p align="center">
     <a href="#"><img src="http://i.giphy.com/26tkmjBLvThP0TSak.gif"></a>
