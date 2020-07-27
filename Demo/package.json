@@ -12,7 +12,7 @@
   "dependencies": {
     "react": "16.13.1",
     "react-native": "0.63.1",
-    "react-native-render-html": "^4.2.1",
+    "react-native-render-html": "^4.2.2",
     "react-native-webview": "^10.3.2"
   },
   "devDependencies": {
