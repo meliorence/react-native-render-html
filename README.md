@@ -12,7 +12,7 @@
 <hr/>
 
 <p align="center">
-    <a href="#"><img widh="124" height="124" src="assets/logo-100x100.svg"></a>
+    <a href="#"><img width="124" height="124" src="assets/logo-100x100.svg"></a>
 </p>
 <h1 align="center">react-native-render-html</h1>
 <p align="center">
