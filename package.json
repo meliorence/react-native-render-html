@@ -6,6 +6,7 @@
   "repository": "https://github.com/archriss/react-native-render-html",
   "description": "React Native component that renders HTML as native views",
   "types": "types/react-native-render-html/index.d.ts",
+  "main": "src/index.js",
   "scripts": {
     "test": "npm run test:js && npm run test:ts && npm run test:lint",
     "test:ts": "dtslint types/react-native-render-html",
