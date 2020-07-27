@@ -12,15 +12,15 @@
 <hr/>
 
 <p align="center">
-    <a href="#"><img width=150 height=150 src="assets/logo.svg"></a>
+    <a href="#"><img widh="124" height="124" src="assets/logo-100x100.svg"></a>
 </p>
 <h1 align="center">react-native-render-html</h1>
 <p align="center">
-  <small>Based on the original work of <a href="https://github.com/Thomas101">Thomas Beverley</a>, props to him.</small>
+  <sup>Based on the original work of <a href="https://github.com/Thomas101">Thomas Beverley</a>, props to him.</sup>
 </p>
-
+<p align="center">
 An iOS/Android pure javascript react-native component that renders your HTML into 100% native views. It's made to be extremely customizable and easy to use and aims at being able to render anything you throw at it.
-
+</p>
 <p align="center">
     <a href="#"><img src="http://i.giphy.com/26tkmjBLvThP0TSak.gif"></a>
 </p>
