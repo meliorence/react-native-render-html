@@ -9,8 +9,7 @@
 [![github closed issues](https://img.shields.io/github/issues-closed/archriss/react-native-render-html.svg?colorB=44cc11)](https://github.com/archriss/react-native-render-html/issues?q=is%3Aissue+is%3Aclosed)
 [![](https://img.shields.io/discord/736906960041148476?label=discord)](https://discord.gg/dbEMMJM)
 
-<hr/>
-
+<br>
 <p align="center">
     <a href="#"><img width="124" height="124" src="assets/logo-100x100.svg"></a>
 </p>
