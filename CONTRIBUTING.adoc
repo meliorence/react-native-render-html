@@ -109,7 +109,8 @@ You should never start a Pull Request prior to having the bug, feature or
 enhancement described in a separate issue. It is also highly advised that you
 deliberate about your intention to provide a PR in the aforementioned issue.
 
-[NOTE] We require some criterion to accept a pull request. But don't worry,
+[NOTE]
+We require some criterion to accept a pull request. But don't worry,
 we're also willing to help. You're encouraged to start a
 https://github.blog/2019-02-14-introducing-draft-pull-requests/[Github draft]
 and we will be glad to help you build it and make it comply with our
@@ -161,7 +162,9 @@ Github.
 [NOTE]
 RFC are propositions for new methods, behaviors and other API capabilities, or
 the exploration of an algorithmic challenge that is specific to this library.
-These are not Internet Society's RFCs!
+These are not Internet Society's RFCs! We don't have a rich multi-stage process. A
+RFC is either a draft, in discussion, or adopted (merged). We thereafter use
+versioning to polish and enhance those specifications. 
 
 RFC purpose is to offer drafts for new ideas which goes relatively in depth
 regarding the issues, consequences and caveats of a peculiar feature. We don't
@@ -173,7 +176,15 @@ feature will address).
 2. Requirements (what are the behaviors required for this feature to be
 supported?).
 
-You can take a look at drafts in https://github.com/archriss/react-native-render-html/tree/master/rfc[the `rfc` folder] for inspiration.
+You can take a look at drafts in
+https://github.com/archriss/react-native-render-html/tree/master/rfc[the `rfc`
+folder] for inspiration.
+
+[NOTE]
+We require RFCs to be written in *AsciiDoc*. If you know
+markdown, it is very easy to pick and it ends-up much more powerful and
+versatile. Their documentation is of excellent quality, as proven by their
+https://asciidoctor.org/docs/asciidoc-writers-guide/[writer's guide].
 
 === Other
 
