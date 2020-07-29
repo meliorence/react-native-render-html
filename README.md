@@ -3,6 +3,7 @@
 [![npm](https://img.shields.io/npm/v/react-native-render-html/latest)](https://www.npmjs.com/package/react-native-render-html)
 [![](https://img.shields.io/npm/v/react-native-render-html/next)](#)
 [![](https://img.shields.io/badge/semver-2.0.0-e10079.svg)](https://semver.org/spec/v2.0.0.html)
+[![](https://img.shields.io/codecov/c/gh/archriss/react-native-render-html?style=plastic)](https://codecov.io/gh/archriss/react-native-render-html)
 [![](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=master)](https://github.com/archriss/react-native-render-html/actions?query=branch%3Amaster+workflow%3ACI)
 [![npm](https://img.shields.io/npm/dm/react-native-render-html.svg?colorB=007ec6)](https://www.npmjs.com/package/react-native-render-html)
 [![github issues](https://img.shields.io/github/issues/archriss/react-native-render-html.svg)](https://github.com/archriss/react-native-render-html/issues)
