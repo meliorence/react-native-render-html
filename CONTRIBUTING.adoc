@@ -48,7 +48,7 @@ opening a new issue].
 
 The most important quality of your bug report is *reproducibility*. It means we
 can easily reproduce and investigate the bug to fix it as quickly as possible.
-If you've never heard of a “minimal working example”, take a look at this
+If you've never heard of a “minimal reproducible example”, take a look at this
 guide: https://stackoverflow.com/help/mcve. Bellow is a table of different
 types of reproductions:
 
