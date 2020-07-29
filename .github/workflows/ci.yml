@@ -29,5 +29,9 @@ jobs:
     - run: npm ci
     - run: npm run test:ts
       name: Typescript Tests
-    - run: npm run test:js
+    - run: npm run test:js -- --coverage
       name: Jest Tests
+    - uses: codecov/codecov-action@v1
+      with:
+        file: ./coverage/clover.xml # optional
+        fail_ci_if_error: true # optional (default = false)

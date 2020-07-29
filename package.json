@@ -61,7 +61,7 @@
     "coverageDirectory": "./coverage",
     "collectCoverage": true,
     "coverageReporters": [
-      "html",
+      "clover",
       "text"
     ],
     "coveragePathIgnorePatterns": ["/node_modules/", "/src/__tests__"]
