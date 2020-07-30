@@ -147,4 +147,7 @@ Discord #support channel] and we will help you out.
 
 |How to open the browser when a link is pressed?
 |https://stackoverflow.com/q/63114501/2779871
+
+|The application crashes while using `react-native-screens`
+|https://stackoverflow.com/q/63171131/2779871
 |===
