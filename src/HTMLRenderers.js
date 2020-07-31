@@ -84,6 +84,7 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
     const { rawChildren, nodeIndex, key, baseFontStyle, listsPrefixesRenderers } = passProps;
     const baseFontSize = baseFontStyle.fontSize || 14;
     const textProps = getTextProps(passProps);
+    let numberDisplay = 0;
     children = children && children.map((child, index) => {
         const rawChild = rawChildren[index];
         let prefix = false;
@@ -93,7 +94,8 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
             convertedCSSStyles,
             {
                 ...passProps,
-                index
+                index,
+                numberDisplay
             }
         ];
 
@@ -111,8 +113,9 @@ export function ul (htmlAttribs, children, convertedCSSStyles, passProps = {}) {
                 );
             } else if (rawChild.parentTag === 'ol' && rawChild.tagName === 'li') {
                 prefix = listsPrefixesRenderers && listsPrefixesRenderers.ol ? listsPrefixesRenderers.ol(...rendererArgs) : (
-                    <Text {...textProps} style={{ marginRight: 5, fontSize: baseFontSize }}>{ index + 1 })</Text>
+                    <Text {...textProps} style={{ marginRight: 5, fontSize: baseFontSize }}>{ numberDisplay + 1 })</Text>
                 );
+                numberDisplay += 1;
             }
         }
         return (
