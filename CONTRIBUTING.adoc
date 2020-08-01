@@ -54,6 +54,11 @@ If you've never heard of a “minimal reproducible example”, take a look at th
 guide: https://stackoverflow.com/help/mcve. Bellow is a table of different
 types of reproductions:
 
+[TIP]
+If you add screencasts, screenshots, debugging information, or any insights
+that can help us identify the failure as quickly as possible, you can consider
+each a bonus :zap:.
+
 [cols=3*,options=header,frame=topbot]
 |===
 |Reproduction
@@ -81,8 +86,7 @@ extra work for you.
 |Code Snippet
 |:zap:
 |A snippet is better than nothing, but we don't consider it __high quality__
-and might take more time to investigate. If you add a screencast or
-screenshots, you can consider a bonus :zap:.
+and might take more time to investigate.
 |===
 
 Second important thing: try-out the latest version, including pre-releases! For
