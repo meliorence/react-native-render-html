@@ -74,7 +74,7 @@ to skip many steps.
 
 |Snack
 |:zap::zap::zap:
-|A Snack is very convenient for you and for us. You can
+|A *Snack* is very convenient for you and for us. You can
 https://snack.expo.io/@jsamr/rnrhtml-template[*start from 
 our template*]. *Make sure you set the appropriate version of this library.*
 
@@ -86,7 +86,8 @@ extra work for you.
 |Code Snippet
 |:zap:
 |A snippet is better than nothing, but we don't consider it __high quality__
-and might take more time to investigate.
+and might take more time to investigate. Please consider put your snippet into
+a *Snack*. I will take you 2 minutes to configure.
 |===
 
 Second important thing: try-out the latest version, including pre-releases! For
