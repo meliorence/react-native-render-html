@@ -109,7 +109,7 @@ declare module "react-native-render-html" {
        * ParserOptions from [htmlparser2](https://github.com/fb55/htmlparser2/wiki/Parser-options)
        * Optional, defaults decodeEntities to true
        */
-      htmlParserOptions?: ParserOptions
+      htmlParserOptions?: ParserOptions;
       /**
        * Set a maximum width to non-responsive content (<iframe> for instance)
        */
