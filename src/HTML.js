@@ -22,7 +22,7 @@ export default class HTML extends PureComponent {
         ignoredTags: PropTypes.array.isRequired,
         ignoredStyles: PropTypes.array.isRequired,
         allowedStyles: PropTypes.array,
-        decodeEntities: PropTypes.bool.isRequired,
+        htmlParserOptions: PropTypes.object,
         debug: PropTypes.bool.isRequired,
         listsPrefixesRenderers: PropTypes.object,
         ignoreNodesFunction: PropTypes.func,
@@ -54,7 +54,7 @@ export default class HTML extends PureComponent {
     static defaultProps = {
         renderers: HTMLRenderers,
         debug: false,
-        decodeEntities: true,
+        htmlParserOptions: {},
         emSize: 14,
         ptSize: 1.3,
         staticContentMaxWidth: Dimensions.get('window').width,
@@ -140,7 +140,7 @@ export default class HTML extends PureComponent {
     }
 
     parseDOM (dom, props = this.props) {
-        const { decodeEntities, debug, onParsed } = this.props;
+        const { htmlParserOptions, debug, onParsed } = this.props;
         const parser = new Parser(
             new DomHandler((_err, dom) => {
                 let RNElements = this.mapDOMNodesTORNElements(dom, false, props);
@@ -156,7 +156,7 @@ export default class HTML extends PureComponent {
                     console.log('RNElements from render-html', RNElements);
                 }
             }),
-            { decodeEntities: decodeEntities }
+            { decodeEntities: true, ...htmlParserOptions }
         );
         parser.write(dom);
         parser.done();
