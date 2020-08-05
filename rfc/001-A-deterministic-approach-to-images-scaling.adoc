@@ -6,22 +6,24 @@ ifdef::env-github[]
 :caution-caption: :fire:
 :warning-caption: :warning:
 endif::[]
+:author: Jules Sam. Randolph
+:revnumber: 1.0.0
+:toc:
 
-== A Deterministic Approach to Images Scaling
+= A Deterministic Approach to Images Scaling
 
-____
-​:gem: _This RFC is part of project Foundry._
-____
+|===
+*{author} ― v{revnumber}*
+|===
 
-
-=== Introduction
+== Introduction
 
 The way images are scaled greatly impacts library consumers experience.
 This document is an attempt at specifying behaviors which might not have
 been presented to library consumers in the past, to convey consistency
 with regard to this library behavior.
 
-=== Problem Frame
+== Problem Frame
 
 In this section, we introduce a context to understand the challenges
 surrounding scaling of images. In the bellow figure, a React Native
@@ -48,7 +50,7 @@ library consumers?*
 * *Which API would enable such capabilities?*
 ____
 
-=== Variables
+== Variables
 
 [width="100%",cols="24%,7%,69%",options="header",]
 |===
@@ -77,7 +79,7 @@ ____
 |See section bellow.
 |===
 
-=== Image Box Constrains
+== Image Box Constrains
 
 Image Box Element Constrains are constructed from a range of different
 sources:
@@ -111,7 +113,7 @@ introduce new definitions:
 Default _minimum constrains_ are (0, 0) and default _maximum constrains_
 are (Infinity, Infinity).
 
-=== Consumer Behaviors
+== Consumer Behaviors
 
 These functions pertain to ``injected behaviors'' and give library
 consumers great flexibility in implementing their own constrains
@@ -141,9 +143,9 @@ These behaviors have default values for consumer’s comfort sake:
 `(contentWidth) => contentWidth`;
 * Default `convertUnit` will be defined in a distinct RFC.
 
-=== Algorithms
+== Algorithms
 
-==== Computing Image Box dimensions
+=== Computing Image Box dimensions
 
 Let _box dimensions_ be the `width` and `height` of the Image Box
 Element with each width and height `undefined`.
@@ -160,7 +162,7 @@ argument.
 . Apply the <<cut-box>> algorithm.
 
 [[cut-box]]
-==== Cut Box
+=== Cut Box
 
 Let _box dimensions_ be the `width` and `height` of the Image Box
 Element an argument of this algorithm.
@@ -173,7 +175,7 @@ constrain to _box dimensions_ whilst preserving aspect ratio. +
 *Else*, apply `contentWidth` as a max-width constrain to _box
 dimensions_ whilst preserving aspect ratio.
 
-=== Discussion
+== Discussion
 
 The consumer of the library might hold some assumptions depending on how
 he expects the content to be rendered. In reality, there are different
