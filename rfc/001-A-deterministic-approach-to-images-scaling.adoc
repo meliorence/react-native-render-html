@@ -13,7 +13,7 @@ endif::[]
 = A Deterministic Approach to Images Scaling
 
 |===
-*{author} ― v{revnumber}*
+|*{author} ― v{revnumber}*
 |===
 
 == Introduction
