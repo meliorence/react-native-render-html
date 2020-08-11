@@ -6,7 +6,7 @@
 > We have since deliberately [committed to Semantic
 > Versioning](MAINTAINING.adoc#semantic-versioning).
 
-# next (v4.2.3)
+# v4.2.3
 
 ## Bugfixes
 
