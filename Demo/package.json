@@ -11,19 +11,16 @@
   },
   "dependencies": {
     "react": "16.13.1",
-    "react-native": "0.63.1",
-    "react-native-render-html": "^4.2.2",
-    "react-native-webview": "^10.3.2"
+    "react-native": "0.63.2",
+    "react-native-render-html": "^4.2.3",
+    "react-native-webview": "^10.4.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.4",
-    "@babel/runtime": "^7.8.4",
-    "@react-native-community/eslint-config": "^1.1.0",
-    "babel-jest": "^25.1.0",
-    "eslint": "^6.5.1",
-    "jest": "^25.1.0",
-    "metro-react-native-babel-preset": "^0.59.0",
-    "react-test-renderer": "16.13.1"
+    "@babel/core": "^7.11.1",
+    "@babel/runtime": "^7.11.2",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "eslint": "^7.6.0",
+    "metro-react-native-babel-preset": "^0.62.0"
   },
   "jest": {
     "preset": "react-native"
