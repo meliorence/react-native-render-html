@@ -142,6 +142,9 @@ Discord #support channel] and we will help you out.
 |Issue
 |Solution
 
+|How to render tables?
+|https://github.com/native-html/table-plugin
+
 |Unable to resolve XXX from node_modules/YYY
 |https://stackoverflow.com/a/63111913/2779871
 
