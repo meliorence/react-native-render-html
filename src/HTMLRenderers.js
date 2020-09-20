@@ -20,6 +20,10 @@ function getImgProps(passProps) {
   };
 }
 
+function normalizeUri(uri) {
+    return uri.startsWith('//') ? `https:${uri}` : uri;
+}
+
 export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
     const style = _constructStyles({
         tagName: 'a',
@@ -63,12 +67,13 @@ export function img (htmlAttribs, children, convertedCSSStyles, { key, ...passP
     const { src, alt, width, height } = htmlAttribs;
     return (
         <HTMLImage
-          source={{ uri: src }}
+          source={{ uri: normalizeUri(src) }}
           alt={alt}
           width={width}
           height={height}
           style={style}
           key={key}
+          testID="img"
           {...getImgProps(passProps)}
         />
     );
@@ -154,10 +159,10 @@ export function iframe (htmlAttribs, children, convertedCSSStyles, passProps) {
         additionalStyles: [{ height, width }]
     });
 
-    const source = htmlAttribs.srcdoc ? { html: htmlAttribs.srcdoc } : { uri: htmlAttribs.src };
+    const source = htmlAttribs.srcdoc ? { html: htmlAttribs.srcdoc } : { uri: normalizeUri(htmlAttribs.src) };
 
     return (
-        <WebView key={passProps.key} source={source} style={style} />
+        <WebView testID="iframe" key={passProps.key} source={source} style={style} />
     );
 }
 
