@@ -6,6 +6,12 @@
 > We have since deliberately [committed to Semantic
 > Versioning](MAINTAINING.adoc#semantic-versioning).
 
+# v4.2.4
+
+## Bugfixes
+
+- `src` attributes starting with "//" in `img` and `iframe` elements are not rendered ([#408](https://github.com/archriss/react-native-render-html/issues/256))
+
 # v4.2.3
 
 ## Bugfixes
