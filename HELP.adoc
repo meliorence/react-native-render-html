@@ -142,15 +142,18 @@ Discord #support channel] and we will help you out.
 |Issue
 |Solution
 
-|How to render tables?
-|https://github.com/native-html/table-plugin
-
 |Unable to resolve XXX from node_modules/YYY
 |https://stackoverflow.com/a/63111913/2779871
+
+|The application crashes while using `react-native-screens`
+|https://stackoverflow.com/q/63171131/2779871
+
+|How to render tables?
+|https://github.com/native-html/table-plugin
 
 |How to open the browser when a link is pressed?
 |https://stackoverflow.com/q/63114501/2779871
 
-|The application crashes while using `react-native-screens`
-|https://stackoverflow.com/q/63171131/2779871
+|How to access the raw HTML from a custom renderer?
+|https://stackoverflow.com/q/63979897/2779871
 |===
