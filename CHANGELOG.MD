@@ -2,7 +2,7 @@
 
 ## Bugfixes
 
-- `src` attributes starting with "//" in `img` and `iframe` elements are not rendered ([#408](https://github.com/archriss/react-native-render-html/issues/256))
+- `src` attributes starting with "//" in `img` and `iframe` elements are not rendered ([#408](https://github.com/archriss/react-native-render-html/issues/408))
 
 # v4.2.3
 
