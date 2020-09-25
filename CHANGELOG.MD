@@ -1,4 +1,4 @@
-# next
+# v4.2.4
 
 ## Bugfixes
 
