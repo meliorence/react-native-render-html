@@ -1,9 +1,11 @@
 import { StyleSheet } from 'react-native';
 
+export const CONTENT_PADDING_HZ = 20;
+
 export default StyleSheet.create({
     container: {
         flex: 1,
-        padding: '5%'
+        padding: CONTENT_PADDING_HZ
     },
     title: {
         fontSize: 16,

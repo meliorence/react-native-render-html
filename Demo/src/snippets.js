@@ -36,7 +36,7 @@ export const lists = `
 export const simpleLoremWithImages = `
     <p>This first image's dimensions are set in its style attributes.</p>
     <img style="width: 50%; height: 100px; align-self: center;" src="https://i.imgur.com/gSmWCJF.jpg" />
-    <p>The next image will be sized automatically thanks to the "imagesMaxWidth" prop.</p>
+    <p>The next image will be sized automatically thanks to the "contentWidth" and "computeImageMaxWidth" props.</p>
     <img src="https://i.imgur.com/XP2BE7q.jpg" />
 `;
 
