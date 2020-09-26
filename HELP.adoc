@@ -156,4 +156,8 @@ Discord #support channel] and we will help you out.
 
 |How to access the raw HTML from a custom renderer?
 |https://stackoverflow.com/q/63979897/2779871
+
+|How to set images max width when img element already has a width attribute?
+|https://stackoverflow.com/a/64077140/2779871
+
 |===
