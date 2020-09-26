@@ -15,7 +15,12 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     justifyContent: "center",
   },
-  errorText: { textAlign: "center", fontStyle: "italic" }
+  errorText: { textAlign: "center", fontStyle: "italic" },
+  container: {
+    flexDirection: "row",
+    alignSelf: "stretch",
+    justifyContent: "center",
+  },
 });
 
 function attemptParseFloat(value) {
@@ -246,10 +251,9 @@ export default class HTMLImage extends PureComponent {
       height,
       contentWidth,
       enableExperimentalPercentWidth,
-      style
+      style,
     } = props;
-    this.__cachedFlattenStyles =
-      StyleSheet.flatten(style) || emptyObject;
+    this.__cachedFlattenStyles = StyleSheet.flatten(style) || emptyObject;
     this.__cachedRequirements = deriveRequiredDimensionsFromProps({
       width,
       height,
@@ -330,20 +334,22 @@ export default class HTMLImage extends PureComponent {
 
   fetchPhysicalImageDimensions(props = this.props) {
     const { source } = props;
-    source && source.uri && Image.getSize(
-      source.uri,
-      (imagePhysicalWidth, imagePhysicalHeight) => {
-        this.mounted &&
-          this.setState({
-            imagePhysicalWidth,
-            imagePhysicalHeight,
-            error: false,
-          });
-      },
-      () => {
-        this.mounted && this.setState({ error: true });
-      }
-    );
+    source &&
+      source.uri &&
+      Image.getSize(
+        source.uri,
+        (imagePhysicalWidth, imagePhysicalHeight) => {
+          this.mounted &&
+            this.setState({
+              imagePhysicalWidth,
+              imagePhysicalHeight,
+              error: false,
+            });
+        },
+        () => {
+          this.mounted && this.setState({ error: true });
+        }
+      );
   }
 
   renderImage(imageBoxDimensions) {
@@ -359,14 +365,9 @@ export default class HTMLImage extends PureComponent {
 
   renderAlt() {
     return (
-      <View
-        style={styles.errorBox}
-        testID="image-error"
-      >
+      <View style={styles.errorBox} testID="image-error">
         {this.props.alt ? (
-          <Text style={styles.errorText}>
-            {this.props.alt}
-          </Text>
+          <Text style={styles.errorText}>{this.props.alt}</Text>
         ) : (
           false
         )}
@@ -383,7 +384,7 @@ export default class HTMLImage extends PureComponent {
     );
   }
 
-  render() {
+  renderContent() {
     const { error, imageBoxDimensions } = this.state;
     if (error) {
       return this.renderAlt();
@@ -392,5 +393,9 @@ export default class HTMLImage extends PureComponent {
       return this.renderPlaceholder();
     }
     return this.renderImage(imageBoxDimensions);
+  }
+
+  render() {
+    return <View style={styles.container}>{this.renderContent()}</View>;
   }
 }
