@@ -52,7 +52,7 @@ const ExamplesList = ({onCurrentExampleChange}) => {
   );
 };
 
-const Demo2 = () => {
+const Demo = () => {
   const [currentExample, setCurrentExample] = useState('paragraphs');
   const {width: contentWidth} = useWindowDimensions();
   const additionalProps = EXAMPLES[currentExample].props || {};
@@ -72,74 +72,4 @@ const Demo2 = () => {
   );
 };
 
-export default Demo2;
-
-class Demo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {currentExample: 'paragraphs'};
-
-    this.setCurrentExample = this.setCurrentExample.bind(this);
-  }
-
-  onLinkPress(evt, href, htmlAttribs) {
-    alert(`Opened ${href} ! Attributes: ${JSON.stringify(htmlAttribs)}`);
-  }
-
-  setCurrentExample(currentExample) {
-    this.setState({currentExample});
-  }
-
-  get examplesList() {
-    const examples = Object.keys(EXAMPLES).map((snippetId, index) => {
-      return (
-        <TouchableOpacity
-          key={`example-btn-${index}`}
-          onPress={() => this.setCurrentExample(snippetId)}
-          style={styles.exampleBtn}>
-          <Text style={styles.exampleBtnLabel}>{EXAMPLES[snippetId].name}</Text>
-        </TouchableOpacity>
-      );
-    });
-    return (
-      <ScrollView
-        horizontal={true}
-        style={styles.examplesListContainer}
-        contentContainerStyle={{
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        {examples}
-      </ScrollView>
-    );
-  }
-
-  renderSnippet(snippetId) {
-    const additionalProps = EXAMPLES[snippetId].props || {};
-    return (
-      <HTML
-        {...DEFAULT_PROPS}
-        html={snippets[snippetId]}
-        {...additionalProps}
-      />
-    );
-  }
-
-  get currentExample() {
-    return (
-      <ScrollView style={{flex: 1}}>
-        {this.renderSnippet(this.state.currentExample)}
-      </ScrollView>
-    );
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.title}>react-native-render-html</Text>
-        {this.examplesList}
-        {this.currentExample}
-      </View>
-    );
-  }
-}
+export default Demo;
