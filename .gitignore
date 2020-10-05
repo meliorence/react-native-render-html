@@ -38,6 +38,10 @@ node_modules/
 npm-debug.log
 yarn.lock
 
+# Todos
+
+*.todo
+
 # Specific to this project
 /Demo/package-lock.json
 /coverage/
