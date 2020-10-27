@@ -6,6 +6,7 @@ ifdef::env-github[]
 :caution-caption: :fire:
 :warning-caption: :warning:
 endif::[]
+:toc:
 
 :rnrh-test-folder: https://github.com/archriss/react-native-render-html/tree/master/src/__tests__
 

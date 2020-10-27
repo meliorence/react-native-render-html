@@ -6,6 +6,7 @@ ifdef::env-github[]
 :caution-caption: :fire:
 :warning-caption: :warning:
 endif::[]
+:toc:
 
 = A User's Guide to Getting Help
 
