@@ -12,7 +12,7 @@ import {
 /**
  * Converts a html style string to an object
  * @param str: the style string
- * @return the style as an obect
+ * @return the style as an object
  */
 export function cssStringToObject(str) {
   return str
@@ -36,7 +36,7 @@ export function cssObjectToString(obj) {
 
 /**
  * Helper that composes styles with the default style for a tag, the "style" attribute and
- * any given addiitional style. Checks everything against the style sets of views, images,
+ * any given additional style. Checks everything against the style sets of views, images,
  * or texts with prop-types.
  * @export
  * @param {any} { tagName, htmlAttribs, passProps, additionalStyles, styleSet = 'VIEW' }
@@ -146,7 +146,7 @@ function _recursivelyComputeParentTextStyles(element, passProps, styles = []) {
 }
 
 /**
- * Creates a set of style from an array of classes asosciated to a node.
+ * Creates a set of style from an array of classes associated to a node.
  * @export
  * @param {any} htmlAttribs
  * @param {any} [classesStyles={}]
@@ -177,7 +177,7 @@ export function _getElementCSSClasses(htmlAttribs) {
 }
 
 /**
- * Converts a html style to its equavalent react native style
+ * Converts a html style to its equivalent react native style
  * @param {object} css: object of key value css strings
  * @param {string} styleset: the styleset to convert the styles against
  * @param {object} { parentTag, emSize, ignoredStyles }
