@@ -376,7 +376,7 @@ export default class HTML extends PureComponent {
                     }
                 });
                 if (Object.keys(textChildrenInheritedStyles).length === 0) {
-                    // No style to apply to text children, avoid unecessary loops
+                    // No style to apply to text children, avoid unnecessary loops
                     return parsedNode;
                 }
                 // Re-write wrapper's styles as a string
