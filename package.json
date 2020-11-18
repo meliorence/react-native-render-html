@@ -1,89 +1,35 @@
 {
-  "name": "react-native-render-html",
-  "version": "5.1.1",
+  "name": "react-native-render-html-project",
+  "version": "0.0.0",
   "author": "Meliorence <contact@meliorence.com> (github.com/meliorence)",
   "license": "BSD-2-Clause",
-  "repository": "https://github.com/meliorence/react-native-render-html",
-  "description": "React Native component that renders HTML as native views",
-  "types": "types/react-native-render-html/index.d.ts",
-  "main": "lib/index.js",
-  "homepage": "https://github.com/meliorence/react-native-render-html",
-  "files": [
-    "lib/",
-    "src/",
-    "types/",
-    "LICENSE",
-    "HELP.adoc",
-    "README.md",
-    "CHANGELOG.MD",
-    "react-native-render-html.podspec"
-  ],
+  "private": true,
+  "repository": "https://github.com/archriss/react-native-render-html",
   "scripts": {
-    "test": "yarn test:js && yarn test:ts && yarn test:lint",
-    "test:ts": "dtslint types/react-native-render-html",
-    "test:js": "jest",
-    "test:lint": "eslint src/",
-    "fixlint": "prettier --write src/",
-    "build": "babel src --out-dir lib --ignore 'src/__mocks__/**/*,src/__tests__/**/*'",
-    "prepack": "yarn build"
-  },
-  "keywords": [
-    "react-native",
-    "react-component",
-    "react-native-component",
-    "html",
-    "render-html"
-  ],
-  "dependencies": {
-    "deprecated-prop-type": "^1.0.0",
-    "htmlparser2": "5.0.1",
-    "prop-types": "^15.7.2",
-    "stringify-entities": "^3.1.0"
-  },
-  "peerDependencies": {
-    "react": "*",
-    "react-native": "*"
+    "build": "yarn workspace react-native-render-html build",
+    "start": "yarn workspace demo start",
+    "test:jest": "yarn workspace react-native-render-html test:jest",
+    "test:ts": "yarn workspace react-native-render-html test:ts",
+    "test:lint": "yarn workspace react-native-render-html test:lint"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.8",
-    "@babel/core": "^7.12.9",
-    "@babel/runtime": "^7.12.5",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "@react-native-community/eslint-config": "^2.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-native": "^0.63.37",
-    "babel-eslint": "10.1.0",
-    "babel-jest": "^25.5.1",
+    "@tsconfig/react-native": "^1.0.2",
+    "commitlint": "^11.0.0",
     "conditional-type-checks": "^1.0.5",
-    "dtslint": "^2.0.6",
-    "eslint": "^7.14.0",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-plugin-react": "^7.21.5",
-    "jest": "^25.5.4",
-    "metro-react-native-babel-preset": "^0.64.0",
-    "prettier": "^2.2.1",
-    "react": "^16.13.1",
-    "react-native": "^0.63.4",
-    "react-native-testing-library": "^2.2.0",
-    "react-native-webview": "^11.0.0",
-    "react-test-renderer": "16.13.1",
-    "typescript": "^3.9.7"
+    "dtslint": "^2.0.5",
+    "eslint": "^7.10.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-compat": "^3.8.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.3.0",
+    "metro-react-native-babel-preset": "^0.59.0",
+    "prettier": "^2.1.2"
   },
-  "resolutions": {
-    "typescript": "3.9.7",
-    "@types/react": "17.0.0"
-  },
-  "jest": {
-    "preset": "react-native",
-    "testRegex": "src/.*(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$",
-    "coverageDirectory": "./coverage",
-    "collectCoverage": true,
-    "coverageReporters": [
-      "clover",
-      "text"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/src/__tests__"
-    ]
-  }
+  "workspaces": [
+    "packages/*",
+    "demo"
+  ]
 }

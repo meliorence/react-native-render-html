@@ -155,11 +155,15 @@ export default function Demo() {
 
 ## Demo
 
-This component comes with a demo that showcases every feature presented here. It's very useful to keep track of bugs and rendering differences between the different versions of react-native.
+This component comes with a demo that showcases every feature presented here.
+It's very useful to keep track of bugs and rendering differences between the
+different versions of react-native.
 
-**It is mandatory** to refer to an example of the demo or to provide one when submitting an issue or a pull request for a new feature.
+**It is mandatory** to refer to an example of the demo or to provide one when
+submitting an issue or a pull request for a new feature.
 
-Feel free to write more advanced examples and submit a pull-request for it, it will probably be very useful for other users.
+Feel free to write more advanced examples and submit a pull-request for it, it
+will probably be very useful for other users.
 
 ## Creating custom renderers
 
