@@ -19,14 +19,20 @@
     "@tsconfig/react-native": "^1.0.2",
     "commitlint": "^11.0.0",
     "conditional-type-checks": "^1.0.5",
-    "dtslint": "^2.0.5",
-    "eslint": "^7.10.0",
-    "eslint-config-prettier": "^6.12.0",
+    "dtslint": "^2.0.6",
+    "eslint": "^7.13.0",
+    "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-compat": "^3.8.0",
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.3.0",
-    "metro-react-native-babel-preset": "^0.59.0",
+    "metro-react-native-babel-preset": "^0.64.0",
     "prettier": "^2.1.2"
+  },
+  "resolutions": {
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz",
+    "react-native-webview": "10.7.0"
   },
   "workspaces": [
     "packages/*",
