@@ -1,18 +1,26 @@
 import * as React from 'react';
 import {
   NavigationContainer,
-  DefaultTheme,
-  DarkTheme,
-  useNavigation
+  DefaultTheme as NavLightTheme,
+  DarkTheme as NavDarkTheme,
+  useTheme
 } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
-import { ColorSchemeName } from 'react-native';
+import { ColorSchemeName, View } from 'react-native';
 import { Appbar, Snackbar } from 'react-native-paper';
 import snippets from './snippets';
 import Snippet from './Snippet';
 import SourceRenderer from '../components/SourceRenderer';
-import { View } from '../components/Themed';
+import {
+  Provider as PaperProvider,
+  DarkTheme as PaperDarkTheme,
+  DefaultTheme as PaperLightTheme
+} from 'react-native-paper';
+import merge from 'deepmerge';
+
+const CombinedLightTheme = merge(PaperLightTheme, NavLightTheme);
+const CombinedDarkTheme = merge(PaperDarkTheme, NavDarkTheme);
 
 export default function Navigation({
   colorScheme
@@ -20,11 +28,13 @@ export default function Navigation({
   colorScheme: ColorSchemeName;
 }) {
   return (
-    <NavigationContainer
-      // linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <RootNavigator />
-    </NavigationContainer>
+    <PaperProvider theme={colorScheme === 'dark' ? CombinedDarkTheme : CombinedLightTheme}>
+      <NavigationContainer
+        // linking={LinkingConfiguration}
+        theme={colorScheme === 'dark' ? CombinedDarkTheme : CombinedLightTheme}>
+        <RootNavigator />
+      </NavigationContainer>
+    </PaperProvider>
   );
 }
 
@@ -34,6 +44,7 @@ const Drawer = createDrawerNavigator<Record<keyof typeof snippets, any>>();
 function RootNavigator() {
   const [useLegacy, setUseLegacy] = React.useState(false);
   const [snackbarVisible, setSnackbarVisible] = React.useState(false);
+  const theme = useTheme();
   React.useEffect(() => {
     setSnackbarVisible(true);
     const timeout = setTimeout(() => setSnackbarVisible(false), 2500);
@@ -47,22 +58,22 @@ function RootNavigator() {
             <Drawer.Navigator
               initialRouteName={'test'}
               hideStatusBar={false}
-              screenOptions={{ headerShown: false }}>
+              screenOptions={{ headerTintColor: theme.colors.text, headerShown: true }}>
               {Object.keys(snippets).map((snippetId) => {
                 return (
                   <Drawer.Screen
                     options={{
                       title: snippets[snippetId].name,
-                      headerShown: true,
                       headerRight: ({ tintColor }) => (
                         <View style={{ flexDirection: 'row' }}>
                           <Appbar.Action
                             icon="alpha-l-circle"
-                            color={useLegacy ? 'red' : undefined}
+                            color={useLegacy ? 'red' : tintColor}
                             onPress={() => setUseLegacy((l) => !l)}
                           />
                           <Appbar.Action
                             icon="xml"
+                            color={tintColor}
                             onPress={() =>
                               navigation.navigate(
                                 'source',
