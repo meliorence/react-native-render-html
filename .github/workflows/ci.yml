@@ -29,11 +29,11 @@ jobs:
     - run: yarn install --immutable
     - run: yarn test:ts
       name: Typescript Tests
-    - run: yarn test:js --coverage
+    - run: yarn test:jest --coverage
       name: Jest Tests
-    - run: yarn build
-      name: Build
+    - run: yarn test:lint
+      name: Linting Tests
     - uses: codecov/codecov-action@v1
       with:
-        file: ./coverage/clover.xml # optional
+        file: ./packages/render-html/coverage/clover.xml # optional
         fail_ci_if_error: true # optional (default = false)

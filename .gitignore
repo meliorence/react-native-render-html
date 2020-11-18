@@ -52,9 +52,9 @@ npm-debug.log
 /Demo/package-lock.json
 /coverage/
 test.html
-/lib
+lib/
 
-# Foundry
-
-/demo
-/packages
+# old sources
+/src/
+/Demo/
+/types/
