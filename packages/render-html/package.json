@@ -1,0 +1,76 @@
+{
+  "name": "react-native-render-html",
+  "version": "5.0.0-alpha.2",
+  "author": "Archriss",
+  "license": "BSD-2-Clause",
+  "description": "React Native component that renders HTML as native views.",
+  "main": "lib/commonjs/index.js",
+  "types": "lib/typescript/index.d.ts",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "homepage": "https://github.com/archriss/react-native-render-html#readme",
+  "bugs": {
+    "url": "https://github.com/archriss/react-native-render-html/issues"
+  },
+  "keywords": [
+    "react-native",
+    "react-component",
+    "react-native-component",
+    "html",
+    "render-html"
+  ],
+  "repository": "https://github.com/archriss/react-native-render-html",
+  "scripts": {
+    "test": "yarn test:jest && yarn test:ts && yarn test:lint",
+    "test:jest": "jest src/",
+    "test:ts": "tsc --noEmit",
+    "test:lint": "eslint --ext ts,tsx src/",
+    "build": "bob build",
+    "prepack": "yarn run build"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-transform-react-jsx": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
+    "@babel/runtime": "^7.11.2",
+    "@react-native-community/bob": "^0.16.2",
+    "@release-it/conventional-changelog": "^2.0.0",
+    "@types/jest": "^26.0.14",
+    "@types/react-native": "^0.63.25",
+    "babel-jest": "^26.5.2",
+    "eslint": "^7.10.0",
+    "jest": "^26.5.2",
+    "metro-react-native-babel-preset": "^0.63.0",
+    "prettier": "^2.1.2",
+    "react": "16.13.1",
+    "release-it": "^14.0.3",
+    "typescript": "~3.9.7"
+  },
+  "peerDependencies": {
+    "prop-types": "*",
+    "react": "*",
+    "react-native": "^0.63.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "@react-native-community/bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
+    ]
+  },
+  "dependencies": {
+    "@native-html/transient-render-tree": "^1.1.2"
+  }
+}
