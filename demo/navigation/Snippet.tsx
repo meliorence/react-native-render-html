@@ -6,14 +6,16 @@ import {
   useWindowDimensions
 } from 'react-native';
 import RenderHTML, { RenderHTMLProps } from 'react-native-render-html';
+import LegacyHTML from 'rnrh-legacy';
 import { useThemeColor } from '../components/Themed';
 import snippets from './snippets';
 import { CONTENT_PADDING_HZ } from './styles';
 
 const CONTENT_WIDTH = Dimensions.get('window').width - 50;
-const CUSTOM_RENDERERS = {};
-const DEFAULT_PROPS: Partial<RenderHTMLProps> = {
-  renderers: CUSTOM_RENDERERS,
+const DEFAULT_PROPS: Pick<
+  RenderHTMLProps,
+  'contentWidth' | 'computeImagesMaxWidth' | 'onLinkPress' | 'debug'
+> = {
   contentWidth: CONTENT_WIDTH,
   computeImagesMaxWidth(contentWidth: number) {
     return contentWidth - 40;
@@ -24,27 +26,34 @@ const DEFAULT_PROPS: Partial<RenderHTMLProps> = {
   debug: true
 };
 
-const Snippet = ({ exampleId }: { exampleId: keyof typeof snippets }) => {
+const Snippet = ({
+  exampleId,
+  useLegacy = false
+}: {
+  exampleId: keyof typeof snippets;
+  useLegacy: boolean;
+}) => {
   const { width: contentWidth } = useWindowDimensions();
   const additionalProps = snippets[exampleId].props || {};
   const baseStyle = {
     color: useThemeColor({}, 'text'),
     ...additionalProps.baseStyle
   };
-  const renderHtml = (
-    <RenderHTML
-      {...DEFAULT_PROPS}
-      contentWidth={contentWidth - CONTENT_PADDING_HZ * 2}
-      html={snippets[exampleId].html}
-      {...additionalProps}
-      baseStyle={baseStyle}
-      enableUserAgentStyles
-      textSelectable
-    />
+  const sharedProps = {
+    ...DEFAULT_PROPS,
+    contentWidth: contentWidth - CONTENT_PADDING_HZ * 2,
+    html: snippets[exampleId].html,
+    ...additionalProps as any,
+    textSelectable: true,
+    renderers: {}
+  };
+
+  const renderHtml = useLegacy ? ( 
+    <LegacyHTML {...sharedProps} html={sharedProps.html} baseFontStyle={baseStyle} debug={false} />
+  ) : (
+    <RenderHTML {...sharedProps} baseStyle={baseStyle} enableUserAgentStyles />
   );
-  return (
-    <ScrollView style={{ flex: 1, padding: 10 }}>{renderHtml}</ScrollView>
-  );
+  return <ScrollView style={{ flex: 1, padding: 10 }}>{renderHtml}</ScrollView>;
 };
 
 export default Snippet;

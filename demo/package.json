@@ -19,13 +19,13 @@
     "@react-navigation/drawer": "^5.11.3",
     "@react-navigation/native": "^5.7.3",
     "@react-navigation/stack": "^5.9.0",
-    "expo": "~39.0.2",
-    "expo-asset": "~8.2.0",
+    "expo": "~39.0.4",
+    "expo-asset": "~8.2.1",
     "expo-constants": "~9.2.0",
     "expo-font": "~8.3.0",
-    "expo-linking": "^1.0.1",
+    "expo-linking": "^1.0.6",
     "expo-splash-screen": "~0.6.2",
-    "expo-status-bar": "~1.0.2",
+    "expo-status-bar": "~1.0.3",
     "expo-web-browser": "~8.5.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -38,14 +38,16 @@
     "react-native-screens": "~2.10.1",
     "react-native-syntax-highlighter": "^2.1.0",
     "react-native-web": "~0.13.12",
-    "react-syntax-highlighter": "6.0.4"
+    "react-native-webview": "10.7.0",
+    "react-syntax-highlighter": "6.0.4",
+    "rnrh-legacy": "workspace:*"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0",
-    "@types/react": "~16.9.35",
-    "@types/react-native": "~0.63.2",
+    "@babel/core": "~7.12.3",
+    "@types/react": "~16.9.56",
+    "@types/react-native": "~0.63.35",
     "jest-expo": "~39.0.0",
-    "typescript": "~3.9.5"
+    "typescript": "~3.9.7"
   },
   "private": true,
   "installConfig": {
