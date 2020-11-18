@@ -26,6 +26,12 @@ const DEFAULT_PROPS: Pick<
   debug: true
 };
 
+function toLegacyBaseFontStyles(baseStyles: Record<string, any>) {
+  return Object.keys(baseStyles).filter(
+    (k) => k != 'whiteSpace' && k != 'listStyleType'
+  ).reduce((container, key) => ({ ...container, [key]: baseStyles[key] }), {});
+}
+
 const Snippet = ({
   exampleId,
   useLegacy = false
@@ -43,13 +49,18 @@ const Snippet = ({
     ...DEFAULT_PROPS,
     contentWidth: contentWidth - CONTENT_PADDING_HZ * 2,
     html: snippets[exampleId].html,
-    ...additionalProps as any,
+    ...(additionalProps as any),
     textSelectable: true,
     renderers: {}
   };
 
-  const renderHtml = useLegacy ? ( 
-    <LegacyHTML {...sharedProps} html={sharedProps.html} baseFontStyle={baseStyle} debug={false} />
+  const renderHtml = useLegacy ? (
+    <LegacyHTML
+      {...sharedProps}
+      html={sharedProps.html}
+      baseFontStyle={toLegacyBaseFontStyles(baseStyle)}
+      debug={false}
+    />
   ) : (
     <RenderHTML {...sharedProps} baseStyle={baseStyle} enableUserAgentStyles />
   );
