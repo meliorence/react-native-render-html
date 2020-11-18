@@ -51,7 +51,7 @@ yarn.lock
 
 # Specific to this project
 /Demo/package-lock.json
-/coverage/
+coverage/
 lib/
 # old sources
 /src/
