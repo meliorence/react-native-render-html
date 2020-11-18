@@ -32,21 +32,21 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
-    "@babel/plugin-transform-react-jsx": "^7.10.4",
-    "@babel/preset-typescript": "^7.10.4",
-    "@babel/runtime": "^7.11.2",
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-transform-react-jsx": "^7.12.5",
+    "@babel/preset-typescript": "^7.12.1",
+    "@babel/runtime": "^7.12.5",
     "@react-native-community/bob": "^0.16.2",
     "@release-it/conventional-changelog": "^2.0.0",
     "@types/jest": "^26.0.14",
-    "@types/react-native": "^0.63.25",
-    "babel-jest": "^26.5.2",
-    "eslint": "^7.10.0",
-    "jest": "^26.5.2",
-    "metro-react-native-babel-preset": "^0.63.0",
+    "@types/react-native": "^0.63.35",
+    "babel-jest": "^26.6.3",
+    "eslint": "^7.13.0",
+    "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "^0.64.0",
     "prettier": "^2.1.2",
     "react": "16.13.1",
-    "release-it": "^14.0.3",
+    "release-it": "^14.2.1",
     "typescript": "~3.9.7"
   },
   "peerDependencies": {
@@ -71,6 +71,6 @@
     ]
   },
   "dependencies": {
-    "@native-html/transient-render-tree": "^1.1.2"
+    "@native-html/transient-render-tree": "^1.1.3"
   }
 }
