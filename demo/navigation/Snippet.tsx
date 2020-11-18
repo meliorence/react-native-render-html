@@ -27,9 +27,9 @@ const DEFAULT_PROPS: Pick<
 };
 
 function toLegacyBaseFontStyles(baseStyles: Record<string, any>) {
-  return Object.keys(baseStyles).filter(
-    (k) => k != 'whiteSpace' && k != 'listStyleType'
-  ).reduce((container, key) => ({ ...container, [key]: baseStyles[key] }), {});
+  return Object.keys(baseStyles)
+    .filter((k) => k != 'whiteSpace' && k != 'listStyleType')
+    .reduce((container, key) => ({ ...container, [key]: baseStyles[key] }), {});
 }
 
 const Snippet = ({
@@ -64,7 +64,13 @@ const Snippet = ({
   ) : (
     <RenderHTML {...sharedProps} baseStyle={baseStyle} enableUserAgentStyles />
   );
-  return <ScrollView style={{ flex: 1, padding: 10 }}>{renderHtml}</ScrollView>;
+  return (
+    <ScrollView
+      contentContainerStyle={{ flexGrow: 1, padding: 10 }}
+      style={{ flexGrow: 1 }}>
+      {renderHtml}
+    </ScrollView>
+  );
 };
 
 export default Snippet;

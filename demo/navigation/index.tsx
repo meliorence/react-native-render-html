@@ -28,7 +28,8 @@ export default function Navigation({
   colorScheme: ColorSchemeName;
 }) {
   return (
-    <PaperProvider theme={colorScheme === 'dark' ? CombinedDarkTheme : CombinedLightTheme}>
+    <PaperProvider
+      theme={colorScheme === 'dark' ? CombinedDarkTheme : CombinedLightTheme}>
       <NavigationContainer
         // linking={LinkingConfiguration}
         theme={colorScheme === 'dark' ? CombinedDarkTheme : CombinedLightTheme}>
@@ -58,7 +59,10 @@ function RootNavigator() {
             <Drawer.Navigator
               initialRouteName={'test'}
               hideStatusBar={false}
-              screenOptions={{ headerTintColor: theme.colors.text, headerShown: true }}>
+              screenOptions={{
+                headerTintColor: theme.colors.text,
+                headerShown: true
+              }}>
               {Object.keys(snippets).map((snippetId) => {
                 return (
                   <Drawer.Screen
@@ -95,7 +99,11 @@ function RootNavigator() {
             </Drawer.Navigator>
           )}
         </Stack.Screen>
-        <Stack.Screen name="source" component={SourceRenderer} />
+        <Stack.Screen
+          name="source"
+          options={{  }}
+          component={SourceRenderer}
+        />
       </Stack.Navigator>
       <Snackbar visible={snackbarVisible} onDismiss={() => void 0}>
         {useLegacy ? 'Legacy (v5.x) enabled.' : 'Foundry (v6.x) enabled'}
