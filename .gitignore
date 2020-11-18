@@ -50,8 +50,8 @@ npm-debug.log
 
 # Specific to this project
 /Demo/package-lock.json
-/coverage/
 test.html
+coverage/
 lib/
 
 # old sources
