@@ -6,7 +6,7 @@ import numOfCharsInPrefix from './numOfCharsInPrefix';
 
 interface ListPrefixRendererProps {
   color?: string;
-  fontSize?: number;
+  fontSize: number;
   index: number;
   nestLevel: number;
 }
@@ -16,7 +16,7 @@ const TextualPrefixRenderer = ({
   fontSize,
   prefix
 }: Pick<ListPrefixRendererProps, 'color' | 'fontSize'> & {
-  prefix: string;
+    prefix: string;
 }) => {
   return (
     <Text
@@ -100,7 +100,6 @@ const DecimalPrefixRenderer = ({
   );
 };
 
-
 interface PrefixSepcs {
   Component: ComponentType<ListPrefixRendererProps>;
   computeStrSize(length: number): number;
@@ -176,7 +175,7 @@ const listRenderer: DefaultRenderers['block'][string] = (props) => {
               index={i}
               nestLevel={0}
               color={tnode.styles.nativeTextFlow.color as string}
-              fontSize={tnode.styles.nativeTextFlow.fontSize}
+              fontSize={tnode.styles.nativeTextFlow.fontSize || 14}
             />
           </View>
           <View>{renderTNode(childTNode, passedProps)}</View>
