@@ -49,10 +49,9 @@ npm-debug.log
 !.yarn/versions
 
 # Specific to this project
-/Demo/package-lock.json
-test.html
 coverage/
 lib/
+test.html
 
 # old sources
 /src/
