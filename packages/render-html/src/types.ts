@@ -115,6 +115,17 @@ export interface RenderHTMLProps<P = any> extends RenderHTMLPassedProps<P> {
    */
   enableUserAgentStyles?: boolean;
   /**
+   * Enable or disable margin collapsing CSS behavior (experimental!).
+   * See {@link https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing | MDN docs}.
+   * 
+   * @remarks Limitations:
+   * - Only adjacent siblings collapsing is implemented.
+   * - If one of the margins height is in percent, no collapsing will occur.
+   * 
+   * @default false
+   */
+  enableExperimentalMarginCollapsing?: boolean;
+  /**
    * Provide your styles for specific HTML tags.
    *
    * **Important note** Do NOT use the StyleSheet API to create the styles you're going to feed to tagsStyle and classesStyles.

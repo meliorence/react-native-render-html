@@ -12,6 +12,7 @@ const propTypes: RenderHTMLPropTypes = {
   renderers: PropTypes.object.isRequired,
   enableCSSInlineProcessing: PropTypes.bool,
   enableUserAgentStyles: PropTypes.bool,
+  enableExperimentalMarginCollapsing: PropTypes.bool,
   idsStyles: PropTypes.object,
   remoteErrorView: PropTypes.func,
   remoteLoadingView: PropTypes.func,
@@ -67,6 +68,7 @@ const defaultProps: Partial<Record<keyof RenderHTMLProps, any>> = {
   allowFontScaling: true,
   enableUserAgentStyles: true,
   enableCSSInlineProcessing: true,
+  enableExperimentalMarginCollapsing: false,
   renderers: {}
 };
 
@@ -77,6 +79,8 @@ export default function RenderHTML(props: RenderHTMLProps) {
       defaultRenderers={defaultRenderers}
       passedProps={props}
       tnode={ttree}
+      marginCollapsingEnabled={props.enableExperimentalMarginCollapsing!}
+      collapsedMarginTop={null}
     />
   );
 }

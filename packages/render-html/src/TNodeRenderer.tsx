@@ -13,6 +13,8 @@ import { RenderHTMLPassedProps } from './types';
 import extractAnchorOnLinkPress from './extractAnchorOnLinkPress';
 import { GestureResponderEvent } from 'react-native';
 
+export type CollapsedMarginTop =  number | null
+
 export interface TNodeGenericRendererProps<T extends TNode> {
   tnode: T;
   key?: string | number;
@@ -21,6 +23,8 @@ export interface TNodeGenericRendererProps<T extends TNode> {
   defaultRenderers: typeof defaultRenderers;
   passedProps: RenderHTMLPassedProps;
   syntheticAnchorOnLinkPress?: (e: GestureResponderEvent) => void;
+  marginCollapsingEnabled: boolean;
+  collapsedMarginTop: CollapsedMarginTop;
 }
 
 export type TNodeRendererProps<T extends TNode> = Omit<
@@ -28,39 +32,72 @@ export type TNodeRendererProps<T extends TNode> = Omit<
   'renderTNode' | 'renderTChildren'
 >;
 
-function renderTNode(
-  tnode: TNode,
-  passedProps: RenderHTMLPassedProps,
-  key?: number | string,
-  syntheticAnchorOnLinkPress?: (e: GestureResponderEvent) => void
-) {
-  return (
-    <TNodeRenderer
-      passedProps={passedProps}
-      defaultRenderers={defaultRenderers}
-      tnode={tnode}
-      key={key}
-      syntheticAnchorOnLinkPress={syntheticAnchorOnLinkPress}
-    />
-  );
+function renderTNode(props: Omit<TNodeRendererProps<any>, 'defaultRenderers'>) {
+  return React.createElement(TNodeRenderer, {
+    ...props,
+    defaultRenderers
+  });
+}
+
+function isCollapsible(tnode: TNode) {
+  return tnode instanceof TBlock || tnode instanceof TPhrasing;
+}
+
+function getCollapsedMargins(
+  precedent: TNode,
+  current: TNode
+): CollapsedMarginTop {
+  const precedentMarginBottom =
+    typeof precedent.styles.nativeBlockRet.marginBottom === 'number'
+      ? precedent.styles.nativeBlockRet.marginBottom
+      : null;
+  const currentMarginBottom =
+    typeof current.styles.nativeBlockRet.marginTop === 'number'
+      ? current.styles.nativeBlockRet.marginTop
+      : null;
+  if (precedentMarginBottom == null || currentMarginBottom == null) {
+    return null;
+  }
+  return Math.max(Math.abs(precedentMarginBottom - currentMarginBottom), 0);
 }
 
 function renderTChildren(
   tnode: TNode,
-  passedProps: RenderHTMLPassedProps,
-  syntheticAnchorOnLinkPress?: (e: GestureResponderEvent) => void
+  childrenProps: Pick<
+    TNodeRendererProps<any>,
+    'marginCollapsingEnabled' | 'passedProps' | 'syntheticAnchorOnLinkPress'
+  >
 ) {
-  return tnode.children.map((childTnode, i) =>
-    renderTNode(childTnode, passedProps, i, syntheticAnchorOnLinkPress)
-  );
+  const shouldCollapseChildren =
+    childrenProps.marginCollapsingEnabled && isCollapsible(tnode);
+  let collapsedMarginTop: CollapsedMarginTop | null = null;
+  return tnode.children.map((childTnode, i) => {
+    if (
+      shouldCollapseChildren &&
+      isCollapsible(childTnode) &&
+      i > 0 &&
+      isCollapsible(tnode.children[i - 1])
+    ) {
+      collapsedMarginTop = getCollapsedMargins(tnode.children[i - 1], childTnode);
+    }
+    return renderTNode({
+      ...childrenProps,
+      tnode: childTnode,
+      key: i,
+      collapsedMarginTop
+    });
+  });
 }
 
 function TNodeRenderer(props: TNodeRendererProps<TNode>) {
-  const { tnode, passedProps, syntheticAnchorOnLinkPress: inheritedSyntheticAnchorOnLinkPress } = props;
-  const syntheticAnchorOnLinkPress = extractAnchorOnLinkPress(
+  const {
     tnode,
-    passedProps
-  ) || inheritedSyntheticAnchorOnLinkPress;
+    passedProps,
+    syntheticAnchorOnLinkPress: inheritedSyntheticAnchorOnLinkPress
+  } = props;
+  const syntheticAnchorOnLinkPress =
+    extractAnchorOnLinkPress(tnode, passedProps) ||
+    inheritedSyntheticAnchorOnLinkPress;
   const childrenProps: TNodeGenericRendererProps<any> = {
     ...props,
     renderTChildren,
