@@ -53,6 +53,7 @@ yarn.lock
 /Demo/package-lock.json
 coverage/
 lib/
+test.html
 # old sources
 /src/
 /Demo/
