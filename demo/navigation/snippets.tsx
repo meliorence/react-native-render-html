@@ -3,13 +3,7 @@ import { View, Text } from 'react-native';
 import { RenderHTMLProps } from 'react-native-render-html';
 import { DOMElement } from '@native-html/transient-render-tree';
 
-const test = `<a href="http://google.fr"><div
-style="
-  background-color: red;
-  height: 20px;
-  width: 40px;
-"
->Click me!</div></a>`;
+const test = `<p>First paragraph</p><p>Second paragraph</p>`;
 
 const paragraphs = `<p style="font-size: 1.3em">
 This paragraph is styled a font size set in em !
@@ -415,8 +409,7 @@ const snippetsMapConfig: Record<
   },
   pre: {
     name: 'Preformatted',
-    html: `<pre>
-  ___________________________
+    html: `<pre>  ___________________________
 < I'm an expert in my field. >
   ---------------------------
     \\   ^__^ 
@@ -446,6 +439,7 @@ const snippetsMapConfig: Record<
       classesStyles: {
         'last-paragraph': {
           textAlign: 'right',
+          marginLeft: 20,
           color: 'teal',
           fontWeight: 'bold',
           backgroundColor: 'yellow'
