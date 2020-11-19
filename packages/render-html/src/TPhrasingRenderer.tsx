@@ -21,7 +21,7 @@ const TPhrasingRenderer = ({
         tnode.styles.nativeTextFlow,
         tnode.styles.nativeTextRet,
       ]}>
-      {renderTChildren(tnode, passedProps, syntheticAnchorOnLinkPress)}
+      {renderTChildren(tnode, { passedProps, syntheticAnchorOnLinkPress, marginCollapsingEnabled: false })}
     </Text>
   );
 };

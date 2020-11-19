@@ -16,7 +16,7 @@ const TextualPrefixRenderer = ({
   fontSize,
   prefix
 }: Pick<ListPrefixRendererProps, 'color' | 'fontSize'> & {
-    prefix: string;
+  prefix: string;
 }) => {
   return (
     <Text
@@ -140,7 +140,15 @@ const prefixRenderersMap: Record<SupportedListStyleType, PrefixSepcs> = ({
 >;
 
 const listRenderer: DefaultRenderers['block'][string] = (props) => {
-  const { nativeStyle, tnode, Default, passedProps, renderTNode } = props;
+  const {
+    nativeStyle,
+    tnode,
+    Default,
+    passedProps,
+    renderTNode,
+    marginCollapsingEnabled,
+    syntheticAnchorOnLinkPress
+  } = props;
   // Map children to horizontal rows with prefixes
   const rendererSpecs =
     prefixRenderersMap[
@@ -158,7 +166,7 @@ const listRenderer: DefaultRenderers['block'][string] = (props) => {
       : bulletWidth * 1.5;
   const PrefixRenderer = rendererSpecs.Component;
   return (
-    <Default {...props} nativeStyle={[nativeStyle, { paddingLeft }]}>
+    <Default {...props} nativeStyle={{ ...nativeStyle, paddingLeft }}>
       {tnode.children.map((childTNode, i) => (
         <View
           key={i}
@@ -178,7 +186,16 @@ const listRenderer: DefaultRenderers['block'][string] = (props) => {
               fontSize={tnode.styles.nativeTextFlow.fontSize || 14}
             />
           </View>
-          <View>{renderTNode(childTNode, passedProps)}</View>
+          <View>
+            {renderTNode({
+              tnode: childTNode,
+              passedProps,
+              key: i,
+              marginCollapsingEnabled,
+              syntheticAnchorOnLinkPress,
+              collapsedMarginTop: null
+            })}
+          </View>
         </View>
       ))}
     </Default>
