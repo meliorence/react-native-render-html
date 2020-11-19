@@ -10,7 +10,6 @@ import TPhrasingRenderer from './TPhrasingRenderer';
 import TTextRenderer from './TTextRenderer';
 import defaultRenderers from './defaultRenderers';
 import { RenderHTMLPassedProps } from './types';
-import printTNode from './printTNode';
 import extractAnchorOnLinkPress from './extractAnchorOnLinkPress';
 import { GestureResponderEvent } from 'react-native';
 
@@ -69,9 +68,6 @@ function TNodeRenderer(props: TNodeRendererProps<TNode>) {
     defaultRenderers,
     syntheticAnchorOnLinkPress
   };
-  if (tnode.tagName === 'body') {
-    printTNode(tnode);
-  }
   if (tnode instanceof TBlock) {
     return React.createElement(TBlockRenderer, childrenProps);
   }

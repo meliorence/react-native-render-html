@@ -1,12 +1,14 @@
-import React, { useMemo } from 'react';
-import { TTreeBuilder } from '@native-html/transient-render-tree';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Dimensions } from 'react-native';
 import { RenderHTMLProps } from './types';
 import TNodeRenderer from './TNodeRenderer';
 import defaultRenderers from './defaultRenderers';
+import useTTree from './useTTree';
 
-const propTypes: Record<keyof RenderHTMLProps, any> = {
+type RenderHTMLPropTypes = Record<keyof RenderHTMLProps, any>;
+
+const propTypes: RenderHTMLPropTypes = {
   renderers: PropTypes.object.isRequired,
   enableCSSInlineProcessing: PropTypes.bool,
   enableUserAgentStyles: PropTypes.bool,
@@ -44,10 +46,11 @@ const propTypes: Record<keyof RenderHTMLProps, any> = {
   baseStyle: PropTypes.object,
   textSelectable: PropTypes.bool,
   renderersProps: PropTypes.object,
-  allowFontScaling: PropTypes.bool
+  allowFontScaling: PropTypes.bool,
+  onTTreeChange: PropTypes.func
 };
 
-const defaultProps = {
+const defaultProps: Partial<Record<keyof RenderHTMLProps, any>> = {
   debug: false,
   decodeEntities: true,
   emSize: 14,
@@ -57,67 +60,23 @@ const defaultProps = {
   enableExperimentalPercentWidth: false,
   ignoredTags: [],
   ignoredStyles: [],
-  baseStyles: { fontSize: 14 },
+  baseStyle: { fontSize: 14 },
   tagsStyles: {},
   classesStyles: {},
   textSelectable: false,
   allowFontScaling: true,
   enableUserAgentStyles: true,
-  enableCSSInlineProcessing: true
+  enableCSSInlineProcessing: true,
+  renderers: {}
 };
 
-function useTTreeBuilder({
-  allowedStyles,
-  ignoredStyles,
-  decodeEntities,
-  baseStyle,
-  classesStyles,
-  tagsStyles,
-  idsStyles,
-  enableCSSInlineProcessing,
-  enableUserAgentStyles
-}: RenderHTMLProps) {
-  return useMemo(
-    () =>
-      new TTreeBuilder({
-        cssProcessorConfig: {
-          inlinePropertiesBlacklist: ignoredStyles,
-          inlinePropertiesWhitelist: allowedStyles
-        },
-        htmlParserOptions: {
-          decodeEntities
-        },
-        stylesConfig: {
-          baseStyle,
-          enableCSSInlineProcessing,
-          enableUserAgentStyles,
-          classesStyles,
-          idsStyles,
-          tagsStyles
-        }
-      }),
-    [
-      allowedStyles,
-      baseStyle,
-      classesStyles,
-      decodeEntities,
-      enableCSSInlineProcessing,
-      enableUserAgentStyles,
-      idsStyles,
-      ignoredStyles,
-      tagsStyles
-    ]
-  );
-}
-
 export default function RenderHTML(props: RenderHTMLProps) {
-  const ttreebuilder = useTTreeBuilder(props);
-  const troot = ttreebuilder.buildTTree(props.html);
+  const ttree = useTTree(props);
   return (
     <TNodeRenderer
       defaultRenderers={defaultRenderers}
       passedProps={props}
-      tnode={troot}
+      tnode={ttree}
     />
   );
 }

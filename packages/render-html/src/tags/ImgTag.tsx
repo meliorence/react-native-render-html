@@ -25,6 +25,7 @@ export interface ImgTagProps {
   testID?: string;
   computeImagesMaxWidth?: (containerWidth: number) => number;
   onPress: PressableProps['onPress'];
+  altColor: string;
   contentWidth: number;
   enableExperimentalPercentWidth?: boolean;
   imagesInitialDimensions: ImgDimensions;
@@ -411,7 +412,7 @@ export default class ImgTag extends PureComponent<ImgTagProps, any> {
     return (
       <View style={styles.errorBox} testID="image-error">
         {this.props.alt ? (
-          <Text style={styles.errorText}>{this.props.alt}</Text>
+          <Text style={[styles.errorText, { color: this.props.altColor }]}>{this.props.alt}</Text>
         ) : (
           false
         )}
