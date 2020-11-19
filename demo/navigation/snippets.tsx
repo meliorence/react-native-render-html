@@ -38,7 +38,20 @@ Finally, this paragraph is styled through the
 classesStyles prop
 </p>`;
 
-const lists = `<p>An <em>ul</em> tag, default styling</p>
+const lists = `
+<p>A <em>dl</em> (description list) tag, default styling</p>
+<dl>
+  <dt>Beast of Bodmin</dt>
+  <dd>A large feline inhabiting Bodmin Moor.</dd>
+
+  <dt>Morgawr</dt>
+  <dd>A sea serpent.</dd>
+
+  <dt>Owlman</dt>
+  <dd>A giant owl-like creature.</dd>
+</dl>
+<hr />
+<p>An <em>ul</em> tag, default styling (<em>list-style-type: disc;</em>)</p>
 <ul>
 	<li>Easy</li>
 	<li>Peasy</li>
@@ -60,8 +73,18 @@ const lists = `<p>An <em>ul</em> tag, default styling</p>
 </ul>
 <hr />
 <p>An 
+	<em>ul</em> tag, with 
+	<em>list-style-type: square;</em>
+</p>
+<ul style="list-style-type: square;">
+	<li>Sneaky</li>
+	<li>Beaky</li>
+	<li>Like</li>
+</ul>
+<hr />
+<p>An 
 	<em>ol</em> tag, with 
-	<em>color: blue;</em>
+	<em>color: blue;</em> (and default <em>list-style-type: decimal;</em>)
 </p>
 <ol style="color:blue;">
 	<li>Sneaky</li>
@@ -74,6 +97,16 @@ const lists = `<p>An <em>ul</em> tag, default styling</p>
 	<em>list-style-type: lower-alpha;</em>
 </p>
 <ol style="list-style-type: lower-alpha;">
+	<li>Sneaky</li>
+	<li>Beaky</li>
+	<li>Like</li>
+</ol>
+<hr />
+<p>An 
+	<em>ol</em> tag, with 
+	<em>list-style-type: upper-alpha;</em>
+</p>
+<ol style="list-style-type: upper-alpha;">
 	<li>Sneaky</li>
 	<li>Beaky</li>
 	<li>Like</li>

@@ -27,10 +27,25 @@ const DEFAULT_PROPS: Pick<
   debug: true
 };
 
-function toLegacyBaseFontStyles(baseStyles: Record<string, any>) {
-  return Object.keys(baseStyles)
+function stripUnsupportedStylesInLegacy(style: Record<string, any>) {
+  return Object.keys(style)
     .filter((k) => k != 'whiteSpace' && k != 'listStyleType')
-    .reduce((container, key) => ({ ...container, [key]: baseStyles[key] }), {});
+    .reduce((container, key) => ({ ...container, [key]: style[key] }), {});
+}
+
+function stripLegacyStylesheet(
+  styleSheet?: Record<string, Record<string, any>>
+) {
+  if (!styleSheet) {
+    return undefined;
+  }
+  return Object.entries(styleSheet).reduce(
+    (prev, [key, value]) => ({
+      ...prev,
+      [key]: stripUnsupportedStylesInLegacy(value)
+    }),
+    {} as Record<string, any>
+  );
 }
 
 const Snippet = ({
@@ -60,7 +75,9 @@ const Snippet = ({
     <LegacyHTML
       {...sharedProps}
       html={sharedProps.html}
-      baseFontStyle={toLegacyBaseFontStyles(baseStyle)}
+      baseFontStyle={stripUnsupportedStylesInLegacy(baseStyle)}
+      classesStyles={stripLegacyStylesheet(sharedProps.classesStyles)}
+      tagsStyles={stripLegacyStylesheet(sharedProps.tagsStyles)}
       debug={false}
     />
   ) : (
