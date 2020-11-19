@@ -14,7 +14,8 @@ import {
   createStackNavigator,
   StackScreenProps
 } from '@react-navigation/stack';
-import { ColorSchemeName, View } from 'react-native';
+import { ColorSchemeName, Platform, View } from 'react-native';
+import { TNode, tnodeToString } from '@native-html/transient-render-tree';
 import { Appbar, Snackbar } from 'react-native-paper';
 import snippets from './snippets';
 import Snippet from './Snippet';
@@ -26,6 +27,9 @@ import {
 } from 'react-native-paper';
 import merge from 'deepmerge';
 import { memo } from 'react';
+import TTreeContextProvider, { useTTree } from '../state/TTreeContextProvider';
+import { MonoText } from '../components/StyledText';
+import BidirectionalScrollView from '../components/BidirectionalScrollView';
 
 const CombinedLightTheme = merge(PaperLightTheme, NavLightTheme);
 const CombinedDarkTheme = merge(PaperDarkTheme, NavDarkTheme);
@@ -51,8 +55,8 @@ const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator<Record<keyof typeof snippets, any>>();
 
 const ignoredSnippets = [
-  'test',
   'trickyStuff',
+  'invalidHTML',
   'ignoringTagsAndStyles',
   'customHTMLTags',
   'parseRemoteHTML',
@@ -60,6 +64,10 @@ const ignoredSnippets = [
   'alteration',
   'inlineCustomTags'
 ];
+
+if (!__DEV__) {
+  ignoredSnippets.push('test');
+}
 
 function SnippetScreen({ route }: DrawerScreenProps<any>) {
   const legacyMode = useLegacyMode();
@@ -73,37 +81,64 @@ const ToggleLegacyContext = React.createContext(() => {});
 const useLegacyMode = () => React.useContext(LegacyContext);
 const useToggleLegacyMode = () => React.useContext(ToggleLegacyContext);
 
+function TTreeScreen() {
+  const { ttree } = useTTree();
+  return (
+    <BidirectionalScrollView padding={5}>
+      <MonoText style={{ fontSize: 12 }}>
+        {ttree && tnodeToString(ttree)}
+      </MonoText>
+    </BidirectionalScrollView>
+  );
+}
+
 const HeaderRight = memo(function HeaderRight({ tintColor, snippetId }: any) {
   const toggleUseLegacy = useToggleLegacyMode();
   const navigation = useNavigation();
   const legacyMode = useLegacyMode();
   return (
-    <View style={{ flexDirection: 'row' }}>
+    <View
+      style={{
+        flexDirection: 'row'
+      }}>
       <Appbar.Action
         icon="alpha-l-circle"
         color={legacyMode ? 'red' : tintColor}
+        style={{ marginHorizontal: 0 }}
         onPress={toggleUseLegacy}
       />
       <Appbar.Action
         icon="xml"
         color={tintColor}
+        style={{ marginHorizontal: 0 }}
         onPress={() =>
           navigation.navigate('source', snippets[snippetId].html as any)
         }
+      />
+      <Appbar.Action
+        icon="file-tree"
+        color={tintColor}
+        style={{ marginHorizontal: 0 }}
+        onPress={() => navigation.navigate('ttree')}
       />
     </View>
   );
 });
 
-function HomeScreen({ navigation }: StackScreenProps<any>) {
+function HomeScreen({}: StackScreenProps<any>) {
   const theme = useTheme();
   return (
     <Drawer.Navigator
-      initialRouteName={'test'}
       hideStatusBar={false}
+      initialRouteName="Texts styles behaviour"
       screenOptions={{
         headerTintColor: theme.colors.text,
-        headerShown: true
+        headerShown: true,
+        headerTitleAllowFontScaling: true,
+        headerTitleStyle: {
+          width: Platform.OS === 'ios' ? '60%' : '75%',
+          alignItems: Platform.OS === 'ios' ? 'center' : 'flex-start'
+        }
       }}>
       {Object.keys(snippets)
         .filter((k) => ignoredSnippets.indexOf(k) === -1)
@@ -130,6 +165,7 @@ function HomeScreen({ navigation }: StackScreenProps<any>) {
 function RootNavigator() {
   const [legacyMode, setLegacyMode] = React.useState(false);
   const [snackbarVisible, setSnackbarVisible] = React.useState(false);
+  const [ttree, setTTree] = React.useState<TNode | null>(null);
   React.useEffect(() => {
     setSnackbarVisible(true);
     const timeout = setTimeout(() => setSnackbarVisible(false), 2500);
@@ -139,23 +175,36 @@ function RootNavigator() {
     () => setLegacyMode((s) => !s),
     []
   );
+  const memoizedTTreeContext = React.useMemo(() => ({ ttree, setTTree }), [
+    ttree,
+    setTTree
+  ]);
   return (
-    <ToggleLegacyContext.Provider value={memoizedSetUseLegacy}>
-      <LegacyContext.Provider value={legacyMode}>
-        <Stack.Navigator initialRouteName="home">
-          <Stack.Screen
-            name="home"
-            options={{ headerShown: false }}
-            component={HomeScreen}
-          />
-          <Stack.Screen name="source" options={{}} component={SourceRenderer} />
-        </Stack.Navigator>
-        <Snackbar visible={snackbarVisible} onDismiss={() => void 0}>
-          {legacyMode
-            ? 'Legacy (v5.x) enabled.'
-            : 'Foundry (v6.x) enabled'}
-        </Snackbar>
-      </LegacyContext.Provider>
-    </ToggleLegacyContext.Provider>
+    <TTreeContextProvider value={memoizedTTreeContext}>
+      <ToggleLegacyContext.Provider value={memoizedSetUseLegacy}>
+        <LegacyContext.Provider value={legacyMode}>
+          <Stack.Navigator initialRouteName="home">
+            <Stack.Screen
+              name="home"
+              options={{ headerShown: false }}
+              component={HomeScreen}
+            />
+            <Stack.Screen
+              name="source"
+              options={{}}
+              component={SourceRenderer}
+            />
+            <Stack.Screen
+              name="ttree"
+              options={{ title: 'Transient Render Tree snapshot' }}
+              component={TTreeScreen}
+            />
+          </Stack.Navigator>
+          <Snackbar visible={snackbarVisible} onDismiss={() => void 0}>
+            {legacyMode ? 'Legacy (v5.x) enabled.' : 'Foundry (v6.x) enabled'}
+          </Snackbar>
+        </LegacyContext.Provider>
+      </ToggleLegacyContext.Provider>
+    </TTreeContextProvider>
   );
 }

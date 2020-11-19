@@ -8,6 +8,7 @@ import {
 import RenderHTML, { RenderHTMLProps } from 'react-native-render-html';
 import LegacyHTML from 'rnrh-legacy';
 import { useThemeColor } from '../components/Themed';
+import { useTTree } from '../state/TTreeContextProvider';
 import snippets from './snippets';
 import { CONTENT_PADDING_HZ } from './styles';
 
@@ -40,6 +41,7 @@ const Snippet = ({
   useLegacy: boolean;
 }) => {
   const { width: contentWidth } = useWindowDimensions();
+  const { setTTree } = useTTree();
   const additionalProps = snippets[exampleId].props || {};
   const baseStyle = {
     color: useThemeColor({}, 'text'),
@@ -62,7 +64,13 @@ const Snippet = ({
       debug={false}
     />
   ) : (
-    <RenderHTML {...sharedProps} baseStyle={baseStyle} enableUserAgentStyles />
+    <RenderHTML
+      {...sharedProps}
+      baseStyle={baseStyle}
+      enableUserAgentStyles
+      onTTreeChange={setTTree}
+      debug={false}
+    />
   );
   return (
     <ScrollView
