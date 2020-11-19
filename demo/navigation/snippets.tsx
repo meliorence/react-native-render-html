@@ -14,16 +14,15 @@ style="
 const paragraphs = `<p style="font-size: 1.3em">
 This paragraph is styled a font size set in em !
 </p>
-<em>This one showcases the default renderer for the "em" HTML
-tag.</em>
+<hr/>
 <p style="padding: 10%; background-color: #f7a29c">
 This one features a padding
-
 <strong>in percentage !</strong>
 </p>
 <hr />
 <i>Here, we have a style set on the "i" tag with the
 "tagsStyles" prop.</i>
+<hr />
 <p>
 And
 
@@ -33,6 +32,7 @@ And
 <div
   style="background-color: red; height: 20px; width: 40px"></div>
 </a>
+<hr />
 <p class="last-paragraph">
 Finally, this paragraph is styled through the
 classesStyles prop
@@ -158,12 +158,14 @@ const layoutStyles = `
 </div>
 `;
 
-const textsStylesBehaviour = `<p>Styling texts is a very tricky part of converting HTML into react-native components.</p>
+const textsStylesBehaviour = `<p>Styling texts is a challenging part of converting HTML into react-native components.</p>
 <p>The way react-native's <em>Text</em> components behaves is a lot different from our browsers' implementation.</p>
 <p>Let's see how styles are applied to texts with this plugin.</p>
+<hr/>
 <div style="color:red;">This text is inside a div, without a text tag wrapping it. The <em>div</em> tag only has <em>color:red;</em> as style.</div>
-In the example above, you may find, if you inspect the rendered components, that it's the <em>Text</em> component inside that actually receives the color attribute.
-This is because this library parses every text-only style of <em>View</em> wrappers and moves them to each <em>Text</em> child.
+<p>In the example above, you may find, if you inspect the rendered components, that it's the <em>Text</em> component inside that actually receives the color attribute.</p>
+<p>This is because this library parses every text-only style of <em>View</em> wrappers and moves them to each <em>Text</em> child.</p>
+<hr/>
 <div style="color:red">
     <p>This first paragraph doesn't have a specific styling.</p>
     <p style="color:blue;">This one is blue.</p>
@@ -235,9 +237,7 @@ const invalidHTML = `
 <p>Let's add a WordPress shortcode and some unopened/unclosed tags to demonstrate this.</p>
 [gallery ids="11,12,13"]
 <p></em></img>
-<p>See ? Easy stuff.</p>
-<p>You'll obviously find out that some specific cases actually crash the app by rendering some native component in a way that react native hates. If so, please open an issue or open a PR with a reproduction like this one so we can work towards making this plugin 100% crash safe.</p>
-`;
+<p>See ? Easy stuff.</p>`;
 
 const iframes = `
 <p>Yes you read that right, those damn iframes can render with this plugin.</p>
@@ -295,8 +295,8 @@ const anchors = `
   So every renderer now receives a special optional prop, 
 	<em>syntheticOnLinkPress</em>,
   that one can choose to handle, ignore, or pass to children.
-
 </p>
+<hr />
 <p>
   In the below example, the anchor encompasses both raw text and an img tag.
   You can click the image and you'll be directed to a WebView.
@@ -305,6 +305,18 @@ const anchors = `
 <a href="https://developer.mozilla.org/">
 	<img alt="And this image too!" src="https://i.imgur.com/gSmWCJF.jpg" />
 </a>
+<hr />
+<p>
+  In the below example, the anchor surrounds a div with fixed width and height,
+  which has a text node as a child. The child should overflow below the red-painted div.
+</p>
+<a href="http://google.fr"><div
+style="
+  background-color: red;
+  height: 20px;
+  width: 40px;
+"
+>Click me!</div></a>
 `
 
 const inlineCustomTags = `
@@ -415,7 +427,7 @@ const snippetsMapConfig: Record<
     html: textsStylesBehaviour,
     props: {
       tagsStyles: {
-        div: { borderWidth: 1, padding: 10, marginBottom: 10, borderColor: 'gray' }
+        div: { borderWidth: 1, padding: 10, marginTop: 10, borderColor: 'gray' }
       }
     }
   },

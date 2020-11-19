@@ -4,19 +4,17 @@ import { useColorScheme, View, ViewProps, ViewStyle } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
 import { solarizedlight, darcula } from 'react-syntax-highlighter/styles/prism';
+import BidirectionalScrollView from './BidirectionalScrollView';
 
 export interface SourceRenderer {
   htmlSource: string;
 }
 
-function Container({ children, style }: PropsWithChildren<ViewProps>) {
+function Container({ children }: PropsWithChildren<ViewProps>) {
   return (
-    <ScrollView
-      horizontal
-      style={{ flexGrow: 1 }}
-      contentContainerStyle={[style, { margin: 0, flexGrow: 1 }]}>
+    <BidirectionalScrollView padding={10}>
       {children}
-    </ScrollView>
+    </BidirectionalScrollView>
   );
 }
 
