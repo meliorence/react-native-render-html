@@ -6,10 +6,11 @@ import {
   StyleSheet,
   ImageStyle,
   StyleProp,
-  PressableProps,
+  PressableProps
 } from 'react-native';
 import PropTypes from 'prop-types';
 import GenericPressable from '../GenericPressable';
+import { ImageDimensions } from '../types';
 
 export interface ImgDimensions {
   width: number;
@@ -37,8 +38,6 @@ const emptyObject = {};
 const styles = StyleSheet.create({
   image: { resizeMode: 'cover' },
   errorBox: {
-    width: 50,
-    height: 50,
     borderWidth: 1,
     borderColor: 'lightgray',
     overflow: 'hidden',
@@ -245,7 +244,16 @@ function computeImageBoxDimensions(params: any) {
   return null;
 }
 
-export default class ImgTag extends PureComponent<ImgTagProps, any> {
+interface State {
+  requiredWidth: number;
+  requiredHeight: number;
+  imagePhysicalWidth: number | null;
+  imagePhysicalHeight: number | null;
+  imageBoxDimensions: ImageDimensions | null;
+  error: boolean;
+}
+
+export default class ImgTag extends PureComponent<ImgTagProps, State> {
   private __cachedFlattenStyles: Record<string, any> | null = null;
   private __cachedRequirements: ImgDimensions | null = null;
   private mounted = false;
@@ -258,7 +266,8 @@ export default class ImgTag extends PureComponent<ImgTagProps, any> {
       imagePhysicalHeight: null,
       requiredWidth: this.__cachedRequirements!.width,
       requiredHeight: this.__cachedRequirements!.height,
-      imageBoxDimensions: null
+      imageBoxDimensions: null,
+      error: false
     };
     this.state = {
       ...state,
@@ -330,9 +339,7 @@ export default class ImgTag extends PureComponent<ImgTagProps, any> {
 
   componentDidMount() {
     this.mounted = true;
-    if (this.state.requiredWidth == null || this.state.requiredHeight == null) {
-      this.fetchPhysicalImageDimensions();
-    }
+    this.fetchPhysicalImageDimensions();
   }
 
   componentWillUnmount() {
@@ -409,10 +416,28 @@ export default class ImgTag extends PureComponent<ImgTagProps, any> {
   }
 
   renderAlt() {
+    const imageBoxDimensions = this.computeImageBoxDimensions(
+      this.props,
+      this.state
+    );
     return (
-      <View style={styles.errorBox} testID="image-error">
+      <View
+        style={[
+          styles.errorBox,
+          {
+            height:
+              imageBoxDimensions?.height ||
+              this.props.imagesInitialDimensions.height,
+            width:
+              imageBoxDimensions?.width ||
+              this.props.imagesInitialDimensions.width
+          }
+        ]}
+        testID="image-error">
         {this.props.alt ? (
-          <Text style={[styles.errorText, { color: this.props.altColor }]}>{this.props.alt}</Text>
+          <Text style={[styles.errorText, { color: this.props.altColor }]}>
+            {this.props.alt}
+          </Text>
         ) : (
           false
         )}
@@ -441,13 +466,14 @@ export default class ImgTag extends PureComponent<ImgTagProps, any> {
   }
 
   render() {
+    const style = [styles.container, this.props.style];
     if (this.props.onPress) {
       return (
-        <GenericPressable onPress={this.props.onPress} style={styles.container}>
+        <GenericPressable onPress={this.props.onPress} style={style}>
           {this.renderContent()}
         </GenericPressable>
       );
     }
-    return <View style={styles.container}>{this.renderContent()}</View>;
+    return <View style={style}>{this.renderContent()}</View>;
   }
 }
