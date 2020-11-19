@@ -317,11 +317,26 @@ style="
   width: 40px;
 "
 >Click me!</div></a>
-`
+`;
 
 const inlineCustomTags = `
     <p>Foo <MyTag></MyTag> Baz </p>
     <p>Foo <myothertag></myothertag> baz</p>
+`;
+
+const whitespace = `<p>In the below example, <em>white-space</em> is set to <em>normal</em> (the default)</p>
+<div class="white-space-normal">
+  <span>This is text!</span>
+
+  This is <strong>bold</strong> <em>italics</em>.
+</div>
+<hr/>
+<p>In this example, <em>white-space</em> is set to <em>pre</em> (the content is identical)</p>
+<div class="white-space-pre">
+  <span>This is text!</span>
+
+  This is <strong>bold</strong> <em>italics</em>.
+</div>
 `;
 
 function myTagRenderer() {
@@ -346,14 +361,24 @@ const snippetsMapConfig: Record<
     }
   },
   whitespace: {
-    name: "White Space Collapsing",
-    html: `<span>This is text!</span>
-
-
-
-
-
-    This is <strong>bold</strong> <em>italics</em>.`
+    name: 'White Space Collapsing',
+    html: whitespace,
+    props: {
+      tagsStyles: {
+        div: {
+          backgroundColor: 'yellow',
+          color: 'black'
+        }
+      },
+      classesStyles: {
+        'white-space-pre': {
+          whiteSpace: 'pre'
+        },
+        'white-space-normal': {
+          whiteSpace: 'normal'
+        }
+      }
+    }
   },
   pre: {
     name: 'Preformatted',
