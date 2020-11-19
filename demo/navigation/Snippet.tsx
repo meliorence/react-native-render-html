@@ -87,6 +87,7 @@ const Snippet = ({
       enableUserAgentStyles
       onTTreeChange={setTTree}
       debug={false}
+      enableExperimentalMarginCollapsing={true}
     />
   );
   return (
