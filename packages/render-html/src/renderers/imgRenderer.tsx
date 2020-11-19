@@ -28,6 +28,7 @@ const imgRenderer: DefaultRenderers['block'][string] = (props) => {
     <ImgTag
       alt={tnode.attributes.alt}
       testID="img"
+      altColor={tnode.styles.nativeTextFlow.color as string}
       contentWidth={contentWidth as number}
       computeImagesMaxWidth={computeImagesMaxWidth}
       enableExperimentalPercentWidth={enableExperimentalPercentWidth}
