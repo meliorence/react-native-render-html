@@ -8,7 +8,8 @@ import type {
   MixedStyleRecord,
   DOMNode,
   DOMText,
-  DOMElement
+  DOMElement,
+  TNode
 } from '@native-html/transient-render-tree';
 import { ReactNode } from 'react';
 import {
@@ -206,4 +207,8 @@ export interface RenderHTMLProps<P = any> extends RenderHTMLPassedProps<P> {
    * Return true in this custom function to ignore nodes very precisely, see [ignoring HTML content](https://github.com/archriss/react-native-render-html#ignoring-html-content)
    */
   ignoreNodesFunction?: (node: DOMNode, parentTagName: string) => boolean;
+  /**
+   * Triggered when the transient render tree changes. Useful for debugging.
+   */
+  onTTreeChange?: (ttree: TNode) => void;
 }
