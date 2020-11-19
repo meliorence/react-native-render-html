@@ -3,67 +3,81 @@ import { View, Text } from 'react-native';
 import { RenderHTMLProps } from 'react-native-render-html';
 import { DOMElement } from '@native-html/transient-render-tree';
 
-const test = `
+const test = `<a href="http://google.fr"><div
+style="
+  background-color: red;
+  height: 20px;
+  width: 40px;
+"
+>Click me!</div></a>`;
+
+const paragraphs = `<p style="font-size: 1.3em">
+This paragraph is styled a font size set in em !
+</p>
+<em>This one showcases the default renderer for the "em" HTML
+tag.</em>
+<p style="padding: 10%; background-color: #f7a29c">
+This one features a padding
+
+<strong>in percentage !</strong>
+</p>
+<hr />
+<i>Here, we have a style set on the "i" tag with the
+"tagsStyles" prop.</i>
+<p>
+And
+
+<a href="http://google.fr" title="Google FR">This is a link !</a>
+</p>
 <a href="http://google.fr">
-This is
-<span>phrasing content</span>
-<img src="https://i.imgur.com/gSmWCJF.jpg" />
-    and this is <strong>too</strong>.
-</a>`;
-
-const paragraphs = `
-<p style="font-size: 1.3em">This paragraph is styled a font size set in em !</p>
-
-
-
-
-
-<em>This one showcases the default renderer for the "em" HTML tag.</em>
-<p style="padding: 10%;background-color:#f7a29c;">
-  This one features a padding <strong>in percentage !</strong>
-</p>
-<hr />
-<i>Here, we have a style set on the "i" tag with the "tagsStyles" prop.</i>
-<p>And <a href="http://google.fr" title="Google FR">This is a link !</a></p>
-<a href="http://google.fr"
-  ><div style="background-color: red; height: 20px; width: 40px"></div
-></a>
+<div
+  style="background-color: red; height: 20px; width: 40px"></div>
+</a>
 <p class="last-paragraph">
-  Finally, this paragraph is styled through the classesStyles prop
-</p>
-`;
+Finally, this paragraph is styled through the
+classesStyles prop
+</p>`;
 
-const lists = `
-<p>An <em>ul</em> tag, default styling</p>
-<ul style="font-size:25px;">
-    <li>Easy</li>
-    <li>Peasy</li>
-    <li><div style="background-color:red;width:50px;height:50px;"></div></li>
-    <li>Lemon</li>
-    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </li>
+const lists = `<p>An <em>ul</em> tag, default styling</p>
+<ul>
+	<li>Easy</li>
+	<li>Peasy</li>
+	<li>
+		<div style="background-color:red;width:50px;height:50px;"></div>
+	</li>
+	<li>Lemon</li>
+	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </li>
 </ul>
 <hr />
-<p>An <em>ul</em> tag, with <em>list-style-type: circle;</em></p>
+<p>An 
+	<em>ul</em> tag, with 
+	<em>list-style-type: circle;</em>
+</p>
 <ul style="list-style-type: circle;">
-    <li>Sneaky</li>
-    <li>Beaky</li>
-    <li>Like</li>
+	<li>Sneaky</li>
+	<li>Beaky</li>
+	<li>Like</li>
 </ul>
 <hr />
-<p>An <em>ol</em> tag, default styling</p>    
-<ol>
-    <li>Sneaky</li>
-    <li>Beaky</li>
-    <li>Like</li>
+<p>An 
+	<em>ol</em> tag, with 
+	<em>color: blue;</em>
+</p>
+<ol style="color:blue;">
+	<li>Sneaky</li>
+	<li>Beaky</li>
+	<li>Like</li>
 </ol>
 <hr />
-<p>An <em>ol</em> tag, with <em>list-style-type: lower-alpha;</em></p>    
+<p>An 
+	<em>ol</em> tag, with 
+	<em>list-style-type: lower-alpha;</em>
+</p>
 <ol style="list-style-type: lower-alpha;">
-    <li>Sneaky</li>
-    <li>Beaky</li>
-    <li>Like</li>
-</ol>
-`;
+	<li>Sneaky</li>
+	<li>Beaky</li>
+	<li>Like</li>
+</ol>`;
 
 const simpleLoremWithImages = `
 <p>This first image's dimensions are set in its style attributes.</p>
@@ -72,19 +86,22 @@ const simpleLoremWithImages = `
   src="https://i.imgur.com/gSmWCJF.jpg"
 />
 <p>
-  The next image will be sized automatically thanks to the "contentWidth" and
-  "computeImageMaxWidth" props.
+  The next image will be sized automatically thanks to the <em>contentWidth</em> and
+  <em>computeImageMaxWidth</em> props.
 </p>
 <img src="https://i.imgur.com/XP2BE7q.jpg" />
 `;
 
-const imagesWithinParagraphs = `
-<p><img src="https://i.imgur.com/gSmWCJF.jpg" /></p>
+const imagesWithinParagraphs = `<p>
+	<img src="https://i.imgur.com/gSmWCJF.jpg" />
+</p>
 <p>
   Android used to have trouble rendering images inside paragraphs. This is why
   this plugin moves images and appends them right after their container.
 </p>
-<p><img src="https://i.imgur.com/gSmWCJF.jpg" /></p>
+<p>
+	<img src="https://i.imgur.com/gSmWCJF.jpg" />
+</p>
 <p>
   Eo adducta re per Isauriam, rege Persarum bellis finitimis inligato
   repellenteque a conlimitiis suis ferocissimas gentes, quae mente quadam
@@ -93,7 +110,9 @@ const imagesWithinParagraphs = `
   quotiens copia dederit ordinatus, explorabat nostra sollicite, si repperisset
   usquam locum vi subita perrupturus.
 </p>
-<p><img src="https://i.imgur.com/XP2BE7q.jpg" /></p>
+<p>
+	<img src="https://i.imgur.com/XP2BE7q.jpg" />
+</p>
 <p>
   Quod cum ita sit, paucae domus studiorum seriis cultibus antea celebratae nunc
   ludibriis ignaviae torpentis exundant, vocali sonu, perflabili tinnitu fidium
@@ -102,17 +121,17 @@ const imagesWithinParagraphs = `
   organa fabricantur hydraulica, et lyrae ad speciem carpentorum ingentes
   tibiaeque et histrionici gestus instrumenta non levia.
 </p>
-<p><img src="https://i.imgur.com/gSmWCJF.jpg" /></p>
-`;
+<p>
+	<img src="https://i.imgur.com/gSmWCJF.jpg" />
+</p>`;
 
 const images404 = `
+<p>The following image has an unreachable <em>src</em>.</p>
 <img src="http://example.tld/image.jpg" />
-<p>The following images are not valid.</p>
-<img src="http://example.tld/image.jpg" />
-<p>The following images are not valid.</p>
-<img src="http://example.tld/image.jpg" />
-<p>The following images are not valid.</p>
-<img src="http://example.tld/image.jpg" />
+<p>Same, with <em>alt="The Void"</em>.</p>
+<img alt="The Void" src="http://example.tld/image.jpg" />
+<p>Same, with <em>width="300" height="200"</em>.</p>
+<img width="300" height="200" alt="The Void" src="http://example.tld/image.jpg" />
 `;
 
 const trickyStuff = `
@@ -130,40 +149,30 @@ const trickyStuff = `
 const layoutStyles = `
 <p>Nested rectangle with percentage dimensions and positionning</p>
 <div style="background-color: red; height: 200px">
-  <div
-    style="background-color: blue; width: 80%; height: 80%; top: 10%; left: 10%"
-  ></div>
+	<div
+    style="background-color: blue; width: 80%; height: 80%; top: 10%; left: 10%"></div>
 </div>
 <div
-  style="background-color: red; height: 200px; padding: 20%; margin-top: 30px"
->
-  <p style="color: white">Text inside a rectangle with a 20% padding</p>
+  style="background-color: red; height: 200px; padding: 20%; margin-top: 30px">
+	<p style="color: white">Text inside a rectangle with a 20% padding</p>
 </div>
 `;
 
-const textsStylesBehaviour = `
-<p>Styling texts is a very tricky part of converting HTML into react-native components.</p>
+const textsStylesBehaviour = `<p>Styling texts is a very tricky part of converting HTML into react-native components.</p>
 <p>The way react-native's <em>Text</em> components behaves is a lot different from our browsers' implementation.</p>
 <p>Let's see how styles are applied to texts with this plugin.</p>
-
 <div style="color:red;">This text is inside a div, without a text tag wrapping it. The <em>div</em> tag only has <em>color:red;</em> as style.</div>
-
 In the example above, you may find, if you inspect the rendered components, that it's the <em>Text</em> component inside that actually receives the color attribute.
 This is because this library parses every text-only style of <em>View</em> wrappers and moves them to each <em>Text</em> child.
-
 <div style="color:red">
     <p>This first paragraph doesn't have a specific styling.</p>
     <p style="color:blue;">This one is blue.</p>
 </div>
-
 <p>Here, the <em>div</em> wrapper still has <em>color:red;</em> as style.</div>.</p>
-
 <p>The first paragraph inside it doesn't have any style attribute, either from HTML or from the <em>tagsStyles</em> or <em>classesStyles</em> props.</p>
 <p>The second one is set to be blue from its <em>style</em> attribute.</p>
-
 <p>You can see the order of priorities that applies to styling. The less important are your <em>tagsStyles</em>, 
-then your <em>classessStyles</em> and finally the styles parsed from your HTML content.</p>
-`;
+then your <em>classessStyles</em> and finally the styles parsed from your HTML content.</p>`;
 
 const ignoringTagsAndStyles = `
 <p>The following tag (h2) is ignored with the "ignoredTags" prop</p>
@@ -281,13 +290,21 @@ const alteration = `
 
 const anchors = `
 <p>
-  Anchors are difficult because they can encompass text and blocks.
-  In the below example, the anchor encompasses both raw text and an img tag.
-  You can actually click the image and you'll be directed to a WebView!
-</p>
+  Anchors are tricky because they can encompass text and blocks, but
+  we don't want to override event handlers defined by user renderers.
+  So every renderer now receives a special optional prop, 
+	<em>syntheticOnLinkPress</em>,
+  that one can choose to handle, ignore, or pass to children.
 
+</p>
+<p>
+  In the below example, the anchor encompasses both raw text and an img tag.
+  You can click the image and you'll be directed to a WebView.
+</p>
 <a href="https://developer.mozilla.org/">A link to MDN!</a>
-<a href="https://developer.mozilla.org/"><img alt="And this image too!" src="https://i.imgur.com/gSmWCJF.jpg" /></a>
+<a href="https://developer.mozilla.org/">
+	<img alt="And this image too!" src="https://i.imgur.com/gSmWCJF.jpg" />
+</a>
 `
 
 const inlineCustomTags = `
@@ -307,7 +324,7 @@ const snippetsMapConfig: Record<
   string,
   { name: string; html: string; props?: Partial<RenderHTMLProps> }
 > = {
-  em: {
+  test: {
     name: 'Test',
     html: test,
     props: {
@@ -316,14 +333,31 @@ const snippetsMapConfig: Record<
       }
     }
   },
+  whitespace: {
+    name: "White Space Collapsing",
+    html: `<span>This is text!</span>
+
+
+
+
+
+    This is <strong>bold</strong> <em>italics</em>.`
+  },
   pre: {
-    name: 'pre tag',
-    html: `<pre>This is pre!
-    
-    
-    
-    
-Whitespaces are preserved.</pre>
+    name: 'Preformatted',
+    html: `<pre>
+  ___________________________
+< I'm an expert in my field. >
+  ---------------------------
+    \\   ^__^ 
+    \\  (oo)\\_______
+       (__)\\       )\\/\\
+           ||----w |
+           ||     ||
+</pre>
+<figcaption>
+  A cow saying, "I'm an expert in my field." The cow is illustrated using preformatted text characters. 
+</figcaption>
     `,
     props: {}
   },
@@ -381,7 +415,7 @@ Whitespaces are preserved.</pre>
     html: textsStylesBehaviour,
     props: {
       tagsStyles: {
-        div: { borderWidth: 1, padding: 10, marginBottom: 10 }
+        div: { borderWidth: 1, padding: 10, marginBottom: 10, borderColor: 'gray' }
       }
     }
   },
