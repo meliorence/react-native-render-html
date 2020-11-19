@@ -36,6 +36,8 @@ const imgRenderer: DefaultRenderers['block'][string] = (props) => {
       onPress={syntheticAnchorOnLinkPress}
       source={{ uri: normalizeUri(src) }}
       style={nativeStyle}
+      width={tnode.attributes.width}
+      height={tnode.attributes.height}
     />
   );
 };
