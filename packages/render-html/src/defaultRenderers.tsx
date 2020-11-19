@@ -1,16 +1,33 @@
-import type { TBlock, TNode } from '@native-html/transient-render-tree';
+import type {
+  TBlock,
+  TNode
+} from '@native-html/transient-render-tree';
+import { TStyles } from '@native-html/transient-render-tree/lib/typescript/styles/TStyles';
 import { ReactNode } from 'react';
-import { GestureResponderEvent, StyleProp } from 'react-native';
 import imgRenderer from './renderers/imgRenderer';
 import listRenderer from './renderers/listRenderer';
-import type { TNodeGenericRendererProps } from './TNodeRenderer';
-import { RenderHTMLPassedProps } from './types';
+import type {
+  TNodeGenericRendererProps,
+  TNodeRendererProps
+} from './TNodeRenderer';
 
-export interface RendererProps<T extends TNode> {
-  key?: string | number;
-  nativeStyle: StyleProp<any>;
-  untranslatedStyle: StyleProp<any>;
-  tnode: T;
+export interface RendererProps<T extends TNode>
+  extends Pick<
+    TNodeRendererProps<T>,
+    | 'key'
+    | 'tnode'
+    | 'syntheticAnchorOnLinkPress'
+    | 'passedProps'
+    | 'marginCollapsingEnabled'
+    | 'collapsedMarginTop'
+  > {
+  nativeStyle: T extends TBlock
+    ? TStyles['nativeBlockFlow'] & TStyles['nativeBlockRet']
+    : TStyles['nativeBlockFlow'] &
+        TStyles['nativeBlockRet'] &
+        TStyles['nativeTextFlow'] &
+        TStyles['nativeTextRet'];
+  untranslatedStyle: TStyles['webTextFlow'];
   /**
    * If no children is provided, the default renderer will use this method to
    * render children TNodes.
@@ -24,13 +41,7 @@ export interface RendererProps<T extends TNode> {
    * When children is present, renderChildren will not be invoked.
    */
   children?: ReactNode;
-  /**
-   * If one of the parent is an anchor element, this method will be present to
-   * customize link presses.
-   */
-  syntheticAnchorOnLinkPress?: (e: GestureResponderEvent) => void; 
   Default: (props: RendererProps<T>) => any;
-  passedProps: RenderHTMLPassedProps;
 }
 
 export interface DefaultRenderers {

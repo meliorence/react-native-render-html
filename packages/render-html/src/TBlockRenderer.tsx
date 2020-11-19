@@ -12,21 +12,35 @@ const DefaultBlockRenderer = ({
   children: overridingChildren,
   passedProps,
   nativeStyle,
-  syntheticAnchorOnLinkPress
+  syntheticAnchorOnLinkPress,
+  marginCollapsingEnabled,
+  collapsedMarginTop
 }: RendererProps<TBlock>) => {
-  const children = overridingChildren ?? renderTChildren(tnode, passedProps, syntheticAnchorOnLinkPress);
+  const children =
+    overridingChildren ??
+    renderTChildren(tnode, {
+      passedProps,
+      syntheticAnchorOnLinkPress,
+      marginCollapsingEnabled
+    });
+  const additionalStyles: any = {};
+  if (typeof collapsedMarginTop === 'number') {
+    additionalStyles.marginTop = collapsedMarginTop;
+  }
+  const finalStyles =
+    collapsedMarginTop !== null ? [nativeStyle, additionalStyles] : nativeStyle;
   if (typeof syntheticAnchorOnLinkPress === 'function') {
     return (
       <GenericPressable
         key={key}
-        style={nativeStyle}
+        style={finalStyles}
         onPress={syntheticAnchorOnLinkPress}>
         {children}
       </GenericPressable>
     );
   }
   return (
-    <View key={key} style={nativeStyle}>
+    <View key={key} style={finalStyles}>
       {children}
     </View>
   );
@@ -39,18 +53,25 @@ const TBlockRenderer = ({
   renderTNode,
   defaultRenderers,
   passedProps,
-  syntheticAnchorOnLinkPress
+  syntheticAnchorOnLinkPress,
+  marginCollapsingEnabled,
+  collapsedMarginTop: collapsedMargins
 }: TNodeGenericRendererProps<TBlock>) => {
   const rendererProps: RendererProps<TBlock> = {
     key,
     tnode,
-    nativeStyle: [tnode.styles.nativeBlockFlow, tnode.styles.nativeBlockRet],
+    nativeStyle: {
+      ...tnode.styles.nativeBlockFlow,
+      ...tnode.styles.nativeBlockRet
+    },
     passedProps,
     renderTChildren,
     renderTNode,
     syntheticAnchorOnLinkPress,
     Default: DefaultBlockRenderer,
-    untranslatedStyle: tnode.styles.webTextFlow
+    untranslatedStyle: tnode.styles.webTextFlow,
+    marginCollapsingEnabled,
+    collapsedMarginTop: collapsedMargins
   };
   const defaultRenderer = defaultRenderers.block[tnode.tagName as any];
   if (defaultRenderer) {
