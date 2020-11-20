@@ -85,13 +85,13 @@ const Snippet = React.memo(
         baseStyle={baseStyle}
         enableUserAgentStyles
         onTTreeChange={setTTree}
-        debug={true}
-        enableExperimentalMarginCollapsing={false}
+        enableExperimentalMarginCollapsing={true}
+        debug={false}
       />
     );
     return (
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1, padding: CONTAINER_PADDING }}
+        contentContainerStyle={{ flexGrow: 1, paddingHorizontal: CONTAINER_PADDING }}
         style={{ flexGrow: 1 }}>
         {renderHtml}
       </ScrollView>
