@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from 'react-native';
 import { TText } from '@native-html/transient-render-tree';
 import defaultRenderers from './defaultRenderers';
-import { TNodeGenericRendererProps } from './types';
+import { TNodeGenericRendererProps } from './shared-types';
 
 const TTextRenderer = ({
   tnode,

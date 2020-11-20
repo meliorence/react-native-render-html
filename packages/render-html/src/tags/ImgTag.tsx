@@ -5,12 +5,11 @@ import {
   Text,
   StyleSheet,
   ImageStyle,
-  StyleProp,
   PressableProps
 } from 'react-native';
 import PropTypes from 'prop-types';
 import GenericPressable from '../GenericPressable';
-import { ImageDimensions } from '../types';
+import { ImageDimensions } from '../shared-types';
 
 export interface ImgDimensions {
   width: number;
@@ -477,14 +476,4 @@ export default class ImgTag extends PureComponent<ImgTagProps, State> {
     }
     return <View style={style}>{this.renderContent()}</View>;
   }
-}
-
-function splitStyle({ width, height, ...rest }: ImageStyle) {
-  return {
-    boxModel: {
-      width,
-      height
-    },
-    rest
-  };
 }

@@ -1,4 +1,3 @@
-
 export function getStringPrefixFromIndex(
   index: number,
   baseCharcode: number,
@@ -10,6 +9,7 @@ export function getStringPrefixFromIndex(
   const rest = index % modulo;
   const next = (index - rest - modulo) / modulo;
   return (
-    getStringPrefixFromIndex(next, baseCharcode, modulo) + String.fromCharCode(baseCharcode + rest)
+    getStringPrefixFromIndex(next, baseCharcode, modulo) +
+    String.fromCharCode(baseCharcode + rest)
   );
 }
