@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import { RenderHTMLProps } from './types';
 import TNodeRenderer from './TNodeRenderer';
 import defaultRenderers from './defaultRenderers';
@@ -48,10 +48,18 @@ const propTypes: RenderHTMLPropTypes = {
   textSelectable: PropTypes.bool,
   renderersProps: PropTypes.object,
   allowFontScaling: PropTypes.bool,
-  onTTreeChange: PropTypes.func
+  onTTreeChange: PropTypes.func,
+  extraFonts: PropTypes.arrayOf(PropTypes.string),
+  fallbackFonts: PropTypes.shape({
+    serif: PropTypes.string,
+    "sans-serif": PropTypes.string,
+    monospace: PropTypes.string,
+  })
 };
 
-const defaultProps: Partial<Record<keyof RenderHTMLProps, any>> = {
+const defaultProps: {
+  [k in keyof RenderHTMLProps]?: RenderHTMLProps[k];
+} = {
   debug: false,
   decodeEntities: true,
   emSize: 14,
@@ -69,7 +77,64 @@ const defaultProps: Partial<Record<keyof RenderHTMLProps, any>> = {
   enableUserAgentStyles: true,
   enableCSSInlineProcessing: true,
   enableExperimentalMarginCollapsing: false,
-  renderers: {}
+  renderers: {},
+  fallbackFonts: {
+    'sans-serif': Platform.select({ ios: 'system', default: 'sans-serif' }),
+    monospace: Platform.select({ ios: 'Menlo', default: 'monospace' }),
+    serif: Platform.select({ ios: 'Times New Roman', default: 'serif' })
+  },
+  extraFonts: Platform.select({
+    default: [],
+    ios: [
+      'San Francisco',
+      'Arial',
+      'ArialHebrew',
+      'Avenir',
+      'Baskerville',
+      'Bodoni 72',
+      'Bradley Hand',
+      'Chalkboard SE',
+      'Cochin',
+      'Copperplate',
+      'Courier',
+      'Courier New',
+      'Damascus',
+      'Didot',
+      'Futura',
+      'Geeza Pro',
+      'Georgia',
+      'Gill Sans',
+      'Helvetica',
+      'Helvetica Neue',
+      'Hiragino Sans',
+      'Hoefler Text',
+      'Iowan Old Style',
+      'Kailasa',
+      'Khmer Sangam MN',
+      'Marker Felt',
+      'Menlo',
+      'Mishafi',
+      'Noteworthy',
+      'Optima',
+      'Palatino',
+      'Papyrus',
+      'Savoye LET',
+      'Symbol',
+      'Thonburi',
+      'Times New Roman',
+      'Trebuchet MS',
+      'Verdana',
+      'Zapf Dingbats',
+      'Zapfino'
+    ],
+    android: [
+      'Roboto',
+      'notoserif',
+      'sans-serif-light',
+      'sans-serif-thin',
+      'sans-serif-medium'
+    ]
+  })
 };
 
 export default function RenderHTML(props: RenderHTMLProps) {

@@ -222,4 +222,25 @@ export interface RenderHTMLProps<P = any> extends RenderHTMLPassedProps<P> {
    * Triggered when the transient render tree changes. Useful for debugging.
    */
   onTTreeChange?: (ttree: TNode) => void;
+  /**
+   * A list of fonts available in the current platform. These fonts will used
+   * to select the first match in CSS `fontFamily` property, which supports a
+   * comma-separated list of fonts. By default, a handful of fonts are selected
+   * per platform.
+   * 
+   * **Suggestion**: Use Plaform.select({ ios: ..., android: ..., default: ...})
+   */
+  extraFonts?: string[];
+  /**
+   * A record for specific CSS fonts.
+   * 
+   * **Suggestion**: Use Plaform.select({ ios: ..., android: ..., default: ...})
+   */
+  fallbackFonts?: FallbackFontsDefinitions
+}
+
+export interface FallbackFontsDefinitions {
+  serif: string;
+  'sans-serif': string;
+  monospace: string;
 }

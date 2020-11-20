@@ -11,12 +11,27 @@ export default function useTTreeBuilder({
   tagsStyles,
   idsStyles,
   enableCSSInlineProcessing,
-  enableUserAgentStyles
+  enableUserAgentStyles,
+  fallbackFonts,
+  extraFonts
 }: RenderHTMLProps) {
+  const isFontSupported = useMemo(() => {
+    const fontMap = {} as Record<string, true>;
+    extraFonts!.forEach((font) => {
+      fontMap[font] = true;
+    });
+    return (fontFamily: string) => {
+      if (fallbackFonts![fontFamily as keyof typeof fallbackFonts]) {
+        return fallbackFonts![fontFamily as keyof typeof fallbackFonts];
+      }
+      return fontMap[fontFamily] || false;
+    };
+  }, []);
   return useMemo(
     () =>
       new TTreeBuilder({
         cssProcessorConfig: {
+          isFontSupported,
           inlinePropertiesBlacklist: ignoredStyles,
           inlinePropertiesWhitelist: allowedStyles
         },
@@ -41,7 +56,8 @@ export default function useTTreeBuilder({
       enableUserAgentStyles,
       idsStyles,
       ignoredStyles,
-      tagsStyles
+      tagsStyles,
+      isFontSupported
     ]
   );
 }
