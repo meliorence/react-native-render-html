@@ -2,19 +2,21 @@ import { useMemo } from 'react';
 import { TTreeBuilder } from '@native-html/transient-render-tree';
 import { RenderHTMLProps } from './shared-types';
 
-export default function useTTreeBuilder({
-  allowedStyles,
-  ignoredStyles,
-  decodeEntities,
-  baseStyle,
-  classesStyles,
-  tagsStyles,
-  idsStyles,
-  enableCSSInlineProcessing,
-  enableUserAgentStyles,
-  fallbackFonts,
-  extraFonts
-}: RenderHTMLProps) {
+export default function useTTreeBuilder(props: RenderHTMLProps) {
+  const {
+    allowedStyles,
+    ignoredStyles,
+    decodeEntities,
+    baseStyle,
+    classesStyles,
+    tagsStyles,
+    idsStyles,
+    enableCSSInlineProcessing,
+    enableUserAgentStyles,
+    fallbackFonts,
+    extraFonts,
+    triggerTREInvalidationPropNames: triggerTRERebuildProps
+  } = props;
   const isFontSupported = useMemo(() => {
     const fontMap = {} as Record<string, true>;
     extraFonts!.forEach((font) => {
@@ -27,6 +29,7 @@ export default function useTTreeBuilder({
       return fontMap[fontFamily] || false;
     };
   }, [extraFonts, fallbackFonts]);
+  const tbuilderDeps = (triggerTRERebuildProps || []).map((key) => props[key]);
   return useMemo(
     () =>
       new TTreeBuilder({
@@ -47,17 +50,6 @@ export default function useTTreeBuilder({
           tagsStyles
         }
       }),
-    [
-      allowedStyles,
-      baseStyle,
-      classesStyles,
-      decodeEntities,
-      enableCSSInlineProcessing,
-      enableUserAgentStyles,
-      idsStyles,
-      ignoredStyles,
-      tagsStyles,
-      isFontSupported
-    ]
+    [...tbuilderDeps, isFontSupported]
   );
 }
