@@ -1,6 +1,7 @@
 import React from 'react';
 import ImgTag from '../tags/ImgTag';
 import { DefaultRenderers } from '../defaultRenderers';
+import { useSharedProps } from '../context/SharedPropsContext';
 
 function normalizeUri(uri: string) {
   return uri.startsWith('//') ? `https:${uri}` : uri;
@@ -11,7 +12,6 @@ const imgRenderer: DefaultRenderers['block'][string] = (props) => {
     nativeStyle,
     tnode,
     Default,
-    passedProps,
     syntheticAnchorOnLinkPress
   } = props;
   const {
@@ -19,7 +19,7 @@ const imgRenderer: DefaultRenderers['block'][string] = (props) => {
     computeImagesMaxWidth,
     enableExperimentalPercentWidth,
     imagesInitialDimensions
-  } = passedProps;
+  } = useSharedProps();
   const src = tnode.attributes.src;
   if (!src) {
     return React.createElement(Default, props);

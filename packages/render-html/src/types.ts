@@ -9,13 +9,15 @@ import type {
   DOMNode,
   DOMText,
   DOMElement,
-  TNode
+  TNode,
+  TBlock
 } from '@native-html/transient-render-tree';
 import { ReactNode } from 'react';
 import {
   CSSPropertyNameList,
   MixedStyleDeclaration
 } from '@native-html/css-processor';
+import { TStyles } from '@native-html/transient-render-tree/lib/typescript/styles/TStyles';
 
 export interface RendererDictionary<P> {}
 
@@ -61,11 +63,16 @@ export interface RenderHTMLPassedProps<P = any> {
    */
   enableExperimentalPercentWidth?: boolean;
   /**
-   * Enable or disable inline CSS processing (style attribute).
+   * Enable or disable margin collapsing CSS behavior (experimental!).
+   * See {@link https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing | MDN docs}.
    *
-   * @default true
+   * @remarks Limitations:
+   * - Only adjacent siblings collapsing is implemented.
+   * - If one of the margins height is in percent, no collapsing will occur.
+   *
+   * @default false
    */
-  enableCSSInlineProcessing?: boolean;
+  enableExperimentalMarginCollapsing?: boolean;
   /**
    * Fired with the event, the href and an object with all attributes of the tag as its arguments when tapping a link
    */
@@ -115,16 +122,11 @@ export interface RenderHTMLProps<P = any> extends RenderHTMLPassedProps<P> {
    */
   enableUserAgentStyles?: boolean;
   /**
-   * Enable or disable margin collapsing CSS behavior (experimental!).
-   * See {@link https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing | MDN docs}.
-   * 
-   * @remarks Limitations:
-   * - Only adjacent siblings collapsing is implemented.
-   * - If one of the margins height is in percent, no collapsing will occur.
-   * 
-   * @default false
+   * Enable or disable inline CSS processing (style attribute).
+   *
+   * @default true
    */
-  enableExperimentalMarginCollapsing?: boolean;
+  enableCSSInlineProcessing?: boolean;
   /**
    * Provide your styles for specific HTML tags.
    *
@@ -227,20 +229,43 @@ export interface RenderHTMLProps<P = any> extends RenderHTMLPassedProps<P> {
    * to select the first match in CSS `fontFamily` property, which supports a
    * comma-separated list of fonts. By default, a handful of fonts are selected
    * per platform.
-   * 
+   *
    * **Suggestion**: Use Plaform.select({ ios: ..., android: ..., default: ...})
    */
   extraFonts?: string[];
   /**
    * A record for specific CSS fonts.
-   * 
+   *
    * **Suggestion**: Use Plaform.select({ ios: ..., android: ..., default: ...})
    */
-  fallbackFonts?: FallbackFontsDefinitions
+  fallbackFonts?: FallbackFontsDefinitions;
 }
 
 export interface FallbackFontsDefinitions {
   serif: string;
   'sans-serif': string;
   monospace: string;
+}
+
+export interface TNodeGenericRendererProps<T extends TNode> {
+  tnode: T;
+  key?: string | number;
+  syntheticAnchorOnLinkPress?: (e: GestureResponderEvent) => void;
+  collapsedMarginTop: number | null;
+}
+
+export interface RendererProps<T extends TNode>
+  extends TNodeGenericRendererProps<T> {
+  nativeStyle: T extends TBlock
+    ? TStyles['nativeBlockFlow'] & TStyles['nativeBlockRet']
+    : TStyles['nativeBlockFlow'] &
+        TStyles['nativeBlockRet'] &
+        TStyles['nativeTextFlow'] &
+        TStyles['nativeTextRet'];
+  untranslatedStyle: TStyles['webTextFlow'];
+  /**
+   * When children is present, renderChildren will not be invoked.
+   */
+  children?: ReactNode;
+  Default: (props: RendererProps<T>) => any;
 }
