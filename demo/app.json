@@ -1,9 +1,10 @@
 {
   "expo": {
-    "name": "Foundry Demo",
+    "name": "Foundry Playground",
     "slug": "react-native-render-html-foundry-demo",
+    "description": "A playground for the (amazing) upcoming release of React Native Render HTML!",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",

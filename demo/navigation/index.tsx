@@ -135,10 +135,12 @@ function HomeScreen({}: StackScreenProps<any>) {
         headerTintColor: theme.colors.text,
         headerShown: true,
         headerTitleAllowFontScaling: true,
-        headerTitleStyle: {
-          width: Platform.OS === 'ios' ? '60%' : '75%',
-          alignItems: Platform.OS === 'ios' ? 'center' : 'flex-start'
-        }
+        headerTitleStyle: Platform.select({
+          ios: {
+            width: '75%',
+            alignItems: 'flex-start'
+          }
+        })
       }}>
       {Object.keys(snippets)
         .filter((k) => ignoredSnippets.indexOf(k) === -1)
@@ -191,12 +193,12 @@ function RootNavigator() {
             />
             <Stack.Screen
               name="source"
-              options={{}}
+              options={{ title: 'HTML Source' }}
               component={SourceRenderer}
             />
             <Stack.Screen
               name="ttree"
-              options={{ title: 'Transient Render Tree snapshot' }}
+              options={{ title: 'Transient Render Tree' }}
               component={TTreeScreen}
             />
           </Stack.Navigator>
