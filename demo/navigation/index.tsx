@@ -33,8 +33,9 @@ import { memo } from 'react';
 import TTreeContextProvider, { useTTree } from '../state/TTreeContextProvider';
 import { MonoText } from '../components/StyledText';
 import BidirectionalScrollView from '../components/BidirectionalScrollView';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const version = '1.2.0';
+const version = '1.2.1';
 
 const CombinedLightTheme = merge(PaperLightTheme, NavLightTheme);
 const CombinedDarkTheme = merge(PaperDarkTheme, NavDarkTheme);
@@ -181,6 +182,7 @@ function HomeScreen({}: StackScreenProps<any>) {
 }
 
 function VersionDisplay() {
+  const { bottom, left, right } = useSafeAreaInsets();
   return (
     <View
       style={{
@@ -191,7 +193,10 @@ function VersionDisplay() {
           fontSize: 10,
           padding: 10,
           borderTopWidth: StyleSheet.hairlineWidth,
-          textAlign: 'left'
+          textAlign: 'left',
+          marginBottom: bottom,
+          marginLeft: left,
+          marginRight: right
         }}>
         Foundry Playground v{version}
       </MonoText>
