@@ -1,12 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Dimensions, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import { RenderHTMLProps } from './types';
 import TNodeRenderer from './TNodeRenderer';
-import defaultRenderers from './defaultRenderers';
 import useTTree from './useTTree';
+import SharedPropsContext, {
+  defaultSharedPropsContext
+} from './context/SharedPropsContext';
+import TNodeRenderersContext from './context/TNodeRenderersContext';
+import TChildrenRenderer from './TChildrenRenderer';
 
-type RenderHTMLPropTypes = Record<keyof RenderHTMLProps, any>;
+export type RenderHTMLPropTypes = Record<keyof RenderHTMLProps, any>;
 
 const propTypes: RenderHTMLPropTypes = {
   renderers: PropTypes.object.isRequired,
@@ -52,31 +56,25 @@ const propTypes: RenderHTMLPropTypes = {
   extraFonts: PropTypes.arrayOf(PropTypes.string),
   fallbackFonts: PropTypes.shape({
     serif: PropTypes.string,
-    "sans-serif": PropTypes.string,
-    monospace: PropTypes.string,
+    'sans-serif': PropTypes.string,
+    monospace: PropTypes.string
   })
 };
 
 const defaultProps: {
   [k in keyof RenderHTMLProps]?: RenderHTMLProps[k];
 } = {
-  debug: false,
+  ...defaultSharedPropsContext,
   decodeEntities: true,
   emSize: 14,
   ptSize: 1.3,
-  contentWidth: Dimensions.get('window').width,
-  staticContentMaxWidth: Dimensions.get('window').width,
-  enableExperimentalPercentWidth: false,
   ignoredTags: [],
   ignoredStyles: [],
   baseStyle: { fontSize: 14 },
   tagsStyles: {},
   classesStyles: {},
-  textSelectable: false,
-  allowFontScaling: true,
   enableUserAgentStyles: true,
   enableCSSInlineProcessing: true,
-  enableExperimentalMarginCollapsing: false,
   renderers: {},
   fallbackFonts: {
     'sans-serif': Platform.select({ ios: 'system', default: 'sans-serif' }),
@@ -140,13 +138,11 @@ const defaultProps: {
 export default function RenderHTML(props: RenderHTMLProps) {
   const ttree = useTTree(props);
   return (
-    <TNodeRenderer
-      defaultRenderers={defaultRenderers}
-      passedProps={props}
-      tnode={ttree}
-      marginCollapsingEnabled={props.enableExperimentalMarginCollapsing!}
-      collapsedMarginTop={null}
-    />
+    <SharedPropsContext.Provider value={props}>
+      <TNodeRenderersContext.Provider value={{ TNodeRenderer, TChildrenRenderer }} >
+        <TNodeRenderer tnode={ttree} collapsedMarginTop={null} />
+      </TNodeRenderersContext.Provider>
+    </SharedPropsContext.Provider>
   );
 }
 

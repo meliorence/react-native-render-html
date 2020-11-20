@@ -1,12 +1,12 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { TText } from '@native-html/transient-render-tree';
-import { TNodeGenericRendererProps } from './TNodeRenderer';
+import defaultRenderers from './defaultRenderers';
+import { TNodeGenericRendererProps } from './types';
 
 const TTextRenderer = ({
   tnode,
   key,
-  defaultRenderers,
   syntheticAnchorOnLinkPress
 }: TNodeGenericRendererProps<TText>) => {
   const defaultRenderer = defaultRenderers.text[tnode.tagName as any];

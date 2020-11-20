@@ -1,27 +1,33 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { TPhrasing } from '@native-html/transient-render-tree';
-import { TNodeGenericRendererProps } from './TNodeRenderer';
+import { useSharedProps } from './context/SharedPropsContext';
+import { useTChildrenRenderer } from './context/TNodeRenderersContext';
+import { TNodeGenericRendererProps } from './types';
 
 const TPhrasingRenderer = ({
   tnode,
   key,
-  renderTChildren,
-  passedProps,
   syntheticAnchorOnLinkPress
 }: TNodeGenericRendererProps<TPhrasing>) => {
+  const { allowFontScaling, textSelectable } = useSharedProps();
+  const TChildrenRenderer = useTChildrenRenderer();
   return (
     <Text
       key={key}
-      allowFontScaling={passedProps.allowFontScaling}
-      selectable={passedProps.textSelectable}
+      allowFontScaling={allowFontScaling}
+      selectable={textSelectable}
       style={[
         tnode.styles.nativeBlockFlow,
         tnode.styles.nativeBlockRet,
         tnode.styles.nativeTextFlow,
-        tnode.styles.nativeTextRet,
+        tnode.styles.nativeTextRet
       ]}>
-      {renderTChildren(tnode, { passedProps, syntheticAnchorOnLinkPress, marginCollapsingEnabled: false })}
+      <TChildrenRenderer
+        tnode={tnode}
+        disableMarginCollapsing={true}
+        syntheticAnchorOnLinkPress={syntheticAnchorOnLinkPress}
+      />
     </Text>
   );
 };

@@ -4,11 +4,10 @@ import { RenderHTMLPassedProps } from './types';
 
 export default function extractAnchorOnLinkPress(
   tnode: TBlock | TPhrasing,
-  passedProps: RenderHTMLPassedProps
+  onLinkPress: RenderHTMLPassedProps['onLinkPress']
 ) {
   // @ts-ignore
   const href: string = tnode.href;
-  const onLinkPress = passedProps.onLinkPress;
   const shouldHandleLinkPress =
     tnode.isAnchor &&
     typeof href === 'string' &&
