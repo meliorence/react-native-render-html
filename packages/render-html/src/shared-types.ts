@@ -92,23 +92,7 @@ export interface RenderHTMLPassedProps<P = any> {
   debug?: boolean;
 }
 
-export interface RenderHTMLProps<P = any> extends RenderHTMLPassedProps<P> {
-  /**
-   * HTML string to parse and render
-   */
-  html: string;
-  /**
-   * Your custom renderers.
-   */
-  renderers?: RendererDictionary<P>;
-  /**
-   * Set of props accessible into your custom renderers in `passProps` (4th argument)
-   */
-  renderersProps?: any;
-  /**
-   * Remote website to parse and render
-   */
-  uri?: string;
+export interface TransientRenderEngineConfig {
   /**
    * Decode HTML entities of your content.
    * Optional, defaults to true
@@ -147,30 +131,6 @@ export interface RenderHTMLProps<P = any> extends RenderHTMLPassedProps<P> {
    * Provide your styles for specific element identifiers (id attribute).
    */
   idsStyles?: MixedStyleRecord;
-  /**
-   * Custom style for the default container of the rendered HTML.
-   */
-  containerStyle?: StyleProp<ViewStyle>;
-  /**
-   * Replace the default wrapper with a function that takes your content as the first parameter.
-   */
-  customWrapper?: (innerNodes: ReactNode) => ReactNode;
-  /**
-   * Replace the default loader while fetching a remote website's content.
-   */
-  remoteLoadingView?: (props: RenderHTMLProps<P>, state: any) => ReactNode;
-  /**
-   * Replace the default error if a remote website's content could not be fetched.
-   */
-  remoteErrorView?: (props: RenderHTMLProps<P>, state: any) => ReactNode;
-  /**
-   * The default value in pixels for 1em
-   */
-  emSize?: number;
-  /**
-   * The default value in pixels for 1pt
-   */
-  ptSize?: number;
   /**
    * The default style for the document. Inheritable styles will be
    * transferred to children. That works even for Text styles.
@@ -216,10 +176,51 @@ export interface RenderHTMLProps<P = any> extends RenderHTMLPassedProps<P> {
    * @remarks Property names must be camelCased.
    */
   ignoredStyles?: CSSPropertyNameList;
+}
+
+export interface RenderHTMLProps<P = any>
+  extends RenderHTMLPassedProps<P>,
+    TransientRenderEngineConfig {
   /**
-   * Return true in this custom function to ignore nodes very precisely, see [ignoring HTML content](https://github.com/archriss/react-native-render-html#ignoring-html-content)
+   * HTML string to parse and render
    */
-  ignoreNodesFunction?: (node: DOMNode, parentTagName: string) => boolean;
+  html: string;
+  /**
+   * Your custom renderers.
+   */
+  renderers?: RendererDictionary<P>;
+  /**
+   * Set of props accessible into your custom renderers in `passProps` (4th argument)
+   */
+  renderersProps?: any;
+  /**
+   * Remote website to parse and render
+   */
+  uri?: string;
+  /**
+   * Custom style for the default container of the rendered HTML.
+   */
+  containerStyle?: StyleProp<ViewStyle>;
+  /**
+   * Replace the default wrapper with a function that takes your content as the first parameter.
+   */
+  customWrapper?: (innerNodes: ReactNode) => ReactNode;
+  /**
+   * Replace the default loader while fetching a remote website's content.
+   */
+  remoteLoadingView?: (props: RenderHTMLProps<P>, state: any) => ReactNode;
+  /**
+   * Replace the default error if a remote website's content could not be fetched.
+   */
+  remoteErrorView?: (props: RenderHTMLProps<P>, state: any) => ReactNode;
+  /**
+   * The default value in pixels for 1em
+   */
+  emSize?: number;
+  /**
+   * The default value in pixels for 1pt
+   */
+  ptSize?: number;
   /**
    * Triggered when the transient render tree changes. Useful for debugging.
    */
@@ -239,6 +240,24 @@ export interface RenderHTMLProps<P = any> extends RenderHTMLPassedProps<P> {
    * **Suggestion**: Use Plaform.select({ ios: ..., android: ..., default: ...})
    */
   fallbackFonts?: FallbackFontsDefinitions;
+  /**
+   * Name of props which should trigger a rebuild of the Transient Render
+   * Engine (TRE).
+   *
+   * @remarks For performance sake, this component will not recreate an
+   * instance of the engine on each prop change. If you need some props to
+   * trigger a new instantiation, such as `tagsStyles`, pass a list of their
+   * names in this array.
+   *
+   * Please note that only props involved in the building of the transient render
+   * tree are concerned by this mechanism.
+   *
+   * @example
+   * ```ts
+   * triggerTREInvalidationPropNames = ['tagsStyles', 'allowedStyles']
+   * ```
+   */
+  triggerTREInvalidationPropNames?: Array<keyof TransientRenderEngineConfig>;
 }
 
 export interface FallbackFontsDefinitions {
@@ -278,7 +297,9 @@ export interface RendererProps<T extends TNode>
   /**
    * Default renderer for this tnode.
    */
-  TDefaultRenderer: React.ComponentType<
-    Omit<RendererProps<T>, 'TDefaultRenderer'>
-  >;
+  TDefaultRenderer: TDefaultRenderer<T>;
 }
+
+export type TDefaultRenderer<T extends TNode> = React.ComponentType<
+  Omit<RendererProps<T>, 'TDefaultRenderer'>
+>;

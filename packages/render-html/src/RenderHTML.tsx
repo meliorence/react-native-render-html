@@ -26,7 +26,6 @@ const propTypes: RenderHTMLPropTypes = {
   decodeEntities: PropTypes.bool.isRequired,
   debug: PropTypes.bool.isRequired,
   listsPrefixesRenderers: PropTypes.object,
-  ignoreNodesFunction: PropTypes.func,
   alterData: PropTypes.func,
   alterChildren: PropTypes.func,
   alterNode: PropTypes.func,
@@ -58,7 +57,8 @@ const propTypes: RenderHTMLPropTypes = {
     serif: PropTypes.string,
     'sans-serif': PropTypes.string,
     monospace: PropTypes.string
-  })
+  }),
+  triggerTREInvalidationPropNames: PropTypes.arrayOf(PropTypes.string)
 };
 
 const defaultProps: {
@@ -132,7 +132,8 @@ const defaultProps: {
       'sans-serif-thin',
       'sans-serif-medium'
     ]
-  })
+  }),
+  triggerTREInvalidationPropNames: []
 };
 
 export default function RenderHTML(props: RenderHTMLProps) {

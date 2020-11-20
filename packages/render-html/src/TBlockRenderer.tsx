@@ -4,7 +4,11 @@ import { TBlock } from '@native-html/transient-render-tree';
 import defaultRenderers from './defaultRenderers';
 import GenericPressable from './GenericPressable';
 import { useTChildrenRenderer } from './context/TNodeRenderersContext';
-import { RendererProps, TNodeGenericRendererProps } from './shared-types';
+import {
+  RendererProps,
+  TDefaultRenderer,
+  TNodeGenericRendererProps
+} from './shared-types';
 
 function mergeCollapsedMargins(
   collapsedMarginTop: RendererProps<any>['collapsedMarginTop'],
@@ -20,14 +24,14 @@ function mergeCollapsedMargins(
   return [nativeStyle, additionalStyles];
 }
 
-const TDefaultBlockRenderer = ({
+const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
   tnode,
   key,
   children: overridingChildren,
   nativeStyle,
   syntheticAnchorOnLinkPress,
   collapsedMarginTop
-}: RendererProps<TBlock>) => {
+}) => {
   const TChildrenRenderer = useTChildrenRenderer();
   const children = overridingChildren ?? (
     <TChildrenRenderer
