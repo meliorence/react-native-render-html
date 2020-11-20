@@ -182,8 +182,8 @@ style="background-color: red; height: 200px; padding: 20%; margin-top: 30px">
 </div>
 `;
 
-const fontSelection = `<p>CSS <em>fontFamily</em> and <em>font</em> properties allow a comma-separated list of fonts. With the new engine, you can instruct the <em>RenderHTML</em> component which fonts are available in the system (or fonts you have added), and it will pick the first match! The prop to achieve that is <em>extraFonts</em>.</p>
-<p>By default, a handful of fonts supported by the current system are pre-registered. You can also define how special font names are resolved (such as <em>serif</em>, <em>sans-serif</em> and <em>monospace</em> with the <em>fallbackFonts</em> prop).</p>
+const fontSelection = `<p>CSS <em>fontFamily</em> and <em>font</em> properties allow a comma-separated list of fonts. With the new engine, you can instruct the <em>RenderHTML</em> component which fonts are available in the system (or fonts you have added), and it will pick the first match! The prop to achieve that is <em>systemFonts</em>.</p>
+<p>By default, a handful of fonts supported by the current system are pre-registered. If you are using expo, just set this prop to <em>Constants.systemFonts</em>. You can also define how special font names are resolved (such as <em>serif</em>, <em>sans-serif</em> and <em>monospace</em> with the <em>fallbackFonts</em> prop).</p>
 <hr />
 <p><em>font-family: Arial, sans-serif;</em></p>
 <p class="snippet" style="font-family: Arial, sans-serif;">This is set to Arial (will match on iOS) and should fallback to sans-serif otherwise.</p>
