@@ -189,7 +189,7 @@ const fontSelection = `<p>CSS <em>fontFamily</em> and <em>font</em> properties a
 <p class="snippet" style="font-family: Arial, sans-serif;">This is set to Arial (will match on iOS) and should fallback to sans-serif otherwise.</p>
 <hr />
 <p><em>font-family: 'Courier New', monospace;</em></p>
-<p class="snippet" style="font-family: \"Courier New\", monospace;">This is set to 'Courier New' (will match on iOS) and should fallback to monospace otherwise.</p>
+<p class="snippet" style="font-family: 'Courier New', monospace;">This is set to 'Courier New' (will match on iOS) and should fallback to monospace otherwise.</p>
 <hr />
 <p><em>font-family: monospace;</em></p>
 <p class="snippet" style="font-family: monospace;">It will match <em>fallbackFonts['monospace']</em>.</p>
