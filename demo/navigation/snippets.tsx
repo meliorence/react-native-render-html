@@ -3,9 +3,15 @@ import { View, Text } from 'react-native';
 import { RenderHTMLProps } from 'react-native-render-html';
 import { DOMElement } from '@native-html/transient-render-tree';
 
-const test = `<p>First paragraph</p><p>Second paragraph</p>`;
+const test = `<img width="300" height="200" alt="The Void" src="http://example.tld/image.jpg" />`;
 
-const paragraphs = `<p style="font-size: 1.3em">
+const paragraphs = `
+<p>Paragraphs have a default margin top and bottom of 16px. If you use 
+	<em>enableExperimentalMarginCollapsing</em>, margins of adjacents blocks will collapse 
+	<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing">as per the CSS standard</a> (this is the case in the demo when Foundry is enabled).
+</p>
+<hr />
+<p style="font-size: 1.3em">
 This paragraph is styled a font size set in em !
 </p>
 <hr/>
@@ -14,18 +20,18 @@ This one features a padding
 <strong>in percentage !</strong>
 </p>
 <hr />
+<p>
 <i>Here, we have a style set on the "i" tag with the
 "tagsStyles" prop.</i>
+</p>
 <hr />
 <p>
 And
 
-<a href="http://google.fr" title="Google FR">This is a link !</a>
+<a href="http://google.fr" title="Google FR"><p>
+This is a link surrounding a paragraph!
+</p></a>
 </p>
-<a href="http://google.fr">
-<div
-  style="background-color: red; height: 20px; width: 40px"></div>
-</a>
 <hr />
 <p class="last-paragraph">
 Finally, this paragraph is styled through the
@@ -106,25 +112,21 @@ const lists = `
 	<li>Like</li>
 </ol>`;
 
-const simpleLoremWithImages = `
-<p>This first image's dimensions are set in its style attributes.</p>
+const images = `
+<p>This image dimensions are set in its style attributes.</p>
 <img
   style="width: 50%; height: 100px; align-self: center"
   src="https://i.imgur.com/gSmWCJF.jpg"
 />
+<hr />
 <p>
   The next image will be sized automatically thanks to the <em>contentWidth</em> and
   <em>computeImageMaxWidth</em> props.
 </p>
 <img src="https://i.imgur.com/XP2BE7q.jpg" />
-`;
-
-const imagesWithinParagraphs = `<p>
-	<img src="https://i.imgur.com/gSmWCJF.jpg" />
-</p>
+<hr />
 <p>
-  Android used to have trouble rendering images inside paragraphs. This is why
-  this plugin moves images and appends them right after their container.
+  Here are images inside paragraphs!.
 </p>
 <p>
 	<img src="https://i.imgur.com/gSmWCJF.jpg" />
@@ -140,25 +142,16 @@ const imagesWithinParagraphs = `<p>
 <p>
 	<img src="https://i.imgur.com/XP2BE7q.jpg" />
 </p>
-<p>
-  Quod cum ita sit, paucae domus studiorum seriis cultibus antea celebratae nunc
-  ludibriis ignaviae torpentis exundant, vocali sonu, perflabili tinnitu fidium
-  resultantes. denique pro philosopho cantor et in locum oratoris doctor artium
-  ludicrarum accitur et bybliothecis sepulcrorum ritu in perpetuum clausis
-  organa fabricantur hydraulica, et lyrae ad speciem carpentorum ingentes
-  tibiaeque et histrionici gestus instrumenta non levia.
-</p>
-<p>
-	<img src="https://i.imgur.com/gSmWCJF.jpg" />
-</p>`;
-
-const images404 = `
+<hr />
 <p>The following image has an unreachable <em>src</em>.</p>
 <img src="http://example.tld/image.jpg" />
+<hr />
 <p>Same, with <em>alt="The Void"</em>.</p>
 <img alt="The Void" src="http://example.tld/image.jpg" />
-<p>Same, with <em>width="300" height="200"</em>.</p>
+<hr />
+<p>Same, with <em>width="300" height="200"</em>. It should preserve its width and height!</p>
 <img width="300" height="200" alt="The Void" src="http://example.tld/image.jpg" />
+</p>
 `;
 
 const trickyStuff = `
@@ -179,29 +172,47 @@ const layoutStyles = `
 	<div
     style="background-color: blue; width: 80%; height: 80%; top: 10%; left: 10%"></div>
 </div>
+<hr />
 <div
   style="background-color: red; height: 200px; padding: 20%; margin-top: 30px">
 	<p style="color: white">Text inside a rectangle with a 20% padding</p>
 </div>
 `;
 
+const fontSelection = `<p>CSS <em>fontFamily</em> and <em>font</em> properties allow a comma-separated list of fonts. With the new engine, you can instruct the <em>RenderHTML</em> component which fonts are available in the system (or fonts you have added), and it will pick the first match! The prop to achieve that is <em>extraFonts</em>.</p>
+<p>By default, a handful of fonts supported by the current system are pre-registered. You can also define how special font names are resolved (such as <em>serif</em>, <em>sans-serif</em> and <em>monospace</em> with the <em>fallbackFonts</em> prop).</p>
+<hr />
+<p><em>font-family: Arial, sans-serif;</em></p>
+<p class="snippet" style="font-family: Arial, sans-serif;">This is set to Arial (will match on iOS) and should fallback to sans-serif otherwise.</p>
+<hr />
+<p><em>font-family: 'Courier New', monospace;</em></p>
+<p class="snippet" style="font-family: 'Courier New', monospace;">This is set to 'Courier New' (will match on iOS) and should fallback to monospace otherwise.</p>
+<hr />
+<p><em>font-family: monospace;</em></p>
+<p class="snippet" style="font-family: monospace;">It will match <em>fallbackFonts['monospace']</em>.</p>
+<hr />
+<p><em>font-family: serif;</em></p>
+<p class="snippet" style="font-family: serif;">It will match <em>fallbackFonts['serif']</em>.</p>
+<hr />
+<p><em>font-family: sans-serif;</em></p>
+<p class="snippet" style="font-family: sans-serif;">It will match <em>fallbackFonts['sans-serif']</em>.</p>
+`;
+
 const textsStylesBehaviour = `<p>Styling texts is a challenging part of converting HTML into react-native components.</p>
-<p>The way react-native's <em>Text</em> components behaves is a lot different from our browsers' implementation.</p>
+<p>There are significant differences between the CSS standard and how styles are handled in React Native. Most notably, &lt;Text&gt; styles don't inherit from &lt;View&gt; styles. The reconciliation is handled by the Transient Render Tree engine.</p>
 <p>Let's see how styles are applied to texts with this plugin.</p>
 <hr/>
 <div style="color:red;">This text is inside a div, without a text tag wrapping it. The <em>div</em> tag only has <em>color:red;</em> as style.</div>
 <p>In the example above, you may find, if you inspect the rendered components, that it's the <em>Text</em> component inside that actually receives the color attribute.</p>
-<p>This is because this library parses every text-only style of <em>View</em> wrappers and moves them to each <em>Text</em> child.</p>
+<p>This is how the Transient Render Tree engine passes block styles to their children, and let <em>Text</em> children consume <em>Text</em> specific styles.</p>
 <hr/>
 <div style="color:red">
     <p>This first paragraph doesn't have a specific styling.</p>
     <p style="color:blue;">This one is blue.</p>
 </div>
 <p>Here, the <em>div</em> wrapper still has <em>color:red;</em> as style.</div>.</p>
-<p>The first paragraph inside it doesn't have any style attribute, either from HTML or from the <em>tagsStyles</em> or <em>classesStyles</em> props.</p>
-<p>The second one is set to be blue from its <em>style</em> attribute.</p>
-<p>You can see the order of priorities that applies to styling. The less important are your <em>tagsStyles</em>, 
-then your <em>classessStyles</em> and finally the styles parsed from your HTML content.</p>`;
+<p>The first inner paragraph doesn't have any style attribute, either from HTML or from the <em>tagsStyles</em> or <em>classesStyles</em> props.</p>
+<p>The second one is set to be blue from its <em>style</em> attribute.</p>`;
 
 const ignoringTagsAndStyles = `
 <p>The following tag (h2) is ignored with the "ignoredTags" prop</p>
@@ -422,11 +433,25 @@ const snippetsMapConfig: Record<
   A cow saying, "I'm an expert in my field." The cow is illustrated using preformatted text characters. 
 </figcaption>
     `,
-    props: {}
+    props: {
+      tagsStyles: {
+        pre: {
+          fontFamily: 'monospace'
+        }
+      }
+    }
   },
-  anchors: {
-    name: 'Anchors',
-    html: anchors
+  fonts: {
+    name: 'Font Selection',
+    html: fontSelection,
+    props: {
+      classesStyles: {
+        snippet: {
+          backgroundColor: 'yellow',
+          color: 'black'
+        }
+      }
+    }
   },
   paragraphs: {
     name: 'Paragraphs',
@@ -447,6 +472,10 @@ const snippetsMapConfig: Record<
       }
     }
   },
+  anchors: {
+    name: 'Anchors',
+    html: anchors
+  },
   lists: {
     name: 'Lists',
     html: lists,
@@ -454,20 +483,9 @@ const snippetsMapConfig: Record<
       baseStyle: {}
     }
   },
-  simpleLoremWithImages: {
-    name: 'Simple lorem (images)',
-    html: simpleLoremWithImages,
-    props: {
-      baseStyle: {}
-    }
-  },
-  imagesWithinParagraphs: {
-    name: 'Images within paragraphs',
-    html: imagesWithinParagraphs
-  },
-  images404: {
-    name: '404 images',
-    html: images404,
+  images: {
+    name: 'Images',
+    html: images,
     props: {
       baseStyle: {}
     }
@@ -479,7 +497,7 @@ const snippetsMapConfig: Record<
     html: textsStylesBehaviour,
     props: {
       tagsStyles: {
-        div: { borderWidth: 1, padding: 10, marginTop: 10, borderColor: 'gray' }
+        div: { borderWidth: 1, padding: 10, borderColor: 'gray' }
       }
     }
   },

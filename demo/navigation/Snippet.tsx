@@ -33,7 +33,7 @@ function stripUnsupportedStylesInLegacy(style: Record<string, any>) {
     .reduce((container, key) => ({ ...container, [key]: style[key] }), {});
 }
 
-function stripLegacyStylesheet(
+function stripPropsFromStylesheet(
   styleSheet?: Record<string, Record<string, any>>
 ) {
   if (!styleSheet) {
@@ -70,19 +70,23 @@ const Snippet = ({
     textSelectable: true,
     renderers: {}
   };
-
+  const mergedTagsStyles = {
+    ...sharedProps.tagsStyles,
+    hr: { marginTop: 16, marginBottom: 16, ...sharedProps.tagsStyles?.hr, height: 1, backgroundColor: '#CCC' }
+  };
   const renderHtml = useLegacy ? (
     <LegacyHTML
       {...sharedProps}
       html={sharedProps.html}
       baseFontStyle={stripUnsupportedStylesInLegacy(baseStyle)}
-      classesStyles={stripLegacyStylesheet(sharedProps.classesStyles)}
-      tagsStyles={stripLegacyStylesheet(sharedProps.tagsStyles)}
+      classesStyles={stripPropsFromStylesheet(sharedProps.classesStyles)}
+      tagsStyles={stripPropsFromStylesheet(mergedTagsStyles)}
       debug={false}
     />
   ) : (
     <RenderHTML
       {...sharedProps}
+      tagsStyles={mergedTagsStyles}
       baseStyle={baseStyle}
       enableUserAgentStyles
       onTTreeChange={setTTree}
