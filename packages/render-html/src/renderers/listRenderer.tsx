@@ -1,5 +1,6 @@
 import React, { ComponentType } from 'react';
 import { Text, View } from 'react-native';
+import { useTChildrenRenderer } from '../context/TNodeRenderersContext';
 import { DefaultRenderers } from '../defaultRenderers';
 import { getStringPrefixFromIndex } from './getStringListPrefixFromIndex';
 import numOfCharsInPrefix from './numOfCharsInPrefix';
@@ -139,16 +140,14 @@ const prefixRenderersMap: Record<SupportedListStyleType, PrefixSepcs> = ({
   PrefixSepcs
 >;
 
-const listRenderer: DefaultRenderers['block'][string] = (props) => {
-  const {
-    nativeStyle,
-    tnode,
-    Default,
-    passedProps,
-    renderTNode,
-    marginCollapsingEnabled,
-    syntheticAnchorOnLinkPress
-  } = props;
+const listRenderer: DefaultRenderers['block'][string] = ({
+  syntheticAnchorOnLinkPress,
+  nativeStyle,
+  tnode,
+  Default,
+  ...props
+}) => {
+  const TChildrenRenderer = useTChildrenRenderer();
   // Map children to horizontal rows with prefixes
   const rendererSpecs =
     prefixRenderersMap[
@@ -166,7 +165,11 @@ const listRenderer: DefaultRenderers['block'][string] = (props) => {
       : bulletWidth * 1.5;
   const PrefixRenderer = rendererSpecs.Component;
   return (
-    <Default {...props} nativeStyle={{ ...nativeStyle, paddingLeft }}>
+    <Default
+      Default={Default}
+      {...props}
+      tnode={tnode}
+      nativeStyle={{ ...nativeStyle, paddingLeft }}>
       {tnode.children.map((childTNode, i) => (
         <View
           key={i}
@@ -187,13 +190,11 @@ const listRenderer: DefaultRenderers['block'][string] = (props) => {
             />
           </View>
           <View>
-            {renderTNode({
+            {React.createElement(TChildrenRenderer, {
               tnode: childTNode,
-              passedProps,
               key: i,
-              marginCollapsingEnabled,
               syntheticAnchorOnLinkPress,
-              collapsedMarginTop: null
+              disableMarginCollapsing: false
             })}
           </View>
         </View>
