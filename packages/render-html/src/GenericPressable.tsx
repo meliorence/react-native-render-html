@@ -2,7 +2,6 @@ import React, { PropsWithChildren } from 'react';
 import {
   StyleSheet,
   Pressable,
-  ViewProps,
   PressableProps,
   StyleProp,
   Platform

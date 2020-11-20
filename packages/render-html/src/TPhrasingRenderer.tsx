@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import { TPhrasing } from '@native-html/transient-render-tree';
 import { useSharedProps } from './context/SharedPropsContext';
 import { useTChildrenRenderer } from './context/TNodeRenderersContext';
-import { TNodeGenericRendererProps } from './types';
+import { TNodeGenericRendererProps } from './shared-types';
 
 const TPhrasingRenderer = ({
   tnode,

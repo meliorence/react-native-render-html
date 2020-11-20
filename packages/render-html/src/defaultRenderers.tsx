@@ -1,18 +1,18 @@
 import type { TBlock } from '@native-html/transient-render-tree';
-import imgRenderer from './renderers/imgRenderer';
-import listRenderer from './renderers/listRenderer';
-import type { RendererProps } from './types';
+import ImgRenderer from './renderers/ImgRenderer';
+import ListRenderer from './renderers/ListRenderer';
+import type { RendererProps } from './shared-types';
 
 export interface DefaultRenderers {
-  block: Record<string, (props: RendererProps<TBlock>) => any>;
+  block: Record<string, React.FunctionComponent<RendererProps<TBlock>>>;
   text: Record<string, () => string>;
 }
 
 const defaultRenderers: DefaultRenderers = {
   block: {
-    img: imgRenderer,
-    ul: listRenderer,
-    ol: listRenderer
+    img: ImgRenderer,
+    ul: ListRenderer,
+    ol: ListRenderer
   },
   text: {
     br: () => '\n',

@@ -1,6 +1,6 @@
 import { TBlock, TPhrasing } from '@native-html/transient-render-tree';
 import { GestureResponderEvent } from 'react-native';
-import { RenderHTMLPassedProps } from './types';
+import { RenderHTMLPassedProps } from './shared-types';
 
 export default function extractAnchorOnLinkPress(
   tnode: TBlock | TPhrasing,

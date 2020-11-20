@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { TTreeBuilder } from '@native-html/transient-render-tree';
-import { RenderHTMLProps } from './types';
+import { RenderHTMLProps } from './shared-types';
 
 export default function useTTreeBuilder({
   allowedStyles,
@@ -26,7 +26,7 @@ export default function useTTreeBuilder({
       }
       return fontMap[fontFamily] || false;
     };
-  }, []);
+  }, [extraFonts, fallbackFonts]);
   return useMemo(
     () =>
       new TTreeBuilder({

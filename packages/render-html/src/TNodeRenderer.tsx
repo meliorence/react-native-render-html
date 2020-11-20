@@ -10,7 +10,7 @@ import TPhrasingRenderer from './TPhrasingRenderer';
 import TTextRenderer from './TTextRenderer';
 import extractAnchorOnLinkPress from './extractAnchorOnLinkPress';
 import { useSharedProps } from './context/SharedPropsContext';
-import { TNodeGenericRendererProps } from './types';
+import { TNodeGenericRendererProps } from './shared-types';
 
 export type TNodeRendererProps<T extends TNode> = Omit<
   TNodeGenericRendererProps<T>,
