@@ -130,13 +130,12 @@ function HomeScreen({}: StackScreenProps<any>) {
   return (
     <Drawer.Navigator
       hideStatusBar={false}
-      initialRouteName="Texts styles behaviour"
       screenOptions={{
         headerTintColor: theme.colors.text,
         headerShown: true,
         headerTitleAllowFontScaling: true,
         headerTitleStyle: Platform.select({
-          ios: {
+          android: {
             width: '75%',
             alignItems: 'flex-start'
           }
@@ -156,7 +155,7 @@ function HomeScreen({}: StackScreenProps<any>) {
                 )
               }}
               key={snippets[snippetId].name}
-              name={snippets[snippetId].name}
+              name={snippetId}
             />
           );
         })}
