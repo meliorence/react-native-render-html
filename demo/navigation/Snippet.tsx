@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, Linking, useWindowDimensions } from 'react-native';
 import RenderHTML, { RenderHTMLProps } from 'react-native-render-html';
 import LegacyHTML from 'rnrh-legacy';
+import Constants from 'expo-constants';
 import { useThemeColor } from '../components/Themed';
 import { useTTree } from '../state/TTreeContextProvider';
 import snippets from './snippets';
@@ -87,11 +88,15 @@ const Snippet = React.memo(
         onTTreeChange={setTTree}
         enableExperimentalMarginCollapsing={true}
         debug={false}
+        systemFonts={Constants.systemFonts}
       />
     );
     return (
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1, paddingHorizontal: CONTAINER_PADDING }}
+        contentContainerStyle={{
+          flexGrow: 1,
+          paddingHorizontal: CONTAINER_PADDING
+        }}
         style={{ flexGrow: 1 }}>
         {renderHtml}
       </ScrollView>
