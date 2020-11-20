@@ -22,7 +22,7 @@ export interface ImgTagProps {
   alt?: string;
   height?: string;
   width?: string;
-  style?: StyleProp<ImageStyle>;
+  style: ImageStyle;
   testID?: string;
   computeImagesMaxWidth?: (containerWidth: number) => number;
   onPress: PressableProps['onPress'];
@@ -405,11 +405,11 @@ export default class ImgTag extends PureComponent<ImgTagProps, State> {
   }
 
   renderImage(imageBoxDimensions: ImgDimensions) {
-    const { source, style } = this.props;
+    const { source } = this.props;
     return (
       <Image
         source={source}
-        style={[defaultImageStyle, style, imageBoxDimensions]}
+        style={[defaultImageStyle, imageBoxDimensions]}
         testID="image-layout"
       />
     );
@@ -466,7 +466,8 @@ export default class ImgTag extends PureComponent<ImgTagProps, State> {
   }
 
   render() {
-    const style = [styles.container, this.props.style];
+    const { width, height, ...remainingStyle } = this.props.style;
+    const style = [styles.container, remainingStyle];
     if (this.props.onPress) {
       return (
         <GenericPressable onPress={this.props.onPress} style={style}>
@@ -476,4 +477,14 @@ export default class ImgTag extends PureComponent<ImgTagProps, State> {
     }
     return <View style={style}>{this.renderContent()}</View>;
   }
+}
+
+function splitStyle({ width, height, ...rest }: ImageStyle) {
+  return {
+    boxModel: {
+      width,
+      height
+    },
+    rest
+  };
 }
