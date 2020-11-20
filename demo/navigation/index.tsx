@@ -8,13 +8,16 @@ import {
 } from '@react-navigation/native';
 import {
   createDrawerNavigator,
-  DrawerScreenProps
+  DrawerScreenProps,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerContentComponentProps
 } from '@react-navigation/drawer';
 import {
   createStackNavigator,
   StackScreenProps
 } from '@react-navigation/stack';
-import { ColorSchemeName, Platform, View } from 'react-native';
+import { ColorSchemeName, Platform, View, StyleSheet } from 'react-native';
 import { TNode, tnodeToString } from '@native-html/transient-render-tree';
 import { Appbar, Snackbar } from 'react-native-paper';
 import snippets from './snippets';
@@ -30,9 +33,8 @@ import { memo } from 'react';
 import TTreeContextProvider, { useTTree } from '../state/TTreeContextProvider';
 import { MonoText } from '../components/StyledText';
 import BidirectionalScrollView from '../components/BidirectionalScrollView';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const version = "1.1.0";
+const version = '1.2.0';
 
 const CombinedLightTheme = merge(PaperLightTheme, NavLightTheme);
 const CombinedDarkTheme = merge(PaperDarkTheme, NavDarkTheme);
@@ -128,11 +130,23 @@ const HeaderRight = memo(function HeaderRight({ tintColor, snippetId }: any) {
   );
 });
 
+function CustomDrawerContent(props: DrawerContentComponentProps<any>) {
+  return (
+    <>
+      <DrawerContentScrollView {...props}>
+        <DrawerItemList {...props} />
+      </DrawerContentScrollView>
+      <VersionDisplay />
+    </>
+  );
+}
+
 function HomeScreen({}: StackScreenProps<any>) {
   const theme = useTheme();
   return (
     <Drawer.Navigator
       hideStatusBar={false}
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
         headerTintColor: theme.colors.text,
         headerShown: true,
@@ -167,19 +181,19 @@ function HomeScreen({}: StackScreenProps<any>) {
 }
 
 function VersionDisplay() {
-  const theme = useTheme();
-  const { bottom } = useSafeAreaInsets();
   return (
     <View
       style={{
-        bottom: 0,
-        left: 0,
-        height: 20 + bottom,
-        width: '100%',
-        backgroundColor: theme.colors.text
+        alignSelf: 'stretch',
       }}>
-      <MonoText style={{ fontSize: 10, paddingTop: 3, color: theme.colors.background, textAlign: 'center' }}>
-        Foundry Playground v{version}, Jules Sam. Randolph
+      <MonoText
+        style={{
+          fontSize: 10,
+          padding: 10,
+          borderTopWidth: StyleSheet.hairlineWidth,
+          textAlign: 'left'
+        }}>
+        Foundry Playground v{version}
       </MonoText>
     </View>
   );
@@ -226,7 +240,6 @@ function RootNavigator() {
           <Snackbar visible={snackbarVisible} onDismiss={() => void 0}>
             {legacyMode ? 'Legacy (v5.x) enabled.' : 'Foundry (v6.x) enabled'}
           </Snackbar>
-          <VersionDisplay />
         </LegacyContext.Provider>
       </ToggleLegacyContext.Provider>
     </TTreeContextProvider>
