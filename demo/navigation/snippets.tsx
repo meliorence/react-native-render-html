@@ -3,7 +3,10 @@ import { View, Text } from 'react-native';
 import { RenderHTMLProps } from 'react-native-render-html';
 import { DOMElement } from '@native-html/transient-render-tree';
 
-const test = `<img width="300" height="200" alt="The Void" src="http://example.tld/image.jpg" />`;
+const test = `<div
+style="background-color: red; height: 200px; padding: 20%; margin-top: 30px">
+<span style="color: white;">Text inside a rectangle with a 20% padding</span>
+</div>`;
 
 const paragraphs = `
 <p>Paragraphs have a default margin top and bottom of 16px. If you use 
@@ -12,7 +15,7 @@ const paragraphs = `
 </p>
 <hr />
 <p style="font-size: 1.3em">
-This paragraph is styled a font size set in em !
+This paragraph is styled with a font size set in em!
 </p>
 <hr/>
 <p style="padding: 10%; background-color: #f7a29c">
@@ -174,8 +177,8 @@ const layoutStyles = `
 </div>
 <hr />
 <div
-  style="background-color: red; height: 200px; padding: 20%; margin-top: 30px">
-	<p style="color: white">Text inside a rectangle with a 20% padding</p>
+style="background-color: red; height: 200px; padding: 20%; margin-top: 30px">
+  <span style="color: white;">Text inside a rectangle with a 20% padding</span>
 </div>
 `;
 
@@ -186,7 +189,7 @@ const fontSelection = `<p>CSS <em>fontFamily</em> and <em>font</em> properties a
 <p class="snippet" style="font-family: Arial, sans-serif;">This is set to Arial (will match on iOS) and should fallback to sans-serif otherwise.</p>
 <hr />
 <p><em>font-family: 'Courier New', monospace;</em></p>
-<p class="snippet" style="font-family: 'Courier New', monospace;">This is set to 'Courier New' (will match on iOS) and should fallback to monospace otherwise.</p>
+<p class="snippet" style="font-family: \"Courier New\", monospace;">This is set to 'Courier New' (will match on iOS) and should fallback to monospace otherwise.</p>
 <hr />
 <p><em>font-family: monospace;</em></p>
 <p class="snippet" style="font-family: monospace;">It will match <em>fallbackFonts['monospace']</em>.</p>
@@ -200,15 +203,15 @@ const fontSelection = `<p>CSS <em>fontFamily</em> and <em>font</em> properties a
 
 const textsStylesBehaviour = `<p>Styling texts is a challenging part of converting HTML into react-native components.</p>
 <p>There are significant differences between the CSS standard and how styles are handled in React Native. Most notably, &lt;Text&gt; styles don't inherit from &lt;View&gt; styles. The reconciliation is handled by the Transient Render Tree engine.</p>
-<p>Let's see how styles are applied to texts with this plugin.</p>
+<p>Let's see how styles are applied to texts with this library.</p>
 <hr/>
 <div style="color:red;">This text is inside a div, without a text tag wrapping it. The <em>div</em> tag only has <em>color:red;</em> as style.</div>
 <p>In the example above, you may find, if you inspect the rendered components, that it's the <em>Text</em> component inside that actually receives the color attribute.</p>
 <p>This is how the Transient Render Tree engine passes block styles to their children, and let <em>Text</em> children consume <em>Text</em> specific styles.</p>
 <hr/>
 <div style="color:red">
-    <p>This first paragraph doesn't have a specific styling.</p>
-    <p style="color:blue;">This one is blue.</p>
+    <p>This first paragraph doesn't have inline styles.</p>
+    <p style="color:blue;">This one has <em>color:blue;</em>.</p>
 </div>
 <p>Here, the <em>div</em> wrapper still has <em>color:red;</em> as style.</div>.</p>
 <p>The first inner paragraph doesn't have any style attribute, either from HTML or from the <em>tagsStyles</em> or <em>classesStyles</em> props.</p>
@@ -377,6 +380,19 @@ const whitespace = `<p>In the below example, <em>white-space</em> is set to <em>
 </div>
 `;
 
+const preformatted = `<pre>  ___________________________
+< I'm an expert in my field. >
+  ---------------------------
+    \\   ^__^ 
+    \\  (oo)\\_______
+       (__)\\       )\\/\\
+           ||----w |
+           ||     ||
+</pre>
+<figcaption>
+  A cow saying, "I'm an expert in my field." The cow is illustrated using preformatted text characters. 
+</figcaption>`
+
 function myTagRenderer() {
   return <Text>Bar</Text>;
 }
@@ -420,19 +436,7 @@ const snippetsMapConfig: Record<
   },
   pre: {
     name: 'Preformatted',
-    html: `<pre>  ___________________________
-< I'm an expert in my field. >
-  ---------------------------
-    \\   ^__^ 
-    \\  (oo)\\_______
-       (__)\\       )\\/\\
-           ||----w |
-           ||     ||
-</pre>
-<figcaption>
-  A cow saying, "I'm an expert in my field." The cow is illustrated using preformatted text characters. 
-</figcaption>
-    `,
+    html: preformatted,
     props: {
       tagsStyles: {
         pre: {
@@ -493,7 +497,7 @@ const snippetsMapConfig: Record<
   trickyStuff: { name: 'Tricky stuff', html: trickyStuff },
   layoutStyles: { name: 'Layout styles', html: layoutStyles },
   textsStylesBehaviour: {
-    name: 'Texts styles behaviour',
+    name: 'Texts Styles',
     html: textsStylesBehaviour,
     props: {
       tagsStyles: {
