@@ -231,9 +231,9 @@ export interface RenderHTMLProps<P = any>
    * comma-separated list of fonts. By default, a handful of fonts are selected
    * per platform.
    *
-   * **Suggestion**: Use Plaform.select({ ios: ..., android: ..., default: ...})
+   * @remarks If you are using expo, use `Constants.systemFonts`.
    */
-  extraFonts?: string[];
+  systemFonts?: string[];
   /**
    * A record for specific CSS fonts.
    *

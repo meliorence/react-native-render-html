@@ -14,7 +14,7 @@ export default function useTTreeBuilder(props: RenderHTMLProps) {
     enableCSSInlineProcessing,
     enableUserAgentStyles,
     fallbackFonts,
-    extraFonts,
+    systemFonts: extraFonts,
     triggerTREInvalidationPropNames: triggerTRERebuildProps
   } = props;
   const isFontSupported = useMemo(() => {
