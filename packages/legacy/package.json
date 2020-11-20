@@ -6,13 +6,14 @@
     "description": "Legacy package",
     "private": true,
     "types": "types/react-native-render-html/index.d.ts",
-    "main": "src/index.js",
+    "main": "lib/index.js",
     "scripts": {
         "test": "yarn test:js && yarn test:ts && yarn test:lint",
         "test:ts": "dtslint types/react-native-render-html",
         "test:jest": "jest",
         "test:lint": "eslint src/",
-        "fixlint": "prettier --write src/"
+        "fixlint": "prettier --write src/",
+        "build": "babel src --out-dir lib"
     },
     "dependencies": {
         "htmlparser2": "^5.0.1",
@@ -24,6 +25,7 @@
         "react-native-webview": "*"
     },
     "devDependencies": {
+        "@babel/cli": "^7.12.1",
         "@babel/core": "^7.12.3",
         "@babel/runtime": "^7.12.5",
         "@react-native-community/eslint-config": "^2.0.0",
