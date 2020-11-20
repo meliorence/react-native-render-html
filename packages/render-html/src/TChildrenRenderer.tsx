@@ -24,9 +24,8 @@ function getCollapsedMargins(precedent: TNode, current: TNode): null | number {
 
 const TChildrenRenderer: React.FunctionComponent<
   {
-    tnode: TNode;
     disableMarginCollapsing?: boolean;
-  } & Pick<TNodeRendererProps<any>, 'syntheticAnchorOnLinkPress'>
+  } & Pick<TNodeRendererProps<TNode>, 'syntheticAnchorOnLinkPress' | 'tnode'>
 > = function TChildrenRenderer({
   tnode,
   syntheticAnchorOnLinkPress,
