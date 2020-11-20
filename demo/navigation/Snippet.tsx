@@ -48,7 +48,7 @@ function stripPropsFromStylesheet(
   );
 }
 
-const Snippet = ({
+const Snippet = React.memo(({
   exampleId,
   useLegacy = false
 }: {
@@ -90,8 +90,8 @@ const Snippet = ({
       baseStyle={baseStyle}
       enableUserAgentStyles
       onTTreeChange={setTTree}
-      debug={false}
-      enableExperimentalMarginCollapsing={true}
+      debug={true}
+      enableExperimentalMarginCollapsing={false}
     />
   );
   return (
@@ -101,6 +101,6 @@ const Snippet = ({
       {renderHtml}
     </ScrollView>
   );
-};
+});
 
 export default Snippet;
