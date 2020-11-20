@@ -256,16 +256,29 @@ export interface TNodeGenericRendererProps<T extends TNode> {
 
 export interface RendererProps<T extends TNode>
   extends TNodeGenericRendererProps<T> {
+  /**
+   * An object filled with styles which are compatible with React Native
+   * "style" prop.
+   */
   nativeStyle: T extends TBlock
     ? TStyles['nativeBlockFlow'] & TStyles['nativeBlockRet']
     : TStyles['nativeBlockFlow'] &
         TStyles['nativeBlockRet'] &
         TStyles['nativeTextFlow'] &
         TStyles['nativeTextRet'];
+  /**
+   * An object filled with styles which are no compatible with React Native
+   * "style" prop.
+   */
   untranslatedStyle: TStyles['webTextFlow'];
   /**
    * When children is present, renderChildren will not be invoked.
    */
   children?: ReactNode;
-  Default: (props: RendererProps<T>) => any;
+  /**
+   * Default renderer for this tnode.
+   */
+  TDefaultRenderer: React.ComponentType<
+    Omit<RendererProps<T>, 'TDefaultRenderer'>
+  >;
 }

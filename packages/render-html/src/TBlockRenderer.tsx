@@ -4,7 +4,7 @@ import { TBlock } from '@native-html/transient-render-tree';
 import defaultRenderers from './defaultRenderers';
 import GenericPressable from './GenericPressable';
 import { useTChildrenRenderer } from './context/TNodeRenderersContext';
-import { RendererProps, TNodeGenericRendererProps } from './types';
+import { RendererProps, TNodeGenericRendererProps } from './shared-types';
 
 function mergeCollapsedMargins(
   collapsedMarginTop: RendererProps<any>['collapsedMarginTop'],
@@ -20,7 +20,7 @@ function mergeCollapsedMargins(
   return [nativeStyle, additionalStyles];
 }
 
-const DefaultBlockRenderer = ({
+const TDefaultBlockRenderer = ({
   tnode,
   key,
   children: overridingChildren,
@@ -64,7 +64,7 @@ const TBlockRenderer = ({
       ...tnode.styles.nativeBlockRet
     },
     syntheticAnchorOnLinkPress,
-    Default: DefaultBlockRenderer,
+    TDefaultRenderer: TDefaultBlockRenderer,
     untranslatedStyle: tnode.styles.webTextFlow,
     collapsedMarginTop
   };
@@ -72,7 +72,7 @@ const TBlockRenderer = ({
   if (defaultRenderer) {
     return defaultRenderer(rendererProps);
   }
-  return React.createElement(DefaultBlockRenderer, rendererProps);
+  return React.createElement(TDefaultBlockRenderer, rendererProps);
 };
 
 export default TBlockRenderer;

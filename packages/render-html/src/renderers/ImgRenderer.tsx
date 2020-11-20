@@ -7,11 +7,11 @@ function normalizeUri(uri: string) {
   return uri.startsWith('//') ? `https:${uri}` : uri;
 }
 
-const imgRenderer: DefaultRenderers['block'][string] = (props) => {
+const ImgRenderer: DefaultRenderers['block'][string] = (props) => {
   const {
     nativeStyle,
     tnode,
-    Default,
+    TDefaultRenderer: Default,
     syntheticAnchorOnLinkPress
   } = props;
   const {
@@ -42,4 +42,4 @@ const imgRenderer: DefaultRenderers['block'][string] = (props) => {
   );
 };
 
-export default imgRenderer;
+export default ImgRenderer;

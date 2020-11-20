@@ -1,5 +1,5 @@
 import React, { ComponentType } from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useTChildrenRenderer } from '../context/TNodeRenderersContext';
 import { DefaultRenderers } from '../defaultRenderers';
 import { getStringPrefixFromIndex } from './getStringListPrefixFromIndex';
@@ -140,11 +140,18 @@ const prefixRenderersMap: Record<SupportedListStyleType, PrefixSepcs> = ({
   PrefixSepcs
 >;
 
-const listRenderer: DefaultRenderers['block'][string] = ({
+const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    flexWrap: 'nowrap'
+  }
+});
+
+const ListRenderer: DefaultRenderers['block'][string] = ({
   syntheticAnchorOnLinkPress,
   nativeStyle,
   tnode,
-  Default,
+  TDefaultRenderer,
   ...props
 }) => {
   const TChildrenRenderer = useTChildrenRenderer();
@@ -154,8 +161,8 @@ const listRenderer: DefaultRenderers['block'][string] = ({
       tnode.styles.webTextFlow.listStyleType as SupportedListStyleType
     ] ||
     (tnode.tagName === 'ol'
-      ? prefixRenderersMap['decimal']
-      : prefixRenderersMap['disc']);
+      ? prefixRenderersMap.decimal
+      : prefixRenderersMap.disc);
   const prefixLength = rendererSpecs.computeStrSize(tnode.children.length);
   const bulletWidth =
     (tnode.styles.nativeTextFlow.fontSize || 12) * prefixLength;
@@ -165,18 +172,12 @@ const listRenderer: DefaultRenderers['block'][string] = ({
       : bulletWidth * 1.5;
   const PrefixRenderer = rendererSpecs.Component;
   return (
-    <Default
-      Default={Default}
+    <TDefaultRenderer
       {...props}
       tnode={tnode}
       nativeStyle={{ ...nativeStyle, paddingLeft }}>
       {tnode.children.map((childTNode, i) => (
-        <View
-          key={i}
-          style={{
-            flexDirection: 'row',
-            flexWrap: 'nowrap'
-          }}>
+        <View key={i} style={styles.row}>
           <View
             style={{
               width: bulletWidth,
@@ -199,8 +200,8 @@ const listRenderer: DefaultRenderers['block'][string] = ({
           </View>
         </View>
       ))}
-    </Default>
+    </TDefaultRenderer>
   );
 };
 
-export default listRenderer;
+export default ListRenderer;

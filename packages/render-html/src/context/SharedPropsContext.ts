@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dimensions, Linking } from 'react-native';
-import { RenderHTMLPassedProps } from '../types';
+import { RenderHTMLPassedProps } from '../shared-types';
 
 export const defaultSharedPropsContext: Required<RenderHTMLPassedProps> = {
   debug: false,
@@ -19,7 +19,9 @@ export const defaultSharedPropsContext: Required<RenderHTMLPassedProps> = {
   onLinkPress: (_e, href) => Linking.canOpenURL(href) && Linking.openURL(href)
 };
 
-const SharedPropsContext = React.createContext<RenderHTMLPassedProps>(defaultSharedPropsContext);
+const SharedPropsContext = React.createContext<RenderHTMLPassedProps>(
+  defaultSharedPropsContext
+);
 
 export function useSharedProps() {
   return React.useContext(SharedPropsContext);

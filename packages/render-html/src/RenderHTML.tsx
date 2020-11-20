@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Platform } from 'react-native';
-import { RenderHTMLProps } from './types';
+import { RenderHTMLProps } from './shared-types';
 import TNodeRenderer from './TNodeRenderer';
 import useTTree from './useTTree';
 import SharedPropsContext, {
@@ -139,7 +139,8 @@ export default function RenderHTML(props: RenderHTMLProps) {
   const ttree = useTTree(props);
   return (
     <SharedPropsContext.Provider value={props}>
-      <TNodeRenderersContext.Provider value={{ TNodeRenderer, TChildrenRenderer }} >
+      <TNodeRenderersContext.Provider
+        value={{ TNodeRenderer, TChildrenRenderer }}>
         <TNodeRenderer tnode={ttree} collapsedMarginTop={null} />
       </TNodeRenderersContext.Provider>
     </SharedPropsContext.Provider>

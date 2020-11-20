@@ -1,4 +1,4 @@
-import { getStringPrefixFromIndex } from "../getStringListPrefixFromIndex";
+import { getStringPrefixFromIndex } from '../getStringListPrefixFromIndex';
 
 describe('getStringPrefixFromIndex', () => {
   it('should return a one-length caracter when index < modulo', () => {
@@ -12,4 +12,4 @@ describe('getStringPrefixFromIndex', () => {
     expect(getStringPrefixFromIndex(26 * 2 + 2, 97, 26)).toEqual('bc');
     expect(getStringPrefixFromIndex(26 * 27, 97, 26)).toEqual('aaa');
   });
-})
+});
