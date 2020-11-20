@@ -52,7 +52,7 @@ const propTypes: RenderHTMLPropTypes = {
   renderersProps: PropTypes.object,
   allowFontScaling: PropTypes.bool,
   onTTreeChange: PropTypes.func,
-  extraFonts: PropTypes.arrayOf(PropTypes.string),
+  systemFonts: PropTypes.arrayOf(PropTypes.string),
   fallbackFonts: PropTypes.shape({
     serif: PropTypes.string,
     'sans-serif': PropTypes.string,
@@ -81,7 +81,7 @@ const defaultProps: {
     monospace: Platform.select({ ios: 'Menlo', default: 'monospace' }),
     serif: Platform.select({ ios: 'Times New Roman', default: 'serif' })
   },
-  extraFonts: Platform.select({
+  systemFonts: Platform.select({
     default: [],
     ios: [
       'San Francisco',
