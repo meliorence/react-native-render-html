@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { PropsWithChildren } from 'react';
 import { useEffect } from 'react';
-import RenderHTML from './RenderHTML';
 import { RenderHTMLProps } from './shared-types';
 
-export default function RenderHTMLDebug(props: RenderHTMLProps) {
+function RenderHTMLProd(props: PropsWithChildren<RenderHTMLProps>) {
+  return <Fragment>{props.children}</Fragment>;
+}
+
+function RenderHTMLDev(props: PropsWithChildren<RenderHTMLProps>) {
   useEffect(() => {
     if (typeof props.contentWidth !== 'number') {
       console.warn(
@@ -16,5 +20,14 @@ export default function RenderHTMLDebug(props: RenderHTMLProps) {
       );
     }
   }, [props.contentWidth]);
-  return React.createElement(RenderHTML, props);
+  return <Fragment>{props.children}</Fragment>;
+}
+
+export default function RenderHTMLDebug(
+  props: PropsWithChildren<RenderHTMLProps>
+) {
+  if (props.debug && __DEV__) {
+    return React.createElement(RenderHTMLDev, props);
+  }
+  return React.createElement(RenderHTMLProd, props);
 }

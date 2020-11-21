@@ -2910,28 +2910,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@native-html/css-processor@npm:1.5.0":
-  version: 1.5.0
-  resolution: "@native-html/css-processor@npm:1.5.0"
+"@native-html/css-processor@npm:1.5.1":
+  version: 1.5.1
+  resolution: "@native-html/css-processor@npm:1.5.1"
   dependencies:
     css-to-react-native: ^3.0.0
   peerDependencies:
     "@types/react-native": "*"
     csstype: ^3.0.4
-  checksum: 7263eb07cd677080bd2b7958d8eb304858df3c0aeba7a415537dea0e01d31dd64fad068f96071cfd131a240a96bb9c66e11a3b0bda2bbdbfb2b80d7a5785e3d0
+  checksum: 6c4e253314ff5e438964b1d6621f40cb41ab02cee2aa4ccfaf2f2e8adeeaa1576fc0469ceea297c40569ec6d496fff53f7037bb2c35f593d615feef78dcc5a20
   languageName: node
   linkType: hard
 
-"@native-html/transient-render-engine@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@native-html/transient-render-engine@npm:2.0.0"
+"@native-html/transient-render-engine@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@native-html/transient-render-engine@npm:2.0.1"
   dependencies:
-    "@native-html/css-processor": 1.5.0
+    "@native-html/css-processor": 1.5.1
     htmlparser2: ^5.0.1
   peerDependencies:
     "@types/react-native": "*"
     react-native: ^0.63.0
-  checksum: 6d7d520f91b8b19685676026931cda0852a46262585fa706005f4db01c5454814d4a319eaecaf5650991076587e9e1dfbcad619993716532a1920d5359124c6b
+  checksum: 8bee3f1c032972ebbc1d108745c5052e9fc35e5c39087a9d64a29db5c324cc3cc148089a841ce41cf02d8ca9f61b0619a962053af7788ec5a9b2426ec26fc060
   languageName: node
   linkType: hard
 
@@ -14216,7 +14216,7 @@ fsevents@^1.2.7:
     "@babel/preset-react": ^7.12.7
     "@babel/preset-typescript": ^7.12.1
     "@babel/runtime": ^7.12.5
-    "@native-html/transient-render-engine": ^2.0.0
+    "@native-html/transient-render-engine": ^2.0.1
     "@react-native-community/bob": ^0.16.2
     "@release-it/conventional-changelog": ^2.0.0
     "@types/jest": ^26.0.14
