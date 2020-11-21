@@ -11,13 +11,13 @@ import type {
   DOMElement,
   TNode,
   TBlock
-} from '@native-html/transient-render-tree';
+} from '@native-html/transient-render-engine';
 import { ReactNode } from 'react';
 import {
   CSSPropertyNameList,
   MixedStyleDeclaration
 } from '@native-html/css-processor';
-import { TStyles } from '@native-html/transient-render-tree/lib/typescript/styles/TStyles';
+import type { TStyles } from '@native-html/transient-render-engine';
 
 export interface RendererDictionary<P> {}
 

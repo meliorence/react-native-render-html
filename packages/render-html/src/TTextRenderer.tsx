@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { TText } from '@native-html/transient-render-tree';
+import { TText } from '@native-html/transient-render-engine';
 import defaultRenderers from './defaultRenderers';
 import { TNodeGenericRendererProps } from './shared-types';
 

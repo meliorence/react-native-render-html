@@ -18,7 +18,7 @@ import {
   StackScreenProps
 } from '@react-navigation/stack';
 import { ColorSchemeName, Platform, View, StyleSheet } from 'react-native';
-import { TNode, tnodeToString } from '@native-html/transient-render-tree';
+import { TNode, tnodeToString } from '@native-html/transient-render-engine';
 import { Appbar, Snackbar } from 'react-native-paper';
 import snippets from './snippets';
 import Snippet from './Snippet';

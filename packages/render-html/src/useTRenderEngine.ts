@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import { TTreeBuilder } from '@native-html/transient-render-tree';
+import TRenderEngine from '@native-html/transient-render-engine';
 import { RenderHTMLProps } from './shared-types';
 
-export default function useTTreeBuilder(props: RenderHTMLProps) {
+export default function useTRenderEngine(props: RenderHTMLProps) {
   const {
     allowedStyles,
     ignoredStyles,
@@ -32,7 +32,7 @@ export default function useTTreeBuilder(props: RenderHTMLProps) {
   const tbuilderDeps = (triggerTRERebuildProps || []).map((key) => props[key]);
   return useMemo(
     () =>
-      new TTreeBuilder({
+      new TRenderEngine({
         cssProcessorConfig: {
           isFontSupported,
           inlinePropertiesBlacklist: ignoredStyles,
@@ -50,6 +50,7 @@ export default function useTTreeBuilder(props: RenderHTMLProps) {
           tagsStyles
         }
       }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [...tbuilderDeps, isFontSupported]
   );
 }

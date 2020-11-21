@@ -1,4 +1,4 @@
-import { TBlock, TPhrasing } from '@native-html/transient-render-tree';
+import { TBlock, TPhrasing } from '@native-html/transient-render-engine';
 import { GestureResponderEvent } from 'react-native';
 import { RenderHTMLPassedProps } from './shared-types';
 

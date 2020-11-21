@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { RenderHTMLProps } from 'react-native-render-html';
-import { DOMElement } from '@native-html/transient-render-tree';
+import { DOMElement } from '@native-html/transient-render-engine';
 
 const test = `<div
 style="background-color: red; height: 200px; padding: 20%; margin-top: 30px">
