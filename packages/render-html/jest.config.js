@@ -1,5 +1,5 @@
 module.exports = {
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'node'],
-  testRegex: 'src/.*\\.test\\.ts$',
+  preset: 'react-native',
+  testRegex: 'src/.*(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$',
   coveragePathIgnorePatterns: ['/node_modules/', '__tests__']
 };
