@@ -345,7 +345,7 @@ export default class ImgTag extends PureComponent<ImgTagProps, State> {
     this.mounted = false;
   }
 
-  componentDidUpdate(prevProps: ImgTagProps, prevState: any) {
+  componentDidUpdate(prevProps: ImgTagProps, prevState: State) {
     const sourceHasChanged = !sourcesAreEqual(
       prevProps.source,
       this.props.source
@@ -363,6 +363,7 @@ export default class ImgTag extends PureComponent<ImgTagProps, State> {
 
     if (requirementsHaveChanged) {
       this.invalidateRequirements(this.props);
+      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
         requiredWidth: this.__cachedRequirements!.width,
         requiredHeight: this.__cachedRequirements!.height
@@ -377,6 +378,7 @@ export default class ImgTag extends PureComponent<ImgTagProps, State> {
       }
     }
     if (shouldRecomputeImageBox) {
+      // eslint-disable-next-line react/no-did-update-set-state
       this.setState((state: any, props: ImgTagProps) => ({
         imageBoxDimensions: this.computeImageBoxDimensions(props, state)
       }));
