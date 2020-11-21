@@ -37,8 +37,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 // @ts-ignore
 import version from '../version';
 
-console.info(version);
-
 const CombinedLightTheme = merge(PaperLightTheme, NavLightTheme);
 const CombinedDarkTheme = merge(PaperDarkTheme, NavDarkTheme);
 
