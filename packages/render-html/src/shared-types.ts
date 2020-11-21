@@ -12,7 +12,7 @@ import type {
   TNode,
   TBlock
 } from '@native-html/transient-render-engine';
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import {
   CSSPropertyNameList,
   MixedStyleDeclaration
@@ -204,15 +204,15 @@ export interface RenderHTMLProps<P = any>
   /**
    * Replace the default wrapper with a function that takes your content as the first parameter.
    */
-  customWrapper?: (innerNodes: ReactNode) => ReactNode;
+  customWrapper?: (innerNodes: ReactNode) => ReactElement;
   /**
    * Replace the default loader while fetching a remote website's content.
    */
-  remoteLoadingView?: (props: RenderHTMLProps<P>, state: any) => ReactNode;
+  remoteLoadingView?: (props: RenderHTMLProps<P>) => ReactElement;
   /**
    * Replace the default error if a remote website's content could not be fetched.
    */
-  remoteErrorView?: (props: RenderHTMLProps<P>, state: any) => ReactNode;
+  remoteErrorView?: (props: RenderHTMLProps<P>) => ReactElement;
   /**
    * The default value in pixels for 1em
    */

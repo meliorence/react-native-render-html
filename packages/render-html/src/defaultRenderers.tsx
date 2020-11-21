@@ -1,4 +1,5 @@
 import type { TBlock } from '@native-html/transient-render-engine';
+import React from 'react';
 import ImgRenderer from './renderers/ImgRenderer';
 import ListRenderer from './renderers/ListRenderer';
 import type { RendererProps } from './shared-types';

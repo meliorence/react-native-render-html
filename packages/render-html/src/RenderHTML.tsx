@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Platform } from 'react-native';
 import { RenderHTMLProps } from './shared-types';
@@ -10,6 +10,7 @@ import SharedPropsContext, {
 import TNodeRenderersContext from './context/TNodeRenderersContext';
 import TChildrenRenderer from './TChildrenRenderer';
 import RenderHTMLDebug from './RenderHTMLDebug';
+import LoadHTML from './LoadHTML';
 
 export type RenderHTMLPropTypes = Record<keyof RenderHTMLProps, any>;
 
@@ -138,18 +139,25 @@ const defaultProps: {
   debug: __DEV__
 };
 
-export default function RenderHTML(props: RenderHTMLProps) {
+function RenderResolvedHTML(props: RenderHTMLProps) {
   const ttree = useTTree(props);
-  const Wrapper = props.debug ? RenderHTMLDebug : Fragment;
+  return <TNodeRenderer tnode={ttree} collapsedMarginTop={null} />;
+}
+
+export default function RenderHTML(props: RenderHTMLProps) {
   return (
-    <Wrapper {...props}>
+    <RenderHTMLDebug {...props}>
       <SharedPropsContext.Provider value={props}>
         <TNodeRenderersContext.Provider
           value={{ TNodeRenderer, TChildrenRenderer }}>
-          <TNodeRenderer tnode={ttree} collapsedMarginTop={null} />
+          <LoadHTML {...props}>
+            {(resolvedHTML) => (
+              <RenderResolvedHTML {...props} html={resolvedHTML} />
+            )}
+          </LoadHTML>
         </TNodeRenderersContext.Provider>
       </SharedPropsContext.Provider>
-    </Wrapper>
+    </RenderHTMLDebug>
   );
 }
 
