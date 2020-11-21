@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Platform } from 'react-native';
 import { RenderHTMLProps } from './shared-types';
@@ -9,6 +9,7 @@ import SharedPropsContext, {
 } from './context/SharedPropsContext';
 import TNodeRenderersContext from './context/TNodeRenderersContext';
 import TChildrenRenderer from './TChildrenRenderer';
+import RenderHTMLDebug from './RenderHTMLDebug';
 
 export type RenderHTMLPropTypes = Record<keyof RenderHTMLProps, any>;
 
@@ -133,18 +134,22 @@ const defaultProps: {
       'sans-serif-medium'
     ]
   }),
-  triggerTREInvalidationPropNames: []
+  triggerTREInvalidationPropNames: [],
+  debug: __DEV__
 };
 
 export default function RenderHTML(props: RenderHTMLProps) {
   const ttree = useTTree(props);
+  const Wrapper = props.debug ? RenderHTMLDebug : Fragment;
   return (
-    <SharedPropsContext.Provider value={props}>
-      <TNodeRenderersContext.Provider
-        value={{ TNodeRenderer, TChildrenRenderer }}>
-        <TNodeRenderer tnode={ttree} collapsedMarginTop={null} />
-      </TNodeRenderersContext.Provider>
-    </SharedPropsContext.Provider>
+    <Wrapper {...props}>
+      <SharedPropsContext.Provider value={props}>
+        <TNodeRenderersContext.Provider
+          value={{ TNodeRenderer, TChildrenRenderer }}>
+          <TNodeRenderer tnode={ttree} collapsedMarginTop={null} />
+        </TNodeRenderersContext.Provider>
+      </SharedPropsContext.Provider>
+    </Wrapper>
   );
 }
 
