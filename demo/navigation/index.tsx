@@ -34,8 +34,10 @@ import TTreeContextProvider, { useTTree } from '../state/TTreeContextProvider';
 import { MonoText } from '../components/StyledText';
 import BidirectionalScrollView from '../components/BidirectionalScrollView';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+// @ts-ignore
+import version from '../version';
 
-const version = '1.2.2';
+console.info(version);
 
 const CombinedLightTheme = merge(PaperLightTheme, NavLightTheme);
 const CombinedDarkTheme = merge(PaperDarkTheme, NavDarkTheme);
