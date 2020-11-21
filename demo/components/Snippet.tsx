@@ -3,9 +3,9 @@ import { ScrollView, Linking, useWindowDimensions } from 'react-native';
 import RenderHTML, { RenderHTMLProps } from 'react-native-render-html';
 import LegacyHTML from 'rnrh-legacy';
 import Constants from 'expo-constants';
-import { useThemeColor } from '../components/Themed';
+import { useThemeColor } from './Themed';
+import snippets from '../snippets';
 import { useTTree } from '../state/TTreeContextProvider';
-import snippets from './snippets';
 
 const DEFAULT_PROPS: Pick<RenderHTMLProps, 'onLinkPress' | 'debug'> = {
   onLinkPress(evt, href) {
@@ -68,7 +68,8 @@ const Snippet = React.memo(
         ...sharedProps.tagsStyles?.hr,
         height: 1,
         backgroundColor: '#CCC'
-      }
+      },
+      html: {}
     };
     const renderHtml = useLegacy ? (
       <LegacyHTML
@@ -85,10 +86,10 @@ const Snippet = React.memo(
         tagsStyles={mergedTagsStyles}
         baseStyle={baseStyle}
         enableUserAgentStyles
-        onTTreeChange={setTTree}
         enableExperimentalMarginCollapsing={true}
         debug={false}
         systemFonts={Constants.systemFonts}
+        onTTreeChange={setTTree}
       />
     );
     return (

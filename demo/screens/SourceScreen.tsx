@@ -1,10 +1,9 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import React, { PropsWithChildren } from 'react';
-import { useColorScheme, View, ViewProps, ViewStyle } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { useColorScheme, ViewProps } from 'react-native';
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
 import { solarizedlight, darcula } from 'react-syntax-highlighter/styles/prism';
-import BidirectionalScrollView from './BidirectionalScrollView';
+import BidirectionalScrollView from '../components/BidirectionalScrollView';
 
 export interface SourceRenderer {
   htmlSource: string;
@@ -12,16 +11,11 @@ export interface SourceRenderer {
 
 function Container({ children }: PropsWithChildren<ViewProps>) {
   return (
-    <BidirectionalScrollView padding={10}>
-      {children}
-    </BidirectionalScrollView>
+    <BidirectionalScrollView padding={10}>{children}</BidirectionalScrollView>
   );
 }
 
-export default function SourceRenderer({
-  route,
-  navigation
-}: StackScreenProps<any>) {
+export default function SourceScreen({ route }: StackScreenProps<any>) {
   const html = route.params;
   const colorMode = useColorScheme();
   return (
