@@ -14,12 +14,12 @@ export default function useTRenderEngine(props: RenderHTMLProps) {
     enableCSSInlineProcessing,
     enableUserAgentStyles,
     fallbackFonts,
-    systemFonts: extraFonts,
-    triggerTREInvalidationPropNames: triggerTRERebuildProps
+    systemFonts,
+    triggerTREInvalidationPropNames
   } = props;
   const isFontSupported = useMemo(() => {
     const fontMap = {} as Record<string, true>;
-    extraFonts!.forEach((font) => {
+    systemFonts!.forEach((font) => {
       fontMap[font] = true;
     });
     return (fontFamily: string) => {
@@ -28,8 +28,10 @@ export default function useTRenderEngine(props: RenderHTMLProps) {
       }
       return fontMap[fontFamily] || false;
     };
-  }, [extraFonts, fallbackFonts]);
-  const tbuilderDeps = (triggerTRERebuildProps || []).map((key) => props[key]);
+  }, [systemFonts, fallbackFonts]);
+  const tbuilderDeps = (triggerTREInvalidationPropNames || []).map(
+    (key) => props[key]
+  );
   return useMemo(
     () =>
       new TRenderEngine({
