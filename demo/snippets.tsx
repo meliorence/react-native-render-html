@@ -391,7 +391,7 @@ const preformatted = `<pre>  ___________________________
 </pre>
 <figcaption>
   A cow saying, "I'm an expert in my field." The cow is illustrated using preformatted text characters. 
-</figcaption>`
+</figcaption>`;
 
 function myTagRenderer() {
   return <Text>Bar</Text>;
@@ -401,9 +401,9 @@ function myOtherTagRenderer() {
   return <Text>this should break the line</Text>;
 }
 
-const snippetsMapConfig: Record<
+const snippets: Record<
   string,
-  { name: string; html: string; props?: Partial<RenderHTMLProps> }
+  { name: string; html?: string; props?: Partial<RenderHTMLProps> }
 > = {
   test: {
     name: 'Test',
@@ -436,7 +436,7 @@ const snippetsMapConfig: Record<
   },
   pre: {
     name: 'Preformatted',
-    html: preformatted,
+    html: preformatted
   },
   fonts: {
     name: 'Font Selection',
@@ -523,12 +523,15 @@ const snippetsMapConfig: Record<
     }
   },
   invalidHTML: { name: 'Invalid HTML', html: invalidHTML },
-  parseRemoteHTML: {
+  headers: {
+    name: 'Headers',
+    html:
+      '<h1>Header 1</h1><h2>Header 2</h2><h3>Header 3</h3><h4>Header 4</h4><h5>Header 5</h5><h6>Header 6</h6>'
+  },
+  remoteHTML: {
     name: 'Remote HTML',
-    html: '',
     props: {
-      uri: 'http://motherfuckingwebsite.com',
-      ignoredTags: ['script']
+      uri: 'http://motherfuckingwebsite.com'
     }
   },
   iframes: { name: 'Iframes', html: iframes },
@@ -573,7 +576,7 @@ const snippetsMapConfig: Record<
   }
 };
 
-export default snippetsMapConfig;
+export default snippets;
 
 function blueCircleRenderer({ passProps }: any) {
   return (
