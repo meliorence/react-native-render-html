@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { ComponentClass, ComponentType, PureComponent } from 'react';
 import {
   Image,
   View,
@@ -19,13 +19,13 @@ export interface ImgDimensions {
 export interface ImgTagProps {
   source: any;
   alt?: string;
-  height?: string;
-  width?: string;
+  height?: string | number;
+  width?: string | number;
   style: ImageStyle;
   testID?: string;
   computeImagesMaxWidth?: (containerWidth: number) => number;
-  onPress: PressableProps['onPress'];
-  altColor: string;
+  onPress?: PressableProps['onPress'];
+  altColor?: string;
   contentWidth: number;
   enableExperimentalPercentWidth?: boolean;
   imagesInitialDimensions: ImgDimensions;
@@ -252,7 +252,7 @@ interface State {
   error: boolean;
 }
 
-export default class ImgTag extends PureComponent<ImgTagProps, State> {
+class ImgTag extends PureComponent<ImgTagProps, State> {
   private __cachedFlattenStyles: Record<string, any> | null = null;
   private __cachedRequirements: ImgDimensions | null = null;
   private mounted = false;
@@ -274,7 +274,7 @@ export default class ImgTag extends PureComponent<ImgTagProps, State> {
     };
   }
 
-  static propTypes = {
+  static propTypes: Record<keyof ImgTagProps, any> = {
     source: PropTypes.object.isRequired,
     alt: PropTypes.string,
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -286,16 +286,20 @@ export default class ImgTag extends PureComponent<ImgTagProps, State> {
     imagesInitialDimensions: PropTypes.shape({
       width: PropTypes.number,
       height: PropTypes.number
-    })
+    }),
+    altColor: PropTypes.string,
+    onPress: PropTypes.func,
+    testID: PropTypes.string
   };
 
-  static defaultProps = {
+  static defaultProps: Partial<ImgTagProps> = {
     enableExperimentalPercentWidth: false,
     computeImagesMaxWidth: identity,
     imagesInitialDimensions: {
       width: 100,
       height: 100
-    }
+    },
+    style: {}
   };
 
   invalidateRequirements(props: ImgTagProps) {
@@ -479,3 +483,7 @@ export default class ImgTag extends PureComponent<ImgTagProps, State> {
     return <View style={style}>{this.renderContent()}</View>;
   }
 }
+
+const ImgTagExport: ComponentClass<Partial<ImgTagProps>> = ImgTag as any;
+
+export default ImgTagExport;
