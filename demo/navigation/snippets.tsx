@@ -437,13 +437,6 @@ const snippetsMapConfig: Record<
   pre: {
     name: 'Preformatted',
     html: preformatted,
-    props: {
-      tagsStyles: {
-        pre: {
-          fontFamily: 'monospace'
-        }
-      }
-    }
   },
   fonts: {
     name: 'Font Selection',
