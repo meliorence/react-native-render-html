@@ -1,4 +1,4 @@
-import React, { ComponentClass, ComponentType, PureComponent } from 'react';
+import React, { ComponentClass, PureComponent } from 'react';
 import {
   Image,
   View,
