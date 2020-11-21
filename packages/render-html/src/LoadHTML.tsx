@@ -32,7 +32,7 @@ async function loadHTMLResource(uri: string): Promise<LoaderInternalState> {
 }
 
 function useLoader(props: HTMLLoaderProps) {
-  const { uri, html } = props;
+  const { uri, html, onHTMLLoaded } = props;
   const [loadState, setState] = useState<LoaderInternalState>({
     error: false,
     loading: false,
@@ -55,6 +55,9 @@ function useLoader(props: HTMLLoaderProps) {
       cancelled = true;
     };
   }, [error, uri]);
+  useEffect(() => {
+    loadState.resolvedHTML && onHTMLLoaded?.call(null, loadState.resolvedHTML);
+  }, [loadState.resolvedHTML, onHTMLLoaded]);
   return loadState;
 }
 

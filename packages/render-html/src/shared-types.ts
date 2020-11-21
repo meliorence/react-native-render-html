@@ -226,6 +226,10 @@ export interface RenderHTMLProps<P = any>
    */
   onTTreeChange?: (ttree: TNode) => void;
   /**
+   * Triggered when HTML is available to the RenderHTML component.
+   */
+  onHTMLLoaded?: (html: string) => void;
+  /**
    * A list of fonts available in the current platform. These fonts will used
    * to select the first match in CSS `fontFamily` property, which supports a
    * comma-separated list of fonts. By default, a handful of fonts are selected
