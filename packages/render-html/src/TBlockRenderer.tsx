@@ -24,7 +24,7 @@ function mergeCollapsedMargins(
   return [nativeStyle, additionalStyles];
 }
 
-const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
+export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
   tnode,
   key,
   children: overridingChildren,
