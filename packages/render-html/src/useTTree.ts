@@ -1,13 +1,13 @@
-import { tnodeToString } from '@native-html/transient-render-tree';
+import { tnodeToString } from '@native-html/transient-render-engine';
 import { useMemo, useEffect } from 'react';
 import { RenderHTMLProps } from './shared-types';
-import useTTreeBuilder from './useTTreeBuilder';
+import useTRenderEngine from './useTRenderEngine';
 
 export default function useTTree(props: RenderHTMLProps) {
-  const ttreebuilder = useTTreeBuilder(props);
-  const ttree = useMemo(() => ttreebuilder.buildTTree(props.html), [
+  const trenderEngine = useTRenderEngine(props);
+  const ttree = useMemo(() => trenderEngine.buildTTree(props.html), [
     props.html,
-    ttreebuilder
+    trenderEngine
   ]);
   const { onTTreeChange, debug } = props;
   useEffect(() => {

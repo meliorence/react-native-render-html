@@ -1,4 +1,4 @@
-import type { TBlock } from '@native-html/transient-render-tree';
+import type { TBlock } from '@native-html/transient-render-engine';
 import ImgRenderer from './renderers/ImgRenderer';
 import ListRenderer from './renderers/ListRenderer';
 import type { RendererProps } from './shared-types';
