@@ -220,7 +220,7 @@ describe('ImgTag', () => {
         const { findByTestId } = render(
           <ImgTag
             enableExperimentalPercentWidth
-            computeImagesMaxWidth={(contentWidth) => contentWidth * 0.7}
+            computeImagesMaxWidth={(c) => c * 0.7}
             contentWidth={250}
             {...style}
             source={source}
