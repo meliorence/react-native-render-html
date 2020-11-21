@@ -4,7 +4,7 @@ import {
   TNode,
   TPhrasing,
   TText
-} from '@native-html/transient-render-tree';
+} from '@native-html/transient-render-engine';
 import TBlockRenderer from './TBlockRenderer';
 import TPhrasingRenderer from './TPhrasingRenderer';
 import TTextRenderer from './TTextRenderer';

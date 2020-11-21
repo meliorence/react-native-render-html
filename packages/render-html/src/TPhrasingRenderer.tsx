@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { TPhrasing } from '@native-html/transient-render-tree';
+import { TPhrasing } from '@native-html/transient-render-engine';
 import { useSharedProps } from './context/SharedPropsContext';
 import { useTChildrenRenderer } from './context/TNodeRenderersContext';
 import { TNodeGenericRendererProps } from './shared-types';

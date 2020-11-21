@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import { View, ViewProps } from 'react-native';
-import { TBlock } from '@native-html/transient-render-tree';
+import { TBlock } from '@native-html/transient-render-engine';
 import defaultRenderers from './defaultRenderers';
 import GenericPressable from './GenericPressable';
 import { useTChildrenRenderer } from './context/TNodeRenderersContext';

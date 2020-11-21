@@ -1,5 +1,5 @@
 import React from 'react';
-import { TBlock, TNode, TPhrasing } from '@native-html/transient-render-tree';
+import { TBlock, TNode, TPhrasing } from '@native-html/transient-render-engine';
 import { useSharedProps } from './context/SharedPropsContext';
 import TNodeRenderer, { TNodeRendererProps } from './TNodeRenderer';
 
