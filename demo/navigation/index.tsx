@@ -35,7 +35,7 @@ import { MonoText } from '../components/StyledText';
 import BidirectionalScrollView from '../components/BidirectionalScrollView';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const version = '1.2.1';
+const version = '1.2.2';
 
 const CombinedLightTheme = merge(PaperLightTheme, NavLightTheme);
 const CombinedDarkTheme = merge(PaperDarkTheme, NavDarkTheme);
@@ -45,15 +45,17 @@ export default function Navigation({
 }: {
   colorScheme: ColorSchemeName;
 }) {
+  const theme = colorScheme === 'dark' ? CombinedDarkTheme : CombinedLightTheme;
   return (
-    <PaperProvider
-      theme={colorScheme === 'dark' ? CombinedDarkTheme : CombinedLightTheme}>
-      <NavigationContainer
-        // linking={LinkingConfiguration}
-        theme={colorScheme === 'dark' ? CombinedDarkTheme : CombinedLightTheme}>
-        <RootNavigator />
-      </NavigationContainer>
-    </PaperProvider>
+    <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
+      <PaperProvider theme={theme}>
+        <NavigationContainer
+          // linking={LinkingConfiguration}
+          theme={theme}>
+          <RootNavigator />
+        </NavigationContainer>
+      </PaperProvider>
+    </View>
   );
 }
 
@@ -186,7 +188,7 @@ function VersionDisplay() {
   return (
     <View
       style={{
-        alignSelf: 'stretch',
+        alignSelf: 'stretch'
       }}>
       <MonoText
         style={{
