@@ -1,9 +1,10 @@
 import React, { PropsWithChildren } from 'react';
-import { useColorScheme, View, Text, ViewProps } from 'react-native';
+import { useColorScheme, ViewProps } from 'react-native';
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
 import { solarizedlight, darcula } from 'react-syntax-highlighter/styles/prism';
 import BidirectionalScrollView from '../components/BidirectionalScrollView';
-import { useLoadedHTML } from '../state/LoadedHTMLContext';
+import DisplayLoading from '../components/DisplayLoading';
+import { useSelectedHTML } from '../state/store';
 
 export interface SourceRenderer {
   htmlSource: string;
@@ -16,7 +17,7 @@ function Container({ children }: PropsWithChildren<ViewProps>) {
 }
 
 export default function SourceScreen() {
-  const { html } = useLoadedHTML();
+  const html = useSelectedHTML();
   const colorMode = useColorScheme();
   return html ? (
     <SyntaxHighlighter
@@ -28,8 +29,6 @@ export default function SourceScreen() {
       {html}
     </SyntaxHighlighter>
   ) : (
-    <View>
-      <Text>HTML unavailable</Text>
-    </View>
+    <DisplayLoading />
   );
 }

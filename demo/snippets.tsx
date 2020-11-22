@@ -3,8 +3,13 @@ import { View, Text } from 'react-native';
 import { RenderHTMLProps } from 'react-native-render-html';
 import { DOMElement } from '@native-html/transient-render-engine';
 
+const RED = '#c62828';
+const HIGHLIGHT = '#fff59d';
+const BLUE = '#03a9f4';
+const GREEN = '#4caf50';
+
 const test = `<div
-style="background-color: red; height: 200px; padding: 20%; margin-top: 30px">
+style="background-color: ${RED}; height: 200px; padding: 20%; margin-top: 30px">
 <span style="color: white;">Text inside a rectangle with a 20% padding</span>
 </div>`;
 
@@ -59,7 +64,7 @@ const lists = `
 	<li>Easy</li>
 	<li>Peasy</li>
 	<li>
-		<div style="background-color:red;width:50px;height:50px;"></div>
+		<div style="background-color:${RED};width:50px;height:50px;"></div>
 	</li>
 	<li>Lemon</li>
 	<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </li>
@@ -87,9 +92,9 @@ const lists = `
 <hr />
 <p>An 
 	<em>ol</em> tag, with 
-	<em>color: blue;</em> (and default <em>list-style-type: decimal;</em>)
+	<em>color: ${BLUE};</em> (and default <em>list-style-type: decimal;</em>)
 </p>
-<ol style="color:blue;">
+<ol style="color:${BLUE};">
 	<li>Sneaky</li>
 	<li>Beaky</li>
 	<li>Like</li>
@@ -171,13 +176,13 @@ const trickyStuff = `
 
 const layoutStyles = `
 <p>Nested rectangle with percentage dimensions and positionning</p>
-<div style="background-color: red; height: 200px">
+<div style="background-color: ${RED}; height: 200px">
 	<div
-    style="background-color: blue; width: 80%; height: 80%; top: 10%; left: 10%"></div>
+    style="background-color: ${BLUE}; width: 80%; height: 80%; top: 10%; left: 10%"></div>
 </div>
 <hr />
 <div
-style="background-color: red; height: 200px; padding: 20%; margin-top: 30px">
+style="background-color: ${RED}; height: 200px; padding: 20%; margin-top: 30px">
   <span style="color: white;">Text inside a rectangle with a 20% padding</span>
 </div>
 `;
@@ -202,31 +207,31 @@ const fontSelection = `<p>CSS <em>fontFamily</em> and <em>font</em> properties a
 `;
 
 const textsStylesBehaviour = `<p>Styling texts is a challenging part of converting HTML into react-native components.</p>
-<p>There are significant differences between the CSS standard and how styles are handled in React Native. Most notably, &lt;Text&gt; styles don't inherit from &lt;View&gt; styles. The reconciliation is handled by the Transient Render Tree engine.</p>
+<p>There are significant differences between the CSS standard and how styles are handled in React Native. Most notably, <em>&lt;Text&gt;</em> styles don't inherit from <em>&lt;View&gt;</em> styles. The reconciliation is handled by the Transient Render Engine.</p>
 <p>Let's see how styles are applied to texts with this library.</p>
 <hr/>
-<div style="color:red;">This text is inside a div, without a text tag wrapping it. The <em>div</em> tag only has <em>color:red;</em> as style.</div>
+<div style="color:${RED};">This text is inside a div, without a text tag wrapping it. The <em>div</em> tag only has <em>color:${RED};</em> (red) as style.</div>
 <p>In the example above, you may find, if you inspect the rendered components, that it's the <em>Text</em> component inside that actually receives the color attribute.</p>
-<p>This is how the Transient Render Tree engine passes block styles to their children, and let <em>Text</em> children consume <em>Text</em> specific styles.</p>
+<p>This is how the Transient Render Engine passes block styles to their children, and let <em>Text</em> children consume <em>Text</em> specific styles.</p>
 <hr/>
-<div style="color:red">
+<div style="color:${RED}">
     <p>This first paragraph doesn't have inline styles.</p>
-    <p style="color:blue;">This one has <em>color:blue;</em>.</p>
+    <p style="color:${BLUE};">This one has <em>color:${BLUE};</em> (blue).</p>
 </div>
-<p>Here, the <em>div</em> wrapper still has <em>color:red;</em> as style.</div>.</p>
+<p>Here, the <em>div</em> wrapper still has <em>color:${RED};</em> (red) as style.</div>.</p>
 <p>The first inner paragraph doesn't have any style attribute, either from HTML or from the <em>tagsStyles</em> or <em>classesStyles</em> props.</p>
-<p>The second one is set to be blue from its <em>style</em> attribute.</p>`;
+<p>The second one is set to be ${BLUE} (blue) from its <em>style</em> attribute.</p>`;
 
 const ignoringTagsAndStyles = `
 <p>The following tag (h2) is ignored with the "ignoredTags" prop</p>
 <h2>This shouldn't be rendered !</h2>
 <p>^^^ no title there ? great.</p>
 <p>
-  The next div has a red background. It should be ignored with the
+  The next div has a ${RED} background. It should be ignored with the
   "ignoredStyles" prop.
 </p>
 <div
-  style="background-color: red; height: 200px; width: 200px; border-width: 1px"
+  style="background-color: ${RED}; height: 200px; width: 200px; border-width: 1px"
 ></div>
 <p>
   You can also use a function to ignore nodes if you need to be even more
@@ -249,26 +254,26 @@ const customHTMLTags = `
   This example showcases how you can render custom HTML tags with this plugin.
 </p>
 <p>
-  The following tag is named <em>bluecircle</em> and will render... a blue
+  The following tag is named <em>bluecircle</em> and will render... a ${BLUE}
   circle.
 </p>
 <bluecircle></bluecircle>
 <p>Let's get crazy and add some styling to our custom tag.</p>
-<bluecircle style="background-color: red"></bluecircle>
-<p>Yes, that bluecircle tag is now red.</p>
+<bluecircle style="background-color: ${RED}"></bluecircle>
+<p>Yes, that bluecircle tag is now ${RED}.</p>
 <p>For our final trick, let's style this custom tag with a class.</p>
 <bluecircle class="make-me-green"></bluecircle>
 <p>
   That demonstrates how easily we can override styles. In ascending priority :
 </p>
-Style from the class with the <em>classesStyles</em> prop (green)
+Style from the class with the <em>classesStyles</em> prop (${GREEN})
 <ul>
-  <li style="color: blue">Default style for the custom component (blue)</li>
-  <li style="color: green">
-    Style from the class with the <em>classesStyles</em> prop (green)
+  <li style="color: ${BLUE}">Default style for the custom component (${BLUE})</li>
+  <li style="color: ${GREEN}">
+    Style from the class with the <em>classesStyles</em> prop (${GREEN})
   </li>
-  <li style="color: red">
-    Converted CSS to RN style from the <em>style</em> attribute in HTML (red)
+  <li style="color: ${RED}">
+    Converted CSS to RN style from the <em>style</em> attribute in HTML (${RED})
   </li>
 </ul>
 `;
@@ -324,7 +329,7 @@ const alteration = `
   rendered. It's extremely powerful as a last resort to add some very specific
   styling or circumvent rendering problems
 </p>
-<p>Let's make the color of links inside a <em>div</em> red !</p>
+<p>Let's make the color of links inside a <em>div</em> ${RED} !</p>
 <p><a href="http://google.fr">This is a lame link inside a paragraph.</a></p>
 <div><a href="http://google.fr">This is a very cool link inside a div</a></div>
 `;
@@ -353,7 +358,7 @@ const anchors = `
 </p>
 <a href="http://google.fr"><div
 style="
-  background-color: red;
+  background-color: ${RED};
   height: 20px;
   width: 40px;
 "
@@ -401,10 +406,34 @@ function myOtherTagRenderer() {
   return <Text>this should break the line</Text>;
 }
 
-const snippets: Record<
-  string,
-  { name: string; html?: string; props?: Partial<RenderHTMLProps> }
-> = {
+export type SnippetId =
+  | 'test'
+  | 'whitespace'
+  | 'pre'
+  | 'fonts'
+  | 'paragraphs'
+  | 'anchors'
+  | 'lists'
+  | 'images'
+  | 'trickyStuff'
+  | 'layoutStyles'
+  | 'textsStylesBehaviour'
+  | 'ignoringTagsAndStyles'
+  | 'customHTMLTags'
+  | 'invalidHTML'
+  | 'headers'
+  | 'remoteHTML'
+  | 'iframes'
+  | 'alteration'
+  | 'inlineCustomTags';
+
+interface SnippetDeclaration {
+  name: string;
+  html?: string;
+  props?: Partial<RenderHTMLProps>;
+}
+
+const snippets: Record<SnippetId, SnippetDeclaration> = {
   test: {
     name: 'Test',
     html: test,
@@ -420,7 +449,7 @@ const snippets: Record<
     props: {
       tagsStyles: {
         div: {
-          backgroundColor: 'yellow',
+          backgroundColor: HIGHLIGHT,
           color: 'black'
         }
       },
@@ -444,7 +473,7 @@ const snippets: Record<
     props: {
       classesStyles: {
         snippet: {
-          backgroundColor: 'yellow',
+          backgroundColor: HIGHLIGHT,
           color: 'black'
         }
       }
@@ -464,7 +493,7 @@ const snippets: Record<
           marginLeft: 20,
           color: 'teal',
           fontWeight: 'bold',
-          backgroundColor: 'yellow'
+          backgroundColor: HIGHLIGHT
         }
       }
     }
@@ -519,7 +548,7 @@ const snippets: Record<
     html: customHTMLTags,
     props: {
       renderers: { bluecircle: blueCircleRenderer },
-      classesStyles: { 'make-me-green': { backgroundColor: 'green' } }
+      classesStyles: { 'make-me-green': { backgroundColor: GREEN } }
     }
   },
   invalidHTML: { name: 'Invalid HTML', html: invalidHTML },
@@ -558,7 +587,7 @@ const snippets: Record<
       alterNode: (node) => {
         const { name, parent } = node;
         if (name === 'a' && parent && (parent as DOMElement).name === 'div') {
-          node.attribs = { ...(node.attribs || {}), style: 'color:red;' };
+          node.attribs = { ...(node.attribs || {}), style: 'color:${RED};' };
           return node;
         }
       }
@@ -576,14 +605,34 @@ const snippets: Record<
   }
 };
 
-export default snippets;
+const ignoredSnippets: SnippetId[] = [
+  'trickyStuff',
+  'invalidHTML',
+  'ignoringTagsAndStyles',
+  'customHTMLTags',
+  'iframes',
+  'alteration',
+  'inlineCustomTags'
+];
+
+if (!__DEV__) {
+  ignoredSnippets.push('test');
+}
+
+const filteredSnippets: Record<SnippetId, SnippetDeclaration> = (Object.keys(
+  snippets
+) as SnippetId[])
+  .filter((k) => ignoredSnippets.indexOf(k as SnippetId) === -1)
+  .reduce((prev, key) => ({ ...prev, [key]: snippets[key] }), {} as any);
+
+export default filteredSnippets;
 
 function blueCircleRenderer({ passProps }: any) {
   return (
     <View
       key={passProps.key}
       style={[
-        { width: 50, height: 50, borderRadius: 25, backgroundColor: 'blue' }
+        { width: 50, height: 50, borderRadius: 25, backgroundColor: '${BLUE}' }
       ]}
     />
   );

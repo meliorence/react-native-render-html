@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { Platform } from 'react-native';
+import { Platform, TextProps } from 'react-native';
+import Text from './Text';
 
-import { Text, TextProps } from './Themed';
-
-export function MonoText(props: TextProps) {
+export default function MonoText(props: React.PropsWithChildren<TextProps>) {
   return (
     <Text
       {...props}
