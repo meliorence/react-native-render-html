@@ -45,7 +45,7 @@ function DrawerHeader({ scene }: DrawerHeaderProps) {
       />
       <Action
         icon="xml"
-        disabled={html == null}
+        disabled={typeof html !== 'string'}
         onPress={() => navigation.navigate('source')}
       />
       <Action
