@@ -8,10 +8,10 @@ const HIGHLIGHT = '#fff59d';
 const BLUE = '#03a9f4';
 const GREEN = '#4caf50';
 
-const test = `<div
-style="background-color: ${RED}; height: 200px; padding: 20%; margin-top: 30px">
-<span style="color: white;">Text inside a rectangle with a 20% padding</span>
-</div>`;
+const test = `<img
+style="width: 50%; height: 100px; align-self: center"
+src="https://i.imgur.com/gSmWCJF.jpg"
+/>`;
 
 const paragraphs = `
 <p>Paragraphs have a default margin top and bottom of 16px. If you use 
@@ -121,23 +121,34 @@ const lists = `
 </ol>`;
 
 const images = `
-<p>This image dimensions are set in its style attributes.</p>
+<p>
+  Similarly to browsers, this library will place a print box before fetching image dimensions when both <em>width</em> and <em>height</em> attributes are provided.
+  This is great to avoid images "jumping" from zero height to their computed height, and is a hint to good web design.
+</p>
+<p>
+  Moreover, this library will automatically scale images down to the available width, even when the provided inline style width is greater than the container width.
+  You are strongly advised to provide a <em>contentWidth</em> property from <em>useWindowsDimensions</em> official hook to help this component handle the scaling.
+</p>
+<hr/>
+<p>This image display dimensions are set with inline styles (<em>width: 50%; height: 100px;</em>)</p>
 <img
+  width="1200" height="800"
   style="width: 50%; height: 100px; align-self: center"
   src="https://i.imgur.com/gSmWCJF.jpg"
 />
 <hr />
 <p>
   The next image will be sized automatically thanks to the <em>contentWidth</em> and
-  <em>computeImageMaxWidth</em> props.
+  <em>computeImageMaxWidth</em> props. The latter allows you to set the maximum width from <em>contentWidth</em>,
+  or disabling scaling by returning <code>Infinity</code>.
 </p>
-<img src="https://i.imgur.com/XP2BE7q.jpg" />
+<img width="1200" height="800" src="https://i.imgur.com/XP2BE7q.jpg" />
 <hr />
 <p>
   Here are images inside paragraphs!.
 </p>
 <p>
-	<img src="https://i.imgur.com/gSmWCJF.jpg" />
+	<img width="1200" height="800" src="https://i.imgur.com/gSmWCJF.jpg" />
 </p>
 <p>
   Eo adducta re per Isauriam, rege Persarum bellis finitimis inligato
@@ -148,7 +159,7 @@ const images = `
   usquam locum vi subita perrupturus.
 </p>
 <p>
-	<img src="https://i.imgur.com/XP2BE7q.jpg" />
+	<img width="1200" height="800" src="https://i.imgur.com/XP2BE7q.jpg" />
 </p>
 <hr />
 <p>The following image has an unreachable <em>src</em>.</p>
@@ -187,7 +198,8 @@ style="background-color: ${RED}; height: 200px; padding: 20%; margin-top: 30px">
 </div>
 `;
 
-const lorem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`;
+const lorem =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.';
 
 const fontSelection = `<p>CSS <em>fontFamily</em> and <em>font</em> properties allow a comma-separated list of fonts, but React Native styles <em>fontFamily</em> allows only one font name. With the new engine, you can instruct the <em>RenderHTML</em> component which fonts are available in the system (or fonts you have added), and it will pick the first match! The prop to achieve that is <em>systemFonts</em>.</p>
 <p>By default, a handful of fonts supported by the current system are pre-registered. If you are using expo, just set this prop to <em>Constants.systemFonts</em>. You can also define how special font names are resolved (such as <em>serif</em>, <em>sans-serif</em> and <em>monospace</em> with the <em>fallbackFonts</em> prop).</p>
