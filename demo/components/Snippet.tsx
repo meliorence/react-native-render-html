@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { ScrollView, Linking, useWindowDimensions } from 'react-native';
 import RenderHTML, { RenderHTMLProps } from 'react-native-render-html';
 import LegacyHTML from 'rnrh-legacy';
 import Constants from 'expo-constants';
-import { useThemeColor } from './Themed';
-import snippets from '../snippets';
-import { useTTree } from '../state/TTreeContextProvider';
-import { useLoadedHTML } from '../state/LoadedHTMLContext';
+import { TNode } from '@native-html/transient-render-engine';
+import snippets, { SnippetId } from '../snippets';
+import { useSetHTMLForSnippet, useSetTTreeForSnippet } from '../state/store';
+import { useComponentColors } from '../state/ThemeProvider';
+import DisplayLoading from './DisplayLoading';
 
 const DEFAULT_PROPS: Pick<RenderHTMLProps, 'onLinkPress' | 'debug'> = {
   onLinkPress(evt, href) {
@@ -43,15 +44,29 @@ const Snippet = React.memo(
     exampleId,
     useLegacy = false
   }: {
-    exampleId: keyof typeof snippets;
+    exampleId: SnippetId;
     useLegacy: boolean;
   }) => {
     const { width: contentWidth } = useWindowDimensions();
-    const { setTTree } = useTTree();
-    const { setHTML } = useLoadedHTML();
+    const setHtmlForSnippet = useSetHTMLForSnippet();
+    const setTTreeForSnippet = useSetTTreeForSnippet();
+    const setHTML = useCallback(
+      (html: string) => setHtmlForSnippet(exampleId, html),
+      [setHtmlForSnippet, exampleId]
+    );
+    const setTTree = useCallback(
+      (ttree: TNode) => {
+        setTTreeForSnippet(exampleId, ttree);
+      },
+      [setTTreeForSnippet, exampleId]
+    );
     const additionalProps = snippets[exampleId].props || {};
+    const {
+      html: { color, backgroundColor, border }
+    } = useComponentColors();
     const baseStyle = {
-      color: useThemeColor({}, 'text'),
+      color,
+      backgroundColor,
       ...additionalProps.baseStyle
     };
     const sharedProps = {
@@ -69,7 +84,7 @@ const Snippet = React.memo(
         marginBottom: 16,
         ...sharedProps.tagsStyles?.hr,
         height: 1,
-        backgroundColor: '#CCC'
+        backgroundColor: border
       },
       html: {}
     };
@@ -93,6 +108,8 @@ const Snippet = React.memo(
         systemFonts={Constants.systemFonts}
         onTTreeChange={setTTree}
         onHTMLLoaded={setHTML}
+        remoteLoadingView={() => <DisplayLoading />}
+        triggerTREInvalidationPropNames={['baseStyle']}
       />
     );
     return (
