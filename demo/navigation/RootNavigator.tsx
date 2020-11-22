@@ -1,59 +1,70 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { TNode } from '@native-html/transient-render-engine';
 import { Snackbar } from 'react-native-paper';
 import SourceScreen from '../screens/SourceScreen';
-import TTreeContextProvider from '../state/TTreeContextProvider';
 import TTreeScreen from '../screens/TTreeScreen';
-import LegacyContext from '../state/LegacyContext';
-import ToggleLegacyContext from '../state/ToggleLegacyContext';
-import HomeScreen from '../screens/HomeScreen';
+import HomeScreen from '../screens/HomeDrawerScreen';
+import { useLegacyMode } from '../state/store';
+import { useComponentColors } from '../state/ThemeProvider';
+import { View } from 'react-native';
 
 const Stack = createStackNavigator();
 
-export default function RootNavigator() {
-  const [legacyMode, setLegacyMode] = React.useState(false);
+function LegacySnackbar() {
+  const legacyMode = useLegacyMode();
+  const {
+    snackbar: { backgroundColor }
+  } = useComponentColors();
   const [snackbarVisible, setSnackbarVisible] = React.useState(false);
-  const [ttree, setTTree] = React.useState<TNode | null>(null);
   React.useEffect(() => {
     setSnackbarVisible(true);
     const timeout = setTimeout(() => setSnackbarVisible(false), 2500);
     return () => clearTimeout(timeout);
   }, [legacyMode]);
-  const memoizedSetUseLegacy = React.useCallback(
-    () => setLegacyMode((s) => !s),
-    []
-  );
-  const memoizedTTreeContext = React.useMemo(() => ({ ttree, setTTree }), [
-    ttree,
-    setTTree
-  ]);
   return (
-    <TTreeContextProvider value={memoizedTTreeContext}>
-      <ToggleLegacyContext.Provider value={memoizedSetUseLegacy}>
-        <LegacyContext.Provider value={legacyMode}>
-          <Stack.Navigator initialRouteName="home">
-            <Stack.Screen
-              name="home"
-              options={{ headerShown: false }}
-              component={HomeScreen}
-            />
-            <Stack.Screen
-              name="source"
-              options={{ title: 'HTML Source' }}
-              component={SourceScreen}
-            />
-            <Stack.Screen
-              name="ttree"
-              options={{ title: 'Transient Render Tree' }}
-              component={TTreeScreen}
-            />
-          </Stack.Navigator>
-          <Snackbar visible={snackbarVisible} onDismiss={() => void 0}>
-            {legacyMode ? 'Legacy (v5.x) enabled.' : 'Foundry (v6.x) enabled'}
-          </Snackbar>
-        </LegacyContext.Provider>
-      </ToggleLegacyContext.Provider>
-    </TTreeContextProvider>
+    <Snackbar
+      collapsable
+      visible={snackbarVisible}
+      style={{ backgroundColor }}
+      onDismiss={() => setSnackbarVisible(false)}>
+      {legacyMode ? 'Legacy (v5.x) enabled.' : 'Foundry (v6.x) enabled'}
+    </Snackbar>
+  );
+}
+
+export default function RootNavigator() {
+  const {
+    navHeader: { backgroundColor, tintColor }
+  } = useComponentColors();
+  const headerBackground = React.useCallback(
+    () => <View style={{ backgroundColor, flex: 1 }} />,
+    [backgroundColor]
+  );
+  return (
+    <>
+      <Stack.Navigator
+        screenOptions={{
+          headerTintColor: tintColor,
+          headerBackground
+        }}
+        initialRouteName="home">
+        <Stack.Screen
+          name="home"
+          options={{ headerShown: false }}
+          component={HomeScreen}
+        />
+        <Stack.Screen
+          name="source"
+          options={{ title: 'HTML Source' }}
+          component={SourceScreen}
+        />
+        <Stack.Screen
+          name="ttree"
+          options={{ title: 'Transient Render Tree' }}
+          component={TTreeScreen}
+        />
+      </Stack.Navigator>
+      <LegacySnackbar />
+    </>
   );
 }

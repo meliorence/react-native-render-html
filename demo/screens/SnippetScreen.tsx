@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { DrawerScreenProps } from '@react-navigation/drawer';
-import { useLegacyMode } from '../state/LegacyContext';
 import Snippet from '../components/Snippet';
+import { useLegacyMode } from '../state/store';
 
 export default function SnippetScreen({ route }: DrawerScreenProps<any>) {
   const legacyMode = useLegacyMode();

@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 // @ts-ignore
 import version from '../version';
-import { MonoText } from './StyledText';
+import MonoText from './MonoText';
 
 export default function VersionDisplay() {
   const { bottom, left, right } = useSafeAreaInsets();
@@ -17,7 +17,6 @@ export default function VersionDisplay() {
         style={{
           fontSize: 10,
           padding: 10,
-          borderTopWidth: StyleSheet.hairlineWidth,
           textAlign: 'left',
           marginBottom: bottom,
           marginLeft: left,
