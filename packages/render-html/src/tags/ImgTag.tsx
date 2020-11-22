@@ -453,6 +453,7 @@ class ImgTag extends PureComponent<ImgTagProps, State> {
     return (
       <Image
         source={source}
+        onError={() => this.setState({ error: true })}
         style={[defaultImageStyle, imageBoxDimensions]}
         testID="image-layout"
       />
