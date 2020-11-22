@@ -41,7 +41,8 @@
     "react-native-web": "~0.13.12",
     "react-native-webview": "10.7.0",
     "react-syntax-highlighter": "6.0.4",
-    "rnrh-legacy": "workspace:*"
+    "rnrh-legacy": "workspace:*",
+    "zustand": "^3.2.0"
   },
   "devDependencies": {
     "@babel/core": "~7.12.3",
