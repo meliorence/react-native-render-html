@@ -14,6 +14,7 @@ import DrawerHeader from '../components/DrawerHeader';
 import { useComponentColors } from '../state/ThemeProvider';
 import { Switch, List } from 'react-native-paper';
 import { useColorScheme } from '../state/ColorSchemeProvider';
+import { useSetSelectedSnippetId } from '../state/store';
 
 const Drawer = createDrawerNavigator<Record<keyof typeof snippets, any>>();
 
@@ -51,12 +52,18 @@ function CustomDrawerContent(props: DrawerContentComponentProps<any>) {
   );
 }
 
+const initialRouteName = __DEV__ ? devSelectedSnippet : 'whitespace';
+
 export default function HomeScreen({}: StackScreenProps<any>) {
+  const setSelectedSnippetId = useSetSelectedSnippetId();
+  React.useEffect(() => {
+    setSelectedSnippetId(initialRouteName);
+  }, [setSelectedSnippetId]);
   return (
     <Drawer.Navigator
       hideStatusBar={false}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
-      initialRouteName={__DEV__ ? devSelectedSnippet : 'whitespace'}
+      initialRouteName={initialRouteName}
       screenOptions={{
         headerShown: true,
         headerTitleAllowFontScaling: true,
