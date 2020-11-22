@@ -9,11 +9,15 @@ import { useSetHTMLForSnippet, useSetTTreeForSnippet } from '../state/store';
 import { useComponentColors } from '../state/ThemeProvider';
 import DisplayLoading from './DisplayLoading';
 
-const DEFAULT_PROPS: Pick<RenderHTMLProps, 'onLinkPress' | 'debug'> = {
+const DEFAULT_PROPS: Pick<
+  RenderHTMLProps,
+  'onLinkPress' | 'debug' | 'enableExperimentalPercentWidth'
+> = {
   onLinkPress(evt, href) {
     Linking.openURL(href);
   },
-  debug: true
+  debug: true,
+  enableExperimentalPercentWidth: true
 };
 
 function stripUnsupportedStylesInLegacy(style: Record<string, any>) {
