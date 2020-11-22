@@ -10,6 +10,7 @@ describe('ImgTag', () => {
     const { UNSAFE_getByType, update } = render(
       <HTML
         html='<img src="https://img.com/1" />'
+        debug={false}
         contentWidth={contentWidth}
       />
     );
@@ -17,6 +18,7 @@ describe('ImgTag', () => {
     update(
       <HTML
         html='<img src="https://img.com/1" />'
+        debug={false}
         contentWidth={nextContentWidth}
       />
     );
