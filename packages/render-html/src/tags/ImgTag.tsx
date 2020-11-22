@@ -16,6 +16,11 @@ export interface ImgDimensions {
   height: number;
 }
 
+export interface IncompleteImgDimensions {
+  width: number | null;
+  height: number | null;
+}
+
 export interface ImgTagProps {
   source: any;
   alt?: string;
@@ -103,16 +108,37 @@ function extractHorizontalSpace({
   return realLeftMargin + realRightMargin;
 }
 
-function deriveRequiredDimensionsFromProps({
+function derivePhysicalDimensionsFromProps({
   width,
   height,
+  contentWidth,
+  enableExperimentalPercentWidth: enablePercentWidth
+}: ImgTagProps): IncompleteImgDimensions {
+  const normalizeOptionsWidth = {
+    enablePercentWidth,
+    containerDimension: contentWidth
+  };
+  const normalizeOptionsHeight = {
+    enablePercentWidth: false
+  };
+  const widthProp = normalizeSize(width, normalizeOptionsWidth);
+  const heightProp = normalizeSize(height, normalizeOptionsHeight);
+  return {
+    width: widthProp,
+    height: heightProp
+  };
+}
+
+function deriveRequiredDimensionsFromProps({
   enablePercentWidth,
   contentWidth,
-  flatStyle
-}: Pick<ImgTagProps, 'width' | 'height' | 'contentWidth'> & {
+  flatStyle,
+  physicalDimensionsFromProps
+}: Pick<ImgTagProps, 'contentWidth'> & {
   flatStyle: Record<string, any>;
   enablePercentWidth?: boolean;
-}): ImgDimensions {
+  physicalDimensionsFromProps: IncompleteImgDimensions;
+}): IncompleteImgDimensions {
   const normalizeOptionsWidth = {
     enablePercentWidth,
     containerDimension: contentWidth
@@ -122,12 +148,15 @@ function deriveRequiredDimensionsFromProps({
   };
   const styleWidth = normalizeSize(flatStyle.width, normalizeOptionsWidth);
   const styleHeight = normalizeSize(flatStyle.height, normalizeOptionsHeight);
-  const widthProp = normalizeSize(width, normalizeOptionsWidth);
-  const heightProp = normalizeSize(height, normalizeOptionsHeight);
   return {
-    width: typeof styleWidth === 'number' ? styleWidth : (widthProp as number),
+    width:
+      typeof styleWidth === 'number'
+        ? styleWidth
+        : physicalDimensionsFromProps.width,
     height:
-      typeof styleHeight === 'number' ? styleHeight : (heightProp as number)
+      typeof styleHeight === 'number'
+        ? styleHeight
+        : physicalDimensionsFromProps.height
   };
 }
 
@@ -247,8 +276,8 @@ function computeImageBoxDimensions(params: any) {
 }
 
 interface State {
-  requiredWidth: number;
-  requiredHeight: number;
+  requiredWidth: number | null;
+  requiredHeight: number | null;
   imagePhysicalWidth: number | null;
   imagePhysicalHeight: number | null;
   imageBoxDimensions: ImageDimensions | null;
@@ -256,18 +285,19 @@ interface State {
 }
 
 class ImgTag extends PureComponent<ImgTagProps, State> {
-  private __cachedFlattenStyles: Record<string, any> | null = null;
-  private __cachedRequirements: ImgDimensions | null = null;
+  private __cachedFlattenStyles!: Record<string, any>;
+  private __cachedRequirements!: IncompleteImgDimensions;
+  private __cachedPhysicalDimensionsFromProps!: IncompleteImgDimensions;
   private mounted = false;
 
   constructor(props: ImgTagProps) {
     super(props);
     this.invalidateRequirements(props);
     const state = {
-      imagePhysicalWidth: null,
-      imagePhysicalHeight: null,
-      requiredWidth: this.__cachedRequirements!.width,
-      requiredHeight: this.__cachedRequirements!.height,
+      imagePhysicalWidth: this.__cachedPhysicalDimensionsFromProps.width,
+      imagePhysicalHeight: this.__cachedPhysicalDimensionsFromProps.height,
+      requiredWidth: this.__cachedRequirements.width,
+      requiredHeight: this.__cachedRequirements.height,
       imageBoxDimensions: null,
       error: false
     };
@@ -306,20 +336,17 @@ class ImgTag extends PureComponent<ImgTagProps, State> {
   };
 
   invalidateRequirements(props: ImgTagProps) {
-    const {
-      width,
-      height,
-      contentWidth,
-      enableExperimentalPercentWidth,
-      style
-    } = props;
+    const { contentWidth, enableExperimentalPercentWidth, style } = props;
+    const physicalDimensionsFromProps = derivePhysicalDimensionsFromProps(
+      props
+    );
     this.__cachedFlattenStyles = StyleSheet.flatten(style) || emptyObject;
+    this.__cachedPhysicalDimensionsFromProps = physicalDimensionsFromProps;
     this.__cachedRequirements = deriveRequiredDimensionsFromProps({
-      width,
-      height,
       contentWidth,
       enablePercentWidth: enableExperimentalPercentWidth,
-      flatStyle: this.__cachedFlattenStyles
+      flatStyle: this.__cachedFlattenStyles,
+      physicalDimensionsFromProps
     });
   }
 
@@ -394,8 +421,16 @@ class ImgTag extends PureComponent<ImgTagProps, State> {
 
   fetchPhysicalImageDimensions(props = this.props) {
     const { source } = props;
-    source &&
-      source.uri &&
+    const shouldFetchFromImgAPI = !!source?.uri;
+    if (
+      this.__cachedPhysicalDimensionsFromProps.width != null &&
+      this.__cachedPhysicalDimensionsFromProps.height != null
+    ) {
+      this.setState({
+        imagePhysicalWidth: this.__cachedPhysicalDimensionsFromProps.width,
+        imagePhysicalHeight: this.__cachedPhysicalDimensionsFromProps.height
+      });
+    } else if (shouldFetchFromImgAPI) {
       Image.getSize(
         source.uri,
         (imagePhysicalWidth, imagePhysicalHeight) => {
@@ -410,6 +445,7 @@ class ImgTag extends PureComponent<ImgTagProps, State> {
           this.mounted && this.setState({ error: true });
         }
       );
+    }
   }
 
   renderImage(imageBoxDimensions: ImgDimensions) {
