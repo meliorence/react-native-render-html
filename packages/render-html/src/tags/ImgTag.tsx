@@ -56,7 +56,7 @@ function attemptParseFloat(value: any) {
 }
 
 function normalizeSize(
-  dimension: string | number,
+  dimension: string | number | null | undefined,
   options: Partial<{
     containerDimension: number | null;
     enablePercentWidth: boolean;
@@ -109,7 +109,10 @@ function deriveRequiredDimensionsFromProps({
   enablePercentWidth,
   contentWidth,
   flatStyle
-}: any): ImgDimensions {
+}: Pick<ImgTagProps, 'width' | 'height' | 'contentWidth'> & {
+  flatStyle: Record<string, any>;
+  enablePercentWidth?: boolean;
+}): ImgDimensions {
   const normalizeOptionsWidth = {
     enablePercentWidth,
     containerDimension: contentWidth
@@ -122,9 +125,9 @@ function deriveRequiredDimensionsFromProps({
   const widthProp = normalizeSize(width, normalizeOptionsWidth);
   const heightProp = normalizeSize(height, normalizeOptionsHeight);
   return {
-    width: typeof widthProp === 'number' ? widthProp : (styleWidth as number),
+    width: typeof styleWidth === 'number' ? styleWidth : (widthProp as number),
     height:
-      typeof heightProp === 'number' ? heightProp : (styleHeight as number)
+      typeof styleHeight === 'number' ? styleHeight : (heightProp as number)
   };
 }
 

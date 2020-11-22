@@ -312,5 +312,27 @@ describe('ImgTag', () => {
         height: 1080
       });
     });
+    it('should retain inline style prior to attributes width and height to compute print dimensions', async () => {
+      const { findByTestId, getByTestId } = render(
+        <ImgTag
+          width="1200"
+          height="800"
+          contentWidth={500}
+          enableExperimentalPercentWidth
+          style={{
+            width: '50%',
+            height: 100
+          }}
+          source={{ uri: 'http://via.placeholder.com/1200x800' }}
+        />
+      );
+      await waitFor(() => findByTestId('image-layout'));
+      const image2 = getByTestId('image-layout');
+      expect(image2).toBeTruthy();
+      expect(StyleSheet.flatten(image2.props.style)).toMatchObject({
+        width: 250,
+        height: 100
+      });
+    });
   });
 });
