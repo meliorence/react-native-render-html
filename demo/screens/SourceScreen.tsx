@@ -1,9 +1,9 @@
-import { StackScreenProps } from '@react-navigation/stack';
 import React, { PropsWithChildren } from 'react';
-import { useColorScheme, ViewProps } from 'react-native';
+import { useColorScheme, View, Text, ViewProps } from 'react-native';
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
 import { solarizedlight, darcula } from 'react-syntax-highlighter/styles/prism';
 import BidirectionalScrollView from '../components/BidirectionalScrollView';
+import { useLoadedHTML } from '../state/LoadedHTMLContext';
 
 export interface SourceRenderer {
   htmlSource: string;
@@ -15,10 +15,10 @@ function Container({ children }: PropsWithChildren<ViewProps>) {
   );
 }
 
-export default function SourceScreen({ route }: StackScreenProps<any>) {
-  const html = route.params;
+export default function SourceScreen() {
+  const { html } = useLoadedHTML();
   const colorMode = useColorScheme();
-  return (
+  return html ? (
     <SyntaxHighlighter
       language="html"
       fontSize={12}
@@ -27,5 +27,9 @@ export default function SourceScreen({ route }: StackScreenProps<any>) {
       style={colorMode === 'dark' ? darcula : solarizedlight}>
       {html}
     </SyntaxHighlighter>
+  ) : (
+    <View>
+      <Text>HTML unavailable</Text>
+    </View>
   );
 }

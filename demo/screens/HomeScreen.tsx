@@ -8,7 +8,7 @@ import {
 import { useTheme } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
 import VersionDisplay from '../components/VersionDisplay';
-import HeaderRight from '../components/HeaderButtons';
+import HeaderRight from '../components/HeaderRight';
 import SnippetScreen from '../screens/SnippetScreen';
 import snippets from '../snippets';
 import { Platform } from 'react-native';
@@ -70,7 +70,7 @@ export default function HomeScreen({}: StackScreenProps<any>) {
               options={{
                 title: snippets[snippetId].name,
                 headerRight: ({ tintColor }) => (
-                  <HeaderRight tintColor={tintColor} snippetId={snippetId} />
+                  <HeaderRight tintColor={tintColor} />
                 )
               }}
               key={snippets[snippetId].name}

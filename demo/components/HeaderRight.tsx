@@ -5,9 +5,8 @@ import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useToggleLegacyMode } from '../state/ToggleLegacyContext';
 import { useLegacyMode } from '../state/LegacyContext';
-import snippets from '../snippets';
 
-const HeaderRight = memo(function HeaderRight({ tintColor, snippetId }: any) {
+const HeaderRight = memo(function HeaderRight({ tintColor }: any) {
   const toggleUseLegacy = useToggleLegacyMode();
   const navigation = useNavigation();
   const legacyMode = useLegacyMode();
@@ -26,12 +25,11 @@ const HeaderRight = memo(function HeaderRight({ tintColor, snippetId }: any) {
         icon="xml"
         color={tintColor}
         style={{ marginHorizontal: 0 }}
-        onPress={() =>
-          navigation.navigate('source', snippets[snippetId].html as any)
-        }
+        onPress={() => navigation.navigate('source')}
       />
       <Appbar.Action
         icon="file-tree"
+        disabled={legacyMode}
         color={tintColor}
         style={{ marginHorizontal: 0 }}
         onPress={() => navigation.navigate('ttree')}

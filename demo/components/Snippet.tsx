@@ -6,6 +6,7 @@ import Constants from 'expo-constants';
 import { useThemeColor } from './Themed';
 import snippets from '../snippets';
 import { useTTree } from '../state/TTreeContextProvider';
+import { useLoadedHTML } from '../state/LoadedHTMLContext';
 
 const DEFAULT_PROPS: Pick<RenderHTMLProps, 'onLinkPress' | 'debug'> = {
   onLinkPress(evt, href) {
@@ -47,6 +48,7 @@ const Snippet = React.memo(
   }) => {
     const { width: contentWidth } = useWindowDimensions();
     const { setTTree } = useTTree();
+    const { setHTML } = useLoadedHTML();
     const additionalProps = snippets[exampleId].props || {};
     const baseStyle = {
       color: useThemeColor({}, 'text'),
@@ -90,6 +92,7 @@ const Snippet = React.memo(
         debug={false}
         systemFonts={Constants.systemFonts}
         onTTreeChange={setTTree}
+        onHTMLLoaded={setHTML}
       />
     );
     return (
