@@ -90,6 +90,10 @@ const Snippet = React.memo(
       },
       html: {}
     };
+    const systemFonts = React.useMemo(
+      () => [...Constants.systemFonts, 'space-mono'],
+      []
+    );
     const renderHtml = useLegacy ? (
       <LegacyHTML
         {...sharedProps}
@@ -107,7 +111,7 @@ const Snippet = React.memo(
         enableUserAgentStyles
         enableExperimentalMarginCollapsing={true}
         debug={false}
-        systemFonts={Constants.systemFonts}
+        systemFonts={systemFonts}
         onTTreeChange={setTTree}
         onHTMLLoaded={setHTML}
         remoteLoadingView={() => <DisplayLoading />}
