@@ -54,6 +54,7 @@ const propTypes: RenderHTMLPropTypes = {
   renderersProps: PropTypes.object,
   allowFontScaling: PropTypes.bool,
   onTTreeChange: PropTypes.func,
+  onHTMLLoaded: PropTypes.func,
   systemFonts: PropTypes.arrayOf(PropTypes.string),
   fallbackFonts: PropTypes.shape({
     serif: PropTypes.string,
