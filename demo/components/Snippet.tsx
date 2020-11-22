@@ -51,7 +51,9 @@ const Snippet = React.memo(
     const setHtmlForSnippet = useSetHTMLForSnippet();
     const setTTreeForSnippet = useSetTTreeForSnippet();
     const setHTML = useCallback(
-      (html: string) => setHtmlForSnippet(exampleId, html),
+      (html: string) => {
+        setHtmlForSnippet(exampleId, html);
+      },
       [setHtmlForSnippet, exampleId]
     );
     const setTTree = useCallback(
