@@ -20,6 +20,9 @@ export interface ComponentColors {
   snackbar: {
     backgroundColor: string;
   };
+  displayLoading: {
+    color: string;
+  };
 }
 
 export default function ComponentColors(
@@ -43,6 +46,9 @@ export default function ComponentColors(
     },
     snackbar: {
       backgroundColor: themeColors.notification
+    },
+    displayLoading: {
+      color: themeColors.accent
     }
   };
 }
