@@ -1,6 +1,6 @@
 import { tnodeToString } from '@native-html/transient-render-engine';
 import { useMemo, useEffect } from 'react';
-import { RenderHTMLProps } from './shared-types';
+import { RenderHTMLProps } from '../shared-types';
 import useTRenderEngine from './useTRenderEngine';
 
 export default function useTTree(props: RenderHTMLProps) {

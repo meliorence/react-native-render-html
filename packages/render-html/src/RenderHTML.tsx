@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import { Platform } from 'react-native';
 import { RenderHTMLProps } from './shared-types';
 import TNodeRenderer from './TNodeRenderer';
-import useTTree from './useTTree';
+import useTTree from './hooks/useTTree';
 import SharedPropsContext, {
   defaultSharedPropsContext
 } from './context/SharedPropsContext';
-import TNodeRenderersContext from './context/TNodeRenderersContext';
-import TChildrenRenderer from './TChildrenRenderer';
+import TChildrenRenderersContext from './context/TChildrenRendererContext';
+import TNodeChildrenRenderer from './TNodeChildrenRenderer';
 import RenderHTMLDebug from './RenderHTMLDebug';
 import LoadHTML from './LoadHTML';
+import RenderRegistryProvider from './context/RenderRegistryProvider';
 
 export type RenderHTMLPropTypes = Record<keyof RenderHTMLProps, any>;
 
@@ -154,16 +155,17 @@ function RenderResolvedHTML(props: RenderHTMLProps) {
 export default function RenderHTML(props: RenderHTMLProps) {
   return (
     <RenderHTMLDebug {...props}>
-      <SharedPropsContext.Provider value={props}>
-        <TNodeRenderersContext.Provider
-          value={{ TNodeRenderer, TChildrenRenderer }}>
-          <LoadHTML {...props}>
-            {(resolvedHTML) => (
-              <RenderResolvedHTML {...props} html={resolvedHTML} />
-            )}
-          </LoadHTML>
-        </TNodeRenderersContext.Provider>
-      </SharedPropsContext.Provider>
+      <RenderRegistryProvider renderers={props.renderers}>
+        <SharedPropsContext.Provider value={props}>
+          <TChildrenRenderersContext.Provider value={TNodeChildrenRenderer}>
+            <LoadHTML {...props}>
+              {(resolvedHTML) => (
+                <RenderResolvedHTML {...props} html={resolvedHTML} />
+              )}
+            </LoadHTML>
+          </TChildrenRenderersContext.Provider>
+        </SharedPropsContext.Provider>
+      </RenderRegistryProvider>
     </RenderHTMLDebug>
   );
 }

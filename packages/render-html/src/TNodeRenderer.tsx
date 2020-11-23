@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   TBlock,
+  TEmpty,
   TNode,
   TPhrasing,
   TText
@@ -8,8 +9,6 @@ import {
 import TBlockRenderer from './TBlockRenderer';
 import TPhrasingRenderer from './TPhrasingRenderer';
 import TTextRenderer from './TTextRenderer';
-import extractAnchorOnLinkPress from './extractAnchorOnLinkPress';
-import { useSharedProps } from './context/SharedPropsContext';
 import { TNodeGenericRendererProps } from './shared-types';
 
 export type TNodeRendererProps<T extends TNode> = Omit<
@@ -20,16 +19,10 @@ export type TNodeRendererProps<T extends TNode> = Omit<
 const TNodeRenderer: React.FunctionComponent<TNodeRendererProps<
   TNode
 >> = function TNodeRenderer(props) {
-  const { tnode, hasAnchorAncestor: isAnchorChild } = props;
-  const { onLinkPress, debug } = useSharedProps();
-  const syntheticAnchorOnLinkPress = extractAnchorOnLinkPress(
-    tnode,
-    onLinkPress
-  );
+  const { tnode, hasAnchorAncestor } = props;
   const childrenProps: TNodeGenericRendererProps<any> = {
     ...props,
-    hasAnchorAncestor: isAnchorChild,
-    syntheticAnchorOnLinkPress
+    hasAnchorAncestor
   };
   if (tnode instanceof TBlock) {
     return React.createElement(TBlockRenderer, childrenProps);
@@ -37,18 +30,18 @@ const TNodeRenderer: React.FunctionComponent<TNodeRendererProps<
   if (tnode instanceof TPhrasing) {
     return React.createElement(
       TPhrasingRenderer,
-      childrenProps as TNodeGenericRendererProps<any>
+      childrenProps as TNodeGenericRendererProps<TPhrasing>
     );
   }
   if (tnode instanceof TText) {
     return React.createElement(
       TTextRenderer,
-      childrenProps as TNodeGenericRendererProps<any>
+      childrenProps as TNodeGenericRendererProps<TText>
     );
   }
-  if (debug) {
+  if (tnode instanceof TEmpty && tnode.isUnregistered && __DEV__) {
     console.warn(
-      `TNodeRenderer: node with tag ${props.tnode.tagName} has no corresponding renderer.`
+      `There is no custom renderer registered for tag "${tnode.tagName}". The tag will not be rendered.`
     );
   }
   return null;

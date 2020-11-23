@@ -1,6 +1,5 @@
 import React from 'react';
 import { TBlock, TNode, TPhrasing } from '@native-html/transient-render-engine';
-import { useSharedProps } from './context/SharedPropsContext';
 import TNodeRenderer, { TNodeRendererProps } from './TNodeRenderer';
 
 function isCollapsible(tnode: TNode) {
@@ -22,41 +21,34 @@ function getCollapsedMargins(precedent: TNode, current: TNode): null | number {
   return Math.max(Math.abs(precedentMarginBottom - currentMarginBottom), 0);
 }
 
-const TChildrenRenderer: React.FunctionComponent<
-  {
-    disableMarginCollapsing?: boolean;
-  } & Pick<TNodeRendererProps<TNode>, 'hasAnchorAncestor' | 'tnode'>
-> = function TChildrenRenderer({
-  tnode,
+export type TChildrenRendererProps = {
+  disableMarginCollapsing?: boolean;
+  tchildren: TNode[];
+} & Pick<TNodeRendererProps<TNode>, 'hasAnchorAncestor'>;
+
+const TChildrenRenderer: React.FunctionComponent<TChildrenRendererProps> = function TChildrenRenderer({
+  tchildren,
   hasAnchorAncestor,
-  disableMarginCollapsing = false
+  disableMarginCollapsing
 }) {
-  const { enableExperimentalMarginCollapsing } = useSharedProps();
-  const shouldCollapseChildren =
-    enableExperimentalMarginCollapsing &&
-    !disableMarginCollapsing &&
-    isCollapsible(tnode);
   let collapsedMarginTop: number | null = null;
-  const children = tnode.children.map((childTnode, i) => {
+  const elements = tchildren.map((childTnode, i) => {
     if (
-      shouldCollapseChildren &&
+      !disableMarginCollapsing &&
       isCollapsible(childTnode) &&
       i > 0 &&
-      isCollapsible(tnode.children[i - 1])
+      isCollapsible(tchildren[i - 1])
     ) {
-      collapsedMarginTop = getCollapsedMargins(
-        tnode.children[i - 1],
-        childTnode
-      );
+      collapsedMarginTop = getCollapsedMargins(tchildren[i - 1], childTnode);
     }
     return React.createElement(TNodeRenderer, {
-      hasAnchorAncestor: hasAnchorAncestor || tnode.isAnchor,
+      collapsedMarginTop,
+      hasAnchorAncestor: hasAnchorAncestor,
       tnode: childTnode,
-      key: i,
-      collapsedMarginTop
+      key: i
     });
   });
-  return <>{children}</>;
+  return <>{elements}</>;
 };
 
 export default TChildrenRenderer;

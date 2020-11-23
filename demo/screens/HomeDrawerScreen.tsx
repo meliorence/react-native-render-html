@@ -8,7 +8,7 @@ import {
 import { StackScreenProps } from '@react-navigation/stack';
 import VersionDisplay from '../components/VersionDisplay';
 import SnippetScreen from './SnippetScreen';
-import snippets, { SnippetId } from '../snippets';
+import snippets, { devSelectedSnippet, SnippetId } from '../snippets';
 import { Platform } from 'react-native';
 import DrawerHeader from '../components/DrawerHeader';
 import { useComponentColors } from '../state/ThemeProvider';
@@ -17,8 +17,6 @@ import { useColorScheme } from '../state/ColorSchemeProvider';
 import { useSetSelectedSnippetId } from '../state/store';
 
 const Drawer = createDrawerNavigator<Record<keyof typeof snippets, any>>();
-
-const devSelectedSnippet = 'test';
 
 function CustomDrawerContent(props: DrawerContentComponentProps<any>) {
   const {
