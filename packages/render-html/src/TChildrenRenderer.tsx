@@ -25,10 +25,10 @@ function getCollapsedMargins(precedent: TNode, current: TNode): null | number {
 const TChildrenRenderer: React.FunctionComponent<
   {
     disableMarginCollapsing?: boolean;
-  } & Pick<TNodeRendererProps<TNode>, 'syntheticAnchorOnLinkPress' | 'tnode'>
+  } & Pick<TNodeRendererProps<TNode>, 'hasAnchorAncestor' | 'tnode'>
 > = function TChildrenRenderer({
   tnode,
-  syntheticAnchorOnLinkPress,
+  hasAnchorAncestor,
   disableMarginCollapsing = false
 }) {
   const { enableExperimentalMarginCollapsing } = useSharedProps();
@@ -50,7 +50,7 @@ const TChildrenRenderer: React.FunctionComponent<
       );
     }
     return React.createElement(TNodeRenderer, {
-      syntheticAnchorOnLinkPress,
+      hasAnchorAncestor: hasAnchorAncestor || tnode.isAnchor,
       tnode: childTnode,
       key: i,
       collapsedMarginTop

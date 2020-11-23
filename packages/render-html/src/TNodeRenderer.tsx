@@ -20,16 +20,15 @@ export type TNodeRendererProps<T extends TNode> = Omit<
 const TNodeRenderer: React.FunctionComponent<TNodeRendererProps<
   TNode
 >> = function TNodeRenderer(props) {
-  const {
-    tnode,
-    syntheticAnchorOnLinkPress: inheritedSyntheticAnchorOnLinkPress
-  } = props;
+  const { tnode, hasAnchorAncestor: isAnchorChild } = props;
   const { onLinkPress, debug } = useSharedProps();
-  const syntheticAnchorOnLinkPress =
-    extractAnchorOnLinkPress(tnode, onLinkPress) ||
-    inheritedSyntheticAnchorOnLinkPress;
+  const syntheticAnchorOnLinkPress = extractAnchorOnLinkPress(
+    tnode,
+    onLinkPress
+  );
   const childrenProps: TNodeGenericRendererProps<any> = {
     ...props,
+    hasAnchorAncestor: isAnchorChild,
     syntheticAnchorOnLinkPress
   };
   if (tnode instanceof TBlock) {

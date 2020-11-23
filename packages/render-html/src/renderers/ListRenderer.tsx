@@ -152,6 +152,7 @@ const ListRenderer: DefaultRenderers['block'][string] = ({
   nativeStyle,
   tnode,
   TDefaultRenderer,
+  hasAnchorAncestor,
   ...props
 }) => {
   const TChildrenRenderer = useTChildrenRenderer();
@@ -174,6 +175,7 @@ const ListRenderer: DefaultRenderers['block'][string] = ({
   return (
     <TDefaultRenderer
       {...props}
+      hasAnchorAncestor={hasAnchorAncestor}
       tnode={tnode}
       nativeStyle={{ ...nativeStyle, paddingLeft }}>
       {tnode.children.map((childTNode, i) => (
@@ -194,7 +196,7 @@ const ListRenderer: DefaultRenderers['block'][string] = ({
             {React.createElement(TChildrenRenderer, {
               tnode: childTNode,
               key: i,
-              syntheticAnchorOnLinkPress,
+              hasAnchorAncestor: hasAnchorAncestor,
               disableMarginCollapsing: false
             })}
           </View>

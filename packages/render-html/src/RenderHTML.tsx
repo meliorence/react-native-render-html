@@ -142,7 +142,13 @@ const defaultProps: {
 
 function RenderResolvedHTML(props: RenderHTMLProps) {
   const ttree = useTTree(props);
-  return <TNodeRenderer tnode={ttree} collapsedMarginTop={null} />;
+  return (
+    <TNodeRenderer
+      hasAnchorAncestor={false}
+      tnode={ttree}
+      collapsedMarginTop={null}
+    />
+  );
 }
 
 export default function RenderHTML(props: RenderHTMLProps) {
