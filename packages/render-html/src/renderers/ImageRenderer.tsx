@@ -1,19 +1,16 @@
 import React from 'react';
-import ImgTag from '../elements/HTMLImgElement';
-import { DefaultRenderers } from '../defaultRenderers';
+import HTMLImageElement from '../elements/HTMLImageElement';
+import { BlockRenderer } from '../render/render-types';
 import { useSharedProps } from '../context/SharedPropsContext';
+import { ImageStyle } from 'react-native';
+import { defaultHTMLElementModels } from '@native-html/transient-render-engine';
 
 function normalizeUri(uri: string) {
   return uri.startsWith('//') ? `https:${uri}` : uri;
 }
 
-const ImgRenderer: DefaultRenderers['block'][string] = (props) => {
-  const {
-    nativeStyle,
-    tnode,
-    TDefaultRenderer: Default,
-    syntheticAnchorOnLinkPress
-  } = props;
+const ImageRenderer: BlockRenderer = (props) => {
+  const { style, tnode, TDefaultRenderer, onPress } = props;
   const {
     contentWidth,
     computeImagesMaxWidth,
@@ -22,10 +19,10 @@ const ImgRenderer: DefaultRenderers['block'][string] = (props) => {
   } = useSharedProps();
   const src = tnode.attributes.src;
   if (!src) {
-    return React.createElement(Default, props);
+    return React.createElement(TDefaultRenderer, props);
   }
   return (
-    <ImgTag
+    <HTMLImageElement
       alt={tnode.attributes.alt}
       testID="img"
       altColor={tnode.styles.nativeTextFlow.color as string}
@@ -33,13 +30,15 @@ const ImgRenderer: DefaultRenderers['block'][string] = (props) => {
       computeImagesMaxWidth={computeImagesMaxWidth}
       enableExperimentalPercentWidth={enableExperimentalPercentWidth}
       imagesInitialDimensions={imagesInitialDimensions}
-      onPress={syntheticAnchorOnLinkPress}
+      onPress={onPress}
       source={{ uri: normalizeUri(src) }}
-      style={nativeStyle}
+      style={style as ImageStyle}
       width={tnode.attributes.width}
       height={tnode.attributes.height}
     />
   );
 };
 
-export default ImgRenderer;
+ImageRenderer.model = defaultHTMLElementModels.img;
+
+export default ImageRenderer;

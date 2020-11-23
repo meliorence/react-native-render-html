@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { render, waitFor } from 'react-native-testing-library';
-import HTMLImgElement from '../HTMLImgElement';
+import HTMLImgElement from '../HTMLImageElement';
 
 describe('HTMLImgElement', () => {
   describe('scaling logic', () => {
