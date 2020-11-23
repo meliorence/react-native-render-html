@@ -7,7 +7,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 :author: Jules Sam. Randolph
-:revnumber: 1.0.0
+:revnumber: 2.0.0
 :toc: left
 
 = CSS Whitespace Collapsing
@@ -323,10 +323,6 @@ children won't be copied)_
 [[hoist-node]]
 === Hoist Node
 
-[IMPORTANT]
-when _tnode_ is a <<tphrasinganchor>> node, the algorithm will group text with
-<<tphrasinganchor>> and replace <<tblock>> with their corresponding <<tblockanchor>>.
-
 [NOTE]
 <<tempty>> nodes are ignored in the bellow algorithm.
 
@@ -336,15 +332,15 @@ Given _tnode_ a <<tnode>>:
 . *If* _tnode_ is a <<tphrasing>> node
 .. *For each* _cnode_ from _tnode.children_
 ... *If* _cnode_ is a <<tblock>> node
-.... *Let* _newnode_ be a <<tblock>> node
+.... *Let* _newnode_ be a (<<tblockanchor>> node if _tnode_ is <<tphrasinganchor>>, <<tblock>> node otherwise)
 .... *Copy* every attribute of _tnode_ to _newnode_
-.... *Return* the result of applying <<group-text>> to _(newnode, tnode)_
+.... *Return* the result of applying <<group-text>> to _(newnode)_
 ... *End if*
 .. *Done*
 . *Else if* _tnode_ is a <<tblock>> node
 .. *If* _tnode_ has children
 ... *Let* _wrapper_ be a <<tphrasing>>
-... *Return* the result of applying <<group-text>> to _(tnode, wrapper)_
+... *Return* the result of applying <<group-text>> to _(tnode)_
 .. *End if*
 . *End if*
 . *Return* _tnode_
@@ -355,8 +351,9 @@ Given _tnode_ a <<tnode>>:
 [NOTE]
 <<tempty>> nodes are ignored in the bellow algorithm.
 
-Given _tnode_ a <<tblock>> and _wrappernode_ a <<tphrasing>> node:
+Given _tnode_ a <<tblock>> and 
 
+. *Let* _wrappernode_ be a <<tphrasing>> anonymous node which parent styles are those of _tnode_.
 . *Let* _newchildren_ be an empty list of <<tnode,TNodes>>.
 . _(a marker copy is a new instance of the same class, in which only the attribute 'href' is
 copied if present)_
@@ -556,24 +553,20 @@ Hoisting is applied to enforce transient node constrains:
 .After Hoisting
 [source,xml]
 ----
-<TBlock>
-  <TPhrasingAnchor href="https://domain.com">
+<TBlockAnchor href="https://domain.com">
+  <TPhrasing>
     <TText>\nThis is\n<TText/>
     <TText tagName="span">phrasing content</TText>
     <TText>\n</TText>
-  <TPhrasingAnchor>
-  <TBlockAnchor href="https://domain.com" tagName="img"/>
-  <TPhrasingAnchor href="https://domain.com">
+  <TPhrasing>
+  <TBlock tagName="img"/>
+  <TPhrasing href="https://domain.com">
     <TText>\n    and this is </TText>
     <TText tagName="strong">too</TText>
     <TText>.\n</TText>
-  </TPhrasingAnchor>
-</TBlock>
+  </TPhrasing>
+</TBlockAnchor>
 ----
-
-Remarks:: <<tphrasinganchor>> nodes must inherit attributes from the previous
-<<tphrasinganchor>> node, with the exception of CSS styles which will be
-transferred to the parent <<tblock>> node.
 
 See <<hoist-tree>> algorithm.
 
