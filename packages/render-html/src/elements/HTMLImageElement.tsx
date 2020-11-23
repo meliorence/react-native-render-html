@@ -5,7 +5,8 @@ import {
   Text,
   StyleSheet,
   ImageStyle,
-  PressableProps
+  PressableProps,
+  StyleProp
 } from 'react-native';
 import PropTypes from 'prop-types';
 import GenericPressable from '../GenericPressable';
@@ -21,12 +22,12 @@ export interface IncompleteImgDimensions {
   height: number | null;
 }
 
-export interface HTMLImgElementProps {
+export interface HTMLImageElementProps {
   source: any;
   alt?: string;
   height?: string | number;
   width?: string | number;
-  style: ImageStyle;
+  style: StyleProp<ImageStyle>;
   testID?: string;
   computeImagesMaxWidth?: (containerWidth: number) => number;
   onPress?: PressableProps['onPress'];
@@ -113,7 +114,7 @@ function derivePhysicalDimensionsFromProps({
   height,
   contentWidth,
   enableExperimentalPercentWidth: enablePercentWidth
-}: HTMLImgElementProps): IncompleteImgDimensions {
+}: HTMLImageElementProps): IncompleteImgDimensions {
   const normalizeOptionsWidth = {
     enablePercentWidth,
     containerDimension: contentWidth
@@ -134,7 +135,7 @@ function deriveRequiredDimensionsFromProps({
   contentWidth,
   flatStyle,
   physicalDimensionsFromProps
-}: Pick<HTMLImgElementProps, 'contentWidth'> & {
+}: Pick<HTMLImageElementProps, 'contentWidth'> & {
   flatStyle: Record<string, any>;
   enablePercentWidth?: boolean;
   physicalDimensionsFromProps: IncompleteImgDimensions;
@@ -284,13 +285,16 @@ interface State {
   error: boolean;
 }
 
-class HTMLImgElement extends PureComponent<HTMLImgElementProps, State> {
+const HTMLImageElement = class HTMLImageElement extends PureComponent<
+  HTMLImageElementProps,
+  State
+> {
   private __cachedFlattenStyles!: Record<string, any>;
   private __cachedRequirements!: IncompleteImgDimensions;
   private __cachedPhysicalDimensionsFromProps!: IncompleteImgDimensions;
   private mounted = false;
 
-  constructor(props: HTMLImgElementProps) {
+  constructor(props: HTMLImageElementProps) {
     super(props);
     this.invalidateRequirements(props);
     const state = {
@@ -307,7 +311,7 @@ class HTMLImgElement extends PureComponent<HTMLImgElementProps, State> {
     };
   }
 
-  static propTypes: Record<keyof HTMLImgElementProps, any> = {
+  static propTypes: Record<keyof HTMLImageElementProps, any> = {
     source: PropTypes.object.isRequired,
     alt: PropTypes.string,
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -325,7 +329,7 @@ class HTMLImgElement extends PureComponent<HTMLImgElementProps, State> {
     testID: PropTypes.string
   };
 
-  static defaultProps: Partial<HTMLImgElementProps> = {
+  static defaultProps: Partial<HTMLImageElementProps> = {
     enableExperimentalPercentWidth: false,
     computeImagesMaxWidth: identity,
     imagesInitialDimensions: {
@@ -335,7 +339,7 @@ class HTMLImgElement extends PureComponent<HTMLImgElementProps, State> {
     style: {}
   };
 
-  invalidateRequirements(props: HTMLImgElementProps) {
+  invalidateRequirements(props: HTMLImageElementProps) {
     const { contentWidth, enableExperimentalPercentWidth, style } = props;
     const physicalDimensionsFromProps = derivePhysicalDimensionsFromProps(
       props
@@ -350,7 +354,7 @@ class HTMLImgElement extends PureComponent<HTMLImgElementProps, State> {
     });
   }
 
-  computeImageBoxDimensions(props: HTMLImgElementProps, state: any) {
+  computeImageBoxDimensions(props: HTMLImageElementProps, state: any) {
     const { computeImagesMaxWidth, contentWidth } = props;
     const {
       imagePhysicalWidth,
@@ -379,7 +383,7 @@ class HTMLImgElement extends PureComponent<HTMLImgElementProps, State> {
     this.mounted = false;
   }
 
-  componentDidUpdate(prevProps: HTMLImgElementProps, prevState: State) {
+  componentDidUpdate(prevProps: HTMLImageElementProps, prevState: State) {
     const sourceHasChanged = !sourcesAreEqual(
       prevProps.source,
       this.props.source
@@ -413,7 +417,7 @@ class HTMLImgElement extends PureComponent<HTMLImgElementProps, State> {
     }
     if (shouldRecomputeImageBox) {
       // eslint-disable-next-line react/no-did-update-set-state
-      this.setState((state: any, props: HTMLImgElementProps) => ({
+      this.setState((state: any, props: HTMLImageElementProps) => ({
         imageBoxDimensions: this.computeImageBoxDimensions(props, state)
       }));
     }
@@ -511,7 +515,7 @@ class HTMLImgElement extends PureComponent<HTMLImgElementProps, State> {
   }
 
   render() {
-    const { width, height, ...remainingStyle } = this.props.style;
+    const { width, height, ...remainingStyle } = this.__cachedFlattenStyles;
     const style = [styles.container, remainingStyle];
     if (this.props.onPress) {
       return (
@@ -522,10 +526,6 @@ class HTMLImgElement extends PureComponent<HTMLImgElementProps, State> {
     }
     return <View style={style}>{this.renderContent()}</View>;
   }
-}
+} as ComponentClass<Partial<HTMLImageElementProps>>;
 
-const ImgTagExport: ComponentClass<Partial<
-  HTMLImgElementProps
->> = HTMLImgElement as any;
-
-export default ImgTagExport;
+export default HTMLImageElement;

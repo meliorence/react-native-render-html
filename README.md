@@ -166,6 +166,43 @@ will probably be very useful for other users.
 
 ## Creating custom renderers
 
+If you want to customize the rendering logic, there are multiple options to
+consider, depending on particularities of the tag you want to render. The best,
+and easiest option is to use **transient renderers**. If you need more customization
+logic, you can use **plain renderers**.
+
+### Transient Render Tree Tampering
+
+Transient renderers don't provide you with the option of rendering custom
+tags. Instead, customize the props and styles of default renderers,
+depending on the transient render nodes they receive as input.
+
+The big advantage is that transient renderers receive all the benefits from the
+transient render engine, such as style inheritance, hoisting... etc.
+
+### Plain renderers
+
+Plain renderers declaration depends on the model of the tag they render. If the
+tag is a _textual_ tag, such as `em`, `span`, ...etc, you will have to declare
+a `TextualRenderer`. On the other hand, if the tag is a _block_ tag (embedded
+such as `img`, grouping such as `div`, `ol`, `section`, `menu`), you will have
+to declare a `BlockRenderer`. Some tags can be both such as `a`, `del` and
+`ins` tags. In that case, you must declare a `MixedRenderer`, which will have
+to handle both situations. When you declare a renderer for a custom tag, the
+model by which hoisting will apply will be determined by the renderer type you
+chose.
+
+Each of these renderer can be _opaque_, provided the option. Opaque renderers
+have access to the DOM tree (not to be conflated with the render tree!) of the
+children, or the raw html. This is especially useful for special markup such as
+**SVG** and **MathML**.
+
+Some special tags have extensible renderers which you can inherit to benefit
+from their layout model. Examples are `ImageRenderer`, `OrderedListRenderer`,
+̀`UnorderedListRenderer` (see "extending renderers" below).
+
+## Creating custom renderers
+
 This is very useful if you want to make some very specific styling of your HTML content, or even implement custom HTML tags.
 
 ### Custom HTML tags

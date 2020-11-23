@@ -1,3 +1,5 @@
+import { RenderHTMLProps } from 'react-native-render-html';
+
 export type RootStackParamList = {
   Root: undefined;
   NotFound: undefined;
@@ -15,3 +17,9 @@ export type TabOneParamList = {
 export type TabTwoParamList = {
   TabTwoScreen: undefined;
 };
+
+export interface SnippetDeclaration {
+  name: string;
+  html?: string;
+  props?: Partial<RenderHTMLProps>;
+}

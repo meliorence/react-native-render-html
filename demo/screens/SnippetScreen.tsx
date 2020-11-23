@@ -6,5 +6,5 @@ import { useLegacyMode } from '../state/store';
 export default function SnippetScreen({ route }: DrawerScreenProps<any>) {
   const legacyMode = useLegacyMode();
   const { snippetId } = route.params as any;
-  return <Snippet useLegacy={legacyMode} exampleId={snippetId} />;
+  return <Snippet useLegacy={legacyMode} snippetId={snippetId} />;
 }

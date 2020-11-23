@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { ScrollView, Linking, useWindowDimensions } from 'react-native';
+import { ScrollView, Linking, useWindowDimensions, View } from 'react-native';
 import RenderHTML, { RenderHTMLProps } from 'react-native-render-html';
 import LegacyHTML from 'rnrh-legacy';
 import Constants from 'expo-constants';
@@ -8,6 +8,7 @@ import snippets, { SnippetId } from '../snippets';
 import { useSetHTMLForSnippet, useSetTTreeForSnippet } from '../state/store';
 import { useComponentColors } from '../state/ThemeProvider';
 import DisplayLoading from './DisplayLoading';
+import Text from './Text';
 
 const DEFAULT_PROPS: Pick<
   RenderHTMLProps,
@@ -45,10 +46,10 @@ const CONTAINER_PADDING = 10;
 
 const Snippet = React.memo(
   ({
-    exampleId,
+    snippetId,
     useLegacy = false
   }: {
-    exampleId: SnippetId;
+    snippetId: SnippetId;
     useLegacy: boolean;
   }) => {
     const { width: contentWidth } = useWindowDimensions();
@@ -56,17 +57,17 @@ const Snippet = React.memo(
     const setTTreeForSnippet = useSetTTreeForSnippet();
     const setHTML = useCallback(
       (html: string) => {
-        setHtmlForSnippet(exampleId, html);
+        setHtmlForSnippet(snippetId, html);
       },
-      [setHtmlForSnippet, exampleId]
+      [setHtmlForSnippet, snippetId]
     );
     const setTTree = useCallback(
       (ttree: TNode) => {
-        setTTreeForSnippet(exampleId, ttree);
+        setTTreeForSnippet(snippetId, ttree);
       },
-      [setTTreeForSnippet, exampleId]
+      [setTTreeForSnippet, snippetId]
     );
-    const additionalProps = snippets[exampleId].props || {};
+    const additionalProps = snippets[snippetId].props || {};
     const {
       html: { color, backgroundColor, border }
     } = useComponentColors();
@@ -78,10 +79,9 @@ const Snippet = React.memo(
     const sharedProps = {
       ...DEFAULT_PROPS,
       contentWidth: contentWidth - CONTAINER_PADDING * 2,
-      html: snippets[exampleId].html,
+      html: snippets[snippetId].html,
       ...(additionalProps as any),
-      textSelectable: true,
-      renderers: {}
+      textSelectable: true
     };
     const mergedTagsStyles = {
       ...sharedProps.tagsStyles,
@@ -98,6 +98,27 @@ const Snippet = React.memo(
       () => [...Constants.systemFonts, 'space-mono'],
       []
     );
+
+    if (
+      (snippetId === 'customRenderers' || snippetId === 'customTags') &&
+      useLegacy
+    ) {
+      return (
+        <View
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginHorizontal: 30,
+            flexGrow: 1
+          }}>
+          <Text
+            style={{ textAlign: 'center', fontSize: 20, fontStyle: 'italic' }}>
+            Legacy HTML component is not available for this snippet.
+          </Text>
+        </View>
+      );
+    }
+
     const renderHtml = useLegacy ? (
       <LegacyHTML
         {...sharedProps}

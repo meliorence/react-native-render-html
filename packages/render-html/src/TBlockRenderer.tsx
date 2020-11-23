@@ -1,82 +1,60 @@
-import React, { PropsWithChildren } from 'react';
-import { View, ViewProps } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import { TBlock } from '@native-html/transient-render-engine';
-import defaultRenderers from './defaultRenderers';
+import { useTChildrenRenderer } from './context/TChildrenRendererContext';
+import { TDefaultRenderer, TNodeGenericRendererProps } from './shared-types';
+import mergeCollapsedMargins from './helpers/mergeCollapsedMargins';
 import GenericPressable from './GenericPressable';
-import { useTChildrenRenderer } from './context/TNodeRenderersContext';
-import {
-  RendererProps,
-  TDefaultRenderer,
-  TNodeGenericRendererProps
-} from './shared-types';
-
-function mergeCollapsedMargins(
-  collapsedMarginTop: RendererProps<any>['collapsedMarginTop'],
-  nativeStyle: RendererProps<any>['nativeStyle']
-) {
-  if (collapsedMarginTop === null) {
-    return nativeStyle;
-  }
-  const additionalStyles: any = {};
-  if (typeof collapsedMarginTop === 'number') {
-    additionalStyles.marginTop = collapsedMarginTop;
-  }
-  return [nativeStyle, additionalStyles];
-}
+import { useRegisteredRenderer } from './context/RenderRegistryProvider';
+import isLiteRendererDeclaration from './render/isLiteRendererDeclaration';
 
 export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
   tnode,
-  key,
   children: overridingChildren,
-  nativeStyle,
-  hasAnchorAncestor: isAnchorChild,
-  syntheticAnchorOnLinkPress,
-  collapsedMarginTop
+  hasAnchorAncestor,
+  ...passedProps
 }) => {
   const TChildrenRenderer = useTChildrenRenderer();
   const children = overridingChildren ?? (
-    <TChildrenRenderer tnode={tnode} hasAnchorAncestor={isAnchorChild} />
+    <TChildrenRenderer tnode={tnode} hasAnchorAncestor={hasAnchorAncestor} />
   );
-  const sharedProps: PropsWithChildren<
-    ViewProps & { key?: string | number }
-  > = {
-    key,
-    children,
-    style: mergeCollapsedMargins(collapsedMarginTop, nativeStyle)
-  };
-  if (typeof syntheticAnchorOnLinkPress === 'function') {
-    return (
-      <GenericPressable {...sharedProps} onPress={syntheticAnchorOnLinkPress} />
-    );
+  if (typeof passedProps.onPress === 'function') {
+    return React.createElement(GenericPressable, passedProps, children);
   }
-  return React.createElement(View, sharedProps);
+  return React.createElement(View, passedProps, children);
 };
 
 const TBlockRenderer = ({
   tnode,
   key,
   hasAnchorAncestor,
-  collapsedMarginTop,
-  syntheticAnchorOnLinkPress
+  collapsedMarginTop
 }: TNodeGenericRendererProps<TBlock>) => {
-  const rendererProps: RendererProps<TBlock> = {
+  const RegisteredRenderer = useRegisteredRenderer(tnode);
+  const commonProps = {
     key,
     tnode,
-    nativeStyle: {
+    style: mergeCollapsedMargins(collapsedMarginTop, {
       ...tnode.styles.nativeBlockFlow,
       ...tnode.styles.nativeBlockRet
-    },
+    }),
     hasAnchorAncestor,
-    TDefaultRenderer: TDefaultBlockRenderer,
     untranslatedStyle: tnode.styles.webTextFlow,
-    collapsedMarginTop,
-    syntheticAnchorOnLinkPress
+    collapsedMarginTop
   };
-  const defaultRenderer = defaultRenderers.block[tnode.tagName as any];
-  if (defaultRenderer) {
-    return defaultRenderer(rendererProps);
+  if (isLiteRendererDeclaration(RegisteredRenderer)) {
+    return React.createElement(
+      TDefaultBlockRenderer,
+      RegisteredRenderer.deriveTDefaultPropsForTNode(commonProps)
+    );
   }
-  return React.createElement(TDefaultBlockRenderer, rendererProps);
+  if (typeof RegisteredRenderer === 'function') {
+    return React.createElement(RegisteredRenderer, {
+      ...commonProps,
+      TDefaultRenderer: TDefaultBlockRenderer
+    });
+  }
+  return React.createElement(TDefaultBlockRenderer, commonProps);
 };
 
 export default TBlockRenderer;
