@@ -8,6 +8,7 @@ import { TNodeGenericRendererProps } from './shared-types';
 const TPhrasingRenderer = ({
   tnode,
   key,
+  hasAnchorAncestor,
   syntheticAnchorOnLinkPress
 }: TNodeGenericRendererProps<TPhrasing>) => {
   const { allowFontScaling, textSelectable } = useSharedProps();
@@ -17,6 +18,7 @@ const TPhrasingRenderer = ({
       key={key}
       allowFontScaling={allowFontScaling}
       selectable={textSelectable}
+      onPress={syntheticAnchorOnLinkPress}
       style={[
         tnode.styles.nativeBlockFlow,
         tnode.styles.nativeBlockRet,
@@ -26,7 +28,7 @@ const TPhrasingRenderer = ({
       <TChildrenRenderer
         tnode={tnode}
         disableMarginCollapsing={true}
-        syntheticAnchorOnLinkPress={syntheticAnchorOnLinkPress}
+        hasAnchorAncestor={hasAnchorAncestor}
       />
     </Text>
   );

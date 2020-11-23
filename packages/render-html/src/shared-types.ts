@@ -273,8 +273,9 @@ export interface FallbackFontsDefinitions {
 export interface TNodeGenericRendererProps<T extends TNode> {
   tnode: T;
   key?: string | number;
-  syntheticAnchorOnLinkPress?: (e: GestureResponderEvent) => void;
+  hasAnchorAncestor: boolean;
   collapsedMarginTop: number | null;
+  syntheticAnchorOnLinkPress?: (e: GestureResponderEvent) => void;
 }
 
 export interface RendererProps<T extends TNode>

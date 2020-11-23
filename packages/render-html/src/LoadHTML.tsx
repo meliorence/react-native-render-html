@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import { ActivityIndicator, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { RenderHTMLProps } from './shared-types';
 
 interface HTMLLoaderProps extends RenderHTMLProps {
@@ -61,19 +61,29 @@ function useLoader(props: HTMLLoaderProps) {
   return loadState;
 }
 
+const styles = StyleSheet.create({
+  alignCenter: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  errorText: {
+    fontStyle: 'italic',
+    fontSize: 16
+  }
+});
+
 function defaultRenderError(props: RenderHTMLProps) {
   return (
-    <View style={{ flex: 1, alignItems: 'center' }}>
-      <Text style={{ fontStyle: 'italic', fontSize: 16 }}>
-        Failed to load {props.uri}
-      </Text>
+    <View style={styles.alignCenter}>
+      <Text style={styles.errorText}>Failed to load HTML from {props.uri}</Text>
     </View>
   );
 }
 
 function defaultRenderLoading() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.alignCenter}>
       <ActivityIndicator />
     </View>
   );
