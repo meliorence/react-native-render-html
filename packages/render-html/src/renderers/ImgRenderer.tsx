@@ -1,5 +1,5 @@
 import React from 'react';
-import ImgTag from '../tags/ImgTag';
+import ImgTag from '../elements/HTMLImgElement';
 import { DefaultRenderers } from '../defaultRenderers';
 import { useSharedProps } from '../context/SharedPropsContext';
 
