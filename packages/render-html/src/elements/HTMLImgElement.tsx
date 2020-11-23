@@ -21,7 +21,7 @@ export interface IncompleteImgDimensions {
   height: number | null;
 }
 
-export interface ImgTagProps {
+export interface HTMLImgElementProps {
   source: any;
   alt?: string;
   height?: string | number;
@@ -113,7 +113,7 @@ function derivePhysicalDimensionsFromProps({
   height,
   contentWidth,
   enableExperimentalPercentWidth: enablePercentWidth
-}: ImgTagProps): IncompleteImgDimensions {
+}: HTMLImgElementProps): IncompleteImgDimensions {
   const normalizeOptionsWidth = {
     enablePercentWidth,
     containerDimension: contentWidth
@@ -134,7 +134,7 @@ function deriveRequiredDimensionsFromProps({
   contentWidth,
   flatStyle,
   physicalDimensionsFromProps
-}: Pick<ImgTagProps, 'contentWidth'> & {
+}: Pick<HTMLImgElementProps, 'contentWidth'> & {
   flatStyle: Record<string, any>;
   enablePercentWidth?: boolean;
   physicalDimensionsFromProps: IncompleteImgDimensions;
@@ -284,13 +284,13 @@ interface State {
   error: boolean;
 }
 
-class ImgTag extends PureComponent<ImgTagProps, State> {
+class HTMLImgElement extends PureComponent<HTMLImgElementProps, State> {
   private __cachedFlattenStyles!: Record<string, any>;
   private __cachedRequirements!: IncompleteImgDimensions;
   private __cachedPhysicalDimensionsFromProps!: IncompleteImgDimensions;
   private mounted = false;
 
-  constructor(props: ImgTagProps) {
+  constructor(props: HTMLImgElementProps) {
     super(props);
     this.invalidateRequirements(props);
     const state = {
@@ -307,7 +307,7 @@ class ImgTag extends PureComponent<ImgTagProps, State> {
     };
   }
 
-  static propTypes: Record<keyof ImgTagProps, any> = {
+  static propTypes: Record<keyof HTMLImgElementProps, any> = {
     source: PropTypes.object.isRequired,
     alt: PropTypes.string,
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -325,7 +325,7 @@ class ImgTag extends PureComponent<ImgTagProps, State> {
     testID: PropTypes.string
   };
 
-  static defaultProps: Partial<ImgTagProps> = {
+  static defaultProps: Partial<HTMLImgElementProps> = {
     enableExperimentalPercentWidth: false,
     computeImagesMaxWidth: identity,
     imagesInitialDimensions: {
@@ -335,7 +335,7 @@ class ImgTag extends PureComponent<ImgTagProps, State> {
     style: {}
   };
 
-  invalidateRequirements(props: ImgTagProps) {
+  invalidateRequirements(props: HTMLImgElementProps) {
     const { contentWidth, enableExperimentalPercentWidth, style } = props;
     const physicalDimensionsFromProps = derivePhysicalDimensionsFromProps(
       props
@@ -350,7 +350,7 @@ class ImgTag extends PureComponent<ImgTagProps, State> {
     });
   }
 
-  computeImageBoxDimensions(props: ImgTagProps, state: any) {
+  computeImageBoxDimensions(props: HTMLImgElementProps, state: any) {
     const { computeImagesMaxWidth, contentWidth } = props;
     const {
       imagePhysicalWidth,
@@ -379,7 +379,7 @@ class ImgTag extends PureComponent<ImgTagProps, State> {
     this.mounted = false;
   }
 
-  componentDidUpdate(prevProps: ImgTagProps, prevState: State) {
+  componentDidUpdate(prevProps: HTMLImgElementProps, prevState: State) {
     const sourceHasChanged = !sourcesAreEqual(
       prevProps.source,
       this.props.source
@@ -413,7 +413,7 @@ class ImgTag extends PureComponent<ImgTagProps, State> {
     }
     if (shouldRecomputeImageBox) {
       // eslint-disable-next-line react/no-did-update-set-state
-      this.setState((state: any, props: ImgTagProps) => ({
+      this.setState((state: any, props: HTMLImgElementProps) => ({
         imageBoxDimensions: this.computeImageBoxDimensions(props, state)
       }));
     }
@@ -524,6 +524,8 @@ class ImgTag extends PureComponent<ImgTagProps, State> {
   }
 }
 
-const ImgTagExport: ComponentClass<Partial<ImgTagProps>> = ImgTag as any;
+const ImgTagExport: ComponentClass<Partial<
+  HTMLImgElementProps
+>> = HTMLImgElement as any;
 
 export default ImgTagExport;
