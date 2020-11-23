@@ -29,15 +29,13 @@ export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
   key,
   children: overridingChildren,
   nativeStyle,
+  hasAnchorAncestor: isAnchorChild,
   syntheticAnchorOnLinkPress,
   collapsedMarginTop
 }) => {
   const TChildrenRenderer = useTChildrenRenderer();
   const children = overridingChildren ?? (
-    <TChildrenRenderer
-      tnode={tnode}
-      syntheticAnchorOnLinkPress={syntheticAnchorOnLinkPress}
-    />
+    <TChildrenRenderer tnode={tnode} hasAnchorAncestor={isAnchorChild} />
   );
   const sharedProps: PropsWithChildren<
     ViewProps & { key?: string | number }
@@ -57,8 +55,9 @@ export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
 const TBlockRenderer = ({
   tnode,
   key,
-  syntheticAnchorOnLinkPress,
-  collapsedMarginTop
+  hasAnchorAncestor,
+  collapsedMarginTop,
+  syntheticAnchorOnLinkPress
 }: TNodeGenericRendererProps<TBlock>) => {
   const rendererProps: RendererProps<TBlock> = {
     key,
@@ -67,10 +66,11 @@ const TBlockRenderer = ({
       ...tnode.styles.nativeBlockFlow,
       ...tnode.styles.nativeBlockRet
     },
-    syntheticAnchorOnLinkPress,
+    hasAnchorAncestor,
     TDefaultRenderer: TDefaultBlockRenderer,
     untranslatedStyle: tnode.styles.webTextFlow,
-    collapsedMarginTop
+    collapsedMarginTop,
+    syntheticAnchorOnLinkPress
   };
   const defaultRenderer = defaultRenderers.block[tnode.tagName as any];
   if (defaultRenderer) {

@@ -72,6 +72,6 @@
     ]
   },
   "dependencies": {
-    "@native-html/transient-render-engine": "^2.0.1"
+    "@native-html/transient-render-engine": "^3.0.0"
   }
 }
