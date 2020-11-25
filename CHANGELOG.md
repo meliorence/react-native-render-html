@@ -1,3 +1,39 @@
+# [6.0.0-alpha.0](https://github.com/archriss/react-native-render-html/compare/v5.0.0-alpha.2...v6.0.0-alpha.1) (2020-11-25)
+
+### Bug Fixes
+
+* better handling of anchors ([f23d825](https://github.com/archriss/react-native-render-html/commit/f23d8250ac10fc2e1c3209483da9e935d0b52d86))
+* image not aligning properly because of mismerging of styles ([956053d](https://github.com/archriss/react-native-render-html/commit/956053d4a89ba1f8df00d9b47ede169002a1ad7d))
+* images honor styles and physical size in "alt" (error) mode ([a9edfde](https://github.com/archriss/react-native-render-html/commit/a9edfdea2fbe98cb7d265e02d1288ddbc0b83806))
+* in <img> tags, style dimensions should prevail over attributes ([670a7d5](https://github.com/archriss/react-native-render-html/commit/670a7d59467f7b1243f509ee5308e20ee7d14cad))
+* missing proptype (onHTMLLoaded) ([fca6898](https://github.com/archriss/react-native-render-html/commit/fca6898f7ed62e3180e9a15fb1391601002931ce))
+* use onError to evaluate the fetch state of the image ([d8a9333](https://github.com/archriss/react-native-render-html/commit/d8a93337ecf0d84ddf34f236802b1f961450dc98))
+
+
+### Features
+
+* enableExperimentalMarginCollapsing prop ([42bfa53](https://github.com/archriss/react-native-render-html/commit/42bfa53d786a3afb3f551a21882fc157aa6b935d))
+* fallbackFonts and systemFonts props for font selection ([25deb02](https://github.com/archriss/react-native-render-html/commit/25deb020c9465763b562bcf0bac47427a67ee6c3))
+* implement RenderHTMLDebug wrapper component to warn users ([1fb72d7](https://github.com/archriss/react-native-render-html/commit/1fb72d727c7904400f1bfd99c537a09be1f36448))
+* new prop "onTTreeChange" ([8353db6](https://github.com/archriss/react-native-render-html/commit/8353db6612f388cde351669684fa4123402b2ee3))
+* new renderers API ([d94f409](https://github.com/archriss/react-native-render-html/commit/d94f4090c222a3dfbc856241a56e4c3aad80ddbb))
+* onHTMLLoaded prop ([ef65140](https://github.com/archriss/react-native-render-html/commit/ef6514087e516a2d7c4ca2bd13cb022c471edb8e))
+* support for loading HTML from URI ([2fba800](https://github.com/archriss/react-native-render-html/commit/2fba800ba1bfb574caf37cedf181e4b4398e2163))
+* triggerTREInvalidationPropNames prop ([8a18fdb](https://github.com/archriss/react-native-render-html/commit/8a18fdb89faee3c9defa97ca4622ea9fda9495d2))
+
+
+### Performance Improvements
+
+* avoid calls to getImageDimensions API when provided in attrs ([2c6211e](https://github.com/archriss/react-native-render-html/commit/2c6211e5165d634ab5af9397b7fa649c15d0ddc8))
+
+> :warning: We indulged ourselves when releasing **4.2.0** regarding
+> **Semantic Versioning**, because we introduced `react-native-webview` as a peer
+> dependency. As a result, you need to install it yourself. Please follow [the
+> plugin's
+> instructions](https://github.com/react-native-community/react-native-webview/blob/master/docs/Getting-Started.md).
+> We have since deliberately [committed to Semantic
+> Versioning](MAINTAINING.adoc#semantic-versioning).
+
 # v5.1.1
 
 ## Bugfixes
