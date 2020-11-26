@@ -8,10 +8,10 @@ export default function Text(props: React.PropsWithChildren<TextProps>) {
     <NativeText
       {...props}
       style={[
-        props.style,
         {
           color: text
-        }
+        },
+        props.style
       ]}
     />
   );

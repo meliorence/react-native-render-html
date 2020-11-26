@@ -37,6 +37,7 @@ classesStyles prop
 const paragraphs: SnippetDeclaration = {
   name: 'Paragraphs',
   html,
+  source: '/demo/snippets/paragraphs.ts',
   props: {
     baseStyle: {},
     tagsStyles: {
