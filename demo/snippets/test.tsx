@@ -2,7 +2,9 @@ import { SnippetDeclaration } from '../types';
 
 // Change the HTML code here and see what happens.
 const html = `
-Testing playground.
+<p>
+  Open <code>demo/snippets/test.tsx</code> and edit me!
+</p>
 `;
 
 const test: SnippetDeclaration = {
