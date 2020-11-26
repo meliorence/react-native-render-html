@@ -18,3 +18,5 @@ export type { TNodeChildrenRendererProps } from './TNodeChildrenRenderer';
 export { default as TNodeRenderer } from './TNodeRenderer';
 export { default as useTRenderEngine } from './hooks/useTRenderEngine';
 export { default as useTTree } from './hooks/useTTree';
+export { default as defaultRenderers } from './render/defaultRenderers';
+export { default as extendRenderer } from './render/extendRenderer';

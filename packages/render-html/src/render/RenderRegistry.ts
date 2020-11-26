@@ -2,11 +2,9 @@ import { TNode } from '@native-html/transient-render-engine';
 import { ComponentType } from 'react';
 import { RendererProps } from '..';
 import lookupRecord from '../helpers/lookupRecord';
-import AnchorRenderer from '../renderers/AnchorRenderer';
-import ImageRenderer from '../renderers/ImageRenderer';
 import LineBreakRenderer from '../renderers/LineBreakRenderer';
-import ListRenderer from '../renderers/ListRenderer';
 import WordBreakRenderer from '../renderers/WordBreakRenderer';
+import defaultRenderers from './defaultRenderers';
 import {
   InternalTextContentRenderer,
   LiteRendererDeclaration,
@@ -16,13 +14,6 @@ import {
 const internalTextRenderers: Record<string, InternalTextContentRenderer> = {
   br: LineBreakRenderer,
   wbr: WordBreakRenderer
-};
-
-const defaultRenderers: RendererRecord = {
-  img: ImageRenderer,
-  ul: ListRenderer,
-  ol: ListRenderer,
-  a: AnchorRenderer
 };
 
 export default class RenderRegistry {
