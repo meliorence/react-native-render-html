@@ -27,15 +27,7 @@
 
 * avoid calls to getImageDimensions API when provided in attrs ([2c6211e](https://github.com/archriss/react-native-render-html/commit/2c6211e5165d634ab5af9397b7fa649c15d0ddc8))
 
-> :warning: We indulged ourselves when releasing **4.2.0** regarding
-> **Semantic Versioning**, because we introduced `react-native-webview` as a peer
-> dependency. As a result, you need to install it yourself. Please follow [the
-> plugin's
-> instructions](https://github.com/react-native-community/react-native-webview/blob/master/docs/Getting-Started.md).
-> We have since deliberately [committed to Semantic
-> Versioning](MAINTAINING.adoc#semantic-versioning).
-
-# next
+# 5.0.0-alpha.2
 
 ## Enhancements
 
