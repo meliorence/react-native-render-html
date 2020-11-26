@@ -41,6 +41,9 @@ export type SnippetId =
   | 'alteration';
 
 const snippets: Record<SnippetId, SnippetDeclaration> = {
+  // DEV only
+  test,
+  // Public snippets
   whitespace,
   pre,
   fonts,
@@ -54,8 +57,6 @@ const snippets: Record<SnippetId, SnippetDeclaration> = {
   remoteHTML,
   customRenderers,
   customTags,
-  // DEV only
-  test,
   // ↓ Ignored snippets
   trickyStuff,
   ignoring,
