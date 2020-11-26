@@ -72,9 +72,7 @@ export default function useTRenderEngine(props: RenderHTMLProps) {
         if (renderer.model) {
           additionalModels[key] = HTMLElementModel.fromCustomModel({
             ...renderer.model,
-            tagName: key,
-            // @ts-ignore
-            isTranslatable: true
+            tagName: key
           });
         } else {
           console.error(

@@ -126,7 +126,6 @@ const ButtonRenderer: BlockRenderer = function ({
 
 ButtonRenderer.model = defaultHTMLElementModels.button.extend({
   contentModel: HTMLContentModel.block,
-  isTranslatable: true,
   mixedUAStyles: {
     textAlign: 'center',
     padding: 10,
