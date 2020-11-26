@@ -17,6 +17,7 @@ import ignoring from './snippets/ignoring';
 import remoteHTML from './snippets/remoteHTML';
 import alteration from './snippets/alteration';
 import customRenderers from './snippets/customRenderers';
+import modelTampering from './snippets/modelTampering';
 
 export const devSelectedSnippet = 'test';
 
@@ -35,6 +36,7 @@ export type SnippetId =
   | 'ignoring'
   | 'customTags'
   | 'customRenderers'
+  | 'modelTampering'
   | 'headers'
   | 'remoteHTML'
   | 'iframes'
@@ -57,6 +59,7 @@ const snippets: Record<SnippetId, SnippetDeclaration> = {
   remoteHTML,
   customRenderers,
   customTags,
+  modelTampering,
   // ↓ Ignored snippets
   trickyStuff,
   ignoring,
