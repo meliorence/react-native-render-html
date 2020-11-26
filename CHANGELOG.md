@@ -1,4 +1,11 @@
-# [6.0.0-alpha.0](https://github.com/archriss/react-native-render-html/compare/v5.0.0-alpha.2...v6.0.0-alpha.1) (2020-11-25)
+# [6.0.0-alpha.2](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.1...v6.0.0-alpha.2) (2020-11-26)
+
+
+### Bug Fixes
+
+* the LoadHTML component should reflect html changes ([9d1ab9f](https://github.com/archriss/react-native-render-html/commit/9d1ab9f90210ee0d27ebd334848c6a9585c40128))
+
+# [6.0.0-alpha.1](https://github.com/archriss/react-native-render-html/compare/v5.0.0-alpha.2...v6.0.0-alpha.1) (2020-11-25)
 
 
 ### Bug Fixes
