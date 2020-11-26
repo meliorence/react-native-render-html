@@ -61,8 +61,7 @@ InlineBar.model = {
     fontStyle: 'italic',
     color: GREEN
   },
-  contentModel: HTMLContentModel.textual,
-  isVoid: true
+  contentModel: HTMLContentModel.textual
 };
 
 const MixedOtherTag: TextualRenderer = function InlineOtherTag({ key, style }) {
@@ -79,7 +78,6 @@ MixedOtherTag.model = {
     fontStyle: 'italic',
     color: BLUE
   },
-  isVoid: true,
   contentModel: HTMLContentModel.textual
 };
 
