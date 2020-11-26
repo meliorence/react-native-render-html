@@ -14,6 +14,7 @@ const html = `
 
 const trickyStuff: SnippetDeclaration = {
   name: 'Tricky stuff',
+  source: '/demo/snippets/trickyStuff.ts',
   html
 };
 

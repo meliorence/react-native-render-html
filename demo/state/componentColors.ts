@@ -23,6 +23,10 @@ export interface ComponentColors {
   displayLoading: {
     color: string;
   };
+  tsSourceBottomButton: {
+    backgroundColor: string;
+    color: string;
+  };
 }
 
 export default function ComponentColors(
@@ -48,6 +52,10 @@ export default function ComponentColors(
       backgroundColor: themeColors.notification
     },
     displayLoading: {
+      color: themeColors.accent
+    },
+    tsSourceBottomButton: {
+      backgroundColor: themeColors.primary,
       color: themeColors.accent
     }
   };

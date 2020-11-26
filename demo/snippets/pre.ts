@@ -15,6 +15,7 @@ const html = `<pre>  ___________________________
 
 const pre: SnippetDeclaration = {
   name: 'Preformatted',
+  source: '/demo/snippets/pre.ts',
   html: html
 };
 

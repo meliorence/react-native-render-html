@@ -98,9 +98,10 @@ const Snippet = React.memo(
       () => [...Constants.systemFonts, 'space-mono'],
       []
     );
-
     if (
-      (snippetId === 'customRenderers' || snippetId === 'customTags') &&
+      (snippetId === 'customRenderers' ||
+        snippetId === 'customTags' ||
+        snippetId === 'test') &&
       useLegacy
     ) {
       return (
@@ -118,7 +119,6 @@ const Snippet = React.memo(
         </View>
       );
     }
-
     const renderHtml = useLegacy ? (
       <LegacyHTML
         {...sharedProps}
