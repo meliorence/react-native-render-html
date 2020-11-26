@@ -39,6 +39,13 @@ function useLoader(props: HTMLLoaderProps) {
     resolvedHTML: html || null
   });
   const { error } = loadState;
+  // Effect to reload on html changes
+  useEffect(() => {
+    typeof html === 'string' &&
+      typeof uri !== 'string' &&
+      setState({ error: false, loading: false, resolvedHTML: html });
+  }, [html, uri]);
+  // Effect to reload on uri changes
   useEffect(() => {
     let cancelled = false;
     if (!error && uri) {
