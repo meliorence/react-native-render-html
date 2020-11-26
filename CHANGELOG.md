@@ -1,3 +1,10 @@
+# [6.0.0-alpha.3](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.2...v6.0.0-alpha.3) (2020-11-26)
+
+
+### Features
+
+* new extendRenderer utility ([23faca0](https://github.com/archriss/react-native-render-html/commit/23faca08e08e02a4be4f465b00ea6add3232ffbd))
+
 # [6.0.0-alpha.2](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.1...v6.0.0-alpha.2) (2020-11-26)
 
 
