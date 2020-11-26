@@ -137,6 +137,7 @@ ArticleRenderer.model = defaultHTMLElementModels.article;
 
 const customRenderers: SnippetDeclaration = {
   name: 'Custom Renderers',
+  source: '/demo/snippets/customRenderers.tsx',
   html,
   props: {
     renderers: {

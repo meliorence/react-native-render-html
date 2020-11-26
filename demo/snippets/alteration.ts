@@ -46,6 +46,7 @@ const html = `
 const alteration: SnippetDeclaration = {
   name: 'Altering data, chlidren & nodes',
   html,
+  source: '/demo/snippets/alteration.ts',
   props: {
     alterData: (node) => {
       let { parent, data } = node;

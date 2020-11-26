@@ -77,6 +77,7 @@ const html = `
 
 const lists: SnippetDeclaration = {
   name: 'Lists',
+  source: '/demo/snippets/lists.ts',
   html,
   props: {
     baseStyle: {}

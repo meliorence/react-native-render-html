@@ -55,6 +55,7 @@ const html = `
 
 const images: SnippetDeclaration = {
   name: 'Images',
+  source: '/demo/snippets/images.ts',
   html,
   props: {
     baseStyle: {}

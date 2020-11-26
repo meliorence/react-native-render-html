@@ -8,6 +8,10 @@ const html = `
 <p style="text-align:center;"><em>We've just rendered a meme</em></p>
 `;
 
-const iframes: SnippetDeclaration = { name: 'Iframes', html };
+const iframes: SnippetDeclaration = {
+  name: 'Iframes',
+  source: '/demo/snippets/iframes.ts',
+  html
+};
 
 export default iframes;

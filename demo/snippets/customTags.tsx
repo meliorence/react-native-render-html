@@ -97,6 +97,7 @@ const BlueCirclerRenderer: LiteRendererDeclaration<HTMLContentModel.block> = {
 const customTags: SnippetDeclaration = {
   name: 'Custom Tags',
   html,
+  source: '/demo/snippets/customTags.tsx',
   props: {
     renderers: {
       bluecircle: BlueCirclerRenderer,

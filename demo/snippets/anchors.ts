@@ -26,6 +26,7 @@ style="
 
 const anchors: SnippetDeclaration = {
   name: 'Anchors',
+  source: '/demo/snippets/anchors.ts',
   html
 };
 

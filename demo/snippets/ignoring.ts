@@ -32,6 +32,7 @@ const html = `
 const ignoring: SnippetDeclaration = {
   name: 'Ignoring Tags & Styles',
   html: html,
+  source: '/demo/snippets/ignoring.ts',
   props: {
     ignoredTags: ['h2'],
     ignoredStyles: ['backgroundColor'],

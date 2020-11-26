@@ -19,6 +19,7 @@ const html = `<p>Styling texts is a challenging part of converting HTML into rea
 
 const textStyles: SnippetDeclaration = {
   name: 'Texts Styles',
+  source: '/demo/snippets/textStyles.ts',
   html: html,
   props: {
     tagsStyles: {
