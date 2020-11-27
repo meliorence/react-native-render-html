@@ -1,3 +1,19 @@
+# [6.0.0-alpha.6](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.5...v6.0.0-alpha.6) (2020-11-27)
+
+
+### Features
+
+* polished API for extendDefaultRenderer ([bb1fbeb](https://github.com/archriss/react-native-render-html/commit/bb1fbeb5e500d19dcf1fffa1a003082041ff9754))
+
+
+### BREAKING CHANGES
+
+* extendRenderer has been renamed to
+extendDefaultRenderer. Also note:
+
+- The first argument can be the name of the tag to extend;
+- The second argument is now a partial model;
+
 # [6.0.0-alpha.5](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.4...v6.0.0-alpha.5) (2020-11-27)
 
 
