@@ -1,4 +1,4 @@
-const version = require('./version');
+const version = require('./version').demo;
 module.exports = {
   expo: {
     name: 'Foundry Playground',
