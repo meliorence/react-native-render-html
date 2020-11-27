@@ -1,7 +1,5 @@
 import {
-  defaultHTMLElementModels,
-  defaultRenderers,
-  extendRenderer,
+  extendDefaultRenderer,
   HTMLContentModel
 } from 'react-native-render-html';
 import { SnippetDeclaration } from '../types';
@@ -30,12 +28,9 @@ const modelTampering: SnippetDeclaration = {
   source: '/demo/snippets/modelTampering.tsx',
   props: {
     renderers: {
-      img: extendRenderer(
-        defaultRenderers.img,
-        defaultHTMLElementModels.img.extend({
-          contentModel: HTMLContentModel.mixed
-        })
-      )
+      img: extendDefaultRenderer('img', {
+        contentModel: HTMLContentModel.mixed
+      })
     }
   }
 };
