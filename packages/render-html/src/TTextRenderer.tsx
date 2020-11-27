@@ -2,16 +2,17 @@ import React from 'react';
 import { Text } from 'react-native';
 import { TText } from '@native-html/transient-render-engine';
 import {
+  CustomTagRenderer,
+  CustomTagRendererProps,
+  DefaultTagRenderer,
   TDefaultRenderer,
   TDefaultRendererProps,
-  TNodeGenericRendererProps,
-  TRendererBaseProps
+  TNodeGenericRendererProps
 } from './shared-types';
 import {
   useInternalTextRenderer,
-  useRegisteredRenderer
+  useRendererConfig
 } from './context/RenderRegistryProvider';
-import isLiteRendererDeclaration from './render/isLiteRendererDeclaration';
 import { useSharedTextProps } from './context/SharedPropsContext';
 
 export const TDefaultTextRenderer: TDefaultRenderer<TText> = ({
@@ -34,35 +35,30 @@ function TStandardTextRenderer({
   key,
   hasAnchorAncestor
 }: TNodeGenericRendererProps<TText>) {
-  const RegisteredRenderer = useRegisteredRenderer(tnode);
+  const { Default, Custom } = useRendererConfig(tnode);
   const textProps = useSharedTextProps();
-  const commonProps: TRendererBaseProps<TText> = {
+  const style = {
+    ...tnode.styles.nativeBlockFlow,
+    ...tnode.styles.nativeBlockRet,
+    ...tnode.styles.nativeTextFlow,
+    ...tnode.styles.nativeTextRet
+  };
+  const commonProps: CustomTagRendererProps<TText> = {
     key: key,
     tnode: tnode,
-    hasAnchorAncestor: hasAnchorAncestor,
-    style: {
-      ...tnode.styles.nativeBlockFlow,
-      ...tnode.styles.nativeBlockRet,
-      ...tnode.styles.nativeTextFlow,
-      ...tnode.styles.nativeTextRet
-    },
+    style,
+    hasAnchorAncestor,
     textProps,
     viewProps: {},
-    type: 'text'
+    type: 'text',
+    TDefaultRenderer: TDefaultTextRenderer,
+    DefaultTagRenderer:
+      Default || (TDefaultTextRenderer as DefaultTagRenderer<TText>)
   };
-  if (isLiteRendererDeclaration(RegisteredRenderer)) {
-    return React.createElement(
-      TDefaultTextRenderer,
-      RegisteredRenderer.deriveTDefaultPropsForTNode(commonProps)
-    );
-  }
-  if (typeof RegisteredRenderer === 'function') {
-    return React.createElement(RegisteredRenderer, {
-      ...commonProps,
-      TDefaultRenderer: TDefaultTextRenderer
-    });
-  }
-  return React.createElement(TDefaultTextRenderer, commonProps);
+  const Root = (Custom ?? Default ?? TDefaultTextRenderer) as CustomTagRenderer<
+    TText
+  >;
+  return React.createElement(Root, commonProps);
 }
 
 export default function TTextRenderer(props: TNodeGenericRendererProps<TText>) {

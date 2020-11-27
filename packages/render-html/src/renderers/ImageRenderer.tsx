@@ -1,6 +1,6 @@
 import React from 'react';
 import HTMLImageElement from '../elements/HTMLImageElement';
-import { BlockRenderer } from '../render/render-types';
+import { DefaultBlockRenderer } from '../render/render-types';
 import { useSharedProps } from '../context/SharedPropsContext';
 import { ImageStyle } from 'react-native';
 import { defaultHTMLElementModels } from '@native-html/transient-render-engine';
@@ -9,7 +9,7 @@ function normalizeUri(uri: string) {
   return uri.startsWith('//') ? `https:${uri}` : uri;
 }
 
-const ImageRenderer: BlockRenderer = (props) => {
+const ImageRenderer: DefaultBlockRenderer = (props) => {
   const { style, tnode, TDefaultRenderer, onPress } = props;
   const {
     contentWidth,

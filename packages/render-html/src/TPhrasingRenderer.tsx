@@ -4,13 +4,14 @@ import { TPhrasing } from '@native-html/transient-render-engine';
 import { useSharedTextProps } from './context/SharedPropsContext';
 import { useTChildrenRenderer } from './context/TChildrenRendererContext';
 import {
+  CustomTagRenderer,
+  CustomTagRendererProps,
+  DefaultTagRenderer,
   TDefaultRenderer,
-  TNodeGenericRendererProps,
-  TRendererBaseProps
+  TNodeGenericRendererProps
 } from './shared-types';
 import mergeCollapsedMargins from './helpers/mergeCollapsedMargins';
-import { useRegisteredRenderer } from './context/RenderRegistryProvider';
-import isLiteRendererDeclaration from './render/isLiteRendererDeclaration';
+import { useRendererConfig } from './context/RenderRegistryProvider';
 
 export const TDefaultPhrasingRenderer: TDefaultRenderer<TPhrasing> = ({
   tnode,
@@ -39,35 +40,29 @@ const TPhrasingRenderer = ({
   collapsedMarginTop
 }: TNodeGenericRendererProps<TPhrasing>) => {
   const textProps = useSharedTextProps();
-  const RegisteredRenderer = useRegisteredRenderer(tnode);
+  const { Default, Custom } = useRendererConfig(tnode);
   const style = mergeCollapsedMargins(collapsedMarginTop, {
     ...tnode.styles.nativeBlockFlow,
     ...tnode.styles.nativeBlockRet,
     ...tnode.styles.nativeTextFlow,
     ...tnode.styles.nativeTextRet
   });
-  const commonProps: TRendererBaseProps<TPhrasing> = {
+  const commonProps: CustomTagRendererProps<TPhrasing> = {
     key,
     tnode,
     style,
+    hasAnchorAncestor,
     textProps,
     viewProps: {},
     type: 'text',
-    hasAnchorAncestor
+    TDefaultRenderer: TDefaultPhrasingRenderer,
+    DefaultTagRenderer:
+      Default || (TDefaultPhrasingRenderer as DefaultTagRenderer<TPhrasing>)
   };
-  if (isLiteRendererDeclaration(RegisteredRenderer)) {
-    return React.createElement(
-      TDefaultPhrasingRenderer,
-      RegisteredRenderer.deriveTDefaultPropsForTNode(commonProps)
-    );
-  }
-  if (typeof RegisteredRenderer === 'function') {
-    return React.createElement(RegisteredRenderer, {
-      ...commonProps,
-      TDefaultRenderer: TDefaultPhrasingRenderer
-    });
-  }
-  return React.createElement(TDefaultPhrasingRenderer, commonProps);
+  const Root = (Custom ??
+    Default ??
+    TDefaultPhrasingRenderer) as CustomTagRenderer<TPhrasing>;
+  return React.createElement(Root, commonProps);
 };
 
 export default TPhrasingRenderer;

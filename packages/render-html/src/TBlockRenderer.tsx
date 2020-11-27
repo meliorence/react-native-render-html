@@ -3,14 +3,15 @@ import { View } from 'react-native';
 import { TBlock } from '@native-html/transient-render-engine';
 import { useTChildrenRenderer } from './context/TChildrenRendererContext';
 import {
+  CustomTagRenderer,
+  CustomTagRendererProps,
+  DefaultTagRenderer,
   TDefaultRenderer,
-  TNodeGenericRendererProps,
-  TRendererBaseProps
+  TNodeGenericRendererProps
 } from './shared-types';
 import mergeCollapsedMargins from './helpers/mergeCollapsedMargins';
 import GenericPressable from './GenericPressable';
-import { useRegisteredRenderer } from './context/RenderRegistryProvider';
-import isLiteRendererDeclaration from './render/isLiteRendererDeclaration';
+import { useRendererConfig } from './context/RenderRegistryProvider';
 
 export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
   tnode,
@@ -46,8 +47,8 @@ const TBlockRenderer = ({
   hasAnchorAncestor,
   collapsedMarginTop
 }: TNodeGenericRendererProps<TBlock>) => {
-  const RegisteredRenderer = useRegisteredRenderer(tnode);
-  const commonProps: TRendererBaseProps<TBlock> = {
+  const { Default, Custom } = useRendererConfig(tnode);
+  const commonProps: CustomTagRendererProps<TBlock> = {
     key,
     tnode,
     style: mergeCollapsedMargins(collapsedMarginTop, {
@@ -57,21 +58,15 @@ const TBlockRenderer = ({
     textProps: {},
     viewProps: {},
     type: 'text',
-    hasAnchorAncestor
+    hasAnchorAncestor,
+    TDefaultRenderer: TDefaultBlockRenderer,
+    DefaultTagRenderer:
+      Default || (TDefaultBlockRenderer as DefaultTagRenderer<TBlock>)
   };
-  if (isLiteRendererDeclaration(RegisteredRenderer)) {
-    return React.createElement(
-      TDefaultBlockRenderer,
-      RegisteredRenderer.deriveTDefaultPropsForTNode(commonProps)
-    );
-  }
-  if (typeof RegisteredRenderer === 'function') {
-    return React.createElement(RegisteredRenderer, {
-      ...commonProps,
-      TDefaultRenderer: TDefaultBlockRenderer
-    });
-  }
-  return React.createElement(TDefaultBlockRenderer, commonProps);
+  const Root = (Custom ??
+    Default ??
+    TDefaultBlockRenderer) as CustomTagRenderer<TBlock>;
+  return React.createElement(Root, commonProps);
 };
 
 export default TBlockRenderer;

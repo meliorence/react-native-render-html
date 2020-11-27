@@ -1,10 +1,7 @@
 import React from 'react';
-import { HTMLContentModel } from 'react-native-render-html';
+import { CustomLiteRenderer, HTMLContentModel } from 'react-native-render-html';
 import { Text } from 'react-native';
-import {
-  TextualRenderer,
-  LiteRendererDeclaration
-} from 'react-native-render-html';
+import { CustomTextualRenderer } from 'react-native-render-html';
 import { SnippetDeclaration } from '../types';
 import { RED, GREEN, BLUE } from './styles';
 
@@ -47,7 +44,7 @@ Style from the class with the <em>classesStyles</em> prop (${GREEN})
 <p class="centered">before <myothertag></myothertag> after</p>
 `;
 
-const InlineBar: TextualRenderer = function InlineBar({ key, style }) {
+const InlineBar: CustomTextualRenderer = function InlineBar({ key, style }) {
   return (
     <Text style={style} key={key}>
       Inline!
@@ -64,12 +61,11 @@ InlineBar.model = {
   contentModel: HTMLContentModel.textual
 };
 
-const MixedOtherTag: TextualRenderer = function InlineOtherTag({ key, style }) {
-  return (
-    <Text style={style} key={key}>
-      Mixed!
-    </Text>
-  );
+const MixedOtherTag: CustomTextualRenderer = function InlineOtherTag({
+  TDefaultRenderer,
+  ...props
+}) {
+  return <TDefaultRenderer {...props}>Mixed!</TDefaultRenderer>;
 };
 
 MixedOtherTag.model = {
@@ -81,7 +77,7 @@ MixedOtherTag.model = {
   contentModel: HTMLContentModel.textual
 };
 
-const BlueCirclerRenderer: LiteRendererDeclaration<HTMLContentModel.block> = {
+const BlueCirclerRenderer: CustomLiteRenderer<HTMLContentModel.block> = {
   model: {
     mixedUAStyles: {
       width: 50,

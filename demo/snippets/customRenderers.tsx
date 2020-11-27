@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import {
-  BlockRenderer,
+  CustomBlockRenderer,
   defaultHTMLElementModels,
   useTNodeChildrenProps,
   TChildrenRenderer,
@@ -46,15 +46,20 @@ This is different from the old API where you passed functions taking four argume
 <ol>
 <li><code>tnode</code>: the TNode to render;</li>
 <li><code>TDefaultRenderer</code>: the default renderer for this TNode;</li>
-<li><code>key</code>: the key which shall be passed to the root element returned by this component.</li>
+<li><code>DefaultTagRenderer</code>: the default renderer for this tagName;</li>
+<li><code>style</code>: the flatten style object which should be passed to the root element returned by this component;</li>
+<li><code>key</code>: the key which shall be passed to the root element returned by this component;</li>
+<li><code>textProps</code> to use when you render a <code>Text</code>-based element;</li>
+<li><code>viewProps</code> to use when you render a <code>View</code>-based element.</li>
+<li><code>type</code> to check if a <code>Text</code> or <code>View</code> is expected as the root element returned by this component.</li>
 </ol>
 
 <div class="tip">Your component won't receive shared props. Shared props can be consumed with <code>useSharedProps</code> hook.</div>
-<div class="tip"><code>TDefaultRenderer</code> can receive <code>onPress</code> prop and any prop for <code>Text</code> or <code>View</code> components, depending on the rendered TNode.</div>
+<div class="tip"><code>TDefaultRenderer</code> can receive <code>onPress</code> prop, <code>textProps</code> when rendering a <code>Text</code> element, and <code>viewProps</code> when rendering a <code>View</code> element.</div>
 
 <h2>Taking advantage of <code>onPress</code> prop</h2>
 <p>
-The below custom renderer for <code>button</code> takes advantage of the fact <code>TDefaultRenderer</code> can take <code>onPress</code> prop as argument and react to press events! And this is true for TText, TPhrasing and TBlock nodes.
+The below custom renderer for <code>button</code> takes advantage of the fact <code>TDefaultRenderer</code> can receive <code>onPress</code> prop and react to press events! And this is true for TText, TPhrasing and TBlock nodes.
 </p>
 
 <button>Press me!</button>
@@ -86,7 +91,7 @@ function AdComponent() {
   );
 }
 
-const ArticleRenderer: BlockRenderer = function ArticleRenderer(props) {
+const ArticleRenderer: CustomBlockRenderer = function ArticleRenderer(props) {
   const { tnode, TDefaultRenderer, ...defaultRendererProps } = props;
   const tchildrenProps = useTNodeChildrenProps(props);
   const firstChildrenChunk = tnode.children.slice(0, 2);
@@ -103,7 +108,7 @@ const ArticleRenderer: BlockRenderer = function ArticleRenderer(props) {
   );
 };
 
-const ButtonRenderer: BlockRenderer = function ({
+const ButtonRenderer: CustomBlockRenderer = function ({
   TDefaultRenderer,
   ...props
 }) {
