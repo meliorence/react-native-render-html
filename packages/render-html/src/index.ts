@@ -20,3 +20,4 @@ export { default as useTRenderEngine } from './hooks/useTRenderEngine';
 export { default as useTTree } from './hooks/useTTree';
 export { default as defaultRenderers } from './render/defaultRenderers';
 export { default as extendRenderer } from './render/extendRenderer';
+export { default as splitBoxModelStyle } from './helpers/splitBoxModelStyle';
