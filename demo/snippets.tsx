@@ -12,7 +12,7 @@ import lists from './snippets/lists';
 import images from './snippets/images';
 import trickyStuff from './snippets/trickyStuff';
 import layoutStyles from './snippets/layoutStyles';
-import textStyles from './snippets/textsStyles';
+import textStyles from './snippets/textStyles';
 import ignoring from './snippets/ignoring';
 import remoteHTML from './snippets/remoteHTML';
 import alteration from './snippets/alteration';
