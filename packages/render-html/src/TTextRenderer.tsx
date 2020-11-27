@@ -12,6 +12,7 @@ import {
   useRegisteredRenderer
 } from './context/RenderRegistryProvider';
 import isLiteRendererDeclaration from './render/isLiteRendererDeclaration';
+import { useSharedTextProps } from './context/SharedPropsContext';
 
 export const TDefaultTextRenderer: TDefaultRenderer<TText> = ({
   tnode,
@@ -34,6 +35,7 @@ function TStandardTextRenderer({
   hasAnchorAncestor
 }: TNodeGenericRendererProps<TText>) {
   const RegisteredRenderer = useRegisteredRenderer(tnode);
+  const textProps = useSharedTextProps();
   const commonProps: TRendererBaseProps<TText> = {
     key: key,
     tnode: tnode,
@@ -44,7 +46,7 @@ function TStandardTextRenderer({
       ...tnode.styles.nativeTextFlow,
       ...tnode.styles.nativeTextRet
     },
-    textProps: {},
+    textProps,
     viewProps: {},
     type: 'text'
   };

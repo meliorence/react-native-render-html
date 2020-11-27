@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { TPhrasing } from '@native-html/transient-render-engine';
-import { useSharedProps } from './context/SharedPropsContext';
+import { useSharedTextProps } from './context/SharedPropsContext';
 import { useTChildrenRenderer } from './context/TChildrenRendererContext';
 import {
   TDefaultRenderer,
@@ -38,7 +38,7 @@ const TPhrasingRenderer = ({
   hasAnchorAncestor,
   collapsedMarginTop
 }: TNodeGenericRendererProps<TPhrasing>) => {
-  const { allowFontScaling, textSelectable } = useSharedProps();
+  const textProps = useSharedTextProps();
   const RegisteredRenderer = useRegisteredRenderer(tnode);
   const style = mergeCollapsedMargins(collapsedMarginTop, {
     ...tnode.styles.nativeBlockFlow,
@@ -50,10 +50,7 @@ const TPhrasingRenderer = ({
     key,
     tnode,
     style,
-    textProps: {
-      allowFontScaling,
-      selectable: textSelectable
-    },
+    textProps,
     viewProps: {},
     type: 'text',
     hasAnchorAncestor
