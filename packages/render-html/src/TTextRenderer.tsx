@@ -2,7 +2,6 @@ import React from 'react';
 import { Text } from 'react-native';
 import { TText } from '@native-html/transient-render-engine';
 import {
-  NativeTextStyles,
   TDefaultRenderer,
   TDefaultRendererProps,
   TNodeGenericRendererProps
@@ -29,12 +28,12 @@ function TStandardTextRenderer({
     key: key,
     tnode: tnode,
     hasAnchorAncestor: hasAnchorAncestor,
-    style: [
-      tnode.styles.nativeBlockFlow,
-      tnode.styles.nativeBlockRet,
-      tnode.styles.nativeTextFlow,
-      tnode.styles.nativeTextRet
-    ] as NativeTextStyles
+    style: {
+      ...tnode.styles.nativeBlockFlow,
+      ...tnode.styles.nativeBlockRet,
+      ...tnode.styles.nativeTextFlow,
+      ...tnode.styles.nativeTextRet
+    }
   };
   if (isLiteRendererDeclaration(RegisteredRenderer)) {
     return React.createElement(
