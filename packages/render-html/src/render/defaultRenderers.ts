@@ -1,9 +1,9 @@
 import AnchorRenderer from '../renderers/AnchorRenderer';
 import ImageRenderer from '../renderers/ImageRenderer';
 import ListRenderer from '../renderers/ListRenderer';
-import { RendererRecord } from './render-types';
+import { DefaultTagRendererRecord } from './render-types';
 
-const defaultRenderers: RendererRecord = {
+const defaultRenderers: DefaultTagRendererRecord = {
   img: ImageRenderer,
   ul: ListRenderer,
   ol: ListRenderer,
