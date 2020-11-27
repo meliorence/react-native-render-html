@@ -1,5 +1,10 @@
 import React from 'react';
-import { TBlock, TNode, TPhrasing } from '@native-html/transient-render-engine';
+import {
+  TBlock,
+  TNode,
+  TPhrasing,
+  TText
+} from '@native-html/transient-render-engine';
 import { useSharedProps } from './context/SharedPropsContext';
 import { TNodeRendererProps } from './TNodeRenderer';
 import TChildrenRenderer, { TChildrenRendererProps } from './TChildrenRenderer';
@@ -29,10 +34,19 @@ export function useTNodeChildrenProps({
   };
 }
 
-const TNodeChildrenRenderer: React.FunctionComponent<TNodeChildrenRendererProps> = function TNodeChildrenRenderer(
+const TNodeWithChildrenRenderer: React.FunctionComponent<TNodeChildrenRendererProps> = function TNodeChildrenRenderer(
   props
 ) {
   return React.createElement(TChildrenRenderer, useTNodeChildrenProps(props));
+};
+
+const TNodeChildrenRenderer: React.FunctionComponent<TNodeChildrenRendererProps> = function TNodeChildrenRenderer(
+  props
+) {
+  if (props.tnode instanceof TText) {
+    return <>{props.tnode.data}</>;
+  }
+  return React.createElement(TNodeWithChildrenRenderer, props);
 };
 
 export default TNodeChildrenRenderer;
