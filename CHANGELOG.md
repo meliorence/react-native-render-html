@@ -1,3 +1,15 @@
+# [6.0.0-alpha.5](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.4...v6.0.0-alpha.5) (2020-11-27)
+
+
+### Bug Fixes
+
+* inject textProps in TText renderers ([5453f95](https://github.com/archriss/react-native-render-html/commit/5453f95ee4b7ca4c6e51df271fcb85ad5bb49fd3))
+
+
+### Features
+
+* support TText tnode in TNodeChildrenRenderer ([00183cc](https://github.com/archriss/react-native-render-html/commit/00183cce8e1f67de701e99e626bc5b542b60ff39))
+
 # [6.0.0-alpha.4](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.3...v6.0.0-alpha.4) (2020-11-27)
 
 
