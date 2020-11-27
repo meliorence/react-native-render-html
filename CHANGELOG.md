@@ -1,3 +1,30 @@
+# [6.0.0-alpha.4](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.3...v6.0.0-alpha.4) (2020-11-27)
+
+
+### Bug Fixes
+
+* spread styles passed to TDefaultTextRenderer ([d167f95](https://github.com/archriss/react-native-render-html/commit/d167f95217197dba2db07a5c53c82eb533567fca))
+
+
+### Code Refactoring
+
+* distinguish props from TDefaultRenderer and custom renderers ([0f2c41d](https://github.com/archriss/react-native-render-html/commit/0f2c41d83eca7cd27c3d157af2c6edae10dc8fa1))
+
+
+### Features
+
+* add new splitBoxModelStyle utility ([3b0586c](https://github.com/archriss/react-native-render-html/commit/3b0586ccfcbb0c0ddf3933bda10f130917741a9e))
+
+
+### BREAKING CHANGES
+
+* renderer props (and TDefaultRendererProps) don't pass
+props to their underlying element. Instead, they pass `viewProps` if they
+are view-based, and `textProps` if they are text-based. Only `onPress` is
+still directly passed to the underlying element. Finally, a third prop
+is available, `type`, useful for mixed renderers to know the type of the
+underlying element (Text or View).
+
 # [6.0.0-alpha.3](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.2...v6.0.0-alpha.3) (2020-11-26)
 
 
