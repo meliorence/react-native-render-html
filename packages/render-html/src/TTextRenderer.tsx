@@ -4,7 +4,8 @@ import { TText } from '@native-html/transient-render-engine';
 import {
   TDefaultRenderer,
   TDefaultRendererProps,
-  TNodeGenericRendererProps
+  TNodeGenericRendererProps,
+  TRendererBaseProps
 } from './shared-types';
 import {
   useInternalTextRenderer,
@@ -14,9 +15,18 @@ import isLiteRendererDeclaration from './render/isLiteRendererDeclaration';
 
 export const TDefaultTextRenderer: TDefaultRenderer<TText> = ({
   tnode,
-  hasAnchorAncestor,
-  ...props
-}: TDefaultRendererProps<TText>) => <Text {...props}>{tnode.data}</Text>;
+  textProps,
+  onPress,
+  children,
+  style
+}: TDefaultRendererProps<TText>) => {
+  const resolvedStyles = textProps?.style ? [style, textProps.style] : style;
+  return (
+    <Text onPress={onPress} {...textProps} style={resolvedStyles}>
+      {children ?? tnode.data}
+    </Text>
+  );
+};
 
 function TStandardTextRenderer({
   tnode,
@@ -24,7 +34,7 @@ function TStandardTextRenderer({
   hasAnchorAncestor
 }: TNodeGenericRendererProps<TText>) {
   const RegisteredRenderer = useRegisteredRenderer(tnode);
-  const commonProps: TDefaultRendererProps<TText> = {
+  const commonProps: TRendererBaseProps<TText> = {
     key: key,
     tnode: tnode,
     hasAnchorAncestor: hasAnchorAncestor,
@@ -33,7 +43,10 @@ function TStandardTextRenderer({
       ...tnode.styles.nativeBlockRet,
       ...tnode.styles.nativeTextFlow,
       ...tnode.styles.nativeTextRet
-    }
+    },
+    textProps: {},
+    viewProps: {},
+    type: 'text'
   };
   if (isLiteRendererDeclaration(RegisteredRenderer)) {
     return React.createElement(

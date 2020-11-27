@@ -3,6 +3,7 @@ import {
   GestureResponderEvent,
   StyleProp,
   TextProps,
+  TextStyle,
   ViewProps,
   ViewStyle
 } from 'react-native';
@@ -294,14 +295,10 @@ export type NativeStyleProp<T extends TNode> = T extends TBlock
   ? NativeBlockStyles
   : NativeTextStyles;
 
-export type TDefaultRendererProps<T extends TNode> = Pick<
+export type TRendererBaseProps<T extends TNode> = Pick<
   TNodeGenericRendererProps<T>,
   'tnode' | 'key' | 'hasAnchorAncestor'
 > & {
-  /**
-   * When children is present, renderChildren will not be invoked.
-   */
-  children?: ReactNode;
   /**
    * Style extracted from TNode.style
    */
@@ -310,9 +307,37 @@ export type TDefaultRendererProps<T extends TNode> = Pick<
    * Any default renderer should be able to handle press.
    */
   onPress?: (e: GestureResponderEvent) => void;
-} & (T extends TText ? TextProps : T extends TPhrasing ? TextProps : ViewProps);
+  /**
+   * Props for Text-based renderers.
+   */
+  textProps: TextProps;
+  /**
+   * Props for View-based renderers.
+   */
+  viewProps: ViewProps;
+  /**
+   * Is is a text-based or view-based renderer?
+   */
+  type: 'text' | 'block';
+};
 
-export type RendererProps<T extends TNode> = TDefaultRendererProps<T> & {
+export type TDefaultRendererProps<T extends TNode> = TRendererBaseProps<T> & {
+  /**
+   * When children is present, renderChildren will not be invoked.
+   */
+  children?: ReactNode;
+  /**
+   * The style for this renderer will depend on the type of tnode.
+   * You can check if a node is textual with `props.type === 'text'`.
+   */
+  style: T extends TText
+    ? StyleProp<TextStyle>
+    : T extends TPhrasing
+    ? StyleProp<TextStyle>
+    : StyleProp<ViewStyle>;
+};
+
+export type RendererProps<T extends TNode> = TRendererBaseProps<T> & {
   /**
    * Default renderer for this tnode.
    */
