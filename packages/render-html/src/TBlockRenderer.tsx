@@ -2,7 +2,11 @@ import React from 'react';
 import { View } from 'react-native';
 import { TBlock } from '@native-html/transient-render-engine';
 import { useTChildrenRenderer } from './context/TChildrenRendererContext';
-import { TDefaultRenderer, TNodeGenericRendererProps } from './shared-types';
+import {
+  TDefaultRenderer,
+  TNodeGenericRendererProps,
+  TRendererBaseProps
+} from './shared-types';
 import mergeCollapsedMargins from './helpers/mergeCollapsedMargins';
 import GenericPressable from './GenericPressable';
 import { useRegisteredRenderer } from './context/RenderRegistryProvider';
@@ -12,16 +16,28 @@ export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
   tnode,
   children: overridingChildren,
   hasAnchorAncestor,
-  ...passedProps
+  style,
+  onPress,
+  viewProps,
+  key
 }) => {
   const TChildrenRenderer = useTChildrenRenderer();
   const children = overridingChildren ?? (
     <TChildrenRenderer tnode={tnode} hasAnchorAncestor={hasAnchorAncestor} />
   );
-  if (typeof passedProps.onPress === 'function') {
-    return React.createElement(GenericPressable, passedProps, children);
+  const commonProps = {
+    ...viewProps,
+    style: viewProps?.style ? [viewProps.style, style] : style,
+    key
+  };
+  if (typeof onPress === 'function') {
+    return React.createElement(
+      GenericPressable,
+      { onPress, ...commonProps },
+      children
+    );
   }
-  return React.createElement(View, passedProps, children);
+  return React.createElement(View, commonProps, children);
 };
 
 const TBlockRenderer = ({
@@ -31,16 +47,17 @@ const TBlockRenderer = ({
   collapsedMarginTop
 }: TNodeGenericRendererProps<TBlock>) => {
   const RegisteredRenderer = useRegisteredRenderer(tnode);
-  const commonProps = {
+  const commonProps: TRendererBaseProps<TBlock> = {
     key,
     tnode,
     style: mergeCollapsedMargins(collapsedMarginTop, {
       ...tnode.styles.nativeBlockFlow,
       ...tnode.styles.nativeBlockRet
     }),
-    hasAnchorAncestor,
-    untranslatedStyle: tnode.styles.webTextFlow,
-    collapsedMarginTop
+    textProps: {},
+    viewProps: {},
+    type: 'text',
+    hasAnchorAncestor
   };
   if (isLiteRendererDeclaration(RegisteredRenderer)) {
     return React.createElement(

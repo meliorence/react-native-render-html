@@ -5,8 +5,8 @@ import { useSharedProps } from './context/SharedPropsContext';
 import { useTChildrenRenderer } from './context/TChildrenRendererContext';
 import {
   TDefaultRenderer,
-  TDefaultRendererProps,
-  TNodeGenericRendererProps
+  TNodeGenericRendererProps,
+  TRendererBaseProps
 } from './shared-types';
 import mergeCollapsedMargins from './helpers/mergeCollapsedMargins';
 import { useRegisteredRenderer } from './context/RenderRegistryProvider';
@@ -15,15 +15,21 @@ import isLiteRendererDeclaration from './render/isLiteRendererDeclaration';
 export const TDefaultPhrasingRenderer: TDefaultRenderer<TPhrasing> = ({
   tnode,
   key,
+  style,
   children: overridingChildren,
   hasAnchorAncestor,
-  ...passedProps
+  textProps
 }) => {
   const TChildrenRenderer = useTChildrenRenderer();
+  const resolvedStyles = textProps?.style ? [textProps.style, style] : style;
   const children = overridingChildren ?? (
     <TChildrenRenderer tnode={tnode} hasAnchorAncestor={hasAnchorAncestor} />
   );
-  return React.createElement(Text, passedProps, children);
+  return React.createElement(
+    Text,
+    { key, ...textProps, style: resolvedStyles },
+    children
+  );
 };
 
 const TPhrasingRenderer = ({
@@ -40,12 +46,16 @@ const TPhrasingRenderer = ({
     ...tnode.styles.nativeTextFlow,
     ...tnode.styles.nativeTextRet
   });
-  const commonProps: TDefaultRendererProps<TPhrasing> = {
+  const commonProps: TRendererBaseProps<TPhrasing> = {
     key,
     tnode,
     style,
-    allowFontScaling,
-    selectable: textSelectable,
+    textProps: {
+      allowFontScaling,
+      selectable: textSelectable
+    },
+    viewProps: {},
+    type: 'text',
     hasAnchorAncestor
   };
   if (isLiteRendererDeclaration(RegisteredRenderer)) {
