@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, Linking } from 'react-native';
+import { Dimensions, Linking, TextProps } from 'react-native';
 import { RenderHTMLPassedProps } from '../shared-types';
 
 export const defaultSharedPropsContext: Required<RenderHTMLPassedProps> = {
@@ -25,6 +25,14 @@ const SharedPropsContext = React.createContext<RenderHTMLPassedProps>(
 
 export function useSharedProps() {
   return React.useContext(SharedPropsContext);
+}
+
+export function useSharedTextProps(): TextProps {
+  const { textSelectable, allowFontScaling } = useSharedProps();
+  return {
+    selectable: textSelectable,
+    allowFontScaling
+  };
 }
 
 export default SharedPropsContext;
