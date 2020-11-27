@@ -1,5 +1,5 @@
 import React from 'react';
-import { MixedRenderer } from '../render/render-types';
+import { DefaultMixedRenderer } from '../render/render-types';
 import {
   TBlock,
   TNode,
@@ -44,7 +44,7 @@ function useAnchorProps<T extends TNode>(
   };
 }
 
-const AnchorRenderer: MixedRenderer = (props) => {
+const AnchorRenderer: DefaultMixedRenderer = (props) => {
   return React.createElement(props.TDefaultRenderer, useAnchorProps(props));
 };
 

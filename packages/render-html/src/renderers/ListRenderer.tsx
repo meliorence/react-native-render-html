@@ -2,7 +2,7 @@ import { defaultHTMLElementModels } from '@native-html/transient-render-engine';
 import React, { ComponentType } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useTChildrenRenderer } from '../context/TChildrenRendererContext';
-import { BlockRenderer } from '../render/render-types';
+import { DefaultBlockRenderer } from '../render/render-types';
 import { getStringPrefixFromIndex } from './getStringListPrefixFromIndex';
 import numOfCharsInPrefix from './numOfCharsInPrefix';
 
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const ListRenderer: BlockRenderer = ({
+const ListRenderer: DefaultBlockRenderer = ({
   style,
   tnode,
   TDefaultRenderer,

@@ -23,7 +23,7 @@ import {
   MixedStyleDeclaration
 } from '@native-html/css-processor';
 import type { TStyles } from '@native-html/transient-render-engine';
-import { RendererRecord } from './render/render-types';
+import { CustomTagRendererRecord } from './render/render-types';
 
 export interface RendererDictionary<P> {}
 
@@ -194,7 +194,7 @@ export interface RenderHTMLProps<P = any>
   /**
    * Your custom renderers.
    */
-  renderers?: RendererRecord;
+  renderers?: CustomTagRendererRecord;
   /**
    * Set of props accessible into your custom renderers in `passProps` (4th argument)
    */
@@ -337,13 +337,37 @@ export type TDefaultRendererProps<T extends TNode> = TRendererBaseProps<T> & {
     : StyleProp<ViewStyle>;
 };
 
-export type RendererProps<T extends TNode> = TRendererBaseProps<T> & {
+export type DefaultTagRendererProps<T extends TNode> = TRendererBaseProps<T> & {
   /**
    * Default renderer for this tnode.
    */
   TDefaultRenderer: TDefaultRenderer<T>;
 };
 
+export type CustomTagRendererProps<T extends TNode> = DefaultTagRendererProps<
+  T
+> & {
+  /**
+   * Internal renderer for this _tagName_, not to be confused with
+   * {@link TDefaultRenderer}, which is the default renderer for the _tnode_.
+   *
+   * @remarks For example, when rendering `img` tags, `TDefaultRenderer` and
+   * `DefaultTagRenderer` won't be equal.
+   *
+   * When there is no default tag renderer for this tag, this prop will fallback
+   * to the `TDefaultRenderer`.
+   */
+  DefaultTagRenderer: DefaultTagRenderer<T>;
+};
+
 export type TDefaultRenderer<T extends TNode> = React.ComponentType<
   TDefaultRendererProps<T>
+>;
+
+export type DefaultTagRenderer<T extends TNode> = React.ComponentType<
+  DefaultTagRendererProps<T>
+>;
+
+export type CustomTagRenderer<T extends TNode> = React.ComponentType<
+  CustomTagRendererProps<T>
 >;
