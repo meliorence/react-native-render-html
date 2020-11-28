@@ -1,4 +1,34 @@
 import { NativeStyleProp } from '../shared-types';
+import pick from 'ramda/es/pick';
+import omit from 'ramda/es/omit';
+
+const borderBoxProps = [
+  'backgroundColor',
+  'borderBottomColor',
+  'borderBottomLeftRadius',
+  'borderBottomRightRadius',
+  'borderBottomWidth',
+  'borderLeftColor',
+  'borderLeftWidth',
+  'borderRightColor',
+  'borderRightWidth',
+  'borderStyle',
+  'borderTopColor',
+  'borderTopLeftRadius',
+  'borderTopRightRadius',
+  'borderTopWidth',
+  'paddingBottom',
+  'paddingLeft',
+  'paddingRight',
+  'paddingTop',
+  'marginBottom',
+  'marginLeft',
+  'marginRight',
+  'marginTop'
+];
+
+const pickBorderBox = pick(borderBoxProps);
+const omitBorderBox = omit(borderBoxProps);
 
 /**
  * A utility to separate box model styles and other styles. Useful when one wants
@@ -7,56 +37,9 @@ import { NativeStyleProp } from '../shared-types';
  *
  * @param styles - The native styles to split.
  */
-export default function splitBoxModelStyle({
-  backgroundColor,
-  borderBottomColor,
-  borderBottomLeftRadius,
-  borderBottomRightRadius,
-  borderBottomWidth,
-  borderLeftColor,
-  borderLeftWidth,
-  borderRightColor,
-  borderRightWidth,
-  borderStyle,
-  borderTopColor,
-  borderTopLeftRadius,
-  borderTopRightRadius,
-  borderTopWidth,
-  paddingBottom,
-  paddingLeft,
-  paddingRight,
-  paddingTop,
-  marginBottom,
-  marginLeft,
-  marginRight,
-  marginTop,
-  ...rest
-}: NativeStyleProp<any>) {
+export default function splitBoxModelStyle(style: NativeStyleProp<any>) {
   return {
-    boxModel: {
-      backgroundColor,
-      borderBottomColor,
-      borderBottomLeftRadius,
-      borderBottomRightRadius,
-      borderBottomWidth,
-      borderLeftColor,
-      borderLeftWidth,
-      borderRightColor,
-      borderRightWidth,
-      borderStyle,
-      borderTopColor,
-      borderTopLeftRadius,
-      borderTopRightRadius,
-      borderTopWidth,
-      paddingBottom,
-      paddingLeft,
-      paddingRight,
-      paddingTop,
-      marginBottom,
-      marginLeft,
-      marginRight,
-      marginTop
-    },
-    rest
+    boxModelStyle: pickBorderBox(style),
+    otherStyle: omitBorderBox(style)
   };
 }
