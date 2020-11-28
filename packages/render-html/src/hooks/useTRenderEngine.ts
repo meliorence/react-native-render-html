@@ -52,11 +52,6 @@ export default function useTRenderEngine(props: RenderHTMLProps) {
     }
     customRenderersKeys.forEach((key) => {
       const renderer = renderers[key] as CustomRendererSpecs<HTMLContentModel>;
-      if (!renderer.model && __DEV__) {
-        console.warn(
-          `A model should be provided in renderer for tag "${key}".`
-        );
-      }
       if (lookupRecord(defaultModels, key)) {
         if (renderer.model && defaultModels[key] !== renderer.model) {
           if (renderer.model instanceof HTMLElementModel) {
@@ -71,13 +66,14 @@ export default function useTRenderEngine(props: RenderHTMLProps) {
           !renderer.model &&
           defaultModels[key].contentModel === HTMLContentModel.mixed
         ) {
-          console.warn(
-            `You are defining a custom renderer for tag "${key}" which has a mixed content model.` +
-              'Be advised that this tag can be translated to TBlock, TText or Tphrasing nodes. ' +
-              'You must explicitly set the corresponding HTMLElementModel from "defaultHTMLElementModels" ' +
-              'as a static "model" field of your renderer to show you understand the constrains inherent to ' +
-              'those renderers.'
-          );
+          __DEV__ &&
+            console.warn(
+              `You are defining a custom renderer for tag "${key}" which has a mixed content model.` +
+                'Be advised that this tag can be translated to TBlock, TText or Tphrasing nodes. ' +
+                'You must explicitly set the corresponding HTMLElementModel from "defaultHTMLElementModels" ' +
+                'as a static "model" field of your renderer to show you understand the constrains inherent to ' +
+                'those renderers.'
+            );
         }
       } else {
         if (renderer.model) {
@@ -86,10 +82,11 @@ export default function useTRenderEngine(props: RenderHTMLProps) {
             tagName: key
           });
         } else {
-          console.error(
-            `You must provide a model in custom renderer for tag "${key}". Set the "model" static field ` +
-              'of your custom renderer.'
-          );
+          __DEV__ &&
+            console.error(
+              `You must provide a model in custom renderer for tag "${key}". Set the "model" static field ` +
+                'of your custom renderer.'
+            );
         }
       }
     });

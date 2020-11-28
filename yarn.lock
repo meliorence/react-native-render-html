@@ -3712,6 +3712,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/ramda@npm:^0.27.32":
+  version: 0.27.32
+  resolution: "@types/ramda@npm:0.27.32"
+  dependencies:
+    ts-toolbelt: ^6.15.1
+  checksum: c097bbefe31a8355d08f1b4ac6f52c7baf7f2ea7b37f7eff8345a539fcf88a037107cda37afceab728a74d5f6fe7514f4463013cdedeb2e187e127c68b9fa8db
+  languageName: node
+  linkType: hard
+
 "@types/react-native@npm:^0.63.35, @types/react-native@npm:~0.63.35":
   version: 0.63.35
   resolution: "@types/react-native@npm:0.63.35"
@@ -14106,6 +14115,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"ramda@npm:^0.27.1":
+  version: 0.27.1
+  resolution: "ramda@npm:0.27.1"
+  checksum: 9aa4655dffdca66f8ba2ceabebe51996d6c75f6a2fb901a150885ace22c5950c211dd589868780b7a91c1443771702634d4370e7572d8c63c60e4b4f61aa57a9
+  languageName: node
+  linkType: hard
+
 "range-parser@npm:~1.2.1":
   version: 1.2.1
   resolution: "range-parser@npm:1.2.1"
@@ -14248,12 +14264,14 @@ fsevents@^1.2.7:
     "@react-native-community/bob": ^0.16.2
     "@release-it/conventional-changelog": ^2.0.0
     "@types/jest": ^26.0.14
+    "@types/ramda": ^0.27.32
     "@types/react-native": ^0.63.35
     babel-jest: ^26.6.3
     eslint: ^7.13.0
     jest: ^26.6.3
     metro-react-native-babel-preset: ^0.64.0
     prettier: ^2.1.2
+    ramda: ^0.27.1
     react: 16.13.1
     release-it: ^14.2.1
     typescript: ~3.9.7
@@ -16484,6 +16502,13 @@ resolve@1.1.7:
   version: 1.0.1
   resolution: "trim-off-newlines@npm:1.0.1"
   checksum: c590b9e8c1d91ac1b57b65f8ed7cc7837e702d86f47c725462cc7e03f3850dfa92a32f956d350632208aa78e9be03917a21d9ef5d139c30be13bb51bf576209f
+  languageName: node
+  linkType: hard
+
+"ts-toolbelt@npm:^6.15.1":
+  version: 6.15.5
+  resolution: "ts-toolbelt@npm:6.15.5"
+  checksum: d2f585ee3439ae7a72dd7c00630491195b2a4f34107c595d567242482b9fa911b5a9b5921fb4984506c2f7d8efce61351c7f48519438df67b6c0a8dcd40c862c
   languageName: node
   linkType: hard
 
