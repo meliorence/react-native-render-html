@@ -3730,6 +3730,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-test-renderer@npm:^17.0.0":
+  version: 17.0.0
+  resolution: "@types/react-test-renderer@npm:17.0.0"
+  dependencies:
+    "@types/react": "*"
+  checksum: 4931f75cfd17a43d257e9b6a021d1b01f8c859e8ee76353ab881cc3a8f6842c238b68ed643cfd69998193a16536b31f9dae329d8beca1e7c8425f6663f853750
+  languageName: node
+  linkType: hard
+
 "@types/react@npm:*, @types/react@npm:^16.9.56, @types/react@npm:~16.9.56":
   version: 16.9.56
   resolution: "@types/react@npm:16.9.56"
@@ -14266,6 +14275,7 @@ fsevents@^1.2.7:
     "@types/jest": ^26.0.14
     "@types/ramda": ^0.27.32
     "@types/react-native": ^0.63.35
+    "@types/react-test-renderer": ^17.0.0
     babel-jest: ^26.6.3
     eslint: ^7.13.0
     jest: ^26.6.3
