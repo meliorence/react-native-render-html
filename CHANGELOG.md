@@ -1,3 +1,16 @@
+# [6.0.0-alpha.7](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.6...v6.0.0-alpha.7) (2020-11-28)
+
+
+### Bug Fixes
+
+* splitBoxModelStyle, avoid picking undefined props in style ([e5f58bb](https://github.com/archriss/react-native-render-html/commit/e5f58bbbc61ab3261a3e022e0eec26b3e6006088))
+
+
+### BREAKING CHANGES
+
+* the object returned by splitBoxModelStyle has more
+legible field names, boxModelStyle and otherStyle.
+
 # [6.0.0-alpha.6](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.5...v6.0.0-alpha.6) (2020-11-27)
 
 
