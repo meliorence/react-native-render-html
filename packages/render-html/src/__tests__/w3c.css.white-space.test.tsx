@@ -47,8 +47,6 @@ function testCollapseRuleForCharacter(character: string, name: string) {
  *
  * as documented here: https://www.w3.org/TR/css-text-3 (sections 3 and 4)
  */
-// Skip because a fix is not ready yet
-// eslint-disable-next-line jest/no-disabled-tests
 describe('RenderHTML component regarding CSS white-space: normal rule', () => {
   describe('involving spaces', () => {
     testCollapseRuleForCharacter(' ', 'space');
@@ -59,7 +57,7 @@ describe('RenderHTML component regarding CSS white-space: normal rule', () => {
   describe('involving tabs', () => {
     testCollapseRuleForCharacter('\t', 'tab');
   });
-  describe.skip('involving form feeds', () => {
+  describe('involving form feeds', () => {
     testCollapseRuleForCharacter('\f', 'form feed');
   });
 });
