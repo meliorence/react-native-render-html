@@ -8,7 +8,7 @@ jest.useFakeTimers();
 function testCollapseRuleForCharacter(character: string, name: string) {
   const action =
     character === ' ' ? 'preserves a space' : `replaces ${name} with a space`;
-  it.skip(`collapses whitespaces when first text tag has a trailing ${name} and the second starts with a ${name}`, () => {
+  it(`collapses whitespaces when first text tag has a trailing ${name} and the second starts with a ${name}`, () => {
     const testRenderer = renderer.create(
       <RenderHTML
         debug={false}
