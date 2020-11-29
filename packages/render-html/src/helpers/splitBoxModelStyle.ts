@@ -1,6 +1,6 @@
 import { NativeStyleProp } from '../shared-types';
-import pick from 'ramda/es/pick';
-import omit from 'ramda/es/omit';
+import pick from 'ramda/src/pick';
+import omit from 'ramda/src/omit';
 
 const borderBoxProps = [
   'backgroundColor',
