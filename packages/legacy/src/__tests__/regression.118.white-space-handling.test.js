@@ -2,7 +2,6 @@ import React from "react";
 import HTML from "../index";
 import renderer from "react-test-renderer";
 import { extractTextFromInstance } from "./utils";
-
 /**
  * https://github.com/archriss/react-native-render-html/issues/118
  */
