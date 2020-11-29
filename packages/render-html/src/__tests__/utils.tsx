@@ -90,15 +90,18 @@ export function expectTranslatedInlineCSSValueToEqual({
 //   });
 // }
 
-// export function elementHasAncestorOfType(element, Type) {
-//   let el = element;
-//   while ((el = el.parent) != null) {
-//     if (el.type === Type) {
-//       return true;
-//     }
-//   }
-//   return false;
-// }
+export function elementHasAncestorOfType(
+  element: ReactTestInstance | null | undefined,
+  Type: React.ElementType<any> | string
+) {
+  let el = element;
+  while ((el = el?.parent) != null) {
+    if (el.type === Type) {
+      return true;
+    }
+  }
+  return false;
+}
 
 export function getLastAncestorOfType(
   element: ReactTestInstance | null | undefined,
