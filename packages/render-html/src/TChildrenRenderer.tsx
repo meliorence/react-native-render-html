@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import { TBlock, TNode, TPhrasing } from '@native-html/transient-render-engine';
 import TNodeRenderer, { TNodeRendererProps } from './TNodeRenderer';
 
@@ -21,16 +21,25 @@ function getCollapsedMargins(precedent: TNode, current: TNode): null | number {
   return Math.max(Math.abs(precedentMarginBottom - currentMarginBottom), 0);
 }
 
+export interface TChildProps {
+  key: string | number;
+  childElement: ReactElement;
+  index: number;
+  childTnode: TNode;
+}
+
 export type TChildrenRendererProps = {
   disableMarginCollapsing?: boolean;
   tchildren: TNode[];
+  renderChild?: (props: TChildProps) => ReactNode;
 } & Pick<TNodeRendererProps<TNode>, 'hasAnchorAncestor'>;
 
-const TChildrenRenderer: React.FunctionComponent<TChildrenRendererProps> = function TChildrenRenderer({
+const TChildrenRenderer = function TChildrenRenderer({
   tchildren,
   hasAnchorAncestor,
-  disableMarginCollapsing
-}) {
+  disableMarginCollapsing,
+  renderChild
+}: TChildrenRendererProps) {
   let collapsedMarginTop: number | null = null;
   const elements = tchildren.map((childTnode, i) => {
     if (
@@ -41,12 +50,15 @@ const TChildrenRenderer: React.FunctionComponent<TChildrenRendererProps> = funct
     ) {
       collapsedMarginTop = getCollapsedMargins(tchildren[i - 1], childTnode);
     }
-    return React.createElement(TNodeRenderer, {
+    const childElement = React.createElement(TNodeRenderer, {
       collapsedMarginTop,
       hasAnchorAncestor: hasAnchorAncestor,
       tnode: childTnode,
       key: i
     });
+    return typeof renderChild === 'function'
+      ? renderChild({ key: i, childElement, index: i, childTnode })
+      : childElement;
   });
   return <>{elements}</>;
 };
