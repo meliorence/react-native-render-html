@@ -29,7 +29,8 @@ export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
   const commonProps = {
     ...viewProps,
     style: viewProps?.style ? [viewProps.style, style] : style,
-    key
+    key,
+    testID: tnode.tagName || undefined
   };
   if (typeof onPress === 'function') {
     return React.createElement(
