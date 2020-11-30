@@ -138,11 +138,8 @@ export interface TransientRenderEngineConfig {
    */
   idsStyles?: MixedStyleRecord;
   /**
-   * The default style for the document. Inheritable styles will be
+   * The default style for the document (root). Inheritable styles will be
    * transferred to children. That works even for Text styles.
-   *
-   * @remarks This style will not target the root. If you want margins in the
-   * root, use `tagsStyles.body` instead.
    */
   baseStyle?: MixedStyleDeclaration;
   /**
