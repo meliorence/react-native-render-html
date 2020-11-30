@@ -1,12 +1,13 @@
 import AnchorRenderer from '../renderers/AnchorRenderer';
 import ImageRenderer from '../renderers/ImageRenderer';
-import ListRenderer from '../renderers/ListRenderer';
+import OrderedListRenderer from '../renderers/OrderedListRenderer';
+import UnorderedListRenderer from '../renderers/UnorderedListRenderer';
 import { DefaultTagRendererRecord } from './render-types';
 
 const defaultRenderers: DefaultTagRendererRecord = {
   img: ImageRenderer,
-  ul: ListRenderer,
-  ol: ListRenderer,
+  ul: UnorderedListRenderer,
+  ol: OrderedListRenderer,
   a: AnchorRenderer
 };
 
