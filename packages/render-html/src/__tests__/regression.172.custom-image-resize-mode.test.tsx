@@ -6,7 +6,7 @@ import RenderHTML from '../RenderHTML';
 /**
  * https://github.com/archriss/react-native-render-html/issues/172
  */
-describe.skip('HTMLImageElement component should pass regression test #172', () => {
+describe('HTMLImageElement component should pass regression test #172', () => {
   it('passes resizeMode to RN Image component', async () => {
     const source = { uri: 'http://via.placeholder.com/640x360' };
     const tagsStyles = {

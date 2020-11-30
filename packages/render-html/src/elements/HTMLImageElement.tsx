@@ -11,6 +11,7 @@ import {
 import PropTypes from 'prop-types';
 import GenericPressable from '../GenericPressable';
 import { ImageDimensions } from '../shared-types';
+import pick from 'ramda/src/pick';
 
 export interface ImgDimensions {
   width: number;
@@ -55,6 +56,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
+
+const extractImgStyleProps = pick<keyof ImageStyle>([
+  'resizeMode',
+  'tintColor',
+  'overlayColor'
+]);
 
 function attemptParseFloat(value: any) {
   const result = parseFloat(value);
@@ -452,13 +459,13 @@ const HTMLImageElement = class HTMLImageElement extends PureComponent<
     }
   }
 
-  renderImage(imageBoxDimensions: ImgDimensions) {
+  renderImage(imageBoxDimensions: ImgDimensions, imageStyles: ImageStyle) {
     const { source } = this.props;
     return (
       <Image
         source={source}
         onError={() => this.setState({ error: true })}
-        style={[defaultImageStyle, imageBoxDimensions]}
+        style={[defaultImageStyle, imageBoxDimensions, imageStyles]}
         testID="image-layout"
       />
     );
@@ -503,7 +510,7 @@ const HTMLImageElement = class HTMLImageElement extends PureComponent<
     );
   }
 
-  renderContent() {
+  renderContent(imgStyles: ImageStyle) {
     const { error, imageBoxDimensions } = this.state;
     if (error) {
       return this.renderAlt();
@@ -511,20 +518,21 @@ const HTMLImageElement = class HTMLImageElement extends PureComponent<
     if (imageBoxDimensions === null) {
       return this.renderPlaceholder();
     }
-    return this.renderImage(imageBoxDimensions);
+    return this.renderImage(imageBoxDimensions, imgStyles);
   }
 
   render() {
     const { width, height, ...remainingStyle } = this.__cachedFlattenStyles;
+    const imgStyles = extractImgStyleProps(remainingStyle);
     const style = [styles.container, remainingStyle];
     if (this.props.onPress) {
       return (
         <GenericPressable onPress={this.props.onPress} style={style}>
-          {this.renderContent()}
+          {this.renderContent(imgStyles)}
         </GenericPressable>
       );
     }
-    return <View style={style}>{this.renderContent()}</View>;
+    return <View style={style}>{this.renderContent(imgStyles)}</View>;
   }
 } as ComponentClass<Partial<HTMLImageElementProps>>;
 
