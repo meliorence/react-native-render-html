@@ -5,15 +5,14 @@ import {
   expectTranslatedInlineCSSValueToEqual
 } from './utils';
 
-describe.skip('HTML component regarding inline CSS styles', () => {
+describe('HTML component regarding inline CSS styles', () => {
   describe('should ignore rules unknown to React Native styles', () => {
     it('such as vendor-prefixed rules', () => {
       expectTranslatedInlineCSSRuleTo({
         cssInlineRules: '-webkit-box-reflect: above;',
-        test: (style) =>
-          expect(Object.keys(style).sort()).toStrictEqual(
-            ['marginBottom', 'marginTop'].sort()
-          ),
+        test: (style) => {
+          expect(Object.keys(style).sort()).toStrictEqual([].sort());
+        },
         render
       });
     });
@@ -26,7 +25,7 @@ describe.skip('HTML component regarding inline CSS styles', () => {
         render
       });
     });
-    it('should translate size rules with a 1em = 14dpi correspondance', () => {
+    it('should translate size rules with a 1em = 14dpi correspondence', () => {
       expectTranslatedInlineCSSToMatchObject({
         cssInlineRules: 'padding-top: 1em;',
         reactNativeStyle: { paddingTop: 14 },
@@ -40,10 +39,10 @@ describe.skip('HTML component regarding inline CSS styles', () => {
         render
       });
     });
-    it('should translate size rules with a 1pt = 1.3dpi correspondance', () => {
+    it('should translate size rules with a 1pt = 1.33...dpi correspondence', () => {
       expectTranslatedInlineCSSToMatchObject({
         cssInlineRules: 'padding-top: 1pt;',
-        reactNativeStyle: { paddingTop: 1.3 },
+        reactNativeStyle: { paddingTop: 1 + 1 / 3 },
         render
       });
     });
@@ -132,31 +131,5 @@ describe.skip('HTML component regarding inline CSS styles', () => {
       reactNativePropStyleName: 'backgroundColor',
       value: 'hsl(360,100%,100%)'
     });
-  });
-  function testDirective(directive: string) {
-    it(`${directive} directives`, () => {
-      expectTranslatedInlineCSSToMatchObject({
-        cssInlineRules: `font-family: Arial;!${directive}`,
-        reactNativeStyle: { fontFamily: 'Arial' },
-        render
-      });
-    });
-    it(`${directive} directives with spaces`, () => {
-      expectTranslatedInlineCSSToMatchObject({
-        cssInlineRules: `font-family: Arial;!  ${directive}`,
-        reactNativeStyle: { fontFamily: 'Arial' },
-        render
-      });
-    });
-    it(`${directive} directives before semicolons`, () => {
-      expectTranslatedInlineCSSToMatchObject({
-        cssInlineRules: `font-family: Arial !${directive};`,
-        reactNativeStyle: { fontFamily: 'Arial' },
-        render
-      });
-    });
-  }
-  describe('should handle CSS directives', () => {
-    testDirective('important');
   });
 });

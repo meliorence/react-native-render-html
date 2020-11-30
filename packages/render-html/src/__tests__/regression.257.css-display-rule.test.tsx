@@ -9,7 +9,7 @@ describe('HTML component', () => {
     expectTranslatedInlineCSSToMatchObject({
       cssInlineRules: 'display: inline-block;',
       render,
-      reactNativeStyle: { fontSize: 14 }
+      reactNativeStyle: {}
     });
   });
 });
