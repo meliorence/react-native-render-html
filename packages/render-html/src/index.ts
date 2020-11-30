@@ -9,7 +9,7 @@ export * from './shared-types';
 export * from './render/render-types';
 export default RenderHTML;
 export { default as TChildrenRenderer } from './TChildrenRenderer';
-export type { TChildrenRendererProps } from './TChildrenRenderer';
+export type { TChildrenRendererProps, TChildProps } from './TChildrenRenderer';
 export {
   default as TNodeChildrenRenderer,
   useTNodeChildrenProps
