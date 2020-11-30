@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { TBlock } from '@native-html/transient-render-engine';
-import { useTChildrenRenderer } from './context/TChildrenRendererContext';
+import { useTNodeChildrenRenderer } from './context/TChildrenRendererContext';
 import {
   CustomTagRenderer,
   CustomTagRendererProps,
@@ -22,9 +22,12 @@ export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
   viewProps,
   key
 }) => {
-  const TChildrenRenderer = useTChildrenRenderer();
+  const TNodeChildrenRenderer = useTNodeChildrenRenderer();
   const children = overridingChildren ?? (
-    <TChildrenRenderer tnode={tnode} hasAnchorAncestor={hasAnchorAncestor} />
+    <TNodeChildrenRenderer
+      tnode={tnode}
+      hasAnchorAncestor={hasAnchorAncestor}
+    />
   );
   const commonProps = {
     ...viewProps,
