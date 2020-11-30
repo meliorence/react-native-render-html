@@ -2910,28 +2910,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@native-html/css-processor@npm:1.6.0":
-  version: 1.6.0
-  resolution: "@native-html/css-processor@npm:1.6.0"
+"@native-html/css-processor@npm:1.6.1":
+  version: 1.6.1
+  resolution: "@native-html/css-processor@npm:1.6.1"
   dependencies:
     css-to-react-native: ^3.0.0
   peerDependencies:
     "@types/react-native": "*"
     csstype: ^3.0.4
-  checksum: 561ae2afe2b50ee991376c96ea894b2d5f1c1f67a64ae77f4357d1c081d52d740727e6c0716df92af9f2195b9e4925f8f588f5502e700b799ba16d2896b835da
+  checksum: 8cbb5bc0d82044fcb6b52224b55454f3e55d14731b1cf3bb3b520257df20d114547f327badee0e236f83fe1dc6151ea38638b7c74770cdd929cbf7e0f2796e1d
   languageName: node
   linkType: hard
 
-"@native-html/transient-render-engine@npm:^3.5.6":
-  version: 3.5.6
-  resolution: "@native-html/transient-render-engine@npm:3.5.6"
+"@native-html/transient-render-engine@npm:^3.6.0":
+  version: 3.6.0
+  resolution: "@native-html/transient-render-engine@npm:3.6.0"
   dependencies:
-    "@native-html/css-processor": 1.6.0
+    "@native-html/css-processor": 1.6.1
+    "@types/ramda": ^0.27.32
     htmlparser2: ^5.0.1
+    ramda: ^0.27.1
   peerDependencies:
     "@types/react-native": "*"
     react-native: ^0.63.0
-  checksum: 6728b4f5cbf52d1c83786353c5701290f872f579a8e6d5730a4501a2e98af0f0ccd5826768916b7cf3c14793883e3ac57d9aaba2e9939c39fb7dac80eee740cf
+  checksum: c9d6c4699e3d97901c90c5d044638f97670eb0151e225d34dd224d0ffa8a18f0b6bbb07716ba44128da566914bdfd2e292f19bb6b59ad092f32fa6e928bbbfed
   languageName: node
   linkType: hard
 
@@ -14269,7 +14271,7 @@ fsevents@^1.2.7:
     "@babel/preset-react": ^7.12.7
     "@babel/preset-typescript": ^7.12.1
     "@babel/runtime": ^7.12.5
-    "@native-html/transient-render-engine": ^3.5.6
+    "@native-html/transient-render-engine": ^3.6.0
     "@react-native-community/bob": ^0.16.2
     "@release-it/conventional-changelog": ^2.0.0
     "@types/jest": ^26.0.14
