@@ -28,7 +28,12 @@ export const TDefaultPhrasingRenderer: TDefaultRenderer<TPhrasing> = ({
   );
   return React.createElement(
     Text,
-    { key, ...textProps, style: resolvedStyles },
+    {
+      key,
+      ...textProps,
+      style: resolvedStyles,
+      testID: tnode.tagName || undefined
+    },
     children
   );
 };
