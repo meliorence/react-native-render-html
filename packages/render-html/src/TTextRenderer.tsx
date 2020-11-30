@@ -24,7 +24,11 @@ export const TDefaultTextRenderer: TDefaultRenderer<TText> = ({
 }: TDefaultRendererProps<TText>) => {
   const resolvedStyles = textProps?.style ? [style, textProps.style] : style;
   return (
-    <Text onPress={onPress} {...textProps} style={resolvedStyles}>
+    <Text
+      onPress={onPress}
+      {...textProps}
+      style={resolvedStyles}
+      testID={tnode.tagName || undefined}>
       {children ?? tnode.data}
     </Text>
   );
