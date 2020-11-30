@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Platform } from 'react-native';
 import { RenderHTMLProps } from './shared-types';
@@ -12,6 +12,7 @@ import TNodeChildrenRenderer from './TNodeChildrenRenderer';
 import RenderHTMLDebug from './RenderHTMLDebug';
 import LoadHTML from './LoadHTML';
 import RenderRegistryProvider from './context/RenderRegistryProvider';
+import TChildrenRenderer from './TChildrenRenderer';
 
 export type RenderHTMLPropTypes = Record<keyof RenderHTMLProps, any>;
 
@@ -157,7 +158,14 @@ export default function RenderHTML(props: RenderHTMLProps) {
     <RenderHTMLDebug {...props}>
       <RenderRegistryProvider renderers={props.renderers}>
         <SharedPropsContext.Provider value={props}>
-          <TChildrenRenderersContext.Provider value={TNodeChildrenRenderer}>
+          <TChildrenRenderersContext.Provider
+            value={useMemo(
+              () => ({
+                TChildrenRenderer,
+                TNodeChildrenRenderer
+              }),
+              []
+            )}>
             <LoadHTML {...props}>
               {(resolvedHTML) => (
                 <RenderResolvedHTML {...props} html={resolvedHTML} />

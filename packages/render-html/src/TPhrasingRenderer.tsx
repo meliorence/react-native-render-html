@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from 'react-native';
 import { TPhrasing } from '@native-html/transient-render-engine';
 import { useSharedTextProps } from './context/SharedPropsContext';
-import { useTChildrenRenderer } from './context/TChildrenRendererContext';
+import { useTNodeChildrenRenderer } from './context/TChildrenRendererContext';
 import {
   CustomTagRenderer,
   CustomTagRendererProps,
@@ -21,10 +21,13 @@ export const TDefaultPhrasingRenderer: TDefaultRenderer<TPhrasing> = ({
   hasAnchorAncestor,
   textProps
 }) => {
-  const TChildrenRenderer = useTChildrenRenderer();
+  const TNodeChildrenRenderer = useTNodeChildrenRenderer();
   const resolvedStyles = textProps?.style ? [textProps.style, style] : style;
   const children = overridingChildren ?? (
-    <TChildrenRenderer tnode={tnode} hasAnchorAncestor={hasAnchorAncestor} />
+    <TNodeChildrenRenderer
+      tnode={tnode}
+      hasAnchorAncestor={hasAnchorAncestor}
+    />
   );
   return React.createElement(
     Text,
