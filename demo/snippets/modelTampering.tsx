@@ -7,7 +7,7 @@ import { SnippetDeclaration } from '../types';
 const html = `
 <p>
 In the below example, we are changing the element model of the &lt;img&gt; tag
-to support inline rendering. For this purpose, we take advantage of the <code>extendRenderer</code> utility!
+to support inline rendering. For this purpose, we take advantage of the <code>extendDefaultRenderer</code> utility!
 </p>
 <p>
 Be advised, this is yet <strong>experimental</strong>, and React Native has many open bugs regarding inline views and images.</p>
