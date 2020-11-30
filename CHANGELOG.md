@@ -1,3 +1,19 @@
+# [6.0.0-alpha.8](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.7...v6.0.0-alpha.8) (2020-11-30)
+
+
+### Bug Fixes
+
+* discard unsupported CSS inline methods (calc, var) ([b722a78](https://github.com/archriss/react-native-render-html/commit/b722a784ec4c734569b9f0632f70912a74a99afc))
+* prettier, consistant and scalable list rendering ([af826a3](https://github.com/archriss/react-native-render-html/commit/af826a3067b368b38acd24e00f37074562e79afc))
+* regression [#172](https://github.com/archriss/react-native-render-html/issues/172) (passing Image-specific styles to img component) ([916d977](https://github.com/archriss/react-native-render-html/commit/916d9770788e93baa875ffc2f19275159f1b8687))
+* whitespace collapsing, collapse the penultimate child (TPhrasing) ([223cef2](https://github.com/archriss/react-native-render-html/commit/223cef2e45b9d82ace7cc388a2d69bbb000ea6f0))
+* whitespace collapsing, handling of form feed characters (\n) ([e5d20c6](https://github.com/archriss/react-native-render-html/commit/e5d20c64eb63df2c251ca4e54c9c32c000afe4b6))
+
+
+### Features
+
+* new renderChild prop to TChildrenRenderer ([274355e](https://github.com/archriss/react-native-render-html/commit/274355e01783bc0dc1c3909599654182ef018902))
+
 # [6.0.0-alpha.7](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.6...v6.0.0-alpha.7) (2020-11-28)
 
 
