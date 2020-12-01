@@ -31,6 +31,8 @@ jobs:
       name: Typescript Tests
     - run: yarn test:js --coverage
       name: Jest Tests
+    - run: yarn build
+      name: Build
     - uses: codecov/codecov-action@v1
       with:
         file: ./coverage/clover.xml # optional
