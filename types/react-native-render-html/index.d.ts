@@ -316,9 +316,9 @@ export function constructStyles(params: {
   tagName: string;
   htmlAttribs: HtmlAttributesDictionary;
   passProps: PassProps<any>;
-  additionalStyles: StyleProp<any>;
   styleSet: "VIEW" | "TEXT";
-  baseFontStyle: TextStyle;
+  additionalStyles?: StyleProp<any>;
+  baseFontStyle?: NonRegisteredStylesProp<TextStyle>;
 }): StyleProp<any>;
 
 /**
