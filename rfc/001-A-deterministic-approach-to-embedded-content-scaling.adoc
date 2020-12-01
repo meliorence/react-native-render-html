@@ -7,10 +7,10 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 :author: Jules Sam. Randolph
-:revnumber: 1.0.0
+:revnumber: 2.0.0
 :toc:
 
-= A Deterministic Approach to Images Scaling
+= A Deterministic Approach to Embedded Content Scaling
 
 |===
 |*{author} ― v{revnumber}*
@@ -18,7 +18,7 @@ endif::[]
 
 == Introduction
 
-The way images are scaled greatly impacts library consumers experience.
+The way embedded are scaled greatly impacts library consumers experience.
 This document is an attempt at specifying behaviors which might not have
 been presented to library consumers in the past, to convey consistency
 with regard to this library behavior.
@@ -26,17 +26,18 @@ with regard to this library behavior.
 == Problem Frame
 
 In this section, we introduce a context to understand the challenges
-surrounding scaling of images. In the bellow figure, a React Native
+surrounding scaling of embedded. In the bellow figure, a React Native
 layout sketch is presented with the following objects:
 
 * A Container element, which represents the component responsible for
 displaying HTML content;
-* A Image Box element, which is the renderer for the `img` HTML element;
-* An Image Layout, which represents the surface of the screen
-effectively covered by the image to display.
+* A Embedded Box element, which is the renderer for the embedded HTML element
+(`img`, `video`, `iframe`...);
+* An Print Layout, which represents the surface of the screen
+effectively covered by the embedded to display.
 
 [NOTE]
-The relation between the dimensions of the Image Layout and the Image
+The relation between the dimensions of the Print Layout and the Image
 Box Element is defined by `resizeMode`. The conditions under which these
 properties can be passed is out of scope of this document.
 
@@ -58,13 +59,13 @@ ____
 |Type
 |Definition
 
-|`imagePhysicalWidth`
+|`embeddedPhysicalWidth`
 |pixel
-|The pixel width of the image.
+|The pixel width of the embedded.
 
-|`imagePhysicalHeight`
+|`embeddedPhysicalHeight`
 |pixel
-|The pixel height of the image.
+|The pixel height of the embedded.
 
 |`containerWidth`
 |dpi
@@ -79,19 +80,19 @@ ____
 |See section bellow.
 |===
 
-== Image Box Constrains
+== Embedded Box Constrains
 
-Image Box Element Constrains are constructed from a range of different
+Embedded Box Element Constrains are constructed from a range of different
 sources:
 
 [arabic]
-. styles defined by library consumer for the `img` tag, or for a class
-which this `img` element has been given;
+. styles defined by library consumer for the embedded tag, or for a class
+assigned to this element;
 . inline styles of the element;
 . element attributes such as `width` and `height`.
 
 After having applied the rules of specificity, we end up with a set of
-rules which are meant to influence the dimensions of the Image Box
+rules which are meant to influence the dimensions of the Embedded Box
 Element. For the sake of simplicity, we will ignore the following
 constrains:
 
@@ -117,7 +118,7 @@ are (Infinity, Infinity).
 
 These functions pertain to ``injected behaviors'' and give library
 consumers great flexibility in implementing their own constrains
-regarding image scaling logic.
+regarding embedded scaling logic.
 
 [width="100%",cols="13%,7%,80%",options="header",]
 |===
@@ -125,9 +126,9 @@ regarding image scaling logic.
 |Type
 |Definition
 
-|`computeImagesMaxWidth`
-|f(dpi) → dpi
-|A function of `contentWidth` returning the maximum width of Image Box
+|`computeEmbeddedMaxWidth`
+|f(dpi, tagName) → dpi
+|A function of `contentWidth` returning the maximum width of Embedded Box
 Elements. Can return `Infinity` to depict unconstrained widths.
 
 |`convertUnit`
@@ -139,38 +140,38 @@ RFC.
 
 These behaviors have default values for consumer’s comfort sake:
 
-* Default `computeImagesMaxWidth` is defined as identity:
+* Default `computeEmbeddedMaxWidth` is defined as identity:
 `(contentWidth) => contentWidth`;
 * Default `convertUnit` will be defined in a distinct RFC.
 
 == Algorithms
 
-=== Computing Image Box dimensions
+=== Computing Embedded Box dimensions
 
-Let _box dimensions_ be the `width` and `height` of the Image Box
+Let _box dimensions_ be the `width` and `height` of the Embedded Box
 Element with each width and height `undefined`.
 
 [arabic]
 . *If* _required constrains_ `width` and `height` are both defined,
 assign _box dimensions_ to the value of _required constrains_. +
 *Else if* one of both dimensions of _required constrains_ is defined,
-infer the other dimension from the original image aspect ratio
-(`imagePhysicalHeight / imagePhysicalWidth`). +
+infer the other dimension from the original embedded aspect ratio
+(`embeddedPhysicalHeight / embeddedPhysicalWidth`). +
 *Else*, assign _box dimensions_ to the result of applying `convertUnit`
-to both `imagePhysicalWidth` and `imagePhysicalHeight` with a `"px"`
+to both `embeddedPhysicalWidth` and `embeddedPhysicalHeight` with a `"px"`
 argument.
 . Apply the <<cut-box>> algorithm.
 
 [[cut-box]]
 === Cut Box
 
-Let _box dimensions_ be the `width` and `height` of the Image Box
+Let _box dimensions_ be the `width` and `height` of the Embedded Box
 Element an argument of this algorithm.
 
 [arabic]
 . Apply _minimum constrains_ and _maximum constrains_ to _box_
 _dimensions_ width and height whilst preserving aspect ratio.
-. *If* `computeImagesMaxWidth` function is defined, apply max-width
+. *If* `computeEmbeddedMaxWidth` function is defined, apply max-width
 constrain to _box dimensions_ whilst preserving aspect ratio. +
 *Else*, apply `contentWidth` as a max-width constrain to _box
 dimensions_ whilst preserving aspect ratio.
@@ -183,14 +184,14 @@ approaches and library authors must take into account a variety of
 opinions:
 
 [arabic]
-. Some consumers will expect images to _never_ overflow the horizontal
+. Some consumers will expect embedded to _never_ overflow the horizontal
 axis.
-. Other consumers will expect images to be rendered whilst honoring
+. Other consumers will expect embedded to be rendered whilst honoring
 strictly the inline styles as dictated by HTML authors, even if that
 means overflowing the horizontal axis.
 
 This solution can be satisfying for both types of consumers. The
-advantages of `computeImagesMaxWidth` are multiple:
+advantages of `computeEmbeddedMaxWidth` are multiple:
 
 * Enable an architecture ready for responsiveness. Screen orientation
 changes can be easily and deterministically handled.

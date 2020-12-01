@@ -171,7 +171,7 @@
                  style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777px;font-family:serif;-inkscape-font-specification:'serif Italic';fill:#ffffff;fill-opacity:1;stroke-width:0.135884"
                  y="189.73238"
                  x="138.64423"
-                 sodipodi:role="line">Image Box Element</tspan></text>
+                 sodipodi:role="line">Embedded Box Element</tspan></text>
           </g>
           <g
              id="g1213-3"
@@ -197,7 +197,7 @@
                    style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777px;font-family:serif;-inkscape-font-specification:'serif Italic';stroke-width:0.135884"
                    y="175.50594"
                    x="145.13832"
-                   sodipodi:role="line">Image Layout</tspan></text>
+                   sodipodi:role="line">Embedded Layout</tspan></text>
             </g>
           </g>
         </g>
@@ -216,7 +216,7 @@
                  id="tspan1723"
                  x="144.13841"
                  y="56.481358"
-                 style="font-size:7.05556px;stroke-width:0.264583">Image Box Constrains</tspan></text>
+                 style="font-size:7.05556px;stroke-width:0.264583">Embedded Box Constrains</tspan></text>
             <text
                xml:space="preserve"
                style="font-style:normal;font-weight:normal;font-size:3.52778px;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -279,7 +279,7 @@
                x="144.72235"
                y="64.83416"
                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:monospace;-inkscape-font-specification:monospace;stroke-width:0.264583"
-               id="tspan1739-2">computeImagesMaxWidth</tspan><tspan
+               id="tspan1739-2">computeEmbeddedMaxWidth</tspan><tspan
                sodipodi:role="line"
                x="144.72235"
                y="69.243881"
@@ -301,7 +301,7 @@
                  y="56.481358"
                  x="145.00377"
                  id="tspan1723-9"
-                 sodipodi:role="line">Image Characteristics</tspan></text>
+                 sodipodi:role="line">Embedded Characteristics</tspan></text>
             <text
                id="text1729-2"
                y="68.310097"
@@ -312,12 +312,12 @@
                  y="68.310097"
                  x="145.38962"
                  sodipodi:role="line"
-                 id="tspan1935">imagePhysicalWidth</tspan><tspan
+                 id="tspan1935">embeddedPhysicalWidth</tspan><tspan
                  style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:monospace;-inkscape-font-specification:monospace;stroke-width:0.264583"
                  y="72.719818"
                  x="145.38962"
                  sodipodi:role="line"
-                 id="tspan1904">imagePhysicalHeight</tspan></text>
+                 id="tspan1904">embeddedPhysicalHeight</tspan></text>
           </g>
         </g>
         <g
