@@ -45,3 +45,10 @@ yarn.lock
 # Specific to this project
 /Demo/package-lock.json
 /coverage/
+test.html
+
+# Foundry
+
+.yarn
+/demo
+/packages
