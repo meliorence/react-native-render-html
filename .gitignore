@@ -42,6 +42,13 @@ yarn.lock
 
 *.todo
 
+# yarn berry
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+
 # Specific to this project
 /Demo/package-lock.json
 /coverage/
@@ -49,6 +56,5 @@ test.html
 
 # Foundry
 
-.yarn
 /demo
 /packages
