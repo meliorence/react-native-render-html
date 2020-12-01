@@ -2,7 +2,7 @@
 // Project: https://github.com/archriss/react-native-render-html
 // Definitions by: Jules Randolph <https://github.com/jsamr>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.0
+// TypeScript Version: 3.0
 
 declare module "react-native-render-html" {
   import { ReactNode, Component } from "react";
@@ -12,7 +12,7 @@ declare module "react-native-render-html" {
     RecursiveArray,
     Falsy,
     TextStyle,
-    ViewStyle
+    ViewStyle,
   } from "react-native";
   namespace HTML {
     interface BaseNode {
