@@ -1,3 +1,9 @@
+# [6.0.0-alpha.9](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.7...v6.0.0-alpha.9) (2020-12-01)
+
+### Features
+
+* export useSharedProps ([0490d49](https://github.com/archriss/react-native-render-html/commit/0490d49d13e85ed48f77bd996fc5d945c82bb057))
+
 # [6.0.0-alpha.8](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.7...v6.0.0-alpha.8) (2020-11-30)
 
 
