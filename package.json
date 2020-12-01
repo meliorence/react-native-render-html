@@ -7,6 +7,7 @@
   "description": "React Native component that renders HTML as native views",
   "types": "types/react-native-render-html/index.d.ts",
   "main": "lib/index.js",
+  "homepage": "https://github.com/archriss/react-native-render-html",
   "scripts": {
     "test": "yarn test:js && yarn test:ts && yarn test:lint",
     "test:ts": "dtslint types/react-native-render-html",
