@@ -82,7 +82,7 @@ describe("HTML component should honor formatting context of the DOM tree", () =>
         wrapper: "Text",
       },
     };
-    const { UNSAFE_getByType, toJSON } = render(
+    const { UNSAFE_getByType } = render(
       <HTML
         html={`foo<custom><b>hello world</b><img src="https://img.com/1" /></custom>`}
         renderers={customRenderers}

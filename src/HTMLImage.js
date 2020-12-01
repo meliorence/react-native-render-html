@@ -1,3 +1,4 @@
+/* eslint-disable react/no-did-update-set-state */
 import React, { PureComponent } from "react";
 import { Image, View, Text, StyleSheet } from "react-native";
 import PropTypes from "prop-types";

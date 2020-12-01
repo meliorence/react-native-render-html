@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { View, Text, ActivityIndicator, Dimensions } from "react-native";
@@ -191,10 +192,10 @@ export default class HTML extends PureComponent {
   parseDOM(dom, props = this.props) {
     const { decodeEntities, debug, onParsed } = this.props;
     const parser = new Parser(
-      new DomHandler((_err, dom) => {
-        let RNElements = this.mapDOMNodesTORNElements(dom, false, props);
+      new DomHandler((_err, ldom) => {
+        let RNElements = this.mapDOMNodesTORNElements(ldom, false, props);
         if (onParsed) {
-          const alteredRNElements = onParsed(dom, RNElements);
+          const alteredRNElements = onParsed(ldom, RNElements);
           if (alteredRNElements) {
             RNElements = alteredRNElements;
           }
@@ -203,7 +204,7 @@ export default class HTML extends PureComponent {
           RNNodes: this.renderRNElements(RNElements, "root", 0, props),
         });
         if (debug) {
-          console.log("DOMNodes from htmlparser2", dom);
+          console.log("DOMNodes from htmlparser2", ldom);
           console.log("RNElements from render-html", RNElements);
         }
       }),
@@ -457,12 +458,12 @@ export default class HTML extends PureComponent {
           parsedNode.attribs.style = cssObjectToString(wrapperStyles);
           for (let i = 0; i < children.length; i++) {
             const child = children[i];
-            const { wrapper, attribs } = child;
+            const { wrapper: lwrapper, attribs: lattribs } = child;
 
-            if (wrapper === "Text") {
+            if (lwrapper === "Text") {
               // Set (or merge) the inherited text styles extracted from the wrapper for
               // each Text child
-              if (!attribs.style) {
+              if (!lattribs.style) {
                 child.attribs.style = cssObjectToString(
                   textChildrenInheritedStyles
                 );
@@ -546,7 +547,7 @@ export default class HTML extends PureComponent {
           const renderersProps = {};
           if (Wrapper === Text) {
             renderersProps.allowFontScaling = allowFontScaling;
-            renderersProps.selectable = this.props.textSelectable;
+            renderersProps.selectable = textSelectable;
           }
 
           if (this.renderers[tagName]) {

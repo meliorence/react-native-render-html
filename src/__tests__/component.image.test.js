@@ -1,10 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import {
-  render,
-  flushMicrotasksQueue,
-  waitFor,
-} from "react-native-testing-library";
+import { render, waitFor } from "react-native-testing-library";
 import HTMLImage from "../HTMLImage";
 
 describe("HTMLImage component", () => {
@@ -234,7 +230,7 @@ describe("HTMLImage component", () => {
         const { findByTestId } = render(
           <HTMLImage
             enableExperimentalPercentWidth
-            computeImagesMaxWidth={(contentWidth) => contentWidth * 0.7}
+            computeImagesMaxWidth={(cw) => cw * 0.7}
             contentWidth={250}
             {...style}
             source={source}

@@ -1,7 +1,6 @@
 import React from "react";
 import HTML from "../index";
 import { render } from "react-native-testing-library";
-import { getLastAncestorOfType } from "./utils";
 import HTMLImage from "../HTMLImage";
 
 /**

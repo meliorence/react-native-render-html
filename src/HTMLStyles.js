@@ -75,7 +75,7 @@ export function _constructStyles({
     );
   }
 
-  return style.filter((style) => style !== undefined);
+  return style.filter((s) => s !== undefined);
 }
 
 /**

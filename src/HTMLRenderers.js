@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from "react";
 import { TouchableOpacity, Text, View, Platform } from "react-native";
 import { WebView } from "react-native-webview";
@@ -188,8 +189,10 @@ export function iframe(htmlAttribs, children, convertedCSSStyles, passProps) {
   const classStyleWidth = classStyles.width;
   const classStyleHeight = classStyles.height;
 
-  const attrHeight = htmlAttribs.height ? parseInt(htmlAttribs.height) : false;
-  const attrWidth = htmlAttribs.width ? parseInt(htmlAttribs.width) : false;
+  const attrHeight = htmlAttribs.height
+    ? parseInt(htmlAttribs.height, 10)
+    : false;
+  const attrWidth = htmlAttribs.width ? parseInt(htmlAttribs.width, 10) : false;
 
   const height = attrHeight || classStyleHeight || tagStyleHeight || 200;
   const width =
