@@ -20,7 +20,9 @@
 - New prop `htmlParserOptions` to override
   [htmlparser2](https://github.com/fb55/htmlparser2/wiki/Parser-options)
   ParserOptions object, thanks [@fabianlee1211](https://github.com/fabianlee1211).
-- `onLinkPress` has now a default value: open links with `Linking` API (recommended).
+- `onLinkPress` has now a default value: open links with `Linking` API
+  (recommended).
+- Add Podspec file, thanks [@systemride](https://github.com/systemride)
 
 ## Bugfixes
 
