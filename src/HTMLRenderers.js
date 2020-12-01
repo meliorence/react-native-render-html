@@ -23,41 +23,48 @@ function getImgProps(passProps) {
     computeImagesMaxWidth,
     imagesInitialDimensions,
     enableExperimentalPercentWidth,
-    contentWidth
+    contentWidth,
   };
 }
 
 function normalizeUri(uri) {
-    return uri.startsWith('//') ? `https:${uri}` : uri;
+  return uri.startsWith("//") ? `https:${uri}` : uri;
 }
 
-export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
-    const style = _constructStyles({
-        tagName: 'a',
-        htmlAttribs,
-        passProps,
-        styleSet: passProps.parentWrapper === 'Text' ? 'TEXT' : 'VIEW'
-    });
-    // !! This deconstruction needs to happen after the styles construction since
-    // the passed props might be altered by it !!
-    const { parentWrapper, onLinkPress, key, data } = passProps;
-    const textProps = getTextProps(passProps);
-    const onPress = (evt) => onLinkPress && htmlAttribs && htmlAttribs.href ?
-        onLinkPress(evt, htmlAttribs.href, htmlAttribs) :
-        undefined;
-    if (parentWrapper === 'Text') {
-        return (
-            <Text testID="a-renderer" {...textProps} style={style} onPress={onPress} key={key}>
-                { children || data }
-            </Text>
-        );
-    } else {
-        return (
-            <TouchableOpacity onPress={onPress} key={key}>
-                { children || data }
-            </TouchableOpacity>
-        );
-    }
+export function a(htmlAttribs, children, convertedCSSStyles, passProps) {
+  const style = _constructStyles({
+    tagName: "a",
+    htmlAttribs,
+    passProps,
+    styleSet: passProps.parentWrapper === "Text" ? "TEXT" : "VIEW",
+  });
+  // !! This deconstruction needs to happen after the styles construction since
+  // the passed props might be altered by it !!
+  const { parentWrapper, onLinkPress, key, data } = passProps;
+  const textProps = getTextProps(passProps);
+  const onPress = (evt) =>
+    onLinkPress && htmlAttribs && htmlAttribs.href
+      ? onLinkPress(evt, htmlAttribs.href, htmlAttribs)
+      : undefined;
+  if (parentWrapper === "Text") {
+    return (
+      <Text
+        testID="a-renderer"
+        {...textProps}
+        style={style}
+        onPress={onPress}
+        key={key}
+      >
+        {children || data}
+      </Text>
+    );
+  } else {
+    return (
+      <TouchableOpacity onPress={onPress} key={key}>
+        {children || data}
+      </TouchableOpacity>
+    );
+  }
 }
 
 export function img(
@@ -196,11 +203,18 @@ export function iframe(htmlAttribs, children, convertedCSSStyles, passProps) {
     additionalStyles: [{ height, width }],
   });
 
-   const source = htmlAttribs.srcdoc ? { html: htmlAttribs.srcdoc } : { uri: normalizeUri(htmlAttribs.src) };
+  const source = htmlAttribs.srcdoc
+    ? { html: htmlAttribs.srcdoc }
+    : { uri: normalizeUri(htmlAttribs.src) };
 
-    return (
-        <WebView testID="iframe" key={passProps.key} source={source} style={style} />
-    );
+  return (
+    <WebView
+      testID="iframe"
+      key={passProps.key}
+      source={source}
+      style={style}
+    />
+  );
 }
 
 export function pre(htlmAttribs, children, convertedCSSStyles, passProps) {

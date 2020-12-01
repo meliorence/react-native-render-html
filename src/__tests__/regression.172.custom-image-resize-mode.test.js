@@ -13,7 +13,7 @@ describe("HTMLImage component should pass regression test #172", () => {
       img: {
         resizeMode: "contain",
         width: 100,
-        height: 100
+        height: 100,
       },
     };
     const { getByTestId } = render(

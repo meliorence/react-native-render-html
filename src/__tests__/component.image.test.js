@@ -123,7 +123,9 @@ describe("HTMLImage component", () => {
       const style = {
         maxWidth: 320,
       };
-      const { findByTestId } = render(<HTMLImage style={style} source={source} />);
+      const { findByTestId } = render(
+        <HTMLImage style={style} source={source} />
+      );
       const image = await findByTestId("image-layout");
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
@@ -136,7 +138,9 @@ describe("HTMLImage component", () => {
       const style = {
         maxHeight: 180,
       };
-      const { findByTestId } = render(<HTMLImage style={style} source={source} />);
+      const { findByTestId } = render(
+        <HTMLImage style={style} source={source} />
+      );
       const image = await findByTestId("image-layout");
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
@@ -149,7 +153,9 @@ describe("HTMLImage component", () => {
       const style = {
         minWidth: 30,
       };
-      const { findByTestId } = render(<HTMLImage style={style} source={source} />);
+      const { findByTestId } = render(
+        <HTMLImage style={style} source={source} />
+      );
       const image = await findByTestId("image-layout");
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
@@ -162,7 +168,9 @@ describe("HTMLImage component", () => {
       const style = {
         minHeight: 36,
       };
-      const { findByTestId } = render(<HTMLImage style={style} source={source} />);
+      const { findByTestId } = render(
+        <HTMLImage style={style} source={source} />
+      );
       const image = await findByTestId("image-layout");
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({

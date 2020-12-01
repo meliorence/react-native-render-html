@@ -14,10 +14,10 @@ describe("HTMLImage component should pass regression test #141", () => {
     );
     const placeholder = getByTestId("image-placeholder");
     expect(placeholder).toBeTruthy();
-    const imageLayout = queryByTestId("image-layout")
+    const imageLayout = queryByTestId("image-layout");
     expect(imageLayout).toBeFalsy();
     await expect(
-        findByTestId("image-layout", { timeout: 100 })
+      findByTestId("image-layout", { timeout: 100 })
     ).resolves.toBeTruthy();
   });
 });
