@@ -8,6 +8,16 @@
   "types": "types/react-native-render-html/index.d.ts",
   "main": "lib/index.js",
   "homepage": "https://github.com/archriss/react-native-render-html",
+  "files": [
+    "lib/",
+    "src/",
+    "types/",
+    "LICENSE",
+    "HELP.adoc",
+    "README.md",
+    "CHANGELOG.MD",
+    "react-native-render-html.podspec"
+  ],
   "scripts": {
     "test": "yarn test:js && yarn test:ts && yarn test:lint",
     "test:ts": "dtslint types/react-native-render-html",
