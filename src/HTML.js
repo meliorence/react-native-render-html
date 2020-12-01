@@ -70,6 +70,7 @@ export default class HTML extends PureComponent {
     // DEPRECATED
     allowFontScaling: PropTypes.bool,
     textSelectable: PropTypes.bool,
+    decodeEntities: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -94,6 +95,7 @@ export default class HTML extends PureComponent {
     onLinkPress: (_e, href) =>
       Linking.canOpenURL(href) && Linking.openURL(href),
     defaultTextProps: {},
+    decodeEntities: true,
   };
 
   constructor(props) {
@@ -195,7 +197,7 @@ export default class HTML extends PureComponent {
   }
 
   parseDOM(dom, props = this.props) {
-    const { htmlParserOptions, debug, onParsed } = this.props;
+    const { htmlParserOptions, decodeEntities, debug, onParsed } = this.props;
     const parser = new Parser(
       new DomHandler((_err, ldom) => {
         let RNElements = this.mapDOMNodesTORNElements(ldom, false, props);
@@ -214,7 +216,7 @@ export default class HTML extends PureComponent {
         }
       }),
       {
-        decodeEntities: true,
+        decodeEntities,
         ...htmlParserOptions,
       }
     );

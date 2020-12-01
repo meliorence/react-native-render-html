@@ -34,10 +34,11 @@
 - `img`'s tag `resizeMode` property not modifiable through `tagStyles`, [#172](https://github.com/archriss/react-native-render-html/issues/172);
 - `imagesMaxWidth` not working, [#412](https://github.com/archriss/react-native-render-html/issues/412)
 
-## Deprecations (removed in v6)
+## DEPRECATIONS (removed in v6)
 
 - `allowFontScaling`, use `defaultTextProps.allowFontScaling` instead;
 - `textSelectable`, use `defaultTextProps.selectable` instead;
+- `decodeEntities`, use `htmlParserOptions.decodeEntities` instead.
 
 ## BREAKING CHANGES
 
@@ -48,7 +49,6 @@
 - `imagesMaxWidth` had been discontinued in favor of `computeEmbeddedMaxWidth`.
   This function takes the provided `contentWidth` as an argument, and returns
   the space the image should take.
-- `decodeEntities` has been discontinued in favor of `htmlParserOptions`.
 
 # v4.2.4
 
