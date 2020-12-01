@@ -14,7 +14,6 @@ declare module "react-native-render-html" {
     TextStyle,
     ViewStyle,
   } from "react-native";
-  import { ParserOptions } from "htmlparser2";
   namespace HTML {
     interface BaseNode {
       type: "text" | "tag";
@@ -105,7 +104,7 @@ declare module "react-native-render-html" {
        * ParserOptions for [htmlparser2](https://github.com/fb55/htmlparser2/wiki/Parser-options)
        * Optional, defaults `decodeEntities` to `true`
        */
-      htmlParserOptions?: ParserOptions;
+      htmlParserOptions?: Record<string, any>;
       /**
        * Set a maximum width to non-responsive content (<iframe> for instance)
        */
