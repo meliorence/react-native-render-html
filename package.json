@@ -50,7 +50,11 @@
     "react-native": "^0.63.0",
     "react-native-testing-library": "^2.1.0",
     "react-native-webview": "^10.3.2",
-    "react-test-renderer": "16.13.1"
+    "react-test-renderer": "16.13.1",
+    "typescript": "^3.9.0"
+  },
+  "resolutions": {
+    "typescript": "3.9.7"
   },
   "jest": {
     "preset": "react-native",
