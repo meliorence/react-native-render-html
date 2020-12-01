@@ -6,13 +6,15 @@
   "repository": "https://github.com/archriss/react-native-render-html",
   "description": "React Native component that renders HTML as native views",
   "types": "types/react-native-render-html/index.d.ts",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "npm run test:js && npm run test:ts && npm run test:lint",
+    "test": "yarn test:js && yarn test:ts && yarn test:lint",
     "test:ts": "dtslint types/react-native-render-html",
     "test:js": "jest",
     "test:lint": "eslint src/",
-    "fixlint": "prettier --write src/"
+    "fixlint": "prettier --write src/",
+    "build": "babel src --out-dir lib",
+    "prepack": "yarn build"
   },
   "keywords": [
     "react-native",
@@ -30,6 +32,7 @@
     "react-native": "*"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.8",
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",
