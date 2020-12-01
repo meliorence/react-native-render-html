@@ -261,19 +261,42 @@ const html = `
 
 ## Images
 
-By default, unstyled images will be rendered with their respective height and width without resizing. You can force their dimensions by using the `style` attribute in your HTML content or [style](#styling) them with a class or through the `<img>` tag.
+Since release 5.0, images are automatically scaled down to the available width,
+while preserving their aspect ratio.
 
-If you can't set the dimension of each image in your content, you might find the `imagesMaxWidth` prop useful. It resizes (and keeps proportions) your images to a maximum width, ensuring that your images won't overflow out of your viewport.
+- For the scaling to work, you **must** provide `contentWidth` prop.
+- If you need to define a maximum width for an image, use
+  `computeEmbeddedMaxWidth` prop.
+- If you don't want scaling, set `computeEmbeddedMaxWidth` prop to a function
+  returning `Infinity`.
 
-A nice trick, demonstrated in the [basic usage of this module](#basic-usage) is to use the `Dimensions` API of react-native : `imagesMaxWidth={Dimensions.get('window').width}`. You could subtract a value to it to make a margin.
+In the below example, images maximum width will be the minimum between `500`
+and the available width. Note that this function also works for other embedded,
+such as iframes (given that you installed the iframe plugin).
 
-Please note that if you set width AND height through any mean of styling, `imagesMaxWidth` will be ignored.
+```javascript
+import React, { Component } from "react";
+import { ScrollView, useWindowDimensions } from "react-native";
+import HTML from "react-native-render-html";
 
-Before their dimensions have been properly retrieved, images will temporarily be rendered in 100px wide squares. You can override this default value with prop `imagesInitialDimensions`.
+const htmlContent = '<img src="https://i.imgur.com/dHLmxfO.jpg?2" />';
 
-Images with broken links will render an empty square with a thin border, similar to what safari renders in a webview.
-
-Please note that all of these behaviors are implemented in the default `<img>` renderer. If you want to provide your own `<img>` renderer, you'll have to make this happen by yourself. You can use the `img` function in `HTMLRenderers.js` as a starting point.
+export default function Demo() {
+  const contentWidth = useWindowDimensions().width;
+  const computeEmbeddedMaxWidth = (availableWidth) => {
+    return Math.min(availableWidth, 500);
+  };
+  return (
+    <ScrollView style={{ flex: 1 }}>
+      <HTML
+        html={htmlContent}
+        contentWidth={contentWidth}
+        computeEmbeddedMaxWidth={computeEmbeddedMaxWidth}
+      />
+    </ScrollView>
+  );
+}
+```
 
 ## Altering content
 
