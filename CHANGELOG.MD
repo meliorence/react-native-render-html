@@ -6,7 +6,7 @@
 > We have since deliberately [committed to Semantic
 > Versioning](MAINTAINING.adoc#semantic-versioning).
 
-# next
+# next (5.X)
 
 ## Enhancements
 
@@ -14,9 +14,10 @@
   size to available width. For this to happen, **you must** pass `contentWidth`
   prop. We recommend using `useWindowDimensions().width` to handle screen
   rotation gracefully. If you don't want your images to grow after a certain
-  size, you could use `computeImagesMaxWidth`.
-- New prop `computeImagesMaxWidth` (see usage above).
+  size, you could use `computeEmbeddedMaxWidth`.
+- New prop `computeEmbeddedMaxWidth` (see usage above).
 - New prop `contentWidth` (see usage above).
+- `onLinkPress` has now a default value: open links with `Linking` API (recommended)
 
 ## Bugfixes
 
@@ -26,9 +27,13 @@
 
 ## BREAKING CHANGES
 
-- `imagesMaxWidth` had been discontinued in favor of `computeImagesMaxWidth`.
+- `imagesMaxWidth` had been discontinued in favor of `computeEmbeddedMaxWidth`.
   This function takes the provided `contentWidth` as an argument, and returns
   the space the image should take.
+- `iframe` tag element is not rendered anymore, and `react-native-webview` has
+  been removed from peer dependencies; use
+  [`@native-html/iframe-plugin`](https://github.com/native-html/plugins/tree/plugins/packages/iframe-plugin)
+  instead, which supports `onLinkPress` and scales to content width :rocket:.
 
 # v4.2.4
 
