@@ -1,4 +1,4 @@
-# [6.0.0-alpha.9](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.7...v6.0.0-alpha.9) (2020-12-01)
+# [6.0.0-alpha.9](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.8...v6.0.0-alpha.9) (2020-12-01)
 
 ### Features
 
