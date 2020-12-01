@@ -14,28 +14,28 @@ import {
   TextProps,
 } from "react-native";
 
-interface BaseNode {
+export interface BaseNode {
   type: "text" | "tag";
   next: HTMLNode | null;
   prev: HTMLNode | null;
   parent: HTMLNode | null;
   attribs: HtmlAttributesDictionary;
 }
-interface HTMLTextNode extends BaseNode {
+export interface HTMLTextNode extends BaseNode {
   type: "text";
   data: string;
 }
-interface HTMLTagNode extends BaseNode {
+export interface HTMLTagNode extends BaseNode {
   type: "tag";
   name: string;
   children: HTMLNode[];
 }
-type HTMLNode = HTMLTagNode | HTMLTextNode;
-type NonRegisteredStylesProp<T> = T | Falsy | RecursiveArray<T | Falsy>;
-interface HtmlAttributesDictionary {
+export type HTMLNode = HTMLTagNode | HTMLTextNode;
+export type NonRegisteredStylesProp<T> = T | Falsy | RecursiveArray<T | Falsy>;
+export interface HtmlAttributesDictionary {
   [attribute: string]: string | number;
 }
-interface PassProps<P = {}> {
+export interface PassProps<P = {}> {
   onLinkPress?: (
     evt: GestureResponderEvent,
     url: string,
@@ -55,27 +55,27 @@ interface PassProps<P = {}> {
   renderersProps: P;
   data: any;
 }
-type RendererFunction<P = {}> = (
+export type RendererFunction<P = {}> = (
   htmlAttribs: HtmlAttributesDictionary,
   children: ReactNode,
   convertedCSSStyles: NonRegisteredStylesProp<any>,
   passProps: PassProps<P>
 ) => ReactNode;
-type RendererDeclaration<P = {}> =
+export type RendererDeclaration<P = {}> =
   | RendererFunction<P>
   | { renderer: RendererFunction<P>; wrapper: "Text" | "View" };
-interface RendererDictionary<P = {}> {
+export interface RendererDictionary<P = {}> {
   [tag: string]: RendererDeclaration<P>;
 }
-interface StylesDictionary {
+export interface StylesDictionary {
   [tag: string]: NonRegisteredStylesProp<any>;
 }
-interface ImageDimensions {
+export interface ImageDimensions {
   width: number;
   height: number;
 }
 
-interface RenderHTMLSourceUri {
+export interface RenderHTMLSourceUri {
   /**
    * The URI to load in the `HTML` component. Can be a local or remote file.
    */
@@ -108,7 +108,7 @@ export interface RenderHTMLSourceInline {
 
 export type RenderHTMLSource = RenderHTMLSourceInline | RenderHTMLSourceUri;
 
-interface ContainerProps<P = {}> {
+export interface ContainerProps<P = {}> {
   /**
    * HTML string to parse and render.
    *
