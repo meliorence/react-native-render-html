@@ -23,6 +23,9 @@
 - `onLinkPress` has now a default value: open links with `Linking` API
   (recommended).
 - Add Podspec file, thanks [@systemride](https://github.com/systemride)
+- New `WebView` optional prop for plugins which requires it, see
+  [@native-html/plugins](https://github.com/native-html/plugins), thanks
+  [@IjzerenHein](https://github.com/IjzerenHein)
 
 ## Bugfixes
 
@@ -32,13 +35,13 @@
 
 ## BREAKING CHANGES
 
-- `imagesMaxWidth` had been discontinued in favor of `computeEmbeddedMaxWidth`.
-  This function takes the provided `contentWidth` as an argument, and returns
-  the space the image should take.
 - `iframe` tag element is not rendered anymore, and `react-native-webview` has
   been removed from peer dependencies; use
   [`@native-html/iframe-plugin`](https://github.com/native-html/plugins/tree/plugins/packages/iframe-plugin)
   instead, which supports `onLinkPress` and scales to content width :rocket:.
+- `imagesMaxWidth` had been discontinued in favor of `computeEmbeddedMaxWidth`.
+  This function takes the provided `contentWidth` as an argument, and returns
+  the space the image should take.
 - `decodeEntities` has been discontinued in favor of `htmlParserOptions`.
 
 # v4.2.4
