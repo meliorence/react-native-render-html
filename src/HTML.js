@@ -67,6 +67,7 @@ export default class HTML extends PureComponent {
     textSelectable: PropTypes.bool,
     renderersProps: PropTypes.object,
     allowFontScaling: PropTypes.bool,
+    WebView: PropTypes.elementType,
   };
 
   static defaultProps = {

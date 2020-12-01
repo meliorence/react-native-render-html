@@ -5,7 +5,7 @@
 // TypeScript Version: 3.0
 
 declare module "react-native-render-html" {
-  import { ReactNode, Component } from "react";
+  import { ReactNode, Component, ComponentType } from "react";
   import {
     StyleProp,
     GestureResponderEvent,
@@ -224,6 +224,11 @@ declare module "react-native-render-html" {
        * Prints the parsing result from htmlparser2 and render-html after the initial render
        */
       debug?: boolean;
+      /**
+       * The WebView component used by plugins (iframe, table)...
+       * See [@native-html/plugins](https://github.com/native-html/plugins).
+       */
+      WebView?: ComponentType<any>;
     }
   }
   class HTML<P> extends Component<HTML.ContainerProps<P>> {}
