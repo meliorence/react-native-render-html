@@ -22,7 +22,7 @@
     "render-html"
   ],
   "dependencies": {
-    "htmlparser2": "3.10.1",
+    "htmlparser2": "5.0.1",
     "prop-types": "^15.7.2"
   },
   "peerDependencies": {
