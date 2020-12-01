@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from "react";
 import { TouchableOpacity, Text, View, Platform } from "react-native";
-import { _constructStyles } from "./HTMLStyles";
+import { constructStyles } from "./HTMLStyles";
 import HTMLImage from "./HTMLImage";
 
 function getTextProps(passProps) {
@@ -33,7 +33,7 @@ function normalizeUri(uri) {
 }
 
 export function a(htmlAttribs, children, convertedCSSStyles, passProps) {
-  const style = _constructStyles({
+  const style = constructStyles({
     tagName: "a",
     htmlAttribs,
     passProps,
@@ -78,7 +78,7 @@ export function img(
     return false;
   }
 
-  const style = _constructStyles({
+  const style = constructStyles({
     tagName: "img",
     htmlAttribs,
     passProps,
@@ -100,7 +100,7 @@ export function img(
 }
 
 export function ul(htmlAttribs, children, convertedCSSStyles, passProps = {}) {
-  const style = _constructStyles({
+  const style = constructStyles({
     tagName: "ul",
     htmlAttribs,
     passProps,

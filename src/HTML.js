@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import {
   cssStringToRNStyle,
-  _getElementClassStyles,
+  getElementClassStyles,
   cssStringToObject,
   cssObjectToString,
   computeTextStyles,
@@ -448,7 +448,7 @@ export default class HTML extends PureComponent {
           // remove them from the wrapper, mimicking browsers' behaviour better.
           const wrapperStyles = {
             ...(tagsStyles[tagName] || {}),
-            ..._getElementClassStyles(attribs, classesStyles),
+            ...getElementClassStyles(attribs, classesStyles),
             ...cssStringToObject(attribs.style || ""),
           };
 
@@ -590,7 +590,7 @@ export default class HTML extends PureComponent {
             });
           }
 
-          const classStyles = _getElementClassStyles(attribs, classesStyles);
+          const classStyles = getElementClassStyles(attribs, classesStyles);
           const textElement = data ? (
             <Text
               style={computeTextStyles(element, {

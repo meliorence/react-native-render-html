@@ -30,6 +30,8 @@
   [@native-html/plugins](https://github.com/native-html/plugins), thanks
   [@IjzerenHein](https://github.com/IjzerenHein)
 - New `defaultTextProps`, thanks [@Peretz30](https://github.com/Peretz30)
+- Export `constructStyles`, `getParentsTagsRecursively`,
+  `getClosestNodeParentByTag` and `IGNORED_TAGS` from index.js.
 
 ## Bugfixes
 

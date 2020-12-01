@@ -45,7 +45,7 @@ An iOS/Android pure javascript react-native component that renders your HTML int
     - [alterNode](#alternode)
     - [onParsed](#onparsed)
   - [Ignoring HTML content](#ignoring-html-content)
-  - [Useful functions](#useful-functions)
+  - [Utilities](#useful-functions)
   - [Help](#help)
 
 ## Versions
@@ -401,7 +401,7 @@ You can't expect native components to be able to render _everything_ you can fin
 **Please note** that if you supply `ignoredTags`, you will override the default ignored ones. There are _a lot_ of them, if you want to keep them and add your own, you can do something like :
 
 ```javascript
-import { IGNORED_TAGS } from 'react-native-render-html/src/HTMLUtils';
+import { IGNORED_TAGS } from 'react-native-render-html';
 ...
 
 // your props
@@ -412,24 +412,31 @@ ignoredTags={[ ...IGNORED_TAGS, 'tag1', 'tag2']}
 
 `node` is the result of the HTML parsing, which allows you to look for children, check the parent's markup and much more. `parentTagName` is a convenient way to access the parent of your node, and `parentIsText` is a great way to make sure you won't be rendering a `<View>` inside a `<Text>` which, right now, makes react-native crash.
 
-## Useful functions
+## Utilities
 
 The API is exposing some functions you can use to write advanced behaviors more easily.
 You can import them like so :
 
 ```javascript
-import { functionName } from "react-native-render-html/src/HTMLUtils";
+import { functionName } from "react-native-render-html";
 ```
 
 - `getParentsTagsRecursively(node)`
-  - Description : Returns an array with the tagname of every parent of a node or an empty array if nothing is found.
-  - Parameters : - `node` : a parsed HTML node from `alterChildren` for example
-  - Returns : An empty array or an array of strings.
-  - Notes : this is very useful to check if a node is nested in a specific parent. See [alterNode](#alterNode) for an advanced example.
+  - _Description_: Returns an array with the tagname of every parent of a node or an empty array if nothing is found.
+  - _Parameters_:
+    - `node` : a parsed HTML node from `alterChildren` for example
+  - _Returns_: An empty array or an array of strings.
+  - Notes: this is very useful to check if a node is nested in a specific parent. See [alterNode](#alterNode) for an advanced example.
 - `getClosestNodeParentByTag(node, tag)`
-  - Description: Returns the closest parent of a node with a specific tag.
-  - Parameters : - `node` : a parsed HTML node from `alterChildren` for example
-  - Returns : An HTML node if found.
+  - _Description_: Returns the closest parent of a node with a specific tag.
+  - _Parameters_ :
+    - `node` : a parsed HTML node from `alterChildren` for example
+  - _Returns_ : An HTML node if found.
+- `constructStyles(params)`
+  - _Description_: Create styles for a node to render.
+  - _Parameters_ :
+    - `params` : an object with requirements to assemble styles (see Type definitions)
+  - _Returns_ : A styles array (style prop).
 
 ## Help
 
