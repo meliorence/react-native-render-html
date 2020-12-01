@@ -26,10 +26,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run test:ts
+    - run: yarn install --immutable
+    - run: yarn test:ts
       name: Typescript Tests
-    - run: npm run test:js -- --coverage
+    - run: yarn test:js -- --coverage
       name: Jest Tests
     - uses: codecov/codecov-action@v1
       with:

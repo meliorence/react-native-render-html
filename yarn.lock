@@ -1678,23 +1678,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*":
-  version: 17.0.0
-  resolution: "@types/react@npm:17.0.0"
+"@types/react@npm:16.9.19":
+  version: 16.9.19
+  resolution: "@types/react@npm:16.9.19"
   dependencies:
     "@types/prop-types": "*"
-    csstype: ^3.0.2
-  checksum: dcef2034b822a949c5528fa8fa3c64da654fdbb822bd8f0488c0084d84cadb8b90af68813a6c95153d4754079f50b1cab206552c7c20f6b67a26c3641383fe31
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:^16.9.19":
-  version: 16.14.2
-  resolution: "@types/react@npm:16.14.2"
-  dependencies:
-    "@types/prop-types": "*"
-    csstype: ^3.0.2
-  checksum: 41d227d4e9a45b1ad6d80c9b0fe9af003d95d03a0f2f2495a537c36d69541439fcff67edcef241e88c8ab7257377dbe8737d013d3f9b9503b76174165083f7b6
+    csstype: ^2.2.0
+  checksum: 0517d996fd9e52d8bf0ed9d4890189344d1c8d893acdb4cb2a59fd5ce029a1e057ec7b2bed9d1891d62cf91fd4570ec70a37a47a6b056cb99f4473c34ff03249
   languageName: node
   linkType: hard
 
@@ -3095,10 +3085,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csstype@npm:^3.0.2":
-  version: 3.0.5
-  resolution: "csstype@npm:3.0.5"
-  checksum: d15967edea15457961ab1e3f1c4080c83792a595055551a087923b2fb67fffaddaa2eedafe10f665d12dc3f493af03c08322c9410fcd58e3dcf48104de15043c
+"csstype@npm:^2.2.0":
+  version: 2.6.14
+  resolution: "csstype@npm:2.6.14"
+  checksum: 9abe447b28534cc45304fca19a26d373c5bb8e9b18cedbb84330862937d102c9d8cc47f65d233f723c8512804e9d52b81d6fc57c23c6a4d5420f281827d73b03
   languageName: node
   linkType: hard
 
@@ -7812,6 +7802,7 @@ fsevents@^2.1.2:
     jest: ^25.5.4
     metro-react-native-babel-preset: ^0.59.0
     prettier: ^2.0.5
+    prop-types: ^15.7.2
     react: ^16.13.1
     react-native: ^0.63.0
     react-native-testing-library: ^2.1.0
@@ -7819,7 +7810,6 @@ fsevents@^2.1.2:
     react-test-renderer: 16.13.1
     typescript: ^3.9.0
   peerDependencies:
-    prop-types: ">=15.5.10"
     react: "*"
     react-native: "*"
     react-native-webview: "*"
