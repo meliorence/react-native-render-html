@@ -17,7 +17,10 @@
   size, you could use `computeEmbeddedMaxWidth`.
 - New prop `computeEmbeddedMaxWidth` (see usage above).
 - New prop `contentWidth` (see usage above).
-- `onLinkPress` has now a default value: open links with `Linking` API (recommended)
+- New prop `htmlParserOptions` to override
+  [htmlparser2](https://github.com/fb55/htmlparser2/wiki/Parser-options)
+  ParserOptions object, thanks [@fabianlee1211](https://github.com/fabianlee1211).
+- `onLinkPress` has now a default value: open links with `Linking` API (recommended).
 
 ## Bugfixes
 
@@ -34,6 +37,7 @@
   been removed from peer dependencies; use
   [`@native-html/iframe-plugin`](https://github.com/native-html/plugins/tree/plugins/packages/iframe-plugin)
   instead, which supports `onLinkPress` and scales to content width :rocket:.
+- `decodeEntities` has been discontinued in favor of `htmlParserOptions`.
 
 # v4.2.4
 
