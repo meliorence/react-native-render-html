@@ -29,7 +29,7 @@ jobs:
     - run: yarn install --immutable
     - run: yarn test:ts
       name: Typescript Tests
-    - run: yarn test:js -- --coverage
+    - run: yarn test:js --coverage
       name: Jest Tests
     - uses: codecov/codecov-action@v1
       with:
