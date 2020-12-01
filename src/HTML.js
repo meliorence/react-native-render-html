@@ -1,7 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { View, Text, ActivityIndicator, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  Dimensions,
+  Linking,
+} from "react-native";
 import {
   cssStringToRNStyle,
   _getElementClassStyles,
@@ -80,6 +86,8 @@ export default class HTML extends PureComponent {
     classesStyles: {},
     textSelectable: false,
     allowFontScaling: true,
+    onLinkPress: (_e, href) =>
+      Linking.canOpenURL(href) && Linking.openURL(href),
   };
 
   constructor(props) {
