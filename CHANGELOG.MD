@@ -42,6 +42,7 @@
 
 ## BREAKING CHANGES
 
+- (TypeScript users), requires minimum TypeScript version 3.5 (was 2.8)
 - `iframe` tag element is not rendered anymore, and `react-native-webview` has
   been removed from peer dependencies; use
   [`@native-html/iframe-plugin`](https://github.com/native-html/plugins/tree/plugins/packages/iframe-plugin)

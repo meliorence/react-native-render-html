@@ -2,7 +2,7 @@
 // Project: https://github.com/archriss/react-native-render-html
 // Definitions by: Jules Randolph <https://github.com/jsamr>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.0
+// TypeScript Version: 3.5
 
 declare module "react-native-render-html" {
   import { ReactNode, Component, ComponentType } from "react";
