@@ -1,8 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from "react";
 import { TouchableOpacity, Text, View, Platform } from "react-native";
-import { WebView } from "react-native-webview";
-import { _constructStyles, _getElementClassStyles } from "./HTMLStyles";
+import { _constructStyles } from "./HTMLStyles";
 import HTMLImage from "./HTMLImage";
 
 function getTextProps(passProps) {
@@ -178,47 +177,6 @@ export function ul(htmlAttribs, children, convertedCSSStyles, passProps = {}) {
   );
 }
 export const ol = ul;
-
-export function iframe(htmlAttribs, children, convertedCSSStyles, passProps) {
-  const { staticContentMaxWidth, tagsStyles, classesStyles } = passProps;
-
-  const tagStyleHeight = tagsStyles.iframe && tagsStyles.iframe.height;
-  const tagStyleWidth = tagsStyles.iframe && tagsStyles.iframe.width;
-
-  const classStyles = _getElementClassStyles(htmlAttribs, classesStyles);
-  const classStyleWidth = classStyles.width;
-  const classStyleHeight = classStyles.height;
-
-  const attrHeight = htmlAttribs.height
-    ? parseInt(htmlAttribs.height, 10)
-    : false;
-  const attrWidth = htmlAttribs.width ? parseInt(htmlAttribs.width, 10) : false;
-
-  const height = attrHeight || classStyleHeight || tagStyleHeight || 200;
-  const width =
-    attrWidth || classStyleWidth || tagStyleWidth || staticContentMaxWidth;
-
-  const style = _constructStyles({
-    tagName: "iframe",
-    htmlAttribs,
-    passProps,
-    styleSet: "VIEW",
-    additionalStyles: [{ height, width }],
-  });
-
-  const source = htmlAttribs.srcdoc
-    ? { html: htmlAttribs.srcdoc }
-    : { uri: normalizeUri(htmlAttribs.src) };
-
-  return (
-    <WebView
-      testID="iframe"
-      key={passProps.key}
-      source={source}
-      style={style}
-    />
-  );
-}
 
 export function pre(htlmAttribs, children, convertedCSSStyles, passProps) {
   return (

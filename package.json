@@ -27,8 +27,7 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*",
-    "react-native-webview": "*"
+    "react-native": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
