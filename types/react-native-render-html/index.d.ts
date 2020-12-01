@@ -13,6 +13,7 @@ declare module "react-native-render-html" {
     Falsy,
     TextStyle,
     ViewStyle,
+    TextProps,
   } from "react-native";
   namespace HTML {
     interface BaseNode {
@@ -82,6 +83,8 @@ declare module "react-native-render-html" {
       html: string;
       /**
        * Specifies whether fonts should scale to respect Text Size accessibility settings
+       *
+       * @deprecated Use `defaultTextProps.allowFontScaling` instead.
        */
       allowFontScaling?: boolean;
       /**
@@ -189,6 +192,8 @@ declare module "react-native-render-html" {
       baseFontStyle?: NonRegisteredStylesProp<TextStyle>;
       /**
        * Allow all texts to be selected. Default to `false`.
+       *
+       * @deprecated Use `defaultTextProps.selectable` instead.
        */
       textSelectable?: boolean;
       /**
@@ -228,6 +233,12 @@ declare module "react-native-render-html" {
        * See [@native-html/plugins](https://github.com/native-html/plugins).
        */
       WebView?: ComponentType<any>;
+      /**
+       * Default props for Text elements in the render tree.
+       *
+       * @remarks "style" will be ignored. Use `baseFontStyle` instead.
+       */
+      defaultTextProps?: Omit<TextProps, "style">;
     }
   }
   class HTML<P> extends Component<HTML.ContainerProps<P>> {}

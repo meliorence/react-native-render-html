@@ -5,10 +5,11 @@ import { _constructStyles } from "./HTMLStyles";
 import HTMLImage from "./HTMLImage";
 
 function getTextProps(passProps) {
-  const { selectable, allowFontScaling } = passProps;
+  const { selectable, allowFontScaling, defaultTextProps } = passProps;
   return {
     selectable,
     allowFontScaling,
+    ...defaultTextProps,
   };
 }
 

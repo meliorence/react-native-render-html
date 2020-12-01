@@ -26,12 +26,18 @@
 - New `WebView` optional prop for plugins which requires it, see
   [@native-html/plugins](https://github.com/native-html/plugins), thanks
   [@IjzerenHein](https://github.com/IjzerenHein)
+- New `defaultTextProps`, thanks [@Peretz30](https://github.com/Peretz30)
 
 ## Bugfixes
 
 - Image getting blur on iOS, [#141](https://github.com/archriss/react-native-render-html/issues/141);
 - `img`'s tag `resizeMode` property not modifiable through `tagStyles`, [#172](https://github.com/archriss/react-native-render-html/issues/172);
 - `imagesMaxWidth` not working, [#412](https://github.com/archriss/react-native-render-html/issues/412)
+
+## Deprecations (removed in v6)
+
+- `allowFontScaling`, use `defaultTextProps.allowFontScaling` instead;
+- `textSelectable`, use `defaultTextProps.selectable` instead;
 
 ## BREAKING CHANGES
 

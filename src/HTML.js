@@ -64,10 +64,12 @@ export default class HTML extends PureComponent {
     emSize: PropTypes.number.isRequired,
     ptSize: PropTypes.number.isRequired,
     baseFontStyle: PropTypes.object.isRequired,
-    textSelectable: PropTypes.bool,
     renderersProps: PropTypes.object,
-    allowFontScaling: PropTypes.bool,
     WebView: PropTypes.elementType,
+    defaultTextProps: PropTypes.object,
+    // DEPRECATED
+    allowFontScaling: PropTypes.bool,
+    textSelectable: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -91,6 +93,7 @@ export default class HTML extends PureComponent {
     allowFontScaling: true,
     onLinkPress: (_e, href) =>
       Linking.canOpenURL(href) && Linking.openURL(href),
+    defaultTextProps: {},
   };
 
   constructor(props) {
@@ -512,6 +515,7 @@ export default class HTML extends PureComponent {
       ptSize,
       tagsStyles,
       textSelectable,
+      defaultTextProps: { style: _textStlye, ...defaultTextProps },
     } = props;
 
     return RNElements && RNElements.length
@@ -549,10 +553,13 @@ export default class HTML extends PureComponent {
                 )
               : false;
 
-          const renderersProps = {};
+          let renderersProps = {};
           if (Wrapper === Text) {
-            renderersProps.allowFontScaling = allowFontScaling;
-            renderersProps.selectable = textSelectable;
+            renderersProps = {
+              allowFontScaling,
+              selectable: textSelectable,
+              ...defaultTextProps,
+            };
           }
 
           if (this.renderers[tagName]) {
@@ -584,7 +591,6 @@ export default class HTML extends PureComponent {
           const classStyles = _getElementClassStyles(attribs, classesStyles);
           const textElement = data ? (
             <Text
-              allowFontScaling={allowFontScaling}
               style={computeTextStyles(element, {
                 defaultTextStyles: this.defaultTextStyles,
                 tagsStyles,
@@ -595,6 +601,7 @@ export default class HTML extends PureComponent {
                 ignoredStyles,
                 allowedStyles,
               })}
+              {...renderersProps}
             >
               {data}
             </Text>
