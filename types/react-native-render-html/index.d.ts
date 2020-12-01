@@ -35,26 +35,41 @@ export type NonRegisteredStylesProp<T> = T | Falsy | RecursiveArray<T | Falsy>;
 export interface HtmlAttributesDictionary {
   [attribute: string]: string | number;
 }
-export interface PassProps<P = {}> {
-  onLinkPress?: (
-    evt: GestureResponderEvent,
-    url: string,
-    attribs: HtmlAttributesDictionary
-  ) => void;
-  tagsStyles: StylesDictionary;
-  ignoredTags: string[];
-  baseFontStyle: NonRegisteredStylesProp<TextStyle>;
-  renderers: RendererDictionary<P>;
-  imagesMaxWidth: number;
-  html: string;
-  key: string;
+
+export type PassProps<P> = Pick<
+  ContainerProps,
+  | "WebView"
+  | "onLinkPress"
+  | "tagsStyles"
+  | "ignoredTags"
+  | "ignoredStyles"
+  | "renderers"
+  | "baseFontStyle"
+  | "imagesInitialDimensions"
+  | "html"
+  | "uri"
+  | "source"
+  | "listsPrefixesRenderers"
+  | "allowFontScaling"
+  | "defaultTextProps"
+  | "textSelectable"
+  | "allowedStyles"
+  | "classesStyles"
+  | "computeEmbeddedMaxWidth"
+  | "contentWidth"
+  | "debug"
+  | "emSize"
+  | "ptSize"
+  | "enableExperimentalPercentWidth"
+> & {
   nodeIndex: number;
   rawChildren: HTMLNode[];
   parentWrapper: "Text" | string;
-  listsPrefixesRenderers: RendererDictionary<P>;
-  renderersProps: P;
   data: any;
-}
+  key: string;
+  renderersProps: P;
+};
+
 export type RendererFunction<P = {}> = (
   htmlAttribs: HtmlAttributesDictionary,
   children: ReactNode,
@@ -87,7 +102,7 @@ export interface RenderHTMLSourceUri {
   /**
    * Additional HTTP headers to send with the request.
    */
-  headers?: Object;
+  headers?: object;
   /**
    * The HTTP body to send with the request. This must be a valid
    * UTF-8 string, and will be sent exactly as specified, with no
@@ -148,10 +163,6 @@ export interface ContainerProps<P = {}> {
    * Optional, defaults `decodeEntities` to `true`
    */
   htmlParserOptions?: Record<string, any>;
-  /**
-   * Set a maximum width to non-responsive content (<iframe> for instance)
-   */
-  staticContentMaxWidth?: number;
   /**
    * Default width and height to display while image's dimensions are being retrieved.
    */
