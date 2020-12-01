@@ -14,13 +14,13 @@ function getTextProps(passProps) {
 
 function getImgProps(passProps) {
   const {
-    computeImagesMaxWidth,
+    computeEmbeddedMaxWidth,
     imagesInitialDimensions,
     enableExperimentalPercentWidth,
     contentWidth,
   } = passProps;
   return {
-    computeImagesMaxWidth,
+    computeImagesMaxWidth: (cw) => computeEmbeddedMaxWidth(cw, "img"),
     imagesInitialDimensions,
     enableExperimentalPercentWidth,
     contentWidth,

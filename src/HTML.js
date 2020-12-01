@@ -47,7 +47,7 @@ export default class HTML extends PureComponent {
     customWrapper: PropTypes.func,
     onLinkPress: PropTypes.func,
     onParsed: PropTypes.func,
-    computeImagesMaxWidth: PropTypes.func,
+    computeEmbeddedMaxWidth: PropTypes.func,
     staticContentMaxWidth: PropTypes.number,
     contentWidth: PropTypes.number,
     enableExperimentalPercentWidth: PropTypes.bool,
@@ -72,6 +72,7 @@ export default class HTML extends PureComponent {
     contentWidth: Dimensions.get("window").width,
     staticContentMaxWidth: Dimensions.get("window").width,
     enableExperimentalPercentWidth: false,
+    computeEmbeddedMaxWidth: (contentWidth) => contentWidth,
     ignoredTags: IGNORED_TAGS,
     ignoredStyles: [],
     baseFontStyle: { fontSize: 14 },
@@ -124,14 +125,14 @@ export default class HTML extends PureComponent {
       classesStyles,
       contentWidth,
       staticContentMaxWidth,
-      computeImagesMaxWidth,
+      computeEmbeddedMaxWidth,
     } = prevProps;
     let shouldParseDOM =
       tagsStyles !== this.props.tagsStyles ||
       classesStyles !== this.props.classesStyles ||
       contentWidth !== this.props.contentWidth ||
       staticContentMaxWidth !== this.props.staticContentMaxWidth ||
-      computeImagesMaxWidth !== this.props.computeImagesMaxWidth ||
+      computeEmbeddedMaxWidth !== this.props.computeEmbeddedMaxWidth ||
       this.state.dom !== prevState.dom;
 
     this.generateDefaultStyles(this.props.baseFontStyle);

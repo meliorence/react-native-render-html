@@ -8,15 +8,6 @@ import HTMLImage from "../HTMLImage";
  */
 describe("HTML component", () => {
   describe("should pass regression #408 regarding two forward slashes in src", () => {
-    it("should prepend 'https:' to an iframe src attribute with two forward slashes", () => {
-      const { getByTestId } = render(
-        <HTML html={'<iframe src="//youtube.com/" />'} />
-      );
-      const webview = getByTestId("iframe");
-      expect(webview.props.source).toMatchObject({
-        uri: "https://youtube.com/",
-      });
-    });
     it("should prepend 'https:' to an image src attribute with two forward slashes", () => {
       const { UNSAFE_getByType } = render(
         <HTML html={'<img src="//domain.com/" />'} />

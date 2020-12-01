@@ -19,7 +19,7 @@ const DEFAULT_PROPS = {
   htmlStyles: CUSTOM_STYLES,
   renderers: CUSTOM_RENDERERS,
   imagesMaxWidth: IMAGES_MAX_WIDTH,
-  computeImagesMaxWidth(contentWidth) {
+  computeEmbeddedMaxWidth(contentWidth) {
     return contentWidth - 40;
   },
   onLinkPress(evt, href) {

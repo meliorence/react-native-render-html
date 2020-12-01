@@ -13,7 +13,7 @@
     "test:js": "jest",
     "test:lint": "eslint src/",
     "fixlint": "prettier --write src/",
-    "build": "babel src --out-dir lib",
+    "build": "babel src --out-dir lib --ignore 'src/__mocks__/**/*,src/__tests__/**/*'",
     "prepack": "yarn build"
   },
   "keywords": [

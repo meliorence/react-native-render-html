@@ -149,8 +149,11 @@ Discord #support channel] and we will help you out.
 |The application crashes while using `react-native-screens`
 |https://stackoverflow.com/q/63171131/2779871
 
+|How to render iframes?
+|https://github.com/native-html/plugins/tree/master/packages/iframe-plugin#readme
+
 |How to render tables?
-|https://github.com/native-html/table-plugin
+|https://github.com/native-html/plugins/tree/master/packages/table-plugin#readme
 
 |How to open the browser when a link is pressed?
 |https://stackoverflow.com/q/63114501/2779871

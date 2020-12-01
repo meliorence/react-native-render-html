@@ -123,7 +123,10 @@ declare module "react-native-render-html" {
       /**
        * A function which takes contentWidth as argument and returns a new width. Can return Infinity to denote unconstrained widths.
        */
-      computeImagesMaxWidth?: (contentWidth: number) => number;
+      computeEmbeddedMaxWidth?: (
+        contentWidth: number,
+        tagName: string
+      ) => number;
       /**
        * Support for relative percent-widths. Currently, it only works for images.
        */
