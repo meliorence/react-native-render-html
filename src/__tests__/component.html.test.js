@@ -9,14 +9,14 @@ describe("HTML component", () => {
     const nextContentWidth = 200;
     const { UNSAFE_getByType, update } = render(
       <HTML
-        html='<img src="https://img.com/1" />'
+        source={{ html: '<img src="https://img.com/1" />' }}
         contentWidth={contentWidth}
       />
     );
     expect(UNSAFE_getByType(HTMLImage).props.contentWidth).toBe(contentWidth);
     update(
       <HTML
-        html='<img src="https://img.com/1" />'
+        source={{ html: '<img src="https://img.com/1" />' }}
         contentWidth={nextContentWidth}
       />
     );

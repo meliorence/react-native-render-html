@@ -64,7 +64,7 @@ const Demo = () => {
         <HTML
           {...DEFAULT_PROPS}
           contentWidth={contentWidth - CONTENT_PADDING_HZ * 2}
-          html={snippets[currentExample]}
+          source={{html: snippets[currentExample]}}
           {...additionalProps}
         />
       </ScrollView>

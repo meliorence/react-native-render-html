@@ -8,7 +8,7 @@ import HTML from "../HTML";
  */
 describe("HTMLImage component should pass regression test #172", () => {
   it("passes resizeMode to RN Image component", async () => {
-    const source = { uri: "http://via.placeholder.com/640x360" };
+    // const source = { uri: "http://via.placeholder.com/640x360" };
     const tagsStyles = {
       img: {
         resizeMode: "contain",
@@ -18,9 +18,11 @@ describe("HTMLImage component should pass regression test #172", () => {
     };
     const { getByTestId } = render(
       <HTML
-        html='<img width="100" height="100" src="http://via.placeholder.com/100x100" />'
+        source={{
+          html:
+            '<img width="100" height="100" src="http://via.placeholder.com/100x100" />',
+        }}
         tagsStyles={tagsStyles}
-        source={source}
       />
     );
     const imageLayout = getByTestId("image-layout");

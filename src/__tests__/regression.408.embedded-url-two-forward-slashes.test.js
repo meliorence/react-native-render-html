@@ -10,7 +10,7 @@ describe("HTML component", () => {
   describe("should pass regression #408 regarding two forward slashes in src", () => {
     it("should prepend 'https:' to an image src attribute with two forward slashes", () => {
       const { UNSAFE_getByType } = render(
-        <HTML html={'<img src="//domain.com/" />'} />
+        <HTML source={{ html: '<img src="//domain.com/" />' }} />
       );
       const image = UNSAFE_getByType(HTMLImage);
       expect(image.props.source).toMatchObject({ uri: "https://domain.com/" });

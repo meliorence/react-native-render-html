@@ -30,7 +30,23 @@ import {
   generateDefaultTextStyles,
 } from "./HTMLDefaultStyles";
 import { DomHandler, Parser } from "htmlparser2";
+import deprecated from "deprecated-prop-type";
 import * as HTMLRenderers from "./HTMLRenderers";
+
+const DEPREC_MSG = "This prop will be removed in v6 release. ";
+
+function sourceObjectsAreEqual(oldSource, newSource) {
+  return oldSource.uri === newSource.uri && oldSource.html === newSource.html;
+}
+
+function sourceHasChange(oldProps, newProps) {
+  return (
+    oldProps.uri !== newProps.uri ||
+    oldProps.html !== newProps.html ||
+    (oldProps.source !== newProps.source &&
+      !sourceObjectsAreEqual(oldProps.source, newProps.source))
+  );
+}
 
 export default class HTML extends PureComponent {
   static propTypes = {
@@ -45,8 +61,6 @@ export default class HTML extends PureComponent {
     alterData: PropTypes.func,
     alterChildren: PropTypes.func,
     alterNode: PropTypes.func,
-    html: PropTypes.string,
-    uri: PropTypes.string,
     tagsStyles: PropTypes.object,
     classesStyles: PropTypes.object,
     containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
@@ -67,18 +81,44 @@ export default class HTML extends PureComponent {
     renderersProps: PropTypes.object,
     WebView: PropTypes.elementType,
     defaultTextProps: PropTypes.object,
+    source: PropTypes.oneOfType([
+      PropTypes.shape({
+        uri: PropTypes.string.isRequired,
+        method: PropTypes.string,
+        headers: PropTypes.object,
+        body: PropTypes.string,
+      }),
+      PropTypes.shape({
+        html: PropTypes.string.isRequired,
+        baseUrl: PropTypes.string,
+      }),
+    ]),
     // DEPRECATED
-    allowFontScaling: PropTypes.bool,
-    textSelectable: PropTypes.bool,
-    decodeEntities: PropTypes.bool,
+    allowFontScaling: deprecated(
+      PropTypes.bool,
+      DEPREC_MSG + 'Use "defaultTextProps.allowFontScaling" prop instead.'
+    ),
+    textSelectable: deprecated(
+      PropTypes.bool,
+      DEPREC_MSG + 'Use "defaultTextProps.textSelectable" prop instead.'
+    ),
+    decodeEntities: deprecated(
+      PropTypes.bool,
+      DEPREC_MSG + 'Use "htmlParserOptions.decodeEntities" prop instead.'
+    ),
+    html: deprecated(
+      PropTypes.string,
+      DEPREC_MSG + 'Use "source.html" prop instead.'
+    ),
+    uri: deprecated(
+      PropTypes.string,
+      DEPREC_MSG + 'Use "source.uri" prop instead.'
+    ),
   };
 
   static defaultProps = {
     renderers: HTMLRenderers,
     debug: false,
-    htmlParserOptions: {
-      decodeEntities: true,
-    },
     emSize: 14,
     ptSize: 1.3,
     contentWidth: Dimensions.get("window").width,
@@ -90,12 +130,16 @@ export default class HTML extends PureComponent {
     baseFontStyle: { fontSize: 14 },
     tagsStyles: {},
     classesStyles: {},
-    textSelectable: false,
-    allowFontScaling: true,
+
     onLinkPress: (_e, href) =>
       Linking.canOpenURL(href) && Linking.openURL(href),
-    defaultTextProps: {},
-    decodeEntities: true,
+    defaultTextProps: {
+      allowFontScaling: true,
+      selectable: false,
+    },
+    htmlParserOptions: {
+      decodeEntities: true,
+    },
   };
 
   constructor(props) {
@@ -124,8 +168,6 @@ export default class HTML extends PureComponent {
 
   componentDidUpdate(prevProps, prevState) {
     const {
-      html,
-      uri,
       renderers,
       tagsStyles,
       classesStyles,
@@ -145,7 +187,7 @@ export default class HTML extends PureComponent {
     if (renderers !== this.props.renderers) {
       this.renderers = { ...HTMLRenderers, ...(this.props.renderers || {}) };
     }
-    if (html !== this.props.html || uri !== this.props.uri) {
+    if (sourceHasChange(prevProps, this.props)) {
       // If the source changed, register the new HTML and parse it
       this.registerDOM(this.props);
     }
@@ -155,7 +197,8 @@ export default class HTML extends PureComponent {
   }
 
   async registerDOM(props = this.props, cb) {
-    const { html, uri } = props;
+    const html = props.html || (props.source ? props.source.html : null);
+    const uri = props.uri || (props.source ? props.source.uri : null);
     if (html) {
       this.setStateSafe({
         dom: html,
@@ -164,14 +207,19 @@ export default class HTML extends PureComponent {
       });
     } else if (props.uri) {
       try {
-        // WIP : This should render a loader and html prop should not be set in state
-        // Error handling would be nice, too.
+        const { body = null, method = "GET", headers = {} } = props.source
+          ? props.source
+          : {};
         try {
           this.setStateSafe({
             loadingRemoteURL: true,
             errorLoadingRemoteURL: false,
           });
-          const response = await fetch(uri);
+          const response = await fetch(uri, {
+            body,
+            method,
+            headers,
+          });
           const dom = await response.text();
           this.setStateSafe({ dom, loadingRemoteURL: false });
         } catch (err) {
@@ -216,8 +264,8 @@ export default class HTML extends PureComponent {
         }
       }),
       {
-        decodeEntities,
         ...htmlParserOptions,
+        ...(typeof decodeEntities === "boolean" ? { decodeEntities } : {}),
       }
     );
     parser.write(dom);
@@ -558,10 +606,14 @@ export default class HTML extends PureComponent {
           let renderersProps = {};
           if (Wrapper === Text) {
             renderersProps = {
-              allowFontScaling,
-              selectable: textSelectable,
               ...defaultTextProps,
             };
+            if (typeof textSelectable === "boolean") {
+              renderersProps.selectable = textSelectable;
+            }
+            if (typeof allowFontScaling === "boolean") {
+              renderersProps.allowFontScaling = allowFontScaling;
+            }
           }
 
           if (this.renderers[tagName]) {

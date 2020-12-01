@@ -3367,6 +3367,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"deprecated-prop-type@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "deprecated-prop-type@npm:1.0.0"
+  dependencies:
+    warning: 4.0.1
+  checksum: 7d1b89c2572e8a6df04a162efb35040874fc421e78fbe282ebd29af25c33da32c0b9a8fc1c4bc930def363237829d4f7964ce78639425f449493a2253ea3ec9f
+  languageName: node
+  linkType: hard
+
 "destroy@npm:~1.0.4":
   version: 1.0.4
   resolution: "destroy@npm:1.0.4"
@@ -7966,6 +7975,7 @@ fsevents@~2.1.2:
     babel-eslint: 10.1.0
     babel-jest: ^25.5.1
     conditional-type-checks: ^1.0.5
+    deprecated-prop-type: ^1.0.0
     dtslint: ^2.0.6
     eslint: ^7.14.0
     eslint-config-prettier: ^6.15.0
@@ -9838,6 +9848,15 @@ resolve@1.1.7:
   dependencies:
     makeerror: 1.0.x
   checksum: c014f264c473fc4464ba8f59eb9f7ffa1c0cf2c83b65353de28a6012d8dd29e974bf2b0fbd5c71231f56762a3ea0d970b635f7d6f6d670ff83f426741ce6a4da
+  languageName: node
+  linkType: hard
+
+"warning@npm:4.0.1":
+  version: 4.0.1
+  resolution: "warning@npm:4.0.1"
+  dependencies:
+    loose-envify: ^1.0.0
+  checksum: 9575a07a0e75e5b42baa9823b08314d06e8f4f46deddc4c4c349a8a436738f16fd04d21b60a98cc68b13894802c85a5bf412ac9ff3cc999935df04ee36f35603
   languageName: node
   linkType: hard
 

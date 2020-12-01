@@ -25,6 +25,7 @@
     "render-html"
   ],
   "dependencies": {
+    "deprecated-prop-type": "^1.0.0",
     "htmlparser2": "5.0.1",
     "prop-types": "^15.7.2"
   },

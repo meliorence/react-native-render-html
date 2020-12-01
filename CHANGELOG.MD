@@ -10,6 +10,8 @@
 
 ## Enhancements
 
+- New `source` prop which deprecates `html` and `uri` props. This prop
+  supports `method`, `body` and `headers` fields :rocket:
 - Brand new `HTMLImage` component which should be much better at adapting its
   size to available width. For this to happen, **you must** pass `contentWidth`
   prop. We recommend using `useWindowDimensions().width` to handle screen
@@ -39,11 +41,13 @@
 - `img`'s tag `resizeMode` property not modifiable through `tagStyles`, [#172](https://github.com/archriss/react-native-render-html/issues/172);
 - `imagesMaxWidth` not working, [#412](https://github.com/archriss/react-native-render-html/issues/412)
 
-## DEPRECATIONS (removed in v6)
+## DEPRECATED PROPS (removed in v6)
 
 - `allowFontScaling`, use `defaultTextProps.allowFontScaling` instead;
 - `textSelectable`, use `defaultTextProps.selectable` instead;
 - `decodeEntities`, use `htmlParserOptions.decodeEntities` instead.
+- `html`, use `source.html` instead.
+- `uri`, use `source.uri` instead.
 
 ## BREAKING CHANGES
 
@@ -168,8 +172,8 @@
 Example :
 
 ```javascript
-<HTML html={...} renderers={renderers} renderersProps={{ color: 'blue' } />
-<HTML html={...} renderers={renderers} renderersProps={{ color: 'red' } />
+<HTML source={...} renderers={renderers} renderersProps={{ color: 'blue' } />
+<HTML source={...} renderers={renderers} renderersProps={{ color: 'red' } />
 
 const renderers = {
     blockquote: (htmlAttribs, children, convertedCSSStyles, passProps) => {
