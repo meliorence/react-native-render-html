@@ -111,16 +111,6 @@ export default class HTML extends PureComponent {
   componentDidMount() {
     this.mounted = true;
     this.registerDOM();
-    if (__DEV__ && typeof this.props.contentWidth !== "number") {
-      console.warn(
-        "You should always pass contentWidth prop to properly handle screen rotations " +
-          "and have a seemless support for images scaling. " +
-          "In the meantime, HTML will fallback to Dimensions.window().width, but its " +
-          "layout will become inconsistent after screen rotations. " +
-          "You are encouraged to use useWindowDimensions hook, see: " +
-          "https://reactnative.dev/docs/usewindowdimensions"
-      );
-    }
   }
 
   componentWillUnmount() {
