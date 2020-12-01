@@ -14,7 +14,10 @@
   size to available width. For this to happen, **you must** pass `contentWidth`
   prop. We recommend using `useWindowDimensions().width` to handle screen
   rotation gracefully. If you don't want your images to grow after a certain
-  size, you could use `computeEmbeddedMaxWidth`.
+  size, you could use `computeEmbeddedMaxWidth`. Read the RFC document [“A
+  Deterministic Approach to Embedded Content
+  Scaling”](https://github.com/archriss/react-native-render-html/blob/master/rfc/001-A-deterministic-approach-to-embedded-content-scaling.adoc)
+  for more details.
 - New prop `computeEmbeddedMaxWidth` (see usage above).
 - New prop `contentWidth` (see usage above).
 - New prop `htmlParserOptions` to override

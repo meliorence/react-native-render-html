@@ -297,6 +297,10 @@ export default function Demo() {
 }
 ```
 
+Read the RFC document [“A Deterministic Approach to Embedded Content
+Scaling”](https://github.com/archriss/react-native-render-html/blob/master/rfc/001-A-deterministic-approach-to-embedded-content-scaling.adoc)
+for more details.
+
 ## Altering content
 
 `alterData` and `alterChildren` props are very useful to make some modifications on the structure of your HTML before it's actually rendered with react components.
