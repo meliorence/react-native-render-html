@@ -52,6 +52,7 @@ export type PassProps<P> = Pick<
   | "listsPrefixesRenderers"
   | "allowFontScaling"
   | "defaultTextProps"
+  | "defaultWebViewProps"
   | "textSelectable"
   | "allowedStyles"
   | "classesStyles"
@@ -287,6 +288,10 @@ export interface ContainerProps<P = {}> {
    * @remarks "style" will be ignored. Use `baseFontStyle` instead.
    */
   defaultTextProps?: Omit<TextProps, "style">;
+  /**
+   * Default props for WebView elements in the render tree used by plugins.
+   */
+  defaultWebViewProps?: any;
 }
 
 /**

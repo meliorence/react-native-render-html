@@ -81,6 +81,7 @@ export default class HTML extends PureComponent {
     renderersProps: PropTypes.object,
     WebView: PropTypes.elementType,
     defaultTextProps: PropTypes.object,
+    defaultWebViewProps: PropTypes.object,
     source: PropTypes.oneOfType([
       PropTypes.shape({
         uri: PropTypes.string.isRequired,
@@ -140,6 +141,7 @@ export default class HTML extends PureComponent {
     htmlParserOptions: {
       decodeEntities: true,
     },
+    defaultWebViewProps: {},
   };
 
   constructor(props) {
