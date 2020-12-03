@@ -639,7 +639,8 @@ export default class HTML extends PureComponent {
               parentIndex,
               key,
               data,
-              rawChildren: children,
+              domChildren: children,
+              domNode: element,
               ...renderersProps,
             });
           }

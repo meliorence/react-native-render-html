@@ -180,7 +180,7 @@ Just pass an object to the `renderers` prop with the tag name as the key, an a f
 
 ```javascript
 renderers: {
-  hr: () => (
+  hr: (htmlAttribs, children, convertedCSSStyles, passProps) => (
     <View style={{ width: "100%", height: 1, backgroundColor: "blue" }} />
   );
 }
@@ -195,7 +195,9 @@ const content = `<bluecircle></bluecircle>`;
 ...
 
 renderers: {
-    bluecircle: () => <View style={{ width: 20, height: 20, borderRadius: 10, backgroundColor: 'blue' }} />
+    bluecircle: (htmlAttribs, children, convertedCSSStyles, passProps) => (
+      <View style={{ width: 20, height: 20, borderRadius: 10, backgroundColor: 'blue' }} />
+    )
 }
 ```
 
@@ -204,7 +206,22 @@ Your renderers functions receive several arguments that will be very useful to m
 - `htmlAttribs`: attributes attached to the node, parsed in a react-native way
 - `children` : array with the children of the node
 - `convertedCSSStyles` : conversion of the `style` attribute from CSS to react-native's stylesheet
-- `passProps` : various useful information : your `renderersProps`, `groupInfo`, `parentTag`, `parentIsText`...
+- `passProps` : various useful information :
+  * `renderersProps` - the prop of the same name passed to the HTML component
+  * `nodeIndex` - the index of the position relative to parent
+  * `domChildren` - the list of DOM children
+  * `domNode` - the DOM node
+  * `parentWrapper` - Text or View?
+  * `data` - for dom Text elements
+  * `key` - the key for this renderer instance
+  * `parentTag`
+  * `onLinkPress`
+  * `tagsStyles`
+  * `classesStyles`
+  * `defaultTextProps`
+  * `defaultWebViewProps`
+  * `computeEmbeddedMaxWidth`
+  * `contentWidth`
 
 ### Making your custom component block or inline
 

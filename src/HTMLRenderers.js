@@ -107,7 +107,7 @@ export function ul(htmlAttribs, children, convertedCSSStyles, passProps = {}) {
     styleSet: "VIEW",
   });
   const {
-    rawChildren,
+    domChildren,
     nodeIndex,
     key,
     baseFontStyle,
@@ -118,7 +118,7 @@ export function ul(htmlAttribs, children, convertedCSSStyles, passProps = {}) {
   children =
     children &&
     children.map((child, index) => {
-      const rawChild = rawChildren[index];
+      const rawChild = domChildren[index];
       let prefix = false;
       const rendererArgs = [
         htmlAttribs,

@@ -35,6 +35,7 @@
 - New `defaultWebViewProps` for `WebView`-based plugins (tables, iframes...).
 - Export `constructStyles`, `getParentsTagsRecursively`,
   `getClosestNodeParentByTag` and `IGNORED_TAGS` from index.js.
+- New `domNode` field in `passProps`.
 
 ## Bugfixes
 
@@ -60,6 +61,8 @@
 - `imagesMaxWidth` had been discontinued in favor of `computeEmbeddedMaxWidth`.
   This function takes the provided `contentWidth` as an argument, and returns
   the space the image should take.
+- In the `passProps` 4th argument of renderer functions, the field
+  `rawChildren` has been renamed to `domChildren`.
 
 # v4.2.4
 
