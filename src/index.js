@@ -6,4 +6,5 @@ export {
   getClosestNodeParentByTag,
   IGNORED_TAGS,
 } from "./HTMLUtils";
+export { default as domNodeToHTMLString } from "./domNodeToHTMLString";
 export default HTML;

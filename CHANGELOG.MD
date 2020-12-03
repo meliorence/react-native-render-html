@@ -36,6 +36,7 @@
 - Export `constructStyles`, `getParentsTagsRecursively`,
   `getClosestNodeParentByTag` and `IGNORED_TAGS` from index.js.
 - New `domNode` field in `passProps`.
+- New `domNodeToHTMLString` util to get the HTML representation of a DOM node.
 
 ## Bugfixes
 

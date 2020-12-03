@@ -50,14 +50,14 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 
 ## Versions
 
-> :warning: **You are on the master branch which is home for the latest development.**
+>:warning: **You are on the master branch which is home for the latest development.**
 > Check the table bellow to get documentation for your exact
 > version. Because the patch version is irrelevant regarding the features of one
 > version, we will point to the last patch release of a minor version. You can
 > read our full branching policy in the
 > [MAINTAINING.adoc](MAINTAINING.adoc#branching) file.
 
-> :warning: We indulged ourselves when releasing **4.2.0** regarding
+>:warning: We indulged ourselves when releasing **4.2.0** regarding
 > **Semantic Versioning**, because we introduced `react-native-webview` as a peer
 > dependency. As a result, you need to install it yourself. Please follow [the
 > plugin's
@@ -88,7 +88,7 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 npm install react-native-render-html
 ```
 
-> :city_sunrise: To try out pre-releases up-to-date with development, including many fixes, you are
+>:city_sunrise: To try out pre-releases up-to-date with development, including many fixes, you are
 > encouraged to install the `next` tag versions. With our (new) test-first
 > approach, the fixes and features in this branch will have been tested, so the
 > chances you encounter a bug is pretty low. If you encounter any issue on a
@@ -176,7 +176,7 @@ This is very useful if you want to make some very specific styling of your HTML 
 
 ### Custom HTML tags
 
-Just pass an object to the `renderers` prop with the tag name as the key, an a function as its value, like so :
+Just pass an object to the `renderers` prop with the tag name as the key, an a function as its value, like so:
 
 ```javascript
 renderers: {
@@ -188,7 +188,7 @@ renderers: {
 
 Here, we have overriden the default `<hr />` renderer and made it a blue line.
 
-You can also create your own tags and use them in your HTML content :
+You can also create your own tags and use them in your HTML content:
 
 ```javascript
 const content = `<bluecircle></bluecircle>`;
@@ -204,9 +204,9 @@ renderers: {
 Your renderers functions receive several arguments that will be very useful to make some very specific rendering.
 
 - `htmlAttribs`: attributes attached to the node, parsed in a react-native way
-- `children` : array with the children of the node
-- `convertedCSSStyles` : conversion of the `style` attribute from CSS to react-native's stylesheet
-- `passProps` : various useful information :
+- `children`: array with the children of the node
+- `convertedCSSStyles`: conversion of the `style` attribute from CSS to react-native's stylesheet
+- `passProps`: various useful information:
   * `renderersProps` - the prop of the same name passed to the HTML component
   * `nodeIndex` - the index of the position relative to parent
   * `domChildren` - the list of DOM children
@@ -227,7 +227,7 @@ Your renderers functions receive several arguments that will be very useful to m
 
 By default, a custom renderer behaves like a block. So if you're rendering it between texts inside a `<p>`, you'll break your line.
 
-If you want it to be inline, you can slightly change the way you declare it, like this :
+If you want it to be inline, you can slightly change the way you declare it, like this:
 
 ```javascript
 renderers: {
@@ -236,13 +236,13 @@ renderers: {
 }
 ```
 
-> Note : the only values for `wrapper` are `Text` or `View` (default). Those don't represent the `<View>` and `<Text>` component of react-native but are instead used in the parser to prevent crashes and properly render every HTML markup.
+> Note: the only values for `wrapper` are `Text` or `View` (default). Those don't represent the `<View>` and `<Text>` component of react-native but are instead used in the parser to prevent crashes and properly render every HTML markup.
 
 ### Lists prefixes
 
 The default renderer of the `<ul>` and `<ol>` tags will either render a bullet or the count of your elements. If you wish to change this without having to re-write the whole list rendering implementation, you can use the `listsPrefixesRenderers` prop.
 
-Just like with the `renderers` prop, supply an object with `ul` and/or `ul` as functions that receive the [same arguments as your custom HTML tags](#custom-html-tags). For instance, you can swap the default black bullet of `<ul>` with a blue cross :
+Just like with the `renderers` prop, supply an object with `ul` and/or `ul` as functions that receive the [same arguments as your custom HTML tags](#custom-html-tags). For instance, you can swap the default black bullet of `<ul>` with a blue cross:
 
 ```javascript
 // ... your props
@@ -259,7 +259,7 @@ Styling options override themselves, so you might render a custom HTML tag with 
 
 The default style of your custom renderer will be merged to the one from your `classesStyles` which will also be merged by the `style` attribute.
 
-> **IMPORTANT NOTE : Do NOT use the `StyleSheet` API to create the styles you're going to feed to `tagsStyle` and `classesStyles`. Although it might look like it's working at first, the caching logic of `react-native` makes it impossible for this module to deep check each of your style to properly apply the precedence and priorities of your nested tags' styles.**
+> **IMPORTANT NOTE: Do NOT use the `StyleSheet` API to create the styles you're going to feed to `tagsStyle` and `classesStyles`. Although it might look like it's working at first, the caching logic of `react-native` makes it impossible for this module to deep check each of your style to properly apply the precedence and priorities of your nested tags' styles.**
 
 Here's a usage example
 
@@ -328,7 +328,7 @@ They both are functions that receive the parsed `node` as their first and only p
 
 `alterData` allows you to change the text content of your nodes. For instance, you can customize the content of `<h1>` and `<h2>` to render your titles in uppercase.
 
-Here's how you would do that :
+Here's how you would do that:
 
 ```javascript
 // ... your props
@@ -347,7 +347,7 @@ alterData: (node) => {
 
 `alterChildren` allows you to change the children wrapped in any node. For instance, you might want to change the content of a list.
 
-Here's an example :
+Here's an example:
 
 ```javascript
 // ... your props
@@ -365,7 +365,7 @@ alterChildren: (node) => {
 
 `alterNode` allows you to change the values parsed from your HTML before it's rendered. It's extremely powerful as a last resort to add some very specific styling or circumvent rendering problems.
 
-Here's an advanced example where you would change the color of links inside a `<blockquote>` :
+Here's an advanced example where you would change the color of links inside a `<blockquote>`:
 
 ```javascript
 alterNode: (node) => {
@@ -388,7 +388,7 @@ alterNode: (node) => {
 
 `onParsed` is a callback and lets you know when your HTML has been parsed. Its first argument is the `dom` array from htmlparser2, its second is `RNElements` which is the result of the parsing of this module.
 
-If you want to tweak the parsed values, you can change `RNElements` and return it. For instance, you could insert one of your custom component although it was not in your HTML content, like this :
+If you want to tweak the parsed values, you can change `RNElements` and return it. For instance, you could insert one of your custom component although it was not in your HTML content, like this:
 
 ```javascript
 onHTMLParsed = (dom, RNElements) => {
@@ -411,11 +411,11 @@ onHTMLParsed = (dom, RNElements) => {
 
 You can't expect native components to be able to render _everything_ you can find in your browser. And you might not entirely trust your contributors, so here are 3 props allowing you to prevent disasters without sanitizing your HTML on the server-side (that doesn't mean you shouldn't !).
 
-- `ignoredTags` : array of ignored HTML tags, by default `head` and `scripts` are removed
-- `ignoredStyles` : array of ignored CSS rules. Nothing is ignored by default
-- `ignoreNodesFunction` : this is a cumbersome, yet powerful, way of ignoring very specific stuff.
+- `ignoredTags`: array of ignored HTML tags, by default `head` and `scripts` are removed
+- `ignoredStyles`: array of ignored CSS rules. Nothing is ignored by default
+- `ignoreNodesFunction`: this is a cumbersome, yet powerful, way of ignoring very specific stuff.
 
-**Please note** that if you supply `ignoredTags`, you will override the default ignored ones. There are _a lot_ of them, if you want to keep them and add your own, you can do something like :
+**Please note** that if you supply `ignoredTags`, you will override the default ignored ones. There are _a lot_ of them, if you want to keep them and add your own, you can do something like:
 
 ```javascript
 import { IGNORED_TAGS } from 'react-native-render-html';
@@ -425,14 +425,14 @@ import { IGNORED_TAGS } from 'react-native-render-html';
 ignoredTags={[ ...IGNORED_TAGS, 'tag1', 'tag2']}
 ```
 
-`ignoreNodesFunction` receives 3 parameters : `node`, `parentTagName` and `parentIsText`.
+`ignoreNodesFunction` receives 3 parameters: `node`, `parentTagName` and `parentIsText`.
 
 `node` is the result of the HTML parsing, which allows you to look for children, check the parent's markup and much more. `parentTagName` is a convenient way to access the parent of your node, and `parentIsText` is a great way to make sure you won't be rendering a `<View>` inside a `<Text>` which, right now, makes react-native crash.
 
 ## Utilities
 
 The API is exposing some functions you can use to write advanced behaviors more easily.
-You can import them like so :
+You can import them like so:
 
 ```javascript
 import { functionName } from "react-native-render-html";
@@ -441,19 +441,27 @@ import { functionName } from "react-native-render-html";
 - `getParentsTagsRecursively(node)`
   - _Description_: Returns an array with the tagname of every parent of a node or an empty array if nothing is found.
   - _Parameters_:
-    - `node` : a parsed HTML node from `alterChildren` for example
+    - `node`: a parsed HTML node from `alterChildren` for example
   - _Returns_: An empty array or an array of strings.
   - Notes: this is very useful to check if a node is nested in a specific parent. See [alterNode](#alterNode) for an advanced example.
 - `getClosestNodeParentByTag(node, tag)`
   - _Description_: Returns the closest parent of a node with a specific tag.
-  - _Parameters_ :
-    - `node` : a parsed HTML node from `alterChildren` for example
-  - _Returns_ : An HTML node if found.
+  - _Parameters_:
+    - `node`: a parsed HTML node from `alterChildren` for example
+  - _Returns_: An HTML node if found.
 - `constructStyles(params)`
   - _Description_: Create styles for a node to render.
-  - _Parameters_ :
-    - `params` : an object with requirements to assemble styles (see Type definitions)
-  - _Returns_ : A styles array (style prop).
+  - _Parameters_:
+    - `params`: an object with requirements to assemble styles (see Type definitions)
+  - _Returns_: A styles array (style prop).
+- `domNodeToHTMLString(node, reporter)`
+  - _Description_: Convert a DOM node to its HTML representation.
+  - _Parameters_:
+    - `node`: The DOM node stringify.
+    - `reporter(node, depth, html)`: An optional function which takes every
+      parsed node as 1st argument, the node depth as 2d argument, the
+      transformed HTML for this node as 3d argument.
+  - _Returns_: An HTML string converted from the DOM node.
 
 ## Help
 

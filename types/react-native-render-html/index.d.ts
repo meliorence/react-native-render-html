@@ -329,6 +329,20 @@ export function constructStyles(params: {
 }): StyleProp<any>;
 
 /**
+ *
+ * Convert a DOM node to its HTML representation.
+ *
+ * @param root - The node to stringify.
+ * @param reporter? - An optional function which will receive every
+ * parsed node as 1st argument, the depth as 2d argument and the converted html
+ * as 3d argument.
+ */
+export function domNodeToHTMLString(
+  root: HTMLNode,
+  reporter?: (node: HTMLNode, depth: number, html: string) => void
+): string;
+
+/**
  * The set of default ignored tags
  */
 export const IGNORED_TAGS: string[];
