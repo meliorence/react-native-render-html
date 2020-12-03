@@ -1,3 +1,10 @@
+# [6.0.0-alpha.10](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.9...v6.0.0-alpha.10) (2020-12-03)
+
+
+### Bug Fixes
+
+* use unicode escape sequences inside regex literal instead of string ([1299514](https://github.com/archriss/react-native-render-html/commit/1299514d094fa8f680883d43c96efafbfabc3ab4))
+
 # [6.0.0-alpha.9](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.8...v6.0.0-alpha.9) (2020-12-01)
 
 ### Features
