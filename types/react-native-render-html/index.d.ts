@@ -36,6 +36,18 @@ export interface HtmlAttributesDictionary {
   [attribute: string]: string | number;
 }
 
+export interface TransientNode {
+  wrapper: "Text" | "View";
+  children: TransientNode[];
+  attribs: HtmlAttributesDictionary;
+  parent?: TransientNode;
+  tagName?: string;
+  data?: string;
+  parentTag?: string;
+  domNode: HTMLNode;
+  nodeIndex: number;
+}
+
 export type PassProps<P> = Pick<
   ContainerProps,
   | "WebView"
@@ -64,11 +76,11 @@ export type PassProps<P> = Pick<
   | "enableExperimentalPercentWidth"
 > & {
   nodeIndex: number;
-  transientChildren: any[];
+  transientChildren: TransientNode[];
   domNode: HTMLNode;
-  parentWrapper: "Text" | string;
+  parentWrapper: "Text" | "View";
   parentTag?: string;
-  data: any;
+  data?: string;
   key: string;
   renderersProps: P;
 };
@@ -193,10 +205,14 @@ export interface ContainerProps<P = {}> {
     href: string,
     htmlAttribs: HtmlAttributesDictionary
   ) => void;
+
   /**
    * Fired when your HTML content has been parsed. Also useful to tweak your rendering.
+   *
+   * @param root - The root transient node.
+   * @returns The modified root.
    */
-  onParsed?: any;
+  onParsed?: (root: TransientNode) => TransientNode;
   /**
    * Provide your styles for specific HTML tags.
    *

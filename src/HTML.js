@@ -438,6 +438,7 @@ export default class HTML extends PureComponent {
           parentTag: parent && parent.name,
           tagName: name || "rawtext",
           domNode: node,
+          nodeIndex,
         };
       }
       if (type === "tag") {
@@ -468,6 +469,7 @@ export default class HTML extends PureComponent {
           tagName: name,
           parentTag,
           domNode: node,
+          nodeIndex,
         };
       }
     })
