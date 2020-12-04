@@ -14,4 +14,20 @@ describe("domNodeToHTMLString", () => {
     domNodeToHTMLString(root[0], reporter);
     expect(reporter).toHaveBeenCalledTimes(7);
   });
+  it("should handle tables", () => {
+    const tableSnippet = `<table>
+    <tr>
+      <th>Entry Header 1</th>
+      <th>Entry Header 2</th>
+      <th>Entry Header 3</th>
+    </tr>
+    <tr>
+      <td>Entry First Line 1</td>
+      <td>Entry First Line 2</td>
+      <td>Entry First Line 3</td>
+    </tr>
+  </table>`;
+    const root = parseDOM(tableSnippet);
+    expect(domNodeToHTMLString(root[0])).toBe(tableSnippet);
+  });
 });
