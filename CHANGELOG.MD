@@ -37,6 +37,7 @@
   `getClosestNodeParentByTag` and `IGNORED_TAGS` from index.js.
 - New `domNode` field in `passProps`.
 - New `domNodeToHTMLString` util to get the HTML representation of a DOM node.
+- The internal pre-render tree structure is now typed (`TransientNode`) as well as `onParsed`.
 
 ## Bugfixes
 
