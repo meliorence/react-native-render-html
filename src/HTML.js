@@ -437,6 +437,7 @@ export default class HTML extends PureComponent {
           parent,
           parentTag: parent && parent.name,
           tagName: name || "rawtext",
+          domNode: node,
         };
       }
       if (type === "tag") {
@@ -459,7 +460,15 @@ export default class HTML extends PureComponent {
         ) {
           wrapper = "Text";
         }
-        return { wrapper, children, attribs, parent, tagName: name, parentTag };
+        return {
+          wrapper,
+          children,
+          attribs,
+          parent,
+          tagName: name,
+          parentTag,
+          domNode: node,
+        };
       }
     })
       .filter((parsedNode) => parsedNode !== false && parsedNode !== undefined) // remove useless nodes
@@ -580,6 +589,7 @@ export default class HTML extends PureComponent {
             children,
             nodeIndex,
             wrapper,
+            domNode,
           } = element;
           const Wrapper = wrapper === "Text" ? Text : View;
           const key = `${wrapper}-${parentIndex}-${nodeIndex}-${tagName}-${index}-${parentTag}`;
@@ -639,8 +649,8 @@ export default class HTML extends PureComponent {
               parentIndex,
               key,
               data,
-              domChildren: children,
-              domNode: element,
+              transientChildren: children,
+              domNode: domNode,
               ...renderersProps,
             });
           }

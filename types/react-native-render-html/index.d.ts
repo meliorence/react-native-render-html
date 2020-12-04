@@ -64,7 +64,7 @@ export type PassProps<P> = Pick<
   | "enableExperimentalPercentWidth"
 > & {
   nodeIndex: number;
-  domChildren: HTMLNode[];
+  transientChildren: any[];
   domNode: HTMLNode;
   parentWrapper: "Text" | string;
   parentTag?: string;

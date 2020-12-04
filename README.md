@@ -209,7 +209,7 @@ Your renderers functions receive several arguments that will be very useful to m
 - `passProps`: various useful information:
   * `renderersProps` - the prop of the same name passed to the HTML component
   * `nodeIndex` - the index of the position relative to parent
-  * `domChildren` - the list of DOM children
+  * `transientChildren` - the list of transient children (was previously known as `rawChildren`)
   * `domNode` - the DOM node
   * `parentWrapper` - Text or View?
   * `data` - for dom Text elements

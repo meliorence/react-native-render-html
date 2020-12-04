@@ -63,7 +63,7 @@
   This function takes the provided `contentWidth` as an argument, and returns
   the space the image should take.
 - In the `passProps` 4th argument of renderer functions, the field
-  `rawChildren` has been renamed to `domChildren`.
+  `rawChildren` has been renamed to `transientChildren`.
 
 # v4.2.4
 
