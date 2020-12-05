@@ -59,6 +59,12 @@
 - In the `passProps` 4th argument of renderer functions, the field
   `rawChildren` has been renamed to `transientChildren`.
 
+# v4.2.5
+
+## Bugfixes
+
+- re-render `HTML` component on `baseFontStyle` updates
+
 # v4.2.4
 
 ## Bugfixes
