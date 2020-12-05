@@ -1,3 +1,9 @@
+# v4.2.5
+
+## Bugfixes
+
+- re-render `HTML` component on `baseFontStyle` updates
+
 # v4.2.4
 
 ## Bugfixes
