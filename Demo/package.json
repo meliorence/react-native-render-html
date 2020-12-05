@@ -10,9 +10,10 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@native-html/iframe-plugin": "^1.1.1",
     "react": "16.13.1",
     "react-native": "0.63.2",
-    "react-native-render-html": "^5.0.0-alpha.1",
+    "react-native-render-html": "^5.0.0",
     "react-native-webview": "^10.4.0"
   },
   "devDependencies": {

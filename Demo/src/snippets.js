@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import { _constructStyles } from 'react-native-render-html/src/HTMLStyles';
-import { getParentsTagsRecursively } from 'react-native-render-html/src/HTMLUtils';
+import {View, Text} from 'react-native';
+import {constructStyles} from 'react-native-render-html';
+import iframe from '@native-html/iframe-plugin';
 
 export const paragraphs = `
 <p style="font-size:1.3em;">This paragraph is styled a font size set in em !</p>
@@ -81,7 +81,7 @@ export const layoutStyles = `
 export const textsStylesBehaviour = `
 <p>Styling texts is a very tricky part of converting HTML into react-native components.</p>
 <p>The way react-native's <em>Text</em> components behaves is a lot different from our browsers' implementation.</p>
-<p>Let's see how styles are applied to texts with this plugin.</p>
+<p>Let's see how styles are applied to texts.</p>
 
 <div style="color:red;">This text is inside a div, without a text tag wrapping it. The <em>div</em> tag only has <em>color:red;</em> as style.</div>
 
@@ -102,7 +102,6 @@ This is because this library parses every text-only style of <em>View</em> wrapp
 then your <em>classessStyles</em> and finally the styles parsed from your HTML content.</p>
 `;
 
-
 export const ignoringTagsAndStyles = `
     <p>The following tag (h2) is ignored with the "ignoredTags" prop</p>
     <h2>This shouldn't be rendered !</h2>
@@ -118,7 +117,7 @@ export const ignoringTagsAndStyles = `
 `;
 
 export const customHTMLTags = `
-    <p>This example showcases how you can render custom HTML tags with this plugin.</p>
+    <p>This example showcases how you can render custom HTML tags.</p>
     <p>The following tag is named <em>bluecircle</em> and will render... a blue circle.</p>
     <bluecircle></bluecircle>
     <p>Let's get crazy and add some styling to our custom tag.</p>
@@ -145,8 +144,7 @@ export const invalidHTML = `
 `;
 
 export const iframes = `
-    <p>Yes you read that right, those damn iframes can render with this plugin.</p>
-    <p>Check this out</p>
+    <p>As of v5.0.0, inline frames are not rendered by default. You must import @native-html/iframe-plugin and register the default export as the renderer for iframe tag:</p>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/ZZ5LpwO-An4" frameborder="0" allowfullscreen></iframe>
     </iframe>
     <p style="text-align:center;"><em>We've just rendered a meme</em></p>
@@ -174,123 +172,158 @@ export const inlineCustomTags = `
     <p>Foo <myothertag></myothertag> baz</p>
 `;
 
-function myTagRenderer (htmlAttribs, children) {
-    return (
-        <Text>Bar</Text>
-    );
+function myTagRenderer(htmlAttribs, children) {
+  return <Text>Bar</Text>;
 }
 
-function myOtherTagRenderer () {
-    return (
-        <Text>this should break the line</Text>
-    );
+function myOtherTagRenderer() {
+  return <Text>this should break the line</Text>;
 }
 
 export default {
-    paragraphs: {
-        name: 'Paragraphs',
-        props: {
-            baseFontSize: 14,
-            tagsStyles: {
-                i: { textAlign: 'center', fontStyle: 'italic', color: 'grey' }
-            },
-            classesStyles: { 'last-paragraph': { textAlign: 'right', color: 'teal', fontWeight: '800' } }
-        }
+  paragraphs: {
+    name: 'Paragraphs',
+    props: {
+      baseFontSize: 14,
+      tagsStyles: {
+        i: {textAlign: 'center', fontStyle: 'italic', color: 'grey'},
+      },
+      classesStyles: {
+        'last-paragraph': {
+          textAlign: 'right',
+          color: 'teal',
+          fontWeight: '800',
+        },
+      },
     },
-    lists: { name: 'Lists', props: { baseFontSize: 14 } },
-    simpleLoremWithImages: { name: 'Simple lorem (images)', props: { baseFontSize: 20 } },
-    imagesWithinParagraphs: { name: 'Images within paragraphs' },
-    images404: { name: '404 images', props: { baseFontSize: 20 } },
-    trickyStuff: { name: 'Tricky stuff' },
-    layoutStyles: { name: 'Layout styles' },
-    textsStylesBehaviour: {
-        name: 'Texts styles behaviour',
-        props: {
-            tagsStyles: {
-                div: { borderWidth: 1, padding: 10, marginBottom: 10 }
-            }
-        }
+  },
+  lists: {name: 'Lists', props: {baseFontSize: 14}},
+  simpleLoremWithImages: {
+    name: 'Simple lorem (images)',
+    props: {baseFontSize: 20},
+  },
+  imagesWithinParagraphs: {name: 'Images within paragraphs'},
+  images404: {name: '404 images', props: {baseFontSize: 20}},
+  trickyStuff: {name: 'Tricky stuff'},
+  layoutStyles: {name: 'Layout styles'},
+  textsStylesBehaviour: {
+    name: 'Texts styles behaviour',
+    props: {
+      tagsStyles: {
+        div: {borderWidth: 1, padding: 10, marginBottom: 10},
+      },
     },
-    ignoringTagsAndStyles: {
-        name: 'Ignoring tags & styles',
-        props: {
-            ignoredTags: ['h2'],
-            ignoredStyles: ['background-color'],
-            ignoreNodesFunction: (node, parentTagName) => {
-                return node.parent && node.parent.name === 'a' && node.parent.parent && node.parent.parent.name === 'div';
-            }
-        }
+  },
+  ignoringTagsAndStyles: {
+    name: 'Ignoring tags & styles',
+    props: {
+      ignoredTags: ['h2'],
+      ignoredStyles: ['background-color'],
+      ignoreNodesFunction: (node, parentTagName) => {
+        return (
+          node.parent &&
+          node.parent.name === 'a' &&
+          node.parent.parent &&
+          node.parent.parent.name === 'div'
+        );
+      },
     },
-    customHTMLTags: {
-        name: 'Custom HTML tags',
-        props: {
-            renderers: { bluecircle: blueCircleRenderer },
-            classesStyles: { 'make-me-green': { backgroundColor: 'green' } }
-        }
+  },
+  customHTMLTags: {
+    name: 'Custom HTML tags',
+    props: {
+      renderers: {bluecircle: blueCircleRenderer},
+      classesStyles: {'make-me-green': {backgroundColor: 'green'}},
     },
-    invalidHTML: { name: 'Invalid HTML' },
-    parseRemoteHTML: { name: 'Remote HTML', props: { html: undefined, uri: 'http://motherfuckingwebsite.com', ignoredTags: ['script'] } },
-    iframes: { name: 'Iframes' },
-    alteration: {
-        name: 'Altering data, chlidren & nodes',
-        props: {
-            alterData: (node) => {
-                let { parent, data } = node;
-                if (parent && parent.name === 'h1') {
-                    return data.toUpperCase();
-                } else {
-                    return false;
-                }
-            },
-            alterChildren: (node) => {
-                const { children, name } = node;
-                if (name === 'ol' && children && children.length) {
-                    return children.splice(0, 2);
-                } else {
-                    return false;
-                }
-            },
-            alterNode: (node) => {
-                const { name, parent } = node;
-                if (name === 'a' && parent && parent.name === 'div') {
-                    node.attribs = { ...(node.attribs || {}), style: 'color:red;' };
-                    return node;
-                }
-            }
-        }
+  },
+  invalidHTML: {name: 'Invalid HTML'},
+  parseRemoteHTML: {
+    name: 'Remote HTML',
+    props: {
+      html: undefined,
+      uri: 'http://motherfuckingwebsite.com',
+      ignoredTags: ['script'],
     },
-    inlineCustomTags: {
-        name: 'Inline custom tags',
-        props: {
-            renderers: {
-                mytag: { renderer: myTagRenderer, wrapper: 'Text' },
-                myothertag: myOtherTagRenderer
-            }
+  },
+  iframes: {
+    name: 'Iframes',
+    props: {
+      renderers: {
+        iframe,
+      },
+      tagsStyles: {
+        iframe: {
+          alignSelf: 'center',
+        },
+      },
+    },
+  },
+  alteration: {
+    name: 'Altering data, chlidren & nodes',
+    props: {
+      alterData: (node) => {
+        let {parent, data} = node;
+        if (parent && parent.name === 'h1') {
+          return data.toUpperCase();
+        } else {
+          return false;
         }
-    }
+      },
+      alterChildren: (node) => {
+        const {children, name} = node;
+        if (name === 'ol' && children && children.length) {
+          return children.splice(0, 2);
+        } else {
+          return false;
+        }
+      },
+      alterNode: (node) => {
+        const {name, parent} = node;
+        if (name === 'a' && parent && parent.name === 'div') {
+          node.attribs = {...(node.attribs || {}), style: 'color:red;'};
+          return node;
+        }
+      },
+    },
+  },
+  inlineCustomTags: {
+    name: 'Inline custom tags',
+    props: {
+      renderers: {
+        mytag: {renderer: myTagRenderer, wrapper: 'Text'},
+        myothertag: myOtherTagRenderer,
+      },
+    },
+  },
 };
 
-function blueCircleRenderer (htmlAttribs, children, convertedCSSStyles, passProps) {
-    // This helper allows you to compose the final style of your renderers easily.
-    // It will return a style object based on :
-    // - the default styles for this HTML tag (if any)
-    // - your "htmlStyles" prop for this tag
-    // - the conversion of the "style" attribute from CSS to RN
-    // - your "classesStyles" prop for the classes of the rendered component
-    // - any "additionalyStyles" you provide in the options object
-    const style = _constructStyles({
-        tagName: 'bluecircle',
-        htmlAttribs,
-        passProps,
-        styleSet: 'VIEW',
-        baseFontSize: 14
-    });
-    return (
-        <View
-          key={passProps.key}
-          style={[
-              { width: 50, height: 50, borderRadius: 25, backgroundColor: 'blue' },
-              style
-          ]} />
-    );
+function blueCircleRenderer(
+  htmlAttribs,
+  children,
+  convertedCSSStyles,
+  passProps,
+) {
+  // This helper allows you to compose the final style of your renderers easily.
+  // It will return a style object based on :
+  // - the default styles for this HTML tag (if any)
+  // - your "htmlStyles" prop for this tag
+  // - the conversion of the "style" attribute from CSS to RN
+  // - your "classesStyles" prop for the classes of the rendered component
+  // - any "additionalyStyles" you provide in the options object
+  const style = constructStyles({
+    tagName: 'bluecircle',
+    htmlAttribs,
+    passProps,
+    styleSet: 'VIEW',
+    baseFontSize: 14,
+  });
+  return (
+    <View
+      key={passProps.key}
+      style={[
+        {width: 50, height: 50, borderRadius: 25, backgroundColor: 'blue'},
+        style,
+      ]}
+    />
+  );
 }

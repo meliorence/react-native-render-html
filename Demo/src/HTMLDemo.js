@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import HTML from 'react-native-render-html';
+import WebView from 'react-native-webview';
 import EXAMPLES, * as snippets from './snippets';
 import styles, {CONTENT_PADDING_HZ} from './styles';
 
@@ -16,6 +17,7 @@ const IMAGES_MAX_WIDTH = Dimensions.get('window').width - 50;
 const CUSTOM_STYLES = {};
 const CUSTOM_RENDERERS = {};
 const DEFAULT_PROPS = {
+  WebView,
   htmlStyles: CUSTOM_STYLES,
   renderers: CUSTOM_RENDERERS,
   imagesMaxWidth: IMAGES_MAX_WIDTH,
