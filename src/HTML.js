@@ -171,6 +171,7 @@ export default class HTML extends PureComponent {
   componentDidUpdate(prevProps, prevState) {
     const {
       renderers,
+      baseFontStyle,
       tagsStyles,
       classesStyles,
       contentWidth,
@@ -181,6 +182,7 @@ export default class HTML extends PureComponent {
       classesStyles !== this.props.classesStyles ||
       contentWidth !== this.props.contentWidth ||
       computeEmbeddedMaxWidth !== this.props.computeEmbeddedMaxWidth ||
+      baseFontStyle !== this.props.baseFontStyle ||
       this.state.dom !== prevState.dom;
 
     this.generateDefaultStyles(this.props.baseFontStyle);
