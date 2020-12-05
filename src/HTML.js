@@ -93,7 +93,7 @@ export default class HTML extends PureComponent {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        const { html, uri, renderers, tagsStyles, classesStyles } = prevProps;
+        const { html, uri, renderers, tagsStyles, classesStyles, baseFontStyle } = prevProps;
         let doParseDOM = false;
 
         this.generateDefaultStyles(this.props.baseFontStyle);
@@ -104,7 +104,7 @@ export default class HTML extends PureComponent {
             // If the source changed, register the new HTML and parse it
             this.registerDOM(this.props);
         }
-        if (tagsStyles !== this.props.tagsStyles || classesStyles !== this.props.classesStyles) {
+        if (tagsStyles !== this.props.tagsStyles || classesStyles !== this.props.classesStyles || baseFontStyle !== this.props.baseFontStyle) {
             // If the tagsStyles changed, render again
             this.parseDOM(this.state.dom, this.props);
         }
