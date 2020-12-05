@@ -120,7 +120,6 @@ underlying element (Text or View).
 * missing proptype (onHTMLLoaded) ([fca6898](https://github.com/archriss/react-native-render-html/commit/fca6898f7ed62e3180e9a15fb1391601002931ce))
 * use onError to evaluate the fetch state of the image ([d8a9333](https://github.com/archriss/react-native-render-html/commit/d8a93337ecf0d84ddf34f236802b1f961450dc98))
 
-
 ### Features
 
 * enableExperimentalMarginCollapsing prop ([42bfa53](https://github.com/archriss/react-native-render-html/commit/42bfa53d786a3afb3f551a21882fc157aa6b935d))
@@ -131,7 +130,6 @@ underlying element (Text or View).
 * onHTMLLoaded prop ([ef65140](https://github.com/archriss/react-native-render-html/commit/ef6514087e516a2d7c4ca2bd13cb022c471edb8e))
 * support for loading HTML from URI ([2fba800](https://github.com/archriss/react-native-render-html/commit/2fba800ba1bfb574caf37cedf181e4b4398e2163))
 * triggerTREInvalidationPropNames prop ([8a18fdb](https://github.com/archriss/react-native-render-html/commit/8a18fdb89faee3c9defa97ca4622ea9fda9495d2))
-
 
 ### Performance Improvements
 
