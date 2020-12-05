@@ -1,11 +1,3 @@
-> :warning: We indulged ourselves when releasing **4.2.0** regarding
-> **Semantic Versioning**, because we introduced `react-native-webview` as a peer
-> dependency. As a result, you need to install it yourself. Please follow [the
-> plugin's
-> instructions](https://github.com/react-native-community/react-native-webview/blob/master/docs/Getting-Started.md).
-> We have since deliberately [committed to Semantic
-> Versioning](MAINTAINING.adoc#semantic-versioning).
-
 # next (5.X)
 
 ## Enhancements
@@ -55,14 +47,15 @@
 
 ## BREAKING CHANGES
 
-- (TypeScript users), requires minimum TypeScript version 3.5 (was 2.8)
+- (TypeScript users), requires minimum TypeScript version 3.5 (was 2.0)
 - `iframe` tag element is not rendered anymore, and `react-native-webview` has
   been removed from peer dependencies; use
-  [`@native-html/iframe-plugin`](https://github.com/native-html/plugins/tree/plugins/packages/iframe-plugin)
+  [`@native-html/iframe-plugin`](https://github.com/native-html/plugins/tree/master/packages/iframe-plugin#readme)
   instead, which supports `onLinkPress` and scales to content width :rocket:.
-- `imagesMaxWidth` had been discontinued in favor of `computeEmbeddedMaxWidth`.
-  This function takes the provided `contentWidth` as an argument, and returns
-  the space the image should take.
+- `imagesMaxWidth` and `staticContentMaxWidth` have been discontinued in favor
+  of `computeEmbeddedMaxWidth`. This function takes the provided `contentWidth`
+  as 1st argument, tag name as 2d argument and returns the max width of the
+  embedded (iframe, image...).
 - In the `passProps` 4th argument of renderer functions, the field
   `rawChildren` has been renamed to `transientChildren`.
 

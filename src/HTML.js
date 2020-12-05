@@ -33,7 +33,7 @@ import { DomHandler, Parser } from "htmlparser2";
 import deprecated from "deprecated-prop-type";
 import * as HTMLRenderers from "./HTMLRenderers";
 
-const DEPREC_MSG = "This prop will be removed in v6 release. ";
+const DEPREC_MSG = "This prop will be removed in the v6 release. ";
 
 function sourceObjectsAreEqual(oldSource, newSource) {
   return oldSource.uri === newSource.uri && oldSource.html === newSource.html;
@@ -68,7 +68,6 @@ export default class HTML extends PureComponent {
     onLinkPress: PropTypes.func,
     onParsed: PropTypes.func,
     computeEmbeddedMaxWidth: PropTypes.func,
-    staticContentMaxWidth: PropTypes.number,
     contentWidth: PropTypes.number,
     enableExperimentalPercentWidth: PropTypes.bool,
     imagesInitialDimensions: PropTypes.shape({
@@ -123,7 +122,6 @@ export default class HTML extends PureComponent {
     emSize: 14,
     ptSize: 1.3,
     contentWidth: Dimensions.get("window").width,
-    staticContentMaxWidth: Dimensions.get("window").width,
     enableExperimentalPercentWidth: false,
     computeEmbeddedMaxWidth: (contentWidth) => contentWidth,
     ignoredTags: IGNORED_TAGS,
@@ -174,14 +172,12 @@ export default class HTML extends PureComponent {
       tagsStyles,
       classesStyles,
       contentWidth,
-      staticContentMaxWidth,
       computeEmbeddedMaxWidth,
     } = prevProps;
     let shouldParseDOM =
       tagsStyles !== this.props.tagsStyles ||
       classesStyles !== this.props.classesStyles ||
       contentWidth !== this.props.contentWidth ||
-      staticContentMaxWidth !== this.props.staticContentMaxWidth ||
       computeEmbeddedMaxWidth !== this.props.computeEmbeddedMaxWidth ||
       this.state.dom !== prevState.dom;
 

@@ -50,37 +50,28 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 
 ## Versions
 
->:warning: **You are on the master branch which is home for the latest development.**
+> :warning: **You are on the master branch which is home for the latest development.**
 > Check the table bellow to get documentation for your exact
 > version. Because the patch version is irrelevant regarding the features of one
 > version, we will point to the last patch release of a minor version. You can
 > read our full branching policy in the
 > [MAINTAINING.adoc](MAINTAINING.adoc#branching) file.
 
->:warning: We indulged ourselves when releasing **4.2.0** regarding
-> **Semantic Versioning**, because we introduced `react-native-webview` as a peer
-> dependency. As a result, you need to install it yourself. Please follow [the
-> plugin's
-> instructions](https://github.com/react-native-community/react-native-webview/blob/master/docs/Getting-Started.md).
-> We have since deliberately [committed to Semantic
-> Versioning](MAINTAINING.adoc#semantic-versioning).
-
 ### Stable releases
 
 | Minor | Branch                                                                                  | Documentation                                                                                            | Test Status                                                                                             | Latest                                                                         |
 | ----- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| 5.0   |  [release/5.0](https://github.com/archriss/react-native-render-html/tree/release/5.0)   | [release/5.0/README.md](https://github.com/archriss/react-native-render-html/blob/release/5.0/README.md) | ![CI](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=release%2F5.0) | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/5.0)](#) |
 | 4.2   |  [release/4.2](https://github.com/archriss/react-native-render-html/tree/release/4.2)   | [release/4.2/README.md](https://github.com/archriss/react-native-render-html/blob/release/4.2/README.md) | ![CI](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=release%2F4.2) | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/4.2)](#) |
-| 4.1   |  [release/4.1](https://github.com/archriss/react-native-render-html/tree/release/4.1)   | [release/4.1/README.md](https://github.com/archriss/react-native-render-html/blob/release/4.1/README.md) | ![CI](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=release%2F4.1) | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/4.1)](#) |
-| 4.0   |  [release/4.0](https://github.com/archriss/react-native-render-html/tree/release/4.0)   | [release/4.0/README.md](https://github.com/archriss/react-native-render-html/blob/release/4.0/README.md) | ![CI](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=release%2F4.0) | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/4.0)](#) |
 
 <a name="prereleases"></a>
 
 ### Pre-releases
 
-| Tag      | Branch      | Test Status                                                                                              | Latest                                                                   |
-| -------- | ----------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| next     | [dev/4.x]() | [![CI](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=dev%2f4.x)](#) | [![](https://img.shields.io/npm/v/react-native-render-html/next)](#)     |
-| unstable | [master]()  | [![CI](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=master)](#)    | [![](https://img.shields.io/npm/v/react-native-render-html/unstable)](#) |
+| Tag     | Branch      | Test Status                                                                                                  | Latest                                                                  |
+| ------- | ----------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| next    | dev/5.x     | [![CI](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=dev%2f5.x)](#)     | [![](https://img.shields.io/npm/v/react-native-render-html/next)](#)    |
+| foundry | dev/foundry | [![CI](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=dev%2ffoundry)](#) | [![](https://img.shields.io/npm/v/react-native-render-html/foundry)](#) |
 
 ## Install
 
@@ -88,8 +79,8 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 npm install react-native-render-html
 ```
 
->:city_sunrise: To try out pre-releases up-to-date with development, including many fixes, you are
-> encouraged to install the `next` tag versions. With our (new) test-first
+> :city_sunrise: To try out pre-releases up-to-date with development, including many fixes, you are
+> encouraged to install the `next` tag versions. With our test-first
 > approach, the fixes and features in this branch will have been tested, so the
 > chances you encounter a bug is pretty low. If you encounter any issue on a
 > pre-release, you don't need to fill a full bug report. Just [comment our
@@ -136,7 +127,6 @@ export default function Demo() {
 | `computeEmbeddedMaxWidth`        | A function which takes `contentWidth` as argument and returns a new max width. Can return `Infinity` to denote unconstrained widths. Works for images, iframes (with module)                                                                       | f(number, string) → number                     | Optional, defaults to the identity function                  |
 | `contentWidth`                   | The width of the HTML content to display. If you don't pass this prop, images might overflow horizontally and take up to all their physical width. The recommended practice is to pass `useWindowDimensions().width` minus any padding or margins. | `number`                                       | Optional, defaults to `Dimensions.window().width`            |
 | `enableExperimentalPercentWidth` | Support for relative percent-widths. Currently, it only works for images.                                                                                                                                                                          | `boolean`                                      | Optional, defaults to `false`                                |
-| `staticContentMaxWidth`          | Set a maximum width to non-responsive content (`<iframe> for instance`)                                                                                                                                                                            | `number`                                       | Optional                                                     |
 | `imagesInitialDimensions`        | Default width and height to display while image's dimensions are being retrieved, see [images](#images)                                                                                                                                            | `{ width: 100, height: 100 }`                  | Optional                                                     |
 | `onLinkPress`                    | Fired with the event, the href and an object with all attributes of the tag as its arguments when tapping a link                                                                                                                                   | `function`                                     | Optional                                                     |
 | `onParsed`                       | Fired when your HTML content has been parsed. Also useful to tweak your rendering, see [onParsed](#onparsed)                                                                                                                                       | `function`                                     | Optional                                                     |
@@ -207,21 +197,21 @@ Your renderers functions receive several arguments that will be very useful to m
 - `children`: array with the children of the node
 - `convertedCSSStyles`: conversion of the `style` attribute from CSS to react-native's stylesheet
 - `passProps`: various useful information:
-  * `renderersProps` - the prop of the same name passed to the HTML component
-  * `nodeIndex` - the index of the position relative to parent
-  * `transientChildren` - the list of transient children (was previously known as `rawChildren`)
-  * `domNode` - the DOM node
-  * `parentWrapper` - Text or View?
-  * `data` - for dom Text elements
-  * `key` - the key for this renderer instance
-  * `parentTag`
-  * `onLinkPress`
-  * `tagsStyles`
-  * `classesStyles`
-  * `defaultTextProps`
-  * `defaultWebViewProps`
-  * `computeEmbeddedMaxWidth`
-  * `contentWidth`
+  - `renderersProps` - the prop of the same name passed to the HTML component
+  - `nodeIndex` - the index of the position relative to parent
+  - `transientChildren` - the list of transient children (was previously known as `rawChildren`)
+  - `domNode` - the DOM node
+  - `parentWrapper` - Text or View?
+  - `data` - for dom Text elements
+  - `key` - the key for this renderer instance
+  - `parentTag`
+  - `onLinkPress`
+  - `tagsStyles`
+  - `classesStyles`
+  - `defaultTextProps`
+  - `defaultWebViewProps`
+  - `computeEmbeddedMaxWidth`
+  - `contentWidth`
 
 ### Making your custom component block or inline
 
