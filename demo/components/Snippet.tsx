@@ -82,7 +82,9 @@ const Snippet = React.memo(
       ...DEFAULT_PROPS,
       contentWidth: contentWidth - CONTAINER_PADDING * 2,
       ...(snippetProps as any),
-      textSelectable: true
+      defaultTextProps: {
+        selectable: true
+      }
     };
     const mergedTagsStyles = {
       ...sharedProps.tagsStyles,
