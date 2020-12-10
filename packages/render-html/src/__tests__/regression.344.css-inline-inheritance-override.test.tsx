@@ -20,7 +20,7 @@ describe('RenderHTML component should pass regression #344', () => {
       <RenderHTML
         debug={false}
         tagsStyles={tagsStyles}
-        html='<p><img src="https://img.com/1"/>foo<a>bar</a></p>'
+        source={{ html: '<p><img src="https://img.com/1"/>foo<a>bar</a></p>' }}
       />
     );
     const text = getByTestId('a');

@@ -9,7 +9,7 @@ describe('ImgTag', () => {
     const nextContentWidth = 200;
     const { UNSAFE_getByType, update } = render(
       <HTML
-        html='<img src="https://img.com/1" />'
+        source={{ html: '<img src="https://img.com/1" />' }}
         debug={false}
         contentWidth={contentWidth}
       />
@@ -17,7 +17,7 @@ describe('ImgTag', () => {
     expect(UNSAFE_getByType(ImgTag).props.contentWidth).toBe(contentWidth);
     update(
       <HTML
-        html='<img src="https://img.com/1" />'
+        source={{ html: '<img src="https://img.com/1" />' }}
         debug={false}
         contentWidth={nextContentWidth}
       />

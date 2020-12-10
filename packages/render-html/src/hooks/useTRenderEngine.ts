@@ -5,11 +5,11 @@ import TRenderEngine, {
   HTMLModelRecord,
   TagName
 } from '@native-html/transient-render-engine';
-import { RenderHTMLProps } from '../shared-types';
+import { RenderResolvedHTMLProps } from '../shared-types';
 import { CustomRendererSpecs } from '../render/render-types';
 import lookupRecord from '../helpers/lookupRecord';
 
-export default function useTRenderEngine(props: RenderHTMLProps) {
+export default function useTRenderEngine(props: RenderResolvedHTMLProps) {
   const {
     allowedStyles,
     ignoredStyles,

@@ -9,7 +9,10 @@ describe('RenderHTML component', () => {
   jest.useFakeTimers();
   it('should pass regression #118 regarding handling of CSS white-space', () => {
     const testRenderer = renderer.create(
-      <RenderHTML debug={false} html={'  <div>  foo\n\nbar  baz  </div>'} />
+      <RenderHTML
+        debug={false}
+        source={{ html: '  <div>  foo\n\nbar  baz  </div>' }}
+      />
     );
     const renderedText = extractTextFromInstance(testRenderer.root);
     expect(renderedText).toEqual('foo bar baz');

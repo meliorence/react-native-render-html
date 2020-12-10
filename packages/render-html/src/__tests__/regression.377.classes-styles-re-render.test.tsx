@@ -23,7 +23,7 @@ describe('HTML component', () => {
     const { getByText, update } = render(
       <HTML
         debug={false}
-        html={'<p class="highlight">hello world</p>'}
+        source={{ html: '<p class="highlight">hello world</p>' }}
         classesStyles={tagsStylesInstance1}
         triggerTREInvalidationPropNames={['classesStyles']}
       />
@@ -31,7 +31,7 @@ describe('HTML component', () => {
     update(
       <HTML
         debug={false}
-        html={'<p class="highlight">hello world</p>'}
+        source={{ html: '<p class="highlight">hello world</p>' }}
         classesStyles={tagsStylesInstance2}
         triggerTREInvalidationPropNames={['classesStyles']}
       />

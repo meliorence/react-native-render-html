@@ -23,7 +23,7 @@ describe('RenderHTML component', () => {
     const { getByText, update } = render(
       <RenderHTML
         debug={false}
-        html={'<a>hello world</a>'}
+        source={{ html: '<a>hello world</a>' }}
         tagsStyles={tagsStylesInstance1}
         triggerTREInvalidationPropNames={['tagsStyles']}
       />
@@ -31,7 +31,7 @@ describe('RenderHTML component', () => {
     update(
       <RenderHTML
         debug={false}
-        html={'<a>hello world</a>'}
+        source={{ html: '<a>hello world</a>' }}
         tagsStyles={tagsStylesInstance2}
         triggerTREInvalidationPropNames={['tagsStyles']}
       />

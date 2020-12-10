@@ -5,7 +5,7 @@ import { getLastAncestorOfType } from './utils';
 
 function expectFirstTextToHaveSelectable(html: string, matchingString: string) {
   const { getByText } = render(
-    <RenderHTML debug={false} textSelectable html={html} />
+    <RenderHTML debug={false} textSelectable source={{ html }} />
   );
   const text = getByText(matchingString);
   const ancestorText = getLastAncestorOfType(text);
