@@ -5,7 +5,6 @@ import { RenderHTMLPassedProps } from '../shared-types';
 export const defaultSharedPropsContext: Required<RenderHTMLPassedProps> = {
   debug: false,
   contentWidth: Dimensions.get('window').width,
-  staticContentMaxWidth: Dimensions.get('window').width,
   enableExperimentalPercentWidth: false,
   textSelectable: false,
   allowFontScaling: true,

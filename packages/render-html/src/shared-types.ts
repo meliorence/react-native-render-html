@@ -47,10 +47,6 @@ export interface RenderHTMLPassedProps<P = any> {
    */
   listsPrefixesRenderers?: RendererDictionary<P>;
   /**
-   * Set a maximum width to non-responsive content (<iframe> for instance)
-   */
-  staticContentMaxWidth?: number;
-  /**
    * Default width and height to display while image's dimensions are being retrieved.
    */
   imagesInitialDimensions?: ImageDimensions;
