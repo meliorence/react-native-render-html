@@ -1,7 +1,10 @@
 import React from 'react';
 import HTMLImageElement from '../elements/HTMLImageElement';
 import { DefaultBlockRenderer } from '../render/render-types';
-import { useSharedProps } from '../context/SharedPropsContext';
+import {
+  useComputeMaxWidthForTag,
+  useSharedProps
+} from '../context/SharedPropsContext';
 import { ImageStyle } from 'react-native';
 import { defaultHTMLElementModels } from '@native-html/transient-render-engine';
 
@@ -13,10 +16,10 @@ const ImageRenderer: DefaultBlockRenderer = (props) => {
   const { style, tnode, TDefaultRenderer, onPress } = props;
   const {
     contentWidth,
-    computeImagesMaxWidth,
     enableExperimentalPercentWidth,
     imagesInitialDimensions
   } = useSharedProps();
+  const computeImagesMaxWidth = useComputeMaxWidthForTag('img');
   const src = tnode.attributes.src;
   if (!src) {
     return React.createElement(TDefaultRenderer, props);

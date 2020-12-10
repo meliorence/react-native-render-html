@@ -21,4 +21,7 @@ export { default as useTTree } from './hooks/useTTree';
 export { default as defaultRenderers } from './render/defaultRenderers';
 export { default as extendDefaultRenderer } from './render/extendDefaultRenderer';
 export { default as splitBoxModelStyle } from './helpers/splitBoxModelStyle';
-export { useSharedProps } from './context/SharedPropsContext';
+export {
+  useSharedProps,
+  useComputeMaxWidthForTag
+} from './context/SharedPropsContext';

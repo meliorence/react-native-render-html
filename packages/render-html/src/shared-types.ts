@@ -61,9 +61,13 @@ export interface RenderHTMLPassedProps<P = any> {
    */
   contentWidth?: number;
   /**
-   * A function which takes contentWidth as argument and returns a new width. Can return Infinity to denote unconstrained widths.
+   * A function which takes contentWidth and tagName as arguments and returns a
+   * new width. Can return Infinity to denote unconstrained widths.
+   *
+   * @param contentWidth - The available width in this {@link RenderHTML} component.
+   * @param tagName - The tagName of this element to render, e.g. "img".
    */
-  computeImagesMaxWidth?: (contentWidth: number) => number;
+  computeEmbeddedMaxWidth?: (contentWidth: number, tagName: string) => number;
   /**
    * Support for relative percent-widths. Currently, it only works for images.
    */
