@@ -1,13 +1,9 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import {
-  render,
-  flushMicrotasksQueue,
-  waitFor,
-} from "react-native-testing-library";
+import { render, waitFor } from "react-native-testing-library";
 import HTMLImage from "../HTMLImage";
 
-describe("HTMLImage component", () => {
+describe("HTMLImage", () => {
   describe("scaling logic", () => {
     it("should use width and height from styles", async () => {
       const source = { uri: "http://via.placeholder.com/640x360" };
@@ -123,7 +119,9 @@ describe("HTMLImage component", () => {
       const style = {
         maxWidth: 320,
       };
-      const { findByTestId } = render(<HTMLImage style={style} source={source} />);
+      const { findByTestId } = render(
+        <HTMLImage style={style} source={source} />
+      );
       const image = await findByTestId("image-layout");
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
@@ -136,7 +134,9 @@ describe("HTMLImage component", () => {
       const style = {
         maxHeight: 180,
       };
-      const { findByTestId } = render(<HTMLImage style={style} source={source} />);
+      const { findByTestId } = render(
+        <HTMLImage style={style} source={source} />
+      );
       const image = await findByTestId("image-layout");
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
@@ -149,7 +149,9 @@ describe("HTMLImage component", () => {
       const style = {
         minWidth: 30,
       };
-      const { findByTestId } = render(<HTMLImage style={style} source={source} />);
+      const { findByTestId } = render(
+        <HTMLImage style={style} source={source} />
+      );
       const image = await findByTestId("image-layout");
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
@@ -162,7 +164,9 @@ describe("HTMLImage component", () => {
       const style = {
         minHeight: 36,
       };
-      const { findByTestId } = render(<HTMLImage style={style} source={source} />);
+      const { findByTestId } = render(
+        <HTMLImage style={style} source={source} />
+      );
       const image = await findByTestId("image-layout");
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
@@ -226,7 +230,7 @@ describe("HTMLImage component", () => {
         const { findByTestId } = render(
           <HTMLImage
             enableExperimentalPercentWidth
-            computeImagesMaxWidth={(contentWidth) => contentWidth * 0.7}
+            computeImagesMaxWidth={(c) => c * 0.7}
             contentWidth={250}
             {...style}
             source={source}
@@ -316,6 +320,28 @@ describe("HTMLImage component", () => {
       expect(StyleSheet.flatten(image2.props.style)).toMatchObject({
         width: 1920,
         height: 1080,
+      });
+    });
+    it("should retain inline style prior to attributes width and height to compute print dimensions", async () => {
+      const { findByTestId, getByTestId } = render(
+        <HTMLImage
+          width="1200"
+          height="800"
+          contentWidth={500}
+          enableExperimentalPercentWidth
+          style={{
+            width: "50%",
+            height: 100,
+          }}
+          source={{ uri: "http://via.placeholder.com/1200x800" }}
+        />
+      );
+      await waitFor(() => findByTestId("image-layout"));
+      const image2 = getByTestId("image-layout");
+      expect(image2).toBeTruthy();
+      expect(StyleSheet.flatten(image2.props.style)).toMatchObject({
+        width: 250,
+        height: 100,
       });
     });
   });

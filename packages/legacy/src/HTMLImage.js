@@ -1,5 +1,11 @@
 import React, { PureComponent } from "react";
-import { Image, View, Text, StyleSheet } from "react-native";
+import {
+  Image,
+  View,
+  Text,
+  StyleSheet,
+  TouchableHighlight,
+} from "react-native";
 import PropTypes from "prop-types";
 
 const defaultImageStyle = { resizeMode: "cover" };
@@ -8,8 +14,6 @@ const emptyObject = {};
 const styles = StyleSheet.create({
   image: { resizeMode: "cover" },
   errorBox: {
-    width: 50,
-    height: 50,
     borderWidth: 1,
     borderColor: "lightgray",
     overflow: "hidden",
@@ -23,15 +27,22 @@ const styles = StyleSheet.create({
   },
 });
 
+function extractImgStyleProps({ resizeMode, tintColor, overlayColor }) {
+  return {
+    resizeMode,
+    tintColor,
+    overlayColor,
+  };
+}
+
 function attemptParseFloat(value) {
   const result = parseFloat(value);
   return Number.isNaN(result) ? null : result;
 }
 
-function normalizeSize(
-  dimension,
-  { containerDimension = null, enablePercentWidth = false } = {}
-) {
+function normalizeSize(dimension, options = {}) {
+  const containerDimension = options.containerDimension || null;
+  const enablePercentWidth = options.enablePercentWidth || false;
   if (
     dimension === null ||
     dimension === undefined ||
@@ -49,7 +60,7 @@ function normalizeSize(
       typeof containerDimension === "number"
     ) {
       const parsedFloat = attemptParseFloat(dimension);
-      if (Number.isNaN(parsedFloat)) {
+      if (parsedFloat === null || Number.isNaN(parsedFloat)) {
         return null;
       }
       return (parsedFloat * containerDimension) / 100;
@@ -71,12 +82,32 @@ function extractHorizontalSpace({
   return realLeftMargin + realRightMargin;
 }
 
-function deriveRequiredDimensionsFromProps({
+function derivePhysicalDimensionsFromProps({
   width,
   height,
+  contentWidth,
+  enableExperimentalPercentWidth: enablePercentWidth,
+}) {
+  const normalizeOptionsWidth = {
+    enablePercentWidth,
+    containerDimension: contentWidth,
+  };
+  const normalizeOptionsHeight = {
+    enablePercentWidth: false,
+  };
+  const widthProp = normalizeSize(width, normalizeOptionsWidth);
+  const heightProp = normalizeSize(height, normalizeOptionsHeight);
+  return {
+    width: widthProp,
+    height: heightProp,
+  };
+}
+
+function deriveRequiredDimensionsFromProps({
   enablePercentWidth,
   contentWidth,
   flatStyle,
+  physicalDimensionsFromProps,
 }) {
   const normalizeOptionsWidth = {
     enablePercentWidth,
@@ -87,11 +118,15 @@ function deriveRequiredDimensionsFromProps({
   };
   const styleWidth = normalizeSize(flatStyle.width, normalizeOptionsWidth);
   const styleHeight = normalizeSize(flatStyle.height, normalizeOptionsHeight);
-  const widthProp = normalizeSize(width, normalizeOptionsWidth);
-  const heightProp = normalizeSize(height, normalizeOptionsHeight);
   return {
-    width: typeof widthProp === "number" ? widthProp : styleWidth,
-    height: typeof heightProp === "number" ? heightProp : styleHeight,
+    width:
+      typeof styleWidth === "number"
+        ? styleWidth
+        : physicalDimensionsFromProps.width,
+    height:
+      typeof styleHeight === "number"
+        ? styleHeight
+        : physicalDimensionsFromProps.height,
   };
 }
 
@@ -201,19 +236,22 @@ function computeImageBoxDimensions(params) {
   return null;
 }
 
-export default class HTMLImage extends PureComponent {
-  __cachedFlattenStyles = null;
-  __cachedRequirements = null;
+const HTMLImageElement = class HTMLImageElement extends PureComponent {
+  __cachedFlattenStyles;
+  __cachedRequirements;
+  __cachedPhysicalDimensionsFromProps;
+  mounted = false;
 
   constructor(props) {
     super(props);
     this.invalidateRequirements(props);
     const state = {
-      imagePhysicalWidth: null,
-      imagePhysicalHeight: null,
+      imagePhysicalWidth: this.__cachedPhysicalDimensionsFromProps.width,
+      imagePhysicalHeight: this.__cachedPhysicalDimensionsFromProps.height,
       requiredWidth: this.__cachedRequirements.width,
       requiredHeight: this.__cachedRequirements.height,
       imageBoxDimensions: null,
+      error: false,
     };
     this.state = {
       ...state,
@@ -234,6 +272,9 @@ export default class HTMLImage extends PureComponent {
       width: PropTypes.number,
       height: PropTypes.number,
     }),
+    altColor: PropTypes.string,
+    onPress: PropTypes.func,
+    testID: PropTypes.string,
   };
 
   static defaultProps = {
@@ -243,23 +284,21 @@ export default class HTMLImage extends PureComponent {
       width: 100,
       height: 100,
     },
+    style: {},
   };
 
   invalidateRequirements(props) {
-    const {
-      width,
-      height,
-      contentWidth,
-      enableExperimentalPercentWidth,
-      style,
-    } = props;
+    const { contentWidth, enableExperimentalPercentWidth, style } = props;
+    const physicalDimensionsFromProps = derivePhysicalDimensionsFromProps(
+      props
+    );
     this.__cachedFlattenStyles = StyleSheet.flatten(style) || emptyObject;
+    this.__cachedPhysicalDimensionsFromProps = physicalDimensionsFromProps;
     this.__cachedRequirements = deriveRequiredDimensionsFromProps({
-      width,
-      height,
       contentWidth,
       enablePercentWidth: enableExperimentalPercentWidth,
       flatStyle: this.__cachedFlattenStyles,
+      physicalDimensionsFromProps,
     });
   }
 
@@ -285,9 +324,7 @@ export default class HTMLImage extends PureComponent {
 
   componentDidMount() {
     this.mounted = true;
-    if (this.state.requiredWidth == null || this.state.requiredHeight == null) {
-      this.fetchPhysicalImageDimensions();
-    }
+    this.fetchPhysicalImageDimensions();
   }
 
   componentWillUnmount() {
@@ -312,6 +349,7 @@ export default class HTMLImage extends PureComponent {
 
     if (requirementsHaveChanged) {
       this.invalidateRequirements(this.props);
+      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
         requiredWidth: this.__cachedRequirements.width,
         requiredHeight: this.__cachedRequirements.height,
@@ -326,6 +364,7 @@ export default class HTMLImage extends PureComponent {
       }
     }
     if (shouldRecomputeImageBox) {
+      // eslint-disable-next-line react/no-did-update-set-state
       this.setState((state, props) => ({
         imageBoxDimensions: this.computeImageBoxDimensions(props, state),
       }));
@@ -334,8 +373,16 @@ export default class HTMLImage extends PureComponent {
 
   fetchPhysicalImageDimensions(props = this.props) {
     const { source } = props;
-    source &&
-      source.uri &&
+    const shouldFetchFromImgAPI = !!source?.uri;
+    if (
+      this.__cachedPhysicalDimensionsFromProps.width != null &&
+      this.__cachedPhysicalDimensionsFromProps.height != null
+    ) {
+      this.setState({
+        imagePhysicalWidth: this.__cachedPhysicalDimensionsFromProps.width,
+        imagePhysicalHeight: this.__cachedPhysicalDimensionsFromProps.height,
+      });
+    } else if (shouldFetchFromImgAPI) {
       Image.getSize(
         source.uri,
         (imagePhysicalWidth, imagePhysicalHeight) => {
@@ -350,24 +397,45 @@ export default class HTMLImage extends PureComponent {
           this.mounted && this.setState({ error: true });
         }
       );
+    }
   }
 
-  renderImage(imageBoxDimensions) {
-    const { source, style } = this.props;
+  renderImage(imageBoxDimensions, imageStyles) {
+    const { source } = this.props;
     return (
       <Image
         source={source}
-        style={[defaultImageStyle, style, imageBoxDimensions]}
+        onError={() => this.setState({ error: true })}
+        style={[defaultImageStyle, imageBoxDimensions, imageStyles]}
         testID="image-layout"
       />
     );
   }
 
   renderAlt() {
+    const imageBoxDimensions = this.computeImageBoxDimensions(
+      this.props,
+      this.state
+    );
     return (
-      <View style={styles.errorBox} testID="image-error">
+      <View
+        style={[
+          styles.errorBox,
+          {
+            height:
+              imageBoxDimensions?.height ||
+              this.props.imagesInitialDimensions.height,
+            width:
+              imageBoxDimensions?.width ||
+              this.props.imagesInitialDimensions.width,
+          },
+        ]}
+        testID="image-error"
+      >
         {this.props.alt ? (
-          <Text style={styles.errorText}>{this.props.alt}</Text>
+          <Text style={[styles.errorText, { color: this.props.altColor }]}>
+            {this.props.alt}
+          </Text>
         ) : (
           false
         )}
@@ -384,7 +452,7 @@ export default class HTMLImage extends PureComponent {
     );
   }
 
-  renderContent() {
+  renderContent(imgStyles) {
     const { error, imageBoxDimensions } = this.state;
     if (error) {
       return this.renderAlt();
@@ -392,10 +460,22 @@ export default class HTMLImage extends PureComponent {
     if (imageBoxDimensions === null) {
       return this.renderPlaceholder();
     }
-    return this.renderImage(imageBoxDimensions);
+    return this.renderImage(imageBoxDimensions, imgStyles);
   }
 
   render() {
-    return <View style={styles.container}>{this.renderContent()}</View>;
+    const { width, height, ...remainingStyle } = this.__cachedFlattenStyles;
+    const imgStyles = extractImgStyleProps(remainingStyle);
+    const style = [styles.container, remainingStyle];
+    if (this.props.onPress) {
+      return (
+        <TouchableHighlight onPress={this.props.onPress} style={style}>
+          {this.renderContent(imgStyles)}
+        </TouchableHighlight>
+      );
+    }
+    return <View style={style}>{this.renderContent(imgStyles)}</View>;
   }
-}
+};
+
+export default HTMLImageElement;

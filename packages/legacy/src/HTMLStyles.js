@@ -42,7 +42,7 @@ export function cssObjectToString(obj) {
  * @param {any} { tagName, htmlAttribs, passProps, additionalStyles, styleSet = 'VIEW' }
  * @returns {object}
  */
-export function _constructStyles({
+export function constructStyles({
   tagName,
   htmlAttribs,
   passProps,
@@ -60,7 +60,7 @@ export function _constructStyles({
   let style = [
     (styleSet === "VIEW" ? defaultBlockStyles : defaultTextStyles)[tagName],
     passProps.tagsStyles ? passProps.tagsStyles[tagName] : undefined,
-    _getElementClassStyles(htmlAttribs, passProps.classesStyles),
+    getElementClassStyles(htmlAttribs, passProps.classesStyles),
     htmlAttribs.style
       ? cssStringToRNStyle(htmlAttribs.style, STYLESETS[styleSet], {
           ...passProps,
@@ -75,7 +75,7 @@ export function _constructStyles({
     );
   }
 
-  return style.filter((style) => style !== undefined);
+  return style.filter((s) => s !== undefined);
 }
 
 /**
@@ -119,7 +119,7 @@ function _recursivelyComputeParentTextStyles(element, passProps, styles = []) {
     attribs && attribs.style
       ? cssStringToRNStyle(attribs.style, STYLESETS.TEXT, passProps)
       : {};
-  const classStyles = _getElementClassStyles(attribs, classesStyles);
+  const classStyles = getElementClassStyles(attribs, classesStyles);
   const userTagStyles = tagsStyles[name];
   const defaultTagStyles = defaultTextStyles[name];
 
@@ -152,8 +152,8 @@ function _recursivelyComputeParentTextStyles(element, passProps, styles = []) {
  * @param {any} [classesStyles={}]
  * @returns {object}
  */
-export function _getElementClassStyles(htmlAttribs, classesStyles = {}) {
-  const elementClasses = _getElementCSSClasses(htmlAttribs);
+export function getElementClassStyles(htmlAttribs, classesStyles = {}) {
+  const elementClasses = getElementCSSClasses(htmlAttribs);
   let styles = {};
   elementClasses.forEach((className) => {
     if (classesStyles[className]) {
@@ -169,7 +169,7 @@ export function _getElementClassStyles(htmlAttribs, classesStyles = {}) {
  * @param {any} htmlAttribs
  * @returns {array}
  */
-export function _getElementCSSClasses(htmlAttribs) {
+export function getElementCSSClasses(htmlAttribs) {
   if (!htmlAttribs || !htmlAttribs.class) {
     return [];
   }
@@ -291,3 +291,8 @@ function mapAbsoluteFontSize(key, value) {
 export function cssStringToRNStyle(str, styleset = STYLESETS.TEXT, options) {
   return cssToRNStyle(cssStringToObject(str), styleset, options);
 }
+
+// Retrocompatibility with v4
+exports._getElementClassStyles = getElementClassStyles;
+exports._getElementCSSClasses = getElementCSSClasses;
+exports._constructStyles = constructStyles;
