@@ -33,7 +33,7 @@ export function expectTranslatedInlineCSSRuleTo({
       enableUserAgentStyles={false}
       enableCSSInlineProcessing={true}
       baseStyle={{}}
-      html={`<span style="${cssInlineRules}">hello world</span>`}
+      source={{ html: `<span style="${cssInlineRules}">hello world</span>` }}
       {...extraProps}
     />
   );

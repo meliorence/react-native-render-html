@@ -187,13 +187,47 @@ export interface TransientRenderEngineConfig {
   ignoredStyles?: CSSPropertyNameList;
 }
 
+export interface RenderHTMLSourceUri {
+  /**
+   * The URI to load in the `HTML` component. Can be a local or remote file.
+   */
+  uri: string;
+  /**
+   * The HTTP Method to use. Defaults to GET if not specified.
+   */
+  method?: string;
+  /**
+   * Additional HTTP headers to send with the request.
+   */
+  headers?: Record<string, string>;
+  /**
+   * The HTTP body to send with the request. This must be a valid
+   * UTF-8 string, and will be sent exactly as specified, with no
+   * additional encoding (e.g. URL-escaping or base64) applied.
+   */
+  body?: string;
+}
+
+export interface RenderHTMLSourceInline {
+  /**
+   * A static HTML page to display in the HTML component.
+   */
+  html: string;
+  /**
+   * The base URL to be used for any relative links in the HTML code.
+   */
+  baseUrl?: string;
+}
+
+export type RenderHTMLSource = RenderHTMLSourceInline | RenderHTMLSourceUri;
+
 export interface RenderHTMLProps<P = any>
   extends RenderHTMLPassedProps<P>,
     TransientRenderEngineConfig {
   /**
-   * HTML string to parse and render
+   * The object source to render (either `{ uri }` or `{ html }`).
    */
-  html: string;
+  source: RenderHTMLSource;
   /**
    * Your custom renderers.
    */
@@ -202,10 +236,6 @@ export interface RenderHTMLProps<P = any>
    * Set of props accessible into your custom renderers in `passProps` (4th argument)
    */
   renderersProps?: any;
-  /**
-   * Remote website to parse and render
-   */
-  uri?: string;
   /**
    * Custom style for the default container of the rendered HTML.
    */
@@ -271,6 +301,14 @@ export interface RenderHTMLProps<P = any>
    * ```
    */
   triggerTREInvalidationPropNames?: Array<keyof TransientRenderEngineConfig>;
+}
+
+export type RenderResolvedHTMLProps = Omit<RenderHTMLProps, 'source'> & {
+  html: string;
+};
+
+export interface SourceLoaderProps extends RenderHTMLProps {
+  children: (resolvedHTML: string) => ReactElement;
 }
 
 export interface FallbackFontsDefinitions {

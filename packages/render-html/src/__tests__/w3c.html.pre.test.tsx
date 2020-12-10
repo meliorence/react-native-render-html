@@ -6,7 +6,7 @@ import { extractTextFromInstance } from './utils';
 describe('RenderHTML component regarding <pre> tags behaviors', () => {
   it('preserves tabs and line returns', () => {
     const testRenderer = renderer.create(
-      <RenderHTML debug={false} html={'<pre>\t\n  a</pre>'} />
+      <RenderHTML debug={false} source={{ html: '<pre>\t\n  a</pre>' }} />
     );
     const renderedText = extractTextFromInstance(testRenderer.root);
     expect(renderedText).toEqual('\t\n  a');
@@ -20,7 +20,7 @@ describe('RenderHTML component regarding <pre> tags behaviors', () => {
     }
     `;
     const testRenderer = renderer.create(
-      <RenderHTML debug={false} html={`<pre>${preContent}</pre>`} />
+      <RenderHTML debug={false} source={{ html: `<pre>${preContent}</pre>` }} />
     );
     const renderedText = extractTextFromInstance(testRenderer.root);
     expect(renderedText).toEqual(preContent);

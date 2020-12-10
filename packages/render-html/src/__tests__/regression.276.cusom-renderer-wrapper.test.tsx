@@ -30,7 +30,7 @@ describe('RenderHTML component', () => {
       const { UNSAFE_getByType } = render(
         <RenderHTML
           debug={false}
-          html={'<p>foo<span>hello world</span></p>'}
+          source={{ html: '<p>foo<span>hello world</span></p>' }}
           renderers={customRenderers}
         />
       );

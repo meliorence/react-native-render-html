@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Platform } from 'react-native';
-import { RenderHTMLProps } from './shared-types';
+import { RenderResolvedHTMLProps, RenderHTMLProps } from './shared-types';
 import TNodeRenderer from './TNodeRenderer';
 import useTTree from './hooks/useTTree';
 import SharedPropsContext, {
@@ -10,7 +10,7 @@ import SharedPropsContext, {
 import TChildrenRenderersContext from './context/TChildrenRendererContext';
 import TNodeChildrenRenderer from './TNodeChildrenRenderer';
 import RenderHTMLDebug from './RenderHTMLDebug';
-import LoadHTML from './LoadHTML';
+import SourceLoader from './SourceLoader';
 import RenderRegistryProvider from './context/RenderRegistryProvider';
 import TChildrenRenderer from './TChildrenRenderer';
 
@@ -18,6 +18,18 @@ export type RenderHTMLPropTypes = Record<keyof RenderHTMLProps, any>;
 
 const propTypes: RenderHTMLPropTypes = {
   renderers: PropTypes.object.isRequired,
+  source: PropTypes.oneOfType([
+    PropTypes.shape({
+      html: PropTypes.string.isRequired,
+      baseUrl: PropTypes.string
+    }),
+    PropTypes.shape({
+      uri: PropTypes.string.isRequired,
+      method: PropTypes.string,
+      body: PropTypes.any,
+      headers: PropTypes.object
+    })
+  ]),
   enableCSSInlineProcessing: PropTypes.bool,
   enableUserAgentStyles: PropTypes.bool,
   enableExperimentalMarginCollapsing: PropTypes.bool,
@@ -34,8 +46,6 @@ const propTypes: RenderHTMLPropTypes = {
   alterChildren: PropTypes.func,
   alterNode: PropTypes.func,
   ignoreNode: PropTypes.func,
-  html: PropTypes.string,
-  uri: PropTypes.string,
   tagsStyles: PropTypes.object,
   classesStyles: PropTypes.object,
   containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
@@ -144,7 +154,7 @@ const defaultProps: {
   debug: __DEV__
 };
 
-function RenderResolvedHTML(props: RenderHTMLProps) {
+function RenderResolvedHTML(props: RenderResolvedHTMLProps) {
   const ttree = useTTree(props);
   return (
     <TNodeRenderer
@@ -168,11 +178,11 @@ export default function RenderHTML(props: RenderHTMLProps) {
               }),
               []
             )}>
-            <LoadHTML {...props}>
+            <SourceLoader {...props}>
               {(resolvedHTML) => (
                 <RenderResolvedHTML {...props} html={resolvedHTML} />
               )}
-            </LoadHTML>
+            </SourceLoader>
           </TChildrenRenderersContext.Provider>
         </SharedPropsContext.Provider>
       </RenderRegistryProvider>

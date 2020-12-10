@@ -12,7 +12,9 @@ function testCollapseRuleForCharacter(character: string, name: string) {
     const testRenderer = renderer.create(
       <RenderHTML
         debug={false}
-        html={`<span>foo${character}</span><span>${character}bar</span>`}
+        source={{
+          html: `<span>foo${character}</span><span>${character}bar</span>`
+        }}
       />
     );
     const renderedText = extractTextFromInstance(testRenderer.root);
@@ -22,7 +24,7 @@ function testCollapseRuleForCharacter(character: string, name: string) {
     const testRenderer = renderer.create(
       <RenderHTML
         debug={false}
-        html={`<b>bold${character}</b><span>text</span>`}
+        source={{ html: `<b>bold${character}</b><span>text</span>` }}
       />
     );
     const renderedText = extractTextFromInstance(testRenderer.root);
@@ -32,7 +34,7 @@ function testCollapseRuleForCharacter(character: string, name: string) {
     const testRenderer = renderer.create(
       <RenderHTML
         debug={false}
-        html={`<b>bold</b>${character}<span>text</span>`}
+        source={{ html: `<b>bold</b>${character}<span>text</span>` }}
       />
     );
     const renderedText = extractTextFromInstance(testRenderer.root);
