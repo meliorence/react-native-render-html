@@ -13,7 +13,7 @@ export default function useTRenderEngine(props: RenderHTMLProps) {
   const {
     allowedStyles,
     ignoredStyles,
-    decodeEntities,
+    htmlParserOptions,
     baseStyle,
     classesStyles,
     tagsStyles,
@@ -102,7 +102,8 @@ export default function useTRenderEngine(props: RenderHTMLProps) {
           inlinePropertiesWhitelist: allowedStyles
         },
         htmlParserOptions: {
-          decodeEntities
+          decodeEntities: true,
+          ...htmlParserOptions
         },
         stylesConfig: {
           baseStyle,

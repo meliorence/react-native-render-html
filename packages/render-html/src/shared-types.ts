@@ -24,6 +24,7 @@ import {
 } from '@native-html/css-processor';
 import type { TStyles } from '@native-html/transient-render-engine';
 import { CustomTagRendererRecord } from './render/render-types';
+import { ParserOptions as HtmlParserOptions } from 'htmlparser2';
 
 export interface RendererDictionary<P> {}
 
@@ -104,10 +105,11 @@ export interface RenderHTMLPassedProps<P = any> {
 
 export interface TransientRenderEngineConfig {
   /**
-   * Decode HTML entities of your content.
-   * Optional, defaults to true
+   * ParserOptions for [htmlparser2](https://github.com/fb55/htmlparser2/wiki/Parser-options)
+   *
+   * @defaultvalue  `{ decodeEntities: true }`
    */
-  decodeEntities?: boolean;
+  htmlParserOptions?: HtmlParserOptions;
   /**
    * Enable or disable fallback styles for each tag. For example, `pre` tags
    * will have `whiteSpace` set to 'pre' by default.
