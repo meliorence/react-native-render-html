@@ -55,9 +55,10 @@ const html = `
 
 const images: SnippetDeclaration = {
   name: 'Images',
-  source: '/demo/snippets/images.ts',
-  html,
+  supportsLegacy: true,
+  codeSource: '/demo/snippets/images.ts',
   props: {
+    source: { html },
     baseStyle: {}
   }
 };

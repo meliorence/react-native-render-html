@@ -7,7 +7,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "test:ts": "tsc --noEmit"
   },
   "jest": {
     "preset": "jest-expo"

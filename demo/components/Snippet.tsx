@@ -67,20 +67,21 @@ const Snippet = React.memo(
       },
       [setTTreeForSnippet, snippetId]
     );
-    const additionalProps = snippets[snippetId].props || {};
+    const snippetProps = snippets[snippetId].props || {};
+    const supportsLegacy = snippets[snippetId].supportsLegacy;
     const {
       html: { color, backgroundColor, border }
     } = useComponentColors();
     const baseStyle = {
       color,
       backgroundColor,
-      ...additionalProps.baseStyle
+      //@ts-ignore
+      ...snippetProps.baseStyle
     };
     const sharedProps = {
       ...DEFAULT_PROPS,
       contentWidth: contentWidth - CONTAINER_PADDING * 2,
-      html: snippets[snippetId].html,
-      ...(additionalProps as any),
+      ...(snippetProps as any),
       textSelectable: true
     };
     const mergedTagsStyles = {
@@ -98,12 +99,7 @@ const Snippet = React.memo(
       () => [...Constants.systemFonts, 'space-mono'],
       []
     );
-    if (
-      (snippetId === 'customRenderers' ||
-        snippetId === 'customTags' ||
-        snippetId === 'test') &&
-      useLegacy
-    ) {
+    if (!supportsLegacy && useLegacy) {
       return (
         <View
           style={{

@@ -18,9 +18,10 @@ const html = `<p>In the below example, <em>white-space</em> is set to <em>normal
 
 const whitespace: SnippetDeclaration = {
   name: 'White Space Collapsing',
-  source: '/demo/snippets/whitespace.ts',
-  html,
+  supportsLegacy: true,
+  codeSource: '/demo/snippets/whitespace.ts',
   props: {
+    source: { html },
     tagsStyles: {
       div: {
         backgroundColor: HIGHLIGHT,

@@ -24,9 +24,10 @@ Be advised, this is yet <strong>experimental</strong>, and React Native has many
 
 const modelTampering: SnippetDeclaration = {
   name: 'Model tampering',
-  html,
-  source: '/demo/snippets/modelTampering.tsx',
+  supportsLegacy: false,
+  codeSource: '/demo/snippets/modelTampering.tsx',
   props: {
+    source: { html },
     renderers: {
       img: extendDefaultRenderer('img', {
         contentModel: HTMLContentModel.mixed

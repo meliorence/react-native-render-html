@@ -14,8 +14,11 @@ const html = `
 
 const trickyStuff: SnippetDeclaration = {
   name: 'Tricky stuff',
-  source: '/demo/snippets/trickyStuff.ts',
-  html
+  supportsLegacy: true,
+  codeSource: '/demo/snippets/trickyStuff.ts',
+  props: {
+    source: { html }
+  }
 };
 
 export default trickyStuff;

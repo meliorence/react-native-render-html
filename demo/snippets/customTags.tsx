@@ -92,9 +92,10 @@ const BlueCirclerRenderer: CustomLiteRenderer<HTMLContentModel.block> = {
 
 const customTags: SnippetDeclaration = {
   name: 'Custom Tags',
-  html,
-  source: '/demo/snippets/customTags.tsx',
+  supportsLegacy: false,
+  codeSource: '/demo/snippets/customTags.tsx',
   props: {
+    source: { html },
     renderers: {
       bluecircle: BlueCirclerRenderer,
       mytag: InlineBar,

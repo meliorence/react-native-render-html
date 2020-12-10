@@ -16,8 +16,11 @@ style="background-color: ${RED}; height: 200px; padding: 20%; margin-top: 30px">
 
 const layoutStyles: SnippetDeclaration = {
   name: 'Layout Styles',
-  source: '/demo/snippets/layoutStyles.ts',
-  html: html
+  supportsLegacy: true,
+  codeSource: '/demo/snippets/layoutStyles.ts',
+  props: {
+    source: { html }
+  }
 };
 
 export default layoutStyles;

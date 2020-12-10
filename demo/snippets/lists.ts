@@ -77,9 +77,10 @@ const html = `
 
 const lists: SnippetDeclaration = {
   name: 'Lists',
-  source: '/demo/snippets/lists.ts',
-  html,
+  supportsLegacy: true,
+  codeSource: '/demo/snippets/lists.ts',
   props: {
+    source: { html },
     baseStyle: {}
   }
 };

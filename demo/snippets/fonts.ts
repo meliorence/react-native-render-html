@@ -28,9 +28,10 @@ const html = `<p>CSS <em>fontFamily</em> and <em>font</em> properties allow a co
 
 const fonts: SnippetDeclaration = {
   name: 'Font Selection',
-  source: '/demo/snippets/fonts.ts',
-  html,
+  supportsLegacy: true,
+  codeSource: '/demo/snippets/fonts.ts',
   props: {
+    source: { html },
     classesStyles: {
       snippet: {
         backgroundColor: HIGHLIGHT,

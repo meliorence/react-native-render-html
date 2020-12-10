@@ -19,9 +19,10 @@ const html = `<p>Styling texts is a challenging part of converting HTML into rea
 
 const textStyles: SnippetDeclaration = {
   name: 'Texts Styles',
-  source: '/demo/snippets/textStyles.ts',
-  html: html,
+  supportsLegacy: true,
+  codeSource: '/demo/snippets/textStyles.ts',
   props: {
+    source: { html },
     tagsStyles: {
       div: { borderWidth: 1, padding: 10, borderColor: 'gray' }
     }

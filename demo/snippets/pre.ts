@@ -15,8 +15,11 @@ const html = `<pre>  ___________________________
 
 const pre: SnippetDeclaration = {
   name: 'Preformatted',
-  source: '/demo/snippets/pre.ts',
-  html: html
+  supportsLegacy: true,
+  codeSource: '/demo/snippets/pre.ts',
+  props: {
+    source: { html }
+  }
 };
 
 export default pre;

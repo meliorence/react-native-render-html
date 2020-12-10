@@ -10,8 +10,11 @@ const html = `
 
 const iframes: SnippetDeclaration = {
   name: 'Iframes',
-  source: '/demo/snippets/iframes.ts',
-  html
+  supportsLegacy: true,
+  codeSource: '/demo/snippets/iframes.ts',
+  props: {
+    source: { html }
+  }
 };
 
 export default iframes;
