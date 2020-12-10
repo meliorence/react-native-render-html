@@ -5305,6 +5305,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"character-entities-html4@npm:^1.0.0":
+  version: 1.1.4
+  resolution: "character-entities-html4@npm:1.1.4"
+  checksum: 1022eecdd5c5c16dd7b0f265a805f97af752d866d94162ef18f0cdce99cd7307ae39e1acfeba48fc85eae498b9232a191c11a9254f0cb0d8f1d2f8ee1ab77d89
+  languageName: node
+  linkType: hard
+
 "character-entities-legacy@npm:^1.0.0":
   version: 1.1.4
   resolution: "character-entities-legacy@npm:1.1.4"
@@ -6622,6 +6629,15 @@ __metadata:
     flat: ^5.0.2
     lodash: ^4.17.20
   checksum: 0f094af18e7f9e7c06d40c814d95b30960a93f6a9a886e6ca9d7d27f27897002cbdf7c302e3fd9e4a040b1e43efa0ae0ad14305b129244f03052bddc5ca1a5ac
+  languageName: node
+  linkType: hard
+
+"deprecated-prop-type@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "deprecated-prop-type@npm:1.0.0"
+  dependencies:
+    warning: 4.0.1
+  checksum: 7d1b89c2572e8a6df04a162efb35040874fc421e78fbe282ebd29af25c33da32c0b9a8fc1c4bc930def363237829d4f7964ce78639425f449493a2253ea3ec9f
   languageName: node
   linkType: hard
 
@@ -9007,7 +9023,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"htmlparser2@npm:^5.0.1":
+"htmlparser2@npm:5.0.1, htmlparser2@npm:^5.0.1":
   version: 5.0.1
   resolution: "htmlparser2@npm:5.0.1"
   dependencies:
@@ -15152,11 +15168,12 @@ resolve@1.1.7:
     babel-eslint: 10.1.0
     babel-jest: ^26.6.3
     conditional-type-checks: ^1.0.5
+    deprecated-prop-type: ^1.0.0
     dtslint: ^2.0.6
     eslint: ^7.13.0
     eslint-config-prettier: ^6.15.0
     eslint-plugin-react: ^7.21.5
-    htmlparser2: ^5.0.1
+    htmlparser2: 5.0.1
     jest: ^26.6.3
     metro-react-native-babel-preset: ^0.64.0
     prettier: ^2.1.2
@@ -15166,6 +15183,7 @@ resolve@1.1.7:
     react-native-testing-library: ^2.1.0
     react-native-webview: ^10.3.2
     react-test-renderer: 16.13.1
+    stringify-entities: ^3.1.0
   peerDependencies:
     react: "*"
     react-native: "*"
@@ -16007,6 +16025,17 @@ resolve@1.1.7:
   dependencies:
     safe-buffer: ~5.1.0
   checksum: bc2dc169d83df1b9e94defe7716bcad8a19ffe8211b029581cb0c6f9e83a6a7ba9ec3be38d179708a8643c692868a2b8b004ab159555dc26089ad3fa7b2158f5
+  languageName: node
+  linkType: hard
+
+"stringify-entities@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "stringify-entities@npm:3.1.0"
+  dependencies:
+    character-entities-html4: ^1.0.0
+    character-entities-legacy: ^1.0.0
+    xtend: ^4.0.0
+  checksum: 4d33442e565cc4975ef2fa67a0d410b13615a43d99a037dfe588b40b32d88302f4fb8fec9ec7dac5241d2c0e952e9e8277323b5898bf52f67d1ff2fda70e16b9
   languageName: node
   linkType: hard
 
@@ -17182,6 +17211,15 @@ typescript@~3.9.7:
   dependencies:
     makeerror: 1.0.x
   checksum: c014f264c473fc4464ba8f59eb9f7ffa1c0cf2c83b65353de28a6012d8dd29e974bf2b0fbd5c71231f56762a3ea0d970b635f7d6f6d670ff83f426741ce6a4da
+  languageName: node
+  linkType: hard
+
+"warning@npm:4.0.1":
+  version: 4.0.1
+  resolution: "warning@npm:4.0.1"
+  dependencies:
+    loose-envify: ^1.0.0
+  checksum: 9575a07a0e75e5b42baa9823b08314d06e8f4f46deddc4c4c349a8a436738f16fd04d21b60a98cc68b13894802c85a5bf412ac9ff3cc999935df04ee36f35603
   languageName: node
   linkType: hard
 

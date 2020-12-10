@@ -1,63 +1,71 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from "react";
 import { TouchableOpacity, Text, View, Platform } from "react-native";
-import { WebView } from "react-native-webview";
-import { _constructStyles, _getElementClassStyles } from "./HTMLStyles";
+import { constructStyles } from "./HTMLStyles";
 import HTMLImage from "./HTMLImage";
 
 function getTextProps(passProps) {
-  const { selectable, allowFontScaling } = passProps;
+  const { selectable, allowFontScaling, defaultTextProps } = passProps;
   return {
     selectable,
     allowFontScaling,
+    ...defaultTextProps,
   };
 }
 
 function getImgProps(passProps) {
   const {
-    computeImagesMaxWidth,
+    computeEmbeddedMaxWidth,
     imagesInitialDimensions,
     enableExperimentalPercentWidth,
     contentWidth,
   } = passProps;
   return {
-    computeImagesMaxWidth,
+    computeImagesMaxWidth: (cw) => computeEmbeddedMaxWidth(cw, "img"),
     imagesInitialDimensions,
     enableExperimentalPercentWidth,
-    contentWidth
+    contentWidth,
   };
 }
 
 function normalizeUri(uri) {
-    return uri.startsWith('//') ? `https:${uri}` : uri;
+  return uri.startsWith("//") ? `https:${uri}` : uri;
 }
 
-export function a (htmlAttribs, children, convertedCSSStyles, passProps) {
-    const style = _constructStyles({
-        tagName: 'a',
-        htmlAttribs,
-        passProps,
-        styleSet: passProps.parentWrapper === 'Text' ? 'TEXT' : 'VIEW'
-    });
-    // !! This deconstruction needs to happen after the styles construction since
-    // the passed props might be altered by it !!
-    const { parentWrapper, onLinkPress, key, data } = passProps;
-    const textProps = getTextProps(passProps);
-    const onPress = (evt) => onLinkPress && htmlAttribs && htmlAttribs.href ?
-        onLinkPress(evt, htmlAttribs.href, htmlAttribs) :
-        undefined;
-    if (parentWrapper === 'Text') {
-        return (
-            <Text testID="a-renderer" {...textProps} style={style} onPress={onPress} key={key}>
-                { children || data }
-            </Text>
-        );
-    } else {
-        return (
-            <TouchableOpacity onPress={onPress} key={key}>
-                { children || data }
-            </TouchableOpacity>
-        );
-    }
+export function a(htmlAttribs, children, convertedCSSStyles, passProps) {
+  const style = constructStyles({
+    tagName: "a",
+    htmlAttribs,
+    passProps,
+    styleSet: passProps.parentWrapper === "Text" ? "TEXT" : "VIEW",
+  });
+  // !! This deconstruction needs to happen after the styles construction since
+  // the passed props might be altered by it !!
+  const { parentWrapper, onLinkPress, key, data } = passProps;
+  const textProps = getTextProps(passProps);
+  const onPress = (evt) =>
+    onLinkPress && htmlAttribs && htmlAttribs.href
+      ? onLinkPress(evt, htmlAttribs.href, htmlAttribs)
+      : undefined;
+  if (parentWrapper === "Text") {
+    return (
+      <Text
+        testID="a-renderer"
+        {...textProps}
+        style={style}
+        onPress={onPress}
+        key={key}
+      >
+        {children || data}
+      </Text>
+    );
+  } else {
+    return (
+      <TouchableOpacity onPress={onPress} key={key}>
+        {children || data}
+      </TouchableOpacity>
+    );
+  }
 }
 
 export function img(
@@ -70,7 +78,7 @@ export function img(
     return false;
   }
 
-  const style = _constructStyles({
+  const style = constructStyles({
     tagName: "img",
     htmlAttribs,
     passProps,
@@ -92,14 +100,14 @@ export function img(
 }
 
 export function ul(htmlAttribs, children, convertedCSSStyles, passProps = {}) {
-  const style = _constructStyles({
+  const style = constructStyles({
     tagName: "ul",
     htmlAttribs,
     passProps,
     styleSet: "VIEW",
   });
   const {
-    rawChildren,
+    transientChildren,
     nodeIndex,
     key,
     baseFontStyle,
@@ -110,7 +118,7 @@ export function ul(htmlAttribs, children, convertedCSSStyles, passProps = {}) {
   children =
     children &&
     children.map((child, index) => {
-      const rawChild = rawChildren[index];
+      const rawChild = transientChildren[index];
       let prefix = false;
       const rendererArgs = [
         htmlAttribs,
@@ -170,38 +178,6 @@ export function ul(htmlAttribs, children, convertedCSSStyles, passProps = {}) {
   );
 }
 export const ol = ul;
-
-export function iframe(htmlAttribs, children, convertedCSSStyles, passProps) {
-  const { staticContentMaxWidth, tagsStyles, classesStyles } = passProps;
-
-  const tagStyleHeight = tagsStyles.iframe && tagsStyles.iframe.height;
-  const tagStyleWidth = tagsStyles.iframe && tagsStyles.iframe.width;
-
-  const classStyles = _getElementClassStyles(htmlAttribs, classesStyles);
-  const classStyleWidth = classStyles.width;
-  const classStyleHeight = classStyles.height;
-
-  const attrHeight = htmlAttribs.height ? parseInt(htmlAttribs.height) : false;
-  const attrWidth = htmlAttribs.width ? parseInt(htmlAttribs.width) : false;
-
-  const height = attrHeight || classStyleHeight || tagStyleHeight || 200;
-  const width =
-    attrWidth || classStyleWidth || tagStyleWidth || staticContentMaxWidth;
-
-  const style = _constructStyles({
-    tagName: "iframe",
-    htmlAttribs,
-    passProps,
-    styleSet: "VIEW",
-    additionalStyles: [{ height, width }],
-  });
-
-   const source = htmlAttribs.srcdoc ? { html: htmlAttribs.srcdoc } : { uri: normalizeUri(htmlAttribs.src) };
-
-    return (
-        <WebView testID="iframe" key={passProps.key} source={source} style={style} />
-    );
-}
 
 export function pre(htlmAttribs, children, convertedCSSStyles, passProps) {
   return (

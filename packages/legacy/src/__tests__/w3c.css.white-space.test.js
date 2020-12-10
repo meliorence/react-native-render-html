@@ -8,21 +8,25 @@ function testCollapseRuleForCharacter(character, name) {
     character === " " ? "preserves a space" : `replaces ${name} with a space`;
   it(`collapses whitespaces when first text tag has a trailing ${name} and the second starts with a ${name}`, () => {
     const testRenderer = renderer.create(
-      <HTML html={`<span>foo${character}</span><span>${character}bar</span>`} />
+      <HTML
+        source={{
+          html: `<span>foo${character}</span><span>${character}bar</span>`,
+        }}
+      />
     );
     const renderedText = extractTextFromInstance(testRenderer.root);
     expect(renderedText).toEqual("foo bar");
   });
   it(`${action} when the first text tag has a trailing ${name} and the second doesn't contain any`, () => {
     const testRenderer = renderer.create(
-      <HTML html={`<b>bold${character}</b><span>text</span>`} />
+      <HTML source={{ html: `<b>bold${character}</b><span>text</span>` }} />
     );
     const renderedText = extractTextFromInstance(testRenderer.root);
     expect(renderedText).toEqual("bold text");
   });
   it(`${action} between two inline elements which don't contain ${name}s and are separated with a ${name}`, () => {
     const testRenderer = renderer.create(
-      <HTML html={`<b>bold</b>${character}<span>text</span>`} />
+      <HTML source={{ html: `<b>bold</b>${character}<span>text</span>` }} />
     );
     const renderedText = extractTextFromInstance(testRenderer.root);
     expect(renderedText).toEqual("bold text");

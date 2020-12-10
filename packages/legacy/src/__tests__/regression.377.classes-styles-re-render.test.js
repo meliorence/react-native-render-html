@@ -22,13 +22,13 @@ describe("HTML component", () => {
   it("should pass regression #377 regarding classesStyles prop", () => {
     const { getByText, update } = render(
       <HTML
-        html={'<p class="highlight">hello world</p>'}
+        source={{ html: '<p class="highlight">hello world</p>' }}
         classesStyles={tagsStylesInstance1}
       />
     );
     update(
       <HTML
-        html={'<p class="highlight">hello world</p>'}
+        source={{ html: '<p class="highlight">hello world</p>' }}
         classesStyles={tagsStylesInstance2}
       />
     );

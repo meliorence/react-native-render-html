@@ -19,7 +19,7 @@ export function expectTranslatedInlineCSSRuleTo({
   render,
 }) {
   const { getByText } = render(
-    <HTML html={`<p style="${cssInlineRules}">hello world</p>`} />
+    <HTML source={{ html: `<p style="${cssInlineRules}">hello world</p>` }} />
   );
   const text = getByText("hello world");
   // eslint-disable-next-line jest/no-disabled-tests

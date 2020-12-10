@@ -1,6 +1,6 @@
 {
     "name": "rnrh-legacy",
-    "version": "5.0.0-alpha.2",
+    "version": "5.0.0",
     "author": "Archriss",
     "license": "BSD-2-Clause",
     "description": "Legacy package",
@@ -16,8 +16,10 @@
         "build": "babel src --out-dir lib"
     },
     "dependencies": {
-        "htmlparser2": "^5.0.1",
-        "prop-types": "^15.7.2"
+        "deprecated-prop-type": "^1.0.0",
+        "htmlparser2": "5.0.1",
+        "prop-types": "^15.7.2",
+        "stringify-entities": "^3.1.0"
     },
     "peerDependencies": {
         "react": "*",
