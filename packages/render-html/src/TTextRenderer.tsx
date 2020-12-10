@@ -13,7 +13,7 @@ import {
   useInternalTextRenderer,
   useRendererConfig
 } from './context/RenderRegistryProvider';
-import { useSharedTextProps } from './context/SharedPropsContext';
+import { useDefaultTextProps } from './context/SharedPropsContext';
 
 export const TDefaultTextRenderer: TDefaultRenderer<TText> = ({
   tnode,
@@ -40,7 +40,7 @@ function TStandardTextRenderer({
   hasAnchorAncestor
 }: TNodeGenericRendererProps<TText>) {
   const { Default, Custom } = useRendererConfig(tnode);
-  const textProps = useSharedTextProps();
+  const textProps = useDefaultTextProps();
   const style = {
     ...tnode.styles.nativeBlockFlow,
     ...tnode.styles.nativeBlockRet,

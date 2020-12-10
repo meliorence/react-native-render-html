@@ -18,6 +18,7 @@ export type RenderHTMLPropTypes = Record<keyof RenderHTMLProps, any>;
 
 const propTypes: RenderHTMLPropTypes = {
   renderers: PropTypes.object.isRequired,
+  defaultTextProps: PropTypes.object,
   source: PropTypes.oneOfType([
     PropTypes.shape({
       html: PropTypes.string.isRequired,
@@ -61,9 +62,7 @@ const propTypes: RenderHTMLPropTypes = {
   emSize: PropTypes.number.isRequired,
   ptSize: PropTypes.number.isRequired,
   baseStyle: PropTypes.object,
-  textSelectable: PropTypes.bool,
   renderersProps: PropTypes.object,
-  allowFontScaling: PropTypes.bool,
   onTTreeChange: PropTypes.func,
   onHTMLLoaded: PropTypes.func,
   systemFonts: PropTypes.arrayOf(PropTypes.string),
@@ -153,8 +152,14 @@ const defaultProps: {
   debug: __DEV__
 };
 
-function RenderResolvedHTML(props: RenderResolvedHTMLProps) {
-  const ttree = useTTree(props);
+function RenderResolvedHTML({
+  defaultTextProps,
+  ...props
+}: RenderResolvedHTMLProps) {
+  const ttree = useTTree({
+    ...props,
+    defaultTextProps: { ...defaultProps.defaultTextProps, ...defaultTextProps }
+  });
   return (
     <TNodeRenderer
       hasAnchorAncestor={false}

@@ -5,7 +5,11 @@ import { getLastAncestorOfType } from './utils';
 
 function expectFirstTextToHaveSelectable(html: string, matchingString: string) {
   const { getByText } = render(
-    <RenderHTML debug={false} textSelectable source={{ html }} />
+    <RenderHTML
+      debug={false}
+      defaultTextProps={{ selectable: true }}
+      source={{ html }}
+    />
   );
   const text = getByText(matchingString);
   const ancestorText = getLastAncestorOfType(text);
@@ -17,7 +21,7 @@ function expectFirstTextToHaveSelectable(html: string, matchingString: string) {
  * https://github.com/archriss/react-native-render-html/issues/193
  */
 describe('RenderHTML component', () => {
-  describe('should pass regression #193 regarding textSelectable prop', () => {
+  describe('should pass regression #193 regarding defaultTextProps.selectable prop', () => {
     it('should pass example #1', () => {
       expectFirstTextToHaveSelectable('<div>selectable</div>', 'selectable');
     });
