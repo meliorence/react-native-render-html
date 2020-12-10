@@ -52,7 +52,6 @@ const propTypes: RenderHTMLPropTypes = {
   customWrapper: PropTypes.func,
   onLinkPress: PropTypes.func,
   computeEmbeddedMaxWidth: PropTypes.func,
-  staticContentMaxWidth: PropTypes.number,
   contentWidth: PropTypes.number,
   enableExperimentalPercentWidth: PropTypes.bool,
   imagesInitialDimensions: PropTypes.shape({
