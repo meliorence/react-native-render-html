@@ -8,7 +8,6 @@ import RenderHTML from '../RenderHTML';
  */
 describe('HTMLImageElement component should pass regression test #172', () => {
   it('passes resizeMode to RN Image component', async () => {
-    const source = { uri: 'http://via.placeholder.com/640x360' };
     const tagsStyles = {
       img: {
         resizeMode: 'contain',
@@ -19,10 +18,11 @@ describe('HTMLImageElement component should pass regression test #172', () => {
     const { getByTestId } = render(
       <RenderHTML
         debug={false}
-        html='<img width="100" height="100" src="http://via.placeholder.com/100x100" />'
-        //@ts-ignore
-        tagsStyles={tagsStyles}
-        source={source}
+        source={{
+          html:
+            '<img width="100" height="100" src="http://via.placeholder.com/100x100" />'
+        }}
+        tagsStyles={tagsStyles as any}
       />
     );
     const imageLayout = getByTestId('image-layout');
