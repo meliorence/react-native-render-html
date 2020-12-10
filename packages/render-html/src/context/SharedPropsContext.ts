@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Dimensions, Linking, TextProps } from 'react-native';
 import { RenderHTMLPassedProps } from '../shared-types';
 
@@ -10,7 +10,7 @@ export const defaultSharedPropsContext: Required<RenderHTMLPassedProps> = {
   textSelectable: false,
   allowFontScaling: true,
   enableExperimentalMarginCollapsing: false,
-  computeImagesMaxWidth: (contentWidth) => contentWidth,
+  computeEmbeddedMaxWidth: (contentWidth) => contentWidth,
   imagesInitialDimensions: {
     height: 50,
     width: 50
@@ -19,7 +19,7 @@ export const defaultSharedPropsContext: Required<RenderHTMLPassedProps> = {
   onLinkPress: (_e, href) => Linking.canOpenURL(href) && Linking.openURL(href)
 };
 
-const SharedPropsContext = React.createContext<RenderHTMLPassedProps>(
+const SharedPropsContext = React.createContext<Required<RenderHTMLPassedProps>>(
   defaultSharedPropsContext
 );
 
@@ -33,6 +33,16 @@ export function useSharedTextProps(): TextProps {
     selectable: textSelectable,
     allowFontScaling
   };
+}
+
+export function useComputeMaxWidthForTag(tagName: string) {
+  const { computeEmbeddedMaxWidth } = useSharedProps();
+  return useCallback(
+    (cw: number) => {
+      return computeEmbeddedMaxWidth(cw, tagName);
+    },
+    [computeEmbeddedMaxWidth, tagName]
+  );
 }
 
 export default SharedPropsContext;

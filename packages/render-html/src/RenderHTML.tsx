@@ -41,7 +41,7 @@ const propTypes: RenderHTMLPropTypes = {
   containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   customWrapper: PropTypes.func,
   onLinkPress: PropTypes.func,
-  computeImagesMaxWidth: PropTypes.func,
+  computeEmbeddedMaxWidth: PropTypes.func,
   staticContentMaxWidth: PropTypes.number,
   contentWidth: PropTypes.number,
   enableExperimentalPercentWidth: PropTypes.bool,
@@ -157,7 +157,7 @@ export default function RenderHTML(props: RenderHTMLProps) {
   return (
     <RenderHTMLDebug {...props}>
       <RenderRegistryProvider renderers={props.renderers}>
-        <SharedPropsContext.Provider value={props}>
+        <SharedPropsContext.Provider value={props as Required<RenderHTMLProps>}>
           <TChildrenRenderersContext.Provider
             value={useMemo(
               () => ({
