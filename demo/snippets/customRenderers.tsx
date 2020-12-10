@@ -142,9 +142,10 @@ ArticleRenderer.model = defaultHTMLElementModels.article;
 
 const customRenderers: SnippetDeclaration = {
   name: 'Custom Renderers',
-  source: '/demo/snippets/customRenderers.tsx',
-  html,
+  supportsLegacy: false,
+  codeSource: '/demo/snippets/customRenderers.tsx',
   props: {
+    source: { html },
     renderers: {
       article: ArticleRenderer,
       button: ButtonRenderer

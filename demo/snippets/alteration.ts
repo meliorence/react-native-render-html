@@ -45,9 +45,10 @@ const html = `
 
 const alteration: SnippetDeclaration = {
   name: 'Altering data, chlidren & nodes',
-  html,
-  source: '/demo/snippets/alteration.ts',
+  supportsLegacy: true,
+  codeSource: '/demo/snippets/alteration.ts',
   props: {
+    source: { html },
     alterData: (node) => {
       let { parent, data } = node;
       if (parent && (parent as DOMElement).name === 'h1') {

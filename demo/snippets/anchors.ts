@@ -26,8 +26,11 @@ style="
 
 const anchors: SnippetDeclaration = {
   name: 'Anchors',
-  source: '/demo/snippets/anchors.ts',
-  html
+  supportsLegacy: true,
+  codeSource: '/demo/snippets/anchors.ts',
+  props: {
+    source: { html }
+  }
 };
 
 export default anchors;

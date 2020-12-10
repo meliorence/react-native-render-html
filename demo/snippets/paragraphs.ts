@@ -36,9 +36,10 @@ classesStyles prop
 
 const paragraphs: SnippetDeclaration = {
   name: 'Paragraphs',
-  html,
-  source: '/demo/snippets/paragraphs.ts',
+  supportsLegacy: true,
+  codeSource: '/demo/snippets/paragraphs.ts',
   props: {
+    source: { html },
     baseStyle: {},
     tagsStyles: {
       i: { textAlign: 'center', fontStyle: 'italic', color: 'grey' }

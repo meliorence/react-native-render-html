@@ -34,7 +34,7 @@ function DrawerHeader({ scene }: DrawerHeaderProps) {
   const html = useSelectedHTML();
   const snippetId = useSelectedSnippetId();
   const [menuVisible, setMenuVisible] = React.useState(false);
-  const snippetSource = filteredSnippets[snippetId].source;
+  const snippetSource = filteredSnippets[snippetId].codeSource;
   const sourceURL = `https://github.com/archriss/react-native-render-html/tree/dev/foundry${snippetSource}#L1`;
 
   const onMenuPress = React.useCallback(

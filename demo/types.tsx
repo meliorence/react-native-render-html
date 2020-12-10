@@ -20,7 +20,7 @@ export type TabTwoParamList = {
 
 export interface SnippetDeclaration {
   name: string;
-  source: string;
-  html?: string;
-  props?: Partial<RenderHTMLProps>;
+  codeSource: string;
+  supportsLegacy: boolean;
+  props?: RenderHTMLProps;
 }
