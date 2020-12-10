@@ -27,7 +27,7 @@ const propTypes: RenderHTMLPropTypes = {
   ignoredTags: PropTypes.array.isRequired,
   ignoredStyles: PropTypes.array.isRequired,
   allowedStyles: PropTypes.array,
-  decodeEntities: PropTypes.bool.isRequired,
+  htmlParserOptions: PropTypes.object,
   debug: PropTypes.bool.isRequired,
   listsPrefixesRenderers: PropTypes.object,
   alterData: PropTypes.func,
@@ -70,7 +70,9 @@ const defaultProps: {
   [k in keyof RenderHTMLProps]?: RenderHTMLProps[k];
 } = {
   ...defaultSharedPropsContext,
-  decodeEntities: true,
+  htmlParserOptions: {
+    decodeEntities: true
+  },
   emSize: 14,
   ptSize: 1.3,
   ignoredTags: [],
