@@ -39,10 +39,6 @@ export interface HtmlAttributesDictionary {
 
 export interface RenderHTMLPassedProps<P = any> {
   /**
-   * Specifies whether fonts should scale to respect Text Size accessibility settings
-   */
-  allowFontScaling?: boolean;
-  /**
    * Your custom renderers from ul and ol bullets, see [lists prefixes](https://github.com/archriss/react-native-render-html#lists-prefixes)
    */
   listsPrefixesRenderers?: RendererDictionary<P>;
@@ -89,9 +85,11 @@ export interface RenderHTMLPassedProps<P = any> {
     htmlAttribs: HtmlAttributesDictionary
   ) => void;
   /**
-   * Allow all texts to be selected. Default to `false`.
+   * Default props for Text elements in the render tree.
+   *
+   * @remarks "style" will be ignored. Use `baseStyle` instead.
    */
-  textSelectable?: boolean;
+  defaultTextProps?: Omit<TextProps, 'style'>;
   /**
    * Log to the console meaningful information regarding dismissed CSS
    * properties, ignored tags... etc.

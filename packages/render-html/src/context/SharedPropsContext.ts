@@ -6,8 +6,10 @@ export const defaultSharedPropsContext: Required<RenderHTMLPassedProps> = {
   debug: false,
   contentWidth: Dimensions.get('window').width,
   enableExperimentalPercentWidth: false,
-  textSelectable: false,
-  allowFontScaling: true,
+  defaultTextProps: {
+    selectable: false,
+    allowFontScaling: true
+  },
   enableExperimentalMarginCollapsing: false,
   computeEmbeddedMaxWidth: (contentWidth) => contentWidth,
   imagesInitialDimensions: {
@@ -26,12 +28,8 @@ export function useSharedProps() {
   return React.useContext(SharedPropsContext);
 }
 
-export function useSharedTextProps(): TextProps {
-  const { textSelectable, allowFontScaling } = useSharedProps();
-  return {
-    selectable: textSelectable,
-    allowFontScaling
-  };
+export function useDefaultTextProps(): TextProps {
+  return useSharedProps().defaultTextProps;
 }
 
 export function useComputeMaxWidthForTag(tagName: string) {

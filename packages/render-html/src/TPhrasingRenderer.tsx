@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { TPhrasing } from '@native-html/transient-render-engine';
-import { useSharedTextProps } from './context/SharedPropsContext';
+import { useDefaultTextProps } from './context/SharedPropsContext';
 import { useTNodeChildrenRenderer } from './context/TChildrenRendererContext';
 import {
   CustomTagRenderer,
@@ -47,7 +47,7 @@ const TPhrasingRenderer = ({
   hasAnchorAncestor,
   collapsedMarginTop
 }: TNodeGenericRendererProps<TPhrasing>) => {
-  const textProps = useSharedTextProps();
+  const textProps = useDefaultTextProps();
   const { Default, Custom } = useRendererConfig(tnode);
   const style = mergeCollapsedMargins(collapsedMarginTop, {
     ...tnode.styles.nativeBlockFlow,
