@@ -152,14 +152,8 @@ const defaultProps: {
   debug: __DEV__
 };
 
-function RenderResolvedHTML({
-  defaultTextProps,
-  ...props
-}: RenderResolvedHTMLProps) {
-  const ttree = useTTree({
-    ...props,
-    defaultTextProps: { ...defaultProps.defaultTextProps, ...defaultTextProps }
-  });
+function RenderResolvedHTML(props: RenderResolvedHTMLProps) {
+  const ttree = useTTree(props);
   return (
     <TNodeRenderer
       hasAnchorAncestor={false}
@@ -169,11 +163,19 @@ function RenderResolvedHTML({
   );
 }
 
-export default function RenderHTML(props: RenderHTMLProps) {
+export default function RenderHTML({
+  defaultTextProps,
+  ...props
+}: RenderHTMLProps) {
+  const normalizedProps = {
+    ...props,
+    defaultTextProps: { ...defaultProps.defaultTextProps, ...defaultTextProps }
+  };
   return (
-    <RenderHTMLDebug {...props}>
-      <RenderRegistryProvider renderers={props.renderers}>
-        <SharedPropsContext.Provider value={props as Required<RenderHTMLProps>}>
+    <RenderHTMLDebug {...normalizedProps}>
+      <RenderRegistryProvider renderers={normalizedProps.renderers}>
+        <SharedPropsContext.Provider
+          value={normalizedProps as Required<RenderHTMLProps>}>
           <TChildrenRenderersContext.Provider
             value={useMemo(
               () => ({
@@ -182,9 +184,9 @@ export default function RenderHTML(props: RenderHTMLProps) {
               }),
               []
             )}>
-            <SourceLoader {...props}>
+            <SourceLoader {...normalizedProps}>
               {(resolvedHTML) => (
-                <RenderResolvedHTML {...props} html={resolvedHTML} />
+                <RenderResolvedHTML {...normalizedProps} html={resolvedHTML} />
               )}
             </SourceLoader>
           </TChildrenRenderersContext.Provider>
