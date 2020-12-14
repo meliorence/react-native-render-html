@@ -406,7 +406,8 @@ const HTMLImageElement = class HTMLImageElement extends PureComponent {
       <Image
         source={source}
         onError={() => this.setState({ error: true })}
-        style={[defaultImageStyle, imageBoxDimensions, imageStyles]}
+        style={[imageBoxDimensions, imageStyles]}
+        resizeMode="contain"
         testID="image-layout"
       />
     );
