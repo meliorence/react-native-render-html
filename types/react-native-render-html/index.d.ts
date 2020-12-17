@@ -212,7 +212,7 @@ export interface ContainerProps<P = {}> {
    * @param root - The root transient node.
    * @returns The modified root.
    */
-  onParsed?: (root: TransientNode) => TransientNode;
+  onParsed?: (dom: HTMLNode[], root: TransientNode[]) => TransientNode[];
   /**
    * Provide your styles for specific HTML tags.
    *
@@ -264,15 +264,15 @@ export interface ContainerProps<P = {}> {
    */
   textSelectable?: boolean;
   /**
-   * Target some specific texts and change their content, see [altering content](https://github.com/archriss/react-native-render-html#altering-content)
+   * Target some specific texts and change their content, see [altering content](https://github.com/archriss/react-native-render-html#alterdata)
    */
-  alterData?: (...args: any[]) => any;
+  alterData?: (node: HTMLNode) => string | Falsy;
   /**
-   * Target some specific nested children and change them, see [altering content](https://github.com/archriss/react-native-render-html#altering-content)
+   * Target some specific nested children and change them, see [altering content](https://github.com/archriss/react-native-render-html#alterchildren)
    */
-  alterChildren?: (...args: any[]) => any;
+  alterChildren?: (node: HTMLNode) => HTMLNode | Falsy;
   /**
-   * Target a specific node and change it, see [altering content](https://github.com/archriss/react-native-render-html#altering-content)
+   * Target a specific node and change it, see [altering content](https://github.com/archriss/react-native-render-html#alternode)
    */
   alterNode?: (node: HTMLNode) => HTMLNode | Falsy;
   /**
