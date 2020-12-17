@@ -1,3 +1,10 @@
+# v5.0.1
+
+## Bugfixes
+
+- Accurate typescript typings for `onParsed`, `alterData`, `alterChildren`
+  (thanks [@SPWizard01](https://github.com/SPWizard01))
+
 # v5.0.0
 
 ## Enhancements
