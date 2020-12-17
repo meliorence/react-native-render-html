@@ -266,7 +266,7 @@ export interface ContainerProps<P = {}> {
   /**
    * Target some specific texts and change their content, see [altering content](https://github.com/archriss/react-native-render-html#alterdata)
    */
-  alterData?: (node: HTMLNode) => HTMLNode | Falsy;
+  alterData?: (node: HTMLNode) => string | Falsy;
   /**
    * Target some specific nested children and change them, see [altering content](https://github.com/archriss/react-native-render-html#alterchildren)
    */
