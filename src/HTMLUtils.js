@@ -379,6 +379,7 @@ export const ABSOLUTE_FONT_SIZE = {
   large: 17,
   "x-large": 20,
   "xx-large": 24,
+  "xxx-large": 32,
   smaller: 13.3,
   larger: 16,
   length: null,
