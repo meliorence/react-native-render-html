@@ -29,7 +29,11 @@ function getImgProps(passProps) {
 }
 
 function normalizeUri(uri) {
-  return uri.startsWith("//") ? `https:${uri}` : uri;
+  const newUri = uri.replace(/[\"<>^`{|}]/g, "");
+  if (newUri.startsWith("//")) {
+    return `https:${newUri}`;
+  }
+  return newUri;
 }
 
 export function a(htmlAttribs, children, convertedCSSStyles, passProps) {
