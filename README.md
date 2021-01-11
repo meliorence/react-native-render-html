@@ -71,7 +71,7 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 | Tag     | Branch      | Test Status                                                                                                  | Latest                                                                  |
 | ------- | ----------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
 | next    | dev/5.x     | [![CI](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=dev%2f5.x)](#)     | [![](https://img.shields.io/npm/v/react-native-render-html/next)](#)    |
-| foundry | dev/foundry | [![CI](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=dev%2ffoundry)](#) | [![](https://img.shields.io/npm/v/react-native-render-html/foundry)](#) |
+| foundry | dev/foundry | [![CI](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=dev%2ffoundry)](#) | [![](https://img.shields.io/npm/v/react-native-render-html/foundry)](#) [![Meercode CI Score](https://meercode.io/badge/archriss/react-native-render-html?type=ci-score&branch=master)](https://meercode.io/archriss/react-native-render-html) |
 
 ## Install
 
