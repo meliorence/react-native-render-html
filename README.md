@@ -4,6 +4,7 @@
 [![](https://img.shields.io/badge/semver-2.0.0-e10079.svg)](https://semver.org/spec/v2.0.0.html)
 [![](https://img.shields.io/codecov/c/gh/archriss/react-native-render-html)](https://codecov.io/gh/archriss/react-native-render-html)
 [![](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=master)](https://github.com/archriss/react-native-render-html/actions?query=branch%3Amaster+workflow%3ACI)
+[![Meercode CI Score](https://meercode.io/badge/archriss/react-native-render-html?type=ci-score&branch=master)](https://meercode.io/archriss/react-native-render-html)
 [![npm](https://img.shields.io/npm/dm/react-native-render-html.svg?colorB=007ec6)](https://www.npmjs.com/package/react-native-render-html)
 [![github issues](https://img.shields.io/github/issues/archriss/react-native-render-html.svg)](https://github.com/archriss/react-native-render-html/issues)
 [![github closed issues](https://img.shields.io/github/issues-closed/archriss/react-native-render-html.svg?colorB=44cc11)](https://github.com/archriss/react-native-render-html/issues?q=is%3Aissue+is%3Aclosed)
@@ -71,7 +72,7 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 | Tag     | Branch      | Test Status                                                                                                  | Latest                                                                  |
 | ------- | ----------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
 | next    | dev/5.x     | [![CI](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=dev%2f5.x)](#)     | [![](https://img.shields.io/npm/v/react-native-render-html/next)](#)    |
-| foundry | dev/foundry | [![CI](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=dev%2ffoundry)](#) | [![](https://img.shields.io/npm/v/react-native-render-html/foundry)](#) [![Meercode CI Score](https://meercode.io/badge/archriss/react-native-render-html?type=ci-score&branch=master)](https://meercode.io/archriss/react-native-render-html) |
+| foundry | dev/foundry | [![CI](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=dev%2ffoundry)](#) | [![](https://img.shields.io/npm/v/react-native-render-html/foundry)](#) |
 
 ## Install
 
