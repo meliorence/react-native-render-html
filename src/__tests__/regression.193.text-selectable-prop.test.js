@@ -15,7 +15,7 @@ function expectFirstTextToHaveSelectable(html, matchingString) {
 }
 
 /**
- * https://github.com/archriss/react-native-render-html/issues/193
+ * https://github.com/meliorence/react-native-render-html/issues/193
  */
 describe("HTML component", () => {
   describe("should pass regression #193 regarding defaultTextProps.selectable prop", () => {

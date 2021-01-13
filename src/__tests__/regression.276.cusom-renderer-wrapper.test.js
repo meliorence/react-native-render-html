@@ -4,7 +4,7 @@ import HTML from "../index";
 import { render } from "react-native-testing-library";
 
 /**
- * https://github.com/archriss/react-native-render-html/issues/276
+ * https://github.com/meliorence/react-native-render-html/issues/276
  */
 describe("HTML component", () => {
   describe("should pass regression #276 regarding customRenderer prop", () => {

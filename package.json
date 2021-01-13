@@ -1,13 +1,13 @@
 {
   "name": "react-native-render-html",
   "version": "5.0.1",
-  "author": "Archriss",
+  "author": "Meliorence <contact@meliorence.com> (github.com/meliorence)",
   "license": "BSD-2-Clause",
-  "repository": "https://github.com/archriss/react-native-render-html",
+  "repository": "https://github.com/meliorence/react-native-render-html",
   "description": "React Native component that renders HTML as native views",
   "types": "types/react-native-render-html/index.d.ts",
   "main": "lib/index.js",
-  "homepage": "https://github.com/archriss/react-native-render-html",
+  "homepage": "https://github.com/meliorence/react-native-render-html",
   "files": [
     "lib/",
     "src/",

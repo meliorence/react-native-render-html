@@ -17,7 +17,7 @@
   rotation gracefully. If you don't want your images to grow after a certain
   size, you could use `computeEmbeddedMaxWidth`. Read the RFC document [“A
   Deterministic Approach to Embedded Content
-  Scaling”](https://github.com/archriss/react-native-render-html/blob/master/rfc/001-A-deterministic-approach-to-embedded-content-scaling.adoc)
+  Scaling”](https://github.com/meliorence/react-native-render-html/blob/master/rfc/001-A-deterministic-approach-to-embedded-content-scaling.adoc)
   for more details.
 - New prop `computeEmbeddedMaxWidth` (see usage above).
 - New prop `contentWidth` (see usage above).
@@ -40,9 +40,9 @@
 
 ## Bugfixes
 
-- Image getting blur on iOS, [#141](https://github.com/archriss/react-native-render-html/issues/141);
-- `img`'s tag `resizeMode` property not modifiable through `tagStyles`, [#172](https://github.com/archriss/react-native-render-html/issues/172);
-- `imagesMaxWidth` not working, [#412](https://github.com/archriss/react-native-render-html/issues/412)
+- Image getting blur on iOS, [#141](https://github.com/meliorence/react-native-render-html/issues/141);
+- `img`'s tag `resizeMode` property not modifiable through `tagStyles`, [#172](https://github.com/meliorence/react-native-render-html/issues/172);
+- `imagesMaxWidth` not working, [#412](https://github.com/meliorence/react-native-render-html/issues/412)
 
 ## DEPRECATED PROPS (removed in v6)
 
@@ -76,14 +76,14 @@
 
 ## Bugfixes
 
-- `src` attributes starting with "//" in `img` and `iframe` elements are not rendered ([#408](https://github.com/archriss/react-native-render-html/issues/408))
+- `src` attributes starting with "//" in `img` and `iframe` elements are not rendered ([#408](https://github.com/meliorence/react-native-render-html/issues/408))
 
 # v4.2.3
 
 ## Bugfixes
 
-- Rendered HTML with uri prop displays “undefined” ([#256](https://github.com/archriss/react-native-render-html/issues/256))
-- Custom wrapper ignored ([#276](https://github.com/archriss/react-native-render-html/issues/276)), thanks [@tomdaniel-it](https://github.com/tomdaniel-it)
+- Rendered HTML with uri prop displays “undefined” ([#256](https://github.com/meliorence/react-native-render-html/issues/256))
+- Custom wrapper ignored ([#276](https://github.com/meliorence/react-native-render-html/issues/276)), thanks [@tomdaniel-it](https://github.com/tomdaniel-it)
 
 ## Enhancements
 
@@ -93,15 +93,15 @@
 
 ## Bugfixes
 
-- Translated elements bloated with HTML component props ([#384](https://github.com/archriss/react-native-render-html/issues/384), [#383](https://github.com/archriss/react-native-render-html/issues/383))
-- Unable to resolve stream module ([#244](https://github.com/archriss/react-native-render-html/issues/244))
-- `textSelectable` not working for tagName `textwrapper` ([#193](https://github.com/archriss/react-native-render-html/issues/193)), thanks [@brsaylor2](https://github.com/brsaylor2)
-- CSS font-family values ignored because of false positive match ([#266](https://github.com/archriss/react-native-render-html/issues/266))
-- CSS text-align unrecognized value ([#252](https://github.com/archriss/react-native-render-html/issues/252))
-- CSS inline rules with "none" values ([#319](https://github.com/archriss/react-native-render-html/issues/319))
-- CSS restrict display attribute to flex and none ([#257](https://github.com/archriss/react-native-render-html/issues/257))
-- Typos in IGNORED_TAGS arrays ([#249](https://github.com/archriss/react-native-render-html/issues/249), [#272](https://github.com/archriss/react-native-render-html/issues/272))
-- Re-render after classesStyles and tagsStyles updates ([#343](https://github.com/archriss/react-native-render-html/issues/343), [#377](https://github.com/archriss/react-native-render-html/issues/377)), thanks [@jorgemasta](https://github.com/jorgemasta)
+- Translated elements bloated with HTML component props ([#384](https://github.com/meliorence/react-native-render-html/issues/384), [#383](https://github.com/meliorence/react-native-render-html/issues/383))
+- Unable to resolve stream module ([#244](https://github.com/meliorence/react-native-render-html/issues/244))
+- `textSelectable` not working for tagName `textwrapper` ([#193](https://github.com/meliorence/react-native-render-html/issues/193)), thanks [@brsaylor2](https://github.com/brsaylor2)
+- CSS font-family values ignored because of false positive match ([#266](https://github.com/meliorence/react-native-render-html/issues/266))
+- CSS text-align unrecognized value ([#252](https://github.com/meliorence/react-native-render-html/issues/252))
+- CSS inline rules with "none" values ([#319](https://github.com/meliorence/react-native-render-html/issues/319))
+- CSS restrict display attribute to flex and none ([#257](https://github.com/meliorence/react-native-render-html/issues/257))
+- Typos in IGNORED_TAGS arrays ([#249](https://github.com/meliorence/react-native-render-html/issues/249), [#272](https://github.com/meliorence/react-native-render-html/issues/272))
+- Re-render after classesStyles and tagsStyles updates ([#343](https://github.com/meliorence/react-native-render-html/issues/343), [#377](https://github.com/meliorence/react-native-render-html/issues/377)), thanks [@jorgemasta](https://github.com/jorgemasta)
 - Image size computed after HTMLImage component marked as mounted, thanks [@laurynas](https://github.com/laurynas)
 
 ## Enhancements
@@ -112,8 +112,8 @@
 
 ## Miscellaneous
 
-- Added a [CHANGELOG](https://github.com/archriss/react-native-render-html/tree/v4.2.2/CHANGELOG.MD) (#314)
-- Each fix [has his regression test implemented along](https://github.com/archriss/react-native-render-html/tree/v4.2.2/src/__tests__)
+- Added a [CHANGELOG](https://github.com/meliorence/react-native-render-html/tree/v4.2.2/CHANGELOG.MD) (#314)
+- Each fix [has his regression test implemented along](https://github.com/meliorence/react-native-render-html/tree/v4.2.2/src/__tests__)
 - Some behaviors have been tested to prepare the ground for future refactorings
 - Upgraded lint tooling to prepare for PR guidelines and CI
 
@@ -199,7 +199,7 @@ const renderers = {
 
 ## Rework
 
-- The logic that applies text styling has been rewritten from scratch. The previous implementation had a lot of flaws that were hard to debug. This should be a much needed improvement addressing some of the oldest issues of this plugin. [The new algorithm is explained here](https://github.com/archriss/react-native-render-html/issues/102#issuecomment-375594792).
+- The logic that applies text styling has been rewritten from scratch. The previous implementation had a lot of flaws that were hard to debug. This should be a much needed improvement addressing some of the oldest issues of this plugin. [The new algorithm is explained here](https://github.com/meliorence/react-native-render-html/issues/102#issuecomment-375594792).
 
 ⚠️ _Although this shouldn't be a breaking change, your current rendering might be taking into account the previous buggy implementation. Upgrading to `3.10.0` might break some of your advanced text styling, just because it's now working as it should have from the beginning._ ⚠️
 

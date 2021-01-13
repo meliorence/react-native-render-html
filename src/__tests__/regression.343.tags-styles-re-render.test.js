@@ -4,7 +4,7 @@ import HTML from "../index";
 import { render } from "react-native-testing-library";
 
 /**
- * https://github.com/archriss/react-native-render-html/issues/343
+ * https://github.com/meliorence/react-native-render-html/issues/343
  */
 describe("HTML component", () => {
   const letterSpacing2 = {

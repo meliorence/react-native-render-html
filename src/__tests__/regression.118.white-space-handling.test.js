@@ -4,7 +4,7 @@ import renderer from "react-test-renderer";
 import { extractTextFromInstance } from "./utils";
 
 /**
- * https://github.com/archriss/react-native-render-html/issues/118
+ * https://github.com/meliorence/react-native-render-html/issues/118
  */
 // Skip because a fix is not ready yet
 // eslint-disable-next-line jest/no-disabled-tests

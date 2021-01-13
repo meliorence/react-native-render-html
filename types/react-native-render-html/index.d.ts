@@ -1,5 +1,5 @@
 // Type definitions for react-native-render-html 4.2
-// Project: https://github.com/archriss/react-native-render-html
+// Project: https://github.com/meliorence/react-native-render-html
 // Definitions by: Jules Randolph <https://github.com/jsamr>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 3.5
@@ -170,7 +170,7 @@ export interface ContainerProps<P = {}> {
    */
   renderersProps?: P;
   /**
-   * Your custom renderers from ul and ol bullets, see [lists prefixes](https://github.com/archriss/react-native-render-html#lists-prefixes)
+   * Your custom renderers from ul and ol bullets, see [lists prefixes](https://github.com/meliorence/react-native-render-html#lists-prefixes)
    */
   listsPrefixesRenderers?: RendererDictionary<P>;
   /**
@@ -264,19 +264,19 @@ export interface ContainerProps<P = {}> {
    */
   textSelectable?: boolean;
   /**
-   * Target some specific texts and change their content, see [altering content](https://github.com/archriss/react-native-render-html#alterdata)
+   * Target some specific texts and change their content, see [altering content](https://github.com/meliorence/react-native-render-html#alterdata)
    */
   alterData?: (node: HTMLNode) => string | Falsy;
   /**
-   * Target some specific nested children and change them, see [altering content](https://github.com/archriss/react-native-render-html#alterchildren)
+   * Target some specific nested children and change them, see [altering content](https://github.com/meliorence/react-native-render-html#alterchildren)
    */
   alterChildren?: (node: HTMLNode) => HTMLNode | Falsy;
   /**
-   * Target a specific node and change it, see [altering content](https://github.com/archriss/react-native-render-html#alternode)
+   * Target a specific node and change it, see [altering content](https://github.com/meliorence/react-native-render-html#alternode)
    */
   alterNode?: (node: HTMLNode) => HTMLNode | Falsy;
   /**
-   * HTML tags you don't want rendered, see [ignoring HTML content](https://github.com/archriss/react-native-render-html#ignoring-html-content)
+   * HTML tags you don't want rendered, see [ignoring HTML content](https://github.com/meliorence/react-native-render-html#ignoring-html-content)
    */
   ignoredTags?: string[];
   /**
@@ -284,11 +284,11 @@ export interface ContainerProps<P = {}> {
    */
   allowedStyles?: string[];
   /**
-   * CSS styles from the style attribute you don't want rendered, see [ignoring HTML content](https://github.com/archriss/react-native-render-html#ignoring-html-content)
+   * CSS styles from the style attribute you don't want rendered, see [ignoring HTML content](https://github.com/meliorence/react-native-render-html#ignoring-html-content)
    */
   ignoredStyles?: string[];
   /**
-   * Return true in this custom function to ignore nodes very precisely, see [ignoring HTML content](https://github.com/archriss/react-native-render-html#ignoring-html-content)
+   * Return true in this custom function to ignore nodes very precisely, see [ignoring HTML content](https://github.com/meliorence/react-native-render-html#ignoring-html-content)
    */
   ignoreNodesFunction?: (node: HTMLNode) => boolean;
   /**
