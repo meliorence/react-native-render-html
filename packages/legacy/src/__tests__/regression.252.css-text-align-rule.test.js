@@ -13,7 +13,7 @@ function testTranslation(cssValue, rnValue) {
 }
 
 /**
- * https://github.com/archriss/react-native-render-html/issues/252
+ * https://github.com/meliorence/react-native-render-html/issues/252
  */
 describe("HTML component", () => {
   describe("should pass regression #252 regarding inline text-align CSS rules", () => {

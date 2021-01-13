@@ -6,7 +6,7 @@ import { CustomBlockRenderer } from '../render/render-types';
 import { HTMLContentModel } from '@native-html/transient-render-engine';
 
 /**
- * https://github.com/archriss/react-native-render-html/issues/276
+ * https://github.com/meliorence/react-native-render-html/issues/276
  */
 describe('RenderHTML component', () => {
   describe('should pass regression #276 regarding customRenderer prop', () => {

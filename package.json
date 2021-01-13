@@ -4,7 +4,11 @@
   "author": "Meliorence <contact@meliorence.com> (github.com/meliorence)",
   "license": "BSD-2-Clause",
   "private": true,
-  "repository": "https://github.com/archriss/react-native-render-html",
+  "repository": "https://github.com/meliorence/react-native-render-html",
+  "description": "React Native component that renders HTML as native views",
+  "types": "types/react-native-render-html/index.d.ts",
+  "main": "lib/index.js",
+  "homepage": "https://github.com/meliorence/react-native-render-html",
   "scripts": {
     "build": "yarn workspace react-native-render-html build",
     "start": "yarn workspace demo start",

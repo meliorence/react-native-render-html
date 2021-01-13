@@ -4,7 +4,7 @@ import { render } from 'react-native-testing-library';
 import HTMLImageElement from '../elements/HTMLImageElement';
 
 /**
- * https://github.com/archriss/react-native-render-html/issues/384
+ * https://github.com/meliorence/react-native-render-html/issues/384
  **/
 describe('RenderHTML component', () => {
   describe('should pass regression regarding RenderHTML props passed to image renderer', () => {

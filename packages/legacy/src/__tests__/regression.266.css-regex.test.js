@@ -13,7 +13,7 @@ function testFontWithSpecialPattern(fontName) {
 }
 
 /**
- * https://github.com/archriss/react-native-render-html/issues/266
+ * https://github.com/meliorence/react-native-render-html/issues/266
  */
 describe("HTML component", () => {
   describe("should pass regression #266 regarding mangeling of specific value patterns", () => {

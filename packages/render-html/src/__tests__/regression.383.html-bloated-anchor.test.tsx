@@ -3,7 +3,7 @@ import RenderHTML from '../RenderHTML';
 import { render } from 'react-native-testing-library';
 
 /**
- * https://github.com/archriss/react-native-render-html/issues/383
+ * https://github.com/meliorence/react-native-render-html/issues/383
  **/
 describe('RenderHTML component', () => {
   describe('should pass regression regarding RenderHTML props passed to anchor renderer', () => {

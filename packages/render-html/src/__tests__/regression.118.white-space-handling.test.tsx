@@ -3,7 +3,7 @@ import RenderHTML from '../RenderHTML';
 import renderer from 'react-test-renderer';
 import { extractTextFromInstance } from './utils';
 /**
- * https://github.com/archriss/react-native-render-html/issues/118
+ * https://github.com/meliorence/react-native-render-html/issues/118
  */
 describe('RenderHTML component', () => {
   jest.useFakeTimers();

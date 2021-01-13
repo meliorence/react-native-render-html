@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import RenderHTML from '../RenderHTML';
 
 /**
- * https://github.com/archriss/react-native-render-html/issues/172
+ * https://github.com/meliorence/react-native-render-html/issues/172
  */
 describe('HTMLImageElement component should pass regression test #172', () => {
   it('passes resizeMode to RN Image component', async () => {
