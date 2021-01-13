@@ -4,7 +4,7 @@ import RenderHTML from '../RenderHTML';
 import { render } from 'react-native-testing-library';
 
 /**
- * https://github.com/archriss/react-native-render-html/issues/344
+ * https://github.com/meliorence/react-native-render-html/issues/344
  */
 describe('RenderHTML component should pass regression #344', () => {
   it('when anchors nested in paragraphs have their tagStyles overridden by inline inheritance', () => {

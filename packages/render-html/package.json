@@ -1,18 +1,19 @@
 {
   "name": "react-native-render-html",
   "version": "6.0.0-alpha.10",
-  "author": "Archriss",
+  "author": "Meliorence <contact@meliorence.com> (github.com/meliorence)",
   "license": "BSD-2-Clause",
   "description": "React Native component that renders HTML as native views.",
   "main": "lib/commonjs/index.js",
   "types": "lib/typescript/index.d.ts",
   "files": [
     "lib",
-    "src"
+    "src",
+    "react-native-render-html.podspec"
   ],
-  "homepage": "https://github.com/archriss/react-native-render-html#readme",
+  "homepage": "https://github.com/meliorence/react-native-render-html#readme",
   "bugs": {
-    "url": "https://github.com/archriss/react-native-render-html/issues"
+    "url": "https://github.com/meliorence/react-native-render-html/issues"
   },
   "keywords": [
     "react-native",
@@ -21,7 +22,7 @@
     "html",
     "render-html"
   ],
-  "repository": "https://github.com/archriss/react-native-render-html",
+  "repository": "https://github.com/meliorence/react-native-render-html",
   "scripts": {
     "test": "yarn test:jest && yarn test:ts && yarn test:lint",
     "test:jest": "jest src/",

@@ -39,7 +39,7 @@ export interface HtmlAttributesDictionary {
 
 export interface RenderHTMLPassedProps<P = any> {
   /**
-   * Your custom renderers from ul and ol bullets, see [lists prefixes](https://github.com/archriss/react-native-render-html#lists-prefixes)
+   * Your custom renderers from ul and ol bullets, see [lists prefixes](https://github.com/meliorence/react-native-render-html#lists-prefixes)
    */
   listsPrefixesRenderers?: RendererDictionary<P>;
   /**
@@ -143,15 +143,15 @@ export interface TransientRenderEngineConfig {
    */
   baseStyle?: MixedStyleDeclaration;
   /**
-   * Target some specific texts and change their content, see [altering content](https://github.com/archriss/react-native-render-html#altering-content)
+   * Target some specific texts and change their content, see [altering content](https://github.com/meliorence/react-native-render-html#altering-content)
    */
   alterData?: (node: DOMText) => string | Falsy | void;
   /**
-   * Target some specific nested children and change them, see [altering content](https://github.com/archriss/react-native-render-html#altering-content)
+   * Target some specific nested children and change them, see [altering content](https://github.com/meliorence/react-native-render-html#altering-content)
    */
   alterChildren?: (node: DOMElement) => DOMNode[] | Falsy | void;
   /**
-   * Target a specific node and change it, see [altering content](https://github.com/archriss/react-native-render-html#altering-content)
+   * Target a specific node and change it, see [altering content](https://github.com/meliorence/react-native-render-html#altering-content)
    */
   alterNode?: (node: DOMElement) => DOMNode | Falsy | void;
   /**
@@ -160,7 +160,7 @@ export interface TransientRenderEngineConfig {
   ignoreNode?: (node: DOMNode, parentTagName: string) => boolean | Falsy;
   /**
    * HTML tags you don't want rendered, see [ignoring HTML
-   * content](https://github.com/archriss/react-native-render-html#ignoring-html-content)
+   * content](https://github.com/meliorence/react-native-render-html#ignoring-html-content)
    */
   ignoredTags?: string[];
   /**
@@ -174,7 +174,7 @@ export interface TransientRenderEngineConfig {
   /**
    * CSS styles from the style attribute you don't want rendered, see [ignoring
    * HTML
-   * content](https://github.com/archriss/react-native-render-html#ignoring-html-content)
+   * content](https://github.com/meliorence/react-native-render-html#ignoring-html-content)
    *
    * @remarks Property names must be camelCased.
    */

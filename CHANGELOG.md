@@ -1,38 +1,38 @@
-# [6.0.0-alpha.10](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.9...v6.0.0-alpha.10) (2020-12-03)
+# [6.0.0-alpha.10](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.9...v6.0.0-alpha.10) (2020-12-03)
 
 
 ### Bug Fixes
 
-* use unicode escape sequences inside regex literal instead of string ([1299514](https://github.com/archriss/react-native-render-html/commit/1299514d094fa8f680883d43c96efafbfabc3ab4))
+* use unicode escape sequences inside regex literal instead of string ([1299514](https://github.com/meliorence/react-native-render-html/commit/1299514d094fa8f680883d43c96efafbfabc3ab4))
 
-# [6.0.0-alpha.9](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.8...v6.0.0-alpha.9) (2020-12-01)
+# [6.0.0-alpha.9](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.8...v6.0.0-alpha.9) (2020-12-01)
 
 ### Features
 
-* export useSharedProps ([0490d49](https://github.com/archriss/react-native-render-html/commit/0490d49d13e85ed48f77bd996fc5d945c82bb057))
+* export useSharedProps ([0490d49](https://github.com/meliorence/react-native-render-html/commit/0490d49d13e85ed48f77bd996fc5d945c82bb057))
 
-# [6.0.0-alpha.8](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.7...v6.0.0-alpha.8) (2020-11-30)
+# [6.0.0-alpha.8](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.7...v6.0.0-alpha.8) (2020-11-30)
 
 
 ### Bug Fixes
 
-* discard unsupported CSS inline methods (calc, var) ([b722a78](https://github.com/archriss/react-native-render-html/commit/b722a784ec4c734569b9f0632f70912a74a99afc))
-* prettier, consistant and scalable list rendering ([af826a3](https://github.com/archriss/react-native-render-html/commit/af826a3067b368b38acd24e00f37074562e79afc))
-* regression [#172](https://github.com/archriss/react-native-render-html/issues/172) (passing Image-specific styles to img component) ([916d977](https://github.com/archriss/react-native-render-html/commit/916d9770788e93baa875ffc2f19275159f1b8687))
-* whitespace collapsing, collapse the penultimate child (TPhrasing) ([223cef2](https://github.com/archriss/react-native-render-html/commit/223cef2e45b9d82ace7cc388a2d69bbb000ea6f0))
-* whitespace collapsing, handling of form feed characters (\n) ([e5d20c6](https://github.com/archriss/react-native-render-html/commit/e5d20c64eb63df2c251ca4e54c9c32c000afe4b6))
+* discard unsupported CSS inline methods (calc, var) ([b722a78](https://github.com/meliorence/react-native-render-html/commit/b722a784ec4c734569b9f0632f70912a74a99afc))
+* prettier, consistant and scalable list rendering ([af826a3](https://github.com/meliorence/react-native-render-html/commit/af826a3067b368b38acd24e00f37074562e79afc))
+* regression [#172](https://github.com/meliorence/react-native-render-html/issues/172) (passing Image-specific styles to img component) ([916d977](https://github.com/meliorence/react-native-render-html/commit/916d9770788e93baa875ffc2f19275159f1b8687))
+* whitespace collapsing, collapse the penultimate child (TPhrasing) ([223cef2](https://github.com/meliorence/react-native-render-html/commit/223cef2e45b9d82ace7cc388a2d69bbb000ea6f0))
+* whitespace collapsing, handling of form feed characters (\n) ([e5d20c6](https://github.com/meliorence/react-native-render-html/commit/e5d20c64eb63df2c251ca4e54c9c32c000afe4b6))
 
 
 ### Features
 
-* new renderChild prop to TChildrenRenderer ([274355e](https://github.com/archriss/react-native-render-html/commit/274355e01783bc0dc1c3909599654182ef018902))
+* new renderChild prop to TChildrenRenderer ([274355e](https://github.com/meliorence/react-native-render-html/commit/274355e01783bc0dc1c3909599654182ef018902))
 
-# [6.0.0-alpha.7](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.6...v6.0.0-alpha.7) (2020-11-28)
+# [6.0.0-alpha.7](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.6...v6.0.0-alpha.7) (2020-11-28)
 
 
 ### Bug Fixes
 
-* splitBoxModelStyle, avoid picking undefined props in style ([e5f58bb](https://github.com/archriss/react-native-render-html/commit/e5f58bbbc61ab3261a3e022e0eec26b3e6006088))
+* splitBoxModelStyle, avoid picking undefined props in style ([e5f58bb](https://github.com/meliorence/react-native-render-html/commit/e5f58bbbc61ab3261a3e022e0eec26b3e6006088))
 
 
 ### BREAKING CHANGES
@@ -40,12 +40,12 @@
 * the object returned by splitBoxModelStyle has more
 legible field names, boxModelStyle and otherStyle.
 
-# [6.0.0-alpha.6](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.5...v6.0.0-alpha.6) (2020-11-27)
+# [6.0.0-alpha.6](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.5...v6.0.0-alpha.6) (2020-11-27)
 
 
 ### Features
 
-* polished API for extendDefaultRenderer ([bb1fbeb](https://github.com/archriss/react-native-render-html/commit/bb1fbeb5e500d19dcf1fffa1a003082041ff9754))
+* polished API for extendDefaultRenderer ([bb1fbeb](https://github.com/meliorence/react-native-render-html/commit/bb1fbeb5e500d19dcf1fffa1a003082041ff9754))
 
 
 ### BREAKING CHANGES
@@ -56,34 +56,34 @@ extendDefaultRenderer. Also note:
 - The first argument can be the name of the tag to extend;
 - The second argument is now a partial model;
 
-# [6.0.0-alpha.5](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.4...v6.0.0-alpha.5) (2020-11-27)
+# [6.0.0-alpha.5](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.4...v6.0.0-alpha.5) (2020-11-27)
 
 
 ### Bug Fixes
 
-* inject textProps in TText renderers ([5453f95](https://github.com/archriss/react-native-render-html/commit/5453f95ee4b7ca4c6e51df271fcb85ad5bb49fd3))
+* inject textProps in TText renderers ([5453f95](https://github.com/meliorence/react-native-render-html/commit/5453f95ee4b7ca4c6e51df271fcb85ad5bb49fd3))
 
 
 ### Features
 
-* support TText tnode in TNodeChildrenRenderer ([00183cc](https://github.com/archriss/react-native-render-html/commit/00183cce8e1f67de701e99e626bc5b542b60ff39))
+* support TText tnode in TNodeChildrenRenderer ([00183cc](https://github.com/meliorence/react-native-render-html/commit/00183cce8e1f67de701e99e626bc5b542b60ff39))
 
-# [6.0.0-alpha.4](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.3...v6.0.0-alpha.4) (2020-11-27)
+# [6.0.0-alpha.4](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.3...v6.0.0-alpha.4) (2020-11-27)
 
 
 ### Bug Fixes
 
-* spread styles passed to TDefaultTextRenderer ([d167f95](https://github.com/archriss/react-native-render-html/commit/d167f95217197dba2db07a5c53c82eb533567fca))
+* spread styles passed to TDefaultTextRenderer ([d167f95](https://github.com/meliorence/react-native-render-html/commit/d167f95217197dba2db07a5c53c82eb533567fca))
 
 
 ### Code Refactoring
 
-* distinguish props from TDefaultRenderer and custom renderers ([0f2c41d](https://github.com/archriss/react-native-render-html/commit/0f2c41d83eca7cd27c3d157af2c6edae10dc8fa1))
+* distinguish props from TDefaultRenderer and custom renderers ([0f2c41d](https://github.com/meliorence/react-native-render-html/commit/0f2c41d83eca7cd27c3d157af2c6edae10dc8fa1))
 
 
 ### Features
 
-* add new splitBoxModelStyle utility ([3b0586c](https://github.com/archriss/react-native-render-html/commit/3b0586ccfcbb0c0ddf3933bda10f130917741a9e))
+* add new splitBoxModelStyle utility ([3b0586c](https://github.com/meliorence/react-native-render-html/commit/3b0586ccfcbb0c0ddf3933bda10f130917741a9e))
 
 
 ### BREAKING CHANGES
@@ -95,45 +95,45 @@ still directly passed to the underlying element. Finally, a third prop
 is available, `type`, useful for mixed renderers to know the type of the
 underlying element (Text or View).
 
-# [6.0.0-alpha.3](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.2...v6.0.0-alpha.3) (2020-11-26)
+# [6.0.0-alpha.3](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.2...v6.0.0-alpha.3) (2020-11-26)
 
 
 ### Features
 
-* new extendRenderer utility ([23faca0](https://github.com/archriss/react-native-render-html/commit/23faca08e08e02a4be4f465b00ea6add3232ffbd))
+* new extendRenderer utility ([23faca0](https://github.com/meliorence/react-native-render-html/commit/23faca08e08e02a4be4f465b00ea6add3232ffbd))
 
-# [6.0.0-alpha.2](https://github.com/archriss/react-native-render-html/compare/v6.0.0-alpha.1...v6.0.0-alpha.2) (2020-11-26)
+# [6.0.0-alpha.2](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.1...v6.0.0-alpha.2) (2020-11-26)
 
-
-### Bug Fixes
-
-* the LoadHTML component should reflect html changes ([9d1ab9f](https://github.com/archriss/react-native-render-html/commit/9d1ab9f90210ee0d27ebd334848c6a9585c40128))
-
-# [6.0.0-alpha.1](https://github.com/archriss/react-native-render-html/compare/v5.0.0-alpha.2...v6.0.0-alpha.1) (2020-11-25)
 
 ### Bug Fixes
 
-* better handling of anchors ([f23d825](https://github.com/archriss/react-native-render-html/commit/f23d8250ac10fc2e1c3209483da9e935d0b52d86))
-* image not aligning properly because of mismerging of styles ([956053d](https://github.com/archriss/react-native-render-html/commit/956053d4a89ba1f8df00d9b47ede169002a1ad7d))
-* images honor styles and physical size in "alt" (error) mode ([a9edfde](https://github.com/archriss/react-native-render-html/commit/a9edfdea2fbe98cb7d265e02d1288ddbc0b83806))
-* in <img> tags, style dimensions should prevail over attributes ([670a7d5](https://github.com/archriss/react-native-render-html/commit/670a7d59467f7b1243f509ee5308e20ee7d14cad))
-* missing proptype (onHTMLLoaded) ([fca6898](https://github.com/archriss/react-native-render-html/commit/fca6898f7ed62e3180e9a15fb1391601002931ce))
-* use onError to evaluate the fetch state of the image ([d8a9333](https://github.com/archriss/react-native-render-html/commit/d8a93337ecf0d84ddf34f236802b1f961450dc98))
+* the LoadHTML component should reflect html changes ([9d1ab9f](https://github.com/meliorence/react-native-render-html/commit/9d1ab9f90210ee0d27ebd334848c6a9585c40128))
+
+# [6.0.0-alpha.1](https://github.com/meliorence/react-native-render-html/compare/v5.0.0-alpha.2...v6.0.0-alpha.1) (2020-11-25)
+
+### Bug Fixes
+
+* better handling of anchors ([f23d825](https://github.com/meliorence/react-native-render-html/commit/f23d8250ac10fc2e1c3209483da9e935d0b52d86))
+* image not aligning properly because of mismerging of styles ([956053d](https://github.com/meliorence/react-native-render-html/commit/956053d4a89ba1f8df00d9b47ede169002a1ad7d))
+* images honor styles and physical size in "alt" (error) mode ([a9edfde](https://github.com/meliorence/react-native-render-html/commit/a9edfdea2fbe98cb7d265e02d1288ddbc0b83806))
+* in <img> tags, style dimensions should prevail over attributes ([670a7d5](https://github.com/meliorence/react-native-render-html/commit/670a7d59467f7b1243f509ee5308e20ee7d14cad))
+* missing proptype (onHTMLLoaded) ([fca6898](https://github.com/meliorence/react-native-render-html/commit/fca6898f7ed62e3180e9a15fb1391601002931ce))
+* use onError to evaluate the fetch state of the image ([d8a9333](https://github.com/meliorence/react-native-render-html/commit/d8a93337ecf0d84ddf34f236802b1f961450dc98))
 
 ### Features
 
-* enableExperimentalMarginCollapsing prop ([42bfa53](https://github.com/archriss/react-native-render-html/commit/42bfa53d786a3afb3f551a21882fc157aa6b935d))
-* fallbackFonts and systemFonts props for font selection ([25deb02](https://github.com/archriss/react-native-render-html/commit/25deb020c9465763b562bcf0bac47427a67ee6c3))
-* implement RenderHTMLDebug wrapper component to warn users ([1fb72d7](https://github.com/archriss/react-native-render-html/commit/1fb72d727c7904400f1bfd99c537a09be1f36448))
-* new prop "onTTreeChange" ([8353db6](https://github.com/archriss/react-native-render-html/commit/8353db6612f388cde351669684fa4123402b2ee3))
-* new renderers API ([d94f409](https://github.com/archriss/react-native-render-html/commit/d94f4090c222a3dfbc856241a56e4c3aad80ddbb))
-* onHTMLLoaded prop ([ef65140](https://github.com/archriss/react-native-render-html/commit/ef6514087e516a2d7c4ca2bd13cb022c471edb8e))
-* support for loading HTML from URI ([2fba800](https://github.com/archriss/react-native-render-html/commit/2fba800ba1bfb574caf37cedf181e4b4398e2163))
-* triggerTREInvalidationPropNames prop ([8a18fdb](https://github.com/archriss/react-native-render-html/commit/8a18fdb89faee3c9defa97ca4622ea9fda9495d2))
+* enableExperimentalMarginCollapsing prop ([42bfa53](https://github.com/meliorence/react-native-render-html/commit/42bfa53d786a3afb3f551a21882fc157aa6b935d))
+* fallbackFonts and systemFonts props for font selection ([25deb02](https://github.com/meliorence/react-native-render-html/commit/25deb020c9465763b562bcf0bac47427a67ee6c3))
+* implement RenderHTMLDebug wrapper component to warn users ([1fb72d7](https://github.com/meliorence/react-native-render-html/commit/1fb72d727c7904400f1bfd99c537a09be1f36448))
+* new prop "onTTreeChange" ([8353db6](https://github.com/meliorence/react-native-render-html/commit/8353db6612f388cde351669684fa4123402b2ee3))
+* new renderers API ([d94f409](https://github.com/meliorence/react-native-render-html/commit/d94f4090c222a3dfbc856241a56e4c3aad80ddbb))
+* onHTMLLoaded prop ([ef65140](https://github.com/meliorence/react-native-render-html/commit/ef6514087e516a2d7c4ca2bd13cb022c471edb8e))
+* support for loading HTML from URI ([2fba800](https://github.com/meliorence/react-native-render-html/commit/2fba800ba1bfb574caf37cedf181e4b4398e2163))
+* triggerTREInvalidationPropNames prop ([8a18fdb](https://github.com/meliorence/react-native-render-html/commit/8a18fdb89faee3c9defa97ca4622ea9fda9495d2))
 
 ### Performance Improvements
 
-* avoid calls to getImageDimensions API when provided in attrs ([2c6211e](https://github.com/archriss/react-native-render-html/commit/2c6211e5165d634ab5af9397b7fa649c15d0ddc8))
+* avoid calls to getImageDimensions API when provided in attrs ([2c6211e](https://github.com/meliorence/react-native-render-html/commit/2c6211e5165d634ab5af9397b7fa649c15d0ddc8))
 
 # v5.0.0
 
@@ -147,7 +147,7 @@ underlying element (Text or View).
   rotation gracefully. If you don't want your images to grow after a certain
   size, you could use `computeEmbeddedMaxWidth`. Read the RFC document [“A
   Deterministic Approach to Embedded Content
-  Scaling”](https://github.com/archriss/react-native-render-html/blob/master/rfc/001-A-deterministic-approach-to-embedded-content-scaling.adoc)
+  Scaling”](https://github.com/meliorence/react-native-render-html/blob/master/rfc/001-A-deterministic-approach-to-embedded-content-scaling.adoc)
   for more details.
 - New prop `computeEmbeddedMaxWidth` (see usage above).
 - New prop `contentWidth` (see usage above).
@@ -170,9 +170,9 @@ underlying element (Text or View).
 
 ## Bugfixes
 
-- Image getting blur on iOS, [#141](https://github.com/archriss/react-native-render-html/issues/141);
-- `img`'s tag `resizeMode` property not modifiable through `tagStyles`, [#172](https://github.com/archriss/react-native-render-html/issues/172);
-- `imagesMaxWidth` not working, [#412](https://github.com/archriss/react-native-render-html/issues/412)
+- Image getting blur on iOS, [#141](https://github.com/meliorence/react-native-render-html/issues/141);
+- `img`'s tag `resizeMode` property not modifiable through `tagStyles`, [#172](https://github.com/meliorence/react-native-render-html/issues/172);
+- `imagesMaxWidth` not working, [#412](https://github.com/meliorence/react-native-render-html/issues/412)
 
 ## DEPRECATED PROPS (removed in v6)
 
@@ -206,14 +206,14 @@ underlying element (Text or View).
 
 ## Bugfixes
 
-- `src` attributes starting with "//" in `img` and `iframe` elements are not rendered ([#408](https://github.com/archriss/react-native-render-html/issues/408))
+- `src` attributes starting with "//" in `img` and `iframe` elements are not rendered ([#408](https://github.com/meliorence/react-native-render-html/issues/408))
 
 # v4.2.3
 
 ## Bugfixes
 
-- Rendered HTML with uri prop displays “undefined” ([#256](https://github.com/archriss/react-native-render-html/issues/256))
-- Custom wrapper ignored ([#276](https://github.com/archriss/react-native-render-html/issues/276)), thanks [@tomdaniel-it](https://github.com/tomdaniel-it)
+- Rendered HTML with uri prop displays “undefined” ([#256](https://github.com/meliorence/react-native-render-html/issues/256))
+- Custom wrapper ignored ([#276](https://github.com/meliorence/react-native-render-html/issues/276)), thanks [@tomdaniel-it](https://github.com/tomdaniel-it)
 
 ## Enhancements
 
@@ -223,15 +223,15 @@ underlying element (Text or View).
 
 ## Bugfixes
 
-- Translated elements bloated with HTML component props ([#384](https://github.com/archriss/react-native-render-html/issues/384), [#383](https://github.com/archriss/react-native-render-html/issues/383))
-- Unable to resolve stream module ([#244](https://github.com/archriss/react-native-render-html/issues/244))
-- `textSelectable` not working for tagName `textwrapper` ([#193](https://github.com/archriss/react-native-render-html/issues/193)), thanks [@brsaylor2](https://github.com/brsaylor2)
-- CSS font-family values ignored because of false positive match ([#266](https://github.com/archriss/react-native-render-html/issues/266))
-- CSS text-align unrecognized value ([#252](https://github.com/archriss/react-native-render-html/issues/252))
-- CSS inline rules with "none" values ([#319](https://github.com/archriss/react-native-render-html/issues/319))
-- CSS restrict display attribute to flex and none ([#257](https://github.com/archriss/react-native-render-html/issues/257))
-- Typos in IGNORED_TAGS arrays ([#249](https://github.com/archriss/react-native-render-html/issues/249), [#272](https://github.com/archriss/react-native-render-html/issues/272))
-- Re-render after classesStyles and tagsStyles updates ([#343](https://github.com/archriss/react-native-render-html/issues/343), [#377](https://github.com/archriss/react-native-render-html/issues/377)), thanks [@jorgemasta](https://github.com/jorgemasta)
+- Translated elements bloated with HTML component props ([#384](https://github.com/meliorence/react-native-render-html/issues/384), [#383](https://github.com/meliorence/react-native-render-html/issues/383))
+- Unable to resolve stream module ([#244](https://github.com/meliorence/react-native-render-html/issues/244))
+- `textSelectable` not working for tagName `textwrapper` ([#193](https://github.com/meliorence/react-native-render-html/issues/193)), thanks [@brsaylor2](https://github.com/brsaylor2)
+- CSS font-family values ignored because of false positive match ([#266](https://github.com/meliorence/react-native-render-html/issues/266))
+- CSS text-align unrecognized value ([#252](https://github.com/meliorence/react-native-render-html/issues/252))
+- CSS inline rules with "none" values ([#319](https://github.com/meliorence/react-native-render-html/issues/319))
+- CSS restrict display attribute to flex and none ([#257](https://github.com/meliorence/react-native-render-html/issues/257))
+- Typos in IGNORED_TAGS arrays ([#249](https://github.com/meliorence/react-native-render-html/issues/249), [#272](https://github.com/meliorence/react-native-render-html/issues/272))
+- Re-render after classesStyles and tagsStyles updates ([#343](https://github.com/meliorence/react-native-render-html/issues/343), [#377](https://github.com/meliorence/react-native-render-html/issues/377)), thanks [@jorgemasta](https://github.com/jorgemasta)
 - Image size computed after HTMLImage component marked as mounted, thanks [@laurynas](https://github.com/laurynas)
 
 ## Enhancements
@@ -242,8 +242,8 @@ underlying element (Text or View).
 
 ## Miscellaneous
 
-- Added a [CHANGELOG](https://github.com/archriss/react-native-render-html/tree/v4.2.2/CHANGELOG.MD) (#314)
-- Each fix [has his regression test implemented along](https://github.com/archriss/react-native-render-html/tree/v4.2.2/src/__tests__)
+- Added a [CHANGELOG](https://github.com/meliorence/react-native-render-html/tree/v4.2.2/CHANGELOG.MD) (#314)
+- Each fix [has his regression test implemented along](https://github.com/meliorence/react-native-render-html/tree/v4.2.2/src/__tests__)
 - Some behaviors have been tested to prepare the ground for future refactorings
 - Upgraded lint tooling to prepare for PR guidelines and CI
 
@@ -329,7 +329,7 @@ const renderers = {
 
 ## Rework
 
-- The logic that applies text styling has been rewritten from scratch. The previous implementation had a lot of flaws that were hard to debug. This should be a much needed improvement addressing some of the oldest issues of this plugin. [The new algorithm is explained here](https://github.com/archriss/react-native-render-html/issues/102#issuecomment-375594792).
+- The logic that applies text styling has been rewritten from scratch. The previous implementation had a lot of flaws that were hard to debug. This should be a much needed improvement addressing some of the oldest issues of this plugin. [The new algorithm is explained here](https://github.com/meliorence/react-native-render-html/issues/102#issuecomment-375594792).
 
 ⚠️ _Although this shouldn't be a breaking change, your current rendering might be taking into account the previous buggy implementation. Upgrading to `3.10.0` might break some of your advanced text styling, just because it's now working as it should have from the beginning._ ⚠️
 

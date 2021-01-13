@@ -3,7 +3,7 @@ import { render } from "react-native-testing-library";
 import HTMLImage from "../HTMLImage";
 
 /**
- * https://github.com/archriss/react-native-render-html/issues/141
+ * https://github.com/meliorence/react-native-render-html/issues/141
  */
 describe("HTMLImage component should pass regression test #141", () => {
   it("doesn't display the image prior to receiving original dimensions", async () => {

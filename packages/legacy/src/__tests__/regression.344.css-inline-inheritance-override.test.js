@@ -4,7 +4,7 @@ import HTML from "../index";
 import { render } from "react-native-testing-library";
 
 /**
- * https://github.com/archriss/react-native-render-html/issues/344
+ * https://github.com/meliorence/react-native-render-html/issues/344
  */
 // Skipped because a fix will require an important refactoring
 // eslint-disable-next-line jest/no-disabled-tests

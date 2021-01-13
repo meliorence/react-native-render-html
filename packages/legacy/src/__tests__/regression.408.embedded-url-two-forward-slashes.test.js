@@ -4,7 +4,7 @@ import { render } from "react-native-testing-library";
 import HTMLImage from "../HTMLImage";
 
 /**
- * https://github.com/archriss/react-native-render-html/issues/408
+ * https://github.com/meliorence/react-native-render-html/issues/408
  */
 describe("HTML component", () => {
   describe("should pass regression #408 regarding two forward slashes in src", () => {

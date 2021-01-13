@@ -8,7 +8,7 @@ ifdef::env-github[]
 endif::[]
 :toc:
 
-:rnrh-test-folder: https://github.com/archriss/react-native-render-html/tree/master/src/__tests__
+:rnrh-test-folder: https://github.com/meliorence/react-native-render-html/tree/master/src/__tests__
 
 = A Contributors' Guide
 
@@ -22,7 +22,7 @@ this project! Your effort will be very much appreciated.
 
 After you've read the relevant sections of this document, you can open a ticket
 through Github here:
-https://github.com/archriss/react-native-render-html/issues/new/choose. Make
+https://github.com/meliorence/react-native-render-html/issues/new/choose. Make
 sure you follow the appropriate template.
 
 [NOTE]
@@ -46,7 +46,7 @@ cannot help you if you don't help us in the process!
 If you would like to report a problem, take a look around and see if someone
 already opened an issue about it (see <<HELP.adoc#,HELP>> document). If you a
 are certain this is a new, unreported bug, you can submit a bug report
-https://github.com/archriss/react-native-render-html/issues/new/choose[by
+https://github.com/meliorence/react-native-render-html/issues/new/choose[by
 opening a new issue].
 
 The most important quality of your bug report is *reproducibility*. It means we
@@ -76,7 +76,7 @@ to skip many steps.
 |Snack
 |:zap::zap::zap:
 |A *Snack* is very convenient for you and for us. You can
-https://snack.expo.io/@jsamr/rnrhtml-template[*start from 
+https://snack.expo.io/@jsamr/rnrhtml-template[*start from
 our template*]. *Make sure you set the appropriate version of this library.*
 
 |Git
@@ -93,13 +93,13 @@ a *Snack*. I will take you 2 minutes to configure.
 
 Second important thing: try-out the latest version, including pre-releases! For
 more information on this topic, read the
-https://github.com/archriss/react-native-render-html#versions[Versions section
+https://github.com/meliorence/react-native-render-html#versions[Versions section
 of the README]. If you can try `master` branch, that would be even better, but
 we don't require it because it could contain breaking changes. To do
 so, simply run the following command:
 
 ```bash
-npm install "github:archriss/react-native-render-html#master"
+npm install "github:meliorence/react-native-render-html#master"
 ```
 
 [[features]]
@@ -170,7 +170,7 @@ RFC are propositions for new methods, behaviors and other API capabilities, or
 the exploration of an algorithmic challenge that is specific to this library.
 These are not Internet Society's RFCs! We don't have a rich multi-stage process. A
 RFC is either a draft, in discussion, or adopted (merged). We thereafter use
-versioning to polish and enhance those specifications. 
+versioning to polish and enhance those specifications.
 
 RFC purpose is to offer drafts for new ideas which goes relatively in depth
 regarding the issues, consequences and caveats of a peculiar feature. We don't
@@ -183,7 +183,7 @@ feature will address).
 supported?).
 
 You can take a look at drafts in
-https://github.com/archriss/react-native-render-html/tree/master/rfc[the `rfc`
+https://github.com/meliorence/react-native-render-html/tree/master/rfc[the `rfc`
 folder] for inspiration.
 
 [NOTE]

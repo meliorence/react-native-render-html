@@ -2,11 +2,11 @@
 [![npm](https://img.shields.io/npm/v/react-native-render-html/latest)](https://www.npmjs.com/package/react-native-render-html)
 [![npm](https://img.shields.io/npm/v/react-native-render-html/next)](https://www.npmjs.com/package/react-native-render-html)
 [![](https://img.shields.io/badge/semver-2.0.0-e10079.svg)](https://semver.org/spec/v2.0.0.html)
-[![](https://img.shields.io/codecov/c/gh/archriss/react-native-render-html)](https://codecov.io/gh/archriss/react-native-render-html)
-[![](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=master)](https://github.com/archriss/react-native-render-html/actions?query=branch%3Amaster+workflow%3ACI)
+[![](https://img.shields.io/codecov/c/gh/meliorence/react-native-render-html)](https://codecov.io/gh/meliorence/react-native-render-html)
+[![](https://github.com/meliorence/react-native-render-html/workflows/CI/badge.svg?branch=master)](https://github.com/meliorence/react-native-render-html/actions?query=branch%3Amaster+workflow%3ACI)
 [![npm](https://img.shields.io/npm/dm/react-native-render-html.svg?colorB=007ec6)](https://www.npmjs.com/package/react-native-render-html)
-[![github issues](https://img.shields.io/github/issues/archriss/react-native-render-html.svg)](https://github.com/archriss/react-native-render-html/issues)
-[![github closed issues](https://img.shields.io/github/issues-closed/archriss/react-native-render-html.svg?colorB=44cc11)](https://github.com/archriss/react-native-render-html/issues?q=is%3Aissue+is%3Aclosed)
+[![github issues](https://img.shields.io/github/issues/meliorence/react-native-render-html.svg)](https://github.com/meliorence/react-native-render-html/issues)
+[![github closed issues](https://img.shields.io/github/issues-closed/meliorence/react-native-render-html.svg?colorB=44cc11)](https://github.com/meliorence/react-native-render-html/issues?q=is%3Aissue+is%3Aclosed)
 [![](https://img.shields.io/discord/736906960041148476?label=discord)](https://discord.gg/dbEMMJM)
 
 <br>
@@ -61,8 +61,8 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 
 | Minor | Branch                                                                                  | Documentation                                                                                            | Test Status                                                                                             | Latest                                                                         |
 | ----- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| 5.0   |  [release/5.0](https://github.com/archriss/react-native-render-html/tree/release/5.0)   | [release/5.0/README.md](https://github.com/archriss/react-native-render-html/blob/release/5.0/README.md) | ![CI](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=release%2F5.0) | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/5.0)](#) |
-| 4.2   |  [release/4.2](https://github.com/archriss/react-native-render-html/tree/release/4.2)   | [release/4.2/README.md](https://github.com/archriss/react-native-render-html/blob/release/4.2/README.md) | ![CI](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=release%2F4.2) | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/4.2)](#) |
+| 5.0   |  [release/5.0](https://github.com/meliorence/react-native-render-html/tree/release/5.0)   | [release/5.0/README.md](https://github.com/meliorence/react-native-render-html/blob/release/5.0/README.md) | ![CI](https://github.com/meliorence/react-native-render-html/workflows/CI/badge.svg?branch=release%2F5.0) | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/5.0)](#) |
+| 4.2   |  [release/4.2](https://github.com/meliorence/react-native-render-html/tree/release/4.2)   | [release/4.2/README.md](https://github.com/meliorence/react-native-render-html/blob/release/4.2/README.md) | ![CI](https://github.com/meliorence/react-native-render-html/workflows/CI/badge.svg?branch=release%2F4.2) | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/4.2)](#) |
 
 <a name="prereleases"></a>
 
@@ -70,8 +70,8 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 
 | Tag     | Branch      | Test Status                                                                                                  | Latest                                                                  |
 | ------- | ----------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
-| next    | dev/5.x     | [![CI](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=dev%2f5.x)](#)     | [![](https://img.shields.io/npm/v/react-native-render-html/next)](#)    |
-| foundry | dev/foundry | [![CI](https://github.com/archriss/react-native-render-html/workflows/CI/badge.svg?branch=dev%2ffoundry)](#) | [![](https://img.shields.io/npm/v/react-native-render-html/foundry)](#) |
+| next    | dev/5.x     | [![CI](https://github.com/meliorence/react-native-render-html/workflows/CI/badge.svg?branch=dev%2f5.x)](#)     | [![](https://img.shields.io/npm/v/react-native-render-html/next)](#)    |
+| foundry | dev/foundry | [![CI](https://github.com/meliorence/react-native-render-html/workflows/CI/badge.svg?branch=dev%2ffoundry)](#) | [![](https://img.shields.io/npm/v/react-native-render-html/foundry)](#) |
 
 ## Install
 
@@ -85,12 +85,12 @@ npm install react-native-render-html
 > chances you encounter a bug is pretty low. If you encounter any issue on a
 > pre-release, you don't need to fill a full bug report. Just [comment our
 > latest release
-> thread](https://github.com/archriss/react-native-render-html/issues?q=is%3Aissue+is%3Aopen+label%3Arelease).
+> thread](https://github.com/meliorence/react-native-render-html/issues?q=is%3Aissue+is%3Aopen+label%3Arelease).
 > To install the `next` version: <pre>npm install react-native-render-html@next</pre>
 >
 > If you wish, you can also try directly the master branch:
 >
-> <pre>npm install "github:archriss/react-native-render-html#master"</pre>
+> <pre>npm install "github:meliorence/react-native-render-html#master"</pre>
 
 ## Basic usage
 
@@ -346,7 +346,7 @@ export default function Demo() {
 ```
 
 Read the RFC document [“A Deterministic Approach to Embedded Content
-Scaling”](https://github.com/archriss/react-native-render-html/blob/master/rfc/001-A-deterministic-approach-to-embedded-content-scaling.adoc)
+Scaling”](https://github.com/meliorence/react-native-render-html/blob/master/rfc/001-A-deterministic-approach-to-embedded-content-scaling.adoc)
 for more details.
 
 ## Altering content

@@ -42,7 +42,7 @@ I am using `react-native-render-html` and I am witnessing a failure such as:
 https://stackoverflow.com/questions/tagged/react-native-render-html for similar
 questions.
 3. Take a look at
-https://github.com/archriss/react-native-render-html/issues[our issue tracker]
+https://github.com/meliorence/react-native-render-html/issues[our issue tracker]
 for similar questions.
 4. If you still don't have a solution, you can choose one or more:
 +
@@ -62,7 +62,7 @@ standards. Finally, because the https://github.com/react-native-community/react-
 
 However, we are always open to feature requests and propositions for
 enhancement regarding better compliance with the standards. You're more than
-welcomed to <<CONTRIBUTING.adoc#tickets,open a 
+welcomed to <<CONTRIBUTING.adoc#tickets,open a
 ticket>> and discuss the feature on https://discord.gg/dbEMMJM[our #general
 Discord channel].
 
@@ -79,14 +79,14 @@ doesn't.
 .__Recommendations__
 --
 1. Make sure your issue isn't covered
-https://github.com/archriss/react-native-render-html/blob/master/README.md[by
+https://github.com/meliorence/react-native-render-html/blob/master/README.md[by
 the docs].
 2. Read the <<common-issues>> section bellow.
 3. Take a look at
 https://stackoverflow.com/questions/tagged/react-native-render-html for similar
 questions.
 4. Take a look at
-https://github.com/archriss/react-native-render-html/issues[our issue tracker]
+https://github.com/meliorence/react-native-render-html/issues[our issue tracker]
 for similar questions.
 5. If you still don't have a solution, you can choose one or more:
 +
@@ -103,14 +103,14 @@ report anyway.
 .__Recommendations__
 --
 1. Make sure the feature isn't covered
-https://github.com/archriss/react-native-render-html/blob/master/README.md[by
+https://github.com/meliorence/react-native-render-html/blob/master/README.md[by
 the docs].
 2. Read the <<common-issues>> section bellow.
 3. Take a look at
 https://stackoverflow.com/questions/tagged/react-native-render-html for similar
 questions.
 4. Take a look at
-https://github.com/archriss/react-native-render-html/issues[our issue tracker]
+https://github.com/meliorence/react-native-render-html/issues[our issue tracker]
 for similar questions.
 5. If you still don't have an answer, you can choose one or more:
 +
@@ -127,7 +127,7 @@ C. Going to https://discord.gg/dbEMMJM[our Discord #support channel].
 .__Recommendations__
 --
 1. Carefully
-https://github.com/archriss/react-native-render-html/blob/master/README.md[read
+https://github.com/meliorence/react-native-render-html/blob/master/README.md[read
 the docs].
 2. Read the <<common-issues>> section bellow.
 3. If you still find difficult to use this feature, then we are lacking good
