@@ -5,6 +5,9 @@ import { DefaultTagRendererProps } from '../shared-types';
 import type { TChildProps } from '../TChildrenRenderer';
 import { useTChildrenRenderer } from '../context/TChildrenRendererContext';
 import usePrefixRenderer, { SupportedListStyleType } from './usePrefixRenderer';
+import NestLevelProvider, {
+  useListNestLevel
+} from '../context/NestLevelProvider';
 
 const styles = StyleSheet.create({
   row: {
@@ -15,22 +18,26 @@ const styles = StyleSheet.create({
 });
 
 export interface HTMLListElementProps extends DefaultTagRendererProps<TBlock> {
-  defaultListType: SupportedListStyleType;
+  listType: 'ol' | 'ul';
+  getListStyleTypeFromNestLevel: (nestLevel: number) => SupportedListStyleType;
 }
 
 export default function HTMLListElement({
   tnode,
   TDefaultRenderer,
   hasAnchorAncestor,
-  defaultListType,
+  listType,
   style,
+  getListStyleTypeFromNestLevel,
   ...props
 }: HTMLListElementProps) {
+  const nestLevel = useListNestLevel(listType);
   // Map children to horizontal rows with prefixes
   const TChildrenRenderer = useTChildrenRenderer();
   const prefixRenderer = usePrefixRenderer({
-    listStyleType: tnode.styles.webTextFlow.listStyleType,
-    defaultListType
+    nestLevel,
+    getListStyleTypeFromNestLevel,
+    listStyleType: tnode.styles.webTextFlow.listStyleType
   });
   const fontSize = tnode.styles.nativeTextFlow.fontSize || 14;
   const color = tnode.styles.nativeTextFlow.color as string;
@@ -58,7 +65,6 @@ export default function HTMLListElement({
       <View style={prefixContainerStyle}>
         <PrefixRenderer
           index={index}
-          nestLevel={0}
           color={color}
           fontSize={fontSize}
           lineHeight={lineHeight}
@@ -68,16 +74,18 @@ export default function HTMLListElement({
     </View>
   );
   return (
-    <TDefaultRenderer
-      hasAnchorAncestor={hasAnchorAncestor}
-      tnode={tnode}
-      style={[style, { paddingLeft }]}
-      {...props}>
-      <TChildrenRenderer
-        tchildren={tnode.children}
+    <NestLevelProvider listType={listType} level={nestLevel + 1}>
+      <TDefaultRenderer
         hasAnchorAncestor={hasAnchorAncestor}
-        renderChild={renderChild}
-      />
-    </TDefaultRenderer>
+        tnode={tnode}
+        style={[style, { paddingLeft }]}
+        {...props}>
+        <TChildrenRenderer
+          tchildren={tnode.children}
+          hasAnchorAncestor={hasAnchorAncestor}
+          renderChild={renderChild}
+        />
+      </TDefaultRenderer>
+    </NestLevelProvider>
   );
 }

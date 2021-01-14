@@ -20,7 +20,10 @@ interface ListPrefixRendererProps {
   fontSize: number;
   lineHeight: number;
   index: number;
-  nestLevel: number;
+  /**
+   * The number of parents of the same tag
+   */
+  // nestLevel: number;
 }
 
 const TextualPrefixRenderer = ({
@@ -195,15 +198,19 @@ export type SupportedListStyleType =
 
 export interface HTMLListPrefixProps {
   listStyleType?: string;
-  defaultListType: string;
+  nestLevel: number;
+  getListStyleTypeFromNestLevel: (nestLevel: number) => SupportedListStyleType;
 }
 
 export default function usePrefixRenderer({
   listStyleType,
-  defaultListType
+  getListStyleTypeFromNestLevel,
+  nestLevel
 }: HTMLListPrefixProps): PrefixSepcs {
-  return (
-    prefixRenderersMap[listStyleType as SupportedListStyleType] ||
-    defaultListType
-  );
+  const selectedListType = getListStyleTypeFromNestLevel(nestLevel);
+  console.info('selected style type', selectedListType);
+  return listStyleType
+    ? prefixRenderersMap[listStyleType as SupportedListStyleType] ||
+        prefixRenderersMap[selectedListType]
+    : prefixRenderersMap[selectedListType];
 }
