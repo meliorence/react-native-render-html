@@ -8,7 +8,6 @@ import {
   defaultHTMLElementModels
 } from '@native-html/transient-render-engine';
 import { useSharedProps } from '../context/SharedPropsContext';
-import { GenericPressableProps } from '../GenericPressable';
 import { RenderHTMLPassedProps, TDefaultRendererProps } from '../shared-types';
 import { GestureResponderEvent } from 'react-native';
 
@@ -28,7 +27,7 @@ function extractAnchorOnLinkPress(
 
 export function useAnchorProps<T extends TNode>(
   props: TDefaultRendererProps<T>
-): TDefaultRendererProps<T> & { onPress?: GenericPressableProps['onPress'] } {
+): TDefaultRendererProps<T> {
   const { tnode } = props;
   const { onLinkPress } = useSharedProps();
   const syntheticAnchorOnLinkPress = extractAnchorOnLinkPress(
