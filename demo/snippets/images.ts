@@ -19,7 +19,7 @@ const html = `
 <hr />
 <p>
   The next image will be sized automatically thanks to the <em>contentWidth</em> and
-  <em>computeImageMaxWidth</em> props. The latter allows you to set the maximum width from <em>contentWidth</em>,
+  <em>computeEmbeddedMaxWidth</em> props. The latter allows you to set the maximum width from <em>contentWidth</em>,
   or disabling scaling by returning <code>Infinity</code>.
 </p>
 <img width="1200" height="800" src="https://i.imgur.com/XP2BE7q.jpg" />
