@@ -26,7 +26,7 @@ function extractAnchorOnLinkPress(
     : undefined;
 }
 
-function useAnchorProps<T extends TNode>(
+export function useAnchorProps<T extends TNode>(
   props: TDefaultRendererProps<T>
 ): TDefaultRendererProps<T> & { onPress?: GenericPressableProps['onPress'] } {
   const { tnode } = props;

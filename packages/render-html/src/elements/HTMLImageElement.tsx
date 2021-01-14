@@ -6,7 +6,8 @@ import {
   StyleSheet,
   ImageStyle,
   PressableProps,
-  StyleProp
+  StyleProp,
+  ImageURISource
 } from 'react-native';
 import PropTypes from 'prop-types';
 import GenericPressable from '../GenericPressable';
@@ -24,7 +25,7 @@ export interface IncompleteImgDimensions {
 }
 
 export interface HTMLImageElementProps {
-  source: any;
+  source: ImageURISource;
   alt?: string;
   height?: string | number;
   width?: string | number;
@@ -441,7 +442,7 @@ const HTMLImageElement = class HTMLImageElement extends PureComponent<
         imagePhysicalWidth: this.__cachedPhysicalDimensionsFromProps.width,
         imagePhysicalHeight: this.__cachedPhysicalDimensionsFromProps.height
       });
-    } else if (shouldFetchFromImgAPI) {
+    } else if (shouldFetchFromImgAPI && source.uri) {
       Image.getSize(
         source.uri,
         (imagePhysicalWidth, imagePhysicalHeight) => {
