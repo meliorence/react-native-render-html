@@ -73,7 +73,37 @@ const html = `
 	<li>Sneaky</li>
 	<li>Beaky</li>
 	<li>Like</li>
-</ol>`;
+</ol>
+<hr />
+<p> The bullet style type will automatically adapt depending on the nest level of the list.
+For example, nesting <em>ul</em> elements will result in:</p>
+<ul>
+	<li>
+		Hello world
+		<ul>
+			<li>Sneaky
+				<ul>
+					<li>Beaky</li>
+					<li>Like</li>
+				</ul>
+			</li>
+			
+		</ul>
+	</li>
+</ul>
+<hr />
+<p>And nesting <em>ol</em> elements:</p>
+
+<ol>
+	<li>
+		Hello world
+		<ol>
+			<li>Sneaky</li>
+			<li>Beaky</li>
+		</ol>
+	</li>
+</ol>
+`;
 
 const lists: SnippetDeclaration = {
   name: 'Lists',

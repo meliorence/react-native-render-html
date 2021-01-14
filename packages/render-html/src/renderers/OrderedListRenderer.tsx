@@ -8,13 +8,28 @@ import HTMLListElement, {
 } from '../elements/HTMLListElement';
 import { DefaultBlockRenderer } from '../render/render-types';
 import { DefaultTagRendererProps } from '../shared-types';
+import { SupportedListStyleType } from '../elements/usePrefixRenderer';
+
+function getListStyleTypeFromNestLevel(
+  nestLevel: number
+): SupportedListStyleType {
+  switch (nestLevel % 3) {
+    case 0:
+      return 'decimal';
+    case 1:
+      return 'upper-alpha';
+    default:
+      return 'lower-alpha';
+  }
+}
 
 export function useOrderedListRendererProps(
   props: DefaultTagRendererProps<TBlock>
 ): HTMLListElementProps {
   return {
     ...props,
-    defaultListType: 'decimal'
+    listType: 'ol',
+    getListStyleTypeFromNestLevel
   };
 }
 
