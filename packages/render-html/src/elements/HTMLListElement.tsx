@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
 export interface HTMLListElementProps extends DefaultTagRendererProps<TBlock> {
   listType: 'ol' | 'ul';
   getListStyleTypeFromNestLevel: (nestLevel: number) => SupportedListStyleType;
+  getStyleFromNestLevel?: (nestLevel: number) => ViewStyle | null;
 }
 
 export default function HTMLListElement({
@@ -29,9 +30,11 @@ export default function HTMLListElement({
   listType,
   style,
   getListStyleTypeFromNestLevel,
+  getStyleFromNestLevel,
   ...props
 }: HTMLListElementProps) {
   const nestLevel = useListNestLevel(listType);
+  const nestLevelStyle = getStyleFromNestLevel?.call(null, nestLevel);
   // Map children to horizontal rows with prefixes
   const TChildrenRenderer = useTChildrenRenderer();
   const prefixRenderer = usePrefixRenderer({
@@ -78,7 +81,7 @@ export default function HTMLListElement({
       <TDefaultRenderer
         hasAnchorAncestor={hasAnchorAncestor}
         tnode={tnode}
-        style={[style, { paddingLeft }]}
+        style={[style, { paddingLeft }, nestLevelStyle]}
         {...props}>
         <TChildrenRenderer
           tchildren={tnode.children}
