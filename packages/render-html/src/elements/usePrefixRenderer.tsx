@@ -208,7 +208,6 @@ export default function usePrefixRenderer({
   nestLevel
 }: HTMLListPrefixProps): PrefixSepcs {
   const selectedListType = getListStyleTypeFromNestLevel(nestLevel);
-  console.info('selected style type', selectedListType);
   return listStyleType
     ? prefixRenderersMap[listStyleType as SupportedListStyleType] ||
         prefixRenderersMap[selectedListType]

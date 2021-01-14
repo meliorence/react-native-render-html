@@ -21,13 +21,18 @@ function getListStyleTypeFromNestLevel(
   }
 }
 
+function getStyleFromNestLevel(nestLevel: number) {
+  return nestLevel > 0 ? { marginTop: 0, marginBottom: 0 } : null;
+}
+
 export function useUnorderedListRendererProps(
   props: DefaultTagRendererProps<TBlock>
 ): HTMLListElementProps {
   return {
     ...props,
     listType: 'ul',
-    getListStyleTypeFromNestLevel
+    getListStyleTypeFromNestLevel,
+    getStyleFromNestLevel
   };
 }
 
