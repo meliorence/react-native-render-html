@@ -24,7 +24,7 @@ export interface IncompleteImgDimensions {
   height: number | null;
 }
 
-export interface HTMLImageElementProps {
+export interface IMGElementProps {
   source: ImageURISource;
   alt?: string;
   height?: string | number;
@@ -122,7 +122,7 @@ function derivePhysicalDimensionsFromProps({
   height,
   contentWidth,
   enableExperimentalPercentWidth: enablePercentWidth
-}: HTMLImageElementProps): IncompleteImgDimensions {
+}: IMGElementProps): IncompleteImgDimensions {
   const normalizeOptionsWidth = {
     enablePercentWidth,
     containerDimension: contentWidth
@@ -143,7 +143,7 @@ function deriveRequiredDimensionsFromProps({
   contentWidth,
   flatStyle,
   physicalDimensionsFromProps
-}: Pick<HTMLImageElementProps, 'contentWidth'> & {
+}: Pick<IMGElementProps, 'contentWidth'> & {
   flatStyle: Record<string, any>;
   enablePercentWidth?: boolean;
   physicalDimensionsFromProps: IncompleteImgDimensions;
@@ -293,8 +293,8 @@ interface State {
   error: boolean;
 }
 
-const HTMLImageElement = class HTMLImageElement extends PureComponent<
-  HTMLImageElementProps,
+const IMGElement = class HTMLImageElement extends PureComponent<
+  IMGElementProps,
   State
 > {
   private __cachedFlattenStyles!: Record<string, any>;
@@ -302,7 +302,7 @@ const HTMLImageElement = class HTMLImageElement extends PureComponent<
   private __cachedPhysicalDimensionsFromProps!: IncompleteImgDimensions;
   private mounted = false;
 
-  constructor(props: HTMLImageElementProps) {
+  constructor(props: IMGElementProps) {
     super(props);
     this.invalidateRequirements(props);
     const state = {
@@ -319,7 +319,7 @@ const HTMLImageElement = class HTMLImageElement extends PureComponent<
     };
   }
 
-  static propTypes: Record<keyof HTMLImageElementProps, any> = {
+  static propTypes: Record<keyof IMGElementProps, any> = {
     source: PropTypes.object.isRequired,
     alt: PropTypes.string,
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -337,7 +337,7 @@ const HTMLImageElement = class HTMLImageElement extends PureComponent<
     testID: PropTypes.string
   };
 
-  static defaultProps: Partial<HTMLImageElementProps> = {
+  static defaultProps: Partial<IMGElementProps> = {
     enableExperimentalPercentWidth: false,
     computeImagesMaxWidth: identity,
     imagesInitialDimensions: {
@@ -347,7 +347,7 @@ const HTMLImageElement = class HTMLImageElement extends PureComponent<
     style: {}
   };
 
-  invalidateRequirements(props: HTMLImageElementProps) {
+  invalidateRequirements(props: IMGElementProps) {
     const { contentWidth, enableExperimentalPercentWidth, style } = props;
     const physicalDimensionsFromProps = derivePhysicalDimensionsFromProps(
       props
@@ -362,7 +362,7 @@ const HTMLImageElement = class HTMLImageElement extends PureComponent<
     });
   }
 
-  computeImageBoxDimensions(props: HTMLImageElementProps, state: any) {
+  computeImageBoxDimensions(props: IMGElementProps, state: any) {
     const { computeImagesMaxWidth, contentWidth } = props;
     const {
       imagePhysicalWidth,
@@ -391,7 +391,7 @@ const HTMLImageElement = class HTMLImageElement extends PureComponent<
     this.mounted = false;
   }
 
-  componentDidUpdate(prevProps: HTMLImageElementProps, prevState: State) {
+  componentDidUpdate(prevProps: IMGElementProps, prevState: State) {
     const sourceHasChanged = !sourcesAreEqual(
       prevProps.source,
       this.props.source
@@ -425,7 +425,7 @@ const HTMLImageElement = class HTMLImageElement extends PureComponent<
     }
     if (shouldRecomputeImageBox) {
       // eslint-disable-next-line react/no-did-update-set-state
-      this.setState((state: any, props: HTMLImageElementProps) => ({
+      this.setState((state: any, props: IMGElementProps) => ({
         imageBoxDimensions: this.computeImageBoxDimensions(props, state)
       }));
     }
@@ -535,6 +535,6 @@ const HTMLImageElement = class HTMLImageElement extends PureComponent<
     }
     return <View style={style}>{this.renderContent(imgStyles)}</View>;
   }
-} as ComponentClass<Partial<HTMLImageElementProps>>;
+} as ComponentClass<Partial<IMGElementProps>>;
 
-export default HTMLImageElement;
+export default IMGElement;

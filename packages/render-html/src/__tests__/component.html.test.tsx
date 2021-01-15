@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-native-testing-library';
 import HTML from '../RenderHTML';
-import ImgTag from '../elements/HTMLImageElement';
+import ImgTag from '../elements/IMGElement';
 
 describe('ImgTag', () => {
   it('should update ImgTag contentWidth when contentWidth prop changes', () => {

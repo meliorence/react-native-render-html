@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-native-testing-library';
-import HTMLImageElement from '../elements/HTMLImageElement';
+import IMGElement from '../elements/IMGElement';
 
 /**
  * https://github.com/meliorence/react-native-render-html/issues/141
@@ -10,7 +10,7 @@ describe('HTMLImageElement component should pass regression test #141', () => {
     const source = { uri: 'http://via.placeholder.com/640x360' };
     const style = {};
     const { findByTestId, getByTestId, queryByTestId } = render(
-      <HTMLImageElement key="1" style={style} source={source} />
+      <IMGElement key="1" style={style} source={source} />
     );
     const placeholder = getByTestId('image-placeholder');
     expect(placeholder).toBeTruthy();

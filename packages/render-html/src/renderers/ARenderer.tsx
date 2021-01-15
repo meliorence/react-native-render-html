@@ -8,8 +8,12 @@ import {
   defaultHTMLElementModels
 } from '@native-html/transient-render-engine';
 import { useSharedProps } from '../context/SharedPropsContext';
-import { RenderHTMLPassedProps, TDefaultRendererProps } from '../shared-types';
+import {
+  DefaultTagRendererProps,
+  RenderHTMLPassedProps
+} from '../shared-types';
 import { GestureResponderEvent } from 'react-native';
+import AElement from '../elements/AElement';
 
 function extractAnchorOnLinkPress(
   tnode: TBlock | TPhrasing | TText,
@@ -25,9 +29,9 @@ function extractAnchorOnLinkPress(
     : undefined;
 }
 
-export function useAnchorProps<T extends TNode>(
-  props: TDefaultRendererProps<T>
-): TDefaultRendererProps<T> {
+export function useAElementProps<T extends TNode>(
+  props: DefaultTagRendererProps<T>
+): DefaultTagRendererProps<T> {
   const { tnode } = props;
   const { onLinkPress } = useSharedProps();
   const syntheticAnchorOnLinkPress = extractAnchorOnLinkPress(
@@ -43,10 +47,10 @@ export function useAnchorProps<T extends TNode>(
   };
 }
 
-const AnchorRenderer: DefaultMixedRenderer = (props) => {
-  return React.createElement(props.TDefaultRenderer, useAnchorProps(props));
+const ARenderer: DefaultMixedRenderer = (props) => {
+  return React.createElement(AElement, useAElementProps(props));
 };
 
-AnchorRenderer.model = defaultHTMLElementModels.a;
+ARenderer.model = defaultHTMLElementModels.a;
 
-export default AnchorRenderer;
+export default ARenderer;

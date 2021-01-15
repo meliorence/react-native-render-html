@@ -1,7 +1,7 @@
 import React from 'react';
 import RenderHTML from '../RenderHTML';
 import { render } from 'react-native-testing-library';
-import HTMLImageElement from '../elements/HTMLImageElement';
+import IMGElement from '../elements/IMGElement';
 
 /**
  * https://github.com/meliorence/react-native-render-html/issues/408
@@ -15,7 +15,7 @@ describe('RenderHTML component', () => {
           source={{ html: '<img src="//domain.com/" />' }}
         />
       );
-      const image = UNSAFE_getByType(HTMLImageElement);
+      const image = UNSAFE_getByType(IMGElement);
       expect(image.props.source).toMatchObject({ uri: 'https://domain.com/' });
     });
   });

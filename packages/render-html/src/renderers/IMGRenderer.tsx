@@ -1,8 +1,8 @@
 import React from 'react';
 import { TBlock } from '@native-html/transient-render-engine';
-import HTMLImageElement, {
-  HTMLImageElementProps
-} from '../elements/HTMLImageElement';
+import IMGElement, {
+  IMGElementProps
+} from '../elements/IMGElement';
 import { DefaultBlockRenderer } from '../render/render-types';
 import {
   useComputeMaxWidthForTag,
@@ -16,9 +16,9 @@ function normalizeUri(uri: string) {
   return uri.startsWith('//') ? `https:${uri}` : uri;
 }
 
-export function useImageRendererProps(
+export function useIMGElementProps(
   props: DefaultTagRendererProps<TBlock>
-): HTMLImageElementProps {
+): IMGElementProps {
   const { style, tnode, onPress } = props;
   const {
     contentWidth,
@@ -43,10 +43,10 @@ export function useImageRendererProps(
   };
 }
 
-const ImageRenderer: DefaultBlockRenderer = (props) => {
-  return React.createElement(HTMLImageElement, useImageRendererProps(props));
+const IMGRenderer: DefaultBlockRenderer = (props) => {
+  return React.createElement(IMGElement, useIMGElementProps(props));
 };
 
-ImageRenderer.model = defaultHTMLElementModels.img;
+IMGRenderer.model = defaultHTMLElementModels.img;
 
-export default ImageRenderer;
+export default IMGRenderer;
