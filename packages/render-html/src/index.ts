@@ -25,3 +25,15 @@ export {
   useSharedProps,
   useComputeMaxWidthForTag
 } from './context/SharedPropsContext';
+
+// Exports to reuse default renderers logic
+export { useAElementProps } from './renderers/ARenderer';
+export { useIMGElementProps } from './renderers/IMGRenderer';
+export { useOLElementProps } from './renderers/OLRenderer';
+export { useULElementProps } from './renderers/ULRenderer';
+
+// Exports to reuse element components
+export { default as AElement } from './elements/AElement';
+export { default as IMGElement } from './elements/IMGElement';
+export { default as OLElement } from './elements/OLElement';
+export { default as ULElement } from './elements/ULElement';

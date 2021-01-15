@@ -1,25 +1,21 @@
 import React from 'react';
-import {
-  defaultHTMLElementModels,
-  TBlock
-} from '@native-html/transient-render-engine';
-import HTMLListElement, {
-  HTMLListElementProps
-} from '../elements/HTMLListElement';
+import { defaultHTMLElementModels } from '@native-html/transient-render-engine';
 import { DefaultBlockRenderer } from '../render/render-types';
 import { DefaultTagRendererProps } from '../shared-types';
+import { TBlock } from '@native-html/transient-render-engine';
 import { SupportedListStyleType } from '../elements/usePrefixRenderer';
+import ULElement, { ULElementProps } from '../elements/ULElement';
 
 function getListStyleTypeFromNestLevel(
   nestLevel: number
 ): SupportedListStyleType {
   switch (nestLevel % 3) {
     case 0:
-      return 'decimal';
+      return 'disc';
     case 1:
-      return 'upper-alpha';
+      return 'circle';
     default:
-      return 'lower-alpha';
+      return 'square';
   }
 }
 
@@ -27,24 +23,20 @@ function getStyleFromNestLevel(nestLevel: number) {
   return nestLevel > 0 ? { marginTop: 0, marginBottom: 0 } : null;
 }
 
-export function useOrderedListRendererProps(
+export function useULElementProps(
   props: DefaultTagRendererProps<TBlock>
-): HTMLListElementProps {
+): ULElementProps {
   return {
     ...props,
-    listType: 'ol',
     getListStyleTypeFromNestLevel,
     getStyleFromNestLevel
   };
 }
 
-const OrderedListRenderer: DefaultBlockRenderer = (props) => {
-  return React.createElement(
-    HTMLListElement,
-    useOrderedListRendererProps(props)
-  );
+const ULRenderer: DefaultBlockRenderer = (props) => {
+  return React.createElement(ULElement, useULElementProps(props));
 };
 
-OrderedListRenderer.model = defaultHTMLElementModels.ol;
+ULRenderer.model = defaultHTMLElementModels.ul;
 
-export default OrderedListRenderer;
+export default ULRenderer;

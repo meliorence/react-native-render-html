@@ -1,6 +1,6 @@
 import React from 'react';
 import RenderHTML from '../RenderHTML';
-import HTMLImageElement from '../elements/HTMLImageElement';
+import IMGElement from '../elements/IMGElement';
 import { render } from 'react-native-testing-library';
 import { elementHasAncestorOfType } from './utils';
 import { TDefaultPhrasingRenderer } from '../TPhrasingRenderer';
@@ -49,7 +49,7 @@ describe('RenderHTML component should honor formatting context of the DOM tree',
         }}
       />
     );
-    const img = UNSAFE_getByType(HTMLImageElement);
+    const img = UNSAFE_getByType(IMGElement);
     expect(elementHasAncestorOfType(img, 'Text')).toBe(false);
   });
 });

@@ -17,13 +17,14 @@ const styles = StyleSheet.create({
   }
 });
 
-export interface HTMLListElementProps extends DefaultTagRendererProps<TBlock> {
-  listType: 'ol' | 'ul';
+export interface GenericListElementProps<T extends 'ol' | 'ul'>
+  extends DefaultTagRendererProps<TBlock> {
+  listType: T;
   getListStyleTypeFromNestLevel: (nestLevel: number) => SupportedListStyleType;
   getStyleFromNestLevel?: (nestLevel: number) => ViewStyle | null;
 }
 
-export default function HTMLListElement({
+export default function GenericListElement({
   tnode,
   TDefaultRenderer,
   hasAnchorAncestor,
@@ -32,7 +33,7 @@ export default function HTMLListElement({
   getListStyleTypeFromNestLevel,
   getStyleFromNestLevel,
   ...props
-}: HTMLListElementProps) {
+}: GenericListElementProps<any>) {
   const nestLevel = useListNestLevel(listType);
   const nestLevelStyle = getStyleFromNestLevel?.call(null, nestLevel);
   // Map children to horizontal rows with prefixes

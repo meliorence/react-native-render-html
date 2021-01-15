@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { render, waitFor } from 'react-native-testing-library';
-import HTMLImgElement from '../HTMLImageElement';
+import HTMLImgElement from '../IMGElement';
 
-describe('HTMLImgElement', () => {
+describe('IMGElement', () => {
   describe('scaling logic', () => {
     it('should use width and height from styles', async () => {
       const source = { uri: 'http://via.placeholder.com/640x360' };

@@ -5,8 +5,8 @@ import {
 import { ComponentType } from 'react';
 import { CustomTagRendererProps } from '..';
 import lookupRecord from '../helpers/lookupRecord';
-import LineBreakRenderer from '../renderers/LineBreakRenderer';
-import WordBreakRenderer from '../renderers/WordBreakRenderer';
+import BRRenderer from '../renderers/BRRenderer';
+import WBRRenderer from '../renderers/WBRRenderer';
 import { CustomTagRenderer, DefaultTagRenderer } from '../shared-types';
 import defaultRenderers from './defaultRenderers';
 import {
@@ -15,8 +15,8 @@ import {
 } from './render-types';
 
 const internalTextRenderers: Record<string, InternalTextContentRenderer> = {
-  br: LineBreakRenderer,
-  wbr: WordBreakRenderer
+  br: BRRenderer,
+  wbr: WBRRenderer
 };
 
 export interface RendererConfig<T extends TNode> {
