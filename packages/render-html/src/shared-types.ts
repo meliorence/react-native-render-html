@@ -17,7 +17,7 @@ import type {
   TText,
   TPhrasing
 } from '@native-html/transient-render-engine';
-import { ReactElement, ReactNode } from 'react';
+import { ComponentType, ReactElement, ReactNode } from 'react';
 import {
   CSSPropertyNameList,
   MixedStyleDeclaration
@@ -91,10 +91,19 @@ export interface RenderHTMLPassedProps<P = any> {
    */
   defaultTextProps?: Omit<TextProps, 'style'>;
   /**
+   * Default props for WebView elements in the render tree used by plugins.
+   */
+  defaultWebViewProps?: any;
+  /**
    * Log to the console meaningful information regarding dismissed CSS
    * properties, ignored tags... etc.
    */
   debug?: boolean;
+  /**
+   * The WebView component used by plugins (iframe, table)...
+   * See [@native-html/plugins](https://github.com/native-html/plugins).
+   */
+  WebView?: ComponentType<any>;
 }
 
 export interface TransientRenderEngineConfig {
