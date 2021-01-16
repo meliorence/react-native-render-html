@@ -1,8 +1,6 @@
 import React from 'react';
 import { TBlock } from '@native-html/transient-render-engine';
-import IMGElement, {
-  IMGElementProps
-} from '../elements/IMGElement';
+import IMGElement, { IMGElementProps } from '../elements/IMGElement';
 import { DefaultBlockRenderer } from '../render/render-types';
 import {
   useComputeMaxWidthForTag,
