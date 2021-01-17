@@ -17,7 +17,9 @@ export const defaultSharedPropsContext: Required<RenderHTMLPassedProps> = {
     width: 50
   },
   listsPrefixesRenderers: {},
-  onLinkPress: (_e, href) => Linking.canOpenURL(href) && Linking.openURL(href)
+  onLinkPress: (_e, href) => Linking.canOpenURL(href) && Linking.openURL(href),
+  WebView: () => null,
+  defaultWebViewProps: {}
 };
 
 const SharedPropsContext = React.createContext<Required<RenderHTMLPassedProps>>(
