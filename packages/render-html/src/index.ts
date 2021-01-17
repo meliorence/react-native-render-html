@@ -23,6 +23,7 @@ export { default as extendDefaultRenderer } from './render/extendDefaultRenderer
 export { default as splitBoxModelStyle } from './helpers/splitBoxModelStyle';
 export {
   useSharedProps,
+  useRendererProps,
   useComputeMaxWidthForTag
 } from './context/SharedPropsContext';
 
