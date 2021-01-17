@@ -71,7 +71,9 @@ const propTypes: RenderHTMLPropTypes = {
     'sans-serif': PropTypes.string,
     monospace: PropTypes.string
   }),
-  triggerTREInvalidationPropNames: PropTypes.arrayOf(PropTypes.string)
+  triggerTREInvalidationPropNames: PropTypes.arrayOf(PropTypes.string),
+  WebView: PropTypes.any,
+  defaultWebViewProps: PropTypes.object
 };
 
 const defaultProps: {
