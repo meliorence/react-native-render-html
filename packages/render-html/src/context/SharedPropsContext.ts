@@ -19,7 +19,8 @@ export const defaultSharedPropsContext: Required<RenderHTMLPassedProps> = {
   listsPrefixesRenderers: {},
   onLinkPress: (_e, href) => Linking.canOpenURL(href) && Linking.openURL(href),
   WebView: () => null,
-  defaultWebViewProps: {}
+  defaultWebViewProps: {},
+  renderersProps: {}
 };
 
 const SharedPropsContext = React.createContext<Required<RenderHTMLPassedProps>>(
@@ -28,6 +29,14 @@ const SharedPropsContext = React.createContext<Required<RenderHTMLPassedProps>>(
 
 export function useSharedProps() {
   return React.useContext(SharedPropsContext);
+}
+
+export function useRendererProps<
+  R extends Record<string, any> = Record<string, any>
+>(k: keyof R) {
+  return React.useContext(SharedPropsContext).renderersProps[
+    k as string
+  ] as R[typeof k];
 }
 
 export function useDefaultTextProps(): TextProps {

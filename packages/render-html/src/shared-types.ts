@@ -85,6 +85,10 @@ export interface RenderHTMLPassedProps<P = any> {
     htmlAttribs: HtmlAttributesDictionary
   ) => void;
   /**
+   * Props to use in custom renderers with `useRendererProps` or `useSharedProps`.
+   */
+  renderersProps?: Record<string, any>;
+  /**
    * Default props for Text elements in the render tree.
    *
    * @remarks "style" will be ignored. Use `baseStyle` instead.
@@ -235,10 +239,6 @@ export interface RenderHTMLProps<P = any>
    * Your custom renderers.
    */
   renderers?: CustomTagRendererRecord;
-  /**
-   * Set of props accessible into your custom renderers in `passProps` (4th argument)
-   */
-  renderersProps?: any;
   /**
    * Custom style for the default container of the rendered HTML.
    */
