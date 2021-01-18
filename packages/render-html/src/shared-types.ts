@@ -240,14 +240,6 @@ export interface RenderHTMLProps<P = any>
    */
   renderers?: CustomTagRendererRecord;
   /**
-   * Custom style for the default container of the rendered HTML.
-   */
-  containerStyle?: StyleProp<ViewStyle>;
-  /**
-   * Replace the default wrapper with a function that takes your content as the first parameter.
-   */
-  customWrapper?: (innerNodes: ReactNode) => ReactElement;
-  /**
    * Replace the default loader while fetching a remote website's content.
    */
   remoteLoadingView?: (props: RenderHTMLProps<P>) => ReactElement;

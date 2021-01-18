@@ -49,8 +49,6 @@ const propTypes: RenderHTMLPropTypes = {
   ignoreNode: PropTypes.func,
   tagsStyles: PropTypes.object,
   classesStyles: PropTypes.object,
-  containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  customWrapper: PropTypes.func,
   onLinkPress: PropTypes.func,
   computeEmbeddedMaxWidth: PropTypes.func,
   contentWidth: PropTypes.number,
