@@ -45,7 +45,17 @@ export interface InternalRendererConfig<P> {
   Renderer: ComponentType<P>;
   rendererProps: P;
 }
-
+/**
+ * Resuse internal renderers logic for infinite customization!
+ *
+ * @remarks `tagName` must be invariant, i.e. it cannot change. You would
+ * otherwise break the rules of hooks.
+ *
+ * @param tagName - **Invariant** The tag name to extend.
+ * @param props - The props passed to the custom renderer.
+ * @returns An object with two fields: `Renderer` (the internal react
+ * component) and `rendererProps`, the internal component props.
+ */
 export default function useInternalRenderer<T extends TagName>(
   tagName: T,
   props: DefaultTagRendererProps<any>
