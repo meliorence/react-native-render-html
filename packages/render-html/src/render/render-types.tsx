@@ -83,8 +83,8 @@ export type DefaultTagRendererFromModel<
   ? DefaultMixedRenderer
   : never;
 
-export type DefaultTagRendererRecord = Record<
-  string,
+export type DefaultTagRendererRecord<T extends string> = Record<
+  T,
   DefaultTagRendererFromModel<any>
 >;
 

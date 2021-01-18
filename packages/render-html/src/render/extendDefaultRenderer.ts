@@ -17,11 +17,19 @@ import defaultRenderers from './defaultRenderers';
  * @param model - The new element model.
  */
 export default function extendDefaultRenderer<N extends HTMLContentModel>(
-  renderer: DefaultTagRendererFromModel<any> | TagName,
+  renderer:
+    | DefaultTagRendererFromModel<any>
+    | Extract<TagName, keyof typeof defaultRenderers>,
   model: Partial<HTMLElementModelProperties<any, N>>
 ) {
   const localRenderer =
     typeof renderer === 'string' ? defaultRenderers[renderer] : renderer;
+  if (!localRenderer && typeof renderer === 'string') {
+    throw new TypeError(
+      'extendDefaultRenderer: there is no default renderer to extend for tag ' +
+        renderer
+    );
+  }
   const newRenderer: CustomTagRendererFromModel<N> = function (props: any) {
     return React.createElement(localRenderer as any, props);
   } as any;
