@@ -58,7 +58,6 @@ const propTypes: RenderHTMLPropTypes = {
     height: PropTypes.number
   }),
   emSize: PropTypes.number.isRequired,
-  ptSize: PropTypes.number.isRequired,
   baseStyle: PropTypes.object,
   renderersProps: PropTypes.object,
   onTTreeChange: PropTypes.func,
@@ -82,7 +81,6 @@ const defaultProps: {
     decodeEntities: true
   },
   emSize: 14,
-  ptSize: 1.3,
   ignoredTags: [],
   ignoredStyles: [],
   baseStyle: { fontSize: 14 },

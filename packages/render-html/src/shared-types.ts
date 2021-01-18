@@ -252,10 +252,6 @@ export interface RenderHTMLProps<P = any>
    */
   emSize?: number;
   /**
-   * The default value in pixels for 1pt
-   */
-  ptSize?: number;
-  /**
    * Triggered when the transient render tree changes. Useful for debugging.
    */
   onTTreeChange?: (ttree: TNode) => void;

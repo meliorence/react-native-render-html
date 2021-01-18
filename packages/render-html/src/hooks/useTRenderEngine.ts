@@ -23,6 +23,7 @@ export default function useTRenderEngine(props: RenderResolvedHTMLProps) {
     fallbackFonts,
     systemFonts,
     renderers = {},
+    emSize,
     triggerTREInvalidationPropNames
   } = props;
   const isFontSupported = useMemo(() => {
@@ -99,7 +100,8 @@ export default function useTRenderEngine(props: RenderResolvedHTMLProps) {
         cssProcessorConfig: {
           isFontSupported,
           inlinePropertiesBlacklist: ignoredStyles,
-          inlinePropertiesWhitelist: allowedStyles
+          inlinePropertiesWhitelist: allowedStyles,
+          rootFontSize: emSize
         },
         htmlParserOptions: {
           decodeEntities: true,
