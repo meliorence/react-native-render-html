@@ -2922,9 +2922,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@native-html/transient-render-engine@npm:^3.6.2":
-  version: 3.6.2
-  resolution: "@native-html/transient-render-engine@npm:3.6.2"
+"@native-html/transient-render-engine@npm:^3.7.0":
+  version: 3.7.0
+  resolution: "@native-html/transient-render-engine@npm:3.7.0"
   dependencies:
     "@native-html/css-processor": 1.6.1
     "@types/ramda": ^0.27.32
@@ -2933,7 +2933,7 @@ __metadata:
   peerDependencies:
     "@types/react-native": "*"
     react-native: ^0.63.0
-  checksum: f5512fa7623452488c5228cb6b04e7962a8b2128a99db2c0b27bf6dbdef75fc4a8caf76c79c02a2fa4fb30e7af1d1fea3269e33c08c98fec4a33c09717514a3c
+  checksum: 14dbce59b0378647507b1a81c1304c1b709ee52bf40d583f99e48816829922cd86bf5e97c815f6b2ecf41530adf0029ba8c5252a8cc0952e353a6c029ffefce9
   languageName: node
   linkType: hard
 
@@ -14287,7 +14287,7 @@ fsevents@^1.2.7:
     "@babel/preset-react": ^7.12.7
     "@babel/preset-typescript": ^7.12.1
     "@babel/runtime": ^7.12.5
-    "@native-html/transient-render-engine": ^3.6.2
+    "@native-html/transient-render-engine": ^3.7.0
     "@react-native-community/bob": ^0.16.2
     "@release-it/conventional-changelog": ^2.0.0
     "@types/jest": ^26.0.14

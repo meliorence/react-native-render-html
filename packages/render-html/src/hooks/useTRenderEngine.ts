@@ -14,6 +14,9 @@ export default function useTRenderEngine(props: RenderResolvedHTMLProps) {
     allowedStyles,
     ignoredStyles,
     ignoredTags,
+    alterDOMChildren,
+    alterDOMData,
+    alterDOMElement,
     htmlParserOptions,
     baseStyle,
     classesStyles,
@@ -121,6 +124,11 @@ export default function useTRenderEngine(props: RenderResolvedHTMLProps) {
           classesStyles,
           idsStyles,
           tagsStyles
+        },
+        alterDOMParams: {
+          alterDOMChildren,
+          alterDOMData,
+          alterDOMElement
         }
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps

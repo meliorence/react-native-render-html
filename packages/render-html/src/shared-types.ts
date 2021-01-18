@@ -1,5 +1,4 @@
 import {
-  Falsy,
   GestureResponderEvent,
   StyleProp,
   TextProps,
@@ -156,34 +155,29 @@ export interface TransientRenderEngineConfig {
    */
   baseStyle?: MixedStyleDeclaration;
   /**
-   * Target some specific texts and change their content, see [altering content](https://github.com/meliorence/react-native-render-html#altering-content)
+   * Target some specific texts and change their content.
    */
-  alterData?: (node: DOMText) => string | Falsy | void;
+  alterDOMData?: (textNode: DOMText) => string | false | void;
   /**
-   * Target some specific nested children and change them, see [altering content](https://github.com/meliorence/react-native-render-html#altering-content)
+   * Target some specific nested children and change them.
    */
-  alterChildren?: (node: DOMElement) => DOMNode[] | Falsy | void;
+  alterDOMChildren?: (nodes: DOMNode[]) => DOMNode[] | false | void;
   /**
-   * Target a specific node and change it, see [altering content](https://github.com/meliorence/react-native-render-html#altering-content)
+   * Target a specific node and change it.
    */
-  alterNode?: (node: DOMElement) => DOMNode | Falsy | void;
+  alterDOMElement?: (elementNode: DOMElement) => DOMElement | false | void;
   /**
-   * HTML tags you don't want rendered, see [ignoring HTML
-   * content](https://github.com/meliorence/react-native-render-html#ignoring-html-content)
+   * HTML tags you don't want rendered.
    */
   ignoredTags?: string[];
   /**
-   * Allow render only certain CSS style properties and ignore every other. If
-   * you have some property both in `allowedStyles` and `ignoredStyles`, it
-   * will be ignored anyway.
+   * Whitelist specific inline CSS style properties and ignore the others.
    *
    * @remarks Property names must be camelCased.
    */
   allowedStyles?: CSSPropertyNameList;
   /**
-   * CSS styles from the style attribute you don't want rendered, see [ignoring
-   * HTML
-   * content](https://github.com/meliorence/react-native-render-html#ignoring-html-content)
+   * Blacklist specific inline CSS style properties and allow the others.
    *
    * @remarks Property names must be camelCased.
    */
