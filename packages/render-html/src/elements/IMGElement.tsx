@@ -29,14 +29,14 @@ export interface IMGElementProps {
   alt?: string;
   height?: string | number;
   width?: string | number;
-  style: StyleProp<ImageStyle>;
+  style?: StyleProp<ImageStyle>;
   testID?: string;
   computeImagesMaxWidth?: (containerWidth: number) => number;
   onPress?: PressableProps['onPress'];
   altColor?: string;
-  contentWidth: number;
+  contentWidth?: number;
   enableExperimentalPercentWidth?: boolean;
-  imagesInitialDimensions: ImgDimensions;
+  imagesInitialDimensions?: ImgDimensions;
 }
 
 const defaultImageStyle: ImageStyle = { resizeMode: 'cover' };
@@ -337,7 +337,7 @@ const IMGElement = class HTMLImageElement extends PureComponent<
     testID: PropTypes.string
   };
 
-  static defaultProps: Partial<IMGElementProps> = {
+  static defaultProps = {
     enableExperimentalPercentWidth: false,
     computeImagesMaxWidth: identity,
     imagesInitialDimensions: {
@@ -484,10 +484,10 @@ const IMGElement = class HTMLImageElement extends PureComponent<
           {
             height:
               imageBoxDimensions?.height ||
-              this.props.imagesInitialDimensions.height,
+              this.props.imagesInitialDimensions?.height,
             width:
               imageBoxDimensions?.width ||
-              this.props.imagesInitialDimensions.width
+              this.props.imagesInitialDimensions?.width
           }
         ]}
         testID="image-error">
@@ -535,6 +535,6 @@ const IMGElement = class HTMLImageElement extends PureComponent<
     }
     return <View style={style}>{this.renderContent(imgStyles)}</View>;
   }
-} as ComponentClass<Partial<IMGElementProps>>;
+} as ComponentClass<IMGElementProps>;
 
 export default IMGElement;
