@@ -46,7 +46,6 @@ const propTypes: RenderHTMLPropTypes = {
   alterData: PropTypes.func,
   alterChildren: PropTypes.func,
   alterNode: PropTypes.func,
-  ignoreNode: PropTypes.func,
   tagsStyles: PropTypes.object,
   classesStyles: PropTypes.object,
   onLinkPress: PropTypes.func,

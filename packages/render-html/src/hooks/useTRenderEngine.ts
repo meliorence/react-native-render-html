@@ -13,6 +13,7 @@ export default function useTRenderEngine(props: RenderResolvedHTMLProps) {
   const {
     allowedStyles,
     ignoredStyles,
+    ignoredTags,
     htmlParserOptions,
     baseStyle,
     classesStyles,
@@ -48,7 +49,7 @@ export default function useTRenderEngine(props: RenderResolvedHTMLProps) {
     const customRenderersKeys = Object.keys(renderers) as Array<
       keyof typeof renderers
     >;
-    if (!customRenderersKeys.length) {
+    if (!customRenderersKeys.length && !ignoredTags?.length) {
       return defaultModels;
     }
     customRenderersKeys.forEach((key) => {
@@ -90,6 +91,12 @@ export default function useTRenderEngine(props: RenderResolvedHTMLProps) {
             );
         }
       }
+    });
+    ignoredTags?.forEach((tag) => {
+      additionalModels[tag] = HTMLElementModel.fromCustomModel({
+        contentModel: HTMLContentModel.none,
+        tagName: tag
+      });
     });
     return { ...defaultModels, ...additionalModels };
   };
