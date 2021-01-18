@@ -60,19 +60,14 @@ const snippets: Record<SnippetId, SnippetDeclaration> = {
   customRenderers,
   customTags,
   modelTampering,
+  ignoring,
   // ↓ Ignored snippets
   trickyStuff,
-  ignoring,
   iframes,
   alteration
 };
 
-const ignoredSnippets: SnippetId[] = [
-  'trickyStuff',
-  'ignoring',
-  'iframes',
-  'alteration'
-];
+const ignoredSnippets: SnippetId[] = ['trickyStuff', 'iframes', 'alteration'];
 
 if (!__DEV__) {
   ignoredSnippets.push('test');
