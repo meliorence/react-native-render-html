@@ -168,10 +168,6 @@ export interface TransientRenderEngineConfig {
    */
   alterNode?: (node: DOMElement) => DOMNode | Falsy | void;
   /**
-   * Ignore specific DOM nodes.
-   */
-  ignoreNode?: (node: DOMNode, parentTagName: string) => boolean | Falsy;
-  /**
    * HTML tags you don't want rendered, see [ignoring HTML
    * content](https://github.com/meliorence/react-native-render-html#ignoring-html-content)
    */
