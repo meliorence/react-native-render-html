@@ -18,6 +18,7 @@ import remoteHTML from './snippets/remoteHTML';
 import alteration from './snippets/alteration';
 import customRenderers from './snippets/customRenderers';
 import modelTampering from './snippets/modelTampering';
+import internalRenderers from './snippets/internalRenderers';
 
 export const devSelectedSnippet = 'test';
 
@@ -40,7 +41,8 @@ export type SnippetId =
   | 'headers'
   | 'remoteHTML'
   | 'iframes'
-  | 'alteration';
+  | 'alteration'
+  | 'internalRenderers';
 
 const snippets: Record<SnippetId, SnippetDeclaration> = {
   // DEV only
@@ -58,6 +60,7 @@ const snippets: Record<SnippetId, SnippetDeclaration> = {
   headers,
   remoteHTML,
   customRenderers,
+  internalRenderers,
   customTags,
   modelTampering,
   ignoring,
