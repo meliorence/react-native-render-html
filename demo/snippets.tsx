@@ -10,7 +10,6 @@ import paragraphs from './snippets/paragraphs';
 import anchors from './snippets/anchors';
 import lists from './snippets/lists';
 import images from './snippets/images';
-import trickyStuff from './snippets/trickyStuff';
 import layoutStyles from './snippets/layoutStyles';
 import textStyles from './snippets/textStyles';
 import ignoring from './snippets/ignoring';
@@ -31,7 +30,6 @@ export type SnippetId =
   | 'anchors'
   | 'lists'
   | 'images'
-  | 'trickyStuff'
   | 'layoutStyles'
   | 'textStyles'
   | 'ignoring'
@@ -64,13 +62,12 @@ const snippets: Record<SnippetId, SnippetDeclaration> = {
   customTags,
   modelTampering,
   ignoring,
+  alteration,
   // ↓ Ignored snippets
-  trickyStuff,
-  iframes,
-  alteration
+  iframes
 };
 
-const ignoredSnippets: SnippetId[] = ['trickyStuff', 'iframes', 'alteration'];
+const ignoredSnippets: SnippetId[] = ['iframes'];
 
 if (!__DEV__) {
   ignoredSnippets.push('test');

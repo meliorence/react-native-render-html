@@ -124,7 +124,10 @@ export interface TransientRenderEngineConfig {
    */
   enableUserAgentStyles?: boolean;
   /**
-   * Enable or disable inline CSS processing (style attribute).
+   * Enable or disable inline CSS processing of inline styles.
+   *
+   * @remarks If you want to allow or disallow specific properties, use
+   * `allowedStyles` or `ignoredStyles` props.
    *
    * @default true
    */
@@ -132,17 +135,15 @@ export interface TransientRenderEngineConfig {
   /**
    * Provide your styles for specific HTML tags.
    *
-   * **Important note** Do NOT use the StyleSheet API to create the styles you're going to feed to tagsStyle and classesStyles.
-   * Although it might look like it's working at first, the caching logic of react-native makes it impossible for this module
-   * to deep check each of your style to properly apply the precedence and priorities of your nested tags' styles.
+   * @remarks Do NOT use the StyleSheet API to create the styles
+   * you're going to feed to `tagsStyle and classesStyles`.
    */
   tagsStyles?: MixedStyleRecord;
   /**
    * Provide your styles for specific HTML classes.
    *
-   * **Important note** Do NOT use the StyleSheet API to create the styles you're going to feed to tagsStyle and classesStyles.
-   * Although it might look like it's working at first, the caching logic of react-native makes it impossible for this module
-   * to deep check each of your style to properly apply the precedence and priorities of your nested tags' styles.
+   * @remarks Do NOT use the StyleSheet API to create the styles
+   * you're going to feed to `tagsStyle and classesStyles`.
    */
   classesStyles?: MixedStyleRecord;
   /**
@@ -155,31 +156,56 @@ export interface TransientRenderEngineConfig {
    */
   baseStyle?: MixedStyleDeclaration;
   /**
-   * Target some specific texts and change their content.
+   * Ignore specific DOM nodes.
+   *
+   * @remarks Use `ignoredTags` if you simply need to discard specific tags.
+   *
+   * @param node - The DOM node to check.
+   * @returns `true` if the node should be dropped, `false` otherwise.
+   */
+  ignoreDOMNode?: (node: DOMNode) => boolean;
+  /**
+   * Change the data of specific DOM text nodes.
+   *
+   * @param textNode - The DOM text node to check.
+   * @returns A string if the node data should be altered, `false` or `void`
+   * otherwise.
    */
   alterDOMData?: (textNode: DOMText) => string | false | void;
   /**
-   * Target some specific nested children and change them.
+   * Change specific DOM nodes children.
+   *
+   * @param elementNode - The DOM element to check.
+   * @returns An array of DOM nodes if the children should be altered, `false`
+   * or `void` otherwise.
    */
-  alterDOMChildren?: (nodes: DOMNode[]) => DOMNode[] | false | void;
+  alterDOMChildren?: (elementNode: DOMElement) => DOMNode[] | false | void;
   /**
-   * Target a specific node and change it.
+   * Change specific DOM elements.
+   *
+   * @param elementNode - The DOM element to check.
+   * @returns The new or altered DOM element if you intended to change it,
+   * `false` or `void` otherwise.
    */
   alterDOMElement?: (elementNode: DOMElement) => DOMElement | false | void;
   /**
-   * HTML tags you don't want rendered.
+   * HTML tags that should be dropped.
    */
   ignoredTags?: string[];
   /**
    * Whitelist specific inline CSS style properties and ignore the others.
    *
-   * @remarks Property names must be camelCased.
+   * @remarks Property names must be camelCased: for example,
+   * 'background-color' should be written 'backgroundColor'.
    */
   allowedStyles?: CSSPropertyNameList;
   /**
    * Blacklist specific inline CSS style properties and allow the others.
    *
-   * @remarks Property names must be camelCased.
+   * @remarks Property names must be camelCased: for example,
+   * 'background-color' should be written 'backgroundColor'. Also note that if
+   * you don't want inline style processing at all, you should set
+   * `enableCSSInlineProcessing` prop to `false`.
    */
   ignoredStyles?: CSSPropertyNameList;
 }
