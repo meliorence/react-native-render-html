@@ -14,6 +14,7 @@ export default function useTRenderEngine(props: RenderResolvedHTMLProps) {
     allowedStyles,
     ignoredStyles,
     ignoredTags,
+    ignoreDOMNode,
     alterDOMChildren,
     alterDOMData,
     alterDOMElement,
@@ -126,6 +127,7 @@ export default function useTRenderEngine(props: RenderResolvedHTMLProps) {
           tagsStyles
         },
         alterDOMParams: {
+          ignoreDOMNode,
           alterDOMChildren,
           alterDOMData,
           alterDOMElement

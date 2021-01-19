@@ -43,6 +43,7 @@ const propTypes: RenderHTMLPropTypes = {
   htmlParserOptions: PropTypes.object,
   debug: PropTypes.bool.isRequired,
   listsPrefixesRenderers: PropTypes.object,
+  ignoreDOMNode: PropTypes.func,
   alterDOMData: PropTypes.func,
   alterDOMChildren: PropTypes.func,
   alterDOMElement: PropTypes.func,
