@@ -1,3 +1,74 @@
+# [6.0.0-alpha.11](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.10...v6.0.0-alpha.11) (2021-01-27)
+
+
+### Bug Fixes
+
+* inject `textProps` in TText renderers ([29ea34c](https://github.com/meliorence/react-native-render-html/commit/29ea34c6b7d3bfb8f1cc876bc974bc3e545e8e66))
+* missing proptype (`onHTMLLoaded`) ([74a56ae](https://github.com/meliorence/react-native-render-html/commit/74a56ae9699c13925c27fbc880c85835d3d69f17))
+* prettier, consistant and scalable list rendering ([7c2e26a](https://github.com/meliorence/react-native-render-html/commit/7c2e26a22591fa60edc02976aebe46640e918c23))
+
+
+### Code Refactoring
+
+* drop `ignoreNodesFunction` ([97ffc8d](https://github.com/meliorence/react-native-render-html/commit/97ffc8dd0ee659c2dcaf02734115df95882880ee))
+* remove `containerStyle` and `customContainer` props ([dab1d25](https://github.com/meliorence/react-native-render-html/commit/dab1d251a133c6d8a2eb9142d7256bd777f15280))
+
+
+### Features
+
+* add `getStyleFromNetstLevel` prop to HTMLListElement ([5695fea](https://github.com/meliorence/react-native-render-html/commit/5695fea9ee13ec13648535a332cda482ddb99192))
+* expose default renderers logic for extensibility ([691f9cf](https://github.com/meliorence/react-native-render-html/commit/691f9cfb8280bdeeda5d9240a50b328f9cbf27ff)), closes [#424](https://github.com/meliorence/react-native-render-html/issues/424)
+* implement `defaultTextProps` prop ([13d7abf](https://github.com/meliorence/react-native-render-html/commit/13d7abfaca0b7f25435f7ef8d0abfa5a4a97b179))
+* implement `useInternalRenderer` hook to reuse internal rendering logic ([add307c](https://github.com/meliorence/react-native-render-html/commit/add307cd29bb3682ea2180eee06c2b9292033013))
+* implement `computeEmbeddedMaxWidth` prop as per RFC001@2.0.0 ([9ee8475](https://github.com/meliorence/react-native-render-html/commit/9ee8475c9cf15c9af88b78a7ea119ec2a8aa49df))
+* nesting ol and ul will result in disinct bullet style types ([a18016f](https://github.com/meliorence/react-native-render-html/commit/a18016ff1fd7692c78d140d25c819a877416276d)), closes [#312](https://github.com/meliorence/react-native-render-html/issues/312)
+* port `alterData`, `alterChildren` and `alterNode` ([1e0002b](https://github.com/meliorence/react-native-render-html/commit/1e0002b4a405bacbfba7cb647c1a8121f91d6b69))
+* port `ignoreDOMNode` hook ([8a0d14f](https://github.com/meliorence/react-native-render-html/commit/8a0d14f3b9782e0d3bfea6aa820811ab9923275e))
+* port `ignoredTags` prop ([9d2f5d5](https://github.com/meliorence/react-native-render-html/commit/9d2f5d57658cf30bc382682ef3be94a5b0f1d37b))
+* port `emSize` prop ([f567532](https://github.com/meliorence/react-native-render-html/commit/f5675320585bdbb309769dc4133226e24762d039))
+* safe typeguards in `extendDefaultRenderer` ([eb565df](https://github.com/meliorence/react-native-render-html/commit/eb565df60462b50a8efbc40afbdc8d060721a235))
+* support `htmlParserOptions` prop ([3e5de96](https://github.com/meliorence/react-native-render-html/commit/3e5de966d227876b6d69d7c925514254d5e5f695))
+* support `source` prop, identical to react-native-webview ([ed74eb9](https://github.com/meliorence/react-native-render-html/commit/ed74eb9b45993f260d6dea988abdd164c15f0f4b))
+* support `WebView` and `defaultWebViewProps` ([fe177d7](https://github.com/meliorence/react-native-render-html/commit/fe177d74a64a07660abc97155df9159c1b39d40a))
+
+
+### BREAKING CHANGES
+
+* `ignoreNodesFunction` has been renamed
+`ignoreDOMNode`.
+* the names of hooks to alter DOM content have been
+changed for clarity:
+
+  - `alterData` becomes `alterDOMData`
+  - `alterChildren` becomes `alterDOMChildren`
+  - `alterNode` becomes `alterDOMElement`
+* dropped ptSize prop. Point is supposed to be an
+absolute (pixel independant) size and unfit for display devices. It will
+be translated by the CSS processor to an absolute unit.
+* `containerStyle` and `customContainer` props have been
+dropped. Use `baseStyle` prop instead to style the root component.
+* drop `textSelectable` and `allowFontScaling`. Use
+`defaultTextProps.selectable` and `defaultTextProps.allowFontScaling`
+instead.
+* `uri` and `html` props have been dropped. Replace `uri`
+with `source={{ uri: 'http://...' }}` and `html` with
+`source={{ html: '<div> ...' }}`. The former now allows `body`,
+`headers` and `method` fields.
+* `decodeEntities` prop has been dropped. Pass this
+option to `htmlParserOptions` prop instead.
+* `computeImagesMaxWidth` has been replaced with
+`computeEmbeddedMaxWidth`. The two props are very similar, but the latest
+takes an extra argument, "tagName", which is the tag for which a width
+constrain should be enforced. It is planned to work with the
+@native-html/iframe-plugin extension.
+* the object returned by `splitBoxModelStyle` has more
+legible field names, `boxModelStyle` and `otherStyle`.
+* `extendRenderer` has been renamed to
+`extendDefaultRenderer`. Also note:
+
+  - The first argument can be the name of the tag to extend;
+  - The second argument is now a partial model;
+
 # [6.0.0-alpha.10](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.9...v6.0.0-alpha.10) (2020-12-03)
 
 
