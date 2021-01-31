@@ -31,3 +31,5 @@ export {
   useRendererProps,
   useComputeMaxWidthForTag
 } from './context/SharedPropsContext';
+export { default as domNodeToHTMLString } from './helpers/domNodeToHTMLString';
+export type { DomNodeToHtmlReporter } from './helpers/domNodeToHTMLString';
