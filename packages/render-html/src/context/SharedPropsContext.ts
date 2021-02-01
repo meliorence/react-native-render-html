@@ -10,6 +10,7 @@ export const defaultSharedPropsContext: Required<RenderHTMLPassedProps> = {
     selectable: false,
     allowFontScaling: true
   },
+  defaultViewProps: {},
   enableExperimentalMarginCollapsing: false,
   computeEmbeddedMaxWidth: (contentWidth) => contentWidth,
   imagesInitialDimensions: {
