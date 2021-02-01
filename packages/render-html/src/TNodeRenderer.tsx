@@ -39,10 +39,16 @@ const TNodeRenderer: React.FunctionComponent<TNodeRendererProps<
       childrenProps as TNodeGenericRendererProps<TText>
     );
   }
-  if (tnode instanceof TEmpty && tnode.isUnregistered && __DEV__) {
-    console.warn(
-      `There is no custom renderer registered for tag "${tnode.tagName}". The tag will not be rendered.`
-    );
+  if (tnode instanceof TEmpty && __DEV__) {
+    if (tnode.isUnregistered) {
+      console.warn(
+        `There is no custom renderer registered for tag "${tnode.tagName}" which is not part of the HTML5 standard. The tag will not be rendered.`
+      );
+    } else {
+      console.warn(
+        `The "${tnode.tagName}" tag is a valid HTML element but is not handled by this library. You must register a custom renderer or plugin and make sure its content model is not set to "none".`
+      );
+    }
   }
   return null;
 };
