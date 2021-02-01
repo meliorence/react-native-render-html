@@ -19,6 +19,7 @@ export type RenderHTMLPropTypes = Record<keyof RenderHTMLProps, any>;
 const propTypes: RenderHTMLPropTypes = {
   renderers: PropTypes.object.isRequired,
   defaultTextProps: PropTypes.object,
+  defaultViewProps: PropTypes.object,
   source: PropTypes.oneOfType([
     PropTypes.shape({
       html: PropTypes.string.isRequired,

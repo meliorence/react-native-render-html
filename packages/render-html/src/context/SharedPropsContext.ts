@@ -43,6 +43,10 @@ export function useDefaultTextProps(): TextProps {
   return useSharedProps().defaultTextProps;
 }
 
+export function useDefaultViewProps(): TextProps {
+  return useSharedProps().defaultViewProps;
+}
+
 export function useComputeMaxWidthForTag(tagName: string) {
   const { computeEmbeddedMaxWidth } = useSharedProps();
   return useCallback(
