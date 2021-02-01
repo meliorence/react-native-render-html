@@ -94,6 +94,12 @@ export interface RenderHTMLPassedProps<P = any> {
    */
   defaultTextProps?: Omit<TextProps, 'style'>;
   /**
+   * Default props for View elements in the render tree.
+   *
+   * @remarks "style" will be ignored. Use `baseStyle` instead.
+   */
+  defaultViewProps?: Omit<ViewProps, 'style'>;
+  /**
    * Default props for WebView elements in the render tree used by plugins.
    */
   defaultWebViewProps?: any;

@@ -12,6 +12,7 @@ import {
 import mergeCollapsedMargins from './helpers/mergeCollapsedMargins';
 import GenericPressable from './GenericPressable';
 import { useRendererConfig } from './context/RenderRegistryProvider';
+import { useDefaultViewProps } from './context/SharedPropsContext';
 
 export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
   tnode,
@@ -52,6 +53,7 @@ const TBlockRenderer = ({
   collapsedMarginTop
 }: TNodeGenericRendererProps<TBlock>) => {
   const { Default, Custom } = useRendererConfig(tnode);
+  const viewProps = useDefaultViewProps();
   const commonProps: CustomTagRendererProps<TBlock> = {
     key,
     tnode,
@@ -59,8 +61,8 @@ const TBlockRenderer = ({
       ...tnode.styles.nativeBlockFlow,
       ...tnode.styles.nativeBlockRet
     }),
+    viewProps,
     textProps: {},
-    viewProps: {},
     type: 'text',
     hasAnchorAncestor,
     TDefaultRenderer: TDefaultBlockRenderer,
