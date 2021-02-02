@@ -19,6 +19,7 @@ export { default as TNodeRenderer } from './TNodeRenderer';
 export { default as useTRenderEngine } from './hooks/useTRenderEngine';
 export { default as useTTree } from './hooks/useTTree';
 export { default as useInternalRenderer } from './hooks/useInternalRenderer';
+export { default as useNormalizedUrl } from './hooks/useNormalizedUrl';
 export type {
   InternalSpecialRenderedTag,
   InternalRendererConfig
@@ -31,5 +32,6 @@ export {
   useRendererProps,
   useComputeMaxWidthForTag
 } from './context/SharedPropsContext';
+export { useDocumentMetadata } from './context/DocumentMetadataProvider';
 export { default as domNodeToHTMLString } from './helpers/domNodeToHTMLString';
 export type { DomNodeToHtmlReporter } from './helpers/domNodeToHTMLString';

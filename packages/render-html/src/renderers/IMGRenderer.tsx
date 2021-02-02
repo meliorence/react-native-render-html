@@ -9,10 +9,7 @@ import {
 import { ImageStyle } from 'react-native';
 import { defaultHTMLElementModels } from '@native-html/transient-render-engine';
 import { DefaultTagRendererProps } from '../shared-types';
-
-function normalizeUri(uri: string) {
-  return uri.startsWith('//') ? `https:${uri}` : uri;
-}
+import useNormalizedUrl from '../hooks/useNormalizedUrl';
 
 export function useIMGElementProps(
   props: DefaultTagRendererProps<TBlock>
@@ -24,7 +21,7 @@ export function useIMGElementProps(
     imagesInitialDimensions
   } = useSharedProps();
   const computeImagesMaxWidth = useComputeMaxWidthForTag('img');
-  const src = (tnode.attributes.src as string) || '';
+  const src = tnode.attributes.src || '';
   return {
     contentWidth,
     computeImagesMaxWidth,
@@ -34,7 +31,7 @@ export function useIMGElementProps(
     alt: tnode.attributes.alt,
     testID: 'img',
     altColor: tnode.styles.nativeTextFlow.color as string,
-    source: { uri: normalizeUri(src) },
+    source: { uri: useNormalizedUrl(src) },
     style: style as ImageStyle,
     width: tnode.attributes.width,
     height: tnode.attributes.height

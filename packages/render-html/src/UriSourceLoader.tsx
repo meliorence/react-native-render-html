@@ -81,5 +81,10 @@ export default function UriSourceLoader(props: UriSourceLoaderProps) {
   if (loading) {
     return remoteLoadingView!.call(null, props);
   }
-  return children?.call(null, resolvedHTML!) || null;
+  return (
+    children?.call(null, {
+      html: resolvedHTML!,
+      baseUrl: props.source.uri
+    }) || null
+  );
 }

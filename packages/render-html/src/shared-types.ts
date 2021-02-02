@@ -14,8 +14,10 @@ import type {
   TNode,
   TBlock,
   TText,
-  TPhrasing
+  TPhrasing,
+  DocumentContext as TREDocumentContext
 } from '@native-html/transient-render-engine';
+
 import { ComponentType, ReactElement, ReactNode } from 'react';
 import {
   CSSPropertyNameList,
@@ -243,7 +245,7 @@ export interface RenderHTMLSourceInline {
    */
   html: string;
   /**
-   * The base URL to be used for any relative links in the HTML code.
+   * The base URL to resolve relative URLs in the HTML code.
    */
   baseUrl?: string;
 }
@@ -318,10 +320,16 @@ export interface RenderHTMLProps<P = any>
 
 export type RenderResolvedHTMLProps = Omit<RenderHTMLProps, 'source'> & {
   html: string;
+  baseUrl?: string;
 };
 
+export interface ResolvedResourceProps {
+  html: string;
+  baseUrl?: string;
+}
+
 export interface SourceLoaderProps extends RenderHTMLProps {
-  children: (resolvedHTML: string) => ReactElement;
+  children: (resource: ResolvedResourceProps) => ReactElement;
 }
 
 export interface FallbackFontsDefinitions {
@@ -425,3 +433,29 @@ export type DefaultTagRenderer<T extends TNode> = React.ComponentType<
 export type CustomTagRenderer<T extends TNode> = React.ComponentType<
   CustomTagRendererProps<T>
 >;
+
+/**
+ * An object containing meta-data extracted from resource URL and HTML head.
+ */
+export interface DocumentMetadata {
+  /**
+   * The base URL of this resource. It will influence how relative URLs are
+   * resolved such as `href` and `src` element properties. By order of
+   * precedence:
+   *
+   * 1. `baseUrl` from `<base/>` html element;
+   * 2. `baseUrl` from `source.baseUrl` prop;
+   * 3. `baseUrl` as origin of `source.uri` prop.
+   */
+  baseUrl: string;
+  /**
+   * The language of this document, extracted from the `lang` attribute of the
+   * `<html/>` element;
+   */
+  lang: string;
+  title: string;
+  scheme: 'http' | 'https';
+  baseTarget: TREDocumentContext['baseTarget'];
+  links: TREDocumentContext['links'];
+  meta: TREDocumentContext['meta'];
+}
