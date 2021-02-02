@@ -60,6 +60,9 @@ export interface RenderHTMLPassedProps<P = any> {
    *
    * @param contentWidth - The available width in this {@link RenderHTML} component.
    * @param tagName - The tagName of this element to render, e.g. "img".
+   *
+   * @remarks Take advantage of `useComputeMaxWidthForTag` hook inside custom
+   * renderers to get the maximum width for this tag.
    */
   computeEmbeddedMaxWidth?: (contentWidth: number, tagName: string) => number;
   /**
@@ -78,29 +81,32 @@ export interface RenderHTMLPassedProps<P = any> {
    */
   enableExperimentalMarginCollapsing?: boolean;
   /**
-   * Fired with the event, the href and an object with all attributes of the tag as its arguments when tapping a link
+   * Fired with the event, the href and an object with all attributes of the
+   * tag as its arguments when tapping a link
    */
   onLinkPress?: (
     event: GestureResponderEvent,
     href: string,
-    htmlAttribs: HtmlAttributesDictionary
+    htmlAttribs: HtmlAttributesDictionary,
+    target: TREDocumentContext['baseTarget']
   ) => void;
   /**
-   * Props to use in custom renderers with `useRendererProps` or `useSharedProps`.
+   * Props to use in custom renderers with `useRendererProps` or
+   * `useSharedProps`.
    */
   renderersProps?: Record<string, any>;
   /**
    * Default props for Text elements in the render tree.
    *
-   * @remarks "style" will be ignored. Use `baseStyle` instead.
+   * @remarks "style" will be merged into the tnode own styles.
    */
-  defaultTextProps?: Omit<TextProps, 'style'>;
+  defaultTextProps?: TextProps;
   /**
    * Default props for View elements in the render tree.
    *
-   * @remarks "style" will be ignored. Use `baseStyle` instead.
+   * @remarks "style" will be merged into the tnode own styles.
    */
-  defaultViewProps?: Omit<ViewProps, 'style'>;
+  defaultViewProps?: ViewProps;
   /**
    * Default props for WebView elements in the render tree used by plugins.
    */
@@ -160,7 +166,7 @@ export interface TransientRenderEngineConfig {
   idsStyles?: MixedStyleRecord;
   /**
    * The default style for the document (root). Inheritable styles will be
-   * transferred to children. That works even for Text styles.
+   * transferred to children. That works also for Text styles.
    */
   baseStyle?: MixedStyleDeclaration;
   /**
@@ -435,7 +441,8 @@ export type CustomTagRenderer<T extends TNode> = React.ComponentType<
 >;
 
 /**
- * An object containing meta-data extracted from resource URL and HTML head.
+ * An object containing meta-data extracted from resource URL and HTML
+ * &lt;head&gt; element.
  */
 export interface DocumentMetadata {
   /**
@@ -453,9 +460,24 @@ export interface DocumentMetadata {
    * `<html/>` element;
    */
   lang: string;
+  /**
+   * The content of the &lt;title&gt; element.
+   */
   title: string;
-  scheme: 'http' | 'https';
+  /**
+   * How anchors should be actionned on press?
+   *
+   * @remarks By default, `onLinkPress` will always open the system browser,
+   * equivalent to `_blank` target. However, you can customize the behavior by
+   * providing your own `onLinkPress` implementation.
+   */
   baseTarget: TREDocumentContext['baseTarget'];
+  /**
+   * A data array comprised of attributes from &lt;link&gt; elements.
+   */
   links: TREDocumentContext['links'];
+  /**
+   * A data array comprised of attributes from &lt;meta&gt; elements.
+   */
   meta: TREDocumentContext['meta'];
 }
