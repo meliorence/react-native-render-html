@@ -7,7 +7,6 @@ const DocumentMetadataContext = React.createContext<DocumentMetadata>({
   lang: 'en',
   links: [],
   meta: [],
-  scheme: 'https',
   title: ''
 });
 

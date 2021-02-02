@@ -71,7 +71,8 @@ const propTypes: RenderHTMLPropTypes = {
   }),
   triggerTREInvalidationPropNames: PropTypes.arrayOf(PropTypes.string),
   WebView: PropTypes.any,
-  defaultWebViewProps: PropTypes.object
+  defaultWebViewProps: PropTypes.object,
+  onDocumentMetadataLoaded: PropTypes.func
 };
 
 const defaultProps: {
@@ -153,7 +154,13 @@ const defaultProps: {
 
 function RenderResolvedHTML(props: RenderResolvedHTMLProps) {
   const ttree = useTTree(props);
-  return <TDocumentRenderer tdoc={ttree} baseUrl={props.baseUrl} />;
+  return (
+    <TDocumentRenderer
+      tdoc={ttree}
+      baseUrl={props.baseUrl}
+      onDocumentMetadataLoaded={props.onDocumentMetadataLoaded}
+    />
+  );
 }
 
 export default function RenderHTML({
