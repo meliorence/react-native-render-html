@@ -222,6 +222,11 @@ export interface TransientRenderEngineConfig {
    * `enableCSSInlineProcessing` prop to `false`.
    */
   ignoredStyles?: CSSPropertyNameList;
+  /**
+   * Handler invoked when the document metadata is available. It will
+   * re-trigger on HTML content changes.
+   */
+  onDocumentMetadataLoaded?: (documentMetadata: DocumentMetadata) => void;
 }
 
 export interface RenderHTMLSourceUri {
@@ -327,6 +332,7 @@ export interface RenderHTMLProps<P = any>
 export type RenderResolvedHTMLProps = Omit<RenderHTMLProps, 'source'> & {
   html: string;
   baseUrl?: string;
+  onDocumentMetadataLoaded?: TransientRenderEngineConfig['onDocumentMetadataLoaded'];
 };
 
 export interface ResolvedResourceProps {
