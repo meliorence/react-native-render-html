@@ -5,7 +5,8 @@ import {
   TNode,
   TPhrasing,
   TText,
-  defaultHTMLElementModels
+  defaultHTMLElementModels,
+  DocumentContext
 } from '@native-html/transient-render-engine';
 import { useSharedProps } from '../context/SharedPropsContext';
 import {
@@ -15,6 +16,7 @@ import {
 import { GestureResponderEvent } from 'react-native';
 import AElement from '../elements/AElement';
 import useNormalizedUrl from '../hooks/useNormalizedUrl';
+import { useDocumentMetadata } from '../context/DocumentMetadataProvider';
 
 function useAnchorOnLinkPress(
   tnode: TBlock | TPhrasing | TText,
@@ -22,13 +24,20 @@ function useAnchorOnLinkPress(
 ) {
   const href: string = tnode.attributes.href;
   const normalizedHref = useNormalizedUrl(href);
+  const { baseTarget } = useDocumentMetadata();
   const shouldHandleLinkPress =
     tnode.tagName === 'a' &&
     typeof normalizedHref === 'string' &&
     typeof onLinkPress === 'function';
   return shouldHandleLinkPress
     ? (e: GestureResponderEvent) =>
-        onLinkPress!(e, normalizedHref, tnode.attributes)
+        onLinkPress!(
+          e,
+          normalizedHref,
+          tnode.attributes,
+          (tnode.attributes.target as DocumentContext['baseTarget']) ||
+            baseTarget
+        )
     : undefined;
 }
 
