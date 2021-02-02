@@ -14,18 +14,21 @@ import {
 } from '../shared-types';
 import { GestureResponderEvent } from 'react-native';
 import AElement from '../elements/AElement';
+import useNormalizedUrl from '../hooks/useNormalizedUrl';
 
-function extractAnchorOnLinkPress(
+function useAnchorOnLinkPress(
   tnode: TBlock | TPhrasing | TText,
   onLinkPress: RenderHTMLPassedProps['onLinkPress']
 ) {
   const href: string = tnode.attributes.href;
+  const normalizedHref = useNormalizedUrl(href);
   const shouldHandleLinkPress =
     tnode.tagName === 'a' &&
-    typeof href === 'string' &&
+    typeof normalizedHref === 'string' &&
     typeof onLinkPress === 'function';
   return shouldHandleLinkPress
-    ? (e: GestureResponderEvent) => onLinkPress!(e, href, tnode.attributes)
+    ? (e: GestureResponderEvent) =>
+        onLinkPress!(e, normalizedHref, tnode.attributes)
     : undefined;
 }
 
@@ -34,10 +37,7 @@ export function useAElementProps<T extends TNode>(
 ): DefaultTagRendererProps<T> {
   const { tnode } = props;
   const { onLinkPress } = useSharedProps();
-  const syntheticAnchorOnLinkPress = extractAnchorOnLinkPress(
-    tnode,
-    onLinkPress
-  );
+  const syntheticAnchorOnLinkPress = useAnchorOnLinkPress(tnode, onLinkPress);
   if (typeof syntheticAnchorOnLinkPress !== 'function') {
     return props;
   }

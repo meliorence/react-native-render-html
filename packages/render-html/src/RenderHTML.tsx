@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Platform } from 'react-native';
 import { RenderResolvedHTMLProps, RenderHTMLProps } from './shared-types';
-import TNodeRenderer from './TNodeRenderer';
 import useTTree from './hooks/useTTree';
 import SharedPropsContext, {
   defaultSharedPropsContext
@@ -13,6 +12,7 @@ import RenderHTMLDebug from './RenderHTMLDebug';
 import SourceLoader from './SourceLoader';
 import RenderRegistryProvider from './context/RenderRegistryProvider';
 import TChildrenRenderer from './TChildrenRenderer';
+import TDocumentRenderer from './TDocumentRenderer';
 
 export type RenderHTMLPropTypes = Record<keyof RenderHTMLProps, any>;
 
@@ -153,13 +153,7 @@ const defaultProps: {
 
 function RenderResolvedHTML(props: RenderResolvedHTMLProps) {
   const ttree = useTTree(props);
-  return (
-    <TNodeRenderer
-      hasAnchorAncestor={false}
-      tnode={ttree}
-      collapsedMarginTop={null}
-    />
-  );
+  return <TDocumentRenderer tdoc={ttree} baseUrl={props.baseUrl} />;
 }
 
 export default function RenderHTML({
@@ -184,8 +178,8 @@ export default function RenderHTML({
               []
             )}>
             <SourceLoader {...normalizedProps}>
-              {(resolvedHTML) => (
-                <RenderResolvedHTML {...normalizedProps} html={resolvedHTML} />
+              {(resolvedProps) => (
+                <RenderResolvedHTML {...normalizedProps} {...resolvedProps} />
               )}
             </SourceLoader>
           </TChildrenRenderersContext.Provider>

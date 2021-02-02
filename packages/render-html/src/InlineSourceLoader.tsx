@@ -19,5 +19,10 @@ function useInlineSourceLoader({
 export default function InlineSourceLoader(props: InlineSourceLoaderProps) {
   const { children } = props;
   const { html } = useInlineSourceLoader(props);
-  return children?.call(null, html) || null;
+  return (
+    children?.call(null, {
+      html,
+      baseUrl: props.source.baseUrl
+    }) || null
+  );
 }
