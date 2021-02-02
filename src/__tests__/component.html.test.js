@@ -24,4 +24,15 @@ describe("HTML component", () => {
       nextContentWidth
     );
   });
+  it("custom renderers should receive a `passProps.domNode` field (4th argument)", () => {
+    const hook = jest.fn();
+    const renderers = {
+      p(htmlAttribs, children, styles, passProps) {
+        hook(passProps.domNode);
+        return null;
+      },
+    };
+    render(<HTML renderers={renderers} source={{ html: "<p>test<p/>" }} />);
+    expect(hook).toHaveBeenCalledWith(expect.any(Object));
+  });
 });
