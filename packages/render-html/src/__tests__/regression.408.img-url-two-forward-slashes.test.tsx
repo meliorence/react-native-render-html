@@ -12,7 +12,10 @@ describe('RenderHTML component', () => {
       const { UNSAFE_getByType } = render(
         <RenderHTML
           debug={false}
-          source={{ html: '<img src="//domain.com/" />' }}
+          source={{
+            html: '<img src="//domain.com/" />',
+            baseUrl: 'https://test.com'
+          }}
         />
       );
       const image = UNSAFE_getByType(IMGElement);
