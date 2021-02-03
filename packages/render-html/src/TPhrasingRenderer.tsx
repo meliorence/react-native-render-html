@@ -19,7 +19,8 @@ export const TDefaultPhrasingRenderer: TDefaultRenderer<TPhrasing> = ({
   style,
   children: overridingChildren,
   hasAnchorAncestor,
-  textProps
+  textProps,
+  onPress
 }) => {
   const TNodeChildrenRenderer = useTNodeChildrenRenderer();
   const resolvedStyles = textProps?.style ? [textProps.style, style] : style;
@@ -34,6 +35,7 @@ export const TDefaultPhrasingRenderer: TDefaultRenderer<TPhrasing> = ({
     {
       key,
       ...textProps,
+      onPress,
       style: resolvedStyles,
       testID: tnode.tagName || undefined
     },
