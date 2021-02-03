@@ -2910,6 +2910,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mdn/browser-compat-data@npm:^2.0.7":
+  version: 2.0.7
+  resolution: "@mdn/browser-compat-data@npm:2.0.7"
+  dependencies:
+    extend: 3.0.2
+  checksum: ddaa97307aee65e46b6e74db211b91fdc98ca1ae1495e65d1e9657be12cc23373b5274d20289989fa95f1ebde55d2b2715c2a05d674e61f08a6f6f4b4ad1be63
+  languageName: node
+  linkType: hard
+
 "@native-html/css-processor@npm:1.6.1":
   version: 1.6.1
   resolution: "@native-html/css-processor@npm:1.6.1"
@@ -5224,17 +5233,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-db@npm:^1.0.30001090":
-  version: 1.0.30001158
-  resolution: "caniuse-db@npm:1.0.30001158"
-  checksum: 1b5fd0f314ba1299af1f7e22be9bbb9c89eed7493f15d5f63331cc2e131cee59d342055b2cc420ca3f0044c36d2e75da0b838261ebef63ded4b959055ec66ad1
-  languageName: node
-  linkType: hard
-
 "caniuse-lite@npm:^1.0.30001157":
   version: 1.0.30001158
   resolution: "caniuse-lite@npm:1.0.30001158"
   checksum: 5e8e370bd6bf104dcec4761f88721ed8140ae45bf7cf69e9a82ff4f31d3cc1da6bf339c0231e3c67aa227108ce0fc18e990b4a251c73216f8c473837fe9f361b
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001166":
+  version: 1.0.30001183
+  resolution: "caniuse-lite@npm:1.0.30001183"
+  checksum: effa2502ea0739da9792d77b32dc7c585146e93c06ee7dfcc513ea7c358bd7a8d7ee22a9efe0045ba01cfab393801d3630eb19881acca5d773ea08db3fd5f7f6
   languageName: node
   linkType: hard
 
@@ -7076,7 +7085,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-prettier@npm:^6.10.1, eslint-config-prettier@npm:^6.15.0":
+"eslint-config-prettier@npm:^6.10.1":
   version: 6.15.0
   resolution: "eslint-config-prettier@npm:6.15.0"
   dependencies:
@@ -7089,21 +7098,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-compat@npm:^3.8.0":
-  version: 3.8.0
-  resolution: "eslint-plugin-compat@npm:3.8.0"
+"eslint-config-prettier@npm:^7.2.0":
+  version: 7.2.0
+  resolution: "eslint-config-prettier@npm:7.2.0"
+  peerDependencies:
+    eslint: ">=7.0.0"
+  bin:
+    eslint-config-prettier: bin/cli.js
+  checksum: 6812150ea49703cd64035527205b4905bc1edcd34646e71f71665e1acff9ab4648f872598389bdb209964093ad73993830a2c821ba12642764a5293513b92a58
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-compat@npm:^3.9.0":
+  version: 3.9.0
+  resolution: "eslint-plugin-compat@npm:3.9.0"
   dependencies:
+    "@mdn/browser-compat-data": ^2.0.7
     ast-metadata-inferer: ^0.4.0
     browserslist: ^4.12.2
-    caniuse-db: ^1.0.30001090
+    caniuse-lite: ^1.0.30001166
     core-js: ^3.6.5
     find-up: ^4.1.0
     lodash.memoize: 4.1.2
-    mdn-browser-compat-data: ^1.0.28
     semver: 7.3.2
   peerDependencies:
     eslint: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
-  checksum: e63c870155d6e4548a73a54453390db9c57cce29a8cd4720b9bb8c2d03d1ec2a03d1d338e9d54365fdd490b0edfe98f8030fc685305212fce1447091553d5219
+  checksum: 3650cc2665c22f657e35fbace0fdb0bf0e42f2295d99bfcd1b245961150fde5e5a82fed1c8fb9242fa08600074cd3b3ee7f410e0ac8c62c5a25902392d9a543f
   languageName: node
   linkType: hard
 
@@ -7151,15 +7171,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-prettier@npm:^3.1.4":
-  version: 3.1.4
-  resolution: "eslint-plugin-prettier@npm:3.1.4"
+"eslint-plugin-prettier@npm:^3.3.1":
+  version: 3.3.1
+  resolution: "eslint-plugin-prettier@npm:3.3.1"
   dependencies:
     prettier-linter-helpers: ^1.0.0
   peerDependencies:
     eslint: ">=5.0.0"
     prettier: ">=1.13.0"
-  checksum: 4e4df155790a20a7ceef9008bbc22a677a8f7e790e9ef613a049a78dfe0b5dc3726afcd4bfd2a8ce41abc88c9a11db029819a722f70b940da32a03629e7f7832
+  peerDependenciesMeta:
+    eslint-config-prettier:
+      optional: true
+  checksum: cf35b0f0e9ef30782fe82913db92f6874181723d77f0c4613f9d69c87069f73d0dc420ef850ebc844613c00a8e87eb9762a36b7d028334c5c7b091763118347b
   languageName: node
   linkType: hard
 
@@ -11876,15 +11899,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"mdn-browser-compat-data@npm:^1.0.28":
-  version: 1.1.2
-  resolution: "mdn-browser-compat-data@npm:1.1.2"
-  dependencies:
-    extend: 3.0.2
-  checksum: e9da79610ad8378e060cb16c54d3653cbb29c70ffbeccfbe8a2d6c04fa5b5cdf81ced26e8c28c075913fe5272989c09d75c10095300f085f5703420345302a30
-  languageName: node
-  linkType: hard
-
 "mem@npm:^4.0.0":
   version: 4.3.0
   resolution: "mem@npm:4.3.0"
@@ -13869,12 +13883,21 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.0.2, prettier@npm:^2.1.2":
+"prettier@npm:^2.0.2":
   version: 2.1.2
   resolution: "prettier@npm:2.1.2"
   bin:
     prettier: bin-prettier.js
   checksum: bedc24c568efbcfe45f255558900777e2fabb36bf28ed4c22d2456eb22dfb012d12e566a46472ea5b857a4e9f263e888f7e316527d00bb58188f1820b0b0031a
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^2.2.1":
+  version: 2.2.1
+  resolution: "prettier@npm:2.2.1"
+  bin:
+    prettier: bin-prettier.js
+  checksum: 92c6c9f4b87eba1f28466edee57dd18c80d00b858edda77d46d1950d20e6e302b68ee255fc91133ba931e63c4577b5ae30da194d9626a8f3c0177778b91bf056
   languageName: node
   linkType: hard
 
@@ -14268,12 +14291,12 @@ fsevents@^1.2.7:
     conditional-type-checks: ^1.0.5
     dtslint: ^2.0.6
     eslint: ^7.13.0
-    eslint-config-prettier: ^6.15.0
-    eslint-plugin-compat: ^3.8.0
-    eslint-plugin-prettier: ^3.1.4
+    eslint-config-prettier: ^7.2.0
+    eslint-plugin-compat: ^3.9.0
+    eslint-plugin-prettier: ^3.3.1
     husky: ^4.3.0
     metro-react-native-babel-preset: ^0.64.0
-    prettier: ^2.1.2
+    prettier: ^2.2.1
   languageName: unknown
   linkType: soft
 
@@ -14298,7 +14321,7 @@ fsevents@^1.2.7:
     eslint: ^7.13.0
     jest: ^26.6.3
     metro-react-native-babel-preset: ^0.64.0
-    prettier: ^2.1.2
+    prettier: ^2.2.1
     ramda: ^0.27.1
     react: 16.13.1
     release-it: ^14.2.1
@@ -15172,12 +15195,12 @@ resolve@1.1.7:
     deprecated-prop-type: ^1.0.0
     dtslint: ^2.0.6
     eslint: ^7.13.0
-    eslint-config-prettier: ^6.15.0
+    eslint-config-prettier: ^7.2.0
     eslint-plugin-react: ^7.21.5
     htmlparser2: 5.0.1
     jest: ^26.6.3
     metro-react-native-babel-preset: ^0.64.0
-    prettier: ^2.1.2
+    prettier: ^2.2.1
     prop-types: ^15.7.2
     react: ^16.13.1
     react-native: ^0.63.3
