@@ -1,6 +1,6 @@
 {
   "name": "react-native-render-html",
-  "version": "6.0.0-alpha.11",
+  "version": "6.0.0-alpha.12",
   "author": "Meliorence <contact@meliorence.com> (github.com/meliorence)",
   "license": "BSD-2-Clause",
   "description": "React Native component that renders HTML as native views.",
