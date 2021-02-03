@@ -16,9 +16,9 @@ export type TNodeRendererProps<T extends TNode> = Omit<
   'renderTNode' | 'renderTChildren'
 >;
 
-const TNodeRenderer: React.FunctionComponent<TNodeRendererProps<
-  TNode
->> = function TNodeRenderer(props) {
+const TNodeRenderer: React.FunctionComponent<
+  TNodeRendererProps<TNode>
+> = function TNodeRenderer(props) {
   const { tnode, hasAnchorAncestor } = props;
   const childrenProps: TNodeGenericRendererProps<any> = {
     ...props,
@@ -42,11 +42,13 @@ const TNodeRenderer: React.FunctionComponent<TNodeRendererProps<
   if (tnode instanceof TEmpty && __DEV__) {
     if (tnode.isUnregistered) {
       console.warn(
-        `There is no custom renderer registered for tag "${tnode.tagName}" which is not part of the HTML5 standard. The tag will not be rendered.`
+        `There is no custom renderer registered for tag "${tnode.tagName}" which is not part of the HTML5 standard. The tag will not be rendered.` +
+          ' If you don\'t want this tag to be rendered, add it to "ignoredTags" prop array. If you do, register a custom renderer for this tag.'
       );
     } else {
       console.warn(
-        `The "${tnode.tagName}" tag is a valid HTML element but is not handled by this library. You must register a custom renderer or plugin and make sure its content model is not set to "none".`
+        `The "${tnode.tagName}" tag is a valid HTML element but is not handled by this library. You must register a custom renderer or plugin and make sure its content model is not set to "none".` +
+          ' If you don\'t want this tag to be rendered, add it to "ignoredTags" prop array.'
       );
     }
   }
