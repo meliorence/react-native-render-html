@@ -3,7 +3,8 @@ import TRenderEngine, {
   HTMLContentModel,
   HTMLElementModel,
   HTMLModelRecord,
-  TagName
+  TagName,
+  DOMElement
 } from '@native-html/transient-render-engine';
 import { RenderResolvedHTMLProps } from '../shared-types';
 import { CustomRendererSpecs } from '../render/render-types';
@@ -96,12 +97,6 @@ export default function useTRenderEngine(props: RenderResolvedHTMLProps) {
         }
       }
     });
-    ignoredTags?.forEach((tag) => {
-      additionalModels[tag] = HTMLElementModel.fromCustomModel({
-        contentModel: HTMLContentModel.none,
-        tagName: tag
-      });
-    });
     return { ...defaultModels, ...additionalModels };
   };
   return useMemo(
@@ -127,7 +122,14 @@ export default function useTRenderEngine(props: RenderResolvedHTMLProps) {
           tagsStyles
         },
         alterDOMParams: {
-          ignoreDOMNode,
+          ignoreDOMNode(node) {
+            return (
+              ((ignoredTags?.indexOf((node as DOMElement).tagName) ?? -1) !==
+                -1 ||
+                ignoreDOMNode?.call(null, node)) ??
+              false
+            );
+          },
           alterDOMChildren,
           alterDOMData,
           alterDOMElement
