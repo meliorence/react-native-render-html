@@ -418,9 +418,9 @@ export type DefaultTagRendererProps<T extends TNode> = TRendererBaseProps<T> & {
   TDefaultRenderer: TDefaultRenderer<T>;
 };
 
-export type CustomTagRendererProps<T extends TNode> = DefaultTagRendererProps<
-  T
-> & {
+export type CustomTagRendererProps<
+  T extends TNode
+> = DefaultTagRendererProps<T> & {
   /**
    * Internal renderer for this _tagName_, not to be confused with
    * {@link TDefaultRenderer}, which is the default renderer for the _tnode_.

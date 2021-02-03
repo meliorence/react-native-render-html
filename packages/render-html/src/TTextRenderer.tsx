@@ -59,9 +59,9 @@ function TStandardTextRenderer({
     DefaultTagRenderer:
       Default || (TDefaultTextRenderer as DefaultTagRenderer<TText>)
   };
-  const Root = (Custom ?? Default ?? TDefaultTextRenderer) as CustomTagRenderer<
-    TText
-  >;
+  const Root = (Custom ??
+    Default ??
+    TDefaultTextRenderer) as CustomTagRenderer<TText>;
   return React.createElement(Root, commonProps);
 }
 
