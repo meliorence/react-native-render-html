@@ -1,3 +1,21 @@
+# [6.0.0-alpha.12](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.11...v6.0.0-alpha.12) (2021-02-03)
+
+
+### Bug Fixes
+
+* missing `onPress` handling in TPhrasingRenderer ([718d8a3](https://github.com/meliorence/react-native-render-html/commit/718d8a38751f41ff8af50aebda76ab913a8c8a03))
+
+
+### Features
+
+* add `defaultViewProps` prop ([d78a74b](https://github.com/meliorence/react-native-render-html/commit/d78a74bd47b41316ab3872f0db5fbbf30f118a4f))
+* add `target` argument to `onLinkPress` handler ([ae035f4](https://github.com/meliorence/react-native-render-html/commit/ae035f4d7c9672e5d748559d2e50066b6e6718a0))
+* distinguish between rendered embedded and others ([f7693b3](https://github.com/meliorence/react-native-render-html/commit/f7693b39edbd0b9ce0134e8aaaf4a6490348fa90))
+* new `onDocumentMetadataLoaded` prop ([14db262](https://github.com/meliorence/react-native-render-html/commit/14db2626a2126e001e81569da67728997489382b))
+* port `domNodeToHTMLString` ([54a100c](https://github.com/meliorence/react-native-render-html/commit/54a100ca48c6c36abf0de474795810f8105e91ba))
+* support a minimal table renderer ([46d6d0c](https://github.com/meliorence/react-native-render-html/commit/46d6d0c4f61f3573446e278310a6adedb6618608))
+* support relative URLs and document metadata (`useDocumentMetadata` and `useNormalizedUrl` hooks) ([22220d4](https://github.com/meliorence/react-native-render-html/commit/22220d4229bf2d151411e591e854e57e6543e7d2))
+
 # [6.0.0-alpha.11](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.10...v6.0.0-alpha.11) (2021-01-27)
 
 
