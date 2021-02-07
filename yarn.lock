@@ -14035,7 +14035,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.6.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
+"prop-types@npm:^15.5.7, prop-types@npm:^15.6.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.7.2
   resolution: "prop-types@npm:15.7.2"
   dependencies:
@@ -14330,13 +14330,13 @@ fsevents@^1.2.7:
     jest: ^26.6.3
     metro-react-native-babel-preset: ^0.64.0
     prettier: ^2.2.1
+    prop-types: ^15.5.7
     ramda: ^0.27.1
     react: 16.13.1
     release-it: ^14.2.1
     stringify-entities: ^3.1.0
     typescript: ~3.9.7
   peerDependencies:
-    prop-types: "*"
     react: "*"
     react-native: ^0.63.0
   languageName: unknown
