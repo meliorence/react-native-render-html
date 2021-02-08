@@ -15,9 +15,8 @@ Be advised, this is yet <strong>experimental</strong>, and React Native has many
 <p style="text-align:center">
   Those are inline images!<br/><br/>
   before
-  <img src="https://fomoyolo-dev-assets.s3.amazonaws.com/image-gallery/c4ea7600-9acb-11ea-a7d0-9bf50f73b3c4.jpg" style="height:32px; width:32px" />&nbsp;
-  <img src="https://fomoyolo-dev-assets.s3.amazonaws.com/image-gallery/5358e030-9ad0-11ea-a7d0-9bf50f73b3c4.jpg" style="height:32px; width:32px" />&nbsp;
-  <img alt="" src="https://fomoyolo-dev-assets.s3.amazonaws.com/image-gallery/99439680-9ad0-11ea-a7d0-9bf50f73b3c4.jpg" style="height:32px; width:57px" />
+  <img src="https://www.fillmurray.com/50/50" width="50" height="50" />&nbsp;
+  <img src="https://www.fillmurray.com/70/50" width="70" height="50" />
   after
 </p>
 `;
