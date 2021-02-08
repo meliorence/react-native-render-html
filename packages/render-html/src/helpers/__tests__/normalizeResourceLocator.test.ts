@@ -42,4 +42,14 @@ describe('normalizeResourceLocator', () => {
       normalizeResourceLocator('//bar.com/baz', 'https://foo.com/')
     ).toEqual('https://bar.com/baz');
   });
+  it('should pass regression #', () => {
+    expect(
+      normalizeResourceLocator(
+        'https://www.androidpolice.com/wp-content/uploads/2020/09/30/chromecast-2_U8JJw5Ncykak-728x410.jpg',
+        ''
+      )
+    ).toEqual(
+      'https://www.androidpolice.com/wp-content/uploads/2020/09/30/chromecast-2_U8JJw5Ncykak-728x410.jpg'
+    );
+  });
 });
