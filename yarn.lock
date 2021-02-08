@@ -3656,6 +3656,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/urijs@npm:^1.19.14":
+  version: 1.19.14
+  resolution: "@types/urijs@npm:1.19.14"
+  checksum: 0a5494947a473959cf33feadc6cbc78c903465664ad6f5a0ef587c2e569648ad1e9bfe2e2786ef23b3ef108c9dcf3b2dc642a1055e933ab1df1107ee9227826e
+  languageName: node
+  linkType: hard
+
 "@types/yargs-parser@npm:*":
   version: 20.2.0
   resolution: "@types/yargs-parser@npm:20.2.0"
@@ -13788,6 +13795,7 @@ fsevents@^1.2.7:
     "@types/ramda": ^0.27.32
     "@types/react-native": ^0.63.35
     "@types/react-test-renderer": ^17.0.0
+    "@types/urijs": ^1.19.14
     babel-jest: ^26.6.3
     eslint: ^7.13.0
     jest: ^26.6.3
@@ -13803,6 +13811,7 @@ fsevents@^1.2.7:
     release-it: ^14.2.1
     stringify-entities: ^3.1.0
     typescript: ~3.9.7
+    urijs: ^1.19.5
   peerDependencies:
     react: "*"
     react-native: ^0.63.0
@@ -16397,6 +16406,13 @@ typescript@~3.9.7:
   dependencies:
     punycode: ^2.1.0
   checksum: 7d8ae8e2d7b82480d7d337f3e53c9a89ffdc7ebb1c31f212da3df6349f2fd1e6a4361f5fb27369ecab33fa37aa85edc53aec6eb7c9a7c3207a9e0944e8c48802
+  languageName: node
+  linkType: hard
+
+"urijs@npm:^1.19.5":
+  version: 1.19.5
+  resolution: "urijs@npm:1.19.5"
+  checksum: 15a3de3a3650b527541812712f3434d33ae923a6635420e1f100c6e1a522ab1885dbfb08b62e584cd70c1004860aa365a3459b88cad138a01a4f842fc3f7b11a
   languageName: node
   linkType: hard
 
