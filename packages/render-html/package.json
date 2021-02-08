@@ -32,7 +32,6 @@
     "prepack": "yarn run build"
   },
   "devDependencies": {
-
     "@babel/cli": "^7.12.13",
     "@babel/core": "^7.12.13",
     "@babel/plugin-transform-react-jsx": "^7.12.13",
@@ -49,7 +48,10 @@
     "metro-react-native-babel-preset": "^0.64.0",
     "prettier": "^2.2.1",
     "react": "16.13.1",
+    "react-native": "^0.63.4",
     "react-native-builder-bob": "^0.17.1",
+    "react-native-testing-library": "^6.0.0",
+    "react-test-renderer": "^17.0.1",
     "release-it": "^14.2.1",
     "typescript": "~3.9.7"
   },
