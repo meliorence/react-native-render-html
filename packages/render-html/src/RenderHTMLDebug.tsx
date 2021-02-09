@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { PropsWithChildren } from 'react';
-import { useEffect } from 'react';
 import lookupRecord from './helpers/lookupRecord';
 import { RenderHTMLProps } from './shared-types';
 
@@ -26,29 +25,24 @@ export const messages = {
     'https://reactnative.dev/docs/usewindowdimensions'
 };
 
-export function RenderHTMLDev(props: PropsWithChildren<RenderHTMLProps>) {
-  useEffect(() => {
+const RenderHTMLDebug = function RenderHTMLDebug(
+  props: PropsWithChildren<RenderHTMLProps>
+) {
+  if (__DEV__) {
     if (typeof props.contentWidth !== 'number') {
       console.warn(messages.contentWidth);
     }
-  }, [props.contentWidth]);
-  if (!props.source) {
-    console.warn(messages.noSource);
-  }
-  if (lookupRecord(props, 'html')) {
-    console.warn(messages.outdatedHtmlProp);
-  }
-  if (lookupRecord(props, 'uri')) {
-    console.warn(messages.outdatedUriProp);
+    if (!props.source) {
+      console.warn(messages.noSource);
+    }
+    if (lookupRecord(props, 'html')) {
+      console.warn(messages.outdatedHtmlProp);
+    }
+    if (lookupRecord(props, 'uri')) {
+      console.warn(messages.outdatedUriProp);
+    }
   }
   return <Fragment>{props.children}</Fragment>;
-}
+};
 
-export default function RenderHTMLDebug(
-  props: PropsWithChildren<RenderHTMLProps>
-) {
-  if (props.debug && __DEV__) {
-    return React.createElement(RenderHTMLDev, props);
-  }
-  return React.createElement(RenderHTMLProd, props);
-}
+export default RenderHTMLDebug;
