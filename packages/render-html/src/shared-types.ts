@@ -250,6 +250,29 @@ export interface TransientRenderEngineConfig {
    * The default value in pixels for 1em
    */
   emSize?: number;
+  /**
+   * Name of props which should trigger a rebuild of the Transient Render
+   * Engine (TRE).
+   *
+   * @remarks For performance sake, this component will not recreate an
+   * instance of the engine on each prop change. If you need some props to
+   * trigger a new instantiation, such as `tagsStyles`, pass a list of their
+   * names in this array.
+   *
+   * Please note that only props involved in the building of the transient render
+   * tree are concerned by this mechanism.
+   *
+   * @example
+   * ```ts
+   * triggerTREInvalidationPropNames = ['tagsStyles', 'allowedStyles']
+   * ```
+   */
+  triggerTREInvalidationPropNames?: Array<
+    Exclude<
+      keyof TransientRenderEngineConfig,
+      'triggerTREInvalidationPropNames'
+    >
+  >;
 }
 
 export interface RenderHTMLSourceUri {
@@ -286,9 +309,8 @@ export interface RenderHTMLSourceInline {
 
 export type RenderHTMLSource = RenderHTMLSourceInline | RenderHTMLSourceUri;
 
-export interface RenderHTMLProps<P = any>
-  extends RenderHTMLPassedProps<P>,
-    TransientRenderEngineConfig {
+export interface RenderHTMLFragmentProps<P = any>
+  extends RenderHTMLPassedProps<P> {
   /**
    * The object source to render (either `{ uri }` or `{ html }`).
    */
@@ -309,27 +331,16 @@ export interface RenderHTMLProps<P = any>
    * Triggered when HTML is available to the RenderHTML component.
    */
   onHTMLLoaded?: (html: string) => void;
-  /**
-   * Name of props which should trigger a rebuild of the Transient Render
-   * Engine (TRE).
-   *
-   * @remarks For performance sake, this component will not recreate an
-   * instance of the engine on each prop change. If you need some props to
-   * trigger a new instantiation, such as `tagsStyles`, pass a list of their
-   * names in this array.
-   *
-   * Please note that only props involved in the building of the transient render
-   * tree are concerned by this mechanism.
-   *
-   * @example
-   * ```ts
-   * triggerTREInvalidationPropNames = ['tagsStyles', 'allowedStyles']
-   * ```
-   */
-  triggerTREInvalidationPropNames?: Array<keyof TransientRenderEngineConfig>;
 }
 
-export type RenderResolvedHTMLProps = Omit<RenderHTMLProps, 'source'> & {
+export interface RenderHTMLProps<P = any>
+  extends RenderHTMLFragmentProps<P>,
+    TransientRenderEngineConfig {}
+
+export type RenderResolvedHTMLProps = Pick<
+  RenderHTMLProps,
+  'onTTreeChange' | 'debug'
+> & {
   html: string;
   baseUrl?: string;
   onDocumentMetadataLoaded?: TransientRenderEngineConfig['onDocumentMetadataLoaded'];
@@ -340,7 +351,11 @@ export interface ResolvedResourceProps {
   baseUrl?: string;
 }
 
-export interface SourceLoaderProps extends RenderHTMLProps {
+export interface SourceLoaderProps
+  extends Pick<
+    RenderHTMLProps,
+    'source' | 'remoteLoadingView' | 'remoteErrorView' | 'onHTMLLoaded'
+  > {
   children: (resource: ResolvedResourceProps) => ReactElement;
 }
 

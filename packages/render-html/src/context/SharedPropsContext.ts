@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Dimensions, Linking, TextProps } from 'react-native';
+import { Dimensions, Linking, TextProps, ViewProps } from 'react-native';
 import { RenderHTMLPassedProps } from '../shared-types';
 
 export const defaultSharedPropsContext: Required<RenderHTMLPassedProps> = {
@@ -19,7 +19,15 @@ export const defaultSharedPropsContext: Required<RenderHTMLPassedProps> = {
   },
   listsPrefixesRenderers: {},
   onLinkPress: (_e, href) => Linking.canOpenURL(href) && Linking.openURL(href),
-  WebView: () => null,
+  WebView: () => {
+    if (__DEV__) {
+      console.warn(
+        'One of your renderer is attempting to use WebView component, which has not been ' +
+          "provided as a prop to the RenderHtml component. As a consequence, the element won't be rendered."
+      );
+    }
+    return null;
+  },
   defaultWebViewProps: {},
   renderersProps: {}
 };
@@ -41,11 +49,17 @@ export function useRendererProps<
 }
 
 export function useDefaultTextProps(): TextProps {
-  return useSharedProps().defaultTextProps;
+  return {
+    ...defaultSharedPropsContext.defaultTextProps,
+    ...useSharedProps().defaultTextProps
+  };
 }
 
-export function useDefaultViewProps(): TextProps {
-  return useSharedProps().defaultViewProps;
+export function useDefaultViewProps(): ViewProps {
+  return {
+    ...defaultSharedPropsContext.defaultViewProps,
+    ...useSharedProps().defaultViewProps
+  };
 }
 
 export function useComputeMaxWidthForTag(tagName: string) {
