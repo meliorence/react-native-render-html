@@ -1,3 +1,11 @@
+# [6.0.0-alpha.13](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.12...v6.0.0-alpha.13) (2021-02-08)
+
+
+### Bug Fixes
+
+* don't peer-depend on prop-types, instead depend directly ([e346dca](https://github.com/meliorence/react-native-render-html/commit/e346dcace79c130552b8af093cb919b4e755329f))
+* use urijs instead of URL API ([c27c8c1](https://github.com/meliorence/react-native-render-html/commit/c27c8c13be638b35d705c526290c52d9caeaf9fe)), closes [#460](https://github.com/meliorence/react-native-render-html/issues/460)
+
 # [6.0.0-alpha.12](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.11...v6.0.0-alpha.12) (2021-02-03)
 
 
