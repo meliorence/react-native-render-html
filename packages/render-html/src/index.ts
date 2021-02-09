@@ -17,6 +17,7 @@ export {
   TRenderEngine,
   TStyles
 } from '@native-html/transient-render-engine';
+export type { MixedStyleDeclaration } from '@native-html/css-processor';
 export type {
   AnchorTagName,
   AttribTagNames,
@@ -26,6 +27,7 @@ export type {
   GroupingTagNames,
   InteractiveTagNames,
   MetadataTagNames,
+  MixedStyleRecord,
   SectioningTagNames,
   SerializableElement,
   SerializableNode,
