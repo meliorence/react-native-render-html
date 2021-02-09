@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { Platform } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import { RenderResolvedHTMLProps, RenderHTMLProps } from './shared-types';
 import useTTree from './hooks/useTTree';
 import SharedPropsContext, {
@@ -149,7 +149,8 @@ const defaultProps: {
     ]
   }),
   triggerTREInvalidationPropNames: [],
-  debug: __DEV__
+  debug: __DEV__,
+  contentWidth: undefined
 };
 
 function RenderResolvedHTML(props: RenderResolvedHTMLProps) {
@@ -168,11 +169,12 @@ export default function RenderHTML({
   ...props
 }: RenderHTMLProps) {
   const normalizedProps = {
+    contentWidth: Dimensions.get('window').width,
     ...props,
     defaultTextProps: { ...defaultProps.defaultTextProps, ...defaultTextProps }
   };
   return (
-    <RenderHTMLDebug {...normalizedProps}>
+    <RenderHTMLDebug {...props}>
       <RenderRegistryProvider renderers={normalizedProps.renderers}>
         <SharedPropsContext.Provider
           value={normalizedProps as Required<RenderHTMLProps>}>

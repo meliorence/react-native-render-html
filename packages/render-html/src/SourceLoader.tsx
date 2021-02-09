@@ -40,6 +40,9 @@ export default function SourceLoader({
   source,
   ...props
 }: SourceLoaderProps): ReactElement | null {
+  if (!source) {
+    return null;
+  }
   if (isUriSource(source)) {
     return React.createElement(UriSourceLoader, { source, ...props });
   }
