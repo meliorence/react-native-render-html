@@ -227,6 +227,29 @@ export interface TransientRenderEngineConfig {
    * re-trigger on HTML content changes.
    */
   onDocumentMetadataLoaded?: (documentMetadata: DocumentMetadata) => void;
+  /**
+   * A list of fonts available in the current platform. These fonts will used
+   * to select the first match in CSS `fontFamily` property, which supports a
+   * comma-separated list of fonts. By default, a handful of fonts are selected
+   * per platform.
+   *
+   * @remarks If you are using expo, use `Constants.systemFonts`.
+   */
+  systemFonts?: string[];
+  /**
+   * A record for specific CSS fonts.
+   *
+   * **Suggestion**: Use Plaform.select({ ios: ..., android: ..., default: ...})
+   */
+  fallbackFonts?: FallbackFontsDefinitions;
+  /**
+   * Your custom renderers.
+   */
+  renderers?: CustomTagRendererRecord;
+  /**
+   * The default value in pixels for 1em
+   */
+  emSize?: number;
 }
 
 export interface RenderHTMLSourceUri {
@@ -271,10 +294,6 @@ export interface RenderHTMLProps<P = any>
    */
   source: RenderHTMLSource;
   /**
-   * Your custom renderers.
-   */
-  renderers?: CustomTagRendererRecord;
-  /**
    * Replace the default loader while fetching a remote website's content.
    */
   remoteLoadingView?: (props: RenderHTMLProps<P>) => ReactElement;
@@ -283,10 +302,6 @@ export interface RenderHTMLProps<P = any>
    */
   remoteErrorView?: (props: RenderHTMLProps<P>) => ReactElement;
   /**
-   * The default value in pixels for 1em
-   */
-  emSize?: number;
-  /**
    * Triggered when the transient render tree changes. Useful for debugging.
    */
   onTTreeChange?: (ttree: TNode) => void;
@@ -294,21 +309,6 @@ export interface RenderHTMLProps<P = any>
    * Triggered when HTML is available to the RenderHTML component.
    */
   onHTMLLoaded?: (html: string) => void;
-  /**
-   * A list of fonts available in the current platform. These fonts will used
-   * to select the first match in CSS `fontFamily` property, which supports a
-   * comma-separated list of fonts. By default, a handful of fonts are selected
-   * per platform.
-   *
-   * @remarks If you are using expo, use `Constants.systemFonts`.
-   */
-  systemFonts?: string[];
-  /**
-   * A record for specific CSS fonts.
-   *
-   * **Suggestion**: Use Plaform.select({ ios: ..., android: ..., default: ...})
-   */
-  fallbackFonts?: FallbackFontsDefinitions;
   /**
    * Name of props which should trigger a rebuild of the Transient Render
    * Engine (TRE).
