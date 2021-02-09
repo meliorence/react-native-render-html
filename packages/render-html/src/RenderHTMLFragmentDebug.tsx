@@ -1,11 +1,7 @@
 import React, { Fragment } from 'react';
 import { PropsWithChildren } from 'react';
 import lookupRecord from './helpers/lookupRecord';
-import { RenderHTMLProps } from './shared-types';
-
-export function RenderHTMLProd(props: PropsWithChildren<RenderHTMLProps>) {
-  return <Fragment>{props.children}</Fragment>;
-}
+import { RenderHTMLFragmentProps } from './shared-types';
 
 export const messages = {
   outdatedUriProp:
@@ -25,8 +21,8 @@ export const messages = {
     'https://reactnative.dev/docs/usewindowdimensions'
 };
 
-const RenderHTMLDebug = function RenderHTMLDebug(
-  props: PropsWithChildren<RenderHTMLProps>
+const RenderHTMLFragmentDebug = function RenderHTMLDebug(
+  props: PropsWithChildren<RenderHTMLFragmentProps>
 ) {
   if (__DEV__) {
     if (typeof props.contentWidth !== 'number') {
@@ -45,4 +41,4 @@ const RenderHTMLDebug = function RenderHTMLDebug(
   return <Fragment>{props.children}</Fragment>;
 };
 
-export default RenderHTMLDebug;
+export default RenderHTMLFragmentDebug;

@@ -1,30 +1,33 @@
 import React from 'react';
 import { render } from 'react-native-testing-library';
-import RenderHTMLDebug, { messages } from '../RenderHTMLDebug';
+import RenderHTMLFragmentDebug, { messages } from '../RenderHTMLFragmentDebug';
 
 beforeAll(function () {
   //@ts-expect-error
   global.__DEV__ = true;
 });
 
-describe('RenderHTMLDebug', () => {
+describe('RenderHTMLFragmentDebug', () => {
   it('should warn when contentWidth has not been provided', () => {
     console.warn = jest.fn();
     render(
-      <RenderHTMLDebug source={{ html: '<p>Hello world</p>' }} debug={false} />
+      <RenderHTMLFragmentDebug
+        source={{ html: '<p>Hello world</p>' }}
+        debug={false}
+      />
     );
     expect(console.warn).toHaveBeenNthCalledWith(1, messages.contentWidth);
   });
   it('should warn when source has not been provided', () => {
     console.warn = jest.fn();
     //@ts-expect-error
-    render(<RenderHTMLDebug contentWidth={0} debug={false} />);
+    render(<RenderHTMLFragmentDebug contentWidth={0} debug={false} />);
     expect(console.warn).toHaveBeenNthCalledWith(1, messages.noSource);
   });
   it('should warn when outdated html prop has been provided', () => {
     console.warn = jest.fn();
     render(
-      React.createElement(RenderHTMLDebug, {
+      React.createElement(RenderHTMLFragmentDebug, {
         contentWidth: 0,
         source: { html: 'hello world' },
         //@ts-expect-error
@@ -37,7 +40,7 @@ describe('RenderHTMLDebug', () => {
   it('should warn when outdated uri prop has been provided', () => {
     console.warn = jest.fn();
     render(
-      React.createElement(RenderHTMLDebug, {
+      React.createElement(RenderHTMLFragmentDebug, {
         contentWidth: 0,
         source: { html: 'hello world' },
         //@ts-expect-error

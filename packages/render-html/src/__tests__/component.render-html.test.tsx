@@ -12,6 +12,7 @@ describe('RenderHTML', () => {
     ).not.toThrow();
   });
   it('should render without error when missing a source', () => {
+    //@ts-expect-error
     expect(() => render(<RenderHTML debug={false} />)).not.toThrow();
   });
   it('should update ImgTag contentWidth when contentWidth prop changes', () => {
