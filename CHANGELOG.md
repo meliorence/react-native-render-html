@@ -1,3 +1,10 @@
+# [6.0.0-alpha.14](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.13...v6.0.0-alpha.14) (2021-02-09)
+
+
+### Features
+
+* graceful handling of missing `source` prop ([4a41dff](https://github.com/meliorence/react-native-render-html/commit/4a41dff5d174471091e9af99658cfdfdf3df45f7))
+
 # [6.0.0-alpha.13](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.12...v6.0.0-alpha.13) (2021-02-08)
 
 
