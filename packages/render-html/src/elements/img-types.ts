@@ -30,6 +30,7 @@ export interface IMGElementLoaderProps {
 }
 
 export interface IMGElementProps extends IMGElementLoaderProps {
+  key?: string | number;
   style?: StyleProp<ImageStyle>;
   testID?: string;
   onPress?: PressableProps['onPress'];
