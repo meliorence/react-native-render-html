@@ -24,6 +24,6 @@ export class Image extends RNImage {
         }
       }
       callback.apply(null, dimensions);
-    }, 0);
+    }, 50);
   }
 }
