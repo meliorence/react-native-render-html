@@ -272,21 +272,19 @@ function usePhysicalDimensions({
       physicalDimensionsFromProps
     ]
   );
-  const [hasError, setHasError] = useState(false);
+  const [error, setError] = useState<null | Error>(null);
   useEffect(
     function fetchPhysicalDimensions() {
       let cancelled = false;
       if (source.uri) {
-        Image.getSize(
+        Image.getSizeWithHeaders(
           source.uri,
+          source.headers || {},
           (w, h) => {
             !cancelled && setPhysicalDimensions({ width: w, height: h });
           },
           (e) => {
-            if (__DEV__) {
-              console.error(e);
-            }
-            !cancelled && setHasError(true);
+            !cancelled && setError(e || {});
           }
         );
         return () => {
@@ -294,11 +292,17 @@ function usePhysicalDimensions({
         };
       }
     },
-    [source.uri, physicalDimensions, physicalDimensionsFromProps]
+    [
+      source.uri,
+      source.headers,
+      physicalDimensions,
+      physicalDimensionsFromProps
+    ]
   );
   useEffect(
     function resetOnURIChange() {
       setPhysicalDimensions(null);
+      setError(null);
     },
     [source.uri]
   );
@@ -308,7 +312,7 @@ function usePhysicalDimensions({
     physicalDimensions: isPlainImgDimensions(physicalDimensionsFromProps)
       ? physicalDimensionsFromProps
       : physicalDimensions,
-    error: hasError
+    error: error
   };
 }
 
@@ -352,9 +356,10 @@ export default function useIMGElementLoader(
   ]);
   return error
     ? {
+        type: 'error',
         alt,
         altColor,
-        type: 'error',
+        error,
         containerStyle: flatStyle,
         imageBoxDimensions: imageBoxDimensions ?? imagesInitialDimensions!
       }
