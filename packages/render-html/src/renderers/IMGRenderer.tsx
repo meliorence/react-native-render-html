@@ -14,7 +14,7 @@ import useNormalizedUrl from '../hooks/useNormalizedUrl';
 export function useIMGElementProps(
   props: DefaultTagRendererProps<TBlock>
 ): IMGElementProps {
-  const { style, tnode, onPress } = props;
+  const { style, tnode, onPress, key } = props;
   const {
     contentWidth,
     enableExperimentalPercentWidth,
@@ -23,6 +23,7 @@ export function useIMGElementProps(
   const computeImagesMaxWidth = useComputeMaxWidthForTag('img');
   const src = tnode.attributes.src || '';
   return {
+    key,
     contentWidth,
     computeImagesMaxWidth,
     enableExperimentalPercentWidth,

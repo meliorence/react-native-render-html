@@ -292,12 +292,7 @@ function usePhysicalDimensions({
         };
       }
     },
-    [
-      source.uri,
-      source.headers,
-      physicalDimensions,
-      physicalDimensionsFromProps
-    ]
+    [source.uri, source.headers]
   );
   useEffect(
     function resetOnURIChange() {
