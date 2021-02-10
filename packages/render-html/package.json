@@ -39,6 +39,7 @@
     "@babel/preset-typescript": "^7.12.13",
     "@babel/runtime": "^7.12.13",
     "@release-it/conventional-changelog": "^2.0.0",
+    "@testing-library/react-hooks": "^5.0.3",
     "@types/jest": "^26.0.14",
     "@types/react-native": "^0.63.35",
     "@types/react-test-renderer": "^17.0.0",
@@ -51,6 +52,7 @@
     "react-native": "^0.63.4",
     "react-native-builder-bob": "^0.17.1",
     "react-native-testing-library": "^6.0.0",
+    "react-performance-testing": "^1.2.3",
     "react-test-renderer": "^17.0.1",
     "release-it": "^14.2.1",
     "typescript": "~3.9.7"
