@@ -12,7 +12,7 @@ export class Image extends RNImage {
    * and invoke the callback with the extracted dimensions. If none can
    * be extracted, it will use 640x360.
    */
-  static getSize(uri, callback) {
+  static getSizeWithHeaders(uri, headers, callback) {
     setTimeout(() => {
       let dimensions = [0, 0];
       if (typeof uri === 'string') {

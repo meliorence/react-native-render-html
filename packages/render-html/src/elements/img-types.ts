@@ -67,6 +67,7 @@ export interface IMGElementStateLoading {
 export interface IMGElementStateError {
   type: 'error';
   containerStyle: ViewStyle;
+  error: Error;
   /**
    * Either the scaled image dimensions, or `initialImageDimensions` if the
    * later could not be determined.
