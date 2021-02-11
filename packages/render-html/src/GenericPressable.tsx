@@ -13,28 +13,26 @@ const styles = StyleSheet.create({
   }
 });
 
-export interface GenericPressableProps
-  extends Pick<PressableProps, 'onPress' | 'hitSlop'> {
-  key?: string | number;
+export interface GenericPressableProps extends PressableProps {
   style?: StyleProp<any>;
   borderless?: boolean;
 }
 
 export default function GenericPressable({
-  key,
   onPress,
   style,
   children,
   hitSlop,
-  borderless = false
+  borderless = false,
+  ...otherProps
 }: PropsWithChildren<GenericPressableProps>) {
   return (
     <Pressable
-      key={key}
       android_ripple={{ borderless, color: 'blue' }}
       style={({ pressed }) => [style, pressed && styles.pressed]}
       onPress={onPress}
-      hitSlop={hitSlop}>
+      hitSlop={hitSlop}
+      {...otherProps}>
       {children}
     </Pressable>
   );
