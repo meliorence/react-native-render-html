@@ -1,29 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { IMGElementStateError } from './img-types';
+import IMGElementContentAlt from './IMGElementContentAlt';
 
-const styles = StyleSheet.create({
-  errorBox: {
-    borderWidth: 1,
-    borderColor: 'lightgray',
-    overflow: 'hidden',
-    justifyContent: 'center'
-  },
-  errorText: { textAlign: 'center', fontStyle: 'italic' }
-});
-
-export default function IMGElementContentError({
-  dimensions,
-  alt,
-  altColor
-}: IMGElementStateError) {
-  return (
-    <View style={[styles.errorBox, dimensions]} testID="image-error">
-      {alt ? (
-        <Text style={[styles.errorText, { color: altColor }]}>{alt}</Text>
-      ) : (
-        false
-      )}
-    </View>
-  );
+export default function IMGElementContentError(props: IMGElementStateError) {
+  return <IMGElementContentAlt {...props} testID="image-error" />;
 }

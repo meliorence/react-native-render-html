@@ -5,18 +5,12 @@ import {
   StyleProp,
   ViewStyle
 } from 'react-native';
+import { ImageDimensions } from '../shared-types';
 
-export interface ImgDimensions {
-  width: number;
-  height: number;
-}
+export type UseIMGElementStateWithCacheProps = UseIMGElementStateProps &
+  Required<Pick<UseIMGElementStateProps, 'cachedNaturalDimensions'>>;
 
-export interface IncompleteImgDimensions {
-  width: number | null;
-  height: number | null;
-}
-
-export interface IMGElementLoaderProps {
+export interface UseIMGElementStateProps {
   alt?: string;
   altColor?: string;
   source: ImageURISource;
@@ -28,25 +22,22 @@ export interface IMGElementLoaderProps {
   enableExperimentalPercentWidth?: boolean;
   /**
    * Rendered dimensions prior to retrieving natural dimensions of the image.
-   *
-   * @remarks When `cachedNaturalDimensions` prop is provided, concrete
-   * dimensions for this image will be immediately rendered.
    */
-  initialDimensions?: ImgDimensions;
+  initialDimensions?: ImageDimensions;
   /**
    * When the natural ("physical") dimensions for this image are accessible a
    * priori, these should be passed. It will save some API calls and filesytem
    * access via React Native Image.getSize.
    */
-  cachedNaturalDimensions?: ImgDimensions;
+  cachedNaturalDimensions?: ImageDimensions;
 }
 
-export interface IMGElementProps extends IMGElementLoaderProps {
+export interface IMGElementProps extends UseIMGElementStateProps {
   style?: StyleProp<ImageStyle>;
   testID?: string;
   onPress?: PressableProps['onPress'];
   enableExperimentalPercentWidth?: boolean;
-  initialDimensions?: ImgDimensions;
+  initialDimensions?: ImageDimensions;
 }
 
 export type IMGElementState =
@@ -54,38 +45,36 @@ export type IMGElementState =
   | IMGElementStateSuccess
   | IMGElementStateLoading;
 
-export interface IMGElementStateSuccess {
-  type: 'success';
+export interface IMGElementStateBase {
   containerStyle: ViewStyle;
+  dimensions: ImageDimensions;
+  source: ImageURISource;
+  alt?: string;
+  altColor?: string;
+}
+export interface IMGElementStateSuccess extends IMGElementStateBase {
+  type: 'success';
   /**
    * Image-only style extracted from `IMGElement.style` prop.
    */
   imageStyle: ImageStyle;
   /**
-   * The concrete (to be displayed) image dimensions.
+   * This callback should be passed down to the underlying image component.
+   *
+   * @remarks In quite frequent circumstances, the image won't be pre-fetched
+   * because its concrete dimensions can be determined immediately. For
+   * example, when both width and height are provide as attributes. So the
+   * first state s0 of this state machine can be "success", and the second
+   * state s1 be "error".
    */
-  dimensions: ImgDimensions;
-  source: ImageURISource;
+  onError: (error: Error) => void;
 }
 
-export interface IMGElementStateLoading {
+export interface IMGElementStateLoading extends IMGElementStateBase {
   type: 'loading';
-  containerStyle: ViewStyle;
-  /**
-   * Initial dimensions.
-   */
-  dimensions: ImgDimensions;
 }
 
-export interface IMGElementStateError {
+export interface IMGElementStateError extends IMGElementStateBase {
   type: 'error';
-  containerStyle: ViewStyle;
   error: Error;
-  /**
-   * Either the scaled image dimensions, or `initialDimensions` if the
-   * later could not be determined.
-   */
-  dimensions: ImgDimensions;
-  alt?: string;
-  altColor?: string;
 }

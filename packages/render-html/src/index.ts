@@ -72,11 +72,13 @@ export { useDocumentMetadata } from './context/DocumentMetadataProvider';
 export { default as domNodeToHTMLString } from './helpers/domNodeToHTMLString';
 export type { DomNodeToHtmlReporter } from './helpers/domNodeToHTMLString';
 // IMG
-export { default as useIMGElementLoader } from './elements/useIMGElementLoader';
+export { default as useIMGElementState } from './elements/useIMGElementState';
+export { default as useIMGElementStateWithCache } from './elements/useIMGElementStateWithCache';
 export { default as IMGElement } from './elements/IMGElement';
 export { default as IMGElementContainer } from './elements/IMGElementContainer';
 export { default as IMGElementContentError } from './elements/IMGElementContentError';
 export { default as IMGElementContentLoading } from './elements/IMGElementContentLoading';
 export { default as IMGElementContentSuccess } from './elements/IMGElementContentSuccess';
+export { default as IMGElementContentAlt } from './elements/IMGElementContentAlt';
 export * from './elements/img-types';
 export { useIMGElementProps } from './renderers/IMGRenderer';

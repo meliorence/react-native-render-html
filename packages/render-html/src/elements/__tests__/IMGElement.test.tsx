@@ -14,7 +14,7 @@ describe('IMGElement', () => {
       const { findByTestId } = render(
         <HTMLImgElement style={style} source={source} />
       );
-      const image = await findByTestId('image-layout');
+      const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject(style);
     });
@@ -27,7 +27,7 @@ describe('IMGElement', () => {
       const { findByTestId } = render(
         <HTMLImgElement {...style} source={source} />
       );
-      const image = await findByTestId('image-layout');
+      const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject(style);
     });
@@ -45,7 +45,7 @@ describe('IMGElement', () => {
           source={source}
         />
       );
-      const image = await findByTestId('image-layout');
+      const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
         width: contentWidth,
@@ -65,7 +65,7 @@ describe('IMGElement', () => {
           source={source}
         />
       );
-      const image = await findByTestId('image-layout');
+      const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
         width: contentWidth,
@@ -80,7 +80,7 @@ describe('IMGElement', () => {
       const { findByTestId } = render(
         <HTMLImgElement {...style} source={source} />
       );
-      const image = await findByTestId('image-layout');
+      const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
         width: 320,
@@ -92,7 +92,7 @@ describe('IMGElement', () => {
       const { findByTestId } = render(
         <HTMLImgElement contentWidth={800} source={source} />
       );
-      const image = await findByTestId('image-layout');
+      const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
         width: 640,
@@ -108,7 +108,7 @@ describe('IMGElement', () => {
       const { findByTestId } = render(
         <HTMLImgElement {...style} source={source} />
       );
-      const image = await findByTestId('image-layout');
+      const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
         width: 0,
@@ -123,7 +123,7 @@ describe('IMGElement', () => {
       const { findByTestId } = render(
         <HTMLImgElement {...style} source={source} />
       );
-      const image = await findByTestId('image-layout');
+      const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
         width: 0,
@@ -138,7 +138,7 @@ describe('IMGElement', () => {
       const { findByTestId } = render(
         <HTMLImgElement style={style} source={source} />
       );
-      const image = await findByTestId('image-layout');
+      const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
         width: 320,
@@ -153,7 +153,7 @@ describe('IMGElement', () => {
       const { findByTestId } = render(
         <HTMLImgElement style={style} source={source} />
       );
-      const image = await findByTestId('image-layout');
+      const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
         width: 320,
@@ -168,7 +168,7 @@ describe('IMGElement', () => {
       const { findByTestId } = render(
         <HTMLImgElement style={style} source={source} />
       );
-      const image = await findByTestId('image-layout');
+      const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
         width: 30,
@@ -183,7 +183,7 @@ describe('IMGElement', () => {
       const { findByTestId } = render(
         <HTMLImgElement style={style} source={source} />
       );
-      const image = await findByTestId('image-layout');
+      const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
         width: 30,
@@ -200,7 +200,7 @@ describe('IMGElement', () => {
       const { findByTestId } = render(
         <HTMLImgElement {...style} source={source} />
       );
-      const image = await findByTestId('image-layout');
+      const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
         width: 640
@@ -214,7 +214,7 @@ describe('IMGElement', () => {
       const { findByTestId } = render(
         <HTMLImgElement {...style} source={source} />
       );
-      const image = await findByTestId('image-layout');
+      const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
         width: 50
@@ -235,7 +235,7 @@ describe('IMGElement', () => {
             source={source}
           />
         );
-        const image = await findByTestId('image-layout');
+        const image = await findByTestId('image-success');
         expect(image).toBeTruthy();
         expect(StyleSheet.flatten(image.props.style)).toMatchObject({
           width: contentWidth * 0.5
@@ -256,7 +256,7 @@ describe('IMGElement', () => {
             source={source}
           />
         );
-        const image = await findByTestId('image-layout');
+        const image = await findByTestId('image-success');
         expect(image).toBeTruthy();
         expect(StyleSheet.flatten(image.props.style)).toMatchObject({
           width: contentWidth * 0.7
@@ -276,7 +276,7 @@ describe('IMGElement', () => {
             source={source}
           />
         );
-        const image = await findByTestId('image-layout');
+        const image = await findByTestId('image-success');
         expect(image).toBeTruthy();
         expect(StyleSheet.flatten(image.props.style)).toMatchObject({
           width: contentWidth,
@@ -295,7 +295,7 @@ describe('IMGElement', () => {
       const { findByTestId } = render(
         <HTMLImgElement contentWidth={200} style={style} source={source} />
       );
-      const image = await findByTestId('image-layout');
+      const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject({
         width: 200 - 30 * 2
@@ -317,7 +317,7 @@ describe('IMGElement', () => {
         <HTMLImgElement {...initialStyle} source={source} />
       );
       update(<HTMLImgElement {...nextStyle} source={source} />);
-      const image = await findByTestId('image-layout');
+      const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject(nextStyle);
     });
@@ -327,15 +327,15 @@ describe('IMGElement', () => {
       const { findByTestId, update, getByTestId } = render(
         <HTMLImgElement source={initialSource} />
       );
-      const image1 = await findByTestId('image-layout');
+      const image1 = await findByTestId('image-success');
       expect(image1).toBeTruthy();
       expect(StyleSheet.flatten(image1.props.style)).toMatchObject({
         width: 640,
         height: 360
       });
       update(<HTMLImgElement source={nextSource} />);
-      await waitFor(() => findByTestId('image-layout'));
-      const image2 = getByTestId('image-layout');
+      await waitFor(() => findByTestId('image-success'));
+      const image2 = getByTestId('image-success');
       expect(image2).toBeTruthy();
       expect(StyleSheet.flatten(image2.props.style)).toMatchObject({
         width: 1920,
@@ -356,8 +356,8 @@ describe('IMGElement', () => {
           source={{ uri: 'http://via.placeholder.com/1200x800' }}
         />
       );
-      await waitFor(() => findByTestId('image-layout'));
-      const image2 = getByTestId('image-layout');
+      await waitFor(() => findByTestId('image-success'));
+      const image2 = getByTestId('image-success');
       expect(image2).toBeTruthy();
       expect(StyleSheet.flatten(image2.props.style)).toMatchObject({
         width: 250,
