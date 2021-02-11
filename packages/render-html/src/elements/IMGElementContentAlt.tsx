@@ -21,6 +21,8 @@ export default function IMGElementContentAlt({
   return (
     <View
       style={[styles.altBox, dimensions, { borderColor: altColor }]}
+      accessibilityRole="image"
+      accessibilityLabel={alt}
       testID={testID}>
       {alt ? (
         <Text style={[styles.altText, { color: altColor }]}>{alt}</Text>

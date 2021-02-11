@@ -10,6 +10,7 @@ import { IMGElementStateSuccess } from './img-types';
 const defaultImageStyle: ImageStyle = { resizeMode: 'cover' };
 
 export default function IMGElementContentSuccess({
+  alt,
   source,
   imageStyle,
   dimensions,
@@ -22,6 +23,8 @@ export default function IMGElementContentSuccess({
   );
   return (
     <Image
+      accessibilityRole="image"
+      accessibilityLabel={alt}
       source={source}
       onError={onImageError}
       style={[defaultImageStyle, dimensions, imageStyle]}
