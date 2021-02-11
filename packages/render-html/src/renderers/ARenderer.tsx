@@ -13,7 +13,7 @@ import {
   DefaultTagRendererProps,
   RenderHTMLPassedProps
 } from '../shared-types';
-import { GestureResponderEvent } from 'react-native';
+import { AccessibilityProps, GestureResponderEvent } from 'react-native';
 import AElement from '../elements/AElement';
 import useNormalizedUrl from '../hooks/useNormalizedUrl';
 import { useDocumentMetadata } from '../context/DocumentMetadataProvider';
@@ -50,9 +50,15 @@ export function useAElementProps<T extends TNode>(
   if (typeof syntheticAnchorOnLinkPress !== 'function') {
     return props;
   }
+  const accessibilityProps: AccessibilityProps = {
+    accessible: true,
+    accessibilityRole: 'link'
+  };
   return {
     ...props,
-    onPress: syntheticAnchorOnLinkPress
+    onPress: syntheticAnchorOnLinkPress,
+    textProps: accessibilityProps,
+    viewProps: accessibilityProps
   };
 }
 
