@@ -1,3 +1,25 @@
+# [6.0.0-alpha.15](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.14...v6.0.0-alpha.15) (2021-02-11)
+
+
+### Bug Fixes
+
+* avoid extraneous re-renders in `useIMGElementState` hook ([f3f3b81](https://github.com/meliorence/react-native-render-html/commit/f3f3b817100b742711e13d33b62845f248750b79))
+* pressable block elements should receive `viewProps` ([3134be1](https://github.com/meliorence/react-native-render-html/commit/3134be12b98462c689b70eda4799fd3dc2e12514))
+
+
+### Features
+
+* accessibility for images with role and label ([02b5232](https://github.com/meliorence/react-native-render-html/commit/02b5232b12f5661d6a28fe71bf54682d84e0fb6d))
+* new `cachedNaturalDimensions` prop to `useIMGelementState` hook ([eaca370](https://github.com/meliorence/react-native-render-html/commit/eaca370bb990e7e47d600a8318f38366846f847a))
+* new `TRenderEngineProvider` and `RenderHTMLFragment` components ([38176ed](https://github.com/meliorence/react-native-render-html/commit/38176edba3a3571e316c27bf7279f9bbc0f1899f))
+* new `useIMGElementStateWithCache` hook for images ([7958f43](https://github.com/meliorence/react-native-render-html/commit/7958f437f8cd3f3ead81ffb614dd505cb90bae95))
+* reeport useful types from css-processor ([78c5a93](https://github.com/meliorence/react-native-render-html/commit/78c5a932db55a5d16ffa6c43fd544db2ec468ef0))
+* reeport useful variables and types from transient-render-engine ([7043e0c](https://github.com/meliorence/react-native-render-html/commit/7043e0c5d36897765863573377bc767d64300ef6))
+* reuse 'img' renderer internal logic w/t `useIMGElementState` hook ([79e9158](https://github.com/meliorence/react-native-render-html/commit/79e9158df6035306a312c7fa835759441aa2dc06)), closes [#424](https://github.com/meliorence/react-native-render-html/issues/424)
+* support accessibility for `a` elements ([69623c8](https://github.com/meliorence/react-native-render-html/commit/69623c84f75c0955d7764c68908f37302706984c)), closes [#285](https://github.com/meliorence/react-native-render-html/issues/285)
+* support source.headers in `useIMGElementState` hook ([e4a0877](https://github.com/meliorence/react-native-render-html/commit/e4a0877293a37b904e9c52ff27ac2abafa82efac))
+* warn user of API misusage even when `debug` is set to false ([f5dd83c](https://github.com/meliorence/react-native-render-html/commit/f5dd83c58e06d1f4e4fdcd6750c2a2a508f38dc4))
+
 # [6.0.0-alpha.14](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.13...v6.0.0-alpha.14) (2021-02-09)
 
 
