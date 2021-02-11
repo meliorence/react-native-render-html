@@ -7,12 +7,12 @@ const defaultImageStyle: ImageStyle = { resizeMode: 'cover' };
 export default function IMGElementContentSuccess({
   source,
   imageStyle,
-  imageBoxDimensions
+  dimensions
 }: IMGElementStateSuccess) {
   return (
     <Image
       source={source}
-      style={[defaultImageStyle, imageBoxDimensions, imageStyle]}
+      style={[defaultImageStyle, dimensions, imageStyle]}
       testID="image-layout"
     />
   );

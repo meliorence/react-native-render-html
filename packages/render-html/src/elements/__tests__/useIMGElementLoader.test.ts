@@ -8,8 +8,8 @@ describe('useIMGElementLoader', () => {
   const props = {
     contentWidth: 300,
     source: { uri: 'https://foo.bar/600x300' },
-    imagesInitialDimensions: { width: 30, height: 30 },
-    computeImagesMaxWidth: (contentWidth: number) => contentWidth
+    initialDimensions: { width: 30, height: 30 },
+    computeMaxWidth: (contentWidth: number) => contentWidth
   };
   it('should render at most twice when width and height physical dimensions are not provided, prior and after fetching physical dimensions', async () => {
     const { renderCount } = perf<{ TestComponent: unknown }>(React);
@@ -31,21 +31,21 @@ describe('useIMGElementLoader', () => {
       expect(renderCount.current.TestComponent.value).toBe(1);
     });
   });
-  it('should start in loading state with imageBoxModel set to imagesInitialDimensions', async () => {
+  it('should start in loading state with dimensions set to initialDimensions', async () => {
     const { result } = renderHook(() => useIMGElementLoader(props));
     expect(result.current.type).toEqual('loading');
-    expect(result.current.imageBoxDimensions).toMatchObject({
+    expect(result.current.dimensions).toMatchObject({
       width: 30,
       height: 30
     });
   });
-  it('should undate to success state with imageBoxModel set to scaled physical image dimensions', async () => {
+  it('should update to success state with dimensions set to scaled physical image dimensions', async () => {
     const { result, waitForNextUpdate } = renderHook(() =>
       useIMGElementLoader(props)
     );
     await waitForNextUpdate();
     expect(result.current.type).toEqual('success');
-    expect(result.current.imageBoxDimensions).toMatchObject({
+    expect(result.current.dimensions).toMatchObject({
       width: 300,
       height: 150
     });
@@ -62,7 +62,7 @@ describe('useIMGElementLoader', () => {
       })
     );
     expect(result.current.type).toEqual('success');
-    expect(result.current.imageBoxDimensions).toMatchObject({
+    expect(result.current.dimensions).toMatchObject({
       width: 300,
       height: 150
     });

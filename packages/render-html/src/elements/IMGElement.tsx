@@ -1,6 +1,8 @@
 import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
-import useIMGElementLoader from './useIMGElementLoader';
+import useIMGElementLoader, {
+  defaultInitialDimensions
+} from './useIMGElementLoader';
 import IMGElementContentSuccess from './IMGElementContentSuccess';
 import IMGElementContainer from './IMGElementContainer';
 import IMGElementContentLoading from './IMGElementContentLoading';
@@ -33,31 +35,33 @@ const IMGElement = ({ onPress, testID, ...props }: IMGElementProps) => {
   );
 };
 
-IMGElement.propTypes = {
+const imgDimensionsType = PropTypes.shape({
+  width: PropTypes.number,
+  height: PropTypes.number
+});
+
+const propTypes: Record<keyof IMGElementProps, any> = {
   source: PropTypes.object.isRequired,
   alt: PropTypes.string,
   altColor: PropTypes.string,
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  computeImagesMaxWidth: PropTypes.func.isRequired,
+  computeMaxWidth: PropTypes.func.isRequired,
   contentWidth: PropTypes.number,
   enableExperimentalPercentWidth: PropTypes.bool,
-  imagesInitialDimensions: PropTypes.shape({
-    width: PropTypes.number,
-    height: PropTypes.number
-  }) as any,
+  initialDimensions: imgDimensionsType,
   onPress: PropTypes.func,
-  testID: PropTypes.string
+  testID: PropTypes.string,
+  cachedNaturalDimensions: imgDimensionsType
 };
+
+IMGElement.propTypes = propTypes;
 
 IMGElement.defaultProps = {
   enableExperimentalPercentWidth: false,
-  computeImagesMaxWidth: identity,
-  imagesInitialDimensions: {
-    width: 100,
-    height: 100
-  },
+  computeMaxWidth: identity,
+  imagesInitialDimensions: defaultInitialDimensions,
   style: {}
 };
 

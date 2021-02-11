@@ -23,10 +23,16 @@ export interface IMGElementLoaderProps {
   height?: string | number;
   width?: string | number;
   style?: StyleProp<ImageStyle>;
-  computeImagesMaxWidth?: (containerWidth: number) => number;
+  computeMaxWidth?: (containerWidth: number) => number;
   contentWidth?: number;
   enableExperimentalPercentWidth?: boolean;
-  imagesInitialDimensions?: ImgDimensions;
+  /**
+   * Rendered dimensions prior to retrieving natural dimensions of the image.
+   *
+   * @remarks When `cachedNaturalDimensions` prop is provided, concrete
+   * dimensions for this image will be immediately rendered.
+   */
+  initialDimensions?: ImgDimensions;
   /**
    * When the natural ("physical") dimensions for this image are accessible a
    * priori, these should be passed. It will save some API calls and filesytem
@@ -36,12 +42,11 @@ export interface IMGElementLoaderProps {
 }
 
 export interface IMGElementProps extends IMGElementLoaderProps {
-  key?: string | number;
   style?: StyleProp<ImageStyle>;
   testID?: string;
   onPress?: PressableProps['onPress'];
   enableExperimentalPercentWidth?: boolean;
-  imagesInitialDimensions?: ImgDimensions;
+  initialDimensions?: ImgDimensions;
 }
 
 export type IMGElementState =
@@ -52,11 +57,14 @@ export type IMGElementState =
 export interface IMGElementStateSuccess {
   type: 'success';
   containerStyle: ViewStyle;
+  /**
+   * Image-only style extracted from `IMGElement.style` prop.
+   */
   imageStyle: ImageStyle;
   /**
-   * The scaled image dimensions, relative to `contentWidth`.
+   * The concrete (to be displayed) image dimensions.
    */
-  imageBoxDimensions: ImgDimensions;
+  dimensions: ImgDimensions;
   source: ImageURISource;
 }
 
@@ -64,11 +72,9 @@ export interface IMGElementStateLoading {
   type: 'loading';
   containerStyle: ViewStyle;
   /**
-   * The display dimensions for the image.
-   * This value is set to `initialImageDimensions`
-   * during loading.
+   * Initial dimensions.
    */
-  imageBoxDimensions: ImgDimensions;
+  dimensions: ImgDimensions;
 }
 
 export interface IMGElementStateError {
@@ -76,10 +82,10 @@ export interface IMGElementStateError {
   containerStyle: ViewStyle;
   error: Error;
   /**
-   * Either the scaled image dimensions, or `initialImageDimensions` if the
+   * Either the scaled image dimensions, or `initialDimensions` if the
    * later could not be determined.
    */
-  imageBoxDimensions: ImgDimensions;
+  dimensions: ImgDimensions;
   alt?: string;
   altColor?: string;
 }
