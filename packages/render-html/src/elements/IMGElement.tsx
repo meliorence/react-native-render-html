@@ -1,13 +1,12 @@
 import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
-import useIMGElementLoader, {
-  defaultInitialDimensions
-} from './useIMGElementLoader';
+import useIMGElementState from './useIMGElementState';
 import IMGElementContentSuccess from './IMGElementContentSuccess';
 import IMGElementContainer from './IMGElementContainer';
 import IMGElementContentLoading from './IMGElementContentLoading';
 import IMGElementContentError from './IMGElementContentError';
-import { IMGElementProps } from './img-types';
+import type { IMGElementProps } from './img-types';
+import defaultImageInitialDimensions from './defaultInitialImageDimensions';
 
 export type { IMGElementProps } from './img-types';
 
@@ -16,7 +15,7 @@ function identity(arg: any) {
 }
 
 const IMGElement = ({ onPress, testID, ...props }: IMGElementProps) => {
-  const state = useIMGElementLoader(props);
+  const state = useIMGElementState(props);
   let content: ReactNode = false;
   if (state.type === 'success') {
     content = React.createElement(IMGElementContentSuccess, state);
@@ -61,7 +60,7 @@ IMGElement.propTypes = propTypes;
 IMGElement.defaultProps = {
   enableExperimentalPercentWidth: false,
   computeMaxWidth: identity,
-  imagesInitialDimensions: defaultInitialDimensions,
+  imagesInitialDimensions: defaultImageInitialDimensions,
   style: {}
 };
 

@@ -12,12 +12,12 @@ describe('HTMLImageElement component should pass regression test #141', () => {
     const { findByTestId, getByTestId, queryByTestId } = render(
       <IMGElement key="1" style={style} source={source} />
     );
-    const placeholder = getByTestId('image-placeholder');
+    const placeholder = getByTestId('image-loading');
     expect(placeholder).toBeTruthy();
-    const imageLayout = queryByTestId('image-layout');
+    const imageLayout = queryByTestId('image-success');
     expect(imageLayout).toBeFalsy();
     await expect(
-      findByTestId('image-layout', { timeout: 100 })
+      findByTestId('image-success', { timeout: 100 })
     ).resolves.toBeTruthy();
   });
 });

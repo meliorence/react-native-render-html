@@ -1,9 +1,9 @@
 import React from 'react';
-import { View } from 'react-native';
 import { IMGElementStateLoading } from './img-types';
+import IMGElementContentAlt from './IMGElementContentAlt';
 
-export default function IMGElementContentLoading({
-  dimensions
-}: IMGElementStateLoading) {
-  return <View style={dimensions} testID="image-placeholder" />;
+export default function IMGElementContentLoading(
+  props: IMGElementStateLoading
+) {
+  return <IMGElementContentAlt {...props} testID="image-loading" />;
 }

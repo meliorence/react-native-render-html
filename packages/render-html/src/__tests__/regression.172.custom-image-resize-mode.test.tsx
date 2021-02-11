@@ -25,7 +25,7 @@ describe('HTMLImageElement component should pass regression test #172', () => {
         tagsStyles={tagsStyles as any}
       />
     );
-    const imageLayout = getByTestId('image-layout');
+    const imageLayout = getByTestId('image-success');
     expect(StyleSheet.flatten(imageLayout.props.style)).toMatchObject(
       tagsStyles.img
     );
