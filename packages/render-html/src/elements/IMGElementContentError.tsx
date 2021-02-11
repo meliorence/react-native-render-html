@@ -13,12 +13,12 @@ const styles = StyleSheet.create({
 });
 
 export default function IMGElementContentError({
-  imageBoxDimensions,
+  dimensions,
   alt,
   altColor
 }: IMGElementStateError) {
   return (
-    <View style={[styles.errorBox, imageBoxDimensions]} testID="image-error">
+    <View style={[styles.errorBox, dimensions]} testID="image-error">
       {alt ? (
         <Text style={[styles.errorText, { color: altColor }]}>{alt}</Text>
       ) : (

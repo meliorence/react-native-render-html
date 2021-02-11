@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { IMGElementStateLoading } from './img-types';
 
 export default function IMGElementContentLoading({
-  imageBoxDimensions
+  dimensions
 }: IMGElementStateLoading) {
-  return <View style={imageBoxDimensions} testID="image-placeholder" />;
+  return <View style={dimensions} testID="image-placeholder" />;
 }

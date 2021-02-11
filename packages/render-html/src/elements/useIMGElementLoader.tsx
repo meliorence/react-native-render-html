@@ -61,15 +61,19 @@ function extractHorizontalSpace({
   return realLeftMargin + realRightMargin;
 }
 
-function derivePhysicalDimensionsFromProps({
+/**
+ * Extract specified dimensions from props.
+ */
+function deriveSpecifiedDimensionsFromProps({
   width,
   height,
   contentWidth,
+  flatStyle,
   enableExperimentalPercentWidth: enablePercentWidth
 }: Pick<
   IMGElementLoaderProps,
   'width' | 'height' | 'contentWidth' | 'enableExperimentalPercentWidth'
->): IncompleteImgDimensions {
+> & { flatStyle: Record<string, any> }): IncompleteImgDimensions {
   const normalizeOptionsWidth = {
     enablePercentWidth,
     containerDimension: contentWidth
@@ -79,40 +83,11 @@ function derivePhysicalDimensionsFromProps({
   };
   const widthProp = normalizeSize(width, normalizeOptionsWidth);
   const heightProp = normalizeSize(height, normalizeOptionsHeight);
-  return {
-    width: widthProp,
-    height: heightProp
-  };
-}
-
-function deriveRequiredDimensionsFromProps({
-  enablePercentWidth,
-  contentWidth,
-  flatStyle,
-  physicalDimensionsFromProps
-}: Pick<IMGElementLoaderProps, 'contentWidth'> & {
-  flatStyle: Record<string, any>;
-  enablePercentWidth?: boolean;
-  physicalDimensionsFromProps: IncompleteImgDimensions;
-}): IncompleteImgDimensions {
-  const normalizeOptionsWidth = {
-    enablePercentWidth,
-    containerDimension: contentWidth
-  };
-  const normalizeOptionsHeight = {
-    enablePercentWidth: false
-  };
   const styleWidth = normalizeSize(flatStyle.width, normalizeOptionsWidth);
   const styleHeight = normalizeSize(flatStyle.height, normalizeOptionsHeight);
   return {
-    width:
-      typeof styleWidth === 'number'
-        ? styleWidth
-        : physicalDimensionsFromProps.width,
-    height:
-      typeof styleHeight === 'number'
-        ? styleHeight
-        : physicalDimensionsFromProps.height
+    width: styleWidth ?? widthProp,
+    height: styleHeight ?? heightProp
   };
 }
 
@@ -163,15 +138,15 @@ function scale(
   return scaleDown(maxBox, scaleUp(minBox, originalBox));
 }
 
-function computeImageBoxDimensions(params: any) {
+function computeConcreteDimensions(params: any) {
   const {
-    computeImagesMaxWidth,
+    computeMaxWidth,
     contentWidth,
     flattenStyles,
-    imagePhysicalWidth,
-    imagePhysicalHeight,
-    requiredWidth,
-    requiredHeight
+    naturalWidth,
+    naturalHeight,
+    specifiedWidth,
+    specifiedHeight
   } = params;
   const horizontalSpace = extractHorizontalSpace(flattenStyles);
   const {
@@ -181,9 +156,7 @@ function computeImageBoxDimensions(params: any) {
     minHeight = 0
   } = flattenStyles;
   const imagesMaxWidth =
-    typeof contentWidth === 'number'
-      ? computeImagesMaxWidth(contentWidth)
-      : Infinity;
+    typeof contentWidth === 'number' ? computeMaxWidth(contentWidth) : Infinity;
   const minBox = {
     width: minWidth,
     height: minHeight
@@ -193,38 +166,35 @@ function computeImageBoxDimensions(params: any) {
       Math.min(
         imagesMaxWidth,
         maxWidth,
-        typeof requiredWidth === 'number' ? requiredWidth : Infinity
+        typeof specifiedWidth === 'number' ? specifiedWidth : Infinity
       ) - horizontalSpace,
     height: Math.min(
-      typeof requiredHeight === 'number' ? requiredHeight : Infinity,
+      typeof specifiedHeight === 'number' ? specifiedHeight : Infinity,
       maxHeight
     )
   };
-  if (typeof requiredWidth === 'number' && typeof requiredHeight === 'number') {
+  if (
+    typeof specifiedWidth === 'number' &&
+    typeof specifiedHeight === 'number'
+  ) {
     return scale(
       { minBox, maxBox },
       {
-        width: requiredWidth,
-        height: requiredHeight
+        width: specifiedWidth,
+        height: specifiedHeight
       }
     );
   }
-  if (imagePhysicalWidth != null && imagePhysicalHeight != null) {
+  if (naturalWidth != null && naturalHeight != null) {
     return scale(
       { minBox, maxBox },
       {
-        width: imagePhysicalWidth,
-        height: imagePhysicalHeight
+        width: naturalWidth,
+        height: naturalHeight
       }
     );
   }
   return null;
-}
-
-function isPlainImgDimensions(
-  imgDimensions: IncompleteImgDimensions
-): imgDimensions is ImgDimensions {
-  return imgDimensions.width != null && imgDimensions.height != null;
 }
 
 const extractImgStyleProps = pick<keyof ImageStyle>([
@@ -233,7 +203,7 @@ const extractImgStyleProps = pick<keyof ImageStyle>([
   'overlayColor'
 ]);
 
-function usePhysicalDimensions({
+function useNaturalDimensions({
   source,
   contentWidth,
   enableExperimentalPercentWidth,
@@ -243,38 +213,23 @@ function usePhysicalDimensions({
   cachedNaturalDimensions
 }: IMGElementLoaderProps) {
   const [
-    physicalDimensions,
-    setPhysicalDimensions
+    naturalDimensions,
+    setNaturalDimensions
   ] = useState<ImgDimensions | null>(cachedNaturalDimensions || null);
+  const flatStyle = useMemo(() => StyleSheet.flatten(style) || {}, [style]);
   const hasCachedDimensions = !!cachedNaturalDimensions;
   const cachedNaturalWidth = cachedNaturalDimensions?.width;
   const cachedNaturalHeight = cachedNaturalDimensions?.height;
-  const physicalDimensionsFromProps = useMemo(
+  const specifiedDimensions = useMemo(
     () =>
-      derivePhysicalDimensionsFromProps({
+      deriveSpecifiedDimensionsFromProps({
         contentWidth,
         enableExperimentalPercentWidth,
         width,
-        height
+        height,
+        flatStyle
       }),
-    [contentWidth, enableExperimentalPercentWidth, height, width]
-  );
-  const flatStyle = useMemo(() => StyleSheet.flatten(style) || {}, [style]);
-  const requirements = useMemo(
-    function computeRequirements() {
-      return deriveRequiredDimensionsFromProps({
-        enablePercentWidth: enableExperimentalPercentWidth,
-        flatStyle,
-        contentWidth,
-        physicalDimensionsFromProps
-      });
-    },
-    [
-      contentWidth,
-      enableExperimentalPercentWidth,
-      flatStyle,
-      physicalDimensionsFromProps
-    ]
+    [contentWidth, enableExperimentalPercentWidth, flatStyle, height, width]
   );
   const [error, setError] = useState<null | Error>(null);
   useEffect(
@@ -285,7 +240,7 @@ function usePhysicalDimensions({
           source.uri,
           source.headers || {},
           (w, h) => {
-            !cancelled && setPhysicalDimensions({ width: w, height: h });
+            !cancelled && setNaturalDimensions({ width: w, height: h });
           },
           (e) => {
             !cancelled && setError(e || {});
@@ -300,7 +255,7 @@ function usePhysicalDimensions({
   );
   useEffect(
     function resetOnURIChange() {
-      setPhysicalDimensions(
+      setNaturalDimensions(
         cachedNaturalWidth != null && cachedNaturalHeight != null
           ? { width: cachedNaturalWidth, height: cachedNaturalHeight }
           : null
@@ -310,14 +265,17 @@ function usePhysicalDimensions({
     [cachedNaturalHeight, cachedNaturalWidth, source.uri]
   );
   return {
-    requirements,
+    specifiedDimensions,
     flatStyle,
-    physicalDimensions: isPlainImgDimensions(physicalDimensionsFromProps)
-      ? physicalDimensionsFromProps
-      : physicalDimensions,
-    error: error
+    naturalDimensions,
+    error
   };
 }
+
+export const defaultInitialDimensions: ImgDimensions = {
+  width: 100,
+  height: 100
+};
 
 export default function useIMGElementLoader(
   props: IMGElementLoaderProps
@@ -327,35 +285,32 @@ export default function useIMGElementLoader(
     altColor,
     source,
     contentWidth,
-    computeImagesMaxWidth,
-    imagesInitialDimensions
+    computeMaxWidth,
+    initialDimensions = defaultInitialDimensions
   } = props;
   const {
-    physicalDimensions,
-    requirements,
+    naturalDimensions,
+    specifiedDimensions,
     flatStyle,
     error
-  } = usePhysicalDimensions(props);
-  const imageBoxDimensions = useMemo(() => {
-    if (physicalDimensions) {
-      return computeImageBoxDimensions({
-        flattenStyles: flatStyle,
-        computeImagesMaxWidth,
-        contentWidth,
-        imagePhysicalWidth: physicalDimensions?.width,
-        imagePhysicalHeight: physicalDimensions?.height,
-        requiredWidth: requirements.width,
-        requiredHeight: requirements.height
-      });
-    }
-    return null;
+  } = useNaturalDimensions(props);
+  const concreteDimensions = useMemo(() => {
+    return computeConcreteDimensions({
+      flattenStyles: flatStyle,
+      computeMaxWidth,
+      contentWidth,
+      naturalWidth: naturalDimensions?.width,
+      naturalHeight: naturalDimensions?.height,
+      specifiedWidth: specifiedDimensions.width,
+      specifiedHeight: specifiedDimensions.height
+    });
   }, [
-    computeImagesMaxWidth,
+    computeMaxWidth,
     contentWidth,
     flatStyle,
-    physicalDimensions,
-    requirements.height,
-    requirements.width
+    naturalDimensions,
+    specifiedDimensions.height,
+    specifiedDimensions.width
   ]);
   return error
     ? {
@@ -364,19 +319,19 @@ export default function useIMGElementLoader(
         altColor,
         error,
         containerStyle: flatStyle,
-        imageBoxDimensions: imageBoxDimensions ?? imagesInitialDimensions!
+        dimensions: concreteDimensions ?? initialDimensions
       }
-    : imageBoxDimensions
+    : concreteDimensions
     ? {
         type: 'success',
         containerStyle: flatStyle as any,
         imageStyle: extractImgStyleProps(flatStyle),
-        imageBoxDimensions,
+        dimensions: concreteDimensions,
         source
       }
     : {
         type: 'loading',
         containerStyle: flatStyle,
-        imageBoxDimensions: imagesInitialDimensions!
+        dimensions: initialDimensions
       };
 }

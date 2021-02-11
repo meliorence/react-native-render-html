@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ClassAttributes } from 'react';
 import { TBlock } from '@native-html/transient-render-engine';
 import IMGElement, { IMGElementProps } from '../elements/IMGElement';
 import { DefaultBlockRenderer } from '../render/render-types';
@@ -13,7 +13,7 @@ import useNormalizedUrl from '../hooks/useNormalizedUrl';
 
 export function useIMGElementProps(
   props: DefaultTagRendererProps<TBlock>
-): IMGElementProps {
+): IMGElementProps & ClassAttributes<any> {
   const { style, tnode, onPress, key } = props;
   const {
     contentWidth,
@@ -25,9 +25,9 @@ export function useIMGElementProps(
   return {
     key,
     contentWidth,
-    computeImagesMaxWidth,
+    computeMaxWidth: computeImagesMaxWidth,
     enableExperimentalPercentWidth,
-    imagesInitialDimensions,
+    initialDimensions: imagesInitialDimensions,
     onPress,
     alt: tnode.attributes.alt,
     testID: 'img',

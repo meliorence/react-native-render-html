@@ -241,7 +241,7 @@ describe('IMGElement', () => {
           width: contentWidth * 0.5
         });
       });
-      it('should constrain a percentage width with the value returned by computeImagesMaxWidth', async () => {
+      it('should constrain a percentage width with the value returned by computeMaxWidth', async () => {
         const source = { uri: 'http://via.placeholder.com/640x360' };
         const contentWidth = 250;
         const style = {
@@ -250,7 +250,7 @@ describe('IMGElement', () => {
         const { findByTestId } = render(
           <HTMLImgElement
             enableExperimentalPercentWidth
-            computeImagesMaxWidth={(c) => c * 0.7}
+            computeMaxWidth={(c) => c * 0.7}
             contentWidth={250}
             {...style}
             source={source}
@@ -342,7 +342,7 @@ describe('IMGElement', () => {
         height: 1080
       });
     });
-    it('should retain inline style prior to attributes width and height to compute print dimensions', async () => {
+    it('should retain inline style prior to attributes width and height to compute concrete dimensions', async () => {
       const { findByTestId, getByTestId } = render(
         <HTMLImgElement
           width="1200"
