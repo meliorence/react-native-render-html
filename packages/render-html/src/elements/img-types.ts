@@ -27,6 +27,12 @@ export interface IMGElementLoaderProps {
   contentWidth?: number;
   enableExperimentalPercentWidth?: boolean;
   imagesInitialDimensions?: ImgDimensions;
+  /**
+   * When the natural ("physical") dimensions for this image are accessible a
+   * priori, these should be passed. It will save some API calls and filesytem
+   * access via React Native Image.getSize.
+   */
+  cachedNaturalDimensions?: ImgDimensions;
 }
 
 export interface IMGElementProps extends IMGElementLoaderProps {

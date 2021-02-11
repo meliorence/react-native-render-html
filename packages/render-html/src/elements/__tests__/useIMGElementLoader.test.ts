@@ -2,6 +2,7 @@ import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 import { perf, wait } from 'react-performance-testing';
 import useIMGElementLoader from '../useIMGElementLoader';
+import { Image } from 'react-native';
 
 describe('useIMGElementLoader', () => {
   const props = {
@@ -48,5 +49,23 @@ describe('useIMGElementLoader', () => {
       width: 300,
       height: 150
     });
+  });
+  it('should suport cachedNaturalDimensions prop', async () => {
+    Image.getSizeWithHeaders = jest.fn();
+    const { result } = renderHook(() =>
+      useIMGElementLoader({
+        ...props,
+        cachedNaturalDimensions: {
+          width: 600,
+          height: 300
+        }
+      })
+    );
+    expect(result.current.type).toEqual('success');
+    expect(result.current.imageBoxDimensions).toMatchObject({
+      width: 300,
+      height: 150
+    });
+    expect(Image.getSizeWithHeaders).not.toHaveBeenCalled();
   });
 });
