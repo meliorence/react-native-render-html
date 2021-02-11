@@ -239,12 +239,16 @@ function usePhysicalDimensions({
   enableExperimentalPercentWidth,
   width,
   height,
-  style
+  style,
+  cachedNaturalDimensions
 }: IMGElementLoaderProps) {
   const [
     physicalDimensions,
     setPhysicalDimensions
-  ] = useState<ImgDimensions | null>(null);
+  ] = useState<ImgDimensions | null>(cachedNaturalDimensions || null);
+  const hasCachedDimensions = !!cachedNaturalDimensions;
+  const cachedNaturalWidth = cachedNaturalDimensions?.width;
+  const cachedNaturalHeight = cachedNaturalDimensions?.height;
   const physicalDimensionsFromProps = useMemo(
     () =>
       derivePhysicalDimensionsFromProps({
@@ -262,7 +266,7 @@ function usePhysicalDimensions({
         enablePercentWidth: enableExperimentalPercentWidth,
         flatStyle,
         contentWidth,
-        physicalDimensionsFromProps: physicalDimensionsFromProps
+        physicalDimensionsFromProps
       });
     },
     [
@@ -276,7 +280,7 @@ function usePhysicalDimensions({
   useEffect(
     function fetchPhysicalDimensions() {
       let cancelled = false;
-      if (source.uri) {
+      if (source.uri && !hasCachedDimensions) {
         Image.getSizeWithHeaders(
           source.uri,
           source.headers || {},
@@ -292,14 +296,18 @@ function usePhysicalDimensions({
         };
       }
     },
-    [source.uri, source.headers]
+    [source.uri, source.headers, hasCachedDimensions]
   );
   useEffect(
     function resetOnURIChange() {
-      setPhysicalDimensions(null);
+      setPhysicalDimensions(
+        cachedNaturalWidth != null && cachedNaturalHeight != null
+          ? { width: cachedNaturalWidth, height: cachedNaturalHeight }
+          : null
+      );
       setError(null);
     },
-    [source.uri]
+    [cachedNaturalHeight, cachedNaturalWidth, source.uri]
   );
   return {
     requirements,
