@@ -1,3 +1,13 @@
+# v5.1.0
+
+## Bugfixes
+
+- prop `source.uri` failing to cause HTML to load
+
+## Features
+
+- `allowWhitespaceNodes` prop to avoid removal of whitespace-filled text nodes
+- re-renders on `baseFontStyle` updates (port from dev/4.x branch)
 # v5.0.1
 
 ## Bugfixes
