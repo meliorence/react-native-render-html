@@ -203,7 +203,7 @@ export default class HTML extends PureComponent {
         loadingRemoteURL: false,
         errorLoadingRemoteURL: false,
       });
-    } else if (props.uri) {
+    } else if (uri) {
       try {
         const { body = null, method = "GET", headers = {} } = props.source
           ? props.source
@@ -237,7 +237,7 @@ export default class HTML extends PureComponent {
     } else {
       console.warn(
         "react-native-render-html",
-        "Please provide the html or uri prop."
+        "Please provide the source.html or source.uri prop."
       );
     }
   }
