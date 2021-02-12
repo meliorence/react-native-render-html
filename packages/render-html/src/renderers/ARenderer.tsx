@@ -11,7 +11,7 @@ import {
 import { useSharedProps } from '../context/SharedPropsContext';
 import {
   DefaultTagRendererProps,
-  RenderHTMLPassedProps
+  RenderHTMLSharedProps
 } from '../shared-types';
 import { AccessibilityProps, GestureResponderEvent } from 'react-native';
 import AElement from '../elements/AElement';
@@ -20,7 +20,7 @@ import { useDocumentMetadata } from '../context/DocumentMetadataProvider';
 
 function useAnchorOnLinkPress(
   tnode: TBlock | TPhrasing | TText,
-  onLinkPress: RenderHTMLPassedProps['onLinkPress']
+  onLinkPress: RenderHTMLSharedProps['onLinkPress']
 ) {
   const href: string = tnode.attributes.href;
   const normalizedHref = useNormalizedUrl(href);

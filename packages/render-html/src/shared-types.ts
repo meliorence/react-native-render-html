@@ -38,7 +38,7 @@ export interface HtmlAttributesDictionary {
   [attribute: string]: string;
 }
 
-export interface RenderHTMLPassedProps<
+export interface RenderHTMLSharedProps<
   RendererProps extends Record<string, any> = Record<string, any>
 > {
   /**
@@ -308,7 +308,7 @@ export interface RenderHTMLSourceInline {
 export type RenderHTMLSource = RenderHTMLSourceInline | RenderHTMLSourceUri;
 
 export interface RenderHTMLFragmentProps<P = any>
-  extends RenderHTMLPassedProps<P> {
+  extends RenderHTMLSharedProps<P> {
   /**
    * The object source to render (either `{ uri }` or `{ html }`).
    */

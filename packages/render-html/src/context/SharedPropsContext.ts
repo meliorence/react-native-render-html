@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 import { Dimensions, Linking, TextProps, ViewProps } from 'react-native';
-import { RenderHTMLPassedProps } from '../shared-types';
+import { RenderHTMLSharedProps } from '../shared-types';
 
-export const defaultSharedPropsContext: Required<RenderHTMLPassedProps> = {
+export const defaultSharedPropsContext: Required<RenderHTMLSharedProps> = {
   debug: false,
   contentWidth: Dimensions.get('window').width,
   enableExperimentalPercentWidth: false,
@@ -31,20 +31,23 @@ export const defaultSharedPropsContext: Required<RenderHTMLPassedProps> = {
   renderersProps: {}
 };
 
-const SharedPropsContext = React.createContext<Required<RenderHTMLPassedProps>>(
+const SharedPropsContext = React.createContext<Required<RenderHTMLSharedProps>>(
   defaultSharedPropsContext
 );
 
-export function useSharedProps() {
-  return React.useContext(SharedPropsContext);
+export function useSharedProps<
+  RendererProps extends Record<string, any> = Record<string, any>
+>() {
+  return React.useContext(SharedPropsContext) as Required<
+    RenderHTMLSharedProps<RendererProps>
+  >;
 }
 
 export function useRendererProps<
-  R extends Record<string, any> = Record<string, any>
->(k: keyof R) {
-  return React.useContext(SharedPropsContext).renderersProps[
-    k as string
-  ] as R[typeof k];
+  RendererProps extends Record<string, any> = Record<string, any>,
+  K extends keyof RendererProps = any
+>(k: K) {
+  return useSharedProps<RendererProps>().renderersProps[k];
 }
 
 export function useDefaultTextProps(): TextProps {
