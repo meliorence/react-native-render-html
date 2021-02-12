@@ -5,16 +5,18 @@ import { RenderHTMLFragmentProps } from './shared-types';
 
 export const messages = {
   outdatedUriProp:
-    "You're attempting to use an outdated prop, 'uri'. This prop has been discontinued since version 6. " +
+    "You're attempting to use an outdated prop, 'uri'. This prop has been discontinued in version 6. " +
     "Use 'source={{ uri }}' instead.",
   outdatedHtmlProp:
-    "You're attempting to use an outdated prop, 'html'. This prop has been discontinued since version 6. " +
+    "You're attempting to use an outdated prop, 'html'. This prop has been discontinued in version 6. " +
     "Use 'source={{ html }}' instead.",
+  outdatedListPrefixRenderersProps:
+    "You're attempting to use an outdated prop, 'listPrefixRenderers'. This prop has been discontinued in version 6.",
   noSource:
     'No source prop was provided to RenderHTML. Nothing will be rendered',
   contentWidth:
     'You should always pass contentWidth prop to properly handle screen rotations ' +
-    'and have a seemless support for images scaling. ' +
+    'and have a seamless support for images scaling. ' +
     'In the meantime, HTML will fallback to Dimensions.window().width, but its ' +
     'layout will become inconsistent after screen rotations. ' +
     'You are encouraged to use useWindowDimensions hook, see: ' +
@@ -36,6 +38,9 @@ const RenderHTMLFragmentDebug = function RenderHTMLDebug(
     }
     if (lookupRecord(props, 'uri')) {
       console.warn(messages.outdatedUriProp);
+    }
+    if (lookupRecord(props, 'listsPrefixesRenderers')) {
+      console.warn(messages.outdatedListPrefixRenderersProps);
     }
   }
   return <Fragment>{props.children}</Fragment>;

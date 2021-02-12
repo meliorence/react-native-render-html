@@ -17,7 +17,6 @@ export const defaultSharedPropsContext: Required<RenderHTMLPassedProps> = {
     height: 50,
     width: 50
   },
-  listsPrefixesRenderers: {},
   onLinkPress: (_e, href) => Linking.canOpenURL(href) && Linking.openURL(href),
   WebView: () => {
     if (__DEV__) {

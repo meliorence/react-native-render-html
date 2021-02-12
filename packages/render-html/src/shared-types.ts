@@ -38,11 +38,9 @@ export interface HtmlAttributesDictionary {
   [attribute: string]: string;
 }
 
-export interface RenderHTMLPassedProps<P = any> {
-  /**
-   * Your custom renderers from ul and ol bullets, see [lists prefixes](https://github.com/meliorence/react-native-render-html#lists-prefixes)
-   */
-  listsPrefixesRenderers?: RendererDictionary<P>;
+export interface RenderHTMLPassedProps<
+  RendererProps extends Record<string, any> = Record<string, any>
+> {
   /**
    * Default width and height to display while image's dimensions are being retrieved.
    */
@@ -94,7 +92,7 @@ export interface RenderHTMLPassedProps<P = any> {
    * Props to use in custom renderers with `useRendererProps` or
    * `useSharedProps`.
    */
-  renderersProps?: Record<string, any>;
+  renderersProps?: RendererProps;
   /**
    * Default props for Text elements in the render tree.
    *
