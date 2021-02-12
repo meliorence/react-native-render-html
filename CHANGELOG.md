@@ -1,3 +1,21 @@
+# [6.0.0-alpha.16](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.15...v6.0.0-alpha.16) (2021-02-12)
+
+
+### Code Refactoring
+
+* accurate typings for `RenderHTMLSharedProps`, `useSharedProps` ([7f57318](https://github.com/meliorence/react-native-render-html/commit/7f57318c8e6e3476a8a7ea564301054eb7aa4c3e))
+* discontinue `listPrefixRenderers` prop ([98a04ca](https://github.com/meliorence/react-native-render-html/commit/98a04ca2d4e37b660a6aee6b60dc9a8adafdefba))
+
+
+### BREAKING CHANGES
+
+* (typescript users) renamed `RenderHTMLPassedProps` to
+`RenderHTMLSharedProps` for consistency. In addition, changed signature
+of `useSharedProps` and `userRendererProps`. These hooks now take as
+first generic type arugment the shape of `renderersProps`.
+* `listPrefixRenderers` prop has been discontinuated. You
+should use a custom renderer for lists instead.
+
 # [6.0.0-alpha.15](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.14...v6.0.0-alpha.15) (2021-02-11)
 
 
