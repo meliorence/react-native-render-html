@@ -74,6 +74,7 @@ export type PassProps<P> = Pick<
   | "emSize"
   | "ptSize"
   | "enableExperimentalPercentWidth"
+  | "allowWhitespaceNodes"
 > & {
   nodeIndex: number;
   transientChildren: TransientNode[];
@@ -310,6 +311,10 @@ export interface ContainerProps<P = {}> {
    * Default props for WebView elements in the render tree used by plugins.
    */
   defaultWebViewProps?: any;
+  /**
+   * Allows the rendering of nodes that consist of only whitespace characters
+   */
+  allowWhitespaceNodes?: boolean;
 }
 
 /**

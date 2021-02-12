@@ -50,6 +50,7 @@ function sourceHasChange(oldProps, newProps) {
 
 export default class HTML extends PureComponent {
   static propTypes = {
+    allowWhitespaceNodes: PropTypes.bool,
     renderers: PropTypes.object.isRequired,
     ignoredTags: PropTypes.array.isRequired,
     ignoredStyles: PropTypes.array.isRequired,
@@ -117,6 +118,7 @@ export default class HTML extends PureComponent {
   };
 
   static defaultProps = {
+    allowWhitespaceNodes: false,
     renderers: HTMLRenderers,
     debug: false,
     emSize: 14,
@@ -370,6 +372,7 @@ export default class HTML extends PureComponent {
    */
   mapDOMNodesTORNElements(DOMNodes, parentTag = false, props = this.props) {
     const {
+      allowWhitespaceNodes,
       ignoreNodesFunction,
       ignoredTags,
       alterNode,
@@ -411,7 +414,7 @@ export default class HTML extends PureComponent {
       // Remove whitespaces to check if it's just a blank text
       const strippedData = data && data.replace(/\s/g, "");
       if (type === "text") {
-        if (!strippedData || !strippedData.length) {
+        if ((!strippedData || !strippedData.length) && !allowWhitespaceNodes) {
           // This is blank, don't render an useless additional component
           return false;
         }
