@@ -13,9 +13,7 @@ import { TNodeRendererProps } from './shared-types';
 
 export type { TNodeRendererProps } from './shared-types';
 
-const TNodeRenderer: React.FunctionComponent<
-  TNodeRendererProps<TNode>
-> = function TNodeRenderer(props) {
+const TNodeRenderer = function TNodeRenderer(props: TNodeRendererProps<TNode>) {
   const { tnode, hasAnchorAncestor } = props;
   const childrenProps: TNodeRendererProps<any> = {
     ...props,
@@ -45,5 +43,14 @@ const TNodeRenderer: React.FunctionComponent<
   }
   return null;
 };
+
+const defaultProps: Required<
+  Pick<TNodeRendererProps<any>, 'hasAnchorAncestor' | 'collapsedMarginTop'>
+> = {
+  hasAnchorAncestor: false,
+  collapsedMarginTop: null
+};
+
+TNodeRenderer.defaultProps = defaultProps;
 
 export default TNodeRenderer;
