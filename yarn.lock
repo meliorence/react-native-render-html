@@ -6506,13 +6506,13 @@ __metadata:
     react-native-paper: ^4.4.0
     react-native-reanimated: ~1.13.0
     react-native-render-html: "workspace:*"
+    react-native-render-html-v5: "npm:react-native-render-html@^5.0.0"
     react-native-safe-area-context: 3.1.4
     react-native-screens: ~2.10.1
     react-native-syntax-highlighter: ^2.1.0
     react-native-web: ~0.13.12
     react-native-webview: 10.7.0
     react-syntax-highlighter: 6.0.4
-    rnrh-legacy: "workspace:*"
     typescript: ~3.9.7
     zustand: ^3.2.0
   languageName: unknown
@@ -6656,6 +6656,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"domhandler@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "domhandler@npm:3.3.0"
+  dependencies:
+    domelementtype: ^2.0.1
+  checksum: dcc53af0ac02f1fc30abf3a794e31c13ad5e47dd00eeb06465211d854cba11c8db60eb65f4f11410fcd332a850eaca394cdd210805628b4f82d1cbcec78c8368
+  languageName: node
+  linkType: hard
+
 "domhandler@npm:^4.0.0":
   version: 4.0.0
   resolution: "domhandler@npm:4.0.0"
@@ -6665,7 +6674,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"domutils@npm:^2.4.4":
+"domutils@npm:^2.4.2, domutils@npm:^2.4.4":
   version: 2.4.4
   resolution: "domutils@npm:2.4.4"
   dependencies:
@@ -8807,7 +8816,19 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"htmlparser2@npm:6.0.0, htmlparser2@npm:^6.0.0":
+"htmlparser2@npm:5.0.1":
+  version: 5.0.1
+  resolution: "htmlparser2@npm:5.0.1"
+  dependencies:
+    domelementtype: ^2.0.1
+    domhandler: ^3.3.0
+    domutils: ^2.4.2
+    entities: ^2.0.0
+  checksum: c3564b7d26b5e894ee9aae9132ddf23ce79c4d31881b75aef14224b5d89c2e17dc638fa77c0a576e0fcc4c73cc608890bc63b4452f79d7960d2b4af836247fc0
+  languageName: node
+  linkType: hard
+
+"htmlparser2@npm:^6.0.0":
   version: 6.0.0
   resolution: "htmlparser2@npm:6.0.0"
   dependencies:
@@ -13942,6 +13963,21 @@ fsevents@^1.2.7:
   languageName: unknown
   linkType: soft
 
+"react-native-render-html-v5@npm:react-native-render-html@^5.0.0":
+  version: 5.1.0
+  resolution: "react-native-render-html@npm:5.1.0"
+  dependencies:
+    deprecated-prop-type: ^1.0.0
+    htmlparser2: 5.0.1
+    prop-types: ^15.7.2
+    stringify-entities: ^3.1.0
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 0207ef60d2fc5951abd95cb647bcb564246228da0b063872dc3bc8a23bbd75d571e7827d78304ba7c55d17caa0f35669b7e9f6a41f737c904dc7bf90ea2e851c
+  languageName: node
+  linkType: hard
+
 "react-native-render-html@workspace:*, react-native-render-html@workspace:packages/render-html":
   version: 0.0.0-use.local
   resolution: "react-native-render-html@workspace:packages/render-html"
@@ -14812,21 +14848,6 @@ resolve@1.1.7:
   checksum: a84877f6c9027bdc3c501b0761603f0171e032581897308030b4314486ccd5ef65571239d62f23ee62a4a6cada948e2a9a0446da30ed3566498c1eee474f23e0
   languageName: node
   linkType: hard
-
-"rnrh-legacy@workspace:*, rnrh-legacy@workspace:packages/legacy":
-  version: 0.0.0-use.local
-  resolution: "rnrh-legacy@workspace:packages/legacy"
-  dependencies:
-    deprecated-prop-type: ^1.0.0
-    htmlparser2: 6.0.0
-    prop-types: ^15.7.2
-    stringify-entities: ^3.1.0
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-    react-native-webview: "*"
-  languageName: unknown
-  linkType: soft
 
 "rsvp@npm:^4.8.4":
   version: 4.8.5

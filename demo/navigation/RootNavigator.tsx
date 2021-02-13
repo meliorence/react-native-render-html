@@ -22,6 +22,7 @@ function LegacySnackbar() {
     return () => clearTimeout(timeout);
   }, [legacyMode]);
   return (
+    //@ts-ignore
     <Snackbar
       collapsable
       visible={snackbarVisible}
