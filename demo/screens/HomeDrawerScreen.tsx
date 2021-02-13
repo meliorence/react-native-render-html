@@ -25,6 +25,7 @@ function CustomDrawerContent(props: DrawerContentComponentProps<any>) {
   const { colorScheme, setColorScheme } = useColorScheme();
   const swichColorModeRight = React.useCallback(
     ({ style }: any) => (
+      //@ts-ignore
       <Switch
         style={style}
         value={colorScheme === 'dark'}
@@ -42,8 +43,13 @@ function CustomDrawerContent(props: DrawerContentComponentProps<any>) {
           activeBackgroundColor={activeBackgroundColor}
         />
       </DrawerContentScrollView>
-      <List.Section>
-        <List.Item title="Dark Mode?" right={swichColorModeRight} />
+      <List.Section accessibilityComponentType={{}} accessibilityTraits={{}}>
+        <List.Item
+          accessibilityComponentType={{}}
+          accessibilityTraits={{}}
+          title="Dark Mode?"
+          right={swichColorModeRight}
+        />
       </List.Section>
       <VersionDisplay />
     </>

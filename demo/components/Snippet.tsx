@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { ScrollView, Linking, useWindowDimensions, View } from 'react-native';
 import RenderHTML, { RenderHTMLProps } from 'react-native-render-html';
-import LegacyHTML from 'rnrh-legacy';
+import LegacyHTML from 'react-native-render-html-v5';
 import Constants from 'expo-constants';
 import { TNode } from '@native-html/transient-render-engine';
 import snippets, { SnippetId } from '../snippets';
