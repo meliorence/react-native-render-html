@@ -2862,19 +2862,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@native-html/transient-render-engine@npm:^4.2.0":
-  version: 4.2.0
-  resolution: "@native-html/transient-render-engine@npm:4.2.0"
+"@native-html/transient-render-engine@npm:4.3.0":
+  version: 4.3.0
+  resolution: "@native-html/transient-render-engine@npm:4.3.0"
   dependencies:
     "@native-html/css-processor": 1.6.1
     "@types/ramda": ^0.27.32
     csstype: ^3.0.4
-    htmlparser2: ^5.0.1
+    domelementtype: ^2.1.0
+    htmlparser2: ^6.0.0
     ramda: ^0.27.1
   peerDependencies:
     "@types/react-native": "*"
     react-native: ^0.63.0
-  checksum: 40bf155ad975e226b0c6aec9bfac056be1728b0a27f309b0798295333c3c3924a3e4e4fe774bb4081fb4d89eaf591c4f8b37b7073b3a7e3d19df6418d90c5c82
+  checksum: 678ce214195403acf78a7670c52557de0fd3f31767f0867c0b751823b8fa438b18a967dd79e3b6d193a94c9b4e8e617e6f66d3ce03546fa35b991826422d6fa6
   languageName: node
   linkType: hard
 
@@ -6673,7 +6674,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"domutils@npm:^2.4.2":
+"domutils@npm:^2.4.2, domutils@npm:^2.4.4":
   version: 2.4.4
   resolution: "domutils@npm:2.4.4"
   dependencies:
@@ -8815,7 +8816,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"htmlparser2@npm:5.0.1, htmlparser2@npm:^5.0.1":
+"htmlparser2@npm:5.0.1":
   version: 5.0.1
   resolution: "htmlparser2@npm:5.0.1"
   dependencies:
@@ -8824,6 +8825,18 @@ fsevents@^1.2.7:
     domutils: ^2.4.2
     entities: ^2.0.0
   checksum: c3564b7d26b5e894ee9aae9132ddf23ce79c4d31881b75aef14224b5d89c2e17dc638fa77c0a576e0fcc4c73cc608890bc63b4452f79d7960d2b4af836247fc0
+  languageName: node
+  linkType: hard
+
+"htmlparser2@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "htmlparser2@npm:6.0.0"
+  dependencies:
+    domelementtype: ^2.0.1
+    domhandler: ^4.0.0
+    domutils: ^2.4.4
+    entities: ^2.0.0
+  checksum: 03819682d894316d1f8d1a11c9212bdf9c8b2e7a2adc0e19262ac8105d0a4d0577caa1f40bf52ac4876961720342e9f12b86dbf2488f0a8263cf278c03129833
   languageName: node
   linkType: hard
 
@@ -13960,7 +13973,7 @@ fsevents@^1.2.7:
     "@babel/preset-react": ^7.12.13
     "@babel/preset-typescript": ^7.12.13
     "@babel/runtime": ^7.12.13
-    "@native-html/transient-render-engine": ^4.2.0
+    "@native-html/transient-render-engine": 4.3.0
     "@release-it/conventional-changelog": ^2.0.0
     "@testing-library/react-hooks": ^5.0.3
     "@types/jest": ^26.0.14
