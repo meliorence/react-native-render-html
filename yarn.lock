@@ -6656,15 +6656,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"domhandler@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "domhandler@npm:3.3.0"
-  dependencies:
-    domelementtype: ^2.0.1
-  checksum: dcc53af0ac02f1fc30abf3a794e31c13ad5e47dd00eeb06465211d854cba11c8db60eb65f4f11410fcd332a850eaca394cdd210805628b4f82d1cbcec78c8368
-  languageName: node
-  linkType: hard
-
 "domhandler@npm:^4.0.0":
   version: 4.0.0
   resolution: "domhandler@npm:4.0.0"
@@ -6674,7 +6665,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"domutils@npm:^2.4.2, domutils@npm:^2.4.4":
+"domutils@npm:^2.4.4":
   version: 2.4.4
   resolution: "domutils@npm:2.4.4"
   dependencies:
@@ -8816,19 +8807,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"htmlparser2@npm:5.0.1":
-  version: 5.0.1
-  resolution: "htmlparser2@npm:5.0.1"
-  dependencies:
-    domelementtype: ^2.0.1
-    domhandler: ^3.3.0
-    domutils: ^2.4.2
-    entities: ^2.0.0
-  checksum: c3564b7d26b5e894ee9aae9132ddf23ce79c4d31881b75aef14224b5d89c2e17dc638fa77c0a576e0fcc4c73cc608890bc63b4452f79d7960d2b4af836247fc0
-  languageName: node
-  linkType: hard
-
-"htmlparser2@npm:^6.0.0":
+"htmlparser2@npm:6.0.0, htmlparser2@npm:^6.0.0":
   version: 6.0.0
   resolution: "htmlparser2@npm:6.0.0"
   dependencies:
@@ -14839,7 +14818,7 @@ resolve@1.1.7:
   resolution: "rnrh-legacy@workspace:packages/legacy"
   dependencies:
     deprecated-prop-type: ^1.0.0
-    htmlparser2: 5.0.1
+    htmlparser2: 6.0.0
     prop-types: ^15.7.2
     stringify-entities: ^3.1.0
   peerDependencies:
