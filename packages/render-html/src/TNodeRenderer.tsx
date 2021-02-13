@@ -2,7 +2,6 @@ import React from 'react';
 import {
   TBlock,
   TEmpty,
-  TNode,
   TPhrasing,
   TText
 } from '@native-html/transient-render-engine';
@@ -13,20 +12,16 @@ import { TNodeRendererProps } from './shared-types';
 
 export type { TNodeRendererProps } from './shared-types';
 
-const TNodeRenderer = function TNodeRenderer(props: TNodeRendererProps<TNode>) {
-  const { tnode, hasAnchorAncestor } = props;
-  const childrenProps: TNodeRendererProps<any> = {
-    ...props,
-    hasAnchorAncestor
-  };
+const TNodeRenderer = function TNodeRenderer(props: TNodeRendererProps<any>) {
+  const { tnode } = props;
   if (tnode instanceof TBlock) {
-    return React.createElement(TBlockRenderer, childrenProps);
+    return React.createElement(TBlockRenderer, props);
   }
   if (tnode instanceof TPhrasing) {
-    return React.createElement(TPhrasingRenderer, childrenProps);
+    return React.createElement(TPhrasingRenderer, props);
   }
   if (tnode instanceof TText) {
-    return React.createElement(TTextRenderer, childrenProps);
+    return React.createElement(TTextRenderer, props);
   }
   if (tnode instanceof TEmpty && __DEV__) {
     if (tnode.isUnregistered) {
