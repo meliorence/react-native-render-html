@@ -8,7 +8,7 @@ import {
   CustomTagRendererProps,
   DefaultTagRenderer,
   TDefaultRenderer,
-  TNodeGenericRendererProps
+  TNodeRendererProps
 } from './shared-types';
 import mergeCollapsedMargins from './helpers/mergeCollapsedMargins';
 import { useRendererConfig } from './context/RenderRegistryProvider';
@@ -48,7 +48,7 @@ const TPhrasingRenderer = ({
   key,
   hasAnchorAncestor,
   collapsedMarginTop
-}: TNodeGenericRendererProps<TPhrasing>) => {
+}: TNodeRendererProps<TPhrasing>) => {
   const textProps = useDefaultTextProps();
   const { Default, Custom } = useRendererConfig(tnode);
   const style = mergeCollapsedMargins(collapsedMarginTop, {

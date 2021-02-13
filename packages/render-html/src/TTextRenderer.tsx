@@ -7,7 +7,7 @@ import {
   DefaultTagRenderer,
   TDefaultRenderer,
   TDefaultRendererProps,
-  TNodeGenericRendererProps
+  TNodeRendererProps
 } from './shared-types';
 import {
   useInternalTextRenderer,
@@ -38,7 +38,7 @@ function TStandardTextRenderer({
   tnode,
   key,
   hasAnchorAncestor
-}: TNodeGenericRendererProps<TText>) {
+}: TNodeRendererProps<TText>) {
   const { Default, Custom } = useRendererConfig(tnode);
   const textProps = useDefaultTextProps();
   const style = {
@@ -65,7 +65,7 @@ function TStandardTextRenderer({
   return React.createElement(Root, commonProps);
 }
 
-export default function TTextRenderer(props: TNodeGenericRendererProps<TText>) {
+export default function TTextRenderer(props: TNodeRendererProps<TText>) {
   const InternalTextRenderer = useInternalTextRenderer(props.tnode);
   if (InternalTextRenderer) {
     return React.createElement(InternalTextRenderer, { key: props.key });

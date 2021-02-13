@@ -7,7 +7,7 @@ import {
   CustomTagRendererProps,
   DefaultTagRenderer,
   TDefaultRenderer,
-  TNodeGenericRendererProps
+  TNodeRendererProps
 } from './shared-types';
 import mergeCollapsedMargins from './helpers/mergeCollapsedMargins';
 import GenericPressable from './GenericPressable';
@@ -51,7 +51,7 @@ const TBlockRenderer = ({
   key,
   hasAnchorAncestor,
   collapsedMarginTop
-}: TNodeGenericRendererProps<TBlock>) => {
+}: TNodeRendererProps<TBlock>) => {
   const { Default, Custom } = useRendererConfig(tnode);
   const viewProps = useDefaultViewProps();
   const commonProps: CustomTagRendererProps<TBlock> = {
