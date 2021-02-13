@@ -363,7 +363,7 @@ export interface FallbackFontsDefinitions {
   monospace: string;
 }
 
-export interface TNodeGenericRendererProps<T extends TNode> {
+export interface TNodeRendererProps<T extends TNode> {
   tnode: T;
   key?: string | number;
   hasAnchorAncestor: boolean;
@@ -383,7 +383,7 @@ export type NativeStyleProp<T extends TNode> = T extends TBlock
   : NativeTextStyles;
 
 export type TRendererBaseProps<T extends TNode> = Pick<
-  TNodeGenericRendererProps<T>,
+  TNodeRendererProps<T>,
   'tnode' | 'key' | 'hasAnchorAncestor'
 > & {
   /**

@@ -9,18 +9,15 @@ import {
 import TBlockRenderer from './TBlockRenderer';
 import TPhrasingRenderer from './TPhrasingRenderer';
 import TTextRenderer from './TTextRenderer';
-import { TNodeGenericRendererProps } from './shared-types';
+import { TNodeRendererProps } from './shared-types';
 
-export type TNodeRendererProps<T extends TNode> = Omit<
-  TNodeGenericRendererProps<T>,
-  'renderTNode' | 'renderTChildren'
->;
+export type { TNodeRendererProps } from './shared-types';
 
 const TNodeRenderer: React.FunctionComponent<
   TNodeRendererProps<TNode>
 > = function TNodeRenderer(props) {
   const { tnode, hasAnchorAncestor } = props;
-  const childrenProps: TNodeGenericRendererProps<any> = {
+  const childrenProps: TNodeRendererProps<any> = {
     ...props,
     hasAnchorAncestor
   };
@@ -28,16 +25,10 @@ const TNodeRenderer: React.FunctionComponent<
     return React.createElement(TBlockRenderer, childrenProps);
   }
   if (tnode instanceof TPhrasing) {
-    return React.createElement(
-      TPhrasingRenderer,
-      childrenProps as TNodeGenericRendererProps<TPhrasing>
-    );
+    return React.createElement(TPhrasingRenderer, childrenProps);
   }
   if (tnode instanceof TText) {
-    return React.createElement(
-      TTextRenderer,
-      childrenProps as TNodeGenericRendererProps<TText>
-    );
+    return React.createElement(TTextRenderer, childrenProps);
   }
   if (tnode instanceof TEmpty && __DEV__) {
     if (tnode.isUnregistered) {
