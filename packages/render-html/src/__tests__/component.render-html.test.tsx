@@ -35,4 +35,22 @@ describe('RenderHTML', () => {
     );
     expect(UNSAFE_getByType(ImgTag).props.contentWidth).toBe(nextContentWidth);
   });
+  it('should support fonts from tagsStyles specified in systemFonts', () => {
+    const tagsStyles = {
+      span: {
+        fontFamily: 'Superfont'
+      }
+    };
+    const { getByTestId } = render(
+      <RenderHTML
+        source={{ html: '<span>hi</span>' }}
+        debug={false}
+        tagsStyles={tagsStyles}
+        systemFonts={['Superfont']}
+        contentWidth={100}
+      />
+    );
+    const span = getByTestId('span');
+    expect(span.props.style).toMatchObject(tagsStyles.span);
+  });
 });
