@@ -226,7 +226,7 @@ export interface TransientRenderEngineConfig {
    */
   onDocumentMetadataLoaded?: (documentMetadata: DocumentMetadata) => void;
   /**
-   * A list of fonts available in the current platform. These fonts will used
+   * A list of fonts available in the current platform. These fonts will be used
    * to select the first match in CSS `fontFamily` property, which supports a
    * comma-separated list of fonts. By default, a handful of fonts are selected
    * per platform.
