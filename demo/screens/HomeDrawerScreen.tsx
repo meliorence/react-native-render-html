@@ -43,13 +43,8 @@ function CustomDrawerContent(props: DrawerContentComponentProps<any>) {
           activeBackgroundColor={activeBackgroundColor}
         />
       </DrawerContentScrollView>
-      <List.Section accessibilityComponentType={{}} accessibilityTraits={{}}>
-        <List.Item
-          accessibilityComponentType={{}}
-          accessibilityTraits={{}}
-          title="Dark Mode?"
-          right={swichColorModeRight}
-        />
+      <List.Section>
+        <List.Item title="Dark Mode?" right={swichColorModeRight} />
       </List.Section>
       <VersionDisplay />
     </>
