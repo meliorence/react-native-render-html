@@ -50,7 +50,11 @@ export {
 } from './TNodeChildrenRenderer';
 export type { TNodeChildrenRendererProps } from './TNodeChildrenRenderer';
 export { default as TNodeRenderer } from './TNodeRenderer';
-export { default as TRenderEngineProvider } from './TRenderEngineProvider';
+export {
+  default as TRenderEngineProvider,
+  defaultFallbackFonts,
+  defaultSystemFonts
+} from './TRenderEngineProvider';
 export { default as RenderHTMLFragment } from './RenderHTMLFragment';
 export { default as useInternalRenderer } from './hooks/useInternalRenderer';
 export { default as useNormalizedUrl } from './hooks/useNormalizedUrl';
