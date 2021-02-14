@@ -5,6 +5,25 @@ import useImageNaturalDimensions from './useImageNaturalDimensions';
 import useImageConcreteDimensions from './useImageConcreteDimensions';
 import defaultImageInitialDimensions from './defaultInitialImageDimensions';
 import extractImageStyleProps from './extractImageStyleProps';
+import { ImageDimensions } from '../shared-types';
+
+function getImageSizeAsync({
+  uri,
+  headers
+}: {
+  uri: string;
+  headers: any;
+}): Promise<ImageDimensions> {
+  return new Promise<ImageDimensions>((onsuccess, onerror) => {
+    const onImageDimensionsSuccess = (width: number, height: number) =>
+      onsuccess({ width, height });
+    if (headers) {
+      Image.getSizeWithHeaders(uri, headers, onImageDimensionsSuccess, onerror);
+    } else {
+      Image.getSize(uri, onImageDimensionsSuccess, onerror);
+    }
+  });
+}
 
 function useFetchedNaturalDimensions(props: UseIMGElementStateProps) {
   const { source, cachedNaturalDimensions } = props;
@@ -21,16 +40,9 @@ function useFetchedNaturalDimensions(props: UseIMGElementStateProps) {
     function fetchPhysicalDimensions() {
       let cancelled = false;
       if (source.uri && !hasCachedDimensions) {
-        Image.getSizeWithHeaders(
-          source.uri,
-          source.headers || {},
-          (w, h) => {
-            !cancelled && onNaturalDimensions({ width: w, height: h });
-          },
-          (e) => {
-            !cancelled && onError(e || {});
-          }
-        );
+        getImageSizeAsync({ uri: source.uri, headers: source.headers })
+          .then((dimensions) => !cancelled && onNaturalDimensions(dimensions))
+          .catch((e) => !cancelled && onError(e || {}));
         return () => {
           cancelled = true;
         };

@@ -26,4 +26,8 @@ export class Image extends RNImage {
       callback.apply(null, dimensions);
     }, 50);
   }
+
+  static getSize(uri, callback) {
+    Image.getSizeWithHeaders(uri, undefined, callback);
+  }
 }
