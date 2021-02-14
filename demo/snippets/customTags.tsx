@@ -46,6 +46,7 @@ Style from the class with the <em>classesStyles</em> prop (${GREEN})
 
 const InlineBar: CustomTextualRenderer = function InlineBar({ key, style }) {
   return (
+    //@ts-ignore, see https://github.com/callstack/react-native-paper/issues/2482
     <Text style={style} key={key}>
       Inline!
     </Text>
