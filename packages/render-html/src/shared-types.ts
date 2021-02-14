@@ -231,7 +231,19 @@ export interface TransientRenderEngineConfig {
    * comma-separated list of fonts. By default, a handful of fonts are selected
    * per platform.
    *
-   * @remarks If you are using expo, use `Constants.systemFonts`.
+   * @remarks
+   * - You need to specify any font family you wish to use via `*styles` props
+   *   here, otherwise those styles will be ignored.
+   * - If you are using expo, you should use or extend `Constants.systemFonts`.
+   *
+   * @example
+   * ```tsx
+   * import RenderHTML, {defaultSystemFonts} from 'react-native-render-html'
+   * // Replace defaultSystemFonts with Constants.systemFonts if you're using expo
+   * const systemFonts = [...defaultSystemFonts, 'Mysuperfont']
+   * // ...
+   * <RenderHTML systemFonts={systemFonts} ... />
+   * ```
    */
   systemFonts?: string[];
   /**
