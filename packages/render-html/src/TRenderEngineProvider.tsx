@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import useTRenderEngine from './hooks/useTRenderEngine';
 import { TransientRenderEngineConfig } from './shared-types';
 import RenderRegistryProvider from './context/RenderRegistryProvider';
+import defaultSystemFonts from './defaultSystemFonts';
 
 const defaultTRenderEngine = {} as any;
 
@@ -51,63 +52,6 @@ export const defaultFallbackFonts = {
   monospace: Platform.select({ ios: 'Menlo', default: 'monospace' }),
   serif: Platform.select({ ios: 'Times New Roman', default: 'serif' })
 };
-
-/**
- * Default system fonts based on current platform. If you are using Expo, use
- * `Constants.systemFonts` instead.
- */
-export const defaultSystemFonts = Platform.select({
-  default: [],
-  ios: [
-    'San Francisco',
-    'Arial',
-    'ArialHebrew',
-    'Avenir',
-    'Baskerville',
-    'Bodoni 72',
-    'Bradley Hand',
-    'Chalkboard SE',
-    'Cochin',
-    'Copperplate',
-    'Courier',
-    'Courier New',
-    'Damascus',
-    'Didot',
-    'Futura',
-    'Geeza Pro',
-    'Georgia',
-    'Gill Sans',
-    'Helvetica',
-    'Helvetica Neue',
-    'Hiragino Sans',
-    'Hoefler Text',
-    'Iowan Old Style',
-    'Kailasa',
-    'Khmer Sangam MN',
-    'Marker Felt',
-    'Menlo',
-    'Mishafi',
-    'Noteworthy',
-    'Optima',
-    'Palatino',
-    'Papyrus',
-    'Savoye LET',
-    'Symbol',
-    'Thonburi',
-    'Times New Roman',
-    'Trebuchet MS',
-    'Verdana',
-    'Zapf Dingbats',
-    'Zapfino'
-  ],
-  android: [
-    'Roboto',
-    'notoserif',
-    'sans-serif-light',
-    'sans-serif-thin',
-    'sans-serif-medium'
-  ]
-});
 
 export const defaultTRenderEngineProviderProps: TransientRenderEngineConfig = {
   htmlParserOptions: {
