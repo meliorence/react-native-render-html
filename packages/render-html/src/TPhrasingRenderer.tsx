@@ -18,17 +18,13 @@ export const TDefaultPhrasingRenderer: TDefaultRenderer<TPhrasing> = ({
   key,
   style,
   children: overridingChildren,
-  hasAnchorAncestor,
   textProps,
   onPress
 }) => {
   const TNodeChildrenRenderer = useTNodeChildrenRenderer();
   const resolvedStyles = textProps?.style ? [textProps.style, style] : style;
   const children = overridingChildren ?? (
-    <TNodeChildrenRenderer
-      tnode={tnode}
-      hasAnchorAncestor={hasAnchorAncestor}
-    />
+    <TNodeChildrenRenderer tnode={tnode} propsFromParent={{}} />
   );
   return React.createElement(
     Text,
@@ -46,12 +42,11 @@ export const TDefaultPhrasingRenderer: TDefaultRenderer<TPhrasing> = ({
 const TPhrasingRenderer = ({
   tnode,
   key,
-  hasAnchorAncestor,
-  collapsedMarginTop
+  propsFromParent
 }: TNodeRendererProps<TPhrasing>) => {
   const textProps = useDefaultTextProps();
   const { Default, Custom } = useRendererConfig(tnode);
-  const style = mergeCollapsedMargins(collapsedMarginTop, {
+  const style = mergeCollapsedMargins(propsFromParent.collapsedMarginTop, {
     ...tnode.styles.nativeBlockFlow,
     ...tnode.styles.nativeBlockRet,
     ...tnode.styles.nativeTextFlow,
@@ -61,8 +56,8 @@ const TPhrasingRenderer = ({
     key,
     tnode,
     style,
-    hasAnchorAncestor,
     textProps,
+    propsFromParent,
     viewProps: {},
     type: 'text',
     TDefaultRenderer: TDefaultPhrasingRenderer,

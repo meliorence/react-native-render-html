@@ -40,10 +40,11 @@ const TNodeRenderer = function TNodeRenderer(props: TNodeRendererProps<any>) {
 };
 
 const defaultProps: Required<
-  Pick<TNodeRendererProps<any>, 'hasAnchorAncestor' | 'collapsedMarginTop'>
+  Pick<TNodeRendererProps<any>, 'propsFromParent'>
 > = {
-  hasAnchorAncestor: false,
-  collapsedMarginTop: null
+  propsFromParent: {
+    collapsedMarginTop: null
+  }
 };
 
 TNodeRenderer.defaultProps = defaultProps;

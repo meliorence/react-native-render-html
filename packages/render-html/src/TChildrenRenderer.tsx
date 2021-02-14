@@ -1,6 +1,7 @@
 import React, { ReactElement, ReactNode } from 'react';
 import { TBlock, TNode, TPhrasing } from '@native-html/transient-render-engine';
-import TNodeRenderer, { TNodeRendererProps } from './TNodeRenderer';
+import TNodeRenderer from './TNodeRenderer';
+import { PropsFromParent } from './shared-types';
 
 function isCollapsible(tnode: TNode) {
   return tnode instanceof TBlock || tnode instanceof TPhrasing;
@@ -26,17 +27,19 @@ export interface TChildProps {
   childElement: ReactElement;
   index: number;
   childTnode: TNode;
+  propsFromParent: PropsFromParent;
 }
 
 export type TChildrenRendererProps = {
   disableMarginCollapsing?: boolean;
   tchildren: TNode[];
   renderChild?: (props: TChildProps) => ReactNode;
-} & Pick<TNodeRendererProps<TNode>, 'hasAnchorAncestor'>;
+  propsFromParent: Partial<PropsFromParent>;
+};
 
 const TChildrenRenderer = function TChildrenRenderer({
   tchildren,
-  hasAnchorAncestor,
+  propsFromParent,
   disableMarginCollapsing,
   renderChild
 }: TChildrenRendererProps) {
@@ -50,17 +53,32 @@ const TChildrenRenderer = function TChildrenRenderer({
     ) {
       collapsedMarginTop = getCollapsedMargins(tchildren[i - 1], childTnode);
     }
+    const resolvedPropsFromParent = { ...propsFromParent, collapsedMarginTop };
     const childElement = React.createElement(TNodeRenderer, {
-      collapsedMarginTop,
-      hasAnchorAncestor: hasAnchorAncestor,
+      propsFromParent: resolvedPropsFromParent,
       tnode: childTnode,
       key: i
     });
     return typeof renderChild === 'function'
-      ? renderChild({ key: i, childElement, index: i, childTnode })
+      ? renderChild({
+          key: i,
+          childElement,
+          index: i,
+          childTnode,
+          propsFromParent: resolvedPropsFromParent
+        })
       : childElement;
   });
   return <>{elements}</>;
 };
+
+export const tchildrenRendererDefaultProps: Pick<
+  TChildrenRendererProps,
+  'propsFromParent'
+> = {
+  propsFromParent: {}
+};
+
+TChildrenRenderer.defaultProps = tchildrenRendererDefaultProps;
 
 export default TChildrenRenderer;

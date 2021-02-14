@@ -9,8 +9,10 @@ import { useSharedProps } from './context/SharedPropsContext';
 import { TNodeRendererProps } from './TNodeRenderer';
 import TChildrenRenderer, {
   TChildProps,
+  tchildrenRendererDefaultProps,
   TChildrenRendererProps
 } from './TChildrenRenderer';
+import { PropsFromParent } from './shared-types';
 
 function isCollapsible(tnode: TNode) {
   return tnode instanceof TBlock || tnode instanceof TPhrasing;
@@ -19,11 +21,12 @@ function isCollapsible(tnode: TNode) {
 export type TNodeChildrenRendererProps = {
   disableMarginCollapsing?: boolean;
   renderChild?: (props: TChildProps) => ReactNode;
-} & Pick<TNodeRendererProps<TNode>, 'hasAnchorAncestor' | 'tnode'>;
+  propsFromParent: Partial<PropsFromParent>;
+} & Pick<TNodeRendererProps<TNode>, 'tnode'>;
 
 export function useTNodeChildrenProps({
   tnode,
-  hasAnchorAncestor,
+  propsFromParent,
   disableMarginCollapsing = false,
   renderChild
 }: TNodeChildrenRendererProps): TChildrenRendererProps {
@@ -33,26 +36,28 @@ export function useTNodeChildrenProps({
     !disableMarginCollapsing &&
     isCollapsible(tnode);
   return {
-    hasAnchorAncestor: hasAnchorAncestor || tnode.tagName === 'a',
+    propsFromParent,
     disableMarginCollapsing: !shouldCollapseChildren,
     tchildren: tnode.children,
     renderChild
   };
 }
 
-const TNodeWithChildrenRenderer: React.FunctionComponent<TNodeChildrenRendererProps> = function TNodeChildrenRenderer(
-  props
+const TNodeWithChildrenRenderer = function TNodeChildrenRenderer(
+  props: TNodeChildrenRendererProps
 ) {
   return React.createElement(TChildrenRenderer, useTNodeChildrenProps(props));
 };
 
-const TNodeChildrenRenderer: React.FunctionComponent<TNodeChildrenRendererProps> = function TNodeChildrenRenderer(
-  props
+const TNodeChildrenRenderer = function TNodeChildrenRenderer(
+  props: TNodeChildrenRendererProps
 ) {
   if (props.tnode instanceof TText) {
     return <>{props.tnode.data}</>;
   }
   return React.createElement(TNodeWithChildrenRenderer, props);
 };
+
+TNodeChildrenRenderer.defaultProps = tchildrenRendererDefaultProps;
 
 export default TNodeChildrenRenderer;

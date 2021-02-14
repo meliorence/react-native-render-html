@@ -2,6 +2,10 @@ import React from 'react';
 import type TNodeChildrenRenderer from '../TNodeChildrenRenderer';
 import type TChildrenRenderer from '../TChildrenRenderer';
 
+const DummyChildrenRenderer = () => null as any;
+
+DummyChildrenRenderer.defaultProps = {} as any;
+
 /**
  * This context allows dependency injection to avoid circular dependencies.
  */
@@ -9,8 +13,8 @@ const TChildrenRenderersContext = React.createContext<{
   TChildrenRenderer: typeof TChildrenRenderer;
   TNodeChildrenRenderer: typeof TNodeChildrenRenderer;
 }>({
-  TChildrenRenderer: () => null as any,
-  TNodeChildrenRenderer: () => null
+  TChildrenRenderer: DummyChildrenRenderer,
+  TNodeChildrenRenderer: DummyChildrenRenderer
 });
 
 export function useTNodeChildrenRenderer() {

@@ -375,11 +375,31 @@ export interface FallbackFontsDefinitions {
   monospace: string;
 }
 
+/**
+ * Special props which are inherited by every children and sub-children of a
+ * node.
+ */
+export interface Markers extends Record<string, any> {
+  /**
+   * Whether or not this node has an anchor (`a`) ancestor.
+   */
+  anchor: boolean;
+}
+
+/**
+ * Props passed from parents to children.
+ *
+ * @remarks Anonymous nodes will pass those props from their parents to
+ * children.
+ */
+export interface PropsFromParent extends Record<string, any> {
+  collapsedMarginTop: number | null;
+}
+
 export interface TNodeRendererProps<T extends TNode> {
   tnode: T;
   key?: string | number;
-  hasAnchorAncestor: boolean;
-  collapsedMarginTop: number | null;
+  propsFromParent: PropsFromParent;
 }
 
 export type NativeBlockStyles = TStyles['nativeBlockFlow'] &
@@ -394,10 +414,8 @@ export type NativeStyleProp<T extends TNode> = T extends TBlock
   ? NativeBlockStyles
   : NativeTextStyles;
 
-export type TRendererBaseProps<T extends TNode> = Pick<
-  TNodeRendererProps<T>,
-  'tnode' | 'key' | 'hasAnchorAncestor'
-> & {
+export interface TRendererBaseProps<T extends TNode>
+  extends TNodeRendererProps<T> {
   /**
    * Style extracted from TNode.style
    */
@@ -418,7 +436,7 @@ export type TRendererBaseProps<T extends TNode> = Pick<
    * Is is a text-based or view-based renderer?
    */
   type: 'text' | 'block';
-};
+}
 
 export type TDefaultRendererProps<T extends TNode> = TRendererBaseProps<T> & {
   /**
