@@ -10,7 +10,7 @@ const defaultSystemFonts = [
   'Apple LiSung',
   'Apple Myungjo',
   'Apple Symbols',
-  '.AquaKana',
+  'AquaKana',
   'Arial',
   'Arial Hebrew',
   'Ayuthaya',
