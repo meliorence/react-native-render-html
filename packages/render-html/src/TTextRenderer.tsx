@@ -37,7 +37,7 @@ export const TDefaultTextRenderer: TDefaultRenderer<TText> = ({
 function TStandardTextRenderer({
   tnode,
   key,
-  hasAnchorAncestor
+  propsFromParent
 }: TNodeRendererProps<TText>) {
   const { Default, Custom } = useRendererConfig(tnode);
   const textProps = useDefaultTextProps();
@@ -51,7 +51,7 @@ function TStandardTextRenderer({
     key: key,
     tnode: tnode,
     style,
-    hasAnchorAncestor,
+    propsFromParent,
     textProps,
     viewProps: {},
     type: 'text',

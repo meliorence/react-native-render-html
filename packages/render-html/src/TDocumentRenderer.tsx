@@ -30,7 +30,7 @@ const TDocumentRenderer = ({
   }, [onDocumentMetadataLoaded, metadata]);
   return (
     <DocumentMetadataProvider value={metadata}>
-      <TNodeChildrenRenderer tnode={tdoc} hasAnchorAncestor={false} />
+      <TNodeChildrenRenderer tnode={tdoc} />
     </DocumentMetadataProvider>
   );
 };

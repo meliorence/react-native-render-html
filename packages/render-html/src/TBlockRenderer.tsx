@@ -17,7 +17,7 @@ import { useDefaultViewProps } from './context/SharedPropsContext';
 export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
   tnode,
   children: overridingChildren,
-  hasAnchorAncestor,
+  propsFromParent,
   style,
   onPress,
   viewProps,
@@ -25,10 +25,7 @@ export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
 }) => {
   const TNodeChildrenRenderer = useTNodeChildrenRenderer();
   const children = overridingChildren ?? (
-    <TNodeChildrenRenderer
-      tnode={tnode}
-      hasAnchorAncestor={hasAnchorAncestor}
-    />
+    <TNodeChildrenRenderer tnode={tnode} propsFromParent={propsFromParent} />
   );
   const commonProps = {
     ...viewProps,
@@ -49,23 +46,22 @@ export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
 const TBlockRenderer = ({
   tnode,
   key,
-  hasAnchorAncestor,
-  collapsedMarginTop
+  propsFromParent
 }: TNodeRendererProps<TBlock>) => {
   const { Default, Custom } = useRendererConfig(tnode);
   const viewProps = useDefaultViewProps();
   const commonProps: CustomTagRendererProps<TBlock> = {
     key,
     tnode,
-    style: mergeCollapsedMargins(collapsedMarginTop, {
+    style: mergeCollapsedMargins(propsFromParent.collapsedMarginTop, {
       ...tnode.styles.nativeBlockFlow,
       ...tnode.styles.nativeBlockRet
     }),
     viewProps,
     textProps: {},
     type: 'text',
-    hasAnchorAncestor,
     TDefaultRenderer: TDefaultBlockRenderer,
+    propsFromParent,
     DefaultTagRenderer:
       Default || (TDefaultBlockRenderer as DefaultTagRenderer<TBlock>)
   };

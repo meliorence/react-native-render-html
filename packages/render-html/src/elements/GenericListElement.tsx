@@ -27,7 +27,6 @@ export interface GenericListElementProps<T extends 'ol' | 'ul'>
 export default function GenericListElement({
   tnode,
   TDefaultRenderer,
-  hasAnchorAncestor,
   listType,
   style,
   getListStyleTypeFromNestLevel,
@@ -80,13 +79,11 @@ export default function GenericListElement({
   return (
     <NestLevelProvider listType={listType} level={nestLevel + 1}>
       <TDefaultRenderer
-        hasAnchorAncestor={hasAnchorAncestor}
         tnode={tnode}
         style={[style, { paddingLeft }, nestLevelStyle]}
         {...props}>
         <TChildrenRenderer
           tchildren={tnode.children}
-          hasAnchorAncestor={hasAnchorAncestor}
           renderChild={renderChild}
         />
       </TDefaultRenderer>
