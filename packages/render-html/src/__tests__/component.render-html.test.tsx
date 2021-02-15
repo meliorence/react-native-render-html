@@ -55,6 +55,30 @@ describe('RenderHTML', () => {
     const span = getByTestId('span');
     expect(span.props.style).toMatchObject(tagsStyles.span);
   });
+  describe('regarding onTTreeChange prop', () => {
+    const onTTreeChange = jest.fn();
+    render(
+      <RenderHTML
+        source={{ html: '<a href="test">Yuhuuu</a>' }}
+        debug={false}
+        onTTreeChange={onTTreeChange}
+        contentWidth={100}
+      />
+    );
+    expect(onTTreeChange).toHaveBeenCalled();
+  });
+  describe('regarding onHTMLLoaded prop', () => {
+    const onHTMLLoaded = jest.fn();
+    render(
+      <RenderHTML
+        source={{ html: '<a href="test">Yuhuuu</a>' }}
+        debug={false}
+        onHTMLLoaded={onHTMLLoaded}
+        contentWidth={100}
+      />
+    );
+    expect(onHTMLLoaded).toHaveBeenCalled();
+  });
   describe('regarding markers', () => {
     it('should set `anchor` marker for `a` tags', () => {
       const { UNSAFE_getByType } = render(
@@ -146,7 +170,7 @@ describe('RenderHTML', () => {
       expect(em.props.markers.em).toBe(true);
     });
   });
-  describe('regarding propsFromParent', () => {
+  describe('regarding propsFromParent prop in custom renderers', () => {
     it('should pass propsForChildren to children', () => {
       const SpanRenderer: CustomTextualRenderer = ({
         TDefaultRenderer,
