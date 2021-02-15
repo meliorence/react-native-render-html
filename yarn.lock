@@ -2862,9 +2862,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@native-html/transient-render-engine@npm:4.3.0":
-  version: 4.3.0
-  resolution: "@native-html/transient-render-engine@npm:4.3.0"
+"@native-html/transient-render-engine@npm:4.4.0":
+  version: 4.4.0
+  resolution: "@native-html/transient-render-engine@npm:4.4.0"
   dependencies:
     "@native-html/css-processor": 1.6.1
     "@types/ramda": ^0.27.32
@@ -2875,7 +2875,7 @@ __metadata:
   peerDependencies:
     "@types/react-native": "*"
     react-native: ^0.63.0
-  checksum: 678ce214195403acf78a7670c52557de0fd3f31767f0867c0b751823b8fa438b18a967dd79e3b6d193a94c9b4e8e617e6f66d3ce03546fa35b991826422d6fa6
+  checksum: 407ec06d1915010bac98c2525f29f09c02431fd13c4ce0334024a1fcd01e2e99d178a62b0095141ea3d85ca14e0998f1f94fa40d8e325db49364d15181e12b38
   languageName: node
   linkType: hard
 
@@ -13997,7 +13997,7 @@ fsevents@^1.2.7:
     "@babel/preset-react": ^7.12.13
     "@babel/preset-typescript": ^7.12.13
     "@babel/runtime": ^7.12.13
-    "@native-html/transient-render-engine": 4.3.0
+    "@native-html/transient-render-engine": 4.4.0
     "@release-it/conventional-changelog": ^2.0.0
     "@testing-library/react-hooks": ^5.0.3
     "@types/jest": ^26.0.14

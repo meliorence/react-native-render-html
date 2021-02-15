@@ -7,7 +7,8 @@ const DocumentMetadataContext = React.createContext<DocumentMetadata>({
   lang: 'en',
   links: [],
   meta: [],
-  title: ''
+  title: '',
+  dir: 'ltr'
 });
 
 const DocumentMetadataProvider = DocumentMetadataContext.Provider;

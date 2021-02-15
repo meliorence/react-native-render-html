@@ -1,7 +1,7 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React from 'react';
 import { TBlock, TNode, TPhrasing } from '@native-html/transient-render-engine';
 import TNodeRenderer from './TNodeRenderer';
-import { PropsFromParent } from './shared-types';
+import { TChildrenRendererProps } from './shared-types';
 
 function isCollapsible(tnode: TNode) {
   return tnode instanceof TBlock || tnode instanceof TPhrasing;
@@ -22,26 +22,12 @@ function getCollapsedMargins(precedent: TNode, current: TNode): null | number {
   return Math.max(Math.abs(precedentMarginBottom - currentMarginBottom), 0);
 }
 
-export interface TChildProps {
-  key: string | number;
-  childElement: ReactElement;
-  index: number;
-  childTnode: TNode;
-  propsFromParent: PropsFromParent;
-}
-
-export type TChildrenRendererProps = {
-  disableMarginCollapsing?: boolean;
-  tchildren: TNode[];
-  renderChild?: (props: TChildProps) => ReactNode;
-  propsFromParent: Partial<PropsFromParent>;
-};
-
 const TChildrenRenderer = function TChildrenRenderer({
   tchildren,
-  propsFromParent,
+  propsForChildren,
   disableMarginCollapsing,
-  renderChild
+  renderChild,
+  parentMarkers
 }: TChildrenRendererProps) {
   let collapsedMarginTop: number | null = null;
   const elements = tchildren.map((childTnode, i) => {
@@ -53,9 +39,10 @@ const TChildrenRenderer = function TChildrenRenderer({
     ) {
       collapsedMarginTop = getCollapsedMargins(tchildren[i - 1], childTnode);
     }
-    const resolvedPropsFromParent = { ...propsFromParent, collapsedMarginTop };
+    const propsFromParent = { ...propsForChildren, collapsedMarginTop };
     const childElement = React.createElement(TNodeRenderer, {
-      propsFromParent: resolvedPropsFromParent,
+      parentMarkers,
+      propsFromParent,
       tnode: childTnode,
       key: i
     });
@@ -65,7 +52,7 @@ const TChildrenRenderer = function TChildrenRenderer({
           childElement,
           index: i,
           childTnode,
-          propsFromParent: resolvedPropsFromParent
+          propsFromParent
         })
       : childElement;
   });
@@ -74,9 +61,9 @@ const TChildrenRenderer = function TChildrenRenderer({
 
 export const tchildrenRendererDefaultProps: Pick<
   TChildrenRendererProps,
-  'propsFromParent'
+  'propsForChildren'
 > = {
-  propsFromParent: {}
+  propsForChildren: {}
 };
 
 TChildrenRenderer.defaultProps = tchildrenRendererDefaultProps;

@@ -1,30 +1,28 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { TPhrasing } from '@native-html/transient-render-engine';
-import { useDefaultTextProps } from './context/SharedPropsContext';
 import { useTNodeChildrenRenderer } from './context/TChildrenRendererContext';
-import {
-  CustomTagRenderer,
-  CustomTagRendererProps,
-  DefaultTagRenderer,
-  TDefaultRenderer,
-  TNodeRendererProps
-} from './shared-types';
-import mergeCollapsedMargins from './helpers/mergeCollapsedMargins';
-import { useRendererConfig } from './context/RenderRegistryProvider';
+import { TDefaultRenderer, TNodeRendererProps } from './shared-types';
+import useAssembledCommonProps from './hooks/useAssembledCommonProps';
 
 export const TDefaultPhrasingRenderer: TDefaultRenderer<TPhrasing> = ({
   tnode,
   key,
   style,
-  children: overridingChildren,
+  children,
   textProps,
+  markers,
+  propsForChildren,
   onPress
 }) => {
   const TNodeChildrenRenderer = useTNodeChildrenRenderer();
   const resolvedStyles = textProps?.style ? [textProps.style, style] : style;
-  const children = overridingChildren ?? (
-    <TNodeChildrenRenderer tnode={tnode} propsFromParent={{}} />
+  const resolvedChildren = children ?? (
+    <TNodeChildrenRenderer
+      parentMarkers={markers}
+      tnode={tnode}
+      propsForChildren={propsForChildren}
+    />
   );
   return React.createElement(
     Text,
@@ -35,39 +33,16 @@ export const TDefaultPhrasingRenderer: TDefaultRenderer<TPhrasing> = ({
       style: resolvedStyles,
       testID: tnode.tagName || undefined
     },
-    children
+    resolvedChildren
   );
 };
 
-const TPhrasingRenderer = ({
-  tnode,
-  key,
-  propsFromParent
-}: TNodeRendererProps<TPhrasing>) => {
-  const textProps = useDefaultTextProps();
-  const { Default, Custom } = useRendererConfig(tnode);
-  const style = mergeCollapsedMargins(propsFromParent.collapsedMarginTop, {
-    ...tnode.styles.nativeBlockFlow,
-    ...tnode.styles.nativeBlockRet,
-    ...tnode.styles.nativeTextFlow,
-    ...tnode.styles.nativeTextRet
-  });
-  const commonProps: CustomTagRendererProps<TPhrasing> = {
-    key,
-    tnode,
-    style,
-    textProps,
-    propsFromParent,
-    viewProps: {},
-    type: 'text',
-    TDefaultRenderer: TDefaultPhrasingRenderer,
-    DefaultTagRenderer:
-      Default || (TDefaultPhrasingRenderer as DefaultTagRenderer<TPhrasing>)
-  };
-  const Root = (Custom ??
-    Default ??
-    TDefaultPhrasingRenderer) as CustomTagRenderer<TPhrasing>;
-  return React.createElement(Root, commonProps);
+const TPhrasingRenderer = (props: TNodeRendererProps<TPhrasing>) => {
+  const { assembledProps, Renderer } = useAssembledCommonProps(
+    props,
+    TDefaultPhrasingRenderer
+  );
+  return React.createElement(Renderer, assembledProps);
 };
 
 export default TPhrasingRenderer;

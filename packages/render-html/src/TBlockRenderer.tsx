@@ -2,30 +2,27 @@ import React from 'react';
 import { View } from 'react-native';
 import { TBlock } from '@native-html/transient-render-engine';
 import { useTNodeChildrenRenderer } from './context/TChildrenRendererContext';
-import {
-  CustomTagRenderer,
-  CustomTagRendererProps,
-  DefaultTagRenderer,
-  TDefaultRenderer,
-  TNodeRendererProps
-} from './shared-types';
-import mergeCollapsedMargins from './helpers/mergeCollapsedMargins';
+import { TDefaultRenderer, TNodeRendererProps } from './shared-types';
 import GenericPressable from './GenericPressable';
-import { useRendererConfig } from './context/RenderRegistryProvider';
-import { useDefaultViewProps } from './context/SharedPropsContext';
+import useAssembledCommonProps from './hooks/useAssembledCommonProps';
 
 export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
   tnode,
   children: overridingChildren,
-  propsFromParent,
+  markers,
   style,
   onPress,
   viewProps,
+  propsForChildren,
   key
 }) => {
   const TNodeChildrenRenderer = useTNodeChildrenRenderer();
   const children = overridingChildren ?? (
-    <TNodeChildrenRenderer tnode={tnode} propsFromParent={propsFromParent} />
+    <TNodeChildrenRenderer
+      parentMarkers={markers}
+      tnode={tnode}
+      propsForChildren={propsForChildren}
+    />
   );
   const commonProps = {
     ...viewProps,
@@ -43,32 +40,12 @@ export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
   return React.createElement(View, commonProps, children);
 };
 
-const TBlockRenderer = ({
-  tnode,
-  key,
-  propsFromParent
-}: TNodeRendererProps<TBlock>) => {
-  const { Default, Custom } = useRendererConfig(tnode);
-  const viewProps = useDefaultViewProps();
-  const commonProps: CustomTagRendererProps<TBlock> = {
-    key,
-    tnode,
-    style: mergeCollapsedMargins(propsFromParent.collapsedMarginTop, {
-      ...tnode.styles.nativeBlockFlow,
-      ...tnode.styles.nativeBlockRet
-    }),
-    viewProps,
-    textProps: {},
-    type: 'text',
-    TDefaultRenderer: TDefaultBlockRenderer,
-    propsFromParent,
-    DefaultTagRenderer:
-      Default || (TDefaultBlockRenderer as DefaultTagRenderer<TBlock>)
-  };
-  const Root = (Custom ??
-    Default ??
-    TDefaultBlockRenderer) as CustomTagRenderer<TBlock>;
-  return React.createElement(Root, commonProps);
+const TBlockRenderer = (props: TNodeRendererProps<TBlock>) => {
+  const { assembledProps, Renderer } = useAssembledCommonProps(
+    props,
+    TDefaultBlockRenderer
+  );
+  return React.createElement(Renderer, assembledProps);
 };
 
 export default TBlockRenderer;
