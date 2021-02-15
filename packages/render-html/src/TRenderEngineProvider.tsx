@@ -39,8 +39,7 @@ export const tRenderEngineProviderPropTypes: Record<
     'sans-serif': PropTypes.string,
     monospace: PropTypes.string
   }),
-  triggerTREInvalidationPropNames: PropTypes.arrayOf(PropTypes.string),
-  onDocumentMetadataLoaded: PropTypes.func
+  triggerTREInvalidationPropNames: PropTypes.arrayOf(PropTypes.string)
 };
 
 /**

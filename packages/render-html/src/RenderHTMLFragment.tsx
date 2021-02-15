@@ -55,7 +55,8 @@ export const renderHtmlFragmentPropTypes: RenderHTMLFragmentPropTypes = {
   onHTMLLoaded: PropTypes.func,
   WebView: PropTypes.any,
   defaultWebViewProps: PropTypes.object,
-  setMarkersForTNode: PropTypes.func
+  setMarkersForTNode: PropTypes.func,
+  onDocumentMetadataLoaded: PropTypes.func
 };
 
 export const renderHTMLFragmentDefaultProps: {
@@ -89,6 +90,7 @@ export default function RenderHTMLFragment(props: RenderHTMLFragmentProps) {
     onTTreeChange,
     remoteErrorView,
     remoteLoadingView,
+    onDocumentMetadataLoaded,
     ...remainingProps
   } = props;
   const sourceLoaderProps = {
@@ -97,7 +99,11 @@ export default function RenderHTMLFragment(props: RenderHTMLFragmentProps) {
     remoteErrorView,
     remoteLoadingView,
     children: (resolvedProps: ResolvedResourceProps) => (
-      <RenderResolvedHTML {...resolvedProps} onTTreeChange={onTTreeChange} />
+      <RenderResolvedHTML
+        {...resolvedProps}
+        onDocumentMetadataLoaded={onDocumentMetadataLoaded}
+        onTTreeChange={onTTreeChange}
+      />
     )
   };
   return (

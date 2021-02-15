@@ -235,11 +235,6 @@ export interface TransientRenderEngineConfig {
    */
   ignoredStyles?: CSSPropertyNameList;
   /**
-   * Handler invoked when the document metadata is available. It will
-   * re-trigger on HTML content changes.
-   */
-  onDocumentMetadataLoaded?: (documentMetadata: DocumentMetadata) => void;
-  /**
    * A list of fonts available in the current platform. These fonts will be used
    * to select the first match in CSS `fontFamily` property, which supports a
    * comma-separated list of fonts. By default, a handful of fonts are selected
@@ -355,6 +350,11 @@ export interface RenderHTMLFragmentProps<P = any>
    * Triggered when HTML is available to the RenderHTML component.
    */
   onHTMLLoaded?: (html: string) => void;
+  /**
+   * Handler invoked when the document metadata is available. It will
+   * re-trigger on HTML content changes.
+   */
+  onDocumentMetadataLoaded?: (documentMetadata: DocumentMetadata) => void;
 }
 
 export interface RenderHTMLProps<P = any>
@@ -363,11 +363,10 @@ export interface RenderHTMLProps<P = any>
 
 export type RenderResolvedHTMLProps = Pick<
   RenderHTMLProps,
-  'onTTreeChange' | 'debug'
+  'onTTreeChange' | 'onDocumentMetadataLoaded' | 'debug'
 > & {
   html: string;
   baseUrl?: string;
-  onDocumentMetadataLoaded?: TransientRenderEngineConfig['onDocumentMetadataLoaded'];
 };
 
 export interface ResolvedResourceProps {

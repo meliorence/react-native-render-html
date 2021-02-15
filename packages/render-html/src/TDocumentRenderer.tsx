@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { TDocument } from '@native-html/transient-render-engine';
-import { DocumentMetadata, TransientRenderEngineConfig } from './shared-types';
+import { DocumentMetadata, RenderHTMLFragmentProps } from './shared-types';
 import DocumentMetadataProvider from './context/DocumentMetadataProvider';
 import { useTNodeChildrenRenderer } from './context/TChildrenRendererContext';
 import { defaultMarkers } from './helpers/getMarkersFromTNode';
@@ -12,7 +12,7 @@ const TDocumentRenderer = ({
 }: {
   tdoc: TDocument;
   baseUrl?: string;
-  onDocumentMetadataLoaded?: TransientRenderEngineConfig['onDocumentMetadataLoaded'];
+  onDocumentMetadataLoaded?: RenderHTMLFragmentProps['onDocumentMetadataLoaded'];
 }) => {
   const TNodeChildrenRenderer = useTNodeChildrenRenderer();
   const metadata: DocumentMetadata = useMemo(() => {
