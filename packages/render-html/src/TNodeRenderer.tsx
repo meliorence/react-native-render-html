@@ -10,6 +10,7 @@ import TPhrasingRenderer from './TPhrasingRenderer';
 import TTextRenderer from './TTextRenderer';
 import { Markers, TNodeRendererProps } from './shared-types';
 import { getMarkersFromTNode } from './helpers/getMarkersFromTNode';
+import { useSharedProps } from './context/SharedPropsContext';
 
 export type { TNodeRendererProps } from './shared-types';
 
@@ -17,8 +18,21 @@ const TNodeRenderer = function TNodeRenderer(
   props: Omit<TNodeRendererProps<any>, 'markers'> & { parentMarkers: Markers }
 ) {
   const { tnode } = props;
+  const { setMarkersForTNode } = useSharedProps();
   const markers = getMarkersFromTNode(tnode, props.parentMarkers);
-  const tnodeProps = { ...props, markers: markers || props.parentMarkers };
+  const customMarkers = setMarkersForTNode(tnode, props.parentMarkers);
+  const resolvedMarkers =
+    markers && !customMarkers
+      ? markers
+      : !markers && customMarkers
+      ? { ...props.parentMarkers, ...customMarkers }
+      : markers && customMarkers
+      ? ({ ...markers, ...customMarkers } as Markers)
+      : null;
+  const tnodeProps = {
+    ...props,
+    markers: resolvedMarkers || props.parentMarkers
+  };
   if (tnode instanceof TBlock) {
     return React.createElement(TBlockRenderer, tnodeProps);
   }

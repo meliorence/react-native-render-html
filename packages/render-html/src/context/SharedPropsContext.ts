@@ -28,7 +28,8 @@ export const defaultSharedPropsContext: Required<RenderHTMLSharedProps> = {
     return null;
   },
   defaultWebViewProps: {},
-  renderersProps: {}
+  renderersProps: {},
+  setMarkersForTNode: () => null
 };
 
 const SharedPropsContext = React.createContext<Required<RenderHTMLSharedProps>>(
