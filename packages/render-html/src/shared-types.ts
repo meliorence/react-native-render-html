@@ -119,6 +119,20 @@ export interface RenderHTMLSharedProps<
    * See [@native-html/plugins](https://github.com/native-html/plugins).
    */
   WebView?: ComponentType<any>;
+  /**
+   * Set custom markers from a TNode and all its descendants. Markers will be
+   * accessible in custom renderers via `markers` prop.
+   *
+   * @param tnode - The TNode to inspect
+   * @param parentMarkers - Markers from the parent TNode.
+   *
+   * @returns a record of markers if one or many markers should be added,
+   * `null` otherwise.
+   */
+  setMarkersForTNode?: (
+    tnode: TNode,
+    parentMarkers: Markers
+  ) => Partial<Markers> | null;
 }
 
 export interface TransientRenderEngineConfig {
@@ -377,10 +391,9 @@ export interface FallbackFontsDefinitions {
 
 /**
  * Markers form an abstraction in which one node provides semantic information
- * to itself and all its descendants by the mean of its name or attributes. For
- * example, `ins` elements, which stand for "insertion" of content in the
- * context of an edit will provide the { edits: 'ins' } marker to all its
- * descendants.
+ * to itself and all its descendants. For example, `ins` elements, which stand
+ * for "insertion" of content in the context of an edit will provide the {
+ * edits: 'ins' } marker to all its descendants.
  *
  * Custom renderers can use markers to change their layout and convey their
  * semantic meaning. Markers can be derived from attributes, such as `lang` and

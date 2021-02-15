@@ -129,6 +129,22 @@ describe('RenderHTML', () => {
       const em = UNSAFE_getByType(EmRenderer);
       expect(em.props.markers.lang).toBe('test');
     });
+    it('should handle setMarkersForTNode prop', () => {
+      const { UNSAFE_getByType } = render(
+        <RenderHTML
+          source={{
+            html: '<em>Two</em>'
+          }}
+          debug={false}
+          setMarkersForTNode={(tnode) =>
+            tnode.tagName === 'em' ? { em: true } : null
+          }
+          contentWidth={100}
+        />
+      );
+      const em = UNSAFE_getByType(TTextRenderer);
+      expect(em.props.markers.em).toBe(true);
+    });
   });
   describe('regarding propsFromParent', () => {
     it('should pass propsForChildren to children', () => {
