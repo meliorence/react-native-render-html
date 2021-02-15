@@ -2,9 +2,9 @@ import React, { useCallback, useState } from 'react';
 import {
   CustomBlockRenderer,
   defaultHTMLElementModels,
-  useTNodeChildrenProps,
   TChildrenRenderer,
-  HTMLContentModel
+  HTMLContentModel,
+  TChildrenRendererProps
 } from 'react-native-render-html';
 import { View, Text } from 'react-native';
 import { SnippetDeclaration } from '../types';
@@ -92,13 +92,15 @@ function AdComponent() {
 }
 
 const ArticleRenderer: CustomBlockRenderer = function ArticleRenderer(props) {
-  const { tnode, TDefaultRenderer, ...defaultRendererProps } = props;
-  const tchildrenProps = useTNodeChildrenProps(props);
+  const { tnode, TDefaultRenderer, markers, ...defaultRendererProps } = props;
+  const tchildrenProps: Pick<TChildrenRendererProps, 'parentMarkers'> = {
+    parentMarkers: markers
+  };
   const firstChildrenChunk = tnode.children.slice(0, 2);
   const secondChildrenChunk = tnode.children.slice(2, 4);
-  const thirdChildrenChunk = tnode.children.slice(4, 5);
+  const thirdChildrenChunk = tnode.children.slice(4);
   return (
-    <TDefaultRenderer tnode={tnode} {...defaultRendererProps}>
+    <TDefaultRenderer tnode={tnode} markers={markers} {...defaultRendererProps}>
       <TChildrenRenderer {...tchildrenProps} tchildren={firstChildrenChunk} />
       {firstChildrenChunk.length === 2 ? <AdComponent /> : null}
       <TChildrenRenderer {...tchildrenProps} tchildren={secondChildrenChunk} />

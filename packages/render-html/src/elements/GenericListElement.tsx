@@ -1,8 +1,7 @@
 import { StyleSheet, View, ViewStyle } from 'react-native';
 import React from 'react';
 import { TBlock } from '@native-html/transient-render-engine';
-import { DefaultTagRendererProps } from '../shared-types';
-import type { TChildProps } from '../TChildrenRenderer';
+import { DefaultTagRendererProps, TChildProps } from '../shared-types';
 import { useTChildrenRenderer } from '../context/TChildrenRendererContext';
 import usePrefixRenderer, { SupportedListStyleType } from './usePrefixRenderer';
 import NestLevelProvider, {
@@ -31,6 +30,7 @@ export default function GenericListElement({
   style,
   getListStyleTypeFromNestLevel,
   getStyleFromNestLevel,
+  markers,
   ...props
 }: GenericListElementProps<any>) {
   const nestLevel = useListNestLevel(listType);
@@ -80,11 +80,13 @@ export default function GenericListElement({
     <NestLevelProvider listType={listType} level={nestLevel + 1}>
       <TDefaultRenderer
         tnode={tnode}
+        markers={markers}
         style={[style, { paddingLeft }, nestLevelStyle]}
         {...props}>
         <TChildrenRenderer
           tchildren={tnode.children}
           renderChild={renderChild}
+          parentMarkers={markers}
         />
       </TDefaultRenderer>
     </NestLevelProvider>

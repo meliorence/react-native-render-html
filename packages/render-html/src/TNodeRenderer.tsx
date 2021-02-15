@@ -8,20 +8,25 @@ import {
 import TBlockRenderer from './TBlockRenderer';
 import TPhrasingRenderer from './TPhrasingRenderer';
 import TTextRenderer from './TTextRenderer';
-import { TNodeRendererProps } from './shared-types';
+import { Markers, TNodeRendererProps } from './shared-types';
+import { getMarkersFromTNode } from './helpers/getMarkersFromTNode';
 
 export type { TNodeRendererProps } from './shared-types';
 
-const TNodeRenderer = function TNodeRenderer(props: TNodeRendererProps<any>) {
+const TNodeRenderer = function TNodeRenderer(
+  props: Omit<TNodeRendererProps<any>, 'markers'> & { parentMarkers: Markers }
+) {
   const { tnode } = props;
+  const markers = getMarkersFromTNode(tnode, props.parentMarkers);
+  const tnodeProps = { ...props, markers: markers || props.parentMarkers };
   if (tnode instanceof TBlock) {
-    return React.createElement(TBlockRenderer, props);
+    return React.createElement(TBlockRenderer, tnodeProps);
   }
   if (tnode instanceof TPhrasing) {
-    return React.createElement(TPhrasingRenderer, props);
+    return React.createElement(TPhrasingRenderer, tnodeProps);
   }
   if (tnode instanceof TText) {
-    return React.createElement(TTextRenderer, props);
+    return React.createElement(TTextRenderer, tnodeProps);
   }
   if (tnode instanceof TEmpty && __DEV__) {
     if (tnode.isUnregistered) {

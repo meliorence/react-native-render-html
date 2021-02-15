@@ -3,6 +3,7 @@ import { TDocument } from '@native-html/transient-render-engine';
 import { DocumentMetadata, TransientRenderEngineConfig } from './shared-types';
 import DocumentMetadataProvider from './context/DocumentMetadataProvider';
 import { useTNodeChildrenRenderer } from './context/TChildrenRendererContext';
+import { defaultMarkers } from './helpers/getMarkersFromTNode';
 
 const TDocumentRenderer = ({
   tdoc,
@@ -15,11 +16,20 @@ const TDocumentRenderer = ({
 }) => {
   const TNodeChildrenRenderer = useTNodeChildrenRenderer();
   const metadata: DocumentMetadata = useMemo(() => {
-    const { baseHref, baseTarget, lang, links, meta, title } = tdoc.context;
+    const {
+      baseHref,
+      baseTarget,
+      lang,
+      links,
+      meta,
+      title,
+      dir
+    } = tdoc.context;
     return {
       baseTarget,
       baseUrl: baseUrl ?? baseHref,
       lang,
+      dir,
       links,
       meta,
       title
@@ -28,9 +38,17 @@ const TDocumentRenderer = ({
   useEffect(() => {
     onDocumentMetadataLoaded?.call(null, metadata);
   }, [onDocumentMetadataLoaded, metadata]);
+  const parentMarkers = useMemo(
+    () => ({
+      ...defaultMarkers,
+      direction: metadata.dir,
+      lang: metadata.lang
+    }),
+    [metadata.dir, metadata.lang]
+  );
   return (
     <DocumentMetadataProvider value={metadata}>
-      <TNodeChildrenRenderer tnode={tdoc} />
+      <TNodeChildrenRenderer parentMarkers={parentMarkers} tnode={tdoc} />
     </DocumentMetadataProvider>
   );
 };

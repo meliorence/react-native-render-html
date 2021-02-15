@@ -376,14 +376,59 @@ export interface FallbackFontsDefinitions {
 }
 
 /**
- * Special props which are inherited by every children and sub-children of a
- * node.
+ * Markers form an abstraction in which one node provides semantic information
+ * to itself and all its descendants by the mean of its name or attributes. For
+ * example, `ins` elements, which stand for "insertion" of content in the
+ * context of an edit will provide the { edits: 'ins' } marker to all its
+ * descendants.
+ *
+ * Custom renderers can use markers to change their layout and convey their
+ * semantic meaning. Markers can be derived from attributes, such as `lang` and
+ * `dir` attributes, or tag names, such as `a`, `ins`, `del`...
  */
 export interface Markers extends Record<string, any> {
   /**
-   * Whether or not this node has an anchor (`a`) ancestor.
+   * If this node is an `a` or has one as ancestor, this field will be set to
+   * `true`.
+   *
+   * @defaultvalue false
    */
   anchor: boolean;
+  /**
+   * If this node is a `del` or `ins` or has either as ancestor, this field
+   * will be set accordingly. Otherwise, it will be set to 'none'.
+   *
+   * https://html.spec.whatwg.org/#edits
+   *
+   * @defaultvalue 'none'
+   */
+  edits: 'ins' | 'del' | 'none';
+  /**
+   * The direction for this content. Follows `dir` attribute.
+   *
+   * https://html.spec.whatwg.org/#the-dir-attribute
+   *
+   * @defaultvalue 'ltr'
+   */
+  direction: 'ltr' | 'rtl';
+  /**
+   * The language for this content. Follows `lang` attribute.
+   *
+   * https://html.spec.whatwg.org/#the-lang-and-xml:lang-attributes
+   */
+  lang: string;
+  /**
+   * * -1: this node is not an `ol` and has no `ol` parents
+   * * 0: this node is an `ol` or has one `ol` parent
+   * * 1: ...
+   */
+  olNestLevel: number;
+  /**
+   * * -1: this node is not an `ul` and has no `ul` parents
+   * * 0: this node is an `ul` or has one `ul` parent
+   * * 1: ...
+   */
+  ulNestLevel: number;
 }
 
 /**
@@ -394,12 +439,6 @@ export interface Markers extends Record<string, any> {
  */
 export interface PropsFromParent extends Record<string, any> {
   collapsedMarginTop: number | null;
-}
-
-export interface TNodeRendererProps<T extends TNode> {
-  tnode: T;
-  key?: string | number;
-  propsFromParent: PropsFromParent;
 }
 
 export type NativeBlockStyles = TStyles['nativeBlockFlow'] &
@@ -414,12 +453,38 @@ export type NativeStyleProp<T extends TNode> = T extends TBlock
   ? NativeBlockStyles
   : NativeTextStyles;
 
+export interface TChildProps {
+  key: string | number;
+  childElement: ReactElement;
+  index: number;
+  childTnode: TNode;
+  propsFromParent: PropsFromParent;
+}
+
+export interface TChildrenBaseProps {
+  disableMarginCollapsing?: boolean;
+  renderChild?: (props: TChildProps) => ReactNode;
+  propsForChildren?: Partial<PropsFromParent>;
+  parentMarkers: Markers;
+}
+
+export interface TChildrenRendererProps extends TChildrenBaseProps {
+  tchildren: TNode[];
+}
+
+export interface TNodeChildrenRendererProps extends TChildrenBaseProps {
+  tnode: TNode;
+}
+
+export interface TNodeRendererProps<T extends TNode> {
+  tnode: T;
+  key?: string | number;
+  markers: Markers;
+  propsFromParent: PropsFromParent;
+}
+
 export interface TRendererBaseProps<T extends TNode>
   extends TNodeRendererProps<T> {
-  /**
-   * Style extracted from TNode.style
-   */
-  style: NativeStyleProp<T>;
   /**
    * Any default renderer should be able to handle press.
    */
@@ -438,7 +503,8 @@ export interface TRendererBaseProps<T extends TNode>
   type: 'text' | 'block';
 }
 
-export type TDefaultRendererProps<T extends TNode> = TRendererBaseProps<T> & {
+export interface TDefaultRendererProps<T extends TNode>
+  extends TRendererBaseProps<T> {
   /**
    * When children is present, renderChildren will not be invoked.
    */
@@ -452,18 +518,27 @@ export type TDefaultRendererProps<T extends TNode> = TRendererBaseProps<T> & {
     : T extends TPhrasing
     ? StyleProp<TextStyle>
     : StyleProp<ViewStyle>;
-};
+  /**
+   * Props passed to children nodes. Those props are accessible from children
+   * renderers as `propsFromParent`
+   */
+  propsForChildren?: Partial<PropsFromParent>;
+}
 
-export type DefaultTagRendererProps<T extends TNode> = TRendererBaseProps<T> & {
+export interface DefaultTagRendererProps<T extends TNode>
+  extends TRendererBaseProps<T> {
+  /**
+   * Styles extracted from tnode.style
+   */
+  style: NativeStyleProp<T>;
   /**
    * Default renderer for this tnode.
    */
   TDefaultRenderer: TDefaultRenderer<T>;
-};
+}
 
-export type CustomTagRendererProps<
-  T extends TNode
-> = DefaultTagRendererProps<T> & {
+export interface CustomTagRendererProps<T extends TNode>
+  extends DefaultTagRendererProps<T> {
   /**
    * Internal renderer for this _tagName_, not to be confused with
    * {@link TDefaultRenderer}, which is the default renderer for the _tnode_.
@@ -475,7 +550,7 @@ export type CustomTagRendererProps<
    * to the `TDefaultRenderer`.
    */
   DefaultTagRenderer: DefaultTagRenderer<T>;
-};
+}
 
 export type TDefaultRenderer<T extends TNode> = React.ComponentType<
   TDefaultRendererProps<T>
@@ -509,6 +584,11 @@ export interface DocumentMetadata {
    * `<html/>` element;
    */
   lang: string;
+  /**
+   * The writing direction of this document, extracted from the `dir` attribute
+   * of `<html/>` element.
+   */
+  dir: 'ltr' | 'rtl';
   /**
    * The content of the &lt;title&gt; element.
    */

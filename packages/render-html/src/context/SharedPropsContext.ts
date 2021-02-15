@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { Dimensions, Linking, TextProps, ViewProps } from 'react-native';
-import { RenderHTMLSharedProps } from '../shared-types';
+import { RenderHTMLSharedProps, TRendererBaseProps } from '../shared-types';
 
 export const defaultSharedPropsContext: Required<RenderHTMLSharedProps> = {
   debug: false,
@@ -50,6 +50,22 @@ export function useRendererProps<
   return useSharedProps<RendererProps>().renderersProps[k];
 }
 
+export function useDefaultContainerProps(): Pick<
+  TRendererBaseProps<any>,
+  'viewProps' | 'textProps'
+> {
+  const sharedProps = useSharedProps();
+  return {
+    viewProps: {
+      ...defaultSharedPropsContext.defaultViewProps,
+      ...sharedProps.defaultViewProps
+    },
+    textProps: {
+      ...defaultSharedPropsContext.defaultTextProps,
+      ...sharedProps.defaultTextProps
+    }
+  };
+}
 export function useDefaultTextProps(): TextProps {
   return {
     ...defaultSharedPropsContext.defaultTextProps,

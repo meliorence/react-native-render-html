@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import {
   TBlock,
   TNode,
@@ -6,29 +6,24 @@ import {
   TText
 } from '@native-html/transient-render-engine';
 import { useSharedProps } from './context/SharedPropsContext';
-import { TNodeRendererProps } from './TNodeRenderer';
 import TChildrenRenderer, {
-  TChildProps,
-  tchildrenRendererDefaultProps,
-  TChildrenRendererProps
+  tchildrenRendererDefaultProps
 } from './TChildrenRenderer';
-import { PropsFromParent } from './shared-types';
+import {
+  TChildrenRendererProps,
+  TNodeChildrenRendererProps
+} from './shared-types';
 
 function isCollapsible(tnode: TNode) {
   return tnode instanceof TBlock || tnode instanceof TPhrasing;
 }
 
-export type TNodeChildrenRendererProps = {
-  disableMarginCollapsing?: boolean;
-  renderChild?: (props: TChildProps) => ReactNode;
-  propsFromParent: Partial<PropsFromParent>;
-} & Pick<TNodeRendererProps<TNode>, 'tnode'>;
-
 export function useTNodeChildrenProps({
   tnode,
-  propsFromParent,
+  propsForChildren,
   disableMarginCollapsing = false,
-  renderChild
+  renderChild,
+  parentMarkers
 }: TNodeChildrenRendererProps): TChildrenRendererProps {
   const { enableExperimentalMarginCollapsing } = useSharedProps();
   const shouldCollapseChildren =
@@ -36,7 +31,8 @@ export function useTNodeChildrenProps({
     !disableMarginCollapsing &&
     isCollapsible(tnode);
   return {
-    propsFromParent,
+    propsForChildren,
+    parentMarkers,
     disableMarginCollapsing: !shouldCollapseChildren,
     tchildren: tnode.children,
     renderChild
