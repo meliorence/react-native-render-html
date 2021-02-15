@@ -4,9 +4,6 @@ import { TBlock } from '@native-html/transient-render-engine';
 import { DefaultTagRendererProps, TChildProps } from '../shared-types';
 import { useTChildrenRenderer } from '../context/TChildrenRendererContext';
 import usePrefixRenderer, { SupportedListStyleType } from './usePrefixRenderer';
-import NestLevelProvider, {
-  useListNestLevel
-} from '../context/NestLevelProvider';
 
 const styles = StyleSheet.create({
   row: {
@@ -33,7 +30,8 @@ export default function GenericListElement({
   markers,
   ...props
 }: GenericListElementProps<any>) {
-  const nestLevel = useListNestLevel(listType);
+  const nestLevel =
+    listType === 'ol' ? markers.olNestLevel : markers.ulNestLevel;
   const nestLevelStyle = getStyleFromNestLevel?.call(null, nestLevel);
   // Map children to horizontal rows with prefixes
   const TChildrenRenderer = useTChildrenRenderer();
@@ -77,18 +75,16 @@ export default function GenericListElement({
     </View>
   );
   return (
-    <NestLevelProvider listType={listType} level={nestLevel + 1}>
-      <TDefaultRenderer
-        tnode={tnode}
-        markers={markers}
-        style={[style, { paddingLeft }, nestLevelStyle]}
-        {...props}>
-        <TChildrenRenderer
-          tchildren={tnode.children}
-          renderChild={renderChild}
-          parentMarkers={markers}
-        />
-      </TDefaultRenderer>
-    </NestLevelProvider>
+    <TDefaultRenderer
+      tnode={tnode}
+      markers={markers}
+      style={[style, { paddingLeft }, nestLevelStyle]}
+      {...props}>
+      <TChildrenRenderer
+        tchildren={tnode.children}
+        renderChild={renderChild}
+        parentMarkers={markers}
+      />
+    </TDefaultRenderer>
   );
 }
