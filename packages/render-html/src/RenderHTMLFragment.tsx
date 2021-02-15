@@ -76,10 +76,6 @@ function RenderResolvedHTML(props: RenderResolvedHTMLProps) {
   );
 }
 
-const renderResolved = (resolvedProps: ResolvedResourceProps) => (
-  <RenderResolvedHTML {...resolvedProps} />
-);
-
 /**
  * Render a HTML snippet, given that there is a `TRenderEngineProvider` up in
  * the render tree.
@@ -90,6 +86,7 @@ export default function RenderHTMLFragment(props: RenderHTMLFragmentProps) {
   const {
     source,
     onHTMLLoaded,
+    onTTreeChange,
     remoteErrorView,
     remoteLoadingView,
     ...remainingProps
@@ -99,7 +96,9 @@ export default function RenderHTMLFragment(props: RenderHTMLFragmentProps) {
     onHTMLLoaded,
     remoteErrorView,
     remoteLoadingView,
-    children: renderResolved
+    children: (resolvedProps: ResolvedResourceProps) => (
+      <RenderResolvedHTML {...resolvedProps} onTTreeChange={onTTreeChange} />
+    )
   };
   return (
     <RenderHTMLFragmentDebug {...props}>
