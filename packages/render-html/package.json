@@ -6,6 +6,7 @@
   "description": "React Native component that renders HTML as native views.",
   "main": "lib/commonjs/index.js",
   "types": "lib/typescript/index.d.ts",
+  "react-native": "src/",
   "files": [
     "lib",
     "src",
