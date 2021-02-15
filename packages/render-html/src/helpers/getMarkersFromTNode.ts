@@ -11,7 +11,8 @@ export const defaultMarkers: Markers = {
 };
 
 function getMarkerFromTagName(
-  tagName: TNode['tagName']
+  tagName: TNode['tagName'],
+  parentMarkers: Markers
 ): Partial<Markers> | null {
   const anchor = tagName === 'a' || null;
   const edits = tagName === 'ins' ? 'ins' : tagName === 'del' ? 'del' : null;
@@ -20,6 +21,12 @@ function getMarkerFromTagName(
   }
   if (edits !== null) {
     return { edits };
+  }
+  if (tagName === 'ol') {
+    return { olNestLevel: parentMarkers.olNestLevel + 1 };
+  }
+  if (tagName === 'ul') {
+    return { ulNestLevel: parentMarkers.ulNestLevel + 1 };
   }
   return null;
 }
@@ -45,7 +52,7 @@ export function getMarkersFromTNode(
   parentMarkers: Markers
 ): Markers | null {
   const markersFromAttrs = getMarkersFromAttributes(tnode.attributes);
-  const markersFromTagName = getMarkerFromTagName(tnode.tagName);
+  const markersFromTagName = getMarkerFromTagName(tnode.tagName, parentMarkers);
   return markersFromAttrs != null || markersFromTagName || null
     ? {
         ...parentMarkers,
