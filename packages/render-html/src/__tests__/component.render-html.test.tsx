@@ -79,6 +79,18 @@ describe('RenderHTML', () => {
     );
     expect(onHTMLLoaded).toHaveBeenCalled();
   });
+  describe('regarding onDocumentMetadataLoaded prop', () => {
+    const onDocumentMetadataLoaded = jest.fn();
+    render(
+      <RenderHTML
+        source={{ html: '<a href="test">Yuhuuu</a>' }}
+        debug={false}
+        onDocumentMetadataLoaded={onDocumentMetadataLoaded}
+        contentWidth={100}
+      />
+    );
+    expect(onDocumentMetadataLoaded).toHaveBeenCalled();
+  });
   describe('regarding markers', () => {
     it('should set `anchor` marker for `a` tags', () => {
       const { UNSAFE_getByType } = render(
