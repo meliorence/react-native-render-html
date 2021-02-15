@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from 'react-native';
 import { TPhrasing } from '@native-html/transient-render-engine';
 import { useTNodeChildrenRenderer } from './context/TChildrenRendererContext';
-import { TDefaultRenderer, TNodeRendererProps } from './shared-types';
+import { TDefaultRenderer, TNodeSubRendererProps } from './shared-types';
 import useAssembledCommonProps from './hooks/useAssembledCommonProps';
 
 export const TDefaultPhrasingRenderer: TDefaultRenderer<TPhrasing> = ({
@@ -37,7 +37,7 @@ export const TDefaultPhrasingRenderer: TDefaultRenderer<TPhrasing> = ({
   );
 };
 
-const TPhrasingRenderer = (props: TNodeRendererProps<TPhrasing>) => {
+const TPhrasingRenderer = (props: TNodeSubRendererProps<TPhrasing>) => {
   const { assembledProps, Renderer } = useAssembledCommonProps(
     props,
     TDefaultPhrasingRenderer

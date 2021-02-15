@@ -2,10 +2,7 @@ import React, { ClassAttributes } from 'react';
 import { TBlock } from '@native-html/transient-render-engine';
 import IMGElement, { IMGElementProps } from '../elements/IMGElement';
 import { DefaultBlockRenderer } from '../render/render-types';
-import {
-  useComputeMaxWidthForTag,
-  useSharedProps
-} from '../context/SharedPropsContext';
+import { useComputeMaxWidthForTag } from '../context/SharedPropsContext';
 import { ImageStyle } from 'react-native';
 import { defaultHTMLElementModels } from '@native-html/transient-render-engine';
 import { DefaultTagRendererProps } from '../shared-types';
@@ -14,12 +11,12 @@ import useNormalizedUrl from '../hooks/useNormalizedUrl';
 export function useIMGElementProps(
   props: DefaultTagRendererProps<TBlock>
 ): IMGElementProps & ClassAttributes<any> {
-  const { style, tnode, onPress, key } = props;
+  const { style, tnode, onPress, key, sharedProps } = props;
   const {
     contentWidth,
     enableExperimentalPercentWidth,
     imagesInitialDimensions
-  } = useSharedProps();
+  } = sharedProps;
   const computeImagesMaxWidth = useComputeMaxWidthForTag('img');
   const src = tnode.attributes.src || '';
   return {

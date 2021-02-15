@@ -18,9 +18,12 @@ const TNodeRenderer = function TNodeRenderer(
   props: Omit<TNodeRendererProps<any>, 'markers'> & { parentMarkers: Markers }
 ) {
   const { tnode } = props;
-  const { setMarkersForTNode } = useSharedProps();
+  const sharedProps = useSharedProps();
   const markers = getMarkersFromTNode(tnode, props.parentMarkers);
-  const customMarkers = setMarkersForTNode(tnode, props.parentMarkers);
+  const customMarkers = sharedProps.setMarkersForTNode(
+    tnode,
+    props.parentMarkers
+  );
   const resolvedMarkers =
     markers && !customMarkers
       ? markers
@@ -31,6 +34,7 @@ const TNodeRenderer = function TNodeRenderer(
       : null;
   const tnodeProps = {
     ...props,
+    sharedProps,
     markers: resolvedMarkers || props.parentMarkers
   };
   if (tnode instanceof TBlock) {

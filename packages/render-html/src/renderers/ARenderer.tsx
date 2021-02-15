@@ -8,7 +8,6 @@ import {
   defaultHTMLElementModels,
   DocumentContext
 } from '@native-html/transient-render-engine';
-import { useSharedProps } from '../context/SharedPropsContext';
 import {
   DefaultTagRendererProps,
   RenderHTMLSharedProps
@@ -44,8 +43,10 @@ function useAnchorOnLinkPress(
 export function useAElementProps<T extends TNode>(
   props: DefaultTagRendererProps<T>
 ): DefaultTagRendererProps<T> {
-  const { tnode } = props;
-  const { onLinkPress } = useSharedProps();
+  const {
+    tnode,
+    sharedProps: { onLinkPress }
+  } = props;
   const syntheticAnchorOnLinkPress = useAnchorOnLinkPress(tnode, onLinkPress);
   if (typeof syntheticAnchorOnLinkPress !== 'function') {
     return props;

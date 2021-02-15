@@ -54,7 +54,8 @@ export const renderHtmlFragmentPropTypes: RenderHTMLFragmentPropTypes = {
   onTTreeChange: PropTypes.func,
   onHTMLLoaded: PropTypes.func,
   WebView: PropTypes.any,
-  defaultWebViewProps: PropTypes.object
+  defaultWebViewProps: PropTypes.object,
+  setMarkersForTNode: PropTypes.func
 };
 
 export const renderHTMLFragmentDefaultProps: {
