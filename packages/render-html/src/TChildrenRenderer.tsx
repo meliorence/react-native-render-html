@@ -2,24 +2,10 @@ import React from 'react';
 import { TBlock, TNode, TPhrasing } from '@native-html/transient-render-engine';
 import TNodeRenderer from './TNodeRenderer';
 import { TChildrenRendererProps } from './shared-types';
+import getCollapsedMarginTop from './helpers/getCollapsedMarginTop';
 
 function isCollapsible(tnode: TNode) {
   return tnode instanceof TBlock || tnode instanceof TPhrasing;
-}
-
-function getCollapsedMargins(precedent: TNode, current: TNode): null | number {
-  const precedentMarginBottom =
-    typeof precedent.styles.nativeBlockRet.marginBottom === 'number'
-      ? precedent.styles.nativeBlockRet.marginBottom
-      : null;
-  const currentMarginBottom =
-    typeof current.styles.nativeBlockRet.marginTop === 'number'
-      ? current.styles.nativeBlockRet.marginTop
-      : null;
-  if (precedentMarginBottom == null || currentMarginBottom == null) {
-    return null;
-  }
-  return Math.max(Math.abs(precedentMarginBottom - currentMarginBottom), 0);
 }
 
 const TChildrenRenderer = function TChildrenRenderer({
@@ -37,7 +23,7 @@ const TChildrenRenderer = function TChildrenRenderer({
       i > 0 &&
       isCollapsible(tchildren[i - 1])
     ) {
-      collapsedMarginTop = getCollapsedMargins(tchildren[i - 1], childTnode);
+      collapsedMarginTop = getCollapsedMarginTop(tchildren[i - 1], childTnode);
     }
     const propsFromParent = { ...propsForChildren, collapsedMarginTop };
     const childElement = React.createElement(TNodeRenderer, {
