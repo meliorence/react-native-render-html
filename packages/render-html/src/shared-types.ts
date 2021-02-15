@@ -496,6 +496,14 @@ export interface TNodeRendererProps<T extends TNode> {
   propsFromParent: PropsFromParent;
 }
 
+export interface TNodeSubRendererProps<T extends TNode>
+  extends TNodeRendererProps<T> {
+  /**
+   * Props shared across the whole render tree.
+   */
+  sharedProps: Required<RenderHTMLSharedProps<any>>;
+}
+
 export interface TRendererBaseProps<T extends TNode>
   extends TNodeRendererProps<T> {
   /**
@@ -544,6 +552,10 @@ export interface DefaultTagRendererProps<T extends TNode>
    * Styles extracted from tnode.style
    */
   style: NativeStyleProp<T>;
+  /**
+   * Props shared across the whole render tree.
+   */
+  sharedProps: Required<RenderHTMLSharedProps<any>>;
   /**
    * Default renderer for this tnode.
    */

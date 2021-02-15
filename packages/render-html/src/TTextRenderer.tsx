@@ -4,7 +4,7 @@ import { TText } from '@native-html/transient-render-engine';
 import {
   TDefaultRenderer,
   TDefaultRendererProps,
-  TNodeRendererProps
+  TNodeSubRendererProps
 } from './shared-types';
 import { useInternalTextRenderer } from './context/RenderRegistryProvider';
 import useAssembledCommonProps from './hooks/useAssembledCommonProps';
@@ -28,7 +28,7 @@ export const TDefaultTextRenderer: TDefaultRenderer<TText> = ({
   );
 };
 
-function TStandardTextRenderer(props: TNodeRendererProps<TText>) {
+function TStandardTextRenderer(props: TNodeSubRendererProps<TText>) {
   const { assembledProps, Renderer } = useAssembledCommonProps(
     props,
     TDefaultTextRenderer
@@ -36,7 +36,7 @@ function TStandardTextRenderer(props: TNodeRendererProps<TText>) {
   return React.createElement(Renderer, assembledProps);
 }
 
-export default function TTextRenderer(props: TNodeRendererProps<TText>) {
+export default function TTextRenderer(props: TNodeSubRendererProps<TText>) {
   const InternalTextRenderer = useInternalTextRenderer(props.tnode);
   if (InternalTextRenderer) {
     return React.createElement(InternalTextRenderer, { key: props.key });

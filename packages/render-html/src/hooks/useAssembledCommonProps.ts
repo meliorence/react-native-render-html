@@ -10,7 +10,7 @@ import {
   NativeStyleProp,
   TDefaultRenderer,
   TDefaultRendererProps,
-  TNodeRendererProps
+  TNodeSubRendererProps
 } from '../shared-types';
 import mergeCollapsedMargins from '../helpers/mergeCollapsedMargins';
 import { useRendererConfig } from '../context/RenderRegistryProvider';
@@ -35,7 +35,13 @@ function getStylesForTnode<T extends TNode>(tnode: T): NativeStyleProp<T> {
 }
 
 export default function useAssembledCommonProps<T extends TNode>(
-  { tnode, key, propsFromParent, markers }: TNodeRendererProps<T>,
+  {
+    tnode,
+    key,
+    propsFromParent,
+    markers,
+    sharedProps
+  }: TNodeSubRendererProps<T>,
   TDefault: TDefaultRenderer<T>
 ): {
   assembledProps: CustomTagRendererProps<T> & TDefaultRendererProps<T>;
@@ -48,6 +54,7 @@ export default function useAssembledCommonProps<T extends TNode>(
     tnode,
     markers,
     propsFromParent,
+    sharedProps,
     TDefaultRenderer: TDefault,
     style: mergeCollapsedMargins(
       propsFromParent.collapsedMarginTop,

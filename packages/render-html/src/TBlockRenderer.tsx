@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { TBlock } from '@native-html/transient-render-engine';
 import { useTNodeChildrenRenderer } from './context/TChildrenRendererContext';
-import { TDefaultRenderer, TNodeRendererProps } from './shared-types';
+import { TDefaultRenderer, TNodeSubRendererProps } from './shared-types';
 import GenericPressable from './GenericPressable';
 import useAssembledCommonProps from './hooks/useAssembledCommonProps';
 
@@ -40,7 +40,7 @@ export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
   return React.createElement(View, commonProps, children);
 };
 
-const TBlockRenderer = (props: TNodeRendererProps<TBlock>) => {
+const TBlockRenderer = (props: TNodeSubRendererProps<TBlock>) => {
   const { assembledProps, Renderer } = useAssembledCommonProps(
     props,
     TDefaultBlockRenderer
