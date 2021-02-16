@@ -1,3 +1,36 @@
+# [6.0.0-alpha.17](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.16...v6.0.0-alpha.17) (2021-02-15)
+
+
+### Bug Fixes
+
+* prop `onDocumentMetadataLoaded` not invoked ([90cc1f6](https://github.com/meliorence/react-native-render-html/commit/90cc1f68d0259095b20822e94c264336c4519a80))
+* prop `onTTreeChange` not invoked ([7d08dd6](https://github.com/meliorence/react-native-render-html/commit/7d08dd60669ba8cd3a688bc46e7b89332ef15d4a))
+
+
+### Features
+
+* access `sharedProps` from custom renderers ([3dc8f0c](https://github.com/meliorence/react-native-render-html/commit/3dc8f0cf43292044bfd136ff7d11e4daa8445c56))
+* add `defaultProps` to `TNodeRenderer` for convinience ([8b6dad9](https://github.com/meliorence/react-native-render-html/commit/8b6dad9f3739ed8699bf4b5affacfecac554ad2d))
+* add `react-native` field in package.json for metro ([d2e89ef](https://github.com/meliorence/react-native-render-html/commit/d2e89efba2a3cb3bbdd7ca8b2cbe35659da4d785))
+* export `defaultSystemFonts` and `defaultFallbackFonts` ([eb3070b](https://github.com/meliorence/react-native-render-html/commit/eb3070b7d74ca3c1bbf4f3f3c4db44c0829ed9e4))
+* implement strictly margin collapsing computation ([28fc95b](https://github.com/meliorence/react-native-render-html/commit/28fc95b7dd70600063389ec5a5707499d284bd97))
+* new `markers` prop for custom renderers ([7f49593](https://github.com/meliorence/react-native-render-html/commit/7f49593711259a76755c883a8eb78fda765cc4c3))
+* new `propsFromParent` in custom renderers and children renderers ([1d445e7](https://github.com/meliorence/react-native-render-html/commit/1d445e7c53ad165d7aad4dddaba43d96f0fb64a8)), closes [#228](https://github.com/meliorence/react-native-render-html/issues/228)
+* new `setMarkersForTNode` prop ([c7b922e](https://github.com/meliorence/react-native-render-html/commit/c7b922ee675160a51f205e37e3f2180af6e77bcf))
+* support `nodeIndex` and `parent` fields in `TNode` ([942fcbc](https://github.com/meliorence/react-native-render-html/commit/942fcbc049dfee6ba0fb94fd0b772f02930bcaaf))
+* support default system fonts for Windows, Macos and web ([ebece1d](https://github.com/meliorence/react-native-render-html/commit/ebece1d7ef9950c7c1fb1407cac07b7bd3f67c05))
+
+
+### BREAKING CHANGES
+
+* - `hasAnchorAncestor` prop has been removed from custom
+  renderers and children renderers. If you need to know if a node has an
+  anchor ancestor, use the new Marker API, which is released along.
+- `collapsedMarginTop` prop has been removed from children renderers. If
+  you were directly using it, use `propsFromParent.collapsedMarginTop`
+  instead. If you were just setting this prop to `null` to avoid
+  typescript errors, just remove this prop.
+
 # [6.0.0-alpha.16](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.15...v6.0.0-alpha.16) (2021-02-12)
 
 
