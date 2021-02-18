@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { ScrollView, Linking, useWindowDimensions, View } from 'react-native';
 import RenderHTML, { RenderHTMLProps } from 'react-native-render-html';
 import LegacyHTML from 'react-native-render-html-v5';
@@ -9,14 +9,13 @@ import { useSetHTMLForSnippet, useSetTTreeForSnippet } from '../state/store';
 import { useComponentColors } from '../state/ThemeProvider';
 import DisplayLoading from './DisplayLoading';
 import Text from './Text';
+import { Snackbar } from 'react-native-paper';
+import MonoText from './MonoText';
 
 const DEFAULT_PROPS: Pick<
   RenderHTMLProps,
   'onLinkPress' | 'debug' | 'enableExperimentalPercentWidth'
 > = {
-  onLinkPress(evt, href) {
-    Linking.openURL(href);
-  },
   debug: true,
   enableExperimentalPercentWidth: true
 };
@@ -52,9 +51,13 @@ const Snippet = React.memo(
     snippetId: SnippetId;
     useLegacy: boolean;
   }) => {
+    const [url, setUrl] = useState<string | null>(null);
     const { width: contentWidth } = useWindowDimensions();
     const setHtmlForSnippet = useSetHTMLForSnippet();
     const setTTreeForSnippet = useSetTTreeForSnippet();
+    const onLinkPress = useCallback((evt, href) => {
+      setUrl(href);
+    }, []);
     const setHTML = useCallback(
       (html: string) => {
         setHtmlForSnippet(snippetId, html);
@@ -80,6 +83,7 @@ const Snippet = React.memo(
     };
     const sharedProps = {
       ...DEFAULT_PROPS,
+      onLinkPress,
       contentWidth: contentWidth - CONTAINER_PADDING * 2,
       ...(snippetProps as any),
       defaultTextProps: {
@@ -117,6 +121,7 @@ const Snippet = React.memo(
         </View>
       );
     }
+
     const renderHtml = useLegacy ? (
       <LegacyHTML
         {...sharedProps}
@@ -142,14 +147,27 @@ const Snippet = React.memo(
       />
     );
     return (
-      <ScrollView
-        contentContainerStyle={{
-          flexGrow: 1,
-          paddingHorizontal: CONTAINER_PADDING
-        }}
-        style={{ flexGrow: 1 }}>
-        {renderHtml}
-      </ScrollView>
+      <>
+        <ScrollView
+          contentContainerStyle={{
+            flexGrow: 1,
+            paddingHorizontal: CONTAINER_PADDING
+          }}
+          style={{ flexGrow: 1 }}>
+          {renderHtml}
+        </ScrollView>
+        <Snackbar
+          visible={url !== null}
+          action={{
+            label: 'browse',
+            onPress: () => {
+              url && Linking.openURL(url);
+            }
+          }}
+          onDismiss={() => setUrl(null)}>
+          <MonoText style={{ color: backgroundColor }}>{url}</MonoText>
+        </Snackbar>
+      </>
     );
   }
 );
