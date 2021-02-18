@@ -15,7 +15,8 @@
     "test:jest": "yarn workspace react-native-render-html test:jest",
     "test:ts": "yarn workspace react-native-render-html test:ts",
     "test:lint": "yarn workspace react-native-render-html test:lint",
-    "release": "yarn workspace react-native-render-html release-it"
+    "release": "yarn workspace react-native-render-html release-it",
+    "publish:demo": "yarn workspace demo expo publish"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
