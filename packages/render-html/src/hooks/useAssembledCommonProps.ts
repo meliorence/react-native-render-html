@@ -14,7 +14,7 @@ import {
 } from '../shared-types';
 import mergeCollapsedMargins from '../helpers/mergeCollapsedMargins';
 import { useRendererConfig } from '../context/RenderRegistryProvider';
-import { useDefaultContainerProps } from '../context/SharedPropsContext';
+import { useDefaultContainerProps } from '../context/SharedPropsProvider';
 
 function getStylesForTnode<T extends TNode>(tnode: T): NativeStyleProp<T> {
   if (tnode instanceof TBlock) {

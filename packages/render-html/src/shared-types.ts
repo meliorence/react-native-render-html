@@ -389,7 +389,7 @@ export interface SourceLoaderProps
     RenderHTMLProps,
     'source' | 'remoteLoadingView' | 'remoteErrorView' | 'onHTMLLoaded'
   > {
-  children: (resource: ResolvedResourceProps) => ReactElement;
+  children: (resource: ResolvedResourceProps) => any;
 }
 
 export interface FallbackFontsDefinitions {

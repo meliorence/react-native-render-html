@@ -1,22 +1,14 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-
-import {
-  RenderResolvedHTMLProps,
-  ResolvedResourceProps,
-  RenderHTMLFragmentProps
-} from './shared-types';
-import useTTree from './hooks/useTTree';
-import SharedPropsContext, {
-  defaultSharedPropsContext
-} from './context/SharedPropsContext';
+import { ResolvedResourceProps, RenderHTMLFragmentProps } from './shared-types';
 import TChildrenRenderersContext from './context/TChildrenRendererContext';
 import TNodeChildrenRenderer from './TNodeChildrenRenderer';
 import RenderHTMLFragmentDebug from './RenderHTMLFragmentDebug';
 import SourceLoader from './SourceLoader';
 import TChildrenRenderer from './TChildrenRenderer';
-import TDocumentRenderer from './TDocumentRenderer';
-import selectSharedProps from './helpers/selectSharedProps';
+import RenderResolvedHTML from './RenderResolvedHTML';
+import SharedPropsProvider from './context/SharedPropsProvider';
+import defaultSharedProps from './context/defaultSharedProps';
 
 export type RenderHTMLFragmentPropTypes = Record<
   keyof RenderHTMLFragmentProps,
@@ -62,26 +54,22 @@ export const renderHtmlFragmentPropTypes: RenderHTMLFragmentPropTypes = {
 export const renderHTMLFragmentDefaultProps: {
   [k in keyof RenderHTMLFragmentProps]?: RenderHTMLFragmentProps[k];
 } = {
-  ...defaultSharedPropsContext,
+  ...defaultSharedProps,
   contentWidth: undefined
 };
 
-function RenderResolvedHTML(props: RenderResolvedHTMLProps) {
-  const ttree = useTTree(props);
-  return (
-    <TDocumentRenderer
-      tdoc={ttree}
-      baseUrl={props.baseUrl}
-      onDocumentMetadataLoaded={props.onDocumentMetadataLoaded}
-    />
-  );
-}
+const childrenRendererContext = {
+  TChildrenRenderer,
+  TNodeChildrenRenderer
+};
 
 /**
  * Render a HTML snippet, given that there is a `TRenderEngineProvider` up in
  * the render tree.
  *
  * @param props - Props for this component.
+ *
+ * @public
  */
 export default function RenderHTMLFragment(props: RenderHTMLFragmentProps) {
   const {
@@ -90,8 +78,7 @@ export default function RenderHTMLFragment(props: RenderHTMLFragmentProps) {
     onTTreeChange,
     remoteErrorView,
     remoteLoadingView,
-    onDocumentMetadataLoaded,
-    ...remainingProps
+    onDocumentMetadataLoaded
   } = props;
   const sourceLoaderProps = {
     source,
@@ -106,20 +93,14 @@ export default function RenderHTMLFragment(props: RenderHTMLFragmentProps) {
       />
     )
   };
+
   return (
     <RenderHTMLFragmentDebug {...props}>
-      <SharedPropsContext.Provider value={selectSharedProps(remainingProps)}>
-        <TChildrenRenderersContext.Provider
-          value={useMemo(
-            () => ({
-              TChildrenRenderer,
-              TNodeChildrenRenderer
-            }),
-            []
-          )}>
+      <SharedPropsProvider {...props}>
+        <TChildrenRenderersContext.Provider value={childrenRendererContext}>
           {React.createElement(SourceLoader, sourceLoaderProps)}
         </TChildrenRenderersContext.Provider>
-      </SharedPropsContext.Provider>
+      </SharedPropsProvider>
     </RenderHTMLFragmentDebug>
   );
 }

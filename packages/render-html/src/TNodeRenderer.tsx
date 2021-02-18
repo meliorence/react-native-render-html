@@ -10,7 +10,7 @@ import TPhrasingRenderer from './TPhrasingRenderer';
 import TTextRenderer from './TTextRenderer';
 import { Markers, TNodeRendererProps } from './shared-types';
 import { getMarkersFromTNode } from './helpers/getMarkersFromTNode';
-import { useSharedProps } from './context/SharedPropsContext';
+import { useSharedProps } from './context/SharedPropsProvider';
 
 export type { TNodeRendererProps } from './shared-types';
 
