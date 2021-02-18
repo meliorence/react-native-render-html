@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { TDocument } from '@native-html/transient-render-engine';
 import { DocumentMetadata, RenderHTMLFragmentProps } from './shared-types';
 import DocumentMetadataProvider from './context/DocumentMetadataProvider';
