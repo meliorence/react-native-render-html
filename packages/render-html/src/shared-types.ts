@@ -27,8 +27,6 @@ import type { TStyles } from '@native-html/transient-render-engine';
 import { CustomTagRendererRecord } from './render/render-types';
 import { ParserOptions as HtmlParserOptions } from 'htmlparser2';
 
-export interface RendererDictionary<P> {}
-
 export interface ImageDimensions {
   width: number;
   height: number;
