@@ -2,7 +2,7 @@ import React, { ClassAttributes } from 'react';
 import { TBlock } from '@native-html/transient-render-engine';
 import IMGElement, { IMGElementProps } from '../elements/IMGElement';
 import { DefaultBlockRenderer } from '../render/render-types';
-import { useComputeMaxWidthForTag } from '../context/SharedPropsContext';
+import { useComputeMaxWidthForTag } from '../context/SharedPropsProvider';
 import { ImageStyle } from 'react-native';
 import { defaultHTMLElementModels } from '@native-html/transient-render-engine';
 import { DefaultTagRendererProps } from '../shared-types';

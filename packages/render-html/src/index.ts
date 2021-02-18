@@ -69,7 +69,7 @@ export {
   useComputeMaxWidthForTag,
   useRendererProps,
   useSharedProps
-} from './context/SharedPropsContext';
+} from './context/SharedPropsProvider';
 export { useDocumentMetadata } from './context/DocumentMetadataProvider';
 export { default as domNodeToHTMLString } from './helpers/domNodeToHTMLString';
 export type { DomNodeToHtmlReporter } from './helpers/domNodeToHTMLString';

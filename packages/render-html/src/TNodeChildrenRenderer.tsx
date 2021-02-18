@@ -5,7 +5,7 @@ import {
   TPhrasing,
   TText
 } from '@native-html/transient-render-engine';
-import { useSharedProps } from './context/SharedPropsContext';
+import { useSharedProps } from './context/SharedPropsProvider';
 import TChildrenRenderer, {
   tchildrenRendererDefaultProps
 } from './TChildrenRenderer';

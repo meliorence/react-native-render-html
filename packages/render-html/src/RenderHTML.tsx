@@ -15,6 +15,8 @@ import RenderHTMLFragment from './RenderHTMLFragment';
  * performance.
  *
  * @param props - Props for this component.
+ *
+ * @public
  */
 export default function RenderHTML(props: RenderHTMLProps) {
   return (

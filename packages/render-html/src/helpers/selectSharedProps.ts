@@ -3,14 +3,14 @@ import pick from 'ramda/src/pick';
 import pipe from 'ramda/src/pipe';
 import mergeRight from 'ramda/src/mergeRight';
 import { RenderHTMLSharedProps, RenderHTMLProps } from '../shared-types';
-import { defaultSharedPropsContext } from '../context/SharedPropsContext';
+import defaultSharedProps from '../context/defaultSharedProps';
 
 const selectSharedProps: (
   props: Partial<RenderHTMLProps>
 ) => Required<RenderHTMLSharedProps> = pipe(
-  pick(Object.keys(defaultSharedPropsContext)),
+  pick(Object.keys(defaultSharedProps)),
   pickBy((val) => val != null),
-  mergeRight(defaultSharedPropsContext) as any
+  mergeRight(defaultSharedProps) as any
 );
 
 export default selectSharedProps;
