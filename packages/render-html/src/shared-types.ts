@@ -36,8 +36,18 @@ export interface HtmlAttributesDictionary {
   [attribute: string]: string;
 }
 
+/**
+ * Props for custom renderers. The convention is to declare a field per renderer.
+ * In doing so, you can benefit from `useRendererProps('tagname')` in custom renderers.
+ *
+ * @public
+ * @remarks Plugins offering options should augment this declaration.
+ * See https://www.typescriptlang.org/docs/handbook/declaration-merging.html
+ */
+export interface RenderersPropsBase extends Record<string, any> {}
+
 export interface RenderHTMLSharedProps<
-  RendererProps extends Record<string, any> = Record<string, any>
+  RendererProps extends RenderersPropsBase = RenderersPropsBase
 > {
   /**
    * Default width and height to display while image's dimensions are being retrieved.
@@ -326,8 +336,9 @@ export interface RenderHTMLSourceInline {
 
 export type RenderHTMLSource = RenderHTMLSourceInline | RenderHTMLSourceUri;
 
-export interface RenderHTMLFragmentProps<P = any>
-  extends RenderHTMLSharedProps<P> {
+export interface RenderHTMLFragmentProps<
+  P extends RenderersPropsBase = RenderersPropsBase
+> extends RenderHTMLSharedProps<P> {
   /**
    * The object source to render (either `{ uri }` or `{ html }`).
    */
@@ -355,8 +366,9 @@ export interface RenderHTMLFragmentProps<P = any>
   onDocumentMetadataLoaded?: (documentMetadata: DocumentMetadata) => void;
 }
 
-export interface RenderHTMLProps<P = any>
-  extends RenderHTMLFragmentProps<P>,
+export interface RenderHTMLProps<
+  P extends RenderersPropsBase = RenderersPropsBase
+> extends RenderHTMLFragmentProps<P>,
     TransientRenderEngineConfig {}
 
 export type RenderResolvedHTMLProps = Pick<
