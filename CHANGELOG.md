@@ -1,3 +1,20 @@
+# [6.0.0-alpha.18](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.17...v6.0.0-alpha.18) (2021-02-18)
+
+
+### Bug Fixes
+
+* `TNode.nodeIndex` gives the index before collapsing ([ba63d59](https://github.com/meliorence/react-native-render-html/commit/ba63d599bbe2439114ed215f4227b8bfca879ab7))
+
+
+### Features
+
+* allow module augmentation for renderers prop via `BaseRenderersProps` ([341b4c3](https://github.com/meliorence/react-native-render-html/commit/341b4c381540acf88f89189e82dc7dd8108bf71a))
+
+
+### Performance Improvements
+
+* limit rerenderings via memoization ([9a17d99](https://github.com/meliorence/react-native-render-html/commit/9a17d998994de329c7168e5cb36f0c410290772c))
+
 # [6.0.0-alpha.17](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.16...v6.0.0-alpha.17) (2021-02-15)
 
 
