@@ -7,7 +7,11 @@ import {
   HTMLElementModel
 } from '@native-html/transient-render-engine';
 import { ComponentType } from 'react';
-import { CustomTagRenderer, DefaultTagRenderer } from '../shared-types';
+import {
+  CustomTagRenderer,
+  DefaultTagRenderer,
+  PropsFromParent
+} from '../shared-types';
 
 export interface CustomRendererSpecs<M extends HTMLContentModel> {
   model: Omit<CustomElementModel<any, M>, 'tagName'> & {
@@ -38,29 +42,35 @@ export type DefaultBlockRenderer = DefaultTagRenderer<TBlock> &
 /**
  * Block renderers can only render tnodes of type TBlock.
  */
-export type CustomBlockRenderer = CustomTagRenderer<TBlock> &
+export type CustomBlockRenderer<
+  P extends PropsFromParent = PropsFromParent
+> = CustomTagRenderer<TBlock, P> &
   Partial<CustomRendererSpecs<HTMLContentModel.block>>;
 
-export type DefaultTextualRenderer = DefaultTagRenderer<TText | TPhrasing> &
+export type DefaultTextualRenderer<
+  P extends PropsFromParent = PropsFromParent
+> = DefaultTagRenderer<TText | TPhrasing, P> &
   DefaultRendererSpecs<HTMLContentModel.textual>;
 
 /**
  * Textual renderers can render tnodes of type TText or TPhrasing.
  */
-export type CustomTextualRenderer = CustomTagRenderer<TText | TPhrasing> &
+export type CustomTextualRenderer<
+  P extends PropsFromParent = PropsFromParent
+> = CustomTagRenderer<TText | TPhrasing, P> &
   Partial<CustomRendererSpecs<HTMLContentModel.textual>>;
 
-export type DefaultMixedRenderer = DefaultTagRenderer<
-  TBlock | TPhrasing | TText
-> &
+export type DefaultMixedRenderer<
+  P extends PropsFromParent = PropsFromParent
+> = DefaultTagRenderer<TBlock | TPhrasing | TText, P> &
   DefaultRendererSpecs<HTMLContentModel.mixed>;
 
 /**
  * Mixed renderers can can render tnodes of type TText, TPhrasing or TBlock.
  */
-export type CustomMixedRenderer = CustomTagRenderer<
-  TBlock | TPhrasing | TText
-> &
+export type CustomMixedRenderer<
+  P extends PropsFromParent = PropsFromParent
+> = CustomTagRenderer<TBlock | TPhrasing | TText, P> &
   Partial<CustomRendererSpecs<HTMLContentModel.mixed>>;
 
 export type CustomTagRendererFromModel<
