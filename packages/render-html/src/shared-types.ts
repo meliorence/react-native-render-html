@@ -644,7 +644,7 @@ export interface DocumentMetadata {
    */
   title: string;
   /**
-   * How anchors should be actionned on press?
+   * How anchors should be actioned on press?
    *
    * @remarks By default, `onLinkPress` will always open the system browser,
    * equivalent to `_blank` target. However, you can customize the behavior by
