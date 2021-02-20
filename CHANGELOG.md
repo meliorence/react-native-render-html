@@ -1,3 +1,15 @@
+# [6.0.0-alpha.19](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.18...v6.0.0-alpha.19) (2021-02-20)
+
+
+### Features
+
+* **ts:** new generic argument for renderers `propsFromParent` prop ([dd7ff6c](https://github.com/meliorence/react-native-render-html/commit/dd7ff6cc656cff3223cf36a1ae6837e73fdfb8ac))
+
+
+### Performance Improvements
+
+* memoize `TDocumentRenderer` to prevent rendering from ascendents ([b5dffea](https://github.com/meliorence/react-native-render-html/commit/b5dffea5ea9ce07f65aac1713b8202c3a9498c3d))
+
 # [6.0.0-alpha.18](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.17...v6.0.0-alpha.18) (2021-02-18)
 
 
