@@ -564,7 +564,7 @@ export interface DefaultTagRendererProps<T extends TNode>
   /**
    * Props shared across the whole render tree.
    */
-  sharedProps: Required<RenderHTMLSharedProps<any>>;
+  sharedProps: Required<RenderHTMLSharedProps<RenderersPropsBase>>;
   /**
    * Default renderer for this tnode.
    */
