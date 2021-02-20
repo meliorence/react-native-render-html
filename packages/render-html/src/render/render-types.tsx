@@ -76,11 +76,11 @@ export type CustomMixedRenderer<
 export type CustomTagRendererFromModel<
   T extends HTMLContentModel
 > = T extends HTMLContentModel.block
-  ? CustomBlockRenderer
+  ? CustomBlockRenderer<any>
   : T extends HTMLContentModel.textual
-  ? CustomTextualRenderer
+  ? CustomTextualRenderer<any>
   : T extends HTMLContentModel.mixed
-  ? CustomMixedRenderer
+  ? CustomMixedRenderer<any>
   : never;
 
 export type DefaultTagRendererFromModel<
