@@ -498,23 +498,30 @@ export interface TNodeChildrenRendererProps extends TChildrenBaseProps {
   tnode: TNode;
 }
 
-export interface TNodeRendererProps<T extends TNode> {
+export interface TNodeRendererProps<
+  T extends TNode,
+  P extends PropsFromParent = PropsFromParent
+> {
   tnode: T;
   key?: string | number;
   markers: Markers;
-  propsFromParent: PropsFromParent;
+  propsFromParent: P;
 }
 
-export interface TNodeSubRendererProps<T extends TNode>
-  extends TNodeRendererProps<T> {
+export interface TNodeSubRendererProps<
+  T extends TNode,
+  P extends PropsFromParent = PropsFromParent
+> extends TNodeRendererProps<T, P> {
   /**
    * Props shared across the whole render tree.
    */
   sharedProps: Required<RenderHTMLSharedProps<any>>;
 }
 
-export interface TRendererBaseProps<T extends TNode>
-  extends TNodeRendererProps<T> {
+export interface TRendererBaseProps<
+  T extends TNode,
+  P extends PropsFromParent = PropsFromParent
+> extends TNodeRendererProps<T, P> {
   /**
    * Any default renderer should be able to handle press.
    */
@@ -533,8 +540,10 @@ export interface TRendererBaseProps<T extends TNode>
   type: 'text' | 'block';
 }
 
-export interface TDefaultRendererProps<T extends TNode>
-  extends TRendererBaseProps<T> {
+export interface TDefaultRendererProps<
+  T extends TNode,
+  P extends PropsFromParent = PropsFromParent
+> extends TRendererBaseProps<T, P> {
   /**
    * When children is present, renderChildren will not be invoked.
    */
@@ -555,8 +564,10 @@ export interface TDefaultRendererProps<T extends TNode>
   propsForChildren?: Partial<PropsFromParent>;
 }
 
-export interface DefaultTagRendererProps<T extends TNode>
-  extends TRendererBaseProps<T> {
+export interface DefaultTagRendererProps<
+  T extends TNode,
+  P extends PropsFromParent = PropsFromParent
+> extends TRendererBaseProps<T, P> {
   /**
    * Styles extracted from tnode.style
    */
@@ -571,8 +582,10 @@ export interface DefaultTagRendererProps<T extends TNode>
   TDefaultRenderer: TDefaultRenderer<T>;
 }
 
-export interface CustomTagRendererProps<T extends TNode>
-  extends DefaultTagRendererProps<T> {
+export interface CustomTagRendererProps<
+  T extends TNode,
+  P extends PropsFromParent = PropsFromParent
+> extends DefaultTagRendererProps<T, P> {
   /**
    * Internal renderer for this _tagName_, not to be confused with
    * {@link TDefaultRenderer}, which is the default renderer for the _tnode_.
@@ -586,17 +599,20 @@ export interface CustomTagRendererProps<T extends TNode>
   DefaultTagRenderer: DefaultTagRenderer<T>;
 }
 
-export type TDefaultRenderer<T extends TNode> = React.ComponentType<
-  TDefaultRendererProps<T>
->;
+export type TDefaultRenderer<
+  T extends TNode,
+  P extends PropsFromParent = PropsFromParent
+> = React.ComponentType<TDefaultRendererProps<T, P>>;
 
-export type DefaultTagRenderer<T extends TNode> = React.ComponentType<
-  DefaultTagRendererProps<T>
->;
+export type DefaultTagRenderer<
+  T extends TNode,
+  P extends PropsFromParent = PropsFromParent
+> = React.ComponentType<DefaultTagRendererProps<T, P>>;
 
-export type CustomTagRenderer<T extends TNode> = React.ComponentType<
-  CustomTagRendererProps<T>
->;
+export type CustomTagRenderer<
+  T extends TNode,
+  P extends PropsFromParent = PropsFromParent
+> = React.ComponentType<CustomTagRendererProps<T, P>>;
 
 /**
  * An object containing meta-data extracted from resource URL and HTML
