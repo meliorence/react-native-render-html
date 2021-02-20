@@ -1,3 +1,10 @@
+# [6.0.0-alpha.20](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.19...v6.0.0-alpha.20) (2021-02-20)
+
+
+### Features
+
+* better extensibility of custom renderers with generic type arg ([b827937](https://github.com/meliorence/react-native-render-html/commit/b8279372abef50f66d8a6cbc3bfd0ddaab982bdc))
+
 # [6.0.0-alpha.19](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.18...v6.0.0-alpha.19) (2021-02-20)
 
 
