@@ -296,7 +296,7 @@ export default function Demo() {
   return (
     <ScrollView style={{ flex: 1 }}>
       <HTML
-        souce={{ html: htmlContent }}
+        source={{ html: htmlContent }}
         contentWidth={contentWidth}
         computeEmbeddedMaxWidth={computeEmbeddedMaxWidth}
       />
