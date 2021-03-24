@@ -12,9 +12,7 @@ const Stack = createStackNavigator();
 
 function LegacySnackbar() {
   const legacyMode = useLegacyMode();
-  const {
-    snackbar: { backgroundColor }
-  } = useComponentColors();
+  const { backgroundColor } = useComponentColors('snackbar');
   const [snackbarVisible, setSnackbarVisible] = React.useState(false);
   React.useEffect(() => {
     setSnackbarVisible(true);
@@ -34,9 +32,7 @@ function LegacySnackbar() {
 }
 
 export default function RootNavigator() {
-  const {
-    navHeader: { backgroundColor, tintColor }
-  } = useComponentColors();
+  const { backgroundColor, tintColor } = useComponentColors('navHeader');
   const headerBackground = React.useCallback(
     () => <View style={{ backgroundColor, flex: 1 }} />,
     [backgroundColor]

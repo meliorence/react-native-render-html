@@ -4,7 +4,7 @@ import { TextStyle, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 // @ts-ignore
 import version from '../version';
-import MonoText from './MonoText';
+import AtomicText from './AtomicText';
 
 const monoStyle: TextStyle = {
   fontSize: 10,
@@ -22,10 +22,12 @@ export default function VersionDisplay() {
         marginRight: right,
         padding: 10
       }}>
-      <MonoText style={monoStyle}>Foundry Playground {version.demo}</MonoText>
-      <MonoText style={monoStyle}>
+      <AtomicText mono style={monoStyle}>
+        Foundry Playground {version.demo}
+      </AtomicText>
+      <AtomicText mono style={monoStyle}>
         react-native-render-html {version.lib}
-      </MonoText>
+      </AtomicText>
     </View>
   );
 }

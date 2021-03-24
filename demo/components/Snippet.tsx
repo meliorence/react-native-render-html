@@ -1,47 +1,19 @@
-import React, { useCallback, useState } from 'react';
-import { ScrollView, Linking, useWindowDimensions, View } from 'react-native';
-import RenderHTML, { RenderHTMLProps } from 'react-native-render-html';
-import LegacyHTML from 'react-native-render-html-v5';
-import Constants from 'expo-constants';
+import React, { useCallback } from 'react';
+import { ScrollView, StyleSheet, useWindowDimensions } from 'react-native';
 import { TNode } from '@native-html/transient-render-engine';
 import snippets, { SnippetId } from '../snippets';
 import { useSetHTMLForSnippet, useSetTTreeForSnippet } from '../state/store';
-import { useComponentColors } from '../state/ThemeProvider';
-import DisplayLoading from './DisplayLoading';
-import Text from './Text';
-import { Snackbar } from 'react-native-paper';
-import MonoText from './MonoText';
-
-const DEFAULT_PROPS: Pick<
-  RenderHTMLProps,
-  'onLinkPress' | 'debug' | 'enableExperimentalPercentWidth'
-> = {
-  debug: true,
-  enableExperimentalPercentWidth: true
-};
-
-function stripUnsupportedStylesInLegacy(style: Record<string, any>) {
-  return Object.keys(style)
-    .filter((k) => k != 'whiteSpace' && k != 'listStyleType')
-    .reduce((container, key) => ({ ...container, [key]: style[key] }), {});
-}
-
-function stripPropsFromStylesheet(
-  styleSheet?: Record<string, Record<string, any>>
-) {
-  if (!styleSheet) {
-    return undefined;
-  }
-  return Object.entries(styleSheet).reduce(
-    (prev, [key, value]) => ({
-      ...prev,
-      [key]: stripUnsupportedStylesInLegacy(value)
-    }),
-    {} as Record<string, any>
-  );
-}
+import HtmlDisplay from './HtmlDisplay';
 
 const CONTAINER_PADDING = 10;
+
+const styles = StyleSheet.create({
+  contentContainer: {
+    flexGrow: 1,
+    paddingHorizontal: CONTAINER_PADDING
+  },
+  container: { flexGrow: 1 }
+});
 
 const Snippet = React.memo(
   ({
@@ -51,13 +23,9 @@ const Snippet = React.memo(
     snippetId: SnippetId;
     useLegacy: boolean;
   }) => {
-    const [url, setUrl] = useState<string | null>(null);
     const { width: contentWidth } = useWindowDimensions();
     const setHtmlForSnippet = useSetHTMLForSnippet();
     const setTTreeForSnippet = useSetTTreeForSnippet();
-    const onLinkPress = useCallback((evt, href) => {
-      setUrl(href);
-    }, []);
     const setHTML = useCallback(
       (html: string) => {
         setHtmlForSnippet(snippetId, html);
@@ -72,102 +40,22 @@ const Snippet = React.memo(
     );
     const snippetProps = snippets[snippetId].props || {};
     const supportsLegacy = snippets[snippetId].supportsLegacy;
-    const {
-      html: { color, backgroundColor, border }
-    } = useComponentColors();
-    const baseStyle = {
-      color,
-      backgroundColor,
-      //@ts-ignore
-      ...snippetProps.baseStyle
-    };
-    const sharedProps = {
-      ...DEFAULT_PROPS,
-      onLinkPress,
-      contentWidth: contentWidth - CONTAINER_PADDING * 2,
-      ...(snippetProps as any),
-      defaultTextProps: {
-        selectable: true
-      }
-    };
-    const mergedTagsStyles = {
-      ...sharedProps.tagsStyles,
-      hr: {
-        marginTop: 16,
-        marginBottom: 16,
-        ...sharedProps.tagsStyles?.hr,
-        height: 1,
-        backgroundColor: border
-      },
-      html: {}
-    };
-    const systemFonts = React.useMemo(
-      () => [...Constants.systemFonts, 'space-mono'],
-      []
-    );
-    if (!supportsLegacy && useLegacy) {
-      return (
-        <View
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginHorizontal: 30,
-            flexGrow: 1
-          }}>
-          <Text
-            style={{ textAlign: 'center', fontSize: 20, fontStyle: 'italic' }}>
-            Legacy HTML component is not available for this snippet.
-          </Text>
-        </View>
-      );
-    }
 
-    const renderHtml = useLegacy ? (
-      <LegacyHTML
-        {...sharedProps}
-        html={sharedProps.html}
-        baseFontStyle={stripUnsupportedStylesInLegacy(baseStyle)}
-        classesStyles={stripPropsFromStylesheet(sharedProps.classesStyles)}
-        tagsStyles={stripPropsFromStylesheet(mergedTagsStyles)}
-        debug={false}
-      />
-    ) : (
-      <RenderHTML
-        {...sharedProps}
-        tagsStyles={mergedTagsStyles}
-        baseStyle={baseStyle}
-        enableUserAgentStyles
-        enableExperimentalMarginCollapsing={true}
-        debug={false}
-        systemFonts={systemFonts}
-        onTTreeChange={setTTree}
-        onHTMLLoaded={setHTML}
-        remoteLoadingView={() => <DisplayLoading />}
-        triggerTREInvalidationPropNames={['baseStyle']}
-      />
-    );
     return (
-      <>
-        <ScrollView
-          contentContainerStyle={{
-            flexGrow: 1,
-            paddingHorizontal: CONTAINER_PADDING
+      <ScrollView
+        contentContainerStyle={styles.contentContainer}
+        style={styles.container}>
+        <HtmlDisplay
+          contentWidth={contentWidth - CONTAINER_PADDING * 2}
+          useLegacy={useLegacy}
+          supportsLegacy={supportsLegacy}
+          renderHtmlProps={{
+            ...(snippetProps as any),
+            onHTMLLoaded: setHTML,
+            onTTreeChange: setTTree
           }}
-          style={{ flexGrow: 1 }}>
-          {renderHtml}
-        </ScrollView>
-        <Snackbar
-          visible={url !== null}
-          action={{
-            label: 'browse',
-            onPress: () => {
-              url && Linking.openURL(url);
-            }
-          }}
-          onDismiss={() => setUrl(null)}>
-          <MonoText style={{ color: backgroundColor }}>{url}</MonoText>
-        </Snackbar>
-      </>
+        />
+      </ScrollView>
     );
   }
 );

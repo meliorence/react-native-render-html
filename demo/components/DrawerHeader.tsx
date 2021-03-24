@@ -10,16 +10,14 @@ import {
 import { useComponentColors } from '../state/ThemeProvider';
 import filteredSnippets from '../snippets';
 import { Linking, Platform } from 'react-native';
-import { MONO } from './MonoText';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import useAtomicTextStyle from '../hooks/useAtomicTextStyle';
 
 function Action({
   selected,
   ...props
 }: React.ComponentProps<typeof Appbar.Action> & { selected?: boolean }) {
-  const {
-    navHeader: { tintColor, selectColor }
-  } = useComponentColors();
+  const { tintColor, selectColor } = useComponentColors('navHeader');
   return (
     <Appbar.Action color={selected ? selectColor : tintColor} {...props} />
   );
@@ -35,15 +33,18 @@ function DrawerHeader({ scene }: DrawerHeaderProps) {
   const snippetId = useSelectedSnippetId();
   const [menuVisible, setMenuVisible] = React.useState(false);
   const snippetSource = filteredSnippets[snippetId].codeSource;
+  const { tintColor, backgroundColor } = useComponentColors('navHeader');
+  const subtitleStyle = useAtomicTextStyle({
+    mono: true,
+    fontSize: 'small',
+    color: tintColor
+  });
   const sourceURL = `https://github.com/meliorence/react-native-render-html/tree/dev/foundry${snippetSource}#L1`;
 
   const onMenuPress = React.useCallback(
     () => (navigation as any).openDrawer(),
     [navigation]
   );
-  const {
-    navHeader: { backgroundColor, tintColor }
-  } = useComponentColors();
   const makeOnPress = (fn?: () => void) => {
     return () => {
       setMenuVisible(false);
@@ -55,7 +56,7 @@ function DrawerHeader({ scene }: DrawerHeaderProps) {
       <Action icon="menu" onPress={onMenuPress} />
       <Appbar.Content
         subtitle={`(${legacyMode ? 'L' : 'F'}) ${snippetSource}`}
-        subtitleStyle={{ fontFamily: MONO }}
+        subtitleStyle={subtitleStyle}
         color={tintColor}
         title={options.title}
       />

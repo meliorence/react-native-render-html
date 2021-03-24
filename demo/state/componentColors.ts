@@ -27,11 +27,20 @@ export interface ComponentColors {
     backgroundColor: string;
     color: string;
   };
+  demoSectionTitle: {
+    backgroundColor: string;
+    color: string;
+  };
+  demoCaption: {
+    backgroundColor: string;
+    color: string;
+  };
 }
 
-export default function ComponentColors(
+export default function componentColors(
   themeColors: ColorsShape
 ): ComponentColors {
+  const backgroundIsDark = Color(themeColors.background).isDark();
   return {
     navHeader: {
       tintColor: themeColors.onPrimary,
@@ -57,6 +66,16 @@ export default function ComponentColors(
     tsSourceBottomButton: {
       backgroundColor: themeColors.primary,
       color: themeColors.accent
+    },
+    demoSectionTitle: {
+      backgroundColor: backgroundIsDark
+        ? Color(themeColors.background).lighten(0.3).string()
+        : Color(themeColors.primary).lighten(1.3).string(),
+      color: themeColors.text
+    },
+    demoCaption: {
+      backgroundColor: themeColors.primary,
+      color: themeColors.onPrimary
     }
   };
 }

@@ -7,6 +7,8 @@ import Navigation from './navigation';
 import ThemeProvider from './state/ThemeProvider';
 import ColorSchemeProvider from './state/ColorSchemeProvider';
 import { useColorScheme } from 'react-native';
+import LinkPressDisplay from './components/LinkPressDisplay';
+import { StacksProvider } from '@mobily/stacks';
 
 enableScreens();
 
@@ -17,14 +19,18 @@ export default function App() {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        <ColorSchemeProvider initialColorScheme={initialColorScheme}>
-          <ThemeProvider>
-            <Navigation />
-            <StatusBar style="light" />
-          </ThemeProvider>
-        </ColorSchemeProvider>
-      </SafeAreaProvider>
+      <StacksProvider spacing={5}>
+        <SafeAreaProvider>
+          <ColorSchemeProvider initialColorScheme={initialColorScheme}>
+            <ThemeProvider>
+              <LinkPressDisplay>
+                <Navigation />
+                <StatusBar style="light" />
+              </LinkPressDisplay>
+            </ThemeProvider>
+          </ColorSchemeProvider>
+        </SafeAreaProvider>
+      </StacksProvider>
     );
   }
 }

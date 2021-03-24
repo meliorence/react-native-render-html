@@ -15,7 +15,10 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.0",
+    "@mobily/stacks": "^0.9.4",
     "@react-native-community/masked-view": "0.1.10",
+    "@react-native-community/slider": "3.0.3",
+    "@react-native-community/viewpager": "4.1.6",
     "@react-navigation/bottom-tabs": "^5.11.7",
     "@react-navigation/drawer": "^5.12.3",
     "@react-navigation/native": "^5.9.2",

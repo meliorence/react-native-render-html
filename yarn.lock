@@ -2850,6 +2850,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mobily/stacks@npm:^0.9.4":
+  version: 0.9.4
+  resolution: "@mobily/stacks@npm:0.9.4"
+  dependencies:
+    wonka: ^4.0.14
+  peerDependencies:
+    react: ">=16.8.0"
+    react-native: ">=0.59.0"
+  checksum: 41b4b42b238eeab1bc8603cadb1dbce9f29b59122b4d3cc258cb0236bbd91824b0e8b7f79266a8847c3e2f7f73e8464452d5a1573948a9c265807a47ca3bcb05
+  languageName: node
+  linkType: hard
+
 "@native-html/css-processor@npm:1.6.1":
   version: 1.6.1
   resolution: "@native-html/css-processor@npm:1.6.1"
@@ -3235,6 +3247,26 @@ __metadata:
     react: ^16.0
     react-native: ">=0.57"
   checksum: fa87cd4cd99b3f2320ccfb7401466a0cbe13dcb8aa3bedce7333fe81a3c763fa8835f798675f286cca93602248749cc153f46bbe5b87a653bf8e5cfc600845de
+  languageName: node
+  linkType: hard
+
+"@react-native-community/slider@npm:3.0.3":
+  version: 3.0.3
+  resolution: "@react-native-community/slider@npm:3.0.3"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 89a1c72c18febe26ae3ff2daa848d676fd1c889f68ca9bfa189031fae2de0f5171a772794578e8f6c9be9a9dc3644e7906ae10f82f41ac0ab7df117ad7078a8e
+  languageName: node
+  linkType: hard
+
+"@react-native-community/viewpager@npm:4.1.6":
+  version: 4.1.6
+  resolution: "@react-native-community/viewpager@npm:4.1.6"
+  peerDependencies:
+    react: ^16.0
+    react-native: ">=0.57"
+  checksum: 99c5852bca1a04e4e80603350326cebff24266a1d70a8c698dc41bb803292e743468e6386d9361bfdc129375ad2298af9f25cf86c9925898865a40e55ced3ff2
   languageName: node
   linkType: hard
 
@@ -6489,7 +6521,10 @@ __metadata:
   dependencies:
     "@babel/core": ~7.12.13
     "@expo/vector-icons": ^10.0.0
+    "@mobily/stacks": ^0.9.4
     "@react-native-community/masked-view": 0.1.10
+    "@react-native-community/slider": 3.0.3
+    "@react-native-community/viewpager": 4.1.6
     "@react-navigation/bottom-tabs": ^5.11.7
     "@react-navigation/drawer": ^5.12.3
     "@react-navigation/native": ^5.9.2
@@ -17049,6 +17084,13 @@ typescript@~3.9.7:
   dependencies:
     execa: ^4.0.2
   checksum: 6e285986c3e2db1eae14da639938ccdd7e78cdccd4b408b173bac81c8214485ed8477fb0d97c67f9f5df722b9ce66d8330f3112d49dae033b16511837867194b
+  languageName: node
+  linkType: hard
+
+"wonka@npm:^4.0.14":
+  version: 4.0.15
+  resolution: "wonka@npm:4.0.15"
+  checksum: df4fd51c15744570e6737975b9cff3e27c39840c1f2c4d4a01cb0b0a6641ff672c96475eb8df8276da2873147e46d8bdd3c3cddcf8f258ef5e97ae55c031f8f9
   languageName: node
   linkType: hard
 
