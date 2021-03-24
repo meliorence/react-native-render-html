@@ -4,6 +4,7 @@ import { TBlock } from '@native-html/transient-render-engine';
 import { DefaultTagRendererProps, TChildProps } from '../shared-types';
 import { useTChildrenRenderer } from '../context/TChildrenRendererContext';
 import usePrefixRenderer, { SupportedListStyleType } from './usePrefixRenderer';
+import { DEFAULT_TEXT_COLOR } from '../constants';
 
 const styles = StyleSheet.create({
   row: {
@@ -41,7 +42,8 @@ export default function GenericListElement({
     listStyleType: tnode.styles.webTextFlow.listStyleType
   });
   const fontSize = tnode.styles.nativeTextFlow.fontSize || 14;
-  const color = tnode.styles.nativeTextFlow.color as string;
+  const color = (tnode.styles.nativeTextFlow.color ??
+    DEFAULT_TEXT_COLOR) as string;
   const lineHeight = tnode.styles.nativeTextFlow.lineHeight || 16.8;
   const prefixMarginRight = fontSize / 2;
   const prefixLength = prefixRenderer.computeStrSize(tnode.children.length);

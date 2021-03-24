@@ -1,0 +1,11 @@
+const DEFAULT_TEXT_COLOR = 'black';
+const DEFAULT_PRESSABLE_RIPPLE_COLOR = 'blue';
+
+const constants = {
+  DEFAULT_PRESSABLE_RIPPLE_COLOR,
+  DEFAULT_TEXT_COLOR
+};
+
+export { DEFAULT_TEXT_COLOR, DEFAULT_PRESSABLE_RIPPLE_COLOR };
+
+export default constants;
