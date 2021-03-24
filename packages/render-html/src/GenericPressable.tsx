@@ -6,6 +6,7 @@ import {
   StyleProp,
   Platform
 } from 'react-native';
+import { DEFAULT_PRESSABLE_RIPPLE_COLOR } from './constants';
 
 const styles = StyleSheet.create({
   pressed: {
@@ -28,7 +29,7 @@ export default function GenericPressable({
 }: PropsWithChildren<GenericPressableProps>) {
   return (
     <Pressable
-      android_ripple={{ borderless, color: 'blue' }}
+      android_ripple={{ borderless, color: DEFAULT_PRESSABLE_RIPPLE_COLOR }}
       style={({ pressed }) => [style, pressed && styles.pressed]}
       onPress={onPress}
       hitSlop={hitSlop}
