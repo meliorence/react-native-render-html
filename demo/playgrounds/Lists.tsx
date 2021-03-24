@@ -110,10 +110,14 @@ type ListType =
   | 'circle'
   | 'disk'
   | 'square'
+  | 'disclosure-open'
+  | 'disclosure-closed'
   | 'decimal'
   | 'none'
   | 'lower-alpha'
-  | 'upper-alpha';
+  | 'upper-alpha'
+  | 'lower-greek'
+  | 'decimal-leading-zero';
 
 interface ControlsProps extends Pick<ViewProps, 'style'> {
   fontSize: number;
@@ -129,9 +133,13 @@ const listTypes: ListType[] = [
   'disk',
   'circle',
   'square',
+  'disclosure-open',
+  'disclosure-closed',
   'decimal',
   'lower-alpha',
   'upper-alpha',
+  'lower-greek',
+  'decimal-leading-zero',
   'none'
 ];
 
