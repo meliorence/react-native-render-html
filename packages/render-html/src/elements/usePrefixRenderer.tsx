@@ -124,43 +124,59 @@ const DecimalPrefixRenderer = ({
   return <TextualPrefixRenderer {...props} prefix={index + 1 + '.'} />;
 };
 
-interface PrefixSepcs {
+interface PrefixSpecs {
   Component: ComponentType<ListPrefixRendererProps>;
   computeStrSize(length: number): number;
 }
 
-const prefixRenderersMap: Record<SupportedListStyleType, PrefixSepcs> = ({
-  none: {
-    Component: NoPrefixRenderer,
-    computeStrSize: () => 0
-  },
-  disc: {
-    Component: DiscPrefixRenderer,
-    computeStrSize: () => 1
-  },
-  circle: {
-    Component: CirclePrefixRenderer,
-    computeStrSize: () => 1
-  },
-  square: {
-    Component: SquarePrefixRenderer,
-    computeStrSize: () => 1
-  },
-  decimal: {
-    Component: DecimalPrefixRenderer,
-    computeStrSize: (length) => numOfCharsInPrefix(length, 10)
-  },
-  'lower-alpha': {
-    Component: LowerAlphaPrefixRenderer,
-    computeStrSize: (length) => numOfCharsInPrefix(length, 26)
-  },
-  'upper-alpha': {
-    Component: UpperAlphaPrefixRenderer,
-    computeStrSize: (length) => numOfCharsInPrefix(length, 26)
-  }
-} as Partial<Record<SupportedListStyleType, PrefixSepcs>>) as Record<
+const none: PrefixSpecs = {
+  Component: NoPrefixRenderer,
+  computeStrSize: () => 0
+};
+
+const disc: PrefixSpecs = {
+  Component: DiscPrefixRenderer,
+  computeStrSize: () => 1
+};
+
+const circle: PrefixSpecs = {
+  Component: CirclePrefixRenderer,
+  computeStrSize: () => 1
+};
+
+const square: PrefixSpecs = {
+  Component: SquarePrefixRenderer,
+  computeStrSize: () => 1
+};
+
+const decimal: PrefixSpecs = {
+  Component: DecimalPrefixRenderer,
+  computeStrSize: (length) => numOfCharsInPrefix(length, 10)
+};
+
+const lowerAlpha: PrefixSpecs = {
+  Component: LowerAlphaPrefixRenderer,
+  computeStrSize: (length) => numOfCharsInPrefix(length, 26)
+};
+
+const upperAlpha: PrefixSpecs = {
+  Component: UpperAlphaPrefixRenderer,
+  computeStrSize: (length) => numOfCharsInPrefix(length, 26)
+};
+
+const prefixRenderersMap: Record<SupportedListStyleType, PrefixSpecs> = ({
+  none,
+  disc,
+  circle,
+  square,
+  decimal,
+  'lower-alpha': lowerAlpha,
+  'upper-alpha': upperAlpha,
+  'lower-latin': lowerAlpha,
+  'upper-latin': upperAlpha
+} as Partial<Record<SupportedListStyleType, PrefixSpecs>>) as Record<
   SupportedListStyleType,
-  PrefixSepcs
+  PrefixSpecs
 >;
 
 export type SupportedListStyleType =
@@ -190,7 +206,7 @@ export default function usePrefixRenderer({
   listStyleType,
   getListStyleTypeFromNestLevel,
   nestLevel
-}: HTMLListPrefixProps): PrefixSepcs {
+}: HTMLListPrefixProps): PrefixSpecs {
   const selectedListType = getListStyleTypeFromNestLevel(nestLevel);
   return listStyleType
     ? prefixRenderersMap[listStyleType as SupportedListStyleType] ||
