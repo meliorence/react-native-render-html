@@ -124,6 +124,19 @@ const DecimalPrefixRenderer = ({
   return <TextualPrefixRenderer {...props} prefix={index + 1 + '.'} />;
 };
 
+const DecimalLeadingZeroPrefixRenderer = ({
+  index,
+  ...props
+}: ListPrefixRendererProps) => {
+  const syntheticIndex = index + 1;
+  return (
+    <TextualPrefixRenderer
+      {...props}
+      prefix={`${syntheticIndex < 10 ? `0${syntheticIndex}` : syntheticIndex}.`}
+    />
+  );
+};
+
 interface PrefixSpecs {
   Component: ComponentType<ListPrefixRendererProps>;
   computeStrSize(length: number): number;
@@ -154,6 +167,11 @@ const decimal: PrefixSpecs = {
   computeStrSize: (length) => numOfCharsInPrefix(length, 10)
 };
 
+const decimalLeadingZero: PrefixSpecs = {
+  Component: DecimalLeadingZeroPrefixRenderer,
+  computeStrSize: (length) => numOfCharsInPrefix(length < 10 ? 10 : length, 10)
+};
+
 const lowerAlpha: PrefixSpecs = {
   Component: LowerAlphaPrefixRenderer,
   computeStrSize: (length) => numOfCharsInPrefix(length, 26)
@@ -173,7 +191,8 @@ const prefixRenderersMap: Record<SupportedListStyleType, PrefixSpecs> = ({
   'lower-alpha': lowerAlpha,
   'upper-alpha': upperAlpha,
   'lower-latin': lowerAlpha,
-  'upper-latin': upperAlpha
+  'upper-latin': upperAlpha,
+  'decimal-leading-zero': decimalLeadingZero
 } as Partial<Record<SupportedListStyleType, PrefixSpecs>>) as Record<
   SupportedListStyleType,
   PrefixSpecs
