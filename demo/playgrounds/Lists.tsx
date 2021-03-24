@@ -1,5 +1,6 @@
 import React, { PropsWithChildren, useState } from 'react';
 import {
+  Platform,
   StyleProp,
   StyleSheet,
   useWindowDimensions,
@@ -105,31 +106,23 @@ function Demo({
     </AtomicBox>
   );
 }
-
-type ListType =
-  | 'circle'
-  | 'disk'
-  | 'square'
-  | 'disclosure-open'
-  | 'disclosure-closed'
-  | 'decimal'
-  | 'none'
-  | 'lower-alpha'
-  | 'upper-alpha'
-  | 'lower-greek'
-  | 'decimal-leading-zero';
-
 interface ControlsProps extends Pick<ViewProps, 'style'> {
   fontSize: number;
   listType: ListType;
   lineHeight: number;
+  fontWeight: FontWeight;
+  fontFamily: string;
+  fontStyle: FontStyle;
   setLineHeight: (lineHeight: number) => void;
   setListType: (listType: ListType) => void;
   setFontSize: (fontSize: number) => void;
+  setFontWeight: (fontWeight: FontWeight) => void;
+  setFontFamily: (fontFamily: string) => void;
+  setFontStyle: (fontStyle: FontStyle) => void;
   contentWidth: number;
 }
 
-const listTypes: ListType[] = [
+const listTypes = [
   'disk',
   'circle',
   'square',
@@ -141,7 +134,14 @@ const listTypes: ListType[] = [
   'lower-greek',
   'decimal-leading-zero',
   'none'
-];
+] as const;
+
+type ListType = typeof listTypes[number];
+
+const fontWeights = ['normal', 'bold'] as const;
+const fontStyles = ['normal', 'italic'] as const;
+type FontWeight = typeof fontWeights[number];
+type FontStyle = typeof fontStyles[number];
 
 function Control({
   style,
@@ -158,12 +158,18 @@ function Control({
 
 function Controls({
   listType,
-  setListType,
-  fontSize,
-  setFontSize,
   contentWidth,
+  fontFamily,
+  fontSize,
+  fontStyle,
+  fontWeight,
   lineHeight,
+  setFontFamily,
+  setFontSize,
+  setFontStyle,
+  setFontWeight,
   setLineHeight,
+  setListType,
   style
 }: ControlsProps) {
   return (
@@ -204,6 +210,20 @@ function Controls({
           </Column>
         </Columns>
       </Control>
+      <Control label="Font weight">
+        <AtomicRadioControl
+          selectedValue={fontWeight}
+          onSelectedValueChange={setFontWeight}
+          values={fontWeights}
+        />
+      </Control>
+      <Control label="Font style">
+        <AtomicRadioControl
+          selectedValue={fontStyle}
+          onSelectedValueChange={setFontStyle}
+          values={fontStyles}
+        />
+      </Control>
       <Control label="List type">
         <AtomicRadioControl
           selectedValue={listType}
@@ -220,9 +240,14 @@ export default function Lists() {
   const [fontSize, setFontSize] = useState(14);
   const [lineHeight, setLineHeight] = useState(1.2);
   const [listType, setListType] = useState<ListType>('circle');
+  const [fontWeight, setFontWeight] = useState<FontWeight>('normal');
+  const [fontStyle, setFontStyle] = useState<FontStyle>('normal');
+  const [fontFamily, setFontFamily] = useState(
+    Platform.select({ ios: 'system', default: 'system' })
+  );
   const spacing = useSpacing(1);
   const demoWidth = contentWidth - spacing * 2;
-  const htmlExample = `<ul style="list-style-type: ${listType};">
+  const htmlExample = `<ul>
 	<li>Sneaky</li>
 	<li>Beaky</li>
 	<li>Like</li>
@@ -230,23 +255,38 @@ export default function Lists() {
   const htmlProps: Partial<RenderHTMLProps> = {
     baseStyle: {
       fontSize,
-      lineHeight: lineHeight * fontSize
+      lineHeight: lineHeight * fontSize,
+      fontFamily,
+      fontStyle,
+      fontWeight
+    },
+    tagsStyles: {
+      ul: {
+        listStyleType: listType
+      }
     }
   };
   const theme = useThemeColors();
+  const controlsProps: ControlsProps = {
+    contentWidth: demoWidth,
+    fontFamily,
+    fontSize,
+    fontStyle,
+    fontWeight,
+    lineHeight,
+    listType,
+    setFontStyle,
+    setFontFamily,
+    setFontSize,
+    setFontWeight,
+    setLineHeight,
+    setListType
+  };
   return (
     <SafeAreaView style={{ backgroundColor: theme.background, flex: 1 }}>
       <ScrollView contentContainerStyle={{ paddingHorizontal: spacing }}>
         <Stack space={3}>
-          <Controls
-            contentWidth={demoWidth}
-            listType={listType}
-            setListType={setListType}
-            fontSize={fontSize}
-            setFontSize={setFontSize}
-            lineHeight={lineHeight}
-            setLineHeight={setLineHeight}
-          />
+          <Controls {...controlsProps} />
           <Demo
             htmlProps={htmlProps}
             html={htmlExample}
