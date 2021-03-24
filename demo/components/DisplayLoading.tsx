@@ -4,9 +4,7 @@ import { ActivityIndicator } from 'react-native-paper';
 import { useComponentColors } from '../state/ThemeProvider';
 
 export default function DisplayLoading() {
-  const {
-    displayLoading: { color }
-  } = useComponentColors();
+  const { color } = useComponentColors('displayLoading');
   return (
     <View
       style={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}>

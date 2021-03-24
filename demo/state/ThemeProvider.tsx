@@ -10,7 +10,7 @@ import {
   DefaultTheme as PaperLightTheme
 } from 'react-native-paper';
 import themeColors, { ColorsShape } from './themeColors';
-import componentColors from './componentColors';
+import componentColors, { ComponentColors } from './componentColors';
 import { useColorScheme } from './ColorSchemeProvider';
 
 function mergeTheme(
@@ -44,8 +44,10 @@ export function useTheme() {
   return React.useContext(ThemeContext);
 }
 
-export function useComponentColors() {
-  return useTheme().componentColors;
+export function useComponentColors<K extends keyof ComponentColors>(
+  component: K
+) {
+  return useTheme().componentColors[component];
 }
 
 export function useThemeColors() {

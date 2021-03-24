@@ -20,8 +20,10 @@ const Drawer = createDrawerNavigator<Record<keyof typeof snippets, any>>();
 
 function CustomDrawerContent(props: DrawerContentComponentProps<any>) {
   const {
-    drawer: { backgroundColor, activeTintColor, activeBackgroundColor }
-  } = useComponentColors();
+    backgroundColor,
+    activeTintColor,
+    activeBackgroundColor
+  } = useComponentColors('drawer');
   const { colorScheme, setColorScheme } = useColorScheme();
   const swichColorModeRight = React.useCallback(
     ({ style }: any) => (
