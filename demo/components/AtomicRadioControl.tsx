@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { RadioButton } from 'react-native-paper';
-import AtomicBox from '../components/AtomicBox';
+import AtomicBox from './AtomicBox';
 import useAtomicTextStyle, {
   AtomicTextStyle
 } from '../hooks/useAtomicTextStyle';
