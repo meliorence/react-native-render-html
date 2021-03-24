@@ -115,6 +115,18 @@ const UpperAlphaPrefixRenderer = ({
   );
 };
 
+const LowerGreekPrefixRenderer = ({
+  index,
+  ...props
+}: ListPrefixRendererProps) => {
+  return (
+    <TextualPrefixRenderer
+      {...props}
+      prefix={getStringPrefixFromIndex(index, 0x3b1, 0x3c9) + '.'}
+    />
+  );
+};
+
 const NoPrefixRenderer = () => null;
 
 const DecimalPrefixRenderer = ({
@@ -182,6 +194,11 @@ const upperAlpha: PrefixSpecs = {
   computeStrSize: (length) => numOfCharsInPrefix(length, 26)
 };
 
+const lowerGreek: PrefixSpecs = {
+  Component: LowerGreekPrefixRenderer,
+  computeStrSize: (length) => numOfCharsInPrefix(length, 24)
+};
+
 const prefixRenderersMap: Record<SupportedListStyleType, PrefixSpecs> = ({
   none,
   disc,
@@ -192,6 +209,7 @@ const prefixRenderersMap: Record<SupportedListStyleType, PrefixSpecs> = ({
   'upper-alpha': upperAlpha,
   'lower-latin': lowerAlpha,
   'upper-latin': upperAlpha,
+  'lower-greek': lowerGreek,
   'decimal-leading-zero': decimalLeadingZero
 } as Partial<Record<SupportedListStyleType, PrefixSpecs>>) as Record<
   SupportedListStyleType,
