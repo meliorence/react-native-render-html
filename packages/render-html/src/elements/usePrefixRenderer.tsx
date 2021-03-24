@@ -91,6 +91,48 @@ const SquarePrefixRenderer = (props: ListPrefixRendererProps) => {
   });
 };
 
+const DisclosureClosedPrefixRenderer = (props: ListPrefixRendererProps) => {
+  const {
+    prefixStyle: { top },
+    prefixSize
+  } = useViewPrefixRendererStyles(props, 1);
+  return React.createElement(View, {
+    style: {
+      top,
+      width: 0,
+      height: 0,
+      borderStyle: 'solid',
+      borderLeftWidth: prefixSize,
+      borderLeftColor: props.color,
+      borderTopWidth: prefixSize / 2,
+      borderTopColor: 'transparent',
+      borderBottomWidth: prefixSize / 2,
+      borderBottomColor: 'transparent'
+    }
+  });
+};
+
+const DisclosureOpenPrefixRenderer = (props: ListPrefixRendererProps) => {
+  const {
+    prefixStyle: { top },
+    prefixSize
+  } = useViewPrefixRendererStyles(props, 1);
+  return React.createElement(View, {
+    style: {
+      top,
+      width: 0,
+      height: 0,
+      borderStyle: 'solid',
+      borderTopWidth: prefixSize,
+      borderTopColor: props.color,
+      borderLeftWidth: prefixSize / 2,
+      borderLeftColor: 'transparent',
+      borderRightWidth: prefixSize / 2,
+      borderRightColor: 'transparent'
+    }
+  });
+};
+
 const LowerAlphaPrefixRenderer = ({
   index,
   ...props
@@ -174,6 +216,16 @@ const square: PrefixSpecs = {
   computeStrSize: () => 1
 };
 
+const disclosureOpen: PrefixSpecs = {
+  Component: DisclosureOpenPrefixRenderer,
+  computeStrSize: () => 1
+};
+
+const disclosureClosed: PrefixSpecs = {
+  Component: DisclosureClosedPrefixRenderer,
+  computeStrSize: () => 1
+};
+
 const decimal: PrefixSpecs = {
   Component: DecimalPrefixRenderer,
   computeStrSize: (length) => numOfCharsInPrefix(length, 10)
@@ -210,7 +262,9 @@ const prefixRenderersMap: Record<SupportedListStyleType, PrefixSpecs> = ({
   'lower-latin': lowerAlpha,
   'upper-latin': upperAlpha,
   'lower-greek': lowerGreek,
-  'decimal-leading-zero': decimalLeadingZero
+  'decimal-leading-zero': decimalLeadingZero,
+  'disclosure-open': disclosureOpen,
+  'disclosure-closed': disclosureClosed
 } as Partial<Record<SupportedListStyleType, PrefixSpecs>>) as Record<
   SupportedListStyleType,
   PrefixSpecs
