@@ -8,7 +8,7 @@ import useAtomicTextStyle, {
 
 export interface AtomicRadioControlProps<V extends string>
   extends AtomicTextStyle {
-  values: V[];
+  values: readonly V[];
   selectedValue: V;
   onSelectedValueChange: (v: V) => void;
   style?: StyleProp<ViewStyle>;
