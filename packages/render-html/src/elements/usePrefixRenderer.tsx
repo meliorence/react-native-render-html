@@ -4,6 +4,7 @@ import React, { ComponentType } from 'react';
 import numOfCharsInPrefix from './numOfCharsInPrefix';
 import { getStringPrefixFromIndex } from './getStringListPrefixFromIndex';
 import { TNode } from '@native-html/transient-render-engine';
+import { MixedStyleDeclaration } from '@native-html/css-processor';
 
 export interface HTMLListElementProps {
   listStyleType: SupportedListStyleType;
@@ -15,28 +16,27 @@ export interface HTMLListElementProps {
   tagName?: string;
 }
 
-interface ListPrefixRendererProps {
+type ListPrefixRendererProps = {
   color?: string;
   fontSize: number;
   lineHeight: number;
   index: number;
-}
+} & Pick<
+  MixedStyleDeclaration,
+  'fontFamily' | 'fontStyle' | 'fontWeight' | 'fontVariant'
+>;
 
 const TextualPrefixRenderer = ({
-  color,
-  fontSize,
-  lineHeight,
-  prefix
-}: Pick<ListPrefixRendererProps, 'color' | 'fontSize' | 'lineHeight'> & {
+  prefix,
+  ...textStyle
+}: Omit<ListPrefixRendererProps, 'index'> & {
   prefix: string;
 }) => {
   return (
     <Text
       selectable={false}
       style={{
-        lineHeight,
-        color,
-        fontSize,
+        ...textStyle,
         textAlign: 'right'
       }}
       children={prefix}
