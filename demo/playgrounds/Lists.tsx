@@ -14,7 +14,7 @@ import SourceDisplay from '../components/SourceDisplay';
 import { Stack, Column, Columns, useSpacing } from '@mobily/stacks';
 import { useComponentColors, useThemeColors } from '../state/ThemeProvider';
 import AtomicBox from '../components/AtomicBox';
-import AtomicRadioControl from '../components/AtomicButtonGroup';
+import AtomicRadioControl from '../components/AtomicRadioControl';
 import AtomicSlider from '../components/AtomicSlider';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
