@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text } from 'react-native';
 import { TText } from '@native-html/transient-render-engine';
 import {
   TDefaultRenderer,
@@ -8,23 +7,17 @@ import {
 } from './shared-types';
 import { useInternalTextRenderer } from './context/RenderRegistryProvider';
 import useAssembledCommonProps from './hooks/useAssembledCommonProps';
+import TDefaultTextualRenderer from './TDefaultTextualRenderer';
 
 export const TDefaultTextRenderer: TDefaultRenderer<TText> = ({
-  tnode,
-  textProps,
-  onPress,
   children,
-  style
+  ...props
 }: TDefaultRendererProps<TText>) => {
-  const resolvedStyles = textProps?.style ? [style, textProps.style] : style;
-  return (
-    <Text
-      onPress={onPress}
-      {...textProps}
-      style={resolvedStyles}
-      testID={tnode.tagName || undefined}>
-      {children ?? tnode.data}
-    </Text>
+  const { tnode } = props;
+  return React.createElement(
+    TDefaultTextualRenderer,
+    props,
+    children ?? tnode.data
   );
 };
 
