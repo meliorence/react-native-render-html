@@ -1,3 +1,22 @@
+# [6.0.0-alpha.21](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.20...v6.0.0-alpha.21) (2021-03-24)
+
+
+### Bug Fixes
+
+* alignment of alpha list style prefixes with varying line height ([c041527](https://github.com/meliorence/react-native-render-html/commit/c041527e51edbe3137495e01681a0f11cee8efb5))
+* alignment of unordered list prefixes ([b2cd6b6](https://github.com/meliorence/react-native-render-html/commit/b2cd6b6d1cd991c6c541d476d7a36911b1fde66d))
+* list prefixes transparent when no baseStyle.color provided ([873b897](https://github.com/meliorence/react-native-render-html/commit/873b89742f4ef6513f3054e1b2f94d5c7f520c87))
+* list style prefixes now inherit from font*(weight,style,family) ([f77db8a](https://github.com/meliorence/react-native-render-html/commit/f77db8a23a6020070b7e9419d0ec176ef8ba23a9))
+* updated react dependency in podspec to enable build in Xcode 12 (for iOS >= 12) ([#464](https://github.com/meliorence/react-native-render-html/issues/464)) ([c55319b](https://github.com/meliorence/react-native-render-html/commit/c55319bce51f28631a6bb5b5828433a0e52e9270)), closes [/github.com/facebook/react-native/issues/29633#issuecomment-694187116](https://github.com//github.com/facebook/react-native/issues/29633/issues/issuecomment-694187116)
+
+
+### Features
+
+* support decimal-leading-zero list style type prefix ([5ab6d6f](https://github.com/meliorence/react-native-render-html/commit/5ab6d6f9cb68e99361c0d4329e3ac79e3dcb9501))
+* support disclosure-* list style type prefixes ([c9aa2fb](https://github.com/meliorence/react-native-render-html/commit/c9aa2fbb4bd02644af92397a0fa9d9b6ed0298b6))
+* support lower-greek list style type prefixes ([9e6f66b](https://github.com/meliorence/react-native-render-html/commit/9e6f66b42377915f69ded76fc1956c92187c660e))
+* support lower-latin and upper-latin list prefix styles ([d42f688](https://github.com/meliorence/react-native-render-html/commit/d42f6884bfa33197f75d306526097df144b504f3))
+
 # [6.0.0-alpha.20](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.19...v6.0.0-alpha.20) (2021-02-20)
 
 
