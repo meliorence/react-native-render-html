@@ -29,16 +29,18 @@ interface ListPrefixRendererProps {
 const TextualPrefixRenderer = ({
   color,
   fontSize,
+  lineHeight,
   prefix
-}: Pick<ListPrefixRendererProps, 'color' | 'fontSize'> & {
+}: Pick<ListPrefixRendererProps, 'color' | 'fontSize' | 'lineHeight'> & {
   prefix: string;
 }) => {
   return (
     <Text
       selectable={false}
       style={{
-        color: color,
-        fontSize: fontSize,
+        lineHeight,
+        color,
+        fontSize,
         textAlign: 'right'
       }}
       children={prefix}
@@ -97,28 +99,24 @@ const SquarePrefixRenderer = (props: ListPrefixRendererProps) => {
 };
 
 const LowerAlphaPrefixRenderer = ({
-  color,
-  fontSize,
-  index
+  index,
+  ...props
 }: ListPrefixRendererProps) => {
   return (
     <TextualPrefixRenderer
-      color={color}
-      fontSize={fontSize}
+      {...props}
       prefix={getStringPrefixFromIndex(index, 97, 26) + '.'}
     />
   );
 };
 
 const UpperAlphaPrefixRenderer = ({
-  color,
-  fontSize,
-  index
+  index,
+  ...props
 }: ListPrefixRendererProps) => {
   return (
     <TextualPrefixRenderer
-      color={color}
-      fontSize={fontSize}
+      {...props}
       prefix={getStringPrefixFromIndex(index, 65, 26) + '.'}
     />
   );
@@ -127,17 +125,10 @@ const UpperAlphaPrefixRenderer = ({
 const NoPrefixRenderer = () => null;
 
 const DecimalPrefixRenderer = ({
-  color,
-  fontSize,
-  index
+  index,
+  ...props
 }: ListPrefixRendererProps) => {
-  return (
-    <TextualPrefixRenderer
-      color={color}
-      fontSize={fontSize}
-      prefix={index + 1 + '.'}
-    />
-  );
+  return <TextualPrefixRenderer {...props} prefix={index + 1 + '.'} />;
 };
 
 interface PrefixSepcs {
