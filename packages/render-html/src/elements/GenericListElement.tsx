@@ -5,6 +5,7 @@ import { DefaultTagRendererProps, TChildProps } from '../shared-types';
 import { useTChildrenRenderer } from '../context/TChildrenRendererContext';
 import usePrefixRenderer, { SupportedListStyleType } from './usePrefixRenderer';
 import { DEFAULT_TEXT_COLOR } from '../constants';
+import { pick } from 'ramda';
 
 const styles = StyleSheet.create({
   row: {
@@ -36,17 +37,22 @@ export default function GenericListElement({
   const nestLevelStyle = getStyleFromNestLevel?.call(null, nestLevel);
   // Map children to horizontal rows with prefixes
   const TChildrenRenderer = useTChildrenRenderer();
-  const prefixRenderer = usePrefixRenderer({
+  const { computeStrSize, Component: PrefixRenderer } = usePrefixRenderer({
     nestLevel,
     getListStyleTypeFromNestLevel,
     listStyleType: tnode.styles.webTextFlow.listStyleType
   });
   const fontSize = tnode.styles.nativeTextFlow.fontSize || 14;
+  const prefixTextStyles = pick(
+    ['fontStyle', 'fontWeight', 'fontFamily', 'fontVariant'],
+    tnode.styles.nativeTextFlow
+  );
+
   const color = (tnode.styles.nativeTextFlow.color ??
     DEFAULT_TEXT_COLOR) as string;
   const lineHeight = tnode.styles.nativeTextFlow.lineHeight || 16.8;
   const prefixMarginRight = fontSize / 2;
-  const prefixLength = prefixRenderer.computeStrSize(tnode.children.length);
+  const prefixLength = computeStrSize(tnode.children.length);
   const bulletWidth = (fontSize || 12) * prefixLength;
   const paddingLeft =
     typeof tnode.styles.nativeBlockRet.paddingLeft === 'number'
@@ -55,7 +61,6 @@ export default function GenericListElement({
           bulletWidth + prefixMarginRight
         )
       : bulletWidth + prefixMarginRight;
-  const PrefixRenderer = prefixRenderer.Component;
   const prefixContainerStyle: ViewStyle = {
     width: bulletWidth,
     marginLeft: -(bulletWidth + prefixMarginRight),
@@ -71,6 +76,7 @@ export default function GenericListElement({
           color={color}
           fontSize={fontSize}
           lineHeight={lineHeight}
+          {...prefixTextStyles}
         />
       </View>
       {childElement}
