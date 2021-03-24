@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import { Platform, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import React, { ComponentType } from 'react';
 import numOfCharsInPrefix from './numOfCharsInPrefix';
 import { getStringPrefixFromIndex } from './getStringListPrefixFromIndex';
@@ -20,10 +20,6 @@ interface ListPrefixRendererProps {
   fontSize: number;
   lineHeight: number;
   index: number;
-  /**
-   * The number of parents of the same tag
-   */
-  // nestLevel: number;
 }
 
 const TextualPrefixRenderer = ({
@@ -58,14 +54,11 @@ function useViewPrefixRendererStyles(
     prefixStyle: {
       width: prefixSize,
       height: prefixSize,
-      top:
-        (props.lineHeight - prefixSize) / 2 +
-        props.fontSize * BASESLINE_OFFSET_MULTI
+      // center the item vertically, relative to line height
+      top: (props.lineHeight - prefixSize) / 2
     }
   };
 }
-
-const BASESLINE_OFFSET_MULTI = Platform.select({ android: 0.1, default: 0 });
 
 const DiscPrefixRenderer = (props: ListPrefixRendererProps) => {
   const { prefixSize, prefixStyle } = useViewPrefixRendererStyles(props);
