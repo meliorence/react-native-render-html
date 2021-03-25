@@ -1,23 +1,32 @@
-import React, { PropsWithChildren, useState } from 'react';
+import React, { PropsWithChildren, useMemo, useState } from 'react';
 import {
   Platform,
   StyleProp,
   StyleSheet,
   useWindowDimensions,
+  View,
   ViewProps,
   ViewStyle
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { RenderHTMLProps } from 'react-native-render-html';
+import Constants from 'expo-constants';
+import BottomSheet, {
+  BottomSheetScrollView,
+  BottomSheetBackgroundProps
+} from '@gorhom/bottom-sheet';
+
 import HtmlDisplay from '../components/HtmlDisplay';
 import AtomicText from '../components/AtomicText';
 import SourceDisplay from '../components/SourceDisplay';
-import { Stack, Column, Columns, useSpacing } from '@mobily/stacks';
+import { Stack, useSpacing } from '@mobily/stacks';
 import { useComponentColors, useThemeColors } from '../state/ThemeProvider';
 import AtomicBox from '../components/AtomicBox';
 import AtomicRadioControl from '../components/AtomicRadioControl';
-import AtomicSlider from '../components/AtomicSlider';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AtomicPicker from '../components/AtomicPicker';
+import MolecularSliderDisplay from '../components/MolecularSliderDisplay';
+import AtomicBottomSheet from '../components/AtomicBottomSheet';
 
 const styles = StyleSheet.create({
   demoContainer: {
@@ -67,14 +76,16 @@ function Demo({
   htmlProps?: Partial<RenderHTMLProps>;
   style?: StyleProp<ViewStyle>;
 }>) {
-  const spacing = useSpacing(1);
+  const boxPaddingU = 2;
   const theme = useThemeColors();
   const htmlCombo = useComponentColors('html');
   const demoSectionCombo = useComponentColors('demoSectionTitle');
+  const htmlContentWidth = contentWidth - 2 * useSpacing(boxPaddingU);
   return (
     <AtomicBox style={style}>
+      <DemoCaption>{children}</DemoCaption>
       <AtomicBox
-        padding={1}
+        padding={boxPaddingU}
         style={[
           styles.demoContainer,
           {
@@ -96,13 +107,12 @@ function Demo({
                 renderHtmlProps={{ ...htmlProps, source: { html } }}
                 useLegacy={false}
                 supportsLegacy={false}
-                contentWidth={contentWidth - 2 * spacing}
+                contentWidth={htmlContentWidth}
               />
             </AtomicBox>
           </Stack>
         </Stack>
       </AtomicBox>
-      <DemoCaption>{children}</DemoCaption>
     </AtomicBox>
   );
 }
@@ -151,7 +161,7 @@ function Control({
   return (
     <Stack style={style} space={1}>
       <AtomicText fontSize="small">{label}</AtomicText>
-      {children}
+      <AtomicBox paddingX={2}>{children}</AtomicBox>
     </Stack>
   );
 }
@@ -172,66 +182,66 @@ function Controls({
   setListType,
   style
 }: ControlsProps) {
+  const spaces = 2;
+  const controlContentWidth = contentWidth - useSpacing(2 * spaces);
   return (
-    <Stack style={style} space={1}>
-      <Control label="Font size">
-        <Columns space={3}>
-          <Column width={'content'}>
-            <AtomicSlider
-              key="font-size"
-              width={contentWidth - 50}
-              minimumValue={10}
-              maximumValue={40}
-              step={0.1}
-              value={fontSize}
-              onValueChange={setFontSize}
-            />
-          </Column>
-          <Column>
-            <AtomicText>{fontSize.toFixed(1)}</AtomicText>
-          </Column>
-        </Columns>
-      </Control>
-      <Control label="Line height">
-        <Columns space={3}>
-          <Column width={'content'}>
-            <AtomicSlider
-              key="line-height"
-              width={contentWidth - 50}
-              minimumValue={1}
-              maximumValue={4}
-              step={0.1}
-              value={lineHeight}
-              onValueChange={setLineHeight}
-            />
-          </Column>
-          <Column>
-            <AtomicText>{lineHeight.toFixed(1)}</AtomicText>
-          </Column>
-        </Columns>
-      </Control>
-      <Control label="Font weight">
-        <AtomicRadioControl
-          selectedValue={fontWeight}
-          onSelectedValueChange={setFontWeight}
-          values={fontWeights}
-        />
-      </Control>
-      <Control label="Font style">
-        <AtomicRadioControl
-          selectedValue={fontStyle}
-          onSelectedValueChange={setFontStyle}
-          values={fontStyles}
-        />
-      </Control>
-      <Control label="List type">
-        <AtomicRadioControl
-          selectedValue={listType}
-          onSelectedValueChange={setListType}
-          values={listTypes}
-        />
-      </Control>
-    </Stack>
+    <AtomicBox paddingX={spaces}>
+      <Stack style={style} space={4}>
+        <Control label="Font size">
+          <MolecularSliderDisplay
+            key="font-size"
+            width={controlContentWidth}
+            minimumValue={10}
+            maximumValue={40}
+            step={0.1}
+            value={fontSize}
+            onValueChange={setFontSize}
+          />
+        </Control>
+        <Control label="Line height">
+          <MolecularSliderDisplay
+            key="line-height"
+            width={controlContentWidth}
+            minimumValue={1}
+            maximumValue={4}
+            step={0.1}
+            value={lineHeight}
+            onValueChange={setLineHeight}
+          />
+        </Control>
+        <Control label="Font weight">
+          <AtomicRadioControl
+            selectedValue={fontWeight}
+            onSelectedValueChange={setFontWeight}
+            values={fontWeights}
+          />
+        </Control>
+        <Control label="Font style">
+          <AtomicRadioControl
+            selectedValue={fontStyle}
+            onSelectedValueChange={setFontStyle}
+            values={fontStyles}
+          />
+        </Control>
+        <Control label="Font family">
+          <AtomicPicker<string>
+            selectedValue={fontFamily}
+            onSelectedValueChange={setFontFamily}
+            items={useMemo(
+              () => Constants.systemFonts.map((v) => ({ value: v })),
+              []
+            )}
+          />
+        </Control>
+        <Control label="List type">
+          <AtomicPicker
+            items={useMemo(() => listTypes.map((v) => ({ value: v })), [])}
+            selectedValue={listType}
+            onSelectedValueChange={setListType}
+          />
+        </Control>
+      </Stack>
+    </AtomicBox>
   );
 }
 
@@ -264,7 +274,8 @@ export default function Lists() {
       ul: {
         listStyleType: listType
       }
-    }
+    },
+    systemFonts: Constants.systemFonts
   };
   const theme = useThemeColors();
   const controlsProps: ControlsProps = {
@@ -282,11 +293,11 @@ export default function Lists() {
     setLineHeight,
     setListType
   };
+  const snapPoints = useMemo(() => ['25%', '50%', '80%'], []);
   return (
     <SafeAreaView style={{ backgroundColor: theme.background, flex: 1 }}>
-      <ScrollView contentContainerStyle={{ paddingHorizontal: spacing }}>
+      <ScrollView>
         <Stack space={3}>
-          <Controls {...controlsProps} />
           <Demo
             htmlProps={htmlProps}
             html={htmlExample}
@@ -299,6 +310,12 @@ export default function Lists() {
           </Demo>
         </Stack>
       </ScrollView>
+      <AtomicBottomSheet snapPoints={snapPoints}>
+        <AtomicBox paddingBottom={3} paddingLeft={2}>
+          <AtomicText fontSize="big">Customize</AtomicText>
+        </AtomicBox>
+        <Controls {...controlsProps} />
+      </AtomicBottomSheet>
     </SafeAreaView>
   );
 }

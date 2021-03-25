@@ -7,7 +7,7 @@ import { useThemeColors } from '../state/ThemeProvider';
 export interface AtomicTextStyle {
   color?: string;
   mono?: boolean;
-  fontSize?: 'normal' | 'small';
+  fontSize?: 'big' | 'normal' | 'small';
   align?: 'center' | 'start' | 'end';
   italic?: boolean;
   style?: StyleProp<TextStyle>;
@@ -28,7 +28,7 @@ export default function useAtomicTextStyle(props?: AtomicTextStyle) {
       {
         color: color ?? inheritedColor ?? text,
         fontFamily: mono ? MONO : undefined,
-        fontSize: fontSize === 'normal' ? 14 : 10,
+        fontSize: fontSize === 'normal' ? 16 : fontSize === 'big' ? 25 : 11,
         fontStyle: italic ? 'italic' : 'normal',
         textAlign:
           align === 'end' ? 'right' : align === 'start' ? 'left' : 'center'

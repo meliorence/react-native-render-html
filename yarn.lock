@@ -1907,6 +1907,38 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@gorhom/bottom-sheet@npm:^2":
+  version: 2.2.6
+  resolution: "@gorhom/bottom-sheet@npm:2.2.6"
+  dependencies:
+    "@gorhom/portal": ^1.0.4
+    invariant: ^2.2.4
+    lodash.isequal: ^4.5.0
+    nanoid: ^3.1.20
+    react-native-redash: ^14.2.4
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-gesture-handler: ">=1.8.0"
+    react-native-reanimated: ">=1.9.0"
+  checksum: 3168223e0e274df80a3c5fbb08ace57ecf712621ad2a26b68eba57e0262bc9f46b985bb6782046417d7f7a850a95b3631cd33cc112423f04bf5ce05156483b3b
+  languageName: node
+  linkType: hard
+
+"@gorhom/portal@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@gorhom/portal@npm:1.0.4"
+  dependencies:
+    immer: ^8.0.1
+    lodash.isequal: ^4.5.0
+    nanoid: ^3.1.20
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 3758951677e5024dbba05d736e3c67aafa8b17d98bed4b9afd366293534a8665f25ca00c37bb52749d0b639a9f46c0505af880791156d68004e68e9a67223cb5
+  languageName: node
+  linkType: hard
+
 "@hapi/address@npm:2.x.x":
   version: 2.1.4
   resolution: "@hapi/address@npm:2.1.4"
@@ -3306,6 +3338,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-community/picker@npm:1.6.6":
+  version: 1.6.6
+  resolution: "@react-native-community/picker@npm:1.6.6"
+  peerDependencies:
+    react: ^16.0
+    react-native: ">=0.57"
+  checksum: 3858510469137363f68c8fe2de6fb04a281d5d7d6e4401e9f1765c75ca743244a09900a1fb26c6eb96d1ddbb79b1ef532845e5f1e45546a567f7a1065dccd50e
+  languageName: node
+  linkType: hard
+
 "@react-native-community/slider@npm:3.0.3":
   version: 3.0.3
   resolution: "@react-native-community/slider@npm:3.0.3"
@@ -4064,6 +4106,13 @@ __metadata:
   dependencies:
     event-target-shim: ^5.0.0
   checksum: cc53ad8df9a6de3f55d4f804fca5106908f855e47b572fb5ab3cdd723b76374686dcefa557a2f87d4396db77e31bc0e6ce9d48637388cef6d884c29ad2691448
+  languageName: node
+  linkType: hard
+
+"abs-svg-path@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "abs-svg-path@npm:0.1.1"
+  checksum: a1a1976292b20a024095579cb2e48873ff62ac5f67a8f595deee7f5f913282c06240e2132920c5ff4ee2a683b9717228a98916dbca7bb454810d921b722682dd
   languageName: node
   linkType: hard
 
@@ -6637,8 +6686,10 @@ __metadata:
   dependencies:
     "@babel/core": ~7.12.13
     "@expo/vector-icons": ^10.0.0
+    "@gorhom/bottom-sheet": ^2
     "@mobily/stacks": ^0.9.4
     "@react-native-community/masked-view": 0.1.10
+    "@react-native-community/picker": 1.6.6
     "@react-native-community/slider": 3.0.3
     "@react-native-community/viewpager": 4.1.6
     "@react-navigation/bottom-tabs": ^5.11.7
@@ -9149,6 +9200,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"immer@npm:^8.0.1":
+  version: 8.0.4
+  resolution: "immer@npm:8.0.4"
+  checksum: 047d4af1c6d9dbba3ecbcf39aed9fa2f5323f80205c0618085d25a981d061353f4417b53fad95c71bd834eb9aa9ffdc2db53c7aa7726736b80bf1ae5f206eca7
+  languageName: node
+  linkType: hard
+
 "import-cwd@npm:3.0.0":
   version: 3.0.0
   resolution: "import-cwd@npm:3.0.0"
@@ -11640,7 +11698,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"lodash.isequal@npm:^4.0.0":
+"lodash.isequal@npm:^4.0.0, lodash.isequal@npm:^4.5.0":
   version: 4.5.0
   resolution: "lodash.isequal@npm:4.5.0"
   checksum: 5b47e094641c18a915497343894c66f7da6aebb9aaa2a3fcc5643455aaf29d19df60ebbed664c8374fb959c8b4ce96810ee6becd8a71ac58c6c2ca8d29762947
@@ -12542,6 +12600,15 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"nanoid@npm:^3.1.20":
+  version: 3.1.22
+  resolution: "nanoid@npm:3.1.22"
+  bin:
+    nanoid: bin/nanoid.cjs
+  checksum: 6a38c799816de388cd67233a9fad6216e0ad2abda3ce5b34eb126afbef6905924507223dc65797e2bcbc513f9cd7e078ea7e69448d59f434a6206b491278ae24
+  languageName: node
+  linkType: hard
+
 "nanomatch@npm:^1.2.9":
   version: 1.2.13
   resolution: "nanomatch@npm:1.2.13"
@@ -12750,6 +12817,15 @@ fsevents@^1.2.7:
   version: 3.0.0
   resolution: "normalize-path@npm:3.0.0"
   checksum: 215a701b471948884193628f3e38910353abf445306b519c42c2a30144b8beb8ca0a684da97bfc2ee11eb168c35c776d484274da4bd8f213d2b22f70579380ee
+  languageName: node
+  linkType: hard
+
+"normalize-svg-path@npm:^1.0.1":
+  version: 1.1.0
+  resolution: "normalize-svg-path@npm:1.1.0"
+  dependencies:
+    svg-arc-to-cubic-bezier: ^3.0.0
+  checksum: 7d287a42c02e13a498d052ea10e6a9dfddc19c47683a38872a57984f45b9b1b93e9eebd3c9633cdc5607d08e1b9055abf493c68ea2d8145aaa788df96ad77300
   languageName: node
   linkType: hard
 
@@ -13358,6 +13434,13 @@ fsevents@^1.2.7:
   dependencies:
     pngjs: ^3.3.0
   checksum: aeebcb74c0fc08e60dd25a991220825d93e7b949eec76c4683639b6534477096cbc11216a87a30a315ffddf4be2295ba00685d3f194af5a7230f1a2ed6a6585b
+  languageName: node
+  linkType: hard
+
+"parse-svg-path@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "parse-svg-path@npm:0.1.2"
+  checksum: a9cf2b838bb774e215ed1adccfd1fdcfdf1ac6bbd46a1185d8ad66a24272ed835f42fbf5dfdd60f4660f037786a2e20aef932a9e48333bddd6959bd49e481dd1
   languageName: node
   linkType: hard
 
@@ -14146,6 +14229,22 @@ fsevents@^1.2.7:
     react: "*"
     react-native: "*"
   checksum: 84c5c41d2be93aecc5af5607133d2780344f2f7dd1b76af8b807f5a0b40c6dca61be66da1f88e82f35b5a6d4ae5b97a7cd94205830397bd7d2f12300f386eb84
+  languageName: node
+  linkType: hard
+
+"react-native-redash@npm:^14.2.4":
+  version: 14.2.4
+  resolution: "react-native-redash@npm:14.2.4"
+  dependencies:
+    abs-svg-path: ^0.1.1
+    normalize-svg-path: ^1.0.1
+    parse-svg-path: ^0.1.2
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-gesture-handler: "*"
+    react-native-reanimated: "*"
+  checksum: 264fc893a833a40483bed76ba5aa193ac2cc9300258b986918a95d22a2fc67f0a2cc4f95fb06e5ffb42d4bf1c3ddecc89af793f1214d7862d9683937c1a96c5c
   languageName: node
   linkType: hard
 
@@ -16144,6 +16243,13 @@ resolve@~1.17.0:
     has-flag: ^4.0.0
     supports-color: ^7.0.0
   checksum: 8b3b6d71ee298d7f9a3ff4bfb928bd037c0b691b01bdfebb77deb3384976cd78c180d564dc3689ce5fe254d323252f7064efa1364bf24ab81efa6b080e51eddb
+  languageName: node
+  linkType: hard
+
+"svg-arc-to-cubic-bezier@npm:^3.0.0":
+  version: 3.2.0
+  resolution: "svg-arc-to-cubic-bezier@npm:3.2.0"
+  checksum: 94725651f6db5ac70b5733dce674d68c657128d57e119d4c46c06567d5d45b142f0819e8368a65e52985fa261ce7313aac32f4af7687214dcc992c5137deb7bb
   languageName: node
   linkType: hard
 
