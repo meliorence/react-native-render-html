@@ -9,7 +9,6 @@ import ColorSchemeProvider from './state/ColorSchemeProvider';
 import { useColorScheme } from 'react-native';
 import LinkPressDisplay from './components/LinkPressDisplay';
 import { StacksProvider } from '@mobily/stacks';
-import Lists from './playgrounds/Lists';
 
 enableScreens();
 
@@ -25,7 +24,7 @@ export default function App() {
           <ColorSchemeProvider initialColorScheme={initialColorScheme}>
             <ThemeProvider>
               <LinkPressDisplay>
-                <Lists />
+                <Navigation />
                 <StatusBar style="light" />
               </LinkPressDisplay>
             </ThemeProvider>
