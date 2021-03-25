@@ -6,13 +6,17 @@ import RenderHTML, {
 } from 'react-native-render-html';
 import LegacyHTML from 'react-native-render-html-v5';
 import Constants from 'expo-constants';
-import { useComponentColors } from '../state/ThemeProvider';
-import DisplayLoading from './DisplayLoading';
-import AtomicText from './AtomicText';
-import useOnLinkPress from '../hooks/useOnLinkPress';
+import { useComponentColors } from '../../state/ThemeProvider';
+import DisplayLoadingAtom from '../atoms/DisplayLoadingAtom';
+import TextNucleon from '../nucleons/TextNucleon';
+import useOnLinkPress from '../../hooks/useOnLinkPress';
 
-const DEFAULT_PROPS: Pick<RenderHTMLProps, 'onLinkPress' | 'debug'> = {
-  debug: true
+const DEFAULT_PROPS: Pick<
+  RenderHTMLProps,
+  'debug' | 'enableExperimentalPercentWidth'
+> = {
+  debug: true,
+  enableExperimentalPercentWidth: true
 };
 
 function stripUnsupportedStylesInLegacy(style: Record<string, any>) {
@@ -46,7 +50,7 @@ const styles = StyleSheet.create({
   legacyWarningText: { textAlign: 'center', fontSize: 20, fontStyle: 'italic' }
 });
 
-const HtmlDisplay = React.memo(
+const HtmlDisplayMolecule = React.memo(
   ({
     supportsLegacy,
     renderHtmlProps,
@@ -105,9 +109,9 @@ const HtmlDisplay = React.memo(
     if (!supportsLegacy && useLegacy) {
       return (
         <View style={styles.legacyWarningContainer}>
-          <AtomicText style={styles.legacyWarningText}>
+          <TextNucleon style={styles.legacyWarningText}>
             Legacy HTML component is not available for this snippet.
-          </AtomicText>
+          </TextNucleon>
         </View>
       );
     }
@@ -131,7 +135,7 @@ const HtmlDisplay = React.memo(
         enableExperimentalMarginCollapsing={true}
         debug={false}
         systemFonts={systemFonts}
-        remoteLoadingView={() => <DisplayLoading />}
+        remoteLoadingView={() => <DisplayLoadingAtom />}
         triggerTREInvalidationPropNames={['baseStyle']}
       />
     );
@@ -139,4 +143,4 @@ const HtmlDisplay = React.memo(
   }
 );
 
-export default HtmlDisplay;
+export default HtmlDisplayMolecule;

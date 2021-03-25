@@ -9,15 +9,17 @@ import { StyleSheet } from 'react-native';
 import { Linking, View } from 'react-native';
 import { RenderHTMLProps } from 'react-native-render-html';
 import { Snackbar } from 'react-native-paper';
-import { useComponentColors } from '../state/ThemeProvider';
-import onLinkPressContext from '../state/onLinkPressContext';
-import AtomicText from './AtomicText';
+import { useComponentColors } from '../../state/ThemeProvider';
+import onLinkPressContext from '../../state/onLinkPressContext';
+import TextNucleon from '../nucleons/TextNucleon';
 
 const styles = StyleSheet.create({
   container: { position: 'relative', flexGrow: 1 }
 });
 
-export default function LinkPressDisplay({ children }: PropsWithChildren<{}>) {
+export default function LinkPressDisplayMolecule({
+  children
+}: PropsWithChildren<{}>) {
   const [url, setUrl] = useState<string | null>(null);
   const onLinkPress = useCallback<Required<RenderHTMLProps>['onLinkPress']>(
     (evt, href) => {
@@ -42,9 +44,9 @@ export default function LinkPressDisplay({ children }: PropsWithChildren<{}>) {
         visible={url !== null}
         action={action}
         onDismiss={() => setUrl(null)}>
-        <AtomicText mono style={{ color: backgroundColor }}>
+        <TextNucleon mono style={{ color: backgroundColor }}>
           {url}
-        </AtomicText>
+        </TextNucleon>
       </Snackbar>
     </onLinkPressContext.Provider>
   );

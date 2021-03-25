@@ -1,20 +1,14 @@
-import React, { createContext, useContext } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import BottomSheet, {
-  BottomSheetScrollView,
   BottomSheetBackgroundProps,
   BottomSheetProps
 } from '@gorhom/bottom-sheet';
-import { useThemeColors } from '../state/ThemeProvider';
+import { useThemeColors } from '../../state/ThemeProvider';
 import Color from 'color';
+import gestureHandlerContextNucleon from '../nucleons/gestureHandlerContextNucleon';
 
 const RADIUS = 15;
-
-const atomicBottomSheetContext = createContext(false);
-
-export function useAtomicBottomSheet() {
-  return useContext(atomicBottomSheetContext);
-}
 
 const styles = StyleSheet.create({
   radiusTop: {
@@ -57,26 +51,28 @@ const Background = ({ style }: BottomSheetBackgroundProps) => {
         style,
         styles.radiusTop,
         {
-          backgroundColor: theme.card
+          backgroundColor: Color(theme.card).alpha(0.95).string()
         }
       ]}
     />
   );
 };
 
-export default function AtomicBottomSheet({
+export default function BottomSheetAtom({
   snapPoints,
-  children
-}: Pick<BottomSheetProps, 'snapPoints' | 'children'>) {
+  children,
+  ...props
+}: Omit<BottomSheetProps, 'handleComponent' | 'backgroundComponent'>) {
   return (
-    <atomicBottomSheetContext.Provider value={true}>
+    <gestureHandlerContextNucleon.Provider value={true}>
       <BottomSheet
         handleComponent={Handle}
         backgroundComponent={Background}
-        enableContentPanningGesture={false}
-        snapPoints={snapPoints}>
-        <BottomSheetScrollView>{children}</BottomSheetScrollView>
+        enableContentPanningGesture={true}
+        snapPoints={snapPoints}
+        {...props}>
+        {children}
       </BottomSheet>
-    </atomicBottomSheetContext.Provider>
+    </gestureHandlerContextNucleon.Provider>
   );
 }

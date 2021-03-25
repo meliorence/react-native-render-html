@@ -3732,16 +3732,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/picker@npm:1.6.6":
-  version: 1.6.6
-  resolution: "@react-native-community/picker@npm:1.6.6"
-  peerDependencies:
-    react: ^16.0
-    react-native: ">=0.57"
-  checksum: 3858510469137363f68c8fe2de6fb04a281d5d7d6e4401e9f1765c75ca743244a09900a1fb26c6eb96d1ddbb79b1ef532845e5f1e45546a567f7a1065dccd50e
-  languageName: node
-  linkType: hard
-
 "@react-native-community/slider@npm:3.0.3":
   version: 3.0.3
   resolution: "@react-native-community/slider@npm:3.0.3"
@@ -3759,6 +3749,16 @@ __metadata:
     react: ^16.0
     react-native: ">=0.57"
   checksum: 1f6ba6e3787bc5bb5c075c799b27319dacb50feae18c806b2af9598aeb934f871de67cf405377864a5e2553270592f5f4f27689bbd5cf15e50db3388cc86a93e
+  languageName: node
+  linkType: hard
+
+"@react-native-picker/picker@npm:1.9.2":
+  version: 1.9.2
+  resolution: "@react-native-picker/picker@npm:1.9.2"
+  peerDependencies:
+    react: ^16.0
+    react-native: ">=0.57"
+  checksum: 1085e3696052065f4a745ba739c7fade1936b0de09c90ab18658d71ec1a84288b1fb7663e2eefc7f4f9210e892578151349e4b7c8704c08e6ed20d022a38c261
   languageName: node
   linkType: hard
 
@@ -7084,9 +7084,9 @@ __metadata:
     "@gorhom/bottom-sheet": ^2
     "@mobily/stacks": ^0.9.4
     "@react-native-community/masked-view": 0.1.10
-    "@react-native-community/picker": 1.6.6
     "@react-native-community/slider": 3.0.3
     "@react-native-community/viewpager": 4.2.0
+    "@react-native-picker/picker": 1.9.2
     "@react-navigation/bottom-tabs": ^5.11.7
     "@react-navigation/drawer": ^5.12.3
     "@react-navigation/native": ^5.9.2
@@ -7109,7 +7109,7 @@ __metadata:
     react-dom: 16.13.1
     react-native: "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz"
     react-native-gesture-handler: ~1.8.0
-    react-native-paper: ^4.7.1
+    react-native-paper: ^4.7.2
     react-native-reanimated: ~1.13.0
     react-native-render-html: "workspace:*"
     react-native-render-html-v5: "npm:react-native-render-html@^5.0.0"
@@ -7119,7 +7119,9 @@ __metadata:
     react-native-web: ~0.13.12
     react-native-webview: 11.0.0
     react-syntax-highlighter: 6.0.4
+    scheduler: ^0.20.2
     typescript: ~4.0.0
+    use-context-selector: ^1.3.7
     zustand: ^3.2.0
   languageName: unknown
   linkType: soft
@@ -14663,9 +14665,9 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-native-paper@npm:^4.7.1":
-  version: 4.7.1
-  resolution: "react-native-paper@npm:4.7.1"
+"react-native-paper@npm:^4.7.2":
+  version: 4.7.2
+  resolution: "react-native-paper@npm:4.7.2"
   dependencies:
     "@callstack/react-theme-provider": ^3.0.5
     color: ^3.1.2
@@ -14674,7 +14676,7 @@ fsevents@^1.2.7:
     react: "*"
     react-native: "*"
     react-native-vector-icons: "*"
-  checksum: acf63595c02b8fe441c91bb51738e06b77527ad63e3c10c782fe31a16de2ec4ad1313abd22769ea8d25541dda086c133b681874bfc88fcacdd0f994773b9c186
+  checksum: df9e12e84dc00b63d7ce7ce25c68cfc5e3b1b04349df50255776e905afb7e963732213c3e5bd65c4db65804e3726d76a6994fa39a64b16c755daa26754cf402e
   languageName: node
   linkType: hard
 
@@ -15780,6 +15782,16 @@ resolve@~1.17.0:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
   checksum: 377b4ad0d8313c4548bac7374bc38409e9d142799979ce396787efa04d1bcabf2591540f243f2131e3df8e56e7f5b29c5415248523e88ecb60f13a32db2e076f
+  languageName: node
+  linkType: hard
+
+"scheduler@npm:^0.20.2":
+  version: 0.20.2
+  resolution: "scheduler@npm:0.20.2"
+  dependencies:
+    loose-envify: ^1.1.0
+    object-assign: ^4.1.1
+  checksum: 2ba121e53e8a438394598612ec9a8f465b39157042f912d2dd5956af643e0d45ec6937ae4eeb0a807d1945b209515263aed12fc3bca95c7a027ec2a54e76b399
   languageName: node
   linkType: hard
 
@@ -17530,6 +17542,23 @@ typescript@~4.1.3:
     querystringify: ^2.1.1
     requires-port: ^1.0.0
   checksum: 33c44a24b9a9e9da7f2591652dc944b6164b93ad1d3ee4eea889b396788f716bd2d6c9d0a2b3ee2e8f863bde69bacbc12c3a4b4e666506ee4c88ea7444004f95
+  languageName: node
+  linkType: hard
+
+"use-context-selector@npm:^1.3.7":
+  version: 1.3.7
+  resolution: "use-context-selector@npm:1.3.7"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: "*"
+    react-native: "*"
+    scheduler: ">=0.19.0"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 345d8c665311eff03a9dfe3293ef8f2ca187ec63cf29f32493d9c3dccd613602246f71e30759aa96676c22e4be7e8a5a97c31e0bb7d06bdc68e772711fb1692e
   languageName: node
   linkType: hard
 

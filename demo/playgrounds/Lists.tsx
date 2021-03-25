@@ -1,321 +1,231 @@
-import React, { PropsWithChildren, useMemo, useState } from 'react';
-import {
-  Platform,
-  StyleProp,
-  StyleSheet,
-  useWindowDimensions,
-  View,
-  ViewProps,
-  ViewStyle
-} from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import { RenderHTMLProps } from 'react-native-render-html';
+import React from 'react';
 import Constants from 'expo-constants';
-import BottomSheet, {
-  BottomSheetScrollView,
-  BottomSheetBackgroundProps
-} from '@gorhom/bottom-sheet';
+import TextNucleon from '../components/nucleons/TextNucleon';
+import HtmlElDisplayAtom from '../components/atoms/HtmlElDisplayAtom';
+import PlaygroundTemplate, {
+  PlaygroundControls,
+  PlaygroundDescription,
+  PlaygroundNavigator,
+  PlaygroundScreen
+} from '../components/templates/PlaygroundTemplate';
+import TideListAtom from '../components/atoms/TideListAtom';
+import SliderTideMolecule from '../components/molecules/SliderTideMolecule';
+import SwitchTideMolecule from '../components/molecules/SwitchTideMolecule';
+import NavTideMolecule from '../components/molecules/NavTideMolecule';
+import RadioListControlMolecule from '../components/molecules/RadioListControlMolecule';
+import {
+  usePlaygroundSetter,
+  usePlaygroundStateSlice
+} from '../components/templates/PlaygroundTemplate/playgroundStore';
 
-import HtmlDisplay from '../components/HtmlDisplay';
-import AtomicText from '../components/AtomicText';
-import SourceDisplay from '../components/SourceDisplay';
-import { Stack, useSpacing } from '@mobily/stacks';
-import { useComponentColors, useThemeColors } from '../state/ThemeProvider';
-import AtomicBox from '../components/AtomicBox';
-import AtomicRadioControl from '../components/AtomicRadioControl';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import AtomicPicker from '../components/AtomicPicker';
-import MolecularSliderDisplay from '../components/MolecularSliderDisplay';
-import AtomicBottomSheet from '../components/AtomicBottomSheet';
 
-const styles = StyleSheet.create({
-  demoContainer: {
-    borderWidth: 3
+
+const sourceMap = {
+  shortOl: {
+    source: `<ol>
+    <li>Sneaky</li>
+    <li>Beaky</li>
+    <li>Like</li>
+  </ol>`,
+    label: 'Short ol'
+  },
+  longOl: {
+    source: `<ol class="gradient-list">
+    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+    <li>Aenean tincidunt elit at ipsum cursus, vitae interdum nulla suscipit.</li>
+    <li>Curabitur in orci vel risus facilisis accumsan.</li>
+    <li>Morbi eleifend tortor lacinia sapien sagittis, quis pellentesque felis egestas.</li>
+    <li>Aenean viverra dui quis leo lacinia fringilla.</li>
+    <li>Sed varius lectus ac condimentum egestas.</li>
+    <li>Maecenas faucibus lorem nec lorem posuere, a rhoncus velit porttitor.</li>
+    <li>Proin porta arcu ac elit malesuada pulvinar.</li>
+    <li>Phasellus vitae felis sit amet mi gravida volutpat.</li>
+    <li>Curabitur vulputate urna non efficitur interdum.</li>
+    <li>Curabitur dapibus enim in consectetur imperdiet.</li>
+    <li>Suspendisse consectetur nibh non condimentum porta.</li>
+    <li>Ut placerat diam in cursus aliquet.</li>
+    <li>Praesent vitae quam id tortor malesuada viverra ut at elit.</li>
+    <li>Vivamus feugiat justo id volutpat rutrum.</li>
+    <li>Nulla volutpat erat non mauris condimentum, nec consequat elit posuere.</li>
+    <li>Vestibulum eu risus efficitur, porta lacus a, mollis metus.</li>
+    <li>Maecenas finibus arcu vel urna commodo, ac bibendum massa vestibulum.</li>
+    <li>Praesent eleifend leo eget consectetur interdum.</li>
+    <li>Suspendisse et lectus gravida, interdum mauris aliquet, mattis purus.</li>
+    <li>In nec nisl feugiat, blandit odio non, vulputate neque.</li>
+    <li>Sed id felis mollis, bibendum orci a, condimentum augue.</li>
+    <li>Etiam eleifend ipsum nec nibh aliquam, non commodo risus eleifend.</li>
+    <li>Curabitur in ipsum eget lacus blandit maximus in at sem.</li>
+    <li>Curabitur sagittis ante nec libero maximus, ut imperdiet elit egestas.</li>
+    <li>Proin congue felis sed ultrices elementum.</li>
+    <li>Duis sit amet velit et lectus eleifend interdum non quis ex.</li>
+    <li>Praesent congue lectus a felis pharetra malesuada.</li>
+    <li>Sed vel mauris condimentum, egestas dolor eu, porttitor nisl.</li>
+    <li>Donec sed elit tincidunt, accumsan magna sed, facilisis libero.</li>
+    <li>Curabitur vel purus quis justo placerat euismod mollis ac arcu.</li>
+    <li>Sed eget mi et justo luctus mollis ut non augue.</li>
+    <li>Suspendisse sit amet lectus et magna euismod tempor.</li>
+    <li>Vestibulum accumsan velit et ipsum pellentesque, vitae ultricies erat blandit.</li>
+    <li>Pellentesque vel dolor ac risus efficitur convallis.</li>
+    <li>Maecenas feugiat quam at facilisis dapibus.</li>
+    <li>Cras commodo leo sit amet lacus lacinia, eget rutrum sem sodales.</li>
+    <li>Ut sit amet risus finibus, iaculis lectus sit amet, varius lectus.</li>
+    <li>Duis dignissim elit eget erat maximus luctus.</li>
+  </ol>`,
+    label: 'Long ol'
+  },
+  nestedUl: {
+    label: 'Nested ul',
+    source: `<ul>
+    <li>
+      Nest Level 1
+      <ul>
+        <li>
+          Nest Level 2
+          <ul>
+            <li>Nest Level 3</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>`
+  },
+  nestedOl: {
+    label: 'Nested ol',
+    source: `<ol>
+    <li>
+      Nest Level 1
+      <ol>
+        <li>
+          Nest Level 2
+          <ol>
+            <li>Nest Level 3</li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>`
   }
-});
+} as const;
 
-const DemoCaption = ({
-  children,
-  style
-}: PropsWithChildren<{ style?: StyleProp<ViewProps> }>) => {
-  const { backgroundColor, color } = useComponentColors('demoCaption');
+function FontSizeTide() {
+  const fontSize = usePlaygroundStateSlice('fontSize');
+  const setFontSize = usePlaygroundSetter('fontSize');
   return (
-    <AtomicBox padding={1} backgroundColor={backgroundColor} style={style}>
-      <AtomicText italic align="center" color={color}>
-        {children}
-      </AtomicText>
-    </AtomicBox>
-  );
-};
-
-const DemoSectionTitle = ({
-  children,
-  style
-}: PropsWithChildren<{
-  style?: StyleProp<ViewStyle>;
-}>) => {
-  const { backgroundColor, color } = useComponentColors('demoSectionTitle');
-  return (
-    <AtomicBox padding={1} backgroundColor={backgroundColor} style={style}>
-      <AtomicText color={color} fontSize="small">
-        {children}
-      </AtomicText>
-    </AtomicBox>
-  );
-};
-
-function Demo({
-  html,
-  contentWidth,
-  htmlProps,
-  children,
-  style
-}: PropsWithChildren<{
-  html: string;
-  contentWidth: number;
-  htmlProps?: Partial<RenderHTMLProps>;
-  style?: StyleProp<ViewStyle>;
-}>) {
-  const boxPaddingU = 2;
-  const theme = useThemeColors();
-  const htmlCombo = useComponentColors('html');
-  const demoSectionCombo = useComponentColors('demoSectionTitle');
-  const htmlContentWidth = contentWidth - 2 * useSpacing(boxPaddingU);
-  return (
-    <AtomicBox style={style}>
-      <DemoCaption>{children}</DemoCaption>
-      <AtomicBox
-        padding={boxPaddingU}
-        style={[
-          styles.demoContainer,
-          {
-            borderColor: theme.primary,
-            backgroundColor: demoSectionCombo.backgroundColor
-          }
-        ]}>
-        <Stack space={3}>
-          <Stack space={0}>
-            <DemoSectionTitle>HTML source</DemoSectionTitle>
-            <AtomicBox padding={1} {...htmlCombo}>
-              <SourceDisplay html={html} />
-            </AtomicBox>
-          </Stack>
-          <Stack space={0}>
-            <DemoSectionTitle>RenderHTML</DemoSectionTitle>
-            <AtomicBox padding={1} {...htmlCombo}>
-              <HtmlDisplay
-                renderHtmlProps={{ ...htmlProps, source: { html } }}
-                useLegacy={false}
-                supportsLegacy={false}
-                contentWidth={htmlContentWidth}
-              />
-            </AtomicBox>
-          </Stack>
-        </Stack>
-      </AtomicBox>
-    </AtomicBox>
-  );
-}
-interface ControlsProps extends Pick<ViewProps, 'style'> {
-  fontSize: number;
-  listType: ListType;
-  lineHeight: number;
-  fontWeight: FontWeight;
-  fontFamily: string;
-  fontStyle: FontStyle;
-  setLineHeight: (lineHeight: number) => void;
-  setListType: (listType: ListType) => void;
-  setFontSize: (fontSize: number) => void;
-  setFontWeight: (fontWeight: FontWeight) => void;
-  setFontFamily: (fontFamily: string) => void;
-  setFontStyle: (fontStyle: FontStyle) => void;
-  contentWidth: number;
-}
-
-const listTypes = [
-  'disk',
-  'circle',
-  'square',
-  'disclosure-open',
-  'disclosure-closed',
-  'decimal',
-  'lower-alpha',
-  'upper-alpha',
-  'lower-greek',
-  'decimal-leading-zero',
-  'none'
-] as const;
-
-type ListType = typeof listTypes[number];
-
-const fontWeights = ['normal', 'bold'] as const;
-const fontStyles = ['normal', 'italic'] as const;
-type FontWeight = typeof fontWeights[number];
-type FontStyle = typeof fontStyles[number];
-
-function Control({
-  style,
-  label,
-  children
-}: PropsWithChildren<{ style?: StyleProp<ViewStyle>; label: string }>) {
-  return (
-    <Stack style={style} space={1}>
-      <AtomicText fontSize="small">{label}</AtomicText>
-      <AtomicBox paddingX={2}>{children}</AtomicBox>
-    </Stack>
+    <SliderTideMolecule
+      leftIconName="format-size"
+      label="Font size"
+      minimumValue={10}
+      maximumValue={40}
+      step={0.1}
+      value={fontSize}
+      onValueChange={setFontSize}
+    />
   );
 }
 
-function Controls({
-  listType,
-  contentWidth,
-  fontFamily,
-  fontSize,
-  fontStyle,
-  fontWeight,
-  lineHeight,
-  setFontFamily,
-  setFontSize,
-  setFontStyle,
-  setFontWeight,
-  setLineHeight,
-  setListType,
-  style
-}: ControlsProps) {
-  const spaces = 2;
-  const controlContentWidth = contentWidth - useSpacing(2 * spaces);
+function LineHeightTide(props: any) {
+  const lineHeight = usePlaygroundStateSlice('lineHeight');
+  const setLineHeight = usePlaygroundSetter('lineHeight');
   return (
-    <AtomicBox paddingX={spaces}>
-      <Stack style={style} space={4}>
-        <Control label="Font size">
-          <MolecularSliderDisplay
-            key="font-size"
-            width={controlContentWidth}
-            minimumValue={10}
-            maximumValue={40}
-            step={0.1}
-            value={fontSize}
-            onValueChange={setFontSize}
-          />
-        </Control>
-        <Control label="Line height">
-          <MolecularSliderDisplay
-            key="line-height"
-            width={controlContentWidth}
-            minimumValue={1}
-            maximumValue={4}
-            step={0.1}
-            value={lineHeight}
-            onValueChange={setLineHeight}
-          />
-        </Control>
-        <Control label="Font weight">
-          <AtomicRadioControl
-            selectedValue={fontWeight}
-            onSelectedValueChange={setFontWeight}
-            values={fontWeights}
-          />
-        </Control>
-        <Control label="Font style">
-          <AtomicRadioControl
-            selectedValue={fontStyle}
-            onSelectedValueChange={setFontStyle}
-            values={fontStyles}
-          />
-        </Control>
-        <Control label="Font family">
-          <AtomicPicker<string>
-            selectedValue={fontFamily}
-            onSelectedValueChange={setFontFamily}
-            items={useMemo(
-              () => Constants.systemFonts.map((v) => ({ value: v })),
-              []
-            )}
-          />
-        </Control>
-        <Control label="List type">
-          <AtomicPicker
-            items={useMemo(() => listTypes.map((v) => ({ value: v })), [])}
-            selectedValue={listType}
-            onSelectedValueChange={setListType}
-          />
-        </Control>
-      </Stack>
-    </AtomicBox>
+    <SliderTideMolecule
+      leftIconName="format-line-spacing"
+      label="Line height"
+      minimumValue={1}
+      maximumValue={4}
+      step={0.1}
+      value={lineHeight}
+      onValueChange={setLineHeight}
+      {...props}
+    />
+  );
+}
+
+function BoldTide(props: any) {
+  const isBold = usePlaygroundStateSlice('isBold');
+  const setIsBold = usePlaygroundSetter('isBold');
+  return (
+    <SwitchTideMolecule
+      leftIconName="format-bold"
+      label="Bold?"
+      value={isBold}
+      onValueChange={setIsBold}
+      {...props}
+    />
+  );
+}
+
+function ItalicTide(props: any) {
+  const isItalic = usePlaygroundStateSlice('isItalic');
+  const setIsItalic = usePlaygroundSetter('isItalic');
+  return (
+    <SwitchTideMolecule
+      leftIconName="format-italic"
+      label="Italic?"
+      value={isItalic}
+      onValueChange={setIsItalic}
+      {...props}
+    />
+  );
+}
+
+function FontFamilyTide(props: any) {
+  return (
+    <NavTideMolecule
+      leftIconName="format-font"
+      label="Font family"
+      route="DemoFontFamily"
+      {...props}
+    />
+  );
+}
+
+function OrderedListTypeTide(props: any) {
+  return (
+    <NavTideMolecule
+      leftIconName="format-list-bulleted-type"
+      label="ol List type"
+      route="PlaygroundOlListType"
+      {...props}
+    />
+  );
+}
+
+function UnorderedListTypeTide(props: any) {
+  return (
+    <NavTideMolecule
+      leftIconName="format-list-bulleted-type"
+      label="ul List type"
+      route="PlaygroundUlListType"
+      {...props}
+    />
   );
 }
 
 export default function Lists() {
-  const { width: contentWidth } = useWindowDimensions();
-  const [fontSize, setFontSize] = useState(14);
-  const [lineHeight, setLineHeight] = useState(1.2);
-  const [listType, setListType] = useState<ListType>('circle');
-  const [fontWeight, setFontWeight] = useState<FontWeight>('normal');
-  const [fontStyle, setFontStyle] = useState<FontStyle>('normal');
-  const [fontFamily, setFontFamily] = useState(
-    Platform.select({ ios: 'system', default: 'system' })
-  );
-  const spacing = useSpacing(1);
-  const demoWidth = contentWidth - spacing * 2;
-  const htmlExample = `<ul>
-	<li>Sneaky</li>
-	<li>Beaky</li>
-	<li>Like</li>
-</ul>`;
-  const htmlProps: Partial<RenderHTMLProps> = {
-    baseStyle: {
-      fontSize,
-      lineHeight: lineHeight * fontSize,
-      fontFamily,
-      fontStyle,
-      fontWeight
-    },
-    tagsStyles: {
-      ul: {
-        listStyleType: listType
-      }
-    },
-    systemFonts: Constants.systemFonts
-  };
-  const theme = useThemeColors();
-  const controlsProps: ControlsProps = {
-    contentWidth: demoWidth,
-    fontFamily,
-    fontSize,
-    fontStyle,
-    fontWeight,
-    lineHeight,
-    listType,
-    setFontStyle,
-    setFontFamily,
-    setFontSize,
-    setFontWeight,
-    setLineHeight,
-    setListType
-  };
-  const snapPoints = useMemo(() => ['25%', '50%', '80%'], []);
   return (
-    <SafeAreaView style={{ backgroundColor: theme.background, flex: 1 }}>
-      <ScrollView>
-        <Stack space={3}>
-          <Demo
-            htmlProps={htmlProps}
-            html={htmlExample}
-            contentWidth={demoWidth}>
-            An{' '}
-            <AtomicText italic={false} mono>
-              &lt;ul/&gt;
-            </AtomicText>{' '}
-            element
-          </Demo>
-        </Stack>
-      </ScrollView>
-      <AtomicBottomSheet snapPoints={snapPoints}>
-        <AtomicBox paddingBottom={3} paddingLeft={2}>
-          <AtomicText fontSize="big">Customize</AtomicText>
-        </AtomicBox>
-        <Controls {...controlsProps} />
-      </AtomicBottomSheet>
-    </SafeAreaView>
+    <PlaygroundTemplate sourceMap={sourceMap} initialSource="shortOl">
+      <PlaygroundControls>
+        <TideListAtom>
+          <FontSizeTide />
+          <LineHeightTide />
+          <BoldTide />
+          <ItalicTide />
+          <FontFamilyTide />
+          <OrderedListTypeTide />
+          <UnorderedListTypeTide />
+        </TideListAtom>
+      </PlaygroundControls>
+      <PlaygroundDescription>
+        <TextNucleon>
+          Discover how <HtmlElDisplayAtom name="ul" /> and{' '}
+          <HtmlElDisplayAtom name="ol" /> elements react to varying style
+          constraints. The renderer for both is the same. The style of the
+          prefix (or marker in CSS terminology) is determined by{' '}
+          <TextNucleon mono>list-style-type</TextNucleon> CSS rule, camel-cased{' '}
+          <TextNucleon mono>listStyleType</TextNucleon>.
+        </TextNucleon>
+        <TextNucleon>There are two types of ...</TextNucleon>
+      </PlaygroundDescription>
+    </PlaygroundTemplate>
   );
 }

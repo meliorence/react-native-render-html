@@ -16,26 +16,29 @@ import { useColorScheme } from './ColorSchemeProvider';
 function mergeTheme(
   paperTheme: typeof PaperDarkTheme,
   navTheme: typeof NavDarkTheme,
-  colors: ColorsShape
+  colors: ColorsShape,
+  colorSheme: 'dark' | 'light'
 ) {
   return {
     ...paperTheme,
     ...navTheme,
     colors,
-    componentColors: componentColors(colors)
+    componentColors: componentColors(colors, colorSheme)
   };
 }
 
 const CombinedLightTheme = mergeTheme(
   PaperLightTheme,
   NavLightTheme,
-  themeColors.light
+  themeColors.light,
+  'light'
 );
 
 const CombinedDarkTheme = mergeTheme(
   PaperDarkTheme,
   NavDarkTheme,
-  themeColors.dark
+  themeColors.dark,
+  'dark'
 );
 
 const ThemeContext = React.createContext(CombinedLightTheme);
@@ -55,7 +58,7 @@ export function useThemeColors() {
 }
 
 export default function ThemeProvider({ children }: PropsWithChildren<{}>) {
-  const { colorScheme } = useColorScheme();
+  const colorScheme = useColorScheme();
   const selectedTheme =
     colorScheme === 'dark' ? CombinedDarkTheme : CombinedLightTheme;
   return (

@@ -6,15 +6,20 @@ import {
   DrawerContentComponentProps
 } from '@react-navigation/drawer';
 import { StackScreenProps } from '@react-navigation/stack';
-import VersionDisplay from '../components/VersionDisplay';
+import VersionDisplayMolecule from '../components/molecules/VersionDisplayMolecule';
 import SnippetScreen from './SnippetScreen';
 import snippets, { devSelectedSnippet, SnippetId } from '../snippets';
-import { Platform } from 'react-native';
+import { Platform, View } from 'react-native';
 import DrawerHeader from '../components/DrawerHeader';
 import { useComponentColors } from '../state/ThemeProvider';
 import { Switch, List } from 'react-native-paper';
-import { useColorScheme } from '../state/ColorSchemeProvider';
+import {
+  useColorScheme,
+  useColorSchemeSetter
+} from '../state/ColorSchemeProvider';
 import { useSetSelectedSnippetId } from '../state/store';
+import Lists from '../playgrounds/Lists';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const Drawer = createDrawerNavigator<Record<keyof typeof snippets, any>>();
 
@@ -24,7 +29,9 @@ function CustomDrawerContent(props: DrawerContentComponentProps<any>) {
     activeTintColor,
     activeBackgroundColor
   } = useComponentColors('drawer');
-  const { colorScheme, setColorScheme } = useColorScheme();
+  const colorScheme = useColorScheme();
+  const setColorScheme = useColorSchemeSetter();
+  const { top } = useSafeAreaInsets();
   const swichColorModeRight = React.useCallback(
     ({ style }: any) => (
       //@ts-ignore
@@ -38,7 +45,13 @@ function CustomDrawerContent(props: DrawerContentComponentProps<any>) {
   );
   return (
     <>
-      <DrawerContentScrollView {...props} style={{ backgroundColor }}>
+      <View
+        style={{ height: top, alignSelf: 'stretch', backgroundColor: 'gray' }}
+      />
+      <DrawerContentScrollView
+        {...props}
+        contentContainerStyle={{ paddingTop: 0 }}
+        style={{ backgroundColor }}>
         <DrawerItemList
           {...props}
           activeTintColor={activeTintColor}
@@ -48,7 +61,7 @@ function CustomDrawerContent(props: DrawerContentComponentProps<any>) {
       <List.Section>
         <List.Item title="Dark Mode?" right={swichColorModeRight} />
       </List.Section>
-      <VersionDisplay />
+      <VersionDisplayMolecule />
     </>
   );
 }
@@ -57,9 +70,31 @@ const initialRouteName = __DEV__ ? devSelectedSnippet : 'whitespace';
 
 export default function HomeScreen({}: StackScreenProps<any>) {
   const setSelectedSnippetId = useSetSelectedSnippetId();
+  const {
+    tintColor: headerTintColor,
+    backgroundColor: headerBackgroundColor
+  } = useComponentColors('navHeader');
   React.useEffect(() => {
     setSelectedSnippetId(initialRouteName);
   }, [setSelectedSnippetId]);
+  const snippetScreens = (Object.keys(snippets) as SnippetId[]).map(
+    (snippetId) => {
+      return (
+        <Drawer.Screen
+          component={SnippetScreen}
+          initialParams={{ snippetId }}
+          options={{
+            header: (props) => (
+              <DrawerHeader snippetId={snippetId} {...props} />
+            ),
+            title: snippets[snippetId].name
+          }}
+          key={snippets[snippetId].name}
+          name={snippetId}
+        />
+      );
+    }
+  );
   return (
     <Drawer.Navigator
       hideStatusBar={false}
@@ -68,27 +103,29 @@ export default function HomeScreen({}: StackScreenProps<any>) {
       screenOptions={{
         headerShown: true,
         headerTitleAllowFontScaling: true,
-        headerTitleStyle: Platform.select({
-          android: {
-            width: '75%',
-            alignItems: 'flex-start'
-          }
-        })
+        headerTintColor: headerTintColor,
+        headerStyle: {
+          backgroundColor: headerBackgroundColor
+        },
+        headerTitleStyle: [
+          Platform.select({
+            android: {
+              width: '75%',
+              alignItems: 'flex-start'
+            }
+          })
+        ]
       }}>
-      {(Object.keys(snippets) as SnippetId[]).map((snippetId) => {
-        return (
-          <Drawer.Screen
-            component={SnippetScreen}
-            initialParams={{ snippetId }}
-            options={{
-              header: (props) => <DrawerHeader {...props} />,
-              title: snippets[snippetId].name
-            }}
-            key={snippets[snippetId].name}
-            name={snippetId}
-          />
-        );
-      })}
+      {snippetScreens}
+      <Drawer.Screen
+        component={Lists}
+        options={{
+          headerShown: true,
+          title: 'Lists Playground'
+        }}
+        key={'lists'}
+        name={'ListsPlayground'}
+      />
     </Drawer.Navigator>
   );
 }
