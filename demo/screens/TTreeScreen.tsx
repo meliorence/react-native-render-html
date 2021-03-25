@@ -1,19 +1,16 @@
 import React from 'react';
-import { tnodeToString } from '@native-html/transient-render-engine';
-import BidirectionalScrollView from '../components/BidirectionalScrollView';
 import { useSelectedTTree } from '../state/store';
-import DisplayLoading from '../components/DisplayLoading';
-import AtomicText from '../components/AtomicText';
+import BidirectionalScrollViewAtom from '../components/atoms/BidirectionalScrollViewAtom';
+import DisplayLoadingAtom from '../components/atoms/DisplayLoadingAtom';
+import TTreeDisplayMolecule from '../components/molecules/TTreeDisplayMolecule';
 
 export default function TTreeScreen() {
   const ttree = useSelectedTTree();
   return ttree ? (
-    <BidirectionalScrollView padding={5}>
-      <AtomicText mono style={{ fontSize: 12 }}>
-        {ttree && tnodeToString(ttree)}
-      </AtomicText>
-    </BidirectionalScrollView>
+    <BidirectionalScrollViewAtom padding={5}>
+      <TTreeDisplayMolecule ttree={ttree} />
+    </BidirectionalScrollViewAtom>
   ) : (
-    <DisplayLoading />
+    <DisplayLoadingAtom />
   );
 }

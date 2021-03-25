@@ -4,14 +4,13 @@ import { Appbar, Divider, Menu } from 'react-native-paper';
 import {
   useToggleLegacyMode,
   useLegacyMode,
-  useSelectedHTML,
-  useSelectedSnippetId
+  useSelectedHTML
 } from '../state/store';
 import { useComponentColors } from '../state/ThemeProvider';
-import filteredSnippets from '../snippets';
+import filteredSnippets, { SnippetId } from '../snippets';
 import { Linking, Platform } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import useAtomicTextStyle from '../hooks/useAtomicTextStyle';
+import useNuclearTextStyle from './nucleons/useNuclearTextStyle';
 
 function Action({
   selected,
@@ -23,18 +22,20 @@ function Action({
   );
 }
 
-function DrawerHeader({ scene }: DrawerHeaderProps) {
+function DrawerHeader({
+  scene,
+  snippetId
+}: DrawerHeaderProps & { snippetId: SnippetId }) {
   const {
     descriptor: { navigation, options }
   } = scene;
   const toggleUseLegacy = useToggleLegacyMode();
   const legacyMode = useLegacyMode();
   const html = useSelectedHTML();
-  const snippetId = useSelectedSnippetId();
   const [menuVisible, setMenuVisible] = React.useState(false);
   const snippetSource = filteredSnippets[snippetId].codeSource;
   const { tintColor, backgroundColor } = useComponentColors('navHeader');
-  const subtitleStyle = useAtomicTextStyle({
+  const subtitleStyle = useNuclearTextStyle({
     mono: true,
     fontSize: 'small',
     color: tintColor

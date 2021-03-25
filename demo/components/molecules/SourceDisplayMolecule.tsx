@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
 import { solarizedlight, darcula } from 'react-syntax-highlighter/styles/prism';
-import BidirectionalScrollView from '../components/BidirectionalScrollView';
+import BidirectionalScrollViewAtom from '../atoms/BidirectionalScrollViewAtom';
 
 export interface SourceRenderer {
   htmlSource: string;
@@ -16,11 +16,13 @@ export interface SourceRenderer {
 
 function Container({ children }: PropsWithChildren<ViewProps>) {
   return (
-    <BidirectionalScrollView padding={10}>{children}</BidirectionalScrollView>
+    <BidirectionalScrollViewAtom padding={10}>
+      {children}
+    </BidirectionalScrollViewAtom>
   );
 }
 
-export default function SourceDisplay({
+export default function SourceDisplayMolecule({
   html,
   style
 }: {

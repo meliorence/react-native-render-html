@@ -3,15 +3,15 @@ import * as React from 'react';
 import { TextStyle, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 // @ts-ignore
-import version from '../version';
-import AtomicText from './AtomicText';
+import version from '../../version';
+import TextNucleon from '../nucleons/TextNucleon';
 
 const monoStyle: TextStyle = {
   fontSize: 10,
   textAlign: 'left'
 };
 
-export default function VersionDisplay() {
+export default function VersionDisplayMolecule() {
   const { bottom, left, right } = useSafeAreaInsets();
   return (
     <View
@@ -22,12 +22,12 @@ export default function VersionDisplay() {
         marginRight: right,
         padding: 10
       }}>
-      <AtomicText mono style={monoStyle}>
+      <TextNucleon mono style={monoStyle}>
         Foundry Playground {version.demo}
-      </AtomicText>
-      <AtomicText mono style={monoStyle}>
+      </TextNucleon>
+      <TextNucleon mono style={monoStyle}>
         react-native-render-html {version.lib}
-      </AtomicText>
+      </TextNucleon>
     </View>
   );
 }

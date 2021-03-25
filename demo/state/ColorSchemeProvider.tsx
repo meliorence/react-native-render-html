@@ -11,7 +11,11 @@ const ColorSchemeContext = React.createContext<ColorSchemeState>({
 });
 
 export function useColorScheme() {
-  return React.useContext(ColorSchemeContext);
+  return React.useContext(ColorSchemeContext).colorScheme;
+}
+
+export function useColorSchemeSetter() {
+  return React.useContext(ColorSchemeContext).setColorScheme;
 }
 
 export default function ColorSchemeProvider({

@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { StyleProp, TextStyle } from 'react-native';
 import { Platform } from 'react-native';
-import textColorContext from '../state/textColorContext';
-import { useThemeColors } from '../state/ThemeProvider';
+import useNuclearTextColor from './useNuclearTextColor';
 
-export interface AtomicTextStyle {
+export interface NuclearTextStyle {
   color?: string;
   mono?: boolean;
   fontSize?: 'big' | 'normal' | 'small';
@@ -18,15 +17,14 @@ const MONO = Platform.select({
   default: 'monospace'
 });
 
-export default function useAtomicTextStyle(props?: AtomicTextStyle) {
+export default function useNuclearTextStyle(props?: NuclearTextStyle) {
   const { color, style, mono, italic, align = 'start', fontSize = 'normal' } =
     props || {};
-  const inheritedColor = React.useContext(textColorContext);
-  const { text } = useThemeColors();
+  const syntheticColor = useNuclearTextColor(color);
   return React.useMemo<StyleProp<TextStyle>>(
     () => [
       {
-        color: color ?? inheritedColor ?? text,
+        color: syntheticColor,
         fontFamily: mono ? MONO : undefined,
         fontSize: fontSize === 'normal' ? 16 : fontSize === 'big' ? 25 : 11,
         fontStyle: italic ? 'italic' : 'normal',
@@ -35,6 +33,6 @@ export default function useAtomicTextStyle(props?: AtomicTextStyle) {
       },
       style
     ],
-    [color, inheritedColor, text, mono, fontSize, italic, align, style]
+    [syntheticColor, mono, fontSize, italic, align, style]
   );
 }

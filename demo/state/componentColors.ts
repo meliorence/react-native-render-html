@@ -27,20 +27,25 @@ export interface ComponentColors {
     backgroundColor: string;
     color: string;
   };
-  demoSectionTitle: {
-    backgroundColor: string;
+  tide: {};
+  sourceBox: {
     color: string;
+    backgroundColor: string;
   };
-  demoCaption: {
-    backgroundColor: string;
-    color: string;
+  controls: {
+    tintColorOff: string;
+    tintColorOn: string;
+    trackColorOn: string;
+    trackColorOff: string;
   };
 }
 
 export default function componentColors(
-  themeColors: ColorsShape
+  themeColors: ColorsShape,
+  colorScheme: 'dark' | 'light'
 ): ComponentColors {
-  const backgroundIsDark = Color(themeColors.background).isDark();
+  // const isDark = colorScheme === 'dark';
+  const overlay = Color(themeColors.surface).lighten(0.75).string();
   return {
     navHeader: {
       tintColor: themeColors.onPrimary,
@@ -48,7 +53,7 @@ export default function componentColors(
       backgroundColor: themeColors.primary
     },
     drawer: {
-      backgroundColor: Color(themeColors.surface).lighten(0.75).string(),
+      backgroundColor: overlay,
       activeTintColor: themeColors.accent,
       activeBackgroundColor: Color(themeColors.primary).alpha(0.1).string()
     },
@@ -67,15 +72,16 @@ export default function componentColors(
       backgroundColor: themeColors.primary,
       color: themeColors.accent
     },
-    demoSectionTitle: {
-      backgroundColor: backgroundIsDark
-        ? Color(themeColors.background).lighten(0.3).string()
-        : Color(themeColors.primary).lighten(1.3).string(),
-      color: themeColors.text
+    tide: {},
+    sourceBox: {
+      color: themeColors.background,
+      backgroundColor: themeColors.text
     },
-    demoCaption: {
-      backgroundColor: themeColors.primary,
-      color: themeColors.onPrimary
+    controls: {
+      tintColorOn: themeColors.accent,
+      tintColorOff: themeColors.card,
+      trackColorOn: Color(themeColors.accent).alpha(0.5).string(),
+      trackColorOff: Color(themeColors.placeholder).alpha(0.3).string()
     }
   };
 }
