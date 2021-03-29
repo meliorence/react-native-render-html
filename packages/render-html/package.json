@@ -23,7 +23,11 @@
     "html",
     "render-html"
   ],
-  "repository": "https://github.com/meliorence/react-native-render-html",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meliorence/react-native-render-html.git",
+    "directory": "packages/render-html"
+  },
   "scripts": {
     "test": "yarn test:jest && yarn test:ts && yarn test:lint",
     "test:jest": "jest src/",
