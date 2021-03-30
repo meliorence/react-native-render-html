@@ -1,8 +1,10 @@
 import {
+  AccessibilityProps,
   GestureResponderEvent,
   StyleProp,
   TextProps,
   TextStyle,
+  TouchableHighlightProps,
   ViewProps,
   ViewStyle
 } from 'react-native';
@@ -30,6 +32,12 @@ import { ParserOptions as HtmlParserOptions } from 'htmlparser2';
 export interface ImageDimensions {
   width: number;
   height: number;
+}
+
+export interface GenericPressableProps extends AccessibilityProps {
+  style?: StyleProp<ViewStyle>;
+  borderless?: boolean;
+  onPress?: TouchableHighlightProps['onPress'];
 }
 
 export interface HtmlAttributesDictionary {
@@ -151,6 +159,15 @@ export interface RenderHTMLSharedProps<
    * See [@native-html/plugins](https://github.com/native-html/plugins).
    */
   WebView?: ComponentType<any>;
+  /**
+   * A component used to wrap pressable elements (e.g. when provided `onPress`).
+   * Note that textual elements will not be wrapped; `TextProps.onPress` will
+   * be used instead.
+   *
+   * @remarks
+   * Changes to this prop will cause a react tree update. Always memoize it.
+   */
+  GenericPressable?: ComponentType<GenericPressableProps>;
   /**
    * Set custom markers from a TNode and all its descendants. Markers will be
    * accessible in custom renderers via `markers` prop.
