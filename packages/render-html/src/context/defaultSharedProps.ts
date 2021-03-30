@@ -1,4 +1,5 @@
 import { Dimensions, Linking } from 'react-native';
+import { DEFAULT_PRESSABLE_RIPPLE_COLOR } from '../constants';
 import { RenderHTMLSharedProps } from '../shared-types';
 
 const defaultSharedProps: Required<RenderHTMLSharedProps> = {
@@ -17,6 +18,7 @@ const defaultSharedProps: Required<RenderHTMLSharedProps> = {
     width: 50
   },
   onLinkPress: (_e, href) => Linking.canOpenURL(href) && Linking.openURL(href),
+  GenericPressable: undefined as any,
   WebView: () => {
     if (__DEV__) {
       console.warn(
@@ -28,7 +30,8 @@ const defaultSharedProps: Required<RenderHTMLSharedProps> = {
   },
   defaultWebViewProps: {},
   renderersProps: {},
-  setMarkersForTNode: () => null
+  setMarkersForTNode: () => null,
+  pressableHightlightColor: DEFAULT_PRESSABLE_RIPPLE_COLOR
 };
 
 export default defaultSharedProps;

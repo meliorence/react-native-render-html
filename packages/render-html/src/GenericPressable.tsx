@@ -5,7 +5,6 @@ import {
   TouchableNativeFeedback,
   View
 } from 'react-native';
-import { DEFAULT_PRESSABLE_RIPPLE_COLOR } from './constants';
 import { useSharedProps } from './context/SharedPropsProvider';
 import { GenericPressableProps } from './shared-types';
 
@@ -16,7 +15,7 @@ export default function GenericPressable({
   ...otherProps
 }: PropsWithChildren<GenericPressableProps>) {
   const {
-    pressableHightlightColor = DEFAULT_PRESSABLE_RIPPLE_COLOR,
+    pressableHightlightColor,
     GenericPressable: UserProvidedPressable
   } = useSharedProps();
   if (UserProvidedPressable) {
