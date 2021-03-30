@@ -1,5 +1,6 @@
 import React, { ComponentType, PropsWithChildren, useMemo } from 'react';
-import { View, Pressable, StyleSheet, ViewStyle } from 'react-native';
+import { View, StyleSheet, ViewStyle } from 'react-native';
+import GenericPressable from '../GenericPressable';
 import { IMGElementProps } from './img-types';
 
 const styles = StyleSheet.create({
@@ -23,7 +24,7 @@ export default function IMGElementContainer({
     return [styles.container, remainingStyle];
   }, [style]);
   const Container: ComponentType<any> =
-    typeof onPress === 'function' ? Pressable : View;
+    typeof onPress === 'function' ? GenericPressable : View;
   return React.createElement(
     Container,
     { style: containerStyle, onPress, testID },
