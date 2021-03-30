@@ -46,11 +46,18 @@ export interface HtmlAttributesDictionary {
  */
 export interface RenderersPropsBase extends Record<string, any> {}
 
+/**
+ * Shared props changes will cause all the React tree to invalidate. You should
+ * always memoize these.
+ */
 export interface RenderHTMLSharedProps<
   RendererProps extends RenderersPropsBase = RenderersPropsBase
 > {
   /**
    * Default width and height to display while image's dimensions are being retrieved.
+   *
+   * @remarks Changes to this prop will cause a react tree update. Always
+   * memoize it.
    */
   imagesInitialDimensions?: ImageDimensions;
   /**
@@ -58,6 +65,7 @@ export interface RenderHTMLSharedProps<
    * images might overflow horizontally and take up to all their physical
    * width. The recommended practice is to pass
    * `useWindowDimensions().width` minus any padding or margins.
+   *
    */
   contentWidth?: number;
   /**
@@ -67,8 +75,11 @@ export interface RenderHTMLSharedProps<
    * @param contentWidth - The available width in this {@link RenderHTML} component.
    * @param tagName - The tagName of this element to render, e.g. "img".
    *
-   * @remarks Take advantage of `useComputeMaxWidthForTag` hook inside custom
-   * renderers to get the maximum width for this tag.
+   * @remarks
+   * - Take advantage of `useComputeMaxWidthForTag` hook inside custom
+   *   renderers to get the maximum width for this tag.
+   * - Changes to this prop will cause a react tree update. Always
+   *   memoize it.
    */
   computeEmbeddedMaxWidth?: (contentWidth: number, tagName: string) => number;
   /**
@@ -88,7 +99,10 @@ export interface RenderHTMLSharedProps<
   enableExperimentalMarginCollapsing?: boolean;
   /**
    * Fired with the event, the href and an object with all attributes of the
-   * tag as its arguments when tapping a link
+   * tag as its arguments when tapping a link.
+   *
+   * @remarks Changes to this prop will cause a react tree update. Always
+   * memoize it.
    */
   onLinkPress?: (
     event: GestureResponderEvent,
@@ -99,22 +113,32 @@ export interface RenderHTMLSharedProps<
   /**
    * Props to use in custom renderers with `useRendererProps` or
    * `useSharedProps`.
+   *
+   * @remarks Changes to this prop will cause a react tree update. Always
+   * memoize it.
    */
   renderersProps?: RendererProps;
   /**
    * Default props for Text elements in the render tree.
    *
-   * @remarks "style" will be merged into the tnode own styles.
+   * @remarks
+   * - "style" will be merged into the tnode own styles.
+   * - Changes to this prop will cause a react tree update. Always memoize it.
    */
   defaultTextProps?: TextProps;
   /**
    * Default props for View elements in the render tree.
    *
-   * @remarks "style" will be merged into the tnode own styles.
+   * @remarks
+   * - "style" will be merged into the tnode own styles.
+   * - Changes to this prop will cause a react tree update. Always memoize it.
    */
   defaultViewProps?: ViewProps;
   /**
    * Default props for WebView elements in the render tree used by plugins.
+   *
+   * @remarks
+   * Changes to this prop will cause a react tree update. Always memoize it.
    */
   defaultWebViewProps?: any;
   /**
