@@ -177,11 +177,19 @@ export interface RenderHTMLSharedProps<
    *
    * @returns a record of markers if one or many markers should be added,
    * `null` otherwise.
+   *
+   * @remarks
+   * Changes to this prop will cause a react tree update. Always memoize it.
    */
   setMarkersForTNode?: (
     tnode: TNode,
     parentMarkers: Markers
   ) => Partial<Markers> | null;
+  /**
+   * Color used for pressable items, either for the ripple effect (Android), or
+   * highlight (other platforms).
+   */
+  pressableHightlightColor?: string;
 }
 
 export interface TransientRenderEngineConfig {
