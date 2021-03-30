@@ -1,3 +1,11 @@
+# [6.0.0-alpha.22](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.21...v6.0.0-alpha.22) (2021-03-30)
+
+
+### Features
+
+* `GenericPressable` prop to customize the component wrapping interactive views ([a29468d](https://github.com/meliorence/react-native-render-html/commit/a29468de6422d916dfcfa44f04c5f43c519f776a)), closes [#472](https://github.com/meliorence/react-native-render-html/issues/472)
+* `pressableHightlightColor` prop to customize pressable appearance ([d3c5b4d](https://github.com/meliorence/react-native-render-html/commit/d3c5b4dee23795613b5c00685203f42b6708e91e))
+
 # [6.0.0-alpha.21](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.20...v6.0.0-alpha.21) (2021-03-24)
 
 
