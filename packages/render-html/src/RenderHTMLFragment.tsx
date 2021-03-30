@@ -46,9 +46,11 @@ export const renderHtmlFragmentPropTypes: RenderHTMLFragmentPropTypes = {
   onTTreeChange: PropTypes.func,
   onHTMLLoaded: PropTypes.func,
   WebView: PropTypes.any,
+  GenericPressable: PropTypes.any,
   defaultWebViewProps: PropTypes.object,
   setMarkersForTNode: PropTypes.func,
-  onDocumentMetadataLoaded: PropTypes.func
+  onDocumentMetadataLoaded: PropTypes.func,
+  pressableHightlightColor: PropTypes.string
 };
 
 export const renderHTMLFragmentDefaultProps: {
