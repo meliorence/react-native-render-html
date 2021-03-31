@@ -1680,6 +1680,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.3.1":
+  version: 7.13.10
+  resolution: "@babel/runtime@npm:7.13.10"
+  dependencies:
+    regenerator-runtime: ^0.13.4
+  checksum: 22014226b96a8c8e8d4e8bcdb011f317d1b32881aef424a669dc6ceaee14993d3609172967853cbf9c25c724c25145d45885b6c9df56ba241c12820776607f1f
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.0.0, @babel/template@npm:^7.12.13, @babel/template@npm:^7.3.3, @babel/template@npm:^7.8.6":
   version: 7.12.13
   resolution: "@babel/template@npm:7.12.13"
@@ -2002,6 +2011,62 @@ __metadata:
     minimatch: ^3.0.4
     strip-json-comments: ^3.1.1
   checksum: 00e87c194672eb85dcea22ba749fb3cabdd9768e952e748b2c727940f06691c873369d75cf3bddb239301eca8c38de6e098b0de4839fa7c16a2062e536e8ff5a
+  languageName: node
+  linkType: hard
+
+"@expo-google-fonts/ibm-plex-mono@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@expo-google-fonts/ibm-plex-mono@npm:0.1.0"
+  checksum: c3ce3acbbb6047d4fe6a7938db5c8634660b1a59435f47468af431906f93eab91c86ca0f7a6cbcdb5211f69b251a8327d37eb2a9a43d95e057a64e48d0a7d418
+  languageName: node
+  linkType: hard
+
+"@expo-google-fonts/ibm-plex-serif@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@expo-google-fonts/ibm-plex-serif@npm:0.1.0"
+  checksum: 43c7d7cae4ca1674d9a844b5109b7f469819bf37a14f2c1819115864a8a397a909bef7d8583667960f52e9a768ad35a0f0ed711b0dbce33403279aebda9be4e1
+  languageName: node
+  linkType: hard
+
+"@expo-google-fonts/josefin-sans@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@expo-google-fonts/josefin-sans@npm:0.1.0"
+  checksum: 3e763a2602ce691316f8067bc45438c043e6b6eec45f64b47007a138a43f2cbd88da9eeaff2bf85dbced339b0b7bf4a90a4bffe2a23169a2f449087f5947e625
+  languageName: node
+  linkType: hard
+
+"@expo-google-fonts/lora@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@expo-google-fonts/lora@npm:0.1.0"
+  checksum: 0f1d6ae9b28996bee55e5b9a6b8e6e8751c70277875fcdedf36f69a7ff69d415df7036c2f2d74fa5efa0a042d3a25218ee552761c3337fd8ff27c116c61e1c93
+  languageName: node
+  linkType: hard
+
+"@expo-google-fonts/merriweather@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@expo-google-fonts/merriweather@npm:0.1.0"
+  checksum: 8c75a3cb0a23bddeecdea240d0f4b2783693239574ca3b7aa0a170eea192afe7858c60cc466aa3c08b6bb53f64d5c2653a7ee6bab46b4d7f0a79d68b4e1de100
+  languageName: node
+  linkType: hard
+
+"@expo-google-fonts/source-code-pro@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@expo-google-fonts/source-code-pro@npm:0.1.0"
+  checksum: b64fa03779af72f0c8acb17756abfed0c8f92dfbf2a86b5b92008559c961372e0e45e47d6e6f44be10e415b5553d1ec6c323b4ffeb7486cb4cafb426ab540fdc
+  languageName: node
+  linkType: hard
+
+"@expo-google-fonts/space-mono@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@expo-google-fonts/space-mono@npm:0.1.0"
+  checksum: ff924c69a96ccc279c571ef8f88e1d9d6a08fb38de0ec60a9eebd10ea9055d18983d47a927acdbdc1f82422dbeb099ac5239f8540b6c8db4aa4300557cbd4939
+  languageName: node
+  linkType: hard
+
+"@expo-google-fonts/work-sans@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@expo-google-fonts/work-sans@npm:0.1.0"
+  checksum: c47b18ee56afd8f917d8e284595b4f339c6dbff052d3a7fd85d7dda6bff0cbb70766a2a5bc6aac53504c6d2dbdfc4f910e1b69bcfdc31dc18c8ea3319f637c20
   languageName: node
   linkType: hard
 
@@ -3332,15 +3397,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mobily/stacks@npm:^0.9.4":
-  version: 0.9.4
-  resolution: "@mobily/stacks@npm:0.9.4"
-  dependencies:
-    wonka: ^4.0.14
+"@mobily/stacks@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@mobily/stacks@npm:1.1.1"
   peerDependencies:
     react: ">=16.8.0"
     react-native: ">=0.59.0"
-  checksum: 41b4b42b238eeab1bc8603cadb1dbce9f29b59122b4d3cc258cb0236bbd91824b0e8b7f79266a8847c3e2f7f73e8464452d5a1573948a9c265807a47ca3bcb05
+  checksum: 86b39e0e9238255b21f87c1208ec04d77390741c44567348362e6030a9641a7d0b8d8b6e8197ec65bde1b6c22b18cb160128fdc9be511f2fe5213d7c15cafcaf
   languageName: node
   linkType: hard
 
@@ -3742,16 +3805,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/viewpager@npm:4.2.0":
-  version: 4.2.0
-  resolution: "@react-native-community/viewpager@npm:4.2.0"
-  peerDependencies:
-    react: ^16.0
-    react-native: ">=0.57"
-  checksum: 1f6ba6e3787bc5bb5c075c799b27319dacb50feae18c806b2af9598aeb934f871de67cf405377864a5e2553270592f5f4f27689bbd5cf15e50db3388cc86a93e
-  languageName: node
-  linkType: hard
-
 "@react-native-picker/picker@npm:1.9.2":
   version: 1.9.2
   resolution: "@react-native-picker/picker@npm:1.9.2"
@@ -4093,6 +4146,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/hast@npm:^2.0.0":
+  version: 2.3.1
+  resolution: "@types/hast@npm:2.3.1"
+  dependencies:
+    "@types/unist": "*"
+  checksum: 8aff367be477854d6cd3e5cf03d7154cd163a67bc3266777c2f4b1c32d07a335420ba58a8a799965dbc3190f1ed9989880008afb1392043290acc384a155a7a3
+  languageName: node
+  linkType: hard
+
 "@types/hoist-non-react-statics@npm:*":
   version: 3.3.1
   resolution: "@types/hoist-non-react-statics@npm:3.3.1"
@@ -4168,6 +4230,13 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: 3aaf557d5b82e733d5a17b7f55af5d6be953363c3a594f006d64265790fe87c301c6e1400c0b6b1cf72add50a0ceddc25afb8231ab8302a2e5b6ebfbfac30e5d
+  languageName: node
+  linkType: hard
+
+"@types/lowlight@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "@types/lowlight@npm:0.0.1"
+  checksum: 30916db2c4cc46c8dab8b34f44edebabb9bad8d64420ba79eb500f76949be33d0f11e49242528a6eecfdfcc1ca2e69f38d28b726720ecfe55af058c81ecd3790
   languageName: node
   linkType: hard
 
@@ -4263,6 +4332,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-syntax-highlighter@npm:^13.5.0":
+  version: 13.5.0
+  resolution: "@types/react-syntax-highlighter@npm:13.5.0"
+  dependencies:
+    "@types/react": "*"
+  checksum: b60ed533fac6dec09a1040bacd019f5fa4f0f23daa65a1b62337c2a81671569807c8b991dd3f639d498e43f804ed36189ea2d1c545b0007c2a53b553f354fd44
+  languageName: node
+  linkType: hard
+
 "@types/react-test-renderer@npm:>=16.9.0, @types/react-test-renderer@npm:^17.0.0":
   version: 17.0.0
   resolution: "@types/react-test-renderer@npm:17.0.0"
@@ -4323,6 +4401,13 @@ __metadata:
     "@types/react": "*"
     csstype: ^3.0.2
   checksum: e0ce3949cbca71581288aac9b948c9943708f7ef20bdc030c8665f88f9e829b37ae7312979d9c949200aff99a704eb22e28f06b8c7bb50d4dbe1d01894762c99
+  languageName: node
+  linkType: hard
+
+"@types/unist@npm:*":
+  version: 2.0.3
+  resolution: "@types/unist@npm:2.0.3"
+  checksum: 42e0dc4ac75a27c4bb91a3f8e82edfd8819cacb6edda08bdfb436700ea01a587faa30017fde744b0a0b33825f5e37686398c1eb5b664cabc3a72a6b3757f85a5
   languageName: node
   linkType: hard
 
@@ -5359,16 +5444,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-runtime@npm:^6.18.0":
-  version: 6.26.0
-  resolution: "babel-runtime@npm:6.26.0"
-  dependencies:
-    core-js: ^2.4.0
-    regenerator-runtime: ^0.11.0
-  checksum: 5010bf1d81e484d9c6a5b4e4c32564a0dc180c2dc5a65f999729c3cb63b9c6e805d3d10c19a4ccc2112bce084e39e51e52daf5c21df0141ce8e6e37727af2e0b
-  languageName: node
-  linkType: hard
-
 "badgin@npm:^1.1.2":
   version: 1.2.2
   resolution: "badgin@npm:1.2.2"
@@ -5927,6 +6002,15 @@ __metadata:
   version: 2.0.0
   resolution: "chownr@npm:2.0.0"
   checksum: b06ba0bf4218bc2214cdb94a7d0200db5c6425f9425795c064dcf5a3801aac8ae87f764727890cd1f48c026559159e7e0e15ed3d1940ce453dec54898d013379
+  languageName: node
+  linkType: hard
+
+"chroma-js@npm:^2.1.0":
+  version: 2.1.1
+  resolution: "chroma-js@npm:2.1.1"
+  dependencies:
+    cross-env: ^6.0.3
+  checksum: 331a9c5ee0acda12f8278978d98526997d4002abf9623cfd3eaa480715de032ce9ab0fbef43323eb29c4cade32a3d93d105f16e3bf42463081567720a5705810
   languageName: node
   linkType: hard
 
@@ -6604,7 +6688,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^2.4.0, core-js@npm:^2.4.1":
+"core-js@npm:^2.4.1":
   version: 2.6.12
   resolution: "core-js@npm:2.6.12"
   checksum: b865823ce9cb5bc63336856440f6525e4996bb91af30660081e82bf447d177f36104f0986906a34ea0c9c03cb8b3d960380848a478e2621dac30c9b8198d28da
@@ -6657,6 +6741,18 @@ __metadata:
     loose-envify: ^1.3.1
     object-assign: ^4.1.1
   checksum: b961a66896ff89ad5451e6cf6a686c03716ecb50f7c61b24864cda5aa18d52ce817b94bbeace3e126b19a1cc926c75f34c0777a6f4004fc947221836b13d4479
+  languageName: node
+  linkType: hard
+
+"cross-env@npm:^6.0.3":
+  version: 6.0.3
+  resolution: "cross-env@npm:6.0.3"
+  dependencies:
+    cross-spawn: ^7.0.0
+  bin:
+    cross-env: src/bin/cross-env.js
+    cross-env-shell: src/bin/cross-env-shell.js
+  checksum: ac3bcc24ad65336d2e2cf27aa73d9b4b816b03684d27a8afb9afaf9f670fac00aa4dd5c7dd6927fd599f624666d604ea2e25828c259d18677d71cc9204565f0f
   languageName: node
   linkType: hard
 
@@ -7079,21 +7175,30 @@ __metadata:
   resolution: "demo@workspace:demo"
   dependencies:
     "@babel/core": ~7.9.0
+    "@expo-google-fonts/ibm-plex-mono": ^0.1.0
+    "@expo-google-fonts/ibm-plex-serif": ^0.1.0
+    "@expo-google-fonts/josefin-sans": ^0.1.0
+    "@expo-google-fonts/lora": ^0.1.0
+    "@expo-google-fonts/merriweather": ^0.1.0
+    "@expo-google-fonts/source-code-pro": ^0.1.0
+    "@expo-google-fonts/space-mono": ^0.1.0
+    "@expo-google-fonts/work-sans": ^0.1.0
     "@expo/metro-config": ^0.1.59
     "@expo/vector-icons": ^12.0.0
     "@gorhom/bottom-sheet": ^2
-    "@mobily/stacks": ^0.9.4
+    "@mobily/stacks": ^1.1.1
     "@react-native-community/masked-view": 0.1.10
     "@react-native-community/slider": 3.0.3
-    "@react-native-community/viewpager": 4.2.0
     "@react-native-picker/picker": 1.9.2
     "@react-navigation/bottom-tabs": ^5.11.7
     "@react-navigation/drawer": ^5.12.3
     "@react-navigation/native": ^5.9.2
     "@react-navigation/stack": ^5.14.2
     "@types/color": ^3.0.1
+    "@types/lowlight": ^0.0.1
     "@types/react": ~16.9.35
     "@types/react-native": ~0.63.2
+    "@types/react-syntax-highlighter": ^13.5.0
     color: ^3.1.3
     deepmerge: ^4.2.2
     expo: ^40.0.0
@@ -7105,20 +7210,23 @@ __metadata:
     expo-status-bar: ~1.0.3
     expo-web-browser: ~8.6.0
     jest-expo: ^40.0.0
+    lowlight: ^1.20.0
     react: 16.13.1
     react-dom: 16.13.1
     react-native: "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz"
     react-native-gesture-handler: ~1.8.0
+    react-native-hsv-color-picker: ^1.0.2
+    react-native-pager-view: ~5.0.12
     react-native-paper: ^4.7.2
     react-native-reanimated: ~1.13.0
     react-native-render-html: "workspace:*"
     react-native-render-html-v5: "npm:react-native-render-html@^5.0.0"
     react-native-safe-area-context: 3.1.9
     react-native-screens: ~2.15.2
-    react-native-syntax-highlighter: ^2.1.0
+    react-native-tab-view: ^3.0.1
     react-native-web: ~0.13.12
     react-native-webview: 11.0.0
-    react-syntax-highlighter: 6.0.4
+    react-syntax-highlighter: ^15.4.3
     scheduler: ^0.20.2
     typescript: ~4.0.0
     use-context-selector: ^1.3.7
@@ -8085,7 +8193,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-linear-gradient@npm:~8.4.0":
+"expo-linear-gradient@npm:^8.0.0, expo-linear-gradient@npm:~8.4.0":
   version: 8.4.0
   resolution: "expo-linear-gradient@npm:8.4.0"
   peerDependencies:
@@ -8378,7 +8486,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fault@npm:^1.0.2":
+"fault@npm:^1.0.0":
   version: 1.0.4
   resolution: "fault@npm:1.0.4"
   dependencies:
@@ -9369,15 +9477,16 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"hastscript@npm:^5.0.0":
-  version: 5.1.2
-  resolution: "hastscript@npm:5.1.2"
+"hastscript@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "hastscript@npm:6.0.0"
   dependencies:
+    "@types/hast": ^2.0.0
     comma-separated-tokens: ^1.0.0
     hast-util-parse-selector: ^2.0.0
     property-information: ^5.0.0
     space-separated-tokens: ^1.0.0
-  checksum: 4d2d5b37c1455ef7b9de77043c8388af7f05cfc7ab176160ae9927ae4a684b2768ae971decc7d63ea77c1e3c13aeff5218f9b0477d1842774e7b7a9a097598e8
+  checksum: c801a859137b7b0092235e50b5c9927c8e0ddbfc4739f4da5bf20170821be6bd883744a11ed2a3909d00d24964632892118913b3b13b02601018035da8b00b52
   languageName: node
   linkType: hard
 
@@ -9397,10 +9506,10 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"highlight.js@npm:~9.12.0":
-  version: 9.12.0
-  resolution: "highlight.js@npm:9.12.0"
-  checksum: cce35377b95ed153c66bd617ea72cb3e6b5ed91c2ae1d5a9791a39258140afaf79538541e186192b650cdacc03eb91ebc6c023208d550e5d6ed4e056c6d7b01c
+"highlight.js@npm:^10.4.1, highlight.js@npm:~10.7.0":
+  version: 10.7.1
+  resolution: "highlight.js@npm:10.7.1"
+  checksum: 7229923a5b92c35f2ea678e76675e44ba3ae753f39491732b372b9c290785189419de2193ad69f8ba96c70e355e2b24569cef3a5c2620ba81301deb0b898abf3
   languageName: node
   linkType: hard
 
@@ -12292,13 +12401,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"lowlight@npm:~1.9.1":
-  version: 1.9.2
-  resolution: "lowlight@npm:1.9.2"
+"lowlight@npm:^1.17.0, lowlight@npm:^1.20.0":
+  version: 1.20.0
+  resolution: "lowlight@npm:1.20.0"
   dependencies:
-    fault: ^1.0.2
-    highlight.js: ~9.12.0
-  checksum: 2d4a78e977ff197ac55f8186c58dd5f23ccd30b88672a01c3fbb65c2d083134b701c4f4710b20b209329045fa33f36150e6d21fce3cca2e07ff9fb22bbaf9d49
+    fault: ^1.0.0
+    highlight.js: ~10.7.0
+  checksum: 619bbc48539c5b60c6017b7c733977d8e481d99cc114ff4fa76e94c648c73a26dfd4daba735764e2d6f9ee62071b2e21b01848c1b53e0bd46af949f153d73f17
   languageName: node
   linkType: hard
 
@@ -13820,9 +13929,9 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"parse-entities@npm:^1.1.2":
-  version: 1.2.2
-  resolution: "parse-entities@npm:1.2.2"
+"parse-entities@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "parse-entities@npm:2.0.0"
   dependencies:
     character-entities: ^1.0.0
     character-entities-legacy: ^1.0.0
@@ -13830,7 +13939,7 @@ fsevents@^1.2.7:
     is-alphanumerical: ^1.0.0
     is-decimal: ^1.0.0
     is-hexadecimal: ^1.0.0
-  checksum: 66fb7cb7c81284aa35408ef0aaae3c704a7005f9b2e99fb86f4c5b454d465b7520e81dbdd35c79a65da98a567a4f03bd74b4097dc965f72ef947a1e09d6bf838
+  checksum: 6a9213216b8c3c18def20beac67a6618d190830fdb5f5b49bec876894404b75e2cd4af4b6913fded084c5572a21042edaf2cf2e991f408c7097901fb8d85c31e
   languageName: node
   linkType: hard
 
@@ -14320,14 +14429,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"prism-themes@git+https://github.com/PrismJS/prism-themes.git#afb4116547cd854074ad705b8171768403ca11f3":
-  version: 1.0.0
-  resolution: "prism-themes@https://github.com/PrismJS/prism-themes.git#commit=afb4116547cd854074ad705b8171768403ca11f3"
-  checksum: b6a9a6dc72ab65c725132bb2d48c3fa75dadfbe3b370b2609936e79ffef121c5361fefd91011a9ee7340010dfa39555fe06a471656266e24abe9d15b46b66644
-  languageName: node
-  linkType: hard
-
-"prismjs@npm:^1.8.4":
+"prismjs@npm:^1.22.0, prismjs@npm:~1.23.0":
   version: 1.23.0
   resolution: "prismjs@npm:1.23.0"
   dependencies:
@@ -14336,18 +14438,6 @@ fsevents@^1.2.7:
     clipboard:
       optional: true
   checksum: 9d55785f1ea68e2a2e6b0a5ea1241811ed986182af76053ecf50245521414597d70b17dc5804a7ad961dfd459e6883a89ad3f86bb064ac3484e3ef24b7891f4f
-  languageName: node
-  linkType: hard
-
-"prismjs@npm:~1.17.0":
-  version: 1.17.1
-  resolution: "prismjs@npm:1.17.1"
-  dependencies:
-    clipboard: ^2.0.0
-  dependenciesMeta:
-    clipboard:
-      optional: true
-  checksum: 9f90514b23f297f121cacf1b4a2c3ee8f1bdb98369adaf5a051a3b4810a760bea026b50d2440dc1ff94a2c237027f0f98d468514926c82070618750bb1fd7550
   languageName: node
   linkType: hard
 
@@ -14656,12 +14746,34 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-native-hsv-color-picker@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "react-native-hsv-color-picker@npm:1.0.2"
+  dependencies:
+    chroma-js: ^2.1.0
+    expo-linear-gradient: ^8.0.0
+  peerDependencies:
+    prop-types: ^15.7.2
+  checksum: 24819993154f868536090fe1e38b4149fc05e511cd3bd0a7c80ec56907a0ecb5fb15882e8b4845736721a07204e7b660995112c6cc9af5d753375af98d8c880c
+  languageName: node
+  linkType: hard
+
 "react-native-iphone-x-helper@npm:^1.3.0, react-native-iphone-x-helper@npm:^1.3.1":
   version: 1.3.1
   resolution: "react-native-iphone-x-helper@npm:1.3.1"
   peerDependencies:
     react-native: ">=0.42.0"
   checksum: b9b39097d3a635bd34d6cb2b9ab188ac718e7c0124ddaf999625dea70a977929db9ab5677f73e2637a1ff31f90569075e8bbef08ced5a4a3005e65bdda26319c
+  languageName: node
+  linkType: hard
+
+"react-native-pager-view@npm:~5.0.12":
+  version: 5.0.12
+  resolution: "react-native-pager-view@npm:5.0.12"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 3a931655dab2be54c787e2bfcb1ea8eddeb12e33e23fdfae5d190046fd90b7a7f7313c350fd5237cc4107cf8d2b2176d503d7ffc2450b29945ccb8c3bdc9a3ea
   languageName: node
   linkType: hard
 
@@ -14807,14 +14919,14 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-native-syntax-highlighter@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "react-native-syntax-highlighter@npm:2.1.0"
-  dependencies:
-    react-syntax-highlighter: ^6.0.4
+"react-native-tab-view@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "react-native-tab-view@npm:3.0.1"
   peerDependencies:
-    react-syntax-highlighter: ^6.0.4
-  checksum: 4f688cfc63c77494fc24bd5462818cbcad15641e816ffa0eb832e9145cecb4147554cea045a54c0617e2aa8b76f9574da4b5069f89cc649a787f02edb94f541b
+    react: "*"
+    react-native: "*"
+    react-native-pager-view: "*"
+  checksum: 2d0729c3c4c63ca400f384fbb2a1c35550acb7ab33a2998fd37ab38772517136cadf966d7d060d74f04887633d9e1774f0b5062395225bf47c57baed0c9eff01
   languageName: node
   linkType: hard
 
@@ -14934,34 +15046,18 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-syntax-highlighter@npm:6.0.4":
-  version: 6.0.4
-  resolution: "react-syntax-highlighter@npm:6.0.4"
+"react-syntax-highlighter@npm:^15.4.3":
+  version: 15.4.3
+  resolution: "react-syntax-highlighter@npm:15.4.3"
   dependencies:
-    babel-runtime: ^6.18.0
-    highlight.js: ~9.12.0
-    lowlight: ~1.9.1
-    prism-themes: "git+https://github.com/PrismJS/prism-themes.git#afb4116547cd854074ad705b8171768403ca11f3"
-    prismjs: ^1.8.4
-    refractor: ^2.0.0
+    "@babel/runtime": ^7.3.1
+    highlight.js: ^10.4.1
+    lowlight: ^1.17.0
+    prismjs: ^1.22.0
+    refractor: ^3.2.0
   peerDependencies:
     react: ">= 0.14.0"
-  checksum: ca4553a47e37d5e9a8bc2d7e1acff25116eff5732b494e656c898bc2ed530042111afdddca1bd249d240c03f61e4ed7184b63435f4b823947d9568e5498c7ead
-  languageName: node
-  linkType: hard
-
-"react-syntax-highlighter@npm:^6.0.4":
-  version: 6.1.2
-  resolution: "react-syntax-highlighter@npm:6.1.2"
-  dependencies:
-    babel-runtime: ^6.18.0
-    highlight.js: ~9.12.0
-    lowlight: ~1.9.1
-    prismjs: ^1.8.4
-    refractor: ^2.0.0
-  peerDependencies:
-    react: ">= 0.14.0"
-  checksum: 72ad294968525aa88da4ab79aa2f84594c58bbf8d7eb7795f5b0532e45c4a2531ccb86db726ccaef72e21f13efb69900527fda75185a03943d25d337bcb77756
+  checksum: 99866d865279aebc93946c07bf9ff471c890adcd6b620ffea84bb57e6efabba3b06c815e47b1064d05e0038f7827e032e47670cd005cbfb4cc96af60950699e6
   languageName: node
   linkType: hard
 
@@ -15158,14 +15254,14 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"refractor@npm:^2.0.0":
-  version: 2.10.1
-  resolution: "refractor@npm:2.10.1"
+"refractor@npm:^3.2.0":
+  version: 3.3.1
+  resolution: "refractor@npm:3.3.1"
   dependencies:
-    hastscript: ^5.0.0
-    parse-entities: ^1.1.2
-    prismjs: ~1.17.0
-  checksum: 074c7d92eaf7f34051c34ba9d2a84dc20a2db0358a69020e23e2961ecc912b3f40d9f72a8aaf4d97c53b8550c9eeddf4c01f8b2ade13a948068b7c384a73774e
+    hastscript: ^6.0.0
+    parse-entities: ^2.0.0
+    prismjs: ~1.23.0
+  checksum: de632f0f594e17809255a8188d63b87533e6e4889f6c59e7e79c63183714e45af33500f88168139adeb494c52af662d5dcb0dd0e126392a138077bc1a30550a5
   languageName: node
   linkType: hard
 
@@ -15182,13 +15278,6 @@ fsevents@^1.2.7:
   version: 1.4.2
   resolution: "regenerate@npm:1.4.2"
   checksum: 54275a99effd8a439bcdd88942b61f68a769133df841e90d94df9ae7c250cb6537c0a28dd913116539772b3415edbcb3c8d81c22275595d3755cf0353976dfa4
-  languageName: node
-  linkType: hard
-
-"regenerator-runtime@npm:^0.11.0":
-  version: 0.11.1
-  resolution: "regenerator-runtime@npm:0.11.1"
-  checksum: d98d44b9f5c9c3c670dcb615c5f5374931f937f3075dc8338126f45231643aa8c47ed2bfdef6ae593e311be54ca02d25d943971ca86a3dc1fa99068c2e1b88b2
   languageName: node
   linkType: hard
 
@@ -17932,13 +18021,6 @@ typescript@~4.1.3:
   dependencies:
     execa: ^4.0.2
   checksum: 6e285986c3e2db1eae14da639938ccdd7e78cdccd4b408b173bac81c8214485ed8477fb0d97c67f9f5df722b9ce66d8330f3112d49dae033b16511837867194b
-  languageName: node
-  linkType: hard
-
-"wonka@npm:^4.0.14":
-  version: 4.0.15
-  resolution: "wonka@npm:4.0.15"
-  checksum: df4fd51c15744570e6737975b9cff3e27c39840c1f2c4d4a01cb0b0a6641ff672c96475eb8df8276da2873147e46d8bdd3c3cddcf8f258ef5e97ae55c031f8f9
   languageName: node
   linkType: hard
 
