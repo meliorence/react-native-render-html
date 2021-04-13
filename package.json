@@ -12,6 +12,7 @@
   "scripts": {
     "build": "yarn workspace react-native-render-html build",
     "start": "yarn workspace demo start",
+    "render-html": "yarn workspace react-native-render-html",
     "test:jest": "yarn workspace react-native-render-html test:jest",
     "test:ts": "yarn workspace react-native-render-html test:ts",
     "test:lint": "yarn workspace react-native-render-html test:lint",
