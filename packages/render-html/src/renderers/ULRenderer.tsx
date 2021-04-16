@@ -3,8 +3,8 @@ import { defaultHTMLElementModels } from '@native-html/transient-render-engine';
 import { DefaultBlockRenderer } from '../render/render-types';
 import { DefaultTagRendererProps } from '../shared-types';
 import { TBlock } from '@native-html/transient-render-engine';
-import { SupportedListStyleType } from '../elements/usePrefixRenderer';
 import ULElement, { ULElementProps } from '../elements/ULElement';
+import { SupportedListStyleType } from '../elements/list-types';
 
 function getListStyleTypeFromNestLevel(
   nestLevel: number
