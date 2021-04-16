@@ -1,9 +1,7 @@
 import React from 'react';
-import GenericListElement, {
-  GenericListElementProps
-} from './GenericListElement';
+import ListElement, { ListElementProps } from './ListElement';
 
-export type OLElementProps = Omit<GenericListElementProps<'ol'>, 'listType'>;
+export type OLElementProps = Omit<ListElementProps<'ol'>, 'listType'>;
 export default function OLElement(props: OLElementProps) {
-  return React.createElement(GenericListElement, { ...props, listType: 'ol' });
+  return React.createElement(ListElement, { ...props, listType: 'ol' });
 }

@@ -5,8 +5,8 @@ import {
 } from '@native-html/transient-render-engine';
 import { DefaultBlockRenderer } from '../render/render-types';
 import { DefaultTagRendererProps } from '../shared-types';
-import { SupportedListStyleType } from '../elements/usePrefixRenderer';
 import OLElement, { OLElementProps } from '../elements/OLElement';
+import { SupportedListStyleType } from '../elements/list-types';
 
 function getListStyleTypeFromNestLevel(
   nestLevel: number
