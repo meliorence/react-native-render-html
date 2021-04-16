@@ -2841,6 +2841,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jsamr/counter-style@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@jsamr/counter-style@npm:2.0.0"
+  checksum: b881a7311bbd8f90526a1f27aa05d2fb265f078b245d7aee3ca805f7c4f7762077645e404454008ab1fb746d6f4c671a002a17767dd146477a2b04203f72df50
+  languageName: node
+  linkType: hard
+
+"@jsamr/react-native-li@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@jsamr/react-native-li@npm:2.0.0"
+  peerDependencies:
+    "@jsamr/counter-style": ^1.0.0 || ^2.0.0
+    react: "*"
+    react-native: "*"
+  checksum: ebddcaca851fb9bd235aa3e182d9f4a570bec40677abc116b9404b684fcd21802531bc3ba05708f04b9764f41f15a035cb8896e4a69e8b2167a8069154934842
+  languageName: node
+  linkType: hard
+
 "@mdn/browser-compat-data@npm:^2.0.7":
   version: 2.0.7
   resolution: "@mdn/browser-compat-data@npm:2.0.7"
@@ -14032,6 +14050,8 @@ fsevents@^1.2.7:
     "@babel/preset-react": ^7.12.13
     "@babel/preset-typescript": ^7.12.13
     "@babel/runtime": ^7.12.13
+    "@jsamr/counter-style": ^2.0.0
+    "@jsamr/react-native-li": ^2.0.0
     "@native-html/transient-render-engine": 4.4.1
     "@release-it/conventional-changelog": ^2.0.0
     "@testing-library/react-hooks": ^5.0.3

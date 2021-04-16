@@ -83,6 +83,8 @@
     ]
   },
   "dependencies": {
+    "@jsamr/counter-style": "^2.0.0",
+    "@jsamr/react-native-li": "^2.0.0",
     "@native-html/transient-render-engine": "4.4.1",
     "@types/ramda": "^0.27.32",
     "@types/urijs": "^1.19.14",
