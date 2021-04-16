@@ -19,6 +19,15 @@ export interface ListElementProps<T extends 'ol' | 'ul'>
   listType: T;
   getListStyleTypeFromNestLevel: (nestLevel: number) => SupportedListStyleType;
   getStyleFromNestLevel?: (nestLevel: number) => ViewStyle | null;
+  /**
+   * If `true`:
+   * - lists markers will be flushed to the right when `I18nManager.isRtl` is `false`.
+   * - list markers prefixes and suffixes print order will be reversed.
+   *
+   * @remarks Beware that left and right padding of li elements *will not*
+   * be switched.
+   */
+  enableExperimentalRtl?: boolean;
 }
 
 function getStartIndex(tnode: TNode) {
@@ -88,14 +97,16 @@ export default function ListElement({
   getListStyleTypeFromNestLevel,
   getStyleFromNestLevel,
   markers,
+  enableExperimentalRtl = false,
   ...props
 }: ListElementProps<any>) {
   const nestLevel =
     listType === 'ol' ? markers.olNestLevel : markers.ulNestLevel;
   const TChildrenRenderer = useTChildrenRenderer();
   const rtl =
-    tnode.styles.nativeBlockFlow.direction === 'rtl' ||
-    markers.direction === 'rtl';
+    enableExperimentalRtl &&
+    (tnode.styles.nativeBlockFlow.direction === 'rtl' ||
+      markers.direction === 'rtl');
   const nestLevelStyle = getStyleFromNestLevel?.call(null, nestLevel);
   const selectedListType = getListStyleTypeFromNestLevel(nestLevel);
   const listStyleType =
