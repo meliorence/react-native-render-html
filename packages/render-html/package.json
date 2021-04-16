@@ -34,6 +34,7 @@
     "test:ts": "tsc --noEmit",
     "test:lint": "eslint --ext ts,tsx src/",
     "build": "bob build",
+    "build:defs": "api-extractor run --local --verbose",
     "prepack": "yarn run build"
   },
   "devDependencies": {
@@ -85,6 +86,7 @@
   "dependencies": {
     "@jsamr/counter-style": "^2.0.0",
     "@jsamr/react-native-li": "^2.0.0",
+    "@microsoft/api-extractor": "^7.13.5",
     "@native-html/transient-render-engine": "4.4.1",
     "@types/ramda": "^0.27.32",
     "@types/urijs": "^1.19.14",
