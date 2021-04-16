@@ -2,9 +2,11 @@ import CounterStyle, { CounterStyleRenderer } from '@jsamr/counter-style';
 import { ComponentType } from 'react';
 import decimal from '@jsamr/counter-style/presets/decimal';
 import decimalLeadingZero from '@jsamr/counter-style/presets/decimalLeadingZero';
+import lowerRoman from '@jsamr/counter-style/presets/lowerRoman';
 import lowerAlpha from '@jsamr/counter-style/presets/lowerAlpha';
 import lowerGreek from '@jsamr/counter-style/presets/lowerGreek';
 import upperAlpha from '@jsamr/counter-style/presets/upperAlpha';
+import upperRoman from '@jsamr/counter-style/presets/upperRoman';
 import DisclosureClosedSymbolRenderer from './symbolic/DisclosureClosedSymbolRenderer';
 import DisclosureOpenSymbolRenderer from './symbolic/DisclosureOpenSymbolRenderer';
 import CircleSymbolRenderer from './symbolic/CircleSymbolRenderer';
@@ -68,8 +70,16 @@ const defaultMarkers: Record<SupportedListStyleType, ListStyleSpec> = {
     counterStyleRenderer: lowerGreek
   },
   'lower-latin': lowerAlphaSpec,
+  'lower-roman': {
+    type: 'textual',
+    counterStyleRenderer: lowerRoman
+  },
   'upper-alpha': upperAlphaSpec,
   'upper-latin': upperAlphaSpec,
+  'upper-roman': {
+    type: 'textual',
+    counterStyleRenderer: upperRoman
+  },
   circle: {
     counterStyleRenderer: symbolicRenderer,
     type: 'cyclic',
