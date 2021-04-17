@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { PropsWithChildren } from 'react';
-import lookupRecord from './helpers/lookupRecord';
 import { RenderHTMLFragmentProps } from './shared-types';
 
 export const messages = {
@@ -33,13 +32,13 @@ const RenderHTMLFragmentDebug = function RenderHTMLDebug(
     if (!props.source) {
       console.warn(messages.noSource);
     }
-    if (lookupRecord(props, 'html')) {
+    if ('html' in props) {
       console.warn(messages.outdatedHtmlProp);
     }
-    if (lookupRecord(props, 'uri')) {
+    if ('uri' in props) {
       console.warn(messages.outdatedUriProp);
     }
-    if (lookupRecord(props, 'listsPrefixesRenderers')) {
+    if ('listsPrefixesRenderers' in props) {
       console.warn(messages.outdatedListPrefixRenderersProps);
     }
   }
