@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ResolvedResourceProps, RenderHTMLFragmentProps } from './shared-types';
+import { RenderHTMLFragmentProps } from './shared-types';
+import { ResolvedResourceProps } from './internal-types';
 import TChildrenRenderersContext from './context/TChildrenRendererContext';
 import TNodeChildrenRenderer from './TNodeChildrenRenderer';
 import RenderHTMLFragmentDebug from './RenderHTMLFragmentDebug';

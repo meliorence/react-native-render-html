@@ -2,7 +2,8 @@ import React, { ReactElement } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import isUriSource from './helpers/isUriSource';
 import InlineSourceLoader from './InlineSourceLoader';
-import { RenderHTMLProps, SourceLoaderProps } from './shared-types';
+import { SourceLoaderProps } from './internal-types';
+import { RenderHTMLProps } from './shared-types';
 import UriSourceLoader from './UriSourceLoader';
 
 const styles = StyleSheet.create({

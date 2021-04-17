@@ -1,9 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
-import { ListCounterRendererProps } from '../../shared-types';
+import { UnitaryCounterRendererProps } from '../../shared-types';
 import useSymbolicMarkerRendererProps from './useSymbolicMarkerRendererStyles';
 
-export default function CircleSymbolRenderer(props: ListCounterRendererProps) {
+export default function CircleSymbolRenderer(
+  props: UnitaryCounterRendererProps
+) {
   const { prefixSize, prefixStyle } = useSymbolicMarkerRendererProps(props);
   const style = {
     borderColor: props.color,

@@ -1,10 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
-import { ListCounterRendererProps } from '../../shared-types';
+import { UnitaryCounterRendererProps } from '../../shared-types';
 import useSymbolicMarkerRendererProps from './useSymbolicMarkerRendererStyles';
 
 export default function DisclosureOpenSymbolRenderer(
-  props: ListCounterRendererProps
+  props: UnitaryCounterRendererProps
 ) {
   const {
     prefixStyle: { top },

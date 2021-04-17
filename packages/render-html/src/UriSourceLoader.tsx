@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { RenderHTMLSourceUri, SourceLoaderProps } from './shared-types';
+import { RenderHTMLSourceUri } from './shared-types';
+import { SourceLoaderProps } from './internal-types';
 
 interface LoaderInternalState {
   loading: boolean;

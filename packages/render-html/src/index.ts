@@ -52,17 +52,13 @@ export {
   default as TRenderEngineProvider,
   defaultFallbackFonts
 } from './TRenderEngineProvider';
-export { default as defaultSystemFonts } from './defaultSystemFonts';
 export { default as RenderHTMLFragment } from './RenderHTMLFragment';
 export { default as useInternalRenderer } from './hooks/useInternalRenderer';
 export { default as useNormalizedUrl } from './hooks/useNormalizedUrl';
-export { default as useTRenderEngine } from './hooks/useTRenderEngine';
-export { default as useTTree } from './hooks/useTTree';
 export type {
   InternalSpecialRenderedTag,
   InternalRendererConfig
 } from './hooks/useInternalRenderer';
-export { default as defaultRenderers } from './render/defaultRenderers';
 export { default as extendDefaultRenderer } from './render/extendDefaultRenderer';
 export { default as splitBoxModelStyle } from './helpers/splitBoxModelStyle';
 export {
@@ -73,6 +69,10 @@ export { useRendererProps } from './context/RenderersPropsProvider';
 export { useDocumentMetadata } from './context/DocumentMetadataProvider';
 export { default as domNodeToHTMLString } from './helpers/domNodeToHTMLString';
 export type { DomNodeToHtmlReporter } from './helpers/domNodeToHTMLString';
+
+// DEFAULTS
+export { default as defaultSystemFonts } from './defaultSystemFonts';
+export { default as defaultRenderers } from './render/defaultRenderers';
 
 // IMG
 export { default as useIMGElementState } from './elements/useIMGElementState';

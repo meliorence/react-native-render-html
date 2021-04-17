@@ -509,27 +509,11 @@ export interface RenderHTMLProps<
 > extends RenderHTMLFragmentProps<P>,
     TransientRenderEngineConfig {}
 
-export type RenderResolvedHTMLProps = Pick<
-  RenderHTMLProps,
-  'onTTreeChange' | 'onDocumentMetadataLoaded' | 'debug'
-> & {
-  html: string;
-  baseUrl?: string;
-};
-
-export interface ResolvedResourceProps {
-  html: string;
-  baseUrl?: string;
-}
-
-export interface SourceLoaderProps
-  extends Pick<
-    RenderHTMLProps,
-    'source' | 'remoteLoadingView' | 'remoteErrorView' | 'onHTMLLoaded'
-  > {
-  children: (resource: ResolvedResourceProps) => any;
-}
-
+/**
+ * An object which keys are keyword font names, and values system fonts.
+ *
+ * @public
+ */
 export interface FallbackFontsDefinitions {
   serif: string;
   'sans-serif': string;
@@ -551,7 +535,7 @@ export interface Markers extends Record<string, any> {
    * If this node is an `a` or has one as ancestor, this field will be set to
    * `true`.
    *
-   * @defaultvalue false
+   * @defaultValue false
    */
   anchor: boolean;
   /**
@@ -560,7 +544,7 @@ export interface Markers extends Record<string, any> {
    *
    * https://html.spec.whatwg.org/#edits
    *
-   * @defaultvalue 'none'
+   * @defaultValue 'none'
    */
   edits: 'ins' | 'del' | 'none';
   /**
@@ -568,7 +552,7 @@ export interface Markers extends Record<string, any> {
    *
    * https://html.spec.whatwg.org/#the-dir-attribute
    *
-   * @defaultvalue 'ltr'
+   * @defaultValue 'ltr'
    */
   direction: 'ltr' | 'rtl';
   /**
@@ -601,18 +585,38 @@ export interface PropsFromParent extends Record<string, any> {
   collapsedMarginTop: number | null;
 }
 
+/**
+ * Mixed styles which can be passed to `View` elements.
+ *
+ * @public
+ */
 export type NativeBlockStyles = TStyles['nativeBlockFlow'] &
   TStyles['nativeBlockRet'];
 
+/**
+ * Mixed styles which can be passed to `Text` elements.
+ *
+ * @public
+ */
 export type NativeTextStyles = TStyles['nativeBlockFlow'] &
   TStyles['nativeBlockRet'] &
   TStyles['nativeTextFlow'] &
   TStyles['nativeTextRet'];
 
+/**
+ * Mixed styles supported by a TNode.
+ *
+ * @public
+ */
 export type NativeStyleProp<T extends TNode> = T extends TBlock
   ? NativeBlockStyles
   : NativeTextStyles;
 
+/**
+ * Props to render a child.
+ *
+ * @public
+ */
 export interface TChildProps {
   key: string | number;
   childElement: ReactElement;
@@ -621,6 +625,11 @@ export interface TChildProps {
   propsFromParent: PropsFromParent;
 }
 
+/**
+ * Common props for TChildren rendering logic.
+ *
+ * @public
+ */
 export interface TChildrenBaseProps {
   disableMarginCollapsing?: boolean;
   renderChild?: (props: TChildProps) => ReactNode;
@@ -628,10 +637,20 @@ export interface TChildrenBaseProps {
   parentMarkers: Markers;
 }
 
+/**
+ * Props for {@link TChildrenRenderer}.
+ *
+ * @public
+ */
 export interface TChildrenRendererProps extends TChildrenBaseProps {
   tchildren: TNode[];
 }
 
+/**
+ * Props for {@link TNodeChildrenRenderer}.
+ *
+ * @public
+ */
 export interface TNodeChildrenRendererProps extends TChildrenBaseProps {
   tnode: TNode;
 }
@@ -755,6 +774,8 @@ export type CustomTagRenderer<
 /**
  * An object containing meta-data extracted from resource URL and HTML
  * &lt;head&gt; element.
+ *
+ * @public
  */
 export interface DocumentMetadata {
   /**
@@ -799,7 +820,12 @@ export interface DocumentMetadata {
   meta: TREDocumentContext['meta'];
 }
 
-export type ListCounterRendererProps = {
+/**
+ * Props for unitary counter renderers.
+ *
+ * @public
+ */
+export type UnitaryCounterRendererProps = {
   color: string;
   fontSize: number;
   lineHeight: number;
@@ -855,7 +881,7 @@ export interface TextualListStyleSpec {
 export interface UnitaryListStyleSpec {
   counterStyleRenderer: CounterStyleRenderer;
   type: 'unitary';
-  Component: ComponentType<ListCounterRendererProps>;
+  Component: ComponentType<UnitaryCounterRendererProps>;
 }
 
 /**

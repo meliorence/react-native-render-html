@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { RenderHTMLSourceInline, SourceLoaderProps } from './shared-types';
+import { SourceLoaderProps } from './internal-types';
+import { RenderHTMLSourceInline } from './shared-types';
 
 export type InlineSourceLoaderProps = {
   source: RenderHTMLSourceInline;
