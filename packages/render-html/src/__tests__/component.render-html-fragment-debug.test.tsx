@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-native-testing-library';
-import RenderHTMLFragmentDebug, { messages } from '../RenderHTMLFragmentDebug';
+import debugMessage from '../debugMessages';
+import RenderHTMLFragmentDebug from '../RenderHTMLFragmentDebug';
 
 beforeAll(function () {
   //@ts-expect-error
@@ -16,13 +17,13 @@ describe('RenderHTMLFragmentDebug', () => {
         debug={false}
       />
     );
-    expect(console.warn).toHaveBeenNthCalledWith(1, messages.contentWidth);
+    expect(console.warn).toHaveBeenNthCalledWith(1, debugMessage.contentWidth);
   });
   it('should warn when source has not been provided', () => {
     console.warn = jest.fn();
     //@ts-expect-error
     render(<RenderHTMLFragmentDebug contentWidth={0} debug={false} />);
-    expect(console.warn).toHaveBeenNthCalledWith(1, messages.noSource);
+    expect(console.warn).toHaveBeenNthCalledWith(1, debugMessage.noSource);
   });
   it('should warn when outdated html prop has been provided', () => {
     console.warn = jest.fn();
@@ -35,7 +36,10 @@ describe('RenderHTMLFragmentDebug', () => {
         debug: false
       })
     );
-    expect(console.warn).toHaveBeenNthCalledWith(1, messages.outdatedHtmlProp);
+    expect(console.warn).toHaveBeenNthCalledWith(
+      1,
+      debugMessage.outdatedHtmlProp
+    );
   });
   it('should warn when outdated uri prop has been provided', () => {
     console.warn = jest.fn();
@@ -48,6 +52,9 @@ describe('RenderHTMLFragmentDebug', () => {
         debug: false
       })
     );
-    expect(console.warn).toHaveBeenNthCalledWith(1, messages.outdatedUriProp);
+    expect(console.warn).toHaveBeenNthCalledWith(
+      1,
+      debugMessage.outdatedUriProp
+    );
   });
 });
