@@ -1,5 +1,4 @@
-import CounterStyle, { CounterStyleRenderer } from '@jsamr/counter-style';
-import { ComponentType } from 'react';
+import CounterStyle from '@jsamr/counter-style';
 import decimal from '@jsamr/counter-style/presets/decimal';
 import decimalLeadingZero from '@jsamr/counter-style/presets/decimalLeadingZero';
 import lowerRoman from '@jsamr/counter-style/presets/lowerRoman';
@@ -12,44 +11,12 @@ import DisclosureOpenSymbolRenderer from './symbolic/DisclosureOpenSymbolRendere
 import CircleSymbolRenderer from './symbolic/CircleSymbolRenderer';
 import DiscSymbolRenderer from './symbolic/DiscSymbolRenderer';
 import SquareSymbolRenderer from './symbolic/SquareSymbolRenderer';
-import {
-  ListCounterRendererProps,
-  DefaultSupportedListStyleType
-} from './list-types';
+import type {
+  DefaultSupportedListStyleType,
+  ListStyleSpec
+} from '../shared-types';
 
 const unitaryRenderer = CounterStyle.cyclic('*').withSuffix(' ');
-
-/**
- * Specs for a list item marker renderer backed by a `CounterStyleRenderer`
- * from `@jsamr/counter-style`.
- *
- * @public
- */
-export interface TextualListStyleSpec {
-  type: 'textual';
-  counterStyleRenderer: CounterStyleRenderer;
-}
-
-/**
- * Specs for a list item marker renderer with only one representation. The
- * "Component" should render this representation, minus prefix and suffix. The
- * rendered component should have a maximum width of `0.6 * fontSize`, and a height of
- * `lineHeight`.
- *
- * @public
- */
-export interface UnitaryListStyleSpec {
-  counterStyleRenderer: CounterStyleRenderer;
-  type: 'unitary';
-  Component: ComponentType<ListCounterRendererProps>;
-}
-
-/**
- * An object to specify how to render list markers.
- *
- * @public
- */
-export type ListStyleSpec = TextualListStyleSpec | UnitaryListStyleSpec;
 
 const lowerAlphaSpec = {
   type: 'textual',
@@ -61,6 +28,11 @@ const upperAlphaSpec = {
   counterStyleRenderer: upperAlpha
 } as const;
 
+/**
+ * Default list style specs supported by this library.
+ *
+ * @public
+ */
 const defaultListStyleSpecs: Record<
   DefaultSupportedListStyleType,
   ListStyleSpec

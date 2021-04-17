@@ -4,9 +4,11 @@ import {
   TBlock
 } from '@native-html/transient-render-engine';
 import { DefaultBlockRenderer } from '../render/render-types';
-import { DefaultTagRendererProps } from '../shared-types';
+import {
+  DefaultTagRendererProps,
+  DefaultSupportedListStyleType
+} from '../shared-types';
 import OLElement, { OLElementProps } from '../elements/OLElement';
-import { DefaultSupportedListStyleType } from '../elements/list-types';
 
 function getListStyleTypeFromNestLevel(
   nestLevel: number
@@ -28,8 +30,10 @@ function getStyleFromNestLevel(nestLevel: number) {
 export function useOLElementProps(
   props: DefaultTagRendererProps<TBlock>
 ): OLElementProps {
+  const listStyleSpecs = props.sharedProps.customListStyleSpecs;
   return {
     ...props,
+    listStyleSpecs,
     getListStyleTypeFromNestLevel,
     getStyleFromNestLevel
   };

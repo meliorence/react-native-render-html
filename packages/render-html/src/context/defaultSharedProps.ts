@@ -24,7 +24,8 @@ const defaultSharedProps: Required<RenderHTMLSharedProps> = {
   },
   defaultWebViewProps: {},
   setMarkersForTNode: () => null,
-  pressableHightlightColor: DEFAULT_PRESSABLE_RIPPLE_COLOR
+  pressableHightlightColor: DEFAULT_PRESSABLE_RIPPLE_COLOR,
+  customListStyleSpecs: {}
 };
 
 export default defaultSharedProps;

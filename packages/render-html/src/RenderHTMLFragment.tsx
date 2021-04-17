@@ -45,7 +45,8 @@ export const renderHtmlFragmentPropTypes: RenderHTMLFragmentPropTypes = {
   defaultWebViewProps: PropTypes.object,
   setMarkersForTNode: PropTypes.func,
   onDocumentMetadataLoaded: PropTypes.func,
-  pressableHightlightColor: PropTypes.string
+  pressableHightlightColor: PropTypes.string,
+  customListStyleSpecs: PropTypes.object
 };
 
 export const renderHTMLFragmentDefaultProps: {

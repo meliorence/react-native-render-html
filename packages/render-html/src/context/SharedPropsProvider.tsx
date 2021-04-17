@@ -1,5 +1,6 @@
 import React, { PropsWithChildren, useCallback, useMemo } from 'react';
 import { TextProps, ViewProps } from 'react-native';
+import defaultListStyleSpecs from '../elements/defaultListStyleSpecs';
 import selectSharedProps from '../helpers/selectSharedProps';
 import { RenderHTMLSharedProps, TRendererBaseProps } from '../shared-types';
 import defaultSharedProps from './defaultSharedProps';
@@ -72,7 +73,13 @@ export default function SharedPropsProvider(
   props: PropsWithChildren<RenderHTMLSharedProps>
 ) {
   const memoizedSharedProps = useMemo(
-    () => selectSharedProps(props),
+    () => ({
+      ...selectSharedProps(props),
+      customListStyleSpecs: {
+        ...defaultListStyleSpecs,
+        ...props.customListStyleSpecs
+      }
+    }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     Object.values(selectSharedProps(props))
   );

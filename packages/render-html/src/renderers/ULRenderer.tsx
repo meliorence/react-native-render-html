@@ -1,10 +1,12 @@
 import React from 'react';
 import { defaultHTMLElementModels } from '@native-html/transient-render-engine';
 import { DefaultBlockRenderer } from '../render/render-types';
-import { DefaultTagRendererProps } from '../shared-types';
+import {
+  DefaultTagRendererProps,
+  DefaultSupportedListStyleType
+} from '../shared-types';
 import { TBlock } from '@native-html/transient-render-engine';
 import ULElement, { ULElementProps } from '../elements/ULElement';
-import { DefaultSupportedListStyleType } from '../elements/list-types';
 
 function getListStyleTypeFromNestLevel(
   nestLevel: number
@@ -26,8 +28,10 @@ function getStyleFromNestLevel(nestLevel: number) {
 export function useULElementProps(
   props: DefaultTagRendererProps<TBlock>
 ): ULElementProps {
+  const listStyleSpecs = props.sharedProps.customListStyleSpecs;
   return {
     ...props,
+    listStyleSpecs,
     getListStyleTypeFromNestLevel,
     getStyleFromNestLevel
   };
