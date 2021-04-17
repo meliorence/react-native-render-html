@@ -4,7 +4,8 @@ type Feedback =
   | 'outdatedListPrefixRenderersProps'
   | 'noSource'
   | 'contentWidth'
-  | 'outdatedImagesDimensions';
+  | 'outdatedImagesDimensions'
+  | 'outdatedOnLinkPressProp';
 
 let debugMessage: Record<Feedback, string>;
 
@@ -28,7 +29,11 @@ if (__DEV__) {
       'You are encouraged to use useWindowDimensions hook, see: ' +
       'https://reactnative.dev/docs/usewindowdimensions',
     outdatedImagesDimensions:
-      "You're attempting to use an outdated prop, 'imagesInitialDimensions'. This prop has been discontinued in version 6. Use 'renderersProps.img.initialDimensions' instead."
+      "You're attempting to use an outdated prop, 'imagesInitialDimensions'. This prop has been discontinued in version 6. " +
+      "Use 'renderersProps.img.initialDimensions' instead.",
+    outdatedOnLinkPressProp:
+      "You're attempting to use an outdated prop, 'onLinkPress'. This prop has been discontinued in version 6. " +
+      "Use 'renderersProps.a.onPress' instead."
   };
 } else {
   debugMessage = {} as any;
