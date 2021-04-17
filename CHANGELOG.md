@@ -1,3 +1,10 @@
+# [6.0.0-alpha.24](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.23...v6.0.0-alpha.24) (2021-04-17)
+
+
+### Bug Fixes
+
+* list marker doesn't pick `fontSize` ([64bf900](https://github.com/meliorence/react-native-render-html/commit/64bf9007a3b8cba2cfe6bf1011896dfae8862e77))
+
 # [6.0.0-alpha.23](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.22...v6.0.0-alpha.23) (2021-04-17)
 
 
