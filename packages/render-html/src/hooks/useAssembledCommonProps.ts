@@ -34,6 +34,9 @@ function getStylesForTnode<T extends TNode>(tnode: T): NativeStyleProp<T> {
   return {} as any;
 }
 
+/**
+ * @internal
+ */
 export default function useAssembledCommonProps<T extends TNode>(
   {
     tnode,

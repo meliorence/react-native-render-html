@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
-import { ListCounterRendererProps } from '../../shared-types';
+import { UnitaryCounterRendererProps } from '../../shared-types';
 import useSymbolicMarkerRendererProps from './useSymbolicMarkerRendererStyles';
 
-export default function DiscSymbolRenderer(props: ListCounterRendererProps) {
+export default function DiscSymbolRenderer(props: UnitaryCounterRendererProps) {
   const { prefixSize, prefixStyle } = useSymbolicMarkerRendererProps(props);
   const style = {
     borderRadius: prefixSize,

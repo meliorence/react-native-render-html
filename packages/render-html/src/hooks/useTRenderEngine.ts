@@ -10,6 +10,9 @@ import { TransientRenderEngineConfig } from '../shared-types';
 import { CustomRendererSpecs } from '../render/render-types';
 import lookupRecord from '../helpers/lookupRecord';
 
+/**
+ * @internal
+ */
 export default function useTRenderEngine(props: TransientRenderEngineConfig) {
   const {
     allowedStyles,

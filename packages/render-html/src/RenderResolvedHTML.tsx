@@ -1,6 +1,6 @@
 import React from 'react';
 import useTTree from './hooks/useTTree';
-import { RenderResolvedHTMLProps } from './shared-types';
+import { RenderResolvedHTMLProps } from './internal-types';
 import TDocumentRenderer from './TDocumentRenderer';
 
 export default function RenderResolvedHTML(props: RenderResolvedHTMLProps) {

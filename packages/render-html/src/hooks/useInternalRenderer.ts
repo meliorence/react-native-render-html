@@ -54,6 +54,8 @@ export interface InternalRendererConfig<P> {
  * @param props - The props passed to the custom renderer.
  * @returns An object with two fields: `Renderer` (the internal react
  * component) and `rendererProps`, the internal component props.
+ *
+ * @public
  */
 export default function useInternalRenderer<T extends TagName>(
   tagName: T,

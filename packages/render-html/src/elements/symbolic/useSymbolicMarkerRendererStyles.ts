@@ -1,7 +1,7 @@
-import { ListCounterRendererProps } from '../../shared-types';
+import { UnitaryCounterRendererProps } from '../../shared-types';
 
 export default function useSymbolicMarkerRendererProps(
-  props: ListCounterRendererProps,
+  props: UnitaryCounterRendererProps,
   shrinkFactor = 1
 ) {
   const prefixSize = props.fontSize / (shrinkFactor * 2.8);
