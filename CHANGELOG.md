@@ -1,3 +1,37 @@
+# [6.0.0-alpha.23](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.22...v6.0.0-alpha.23) (2021-04-17)
+
+
+### Code Refactoring
+
+* extract internal types to a separate file ([27421ad](https://github.com/meliorence/react-native-render-html/commit/27421ade83906c76a3bc0a2b569d8c41467bec38))
+* extract renderer-specific props to `renderersProps` ([f338963](https://github.com/meliorence/react-native-render-html/commit/f338963ac25d5bd5c1062df954bc25b530cad713))
+* move `enableExperimentalPercentWidth` to `renderersProps.img` ([0612a94](https://github.com/meliorence/react-native-render-html/commit/0612a9431c8615d4a7d93c6ca69ae0d7fba2f2f1))
+* move `onLinkPress` to `renderersProps.a.onPress` ([5c31ff9](https://github.com/meliorence/react-native-render-html/commit/5c31ff98bdba81f929e4b343c8cadb58b4092fec))
+
+
+### Features
+
+* configure `enableExperimentalRtl` in `renderersProps.ol|ul` ([2b6b0be](https://github.com/meliorence/react-native-render-html/commit/2b6b0bea66e71c3e97bcd4fdab3bdad2c1a11f1d))
+* configure `getFallbackListStyleTypeFromNestLevel` in `renderersProps.ol|ul` ([540a22c](https://github.com/meliorence/react-native-render-html/commit/540a22c4b397d8b395fa681f4df0ddaa769da817))
+* configure margins removal for nested lists in renderersProps.ol|ul ([15b161c](https://github.com/meliorence/react-native-render-html/commit/15b161c057ac897f516c87c92689ca74077fbecf))
+* export `defaultListStyleSpecs` for customization. ([6c2420b](https://github.com/meliorence/react-native-render-html/commit/6c2420b76024c266513a5c6edf377a2eb8dcb22c))
+* new prop `customListStyleSpecs` to support additional `list-style-type` ([190af19](https://github.com/meliorence/react-native-render-html/commit/190af1928d1c6ac87fdb55aedba15892e0e0350d))
+* support "start" attribute in ol and ul elements ([0f87b22](https://github.com/meliorence/react-native-render-html/commit/0f87b22c539bb7e531e71dcd5fb4a9563f0bcb98)), closes [#336](https://github.com/meliorence/react-native-render-html/issues/336)
+* support "upper-latin" and "lower-lattin" list-style-type CSS props ([1a2c595](https://github.com/meliorence/react-native-render-html/commit/1a2c595825a9bea82c5542f85e8244af2128b543))
+* support `enableRemove*MarginIfNested` for list renderers ([54e4182](https://github.com/meliorence/react-native-render-html/commit/54e418282c0f46e87543589694b4cb3653e238d4))
+* support experimental RTL mode for ol and ul elements ([0954d8b](https://github.com/meliorence/react-native-render-html/commit/0954d8b380245be2372c18e5d70629dd14787fc9))
+
+
+### BREAKING CHANGES
+
+* `getStyleFromNestLevel` prop for list renderers has been dropped. If you need conditional style for list renderers based on nest level,   implement a custom list renderer with `useInternalRenderer` and check the passed markers nest level. 
+* `getListStyleTypeFromNestLevel` prop for list renderers has been renamed to `getFallbackListStyleTypeFromNestLevel`.
+* `useTTree` and `useTRenderEngine` have been removed from barrel exports since they are considered internals. If you were using those, please let me know.
+* `enableExperimentalPercentWidth` has been discontinued. Use `renderersProps.img.enableExperimentalPercentWidth` instead.
+* `onLinkPress` prop has been discontinued. Use `renderersProps.a.onPress` instead.
+* `sharedProps` and `useSharedProps` don't provide `renderersProps` anymore. Explicitly consume those via `useRendererProps`.
+* `initialImagesDimensions` has been moved to `renderersProps.img.initialDimensions`
+
 # [6.0.0-alpha.22](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.21...v6.0.0-alpha.22) (2021-03-30)
 
 
