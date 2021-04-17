@@ -29,19 +29,23 @@ import type { TStyles } from '@native-html/transient-render-engine';
 import type { CustomTagRendererRecord } from './render/render-types';
 import type { ParserOptions as HtmlParserOptions } from 'htmlparser2';
 
+/**
+ * @public
+ */
 export interface ImageDimensions {
   width: number;
   height: number;
 }
 
+/**
+ * Props for custom Pressable components.
+ *
+ * @public
+ */
 export interface GenericPressableProps extends AccessibilityProps {
   style?: StyleProp<ViewStyle>;
   borderless?: boolean;
   onPress?: TouchableHighlightProps['onPress'];
-}
-
-export interface HtmlAttributesDictionary {
-  [attribute: string]: string;
 }
 
 /**
@@ -68,7 +72,7 @@ export interface RenderersPropsBase extends Record<string, any> {
     onPress?: (
       event: GestureResponderEvent,
       href: string,
-      htmlAttribs: HtmlAttributesDictionary,
+      htmlAttribs: Record<string, string>,
       target: TREDocumentContext['baseTarget']
     ) => void;
   };
@@ -246,7 +250,6 @@ export interface RenderHTMLSharedProps {
 }
 
 /**
- *
  * Configuration for the Transient Render Engine.
  *
  * @public
@@ -410,6 +413,11 @@ export interface TransientRenderEngineConfig {
   >;
 }
 
+/**
+ * A source represented by a URI.
+ *
+ * @public
+ */
 export interface RenderHTMLSourceUri {
   /**
    * The URI to load in the `HTML` component. Can be a local or remote file.
@@ -431,6 +439,11 @@ export interface RenderHTMLSourceUri {
   body?: string;
 }
 
+/**
+ * A source which content is provided in-place.
+ *
+ * @public
+ */
 export interface RenderHTMLSourceInline {
   /**
    * A static HTML page to display in the HTML component.
@@ -438,10 +451,16 @@ export interface RenderHTMLSourceInline {
   html: string;
   /**
    * The base URL to resolve relative URLs in the HTML code.
+   * See {@link useNormalizedUrl}.
    */
   baseUrl?: string;
 }
 
+/**
+ * The source to render.
+ *
+ * @public
+ */
 export type RenderHTMLSource = RenderHTMLSourceInline | RenderHTMLSourceUri;
 
 /**
