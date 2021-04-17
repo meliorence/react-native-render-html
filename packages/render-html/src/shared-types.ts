@@ -84,7 +84,7 @@ export interface ListElementConfig {
   /**
    * Get default list-style-type given the number of nest level for this list.
    *
-   * @param nestLevel - The number of ol or ul parents elements.
+   * @param nestLevel - The number of parents elements with the same tag name.
    */
   getFallbackListStyleTypeFromNestLevel?: (
     nestLevel: number
