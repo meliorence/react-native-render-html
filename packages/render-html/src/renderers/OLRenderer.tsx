@@ -23,10 +23,6 @@ function getListStyleTypeFromNestLevel(
   }
 }
 
-function getStyleFromNestLevel(nestLevel: number) {
-  return nestLevel > 0 ? { marginTop: 0, marginBottom: 0 } : null;
-}
-
 export function useOLElementProps(
   props: DefaultTagRendererProps<TBlock>
 ): OLElementProps {
@@ -34,8 +30,7 @@ export function useOLElementProps(
   return {
     ...props,
     listStyleSpecs,
-    getListStyleTypeFromNestLevel,
-    getStyleFromNestLevel
+    getFallbackListStyleTypeFromNestLevel: getListStyleTypeFromNestLevel
   };
 }
 

@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import { Text, View, ViewStyle } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { TBlock, TNode } from '@native-html/transient-render-engine';
 import {
@@ -21,19 +21,43 @@ import pick from 'ramda/src/pick';
 export interface ListElementProps<T extends 'ol' | 'ul'>
   extends DefaultTagRendererProps<TBlock> {
   listType: T;
-  getListStyleTypeFromNestLevel: (
+  /**
+   * Get default list-style-type given the number of nest level for this list.
+   *
+   * @param nestLevel - The number of ol or ul parents elements.
+   */
+  getFallbackListStyleTypeFromNestLevel: (
     nestLevel: number
   ) => DefaultSupportedListStyleType;
-  getStyleFromNestLevel?: (nestLevel: number) => ViewStyle | null;
   /**
-   * If `true`:
+   * Remove top margin if this element parent is an `li` element and it
+   * is its first child.
+   *
+   * @defaultValue true
+   */
+  enableRemoveTopMarginIfNested?: boolean;
+  /**
+   * Remove bottom margin if this element parent is an `li` element and it
+   * is its last child.
+   *
+   * @defaultValue true
+   */
+  enableRemoveBottomMarginIfNested?: boolean;
+  /**
+   * If `true` and the direction is set to `'rtl'` (either via `dir` attribute
+   * or `direction` CSS property):
    * - lists markers will be flushed to the right when `I18nManager.isRtl` is `false`.
    * - list markers prefixes and suffixes print order will be reversed.
    *
    * @remarks Beware that left and right padding of li elements *will not*
    * be switched.
+   *
+   * @defaultValue false
    */
   enableExperimentalRtl?: boolean;
+  /**
+   * Specifications to render list markers.
+   */
   listStyleSpecs: Record<string, ListStyleSpec>;
 }
 
@@ -101,10 +125,11 @@ export default function ListElement({
   TDefaultRenderer,
   listType,
   style,
-  getListStyleTypeFromNestLevel,
-  getStyleFromNestLevel,
+  getFallbackListStyleTypeFromNestLevel: getListStyleTypeFromNestLevel,
   markers,
   enableExperimentalRtl = false,
+  enableRemoveTopMarginIfNested = true,
+  enableRemoveBottomMarginIfNested = true,
   listStyleSpecs,
   ...props
 }: ListElementProps<any>) {
@@ -115,7 +140,18 @@ export default function ListElement({
     enableExperimentalRtl &&
     (tnode.styles.nativeBlockFlow.direction === 'rtl' ||
       markers.direction === 'rtl');
-  const nestLevelStyle = getStyleFromNestLevel?.call(null, nestLevel);
+  const removeTopMarginStyle =
+    enableRemoveTopMarginIfNested &&
+    tnode.parent?.tagName === 'li' &&
+    tnode.nodeIndex === 0
+      ? styles.zeroMarginTop
+      : null;
+  const removeBottomMarginStyle =
+    enableRemoveBottomMarginIfNested &&
+    tnode.parent?.tagName === 'li' &&
+    tnode.nodeIndex === tnode.parent?.children.length - 1
+      ? styles.zeroMarginBottom
+      : null;
   const selectedListType = getListStyleTypeFromNestLevel(nestLevel);
   const listStyleType =
     (tnode.styles.webTextFlow.listStyleType as DefaultSupportedListStyleType) ||
@@ -158,14 +194,14 @@ export default function ListElement({
       index={index}
       {...itemProps}
       style={[itemProps.style, { [rtl ? 'right' : 'left']: -markerWidth }]}>
-      <View style={{ flexShrink: 1 }}>{childElement}</View>
+      <View style={styles.shrink}>{childElement}</View>
     </MarkedListItem>
   );
   const fixedPaddingRule = rtl
     ? ('paddingRight' as const)
     : ('paddingLeft' as const);
   const paddingValue = tnode.styles.nativeBlockRet[fixedPaddingRule];
-  const dynamicStyle = {
+  const dynamicPaddingStyle = {
     position: 'relative' as const,
     [fixedPaddingRule]:
       typeof paddingValue === 'number'
@@ -176,7 +212,12 @@ export default function ListElement({
     <TDefaultRenderer
       tnode={tnode}
       markers={markers}
-      style={[style, nestLevelStyle, dynamicStyle]}
+      style={[
+        style,
+        removeTopMarginStyle,
+        removeBottomMarginStyle,
+        dynamicPaddingStyle
+      ]}
       {...props}>
       <TChildrenRenderer
         tchildren={tnode.children}
@@ -186,3 +227,9 @@ export default function ListElement({
     </TDefaultRenderer>
   );
 }
+
+const styles = StyleSheet.create({
+  zeroMarginTop: { marginTop: 0 },
+  zeroMarginBottom: { marginBottom: 0 },
+  shrink: { flexShrink: 1 }
+});
