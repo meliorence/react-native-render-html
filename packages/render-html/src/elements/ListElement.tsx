@@ -7,17 +7,23 @@ import {
   useMarkedList,
   MarkerBoxProps
 } from '@jsamr/react-native-li';
-import { DefaultTagRendererProps, TChildProps } from '../shared-types';
+import type {
+  DefaultSupportedListStyleType,
+  DefaultTagRendererProps,
+  ListStyleSpec,
+  TChildProps,
+  UnitaryListStyleSpec
+} from '../shared-types';
 import { useTChildrenRenderer } from '../context/TChildrenRendererContext';
 import { DEFAULT_TEXT_COLOR } from '../constants';
 import pick from 'ramda/src/pick';
-import defaultListStyleSpecs, { UnitaryListStyleSpec } from './defaultListStyleSpecs';
-import { DefaultSupportedListStyleType } from './list-types';
 
 export interface ListElementProps<T extends 'ol' | 'ul'>
   extends DefaultTagRendererProps<TBlock> {
   listType: T;
-  getListStyleTypeFromNestLevel: (nestLevel: number) => DefaultSupportedListStyleType;
+  getListStyleTypeFromNestLevel: (
+    nestLevel: number
+  ) => DefaultSupportedListStyleType;
   getStyleFromNestLevel?: (nestLevel: number) => ViewStyle | null;
   /**
    * If `true`:
@@ -28,6 +34,7 @@ export interface ListElementProps<T extends 'ol' | 'ul'>
    * be switched.
    */
   enableExperimentalRtl?: boolean;
+  listStyleSpecs: Record<string, ListStyleSpec>;
 }
 
 function getStartIndex(tnode: TNode) {
@@ -98,6 +105,7 @@ export default function ListElement({
   getStyleFromNestLevel,
   markers,
   enableExperimentalRtl = false,
+  listStyleSpecs,
   ...props
 }: ListElementProps<any>) {
   const nestLevel =
@@ -112,16 +120,22 @@ export default function ListElement({
   const listStyleType =
     (tnode.styles.webTextFlow.listStyleType as DefaultSupportedListStyleType) ||
     selectedListType;
-  if (__DEV__ && !(listStyleType in defaultListStyleSpecs)) {
-    console.warn(
-      `list-style-type "${listStyleType}" is not handled by react-native-render-html.` +
-        'You can register a custom list marker renderer with the appropriate prop.'
-    );
+  if (__DEV__ && !(listStyleType in listStyleSpecs)) {
+    if (listStyleType.match(/^("|')/)) {
+      console.warn(
+        "This library doesn't support strings for list-style-type CSS properties."
+      );
+    } else {
+      console.warn(
+        `list-style-type "${listStyleType}" is not handled by react-native-render-html. ` +
+          'You can easily provide support for this style via "customListStyleSpecs" prop.'
+      );
+    }
   }
   const spec =
-    listStyleType in defaultListStyleSpecs
-      ? defaultListStyleSpecs[listStyleType]
-      : defaultListStyleSpecs[selectedListType];
+    listStyleType in listStyleSpecs
+      ? listStyleSpecs[listStyleType]
+      : listStyleSpecs[selectedListType];
   const counterRenderer = spec.counterStyleRenderer;
   const startIndex = getStartIndex(tnode);
   const markerTextStyle = extractMarkerTextStyle(tnode);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { ListCounterRendererProps } from '../list-types';
+import { ListCounterRendererProps } from '../../shared-types';
 import useSymbolicMarkerRendererProps from './useSymbolicMarkerRendererStyles';
 
 export default function DisclosureClosedSymbolRenderer(

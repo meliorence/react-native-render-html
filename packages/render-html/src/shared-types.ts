@@ -1,4 +1,4 @@
-import {
+import type {
   AccessibilityProps,
   GestureResponderEvent,
   StyleProp,
@@ -19,15 +19,15 @@ import type {
   TPhrasing,
   DocumentContext as TREDocumentContext
 } from '@native-html/transient-render-engine';
-
-import { ComponentType, ReactElement, ReactNode } from 'react';
-import {
+import type { CounterStyleRenderer } from '@jsamr/counter-style';
+import type { ComponentType, ReactElement, ReactNode } from 'react';
+import type {
   CSSPropertyNameList,
   MixedStyleDeclaration
 } from '@native-html/css-processor';
 import type { TStyles } from '@native-html/transient-render-engine';
-import { CustomTagRendererRecord } from './render/render-types';
-import { ParserOptions as HtmlParserOptions } from 'htmlparser2';
+import type { CustomTagRendererRecord } from './render/render-types';
+import type { ParserOptions as HtmlParserOptions } from 'htmlparser2';
 
 export interface ImageDimensions {
   width: number;
@@ -222,6 +222,27 @@ export interface RenderHTMLSharedProps {
    * @defaultValue rgba(38, 132, 240, 0.2)
    */
   pressableHightlightColor?: string;
+  /**
+   * Provide support for list style types which are not supported by this
+   * library.
+   *
+   * @remarks Check the numerous presets provided by `@jsamr/counter-style` as
+   * they require zero-effort!
+   *
+   * @example
+   *
+   * ```js
+   * import hebrew from '@jsamr/counter-style/presets/hebrew';
+   *
+   * const customListStyleSpecs = {
+   *   hebrew: {
+   *     type: 'textual',
+   *     counterStyleRenderer: hebrew
+   *   }
+   * };
+   * ```
+   */
+  customListStyleSpecs?: Record<string, ListStyleSpec>;
 }
 
 /**
@@ -758,3 +779,69 @@ export interface DocumentMetadata {
    */
   meta: TREDocumentContext['meta'];
 }
+
+export type ListCounterRendererProps = {
+  color: string;
+  fontSize: number;
+  lineHeight: number;
+  index: number;
+} & Pick<
+  MixedStyleDeclaration,
+  'fontFamily' | 'fontStyle' | 'fontWeight' | 'fontVariant'
+>;
+
+/**
+ * List style types supported internally.
+ *
+ * See {@link https://www.w3.org/TR/css-counter-styles-3 | CSS Counter Styles Level 3}.
+ *
+ * @public
+ */
+export type DefaultSupportedListStyleType =
+  | 'none'
+  | 'disc'
+  | 'circle'
+  | 'square'
+  | 'decimal'
+  | 'decimal-leading-zero'
+  | 'lower-roman'
+  | 'upper-roman'
+  | 'lower-greek'
+  | 'lower-alpha'
+  | 'lower-latin'
+  | 'upper-alpha'
+  | 'upper-latin'
+  | 'disclosure-open'
+  | 'disclosure-closed';
+
+/**
+ * Specs for a list item marker renderer backed by a `CounterStyleRenderer`
+ * from `@jsamr/counter-style`.
+ *
+ * @public
+ */
+export interface TextualListStyleSpec {
+  type: 'textual';
+  counterStyleRenderer: CounterStyleRenderer;
+}
+
+/**
+ * Specs for a list item marker renderer with only one representation. The
+ * "Component" should render this representation, minus prefix and suffix. The
+ * rendered component should have a maximum width of `0.6 * fontSize`, and a height of
+ * `lineHeight`.
+ *
+ * @public
+ */
+export interface UnitaryListStyleSpec {
+  counterStyleRenderer: CounterStyleRenderer;
+  type: 'unitary';
+  Component: ComponentType<ListCounterRendererProps>;
+}
+
+/**
+ * An object to specify how to render list markers.
+ *
+ * @public
+ */
+export type ListStyleSpec = TextualListStyleSpec | UnitaryListStyleSpec;

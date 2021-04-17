@@ -1,4 +1,4 @@
-import { ListCounterRendererProps } from '../list-types';
+import { ListCounterRendererProps } from '../../shared-types';
 
 export default function useSymbolicMarkerRendererProps(
   props: ListCounterRendererProps,
