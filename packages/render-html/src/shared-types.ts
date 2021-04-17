@@ -81,6 +81,14 @@ export interface ListElementConfig {
    * @defaultValue false
    */
   enableExperimentalRtl?: boolean;
+  /**
+   * Get default list-style-type given the number of nest level for this list.
+   *
+   * @param nestLevel - The number of ol or ul parents elements.
+   */
+  getFallbackListStyleTypeFromNestLevel?: (
+    nestLevel: number
+  ) => DefaultSupportedListStyleType;
 }
 
 /**
