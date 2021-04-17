@@ -5,7 +5,8 @@ type Feedback =
   | 'noSource'
   | 'contentWidth'
   | 'outdatedImagesDimensions'
-  | 'outdatedOnLinkPressProp';
+  | 'outdatedOnLinkPressProp'
+  | 'outdatedEnableExperimentalPercentWidth';
 
 let debugMessage: Record<Feedback, string>;
 
@@ -33,7 +34,10 @@ if (__DEV__) {
       "Use 'renderersProps.img.initialDimensions' instead.",
     outdatedOnLinkPressProp:
       "You're attempting to use an outdated prop, 'onLinkPress'. This prop has been discontinued in version 6. " +
-      "Use 'renderersProps.a.onPress' instead."
+      "Use 'renderersProps.a.onPress' instead.",
+    outdatedEnableExperimentalPercentWidth:
+      "You're attempting to use an outdated prop, 'enableExperimentalPercentWidth'. This prop has been discontinued in version 6. " +
+      "Use 'renderersProps.img.enableExperimentalPercentWidth' instead."
   };
 } else {
   debugMessage = {} as any;
