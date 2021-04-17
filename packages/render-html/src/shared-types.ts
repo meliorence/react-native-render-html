@@ -48,9 +48,10 @@ export interface HtmlAttributesDictionary {
  * Props for custom renderers. The convention is to declare a field per renderer.
  * In doing so, you can benefit from `useRendererProps('tagname')` in custom renderers.
  *
- * @public
  * @remarks Plugins offering options should augment this declaration.
  * See https://www.typescriptlang.org/docs/handbook/declaration-merging.html
+ *
+ * @public
  */
 export interface RenderersPropsBase extends Record<string, any> {
   img: {
@@ -79,7 +80,7 @@ export interface RenderHTMLPassedProps<
    * - When you use the hook, you'll get this object deep-merged with default renderers props.
    * - Changes to this prop will cause a react tree update. Always memoize it.
    */
-  renderersProps?: RendererProps;
+  renderersProps?: Partial<RendererProps>;
 }
 
 /**
@@ -90,11 +91,10 @@ export interface RenderHTMLPassedProps<
  */
 export interface RenderHTMLSharedProps {
   /**
-   * The width of the HTML content to display. If you don't pass this prop,
-   * images might overflow horizontally and take up to all their physical
-   * width. The recommended practice is to pass
+   * The width of the HTML content to display. The recommended practice is to pass
    * `useWindowDimensions().width` minus any padding or margins.
    *
+   * @defaultValue `Dimensions.get('window').width`
    */
   contentWidth?: number;
   /**
@@ -109,10 +109,14 @@ export interface RenderHTMLSharedProps {
    *   renderers to get the maximum width for this tag.
    * - Changes to this prop will cause a react tree update. Always
    *   memoize it.
+   *
+   * @defaultValue `(c) => c`
    */
   computeEmbeddedMaxWidth?: (contentWidth: number, tagName: string) => number;
   /**
    * Support for relative percent-widths. Currently, it only works for images.
+   *
+   * @defaultValue false
    */
   enableExperimentalPercentWidth?: boolean;
   /**
@@ -123,7 +127,7 @@ export interface RenderHTMLSharedProps {
    * - Only adjacent siblings collapsing is implemented.
    * - If one of the margins height is in percent, no collapsing will occur.
    *
-   * @default false
+   * @defaultValue false
    */
   enableExperimentalMarginCollapsing?: boolean;
   /**
@@ -165,11 +169,15 @@ export interface RenderHTMLSharedProps {
   /**
    * Log to the console meaningful information regarding dismissed CSS
    * properties, ignored tags... etc.
+   *
+   * @defaultValue `__DEV__`
    */
   debug?: boolean;
   /**
    * The WebView component used by plugins (iframe, table)...
    * See [@native-html/plugins](https://github.com/native-html/plugins).
+   *
+   * @defaultValue `() => null`
    */
   WebView?: ComponentType<any>;
   /**
@@ -179,6 +187,8 @@ export interface RenderHTMLSharedProps {
    *
    * @remarks
    * Changes to this prop will cause a react tree update. Always memoize it.
+   *
+   * @defaultValue A `TouchableNativeFeedback` based component on Android, `TouchableHighlight` based component on other platforms.
    */
   GenericPressable?: ComponentType<GenericPressableProps>;
   /**
@@ -193,6 +203,8 @@ export interface RenderHTMLSharedProps {
    *
    * @remarks
    * Changes to this prop will cause a react tree update. Always memoize it.
+   *
+   * @defaultValue `() => null`
    */
   setMarkersForTNode?: (
     tnode: TNode,
@@ -201,6 +213,8 @@ export interface RenderHTMLSharedProps {
   /**
    * Color used for pressable items, either for the ripple effect (Android), or
    * highlight (other platforms).
+   *
+   * @defaultValue rgba(38, 132, 240, 0.2)
    */
   pressableHightlightColor?: string;
 }
@@ -215,14 +229,14 @@ export interface TransientRenderEngineConfig {
   /**
    * ParserOptions for [htmlparser2](https://github.com/fb55/htmlparser2/wiki/Parser-options)
    *
-   * @defaultvalue  `{ decodeEntities: true }`
+   * @defaultValue  `{ decodeEntities: true }`
    */
   htmlParserOptions?: HtmlParserOptions;
   /**
    * Enable or disable fallback styles for each tag. For example, `pre` tags
    * will have `whiteSpace` set to 'pre' by default.
    *
-   * @default true
+   * @defaultValue true
    */
   enableUserAgentStyles?: boolean;
   /**
@@ -231,7 +245,7 @@ export interface TransientRenderEngineConfig {
    * @remarks If you want to allow or disallow specific properties, use
    * `allowedStyles` or `ignoredStyles` props.
    *
-   * @default true
+   * @defaultValue true
    */
   enableCSSInlineProcessing?: boolean;
   /**
