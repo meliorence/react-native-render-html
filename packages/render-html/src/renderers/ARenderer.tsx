@@ -8,18 +8,16 @@ import {
   defaultHTMLElementModels,
   DocumentContext
 } from '@native-html/transient-render-engine';
-import {
-  DefaultTagRendererProps,
-  RenderHTMLSharedProps
-} from '../shared-types';
+import { DefaultTagRendererProps, RenderersPropsBase } from '../shared-types';
 import { AccessibilityProps, GestureResponderEvent } from 'react-native';
 import AElement from '../elements/AElement';
 import useNormalizedUrl from '../hooks/useNormalizedUrl';
 import { useDocumentMetadata } from '../context/DocumentMetadataProvider';
+import { useRendererProps } from '../context/RenderersPropsProvider';
 
 function useAnchorOnLinkPress(
   tnode: TBlock | TPhrasing | TText,
-  onLinkPress: RenderHTMLSharedProps['onLinkPress']
+  onPress: RenderersPropsBase['a']['onPress']
 ) {
   const href: string = tnode.attributes.href;
   const normalizedHref = useNormalizedUrl(href);
@@ -27,10 +25,10 @@ function useAnchorOnLinkPress(
   const shouldHandleLinkPress =
     tnode.tagName === 'a' &&
     typeof normalizedHref === 'string' &&
-    typeof onLinkPress === 'function';
+    typeof onPress === 'function';
   return shouldHandleLinkPress
     ? (e: GestureResponderEvent) =>
-        onLinkPress!(
+        onPress!(
           e,
           normalizedHref,
           tnode.attributes,
@@ -43,11 +41,9 @@ function useAnchorOnLinkPress(
 export function useAElementProps<T extends TNode>(
   props: DefaultTagRendererProps<T>
 ): DefaultTagRendererProps<T> {
-  const {
-    tnode,
-    sharedProps: { onLinkPress }
-  } = props;
-  const syntheticAnchorOnLinkPress = useAnchorOnLinkPress(tnode, onLinkPress);
+  const { tnode } = props;
+  const { onPress } = useRendererProps('a');
+  const syntheticAnchorOnLinkPress = useAnchorOnLinkPress(tnode, onPress);
   if (typeof syntheticAnchorOnLinkPress !== 'function') {
     return props;
   }
