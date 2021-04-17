@@ -11,12 +11,8 @@ import { useColorRoles } from '../theme/colorSystem';
 import { SYSTEM_FONTS } from '../constants';
 import TextRoleNucleon from './nucleons/TextRoleNucleon';
 
-const DEFAULT_PROPS: Pick<
-  RenderHTMLProps,
-  'debug' | 'enableExperimentalPercentWidth'
-> = {
-  debug: true,
-  enableExperimentalPercentWidth: true
+const DEFAULT_PROPS: Pick<RenderHTMLProps, 'debug'> = {
+  debug: true
 };
 
 function stripUnsupportedStylesInLegacy(style: Record<string, any>) {
