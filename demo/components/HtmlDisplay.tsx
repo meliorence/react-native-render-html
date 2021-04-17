@@ -11,12 +11,8 @@ import DisplayLoading from './DisplayLoading';
 import AtomicText from './AtomicText';
 import useOnLinkPress from '../hooks/useOnLinkPress';
 
-const DEFAULT_PROPS: Pick<
-  RenderHTMLProps,
-  'onLinkPress' | 'debug' | 'enableExperimentalPercentWidth'
-> = {
-  debug: true,
-  enableExperimentalPercentWidth: true
+const DEFAULT_PROPS: Pick<RenderHTMLProps, 'onLinkPress' | 'debug'> = {
+  debug: true
 };
 
 function stripUnsupportedStylesInLegacy(style: Record<string, any>) {
@@ -79,7 +75,12 @@ const HtmlDisplay = React.memo(
       renderersProps: {
         ...renderHtmlProps.renderersProps,
         a: {
-          onPress: onLinkPress
+          onPress: onLinkPress,
+          ...renderHtmlProps.renderersProps?.a
+        },
+        img: {
+          enableExperimentalPercentWidth: true,
+          ...renderHtmlProps.renderersProps?.img
         }
       },
       defaultTextProps: {
