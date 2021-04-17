@@ -6,11 +6,11 @@ import {
 import { DefaultBlockRenderer } from '../render/render-types';
 import { DefaultTagRendererProps } from '../shared-types';
 import OLElement, { OLElementProps } from '../elements/OLElement';
-import { SupportedListStyleType } from '../elements/list-types';
+import { DefaultSupportedListStyleType } from '../elements/list-types';
 
 function getListStyleTypeFromNestLevel(
   nestLevel: number
-): SupportedListStyleType {
+): DefaultSupportedListStyleType {
   switch (nestLevel % 3) {
     case 0:
       return 'decimal';

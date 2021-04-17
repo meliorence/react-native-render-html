@@ -1,7 +1,7 @@
 import type { MixedStyleDeclaration } from '@native-html/css-processor';
 
-export type ListPrefixRendererProps = {
-  color?: string;
+export type ListCounterRendererProps = {
+  color: string;
   fontSize: number;
   lineHeight: number;
   index: number;
@@ -10,7 +10,7 @@ export type ListPrefixRendererProps = {
   'fontFamily' | 'fontStyle' | 'fontWeight' | 'fontVariant'
 >;
 
-export type SupportedListStyleType =
+export type DefaultSupportedListStyleType =
   | 'none'
   | 'disc'
   | 'circle'

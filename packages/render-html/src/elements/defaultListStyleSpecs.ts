@@ -12,13 +12,18 @@ import DisclosureOpenSymbolRenderer from './symbolic/DisclosureOpenSymbolRendere
 import CircleSymbolRenderer from './symbolic/CircleSymbolRenderer';
 import DiscSymbolRenderer from './symbolic/DiscSymbolRenderer';
 import SquareSymbolRenderer from './symbolic/SquareSymbolRenderer';
-import { ListPrefixRendererProps, SupportedListStyleType } from './list-types';
+import {
+  ListCounterRendererProps,
+  DefaultSupportedListStyleType
+} from './list-types';
 
-const symbolicRenderer = CounterStyle.cyclic('*').withSuffix('  ');
+const unitaryRenderer = CounterStyle.cyclic('*').withSuffix(' ');
 
 /**
  * Specs for a list item marker renderer backed by a `CounterStyleRenderer`
  * from `@jsamr/counter-style`.
+ *
+ * @public
  */
 export interface TextualListStyleSpec {
   type: 'textual';
@@ -30,13 +35,20 @@ export interface TextualListStyleSpec {
  * "Component" should render this representation, minus prefix and suffix. The
  * rendered component should have a maximum width of `0.6 * fontSize`, and a height of
  * `lineHeight`.
+ *
+ * @public
  */
 export interface UnitaryListStyleSpec {
   counterStyleRenderer: CounterStyleRenderer;
-  type: 'cyclic';
-  Component: ComponentType<ListPrefixRendererProps>;
+  type: 'unitary';
+  Component: ComponentType<ListCounterRendererProps>;
 }
 
+/**
+ * An object to specify how to render list markers.
+ *
+ * @public
+ */
 export type ListStyleSpec = TextualListStyleSpec | UnitaryListStyleSpec;
 
 const lowerAlphaSpec = {
@@ -49,19 +61,22 @@ const upperAlphaSpec = {
   counterStyleRenderer: upperAlpha
 } as const;
 
-const defaultMarkers: Record<SupportedListStyleType, ListStyleSpec> = {
+const defaultListStyleSpecs: Record<
+  DefaultSupportedListStyleType,
+  ListStyleSpec
+> = {
   'decimal-leading-zero': {
     type: 'textual',
     counterStyleRenderer: decimalLeadingZero
   },
   'disclosure-closed': {
-    counterStyleRenderer: symbolicRenderer,
-    type: 'cyclic',
+    counterStyleRenderer: unitaryRenderer,
+    type: 'unitary',
     Component: DisclosureClosedSymbolRenderer
   },
   'disclosure-open': {
-    counterStyleRenderer: symbolicRenderer,
-    type: 'cyclic',
+    counterStyleRenderer: unitaryRenderer,
+    type: 'unitary',
     Component: DisclosureOpenSymbolRenderer
   },
   'lower-alpha': lowerAlphaSpec,
@@ -81,8 +96,8 @@ const defaultMarkers: Record<SupportedListStyleType, ListStyleSpec> = {
     counterStyleRenderer: upperRoman
   },
   circle: {
-    counterStyleRenderer: symbolicRenderer,
-    type: 'cyclic',
+    counterStyleRenderer: unitaryRenderer,
+    type: 'unitary',
     Component: CircleSymbolRenderer
   },
   decimal: {
@@ -90,20 +105,20 @@ const defaultMarkers: Record<SupportedListStyleType, ListStyleSpec> = {
     counterStyleRenderer: decimal
   },
   disc: {
-    counterStyleRenderer: symbolicRenderer,
-    type: 'cyclic',
+    counterStyleRenderer: unitaryRenderer,
+    type: 'unitary',
     Component: DiscSymbolRenderer
   },
   none: {
     counterStyleRenderer: CounterStyle.symbolic('').withSuffix(null),
-    type: 'cyclic',
+    type: 'unitary',
     Component: () => null
   },
   square: {
-    counterStyleRenderer: symbolicRenderer,
-    type: 'cyclic',
+    counterStyleRenderer: unitaryRenderer,
+    type: 'unitary',
     Component: SquareSymbolRenderer
   }
 };
 
-export default defaultMarkers;
+export default defaultListStyleSpecs;

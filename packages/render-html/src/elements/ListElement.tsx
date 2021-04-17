@@ -11,13 +11,13 @@ import { DefaultTagRendererProps, TChildProps } from '../shared-types';
 import { useTChildrenRenderer } from '../context/TChildrenRendererContext';
 import { DEFAULT_TEXT_COLOR } from '../constants';
 import pick from 'ramda/src/pick';
-import defaultMarkers, { UnitaryListStyleSpec } from './defaultMarkers';
-import { SupportedListStyleType } from './list-types';
+import defaultListStyleSpecs, { UnitaryListStyleSpec } from './defaultListStyleSpecs';
+import { DefaultSupportedListStyleType } from './list-types';
 
 export interface ListElementProps<T extends 'ol' | 'ul'>
   extends DefaultTagRendererProps<TBlock> {
   listType: T;
-  getListStyleTypeFromNestLevel: (nestLevel: number) => SupportedListStyleType;
+  getListStyleTypeFromNestLevel: (nestLevel: number) => DefaultSupportedListStyleType;
   getStyleFromNestLevel?: (nestLevel: number) => ViewStyle | null;
   /**
    * If `true`:
@@ -110,18 +110,18 @@ export default function ListElement({
   const nestLevelStyle = getStyleFromNestLevel?.call(null, nestLevel);
   const selectedListType = getListStyleTypeFromNestLevel(nestLevel);
   const listStyleType =
-    (tnode.styles.webTextFlow.listStyleType as SupportedListStyleType) ||
+    (tnode.styles.webTextFlow.listStyleType as DefaultSupportedListStyleType) ||
     selectedListType;
-  if (__DEV__ && !(listStyleType in defaultMarkers)) {
+  if (__DEV__ && !(listStyleType in defaultListStyleSpecs)) {
     console.warn(
       `list-style-type "${listStyleType}" is not handled by react-native-render-html.` +
         'You can register a custom list marker renderer with the appropriate prop.'
     );
   }
   const spec =
-    listStyleType in defaultMarkers
-      ? defaultMarkers[listStyleType]
-      : defaultMarkers[selectedListType];
+    listStyleType in defaultListStyleSpecs
+      ? defaultListStyleSpecs[listStyleType]
+      : defaultListStyleSpecs[selectedListType];
   const counterRenderer = spec.counterStyleRenderer;
   const startIndex = getStartIndex(tnode);
   const markerTextStyle = extractMarkerTextStyle(tnode);
@@ -133,7 +133,7 @@ export default function ListElement({
     rtlMarkerReversed: rtl,
     length: tnode.children.length,
     renderMarker:
-      spec.type === 'cyclic'
+      spec.type === 'unitary'
         ? createSymbolicMarkerRenderer(spec.Component)
         : undefined
   });

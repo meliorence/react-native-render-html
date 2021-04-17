@@ -4,11 +4,11 @@ import { DefaultBlockRenderer } from '../render/render-types';
 import { DefaultTagRendererProps } from '../shared-types';
 import { TBlock } from '@native-html/transient-render-engine';
 import ULElement, { ULElementProps } from '../elements/ULElement';
-import { SupportedListStyleType } from '../elements/list-types';
+import { DefaultSupportedListStyleType } from '../elements/list-types';
 
 function getListStyleTypeFromNestLevel(
   nestLevel: number
-): SupportedListStyleType {
+): DefaultSupportedListStyleType {
   switch (nestLevel % 3) {
     case 0:
       return 'disc';
