@@ -74,9 +74,14 @@ const HtmlDisplay = React.memo(
     };
     const sharedProps = {
       ...DEFAULT_PROPS,
-      onLinkPress,
       contentWidth,
       ...(renderHtmlProps as any),
+      renderersProps: {
+        ...renderHtmlProps.renderersProps,
+        a: {
+          onPress: onLinkPress
+        }
+      },
       defaultTextProps: {
         selectable: true
       }
@@ -110,6 +115,7 @@ const HtmlDisplay = React.memo(
       <LegacyHTML
         {...sharedProps}
         html={sharedProps.html}
+        onLinkPress={onLinkPress}
         baseFontStyle={stripUnsupportedStylesInLegacy(baseStyle)}
         classesStyles={stripPropsFromStylesheet(sharedProps.classesStyles)}
         tagsStyles={stripPropsFromStylesheet(mergedTagsStyles)}
