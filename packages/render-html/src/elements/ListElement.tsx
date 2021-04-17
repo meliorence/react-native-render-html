@@ -74,6 +74,7 @@ function extractMarkerTextStyle(tnode: TNode) {
     pick(
       [
         'fontStyle',
+        'fontSize',
         'fontWeight',
         'fontFamily',
         'fontVariant',
