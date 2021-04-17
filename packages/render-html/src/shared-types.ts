@@ -58,8 +58,10 @@ export interface RenderersPropsBase extends Record<string, any> {
     /**
      * A callback to handle anchors presses.
      *
-     * @remarks Changes to this prop will cause a react tree update. Always
-     * memoize it.
+     * @remarks
+     * - Changes to this prop will cause a react tree update. Always memoize
+     *   it.
+     * - The `href` argument has been normalized, see {@link useNormalizedUrl}.
      *
      * @defaultValue A function using React Native `Linking.onpenUrl`.
      */
