@@ -28,6 +28,9 @@ const RenderHTMLFragmentDebug = function RenderHTMLDebug(
     if ('onLinkPress' in props) {
       console.warn(debugMessage.outdatedOnLinkPressProp);
     }
+    if ('enableExperimentalPercentWidth' in props) {
+      console.warn(debugMessage.outdatedEnableExperimentalPercentWidth);
+    }
   }
   return <Fragment>{props.children}</Fragment>;
 };
