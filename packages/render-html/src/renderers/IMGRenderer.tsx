@@ -7,16 +7,14 @@ import { ImageStyle } from 'react-native';
 import { defaultHTMLElementModels } from '@native-html/transient-render-engine';
 import { DefaultTagRendererProps } from '../shared-types';
 import useNormalizedUrl from '../hooks/useNormalizedUrl';
+import { useRendererProps } from '../context/RenderersPropsProvider';
 
 export function useIMGElementProps(
   props: DefaultTagRendererProps<TBlock>
 ): IMGElementProps & ClassAttributes<any> {
   const { style, tnode, onPress, key, sharedProps } = props;
-  const {
-    contentWidth,
-    enableExperimentalPercentWidth,
-    imagesInitialDimensions
-  } = sharedProps;
+  const { contentWidth, enableExperimentalPercentWidth } = sharedProps;
+  const { initialDimensions } = useRendererProps('img');
   const computeImagesMaxWidth = useComputeMaxWidthForTag('img');
   const src = tnode.attributes.src || '';
   return {
@@ -24,7 +22,7 @@ export function useIMGElementProps(
     contentWidth,
     computeMaxWidth: computeImagesMaxWidth,
     enableExperimentalPercentWidth,
-    initialDimensions: imagesInitialDimensions,
+    initialDimensions,
     onPress,
     alt: tnode.attributes.alt,
     testID: 'img',
