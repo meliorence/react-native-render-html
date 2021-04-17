@@ -68,6 +68,19 @@ export interface ListElementConfig {
    * @defaultValue true
    */
   enableRemoveBottomMarginIfNested?: boolean;
+  /**
+   * If `true` and the direction is set to `'rtl'` (either via `dir` attribute
+   * or `direction` CSS property):
+   *
+   * - lists markers will be flushed to the right when `I18nManager.isRtl` is `false`.
+   * - list markers prefixes and suffixes print order will be reversed.
+   *
+   * @remarks Beware that left and right padding of li elements *will not*
+   * be switched.
+   *
+   * @defaultValue false
+   */
+  enableExperimentalRtl?: boolean;
 }
 
 /**
