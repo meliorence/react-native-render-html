@@ -1,4 +1,4 @@
-import { Dimensions, Linking } from 'react-native';
+import { Dimensions } from 'react-native';
 import { DEFAULT_PRESSABLE_RIPPLE_COLOR } from '../constants';
 import { RenderHTMLSharedProps } from '../shared-types';
 
@@ -13,7 +13,6 @@ const defaultSharedProps: Required<RenderHTMLSharedProps> = {
   defaultViewProps: {},
   enableExperimentalMarginCollapsing: false,
   computeEmbeddedMaxWidth: (contentWidth) => contentWidth,
-  onLinkPress: (_e, href) => Linking.canOpenURL(href) && Linking.openURL(href),
   GenericPressable: undefined as any,
   WebView: () => {
     if (__DEV__) {

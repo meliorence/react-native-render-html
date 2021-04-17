@@ -35,7 +35,6 @@ export const renderHtmlFragmentPropTypes: RenderHTMLFragmentPropTypes = {
   remoteErrorView: PropTypes.func,
   remoteLoadingView: PropTypes.func,
   debug: PropTypes.bool.isRequired,
-  onLinkPress: PropTypes.func,
   computeEmbeddedMaxWidth: PropTypes.func,
   contentWidth: PropTypes.number,
   enableExperimentalPercentWidth: PropTypes.bool,

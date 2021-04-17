@@ -54,6 +54,20 @@ export interface HtmlAttributesDictionary {
  * @public
  */
 export interface RenderersPropsBase extends Record<string, any> {
+  a: {
+    /**
+     * A callback to handle anchors presses.
+     *
+     * @remarks Changes to this prop will cause a react tree update. Always
+     * memoize it.
+     */
+    onPress?: (
+      event: GestureResponderEvent,
+      href: string,
+      htmlAttribs: HtmlAttributesDictionary,
+      target: TREDocumentContext['baseTarget']
+    ) => void;
+  };
   img: {
     /**
      * Default width and height to display while image's dimensions are being retrieved.
@@ -105,7 +119,7 @@ export interface RenderHTMLSharedProps {
    * @param tagName - The tagName of this element to render, e.g. "img".
    *
    * @remarks
-   * - Take advantage of `useComputeMaxWidthForTag` hook inside custom
+   * - Take advantage of {@link useComputeMaxWidthForTag} hook inside custom
    *   renderers to get the maximum width for this tag.
    * - Changes to this prop will cause a react tree update. Always
    *   memoize it.
@@ -130,19 +144,6 @@ export interface RenderHTMLSharedProps {
    * @defaultValue false
    */
   enableExperimentalMarginCollapsing?: boolean;
-  /**
-   * Fired with the event, the href and an object with all attributes of the
-   * tag as its arguments when tapping a link.
-   *
-   * @remarks Changes to this prop will cause a react tree update. Always
-   * memoize it.
-   */
-  onLinkPress?: (
-    event: GestureResponderEvent,
-    href: string,
-    htmlAttribs: HtmlAttributesDictionary,
-    target: TREDocumentContext['baseTarget']
-  ) => void;
   /**
    * Default props for Text elements in the render tree.
    *
