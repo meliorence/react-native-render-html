@@ -1,5 +1,4 @@
 import React, { PropsWithChildren, useCallback, useMemo } from 'react';
-import { TextProps, ViewProps } from 'react-native';
 import defaultListStyleSpecs from '../elements/defaultListStyleSpecs';
 import selectSharedProps from '../helpers/selectSharedProps';
 import { RenderHTMLSharedProps, TRendererBaseProps } from '../shared-types';
@@ -9,10 +8,15 @@ const SharedPropsContext = React.createContext<Required<RenderHTMLSharedProps>>(
   defaultSharedProps
 );
 
+/**
+ * Use shared props. See {@link RenderHTMLSharedProps}.
+ *
+ * @public
+ */
 export function useSharedProps() {
-  return React.useContext(SharedPropsContext) as Required<
-    Omit<RenderHTMLSharedProps, 'rendererProps'>
-  >;
+  return React.useContext(
+    SharedPropsContext
+  ) as Required<RenderHTMLSharedProps>;
 }
 
 /**
@@ -34,25 +38,7 @@ export function useDefaultContainerProps(): Pick<
     }
   };
 }
-/**
- * @internal
- */
-export function useDefaultTextProps(): TextProps {
-  return {
-    ...defaultSharedProps.defaultTextProps,
-    ...useSharedProps().defaultTextProps
-  };
-}
 
-/**
- * @internal
- */
-export function useDefaultViewProps(): ViewProps {
-  return {
-    ...defaultSharedProps.defaultViewProps,
-    ...useSharedProps().defaultViewProps
-  };
-}
 /**
  * @public
  */
