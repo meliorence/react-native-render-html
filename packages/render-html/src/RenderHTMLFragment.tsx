@@ -9,6 +9,7 @@ import TChildrenRenderer from './TChildrenRenderer';
 import RenderResolvedHTML from './RenderResolvedHTML';
 import SharedPropsProvider from './context/SharedPropsProvider';
 import defaultSharedProps from './context/defaultSharedProps';
+import RenderersPropsProvider from './context/RenderersPropsProvider';
 
 export type RenderHTMLFragmentPropTypes = Record<
   keyof RenderHTMLFragmentProps,
@@ -38,10 +39,6 @@ export const renderHtmlFragmentPropTypes: RenderHTMLFragmentPropTypes = {
   computeEmbeddedMaxWidth: PropTypes.func,
   contentWidth: PropTypes.number,
   enableExperimentalPercentWidth: PropTypes.bool,
-  imagesInitialDimensions: PropTypes.shape({
-    width: PropTypes.number,
-    height: PropTypes.number
-  }),
   renderersProps: PropTypes.object,
   onTTreeChange: PropTypes.func,
   onHTMLLoaded: PropTypes.func,
@@ -80,7 +77,9 @@ export default function RenderHTMLFragment(props: RenderHTMLFragmentProps) {
     onTTreeChange,
     remoteErrorView,
     remoteLoadingView,
-    onDocumentMetadataLoaded
+    onDocumentMetadataLoaded,
+    renderersProps,
+    ...sharedProps
   } = props;
   const sourceLoaderProps = {
     source,
@@ -98,10 +97,12 @@ export default function RenderHTMLFragment(props: RenderHTMLFragmentProps) {
 
   return (
     <RenderHTMLFragmentDebug {...props}>
-      <SharedPropsProvider {...props}>
-        <TChildrenRenderersContext.Provider value={childrenRendererContext}>
-          {React.createElement(SourceLoader, sourceLoaderProps)}
-        </TChildrenRenderersContext.Provider>
+      <SharedPropsProvider {...sharedProps}>
+        <RenderersPropsProvider renderersProps={renderersProps}>
+          <TChildrenRenderersContext.Provider value={childrenRendererContext}>
+            {React.createElement(SourceLoader, sourceLoaderProps)}
+          </TChildrenRenderersContext.Provider>
+        </RenderersPropsProvider>
       </SharedPropsProvider>
     </RenderHTMLFragmentDebug>
   );

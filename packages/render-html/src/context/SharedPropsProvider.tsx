@@ -1,32 +1,22 @@
 import React, { PropsWithChildren, useCallback, useMemo } from 'react';
 import { TextProps, ViewProps } from 'react-native';
 import selectSharedProps from '../helpers/selectSharedProps';
-import {
-  RenderHTMLFragmentProps,
-  RenderHTMLSharedProps,
-  TRendererBaseProps
-} from '../shared-types';
+import { RenderHTMLSharedProps, TRendererBaseProps } from '../shared-types';
 import defaultSharedProps from './defaultSharedProps';
 
 const SharedPropsContext = React.createContext<Required<RenderHTMLSharedProps>>(
   defaultSharedProps
 );
 
-export function useSharedProps<
-  RendererProps extends Record<string, any> = Record<string, any>
->() {
+export function useSharedProps() {
   return React.useContext(SharedPropsContext) as Required<
-    RenderHTMLSharedProps<RendererProps>
+    Omit<RenderHTMLSharedProps, 'rendererProps'>
   >;
 }
 
-export function useRendererProps<
-  RendererProps extends Record<string, any> = Record<string, any>,
-  K extends keyof RendererProps = any
->(k: K) {
-  return useSharedProps<RendererProps>().renderersProps[k];
-}
-
+/**
+ * @internal
+ */
 export function useDefaultContainerProps(): Pick<
   TRendererBaseProps<any>,
   'viewProps' | 'textProps'
@@ -43,6 +33,9 @@ export function useDefaultContainerProps(): Pick<
     }
   };
 }
+/**
+ * @internal
+ */
 export function useDefaultTextProps(): TextProps {
   return {
     ...defaultSharedProps.defaultTextProps,
@@ -50,13 +43,18 @@ export function useDefaultTextProps(): TextProps {
   };
 }
 
+/**
+ * @internal
+ */
 export function useDefaultViewProps(): ViewProps {
   return {
     ...defaultSharedProps.defaultViewProps,
     ...useSharedProps().defaultViewProps
   };
 }
-
+/**
+ * @public
+ */
 export function useComputeMaxWidthForTag(tagName: string) {
   const { computeEmbeddedMaxWidth } = useSharedProps();
   return useCallback(
@@ -67,8 +65,11 @@ export function useComputeMaxWidthForTag(tagName: string) {
   );
 }
 
+/**
+ * @internal
+ */
 export default function SharedPropsProvider(
-  props: PropsWithChildren<RenderHTMLFragmentProps>
+  props: PropsWithChildren<RenderHTMLSharedProps>
 ) {
   const memoizedSharedProps = useMemo(
     () => selectSharedProps(props),

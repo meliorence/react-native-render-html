@@ -13,10 +13,6 @@ const defaultSharedProps: Required<RenderHTMLSharedProps> = {
   defaultViewProps: {},
   enableExperimentalMarginCollapsing: false,
   computeEmbeddedMaxWidth: (contentWidth) => contentWidth,
-  imagesInitialDimensions: {
-    height: 50,
-    width: 50
-  },
   onLinkPress: (_e, href) => Linking.canOpenURL(href) && Linking.openURL(href),
   GenericPressable: undefined as any,
   WebView: () => {
@@ -29,7 +25,6 @@ const defaultSharedProps: Required<RenderHTMLSharedProps> = {
     return null;
   },
   defaultWebViewProps: {},
-  renderersProps: {},
   setMarkersForTNode: () => null,
   pressableHightlightColor: DEFAULT_PRESSABLE_RIPPLE_COLOR
 };

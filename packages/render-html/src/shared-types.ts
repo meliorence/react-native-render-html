@@ -52,22 +52,43 @@ export interface HtmlAttributesDictionary {
  * @remarks Plugins offering options should augment this declaration.
  * See https://www.typescriptlang.org/docs/handbook/declaration-merging.html
  */
-export interface RenderersPropsBase extends Record<string, any> {}
+export interface RenderersPropsBase extends Record<string, any> {
+  img: {
+    /**
+     * Default width and height to display while image's dimensions are being retrieved.
+     *
+     * @remarks Changes to this prop will cause a react tree update. Always
+     * memoize it.
+     */
+    initialDimensions?: ImageDimensions;
+  };
+}
+
+/**
+ * Props passed to internal and custom renderers.
+ *
+ * @public
+ */
+export interface RenderHTMLPassedProps<
+  RendererProps extends RenderersPropsBase = RenderersPropsBase
+> {
+  /**
+   * Props to use in custom renderers with `useRendererProps`.
+   *
+   * @remarks
+   * - When you use the hook, you'll get this object deep-merged with default renderers props.
+   * - Changes to this prop will cause a react tree update. Always memoize it.
+   */
+  renderersProps?: RendererProps;
+}
 
 /**
  * Shared props changes will cause all the React tree to invalidate. You should
  * always memoize these.
+ *
+ * @public
  */
-export interface RenderHTMLSharedProps<
-  RendererProps extends RenderersPropsBase = RenderersPropsBase
-> {
-  /**
-   * Default width and height to display while image's dimensions are being retrieved.
-   *
-   * @remarks Changes to this prop will cause a react tree update. Always
-   * memoize it.
-   */
-  imagesInitialDimensions?: ImageDimensions;
+export interface RenderHTMLSharedProps {
   /**
    * The width of the HTML content to display. If you don't pass this prop,
    * images might overflow horizontally and take up to all their physical
@@ -118,14 +139,6 @@ export interface RenderHTMLSharedProps<
     htmlAttribs: HtmlAttributesDictionary,
     target: TREDocumentContext['baseTarget']
   ) => void;
-  /**
-   * Props to use in custom renderers with `useRendererProps` or
-   * `useSharedProps`.
-   *
-   * @remarks Changes to this prop will cause a react tree update. Always
-   * memoize it.
-   */
-  renderersProps?: RendererProps;
   /**
    * Default props for Text elements in the render tree.
    *
@@ -192,6 +205,12 @@ export interface RenderHTMLSharedProps<
   pressableHightlightColor?: string;
 }
 
+/**
+ *
+ * Configuration for the Transient Render Engine.
+ *
+ * @public
+ */
 export interface TransientRenderEngineConfig {
   /**
    * ParserOptions for [htmlparser2](https://github.com/fb55/htmlparser2/wiki/Parser-options)
@@ -385,9 +404,15 @@ export interface RenderHTMLSourceInline {
 
 export type RenderHTMLSource = RenderHTMLSourceInline | RenderHTMLSourceUri;
 
+/**
+ * Props for the `RenderHTMLFragment` component.
+ *
+ * @public
+ */
 export interface RenderHTMLFragmentProps<
   P extends RenderersPropsBase = RenderersPropsBase
-> extends RenderHTMLSharedProps<P> {
+> extends RenderHTMLSharedProps,
+    RenderHTMLPassedProps<P> {
   /**
    * The object source to render (either `{ uri }` or `{ html }`).
    */
@@ -415,6 +440,11 @@ export interface RenderHTMLFragmentProps<
   onDocumentMetadataLoaded?: (documentMetadata: DocumentMetadata) => void;
 }
 
+/**
+ * Props for the `RenderHTML` component.
+ *
+ * @public
+ */
 export interface RenderHTMLProps<
   P extends RenderersPropsBase = RenderersPropsBase
 > extends RenderHTMLFragmentProps<P>,
@@ -564,7 +594,7 @@ export interface TNodeSubRendererProps<
   /**
    * Props shared across the whole render tree.
    */
-  sharedProps: Required<RenderHTMLSharedProps<any>>;
+  sharedProps: Required<RenderHTMLSharedProps>;
 }
 
 export interface TRendererBaseProps<
@@ -624,7 +654,7 @@ export interface DefaultTagRendererProps<
   /**
    * Props shared across the whole render tree.
    */
-  sharedProps: Required<RenderHTMLSharedProps<RenderersPropsBase>>;
+  sharedProps: Required<RenderHTMLSharedProps>;
   /**
    * Default renderer for this tnode.
    */
