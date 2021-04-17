@@ -25,6 +25,9 @@ const RenderHTMLFragmentDebug = function RenderHTMLDebug(
     if ('imagesInitialDimensions' in props) {
       console.warn(debugMessage.outdatedImagesDimensions);
     }
+    if ('onLinkPress' in props) {
+      console.warn(debugMessage.outdatedOnLinkPressProp);
+    }
   }
   return <Fragment>{props.children}</Fragment>;
 };
