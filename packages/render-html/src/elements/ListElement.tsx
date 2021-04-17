@@ -23,17 +23,6 @@ export interface ListElementProps<T extends 'ol' | 'ul'>
   extends DefaultTagRendererProps<TBlock>,
     ListElementConfig {
   listType: T;
-  /**
-   * Get default list-style-type given the number of nest level for this list.
-   *
-   * @param nestLevel - The number of ol or ul parents elements.
-   */
-  getFallbackListStyleTypeFromNestLevel: (
-    nestLevel: number
-  ) => DefaultSupportedListStyleType;
-  /**
-   * Specifications to render list markers.
-   */
   listStyleSpecs: Record<string, ListStyleSpec>;
 }
 
@@ -128,7 +117,7 @@ export default function ListElement({
     tnode.nodeIndex === tnode.parent?.children.length - 1
       ? styles.zeroMarginBottom
       : null;
-  const selectedListType = getListStyleTypeFromNestLevel(nestLevel);
+  const selectedListType = getListStyleTypeFromNestLevel!(nestLevel);
   const listStyleType =
     (tnode.styles.webTextFlow.listStyleType as DefaultSupportedListStyleType) ||
     selectedListType;
