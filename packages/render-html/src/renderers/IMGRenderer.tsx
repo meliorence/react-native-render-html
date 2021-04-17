@@ -13,8 +13,11 @@ export function useIMGElementProps(
   props: DefaultTagRendererProps<TBlock>
 ): IMGElementProps & ClassAttributes<any> {
   const { style, tnode, onPress, key, sharedProps } = props;
-  const { contentWidth, enableExperimentalPercentWidth } = sharedProps;
-  const { initialDimensions } = useRendererProps('img');
+  const { contentWidth } = sharedProps;
+  const {
+    initialDimensions,
+    enableExperimentalPercentWidth
+  } = useRendererProps('img');
   const computeImagesMaxWidth = useComputeMaxWidthForTag('img');
   const src = tnode.attributes.src || '';
   return {

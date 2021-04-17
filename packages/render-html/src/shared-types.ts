@@ -60,6 +60,8 @@ export interface RenderersPropsBase extends Record<string, any> {
      *
      * @remarks Changes to this prop will cause a react tree update. Always
      * memoize it.
+     *
+     * @defaultValue A function using React Native `Linking.onpenUrl`.
      */
     onPress?: (
       event: GestureResponderEvent,
@@ -76,6 +78,12 @@ export interface RenderersPropsBase extends Record<string, any> {
      * memoize it.
      */
     initialDimensions?: ImageDimensions;
+    /**
+     * Support for relative percent-widths.
+     *
+     * @defaultValue false
+     */
+    enableExperimentalPercentWidth?: boolean;
   };
 }
 
@@ -127,12 +135,6 @@ export interface RenderHTMLSharedProps {
    * @defaultValue `(c) => c`
    */
   computeEmbeddedMaxWidth?: (contentWidth: number, tagName: string) => number;
-  /**
-   * Support for relative percent-widths. Currently, it only works for images.
-   *
-   * @defaultValue false
-   */
-  enableExperimentalPercentWidth?: boolean;
   /**
    * Enable or disable margin collapsing CSS behavior (experimental!).
    * See {@link https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing | MDN docs}.

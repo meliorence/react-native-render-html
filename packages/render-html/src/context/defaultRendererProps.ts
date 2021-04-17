@@ -6,7 +6,8 @@ const defaultRendererProps: Required<RenderersPropsBase> = {
     initialDimensions: {
       height: 50,
       width: 50
-    }
+    },
+    enableExperimentalPercentWidth: false
   },
   a: {
     onPress: (_e, href) => Linking.canOpenURL(href) && Linking.openURL(href)

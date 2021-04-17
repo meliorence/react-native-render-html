@@ -37,7 +37,6 @@ export const renderHtmlFragmentPropTypes: RenderHTMLFragmentPropTypes = {
   debug: PropTypes.bool.isRequired,
   computeEmbeddedMaxWidth: PropTypes.func,
   contentWidth: PropTypes.number,
-  enableExperimentalPercentWidth: PropTypes.bool,
   renderersProps: PropTypes.object,
   onTTreeChange: PropTypes.func,
   onHTMLLoaded: PropTypes.func,
