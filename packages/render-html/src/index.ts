@@ -73,6 +73,7 @@ export type { DomNodeToHtmlReporter } from './helpers/domNodeToHTMLString';
 // DEFAULTS
 export { default as defaultSystemFonts } from './defaultSystemFonts';
 export { default as defaultRenderers } from './render/defaultRenderers';
+export { default as defaultListStyleSpecs } from './elements/defaultListStyleSpecs';
 
 // IMG
 export { default as useIMGElementState } from './elements/useIMGElementState';
