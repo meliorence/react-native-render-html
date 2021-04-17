@@ -49,6 +49,28 @@ export interface GenericPressableProps extends AccessibilityProps {
 }
 
 /**
+ * Configuration for ol and ul.
+ *
+ * @public
+ */
+export interface ListElementConfig {
+  /**
+   * Remove top margin if this element parent is an `li` element and it
+   * is its first child.
+   *
+   * @defaultValue true
+   */
+  enableRemoveTopMarginIfNested?: boolean;
+  /**
+   * Remove bottom margin if this element parent is an `li` element and it
+   * is its last child.
+   *
+   * @defaultValue true
+   */
+  enableRemoveBottomMarginIfNested?: boolean;
+}
+
+/**
  * Props for custom renderers. The convention is to declare a field per renderer.
  * In doing so, you can benefit from `useRendererProps('tagname')` in custom renderers.
  *
@@ -91,6 +113,8 @@ export interface RenderersPropsBase extends Record<string, any> {
      */
     enableExperimentalPercentWidth?: boolean;
   };
+  ul: ListElementConfig;
+  ol: ListElementConfig;
 }
 
 /**

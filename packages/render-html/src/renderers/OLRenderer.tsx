@@ -9,8 +9,9 @@ import {
   DefaultSupportedListStyleType
 } from '../shared-types';
 import OLElement, { OLElementProps } from '../elements/OLElement';
+import { useRendererProps } from '../context/RenderersPropsProvider';
 
-function getListStyleTypeFromNestLevel(
+function getFallbackListStyleTypeFromNestLevel(
   nestLevel: number
 ): DefaultSupportedListStyleType {
   switch (nestLevel % 3) {
@@ -27,10 +28,12 @@ export function useOLElementProps(
   props: DefaultTagRendererProps<TBlock>
 ): OLElementProps {
   const listStyleSpecs = props.sharedProps.customListStyleSpecs;
+  const config = useRendererProps('ol');
   return {
     ...props,
     listStyleSpecs,
-    getFallbackListStyleTypeFromNestLevel: getListStyleTypeFromNestLevel
+    getFallbackListStyleTypeFromNestLevel,
+    ...config
   };
 }
 

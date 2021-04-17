@@ -7,8 +7,9 @@ import {
 } from '../shared-types';
 import { TBlock } from '@native-html/transient-render-engine';
 import ULElement, { ULElementProps } from '../elements/ULElement';
+import { useRendererProps } from '../context/RenderersPropsProvider';
 
-function getListStyleTypeFromNestLevel(
+function getFallbackListStyleTypeFromNestLevel(
   nestLevel: number
 ): DefaultSupportedListStyleType {
   switch (nestLevel % 3) {
@@ -25,10 +26,12 @@ export function useULElementProps(
   props: DefaultTagRendererProps<TBlock>
 ): ULElementProps {
   const listStyleSpecs = props.sharedProps.customListStyleSpecs;
+  const config = useRendererProps('ul');
   return {
     ...props,
     listStyleSpecs,
-    getFallbackListStyleTypeFromNestLevel: getListStyleTypeFromNestLevel
+    getFallbackListStyleTypeFromNestLevel,
+    ...config
   };
 }
 

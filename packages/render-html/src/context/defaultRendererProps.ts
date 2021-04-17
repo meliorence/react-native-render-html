@@ -11,7 +11,9 @@ const defaultRendererProps: Required<RenderersPropsBase> = {
   },
   a: {
     onPress: (_e, href) => Linking.canOpenURL(href) && Linking.openURL(href)
-  }
+  },
+  ol: {},
+  ul: {}
 };
 
 export default defaultRendererProps;
