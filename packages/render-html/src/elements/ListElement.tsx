@@ -10,6 +10,7 @@ import {
 import type {
   DefaultSupportedListStyleType,
   DefaultTagRendererProps,
+  ListElementConfig,
   ListStyleSpec,
   TChildProps,
   UnitaryListStyleSpec
@@ -19,7 +20,8 @@ import { DEFAULT_TEXT_COLOR } from '../constants';
 import pick from 'ramda/src/pick';
 
 export interface ListElementProps<T extends 'ol' | 'ul'>
-  extends DefaultTagRendererProps<TBlock> {
+  extends DefaultTagRendererProps<TBlock>,
+    ListElementConfig {
   listType: T;
   /**
    * Get default list-style-type given the number of nest level for this list.
@@ -29,20 +31,7 @@ export interface ListElementProps<T extends 'ol' | 'ul'>
   getFallbackListStyleTypeFromNestLevel: (
     nestLevel: number
   ) => DefaultSupportedListStyleType;
-  /**
-   * Remove top margin if this element parent is an `li` element and it
-   * is its first child.
-   *
-   * @defaultValue true
-   */
-  enableRemoveTopMarginIfNested?: boolean;
-  /**
-   * Remove bottom margin if this element parent is an `li` element and it
-   * is its last child.
-   *
-   * @defaultValue true
-   */
-  enableRemoveBottomMarginIfNested?: boolean;
+
   /**
    * If `true` and the direction is set to `'rtl'` (either via `dir` attribute
    * or `direction` CSS property):
