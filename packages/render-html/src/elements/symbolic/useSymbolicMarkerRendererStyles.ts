@@ -1,7 +1,7 @@
-import { ListPrefixRendererProps } from '../list-types';
+import { ListCounterRendererProps } from '../list-types';
 
 export default function useSymbolicMarkerRendererProps(
-  props: ListPrefixRendererProps,
+  props: ListCounterRendererProps,
   shrinkFactor = 1
 ) {
   const prefixSize = props.fontSize / (shrinkFactor * 2.8);

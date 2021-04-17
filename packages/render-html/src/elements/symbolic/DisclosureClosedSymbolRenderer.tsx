@@ -1,10 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
-import { ListPrefixRendererProps } from '../list-types';
+import { ListCounterRendererProps } from '../list-types';
 import useSymbolicMarkerRendererProps from './useSymbolicMarkerRendererStyles';
 
 export default function DisclosureClosedSymbolRenderer(
-  props: ListPrefixRendererProps
+  props: ListCounterRendererProps
 ) {
   const {
     prefixStyle: { top },
