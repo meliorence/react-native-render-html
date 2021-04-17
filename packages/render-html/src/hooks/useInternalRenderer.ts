@@ -4,7 +4,6 @@ import AElement from '../elements/AElement';
 import IMGElement from '../elements/IMGElement';
 import OLElement from '../elements/OLElement';
 import ULElement from '../elements/ULElement';
-import lookupRecord from '../helpers/lookupRecord';
 import { useAElementProps } from '../renderers/ARenderer';
 import { useIMGElementProps } from '../renderers/IMGRenderer';
 import { useOLElementProps } from '../renderers/OLRenderer';
@@ -38,7 +37,7 @@ export type InternalSpecialRenderedTag = keyof typeof specialRenderersConfig;
 function hasSpecialInternalRenderer(
   tagName: TagName
 ): tagName is keyof typeof specialRenderersConfig {
-  return lookupRecord(specialRenderersConfig, tagName);
+  return tagName in specialRenderersConfig;
 }
 
 export interface InternalRendererConfig<P> {
