@@ -10,6 +10,10 @@ import DrawerPlaygroundHeader from './DrawerPlaygroundHeader';
 import useSurfaceBackgroundStyleNucleon from '../../nucleons/useSurfaceBackgroundStyleNucleon';
 import { IconNucleonProps } from '../../nucleons/IconNucleon';
 import Images from '../../features/Images';
+import Architecture from '../../concepts/Architecture';
+import Css from '../../concepts/Css';
+import Html from '../../concepts/Html';
+import Tre from '../../concepts/Tre';
 
 type RouteName = string;
 
@@ -27,6 +31,38 @@ interface GroupDefinition {
     component: React.ComponentType<any>;
   }>;
 }
+
+const concepts: GroupDefinition = {
+  groupLabel: 'Concepts',
+  group: 'concepts',
+  header: (props) => <DrawerPlaygroundHeader {...props} />,
+  routes: [
+    {
+      title: 'Architecture',
+      name: 'Architecture',
+      iconName: 'atom',
+      component: Architecture
+    },
+    {
+      title: 'HTML Processing',
+      name: 'HTMLProcessing',
+      iconName: 'language-html5',
+      component: Html
+    },
+    {
+      title: 'Transient Render Engine',
+      name: 'TRE',
+      iconName: 'file-tree',
+      component: Tre
+    },
+    {
+      title: 'CSS Processing',
+      name: 'CSSProcessing',
+      iconName: 'language-css3',
+      component: Css
+    }
+  ]
+};
 
 const playgrounds: GroupDefinition = {
   groupLabel: 'Playgrounds',
@@ -86,6 +122,7 @@ export default function HomeScreen({}: StackScreenProps<any>) {
         headerShown: true,
         headerTitleAllowFontScaling: true
       }}>
+      {mapGroup(concepts)}
       {mapGroup(features)}
       {mapGroup(playgrounds)}
     </Drawer.Navigator>
