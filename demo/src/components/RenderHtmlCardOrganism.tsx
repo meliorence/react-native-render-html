@@ -1,14 +1,14 @@
 import { Stack, useSpacing } from '@mobily/stacks';
 import React from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
-import UIHtmlDisplayMolecule from '../UIHtmlDisplayMolecule';
-import UISourceDisplayMolecule from '../UISourceDisplayMolecule';
-import BoxNucleon from '../nucleons/BoxNucleon';
-import IconNucleon from '../nucleons/IconNucleon';
-import { useColorRoles } from '../../theme/colorSystem';
-import TextRoleNucleon from '../nucleons/TextRoleNucleon';
+import UIHtmlDisplayMolecule from './UIHtmlDisplayMolecule';
+import UISourceDisplayMolecule from './UISourceDisplayMolecule';
+import BoxNucleon from './nucleons/BoxNucleon';
+import IconNucleon from './nucleons/IconNucleon';
+import { useColorRoles } from '../theme/colorSystem';
+import TextRoleNucleon from './nucleons/TextRoleNucleon';
 
-export default function RenderHtmlCard({
+export default function RenderHtmlCardOrganism({
   html,
   contentWidth,
   caption
