@@ -26,14 +26,22 @@ function BodyHeader1({
   );
 }
 
+export type BodyChapterMoleculeProps = PropsWithChildren<
+  PropsWithStyle<{ title: string; prefix?: string }>
+>;
+
 export default function BodyChapterMolecule({
   title,
   style,
+  prefix,
   children
-}: PropsWithChildren<PropsWithStyle<{ title: string }>>) {
+}: BodyChapterMoleculeProps) {
   return (
     <Stack style={style} space={4}>
-      <BodyHeader1>{title}</BodyHeader1>
+      <BodyHeader1>
+        {prefix}
+        {title}
+      </BodyHeader1>
       {children}
     </Stack>
   );
