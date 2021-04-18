@@ -12,6 +12,7 @@ import {
   usePlaygroundSetter,
   usePlaygroundStateSlice
 } from '../templates/PlaygroundTemplate/playgroundStore';
+import BodyRefHtmlElementMolecule from '../BodyRefHtmlElementMolecule';
 
 const sourceMap = {
   shortOl: {
@@ -223,9 +224,9 @@ export default function Lists() {
       </PlaygroundControls>
       <PlaygroundDescription>
         <TextRoleNucleon role="body">
-          {/* Discover how <HtmlElDisplayAtom name="ul" /> and{' '}
-          <HtmlElDisplayAtom name="ol" /> elements react to varying style */}
-          constraints. The renderer for both is the same. The style of the
+          Discover how <BodyRefHtmlElementMolecule name="ul" /> and{' '}
+          <BodyRefHtmlElementMolecule name="ol" /> elements react to varying
+          style constraints. The renderer for both is the same. The style of the
           prefix (or marker in CSS terminology) is determined by{' '}
           <TextRoleNucleon role="bodyInlineCode">
             list-style-type
