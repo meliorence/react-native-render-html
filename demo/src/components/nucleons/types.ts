@@ -1,4 +1,5 @@
 import { StyleProp, TextProps, ViewStyle } from 'react-native';
+import { TextRoleNucleonProps } from './useTextRoleNucleon';
 
 export interface SelectorProps<V extends string | number> {
   selectedValue: V;
@@ -23,3 +24,7 @@ export type PropsWithStringChild<Target = TextProps> = Omit<
   Target,
   'children'
 > & { children: string };
+
+export type RefProps<T = string> = Omit<TextRoleNucleonProps, 'role'> & {
+  name: T;
+};
