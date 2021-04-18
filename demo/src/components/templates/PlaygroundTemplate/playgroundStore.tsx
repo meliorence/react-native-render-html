@@ -13,6 +13,8 @@ export const olListTypes = [
   'lower-alpha',
   'upper-alpha',
   'lower-greek',
+  'lower-roman',
+  'upper-roman',
   'decimal-leading-zero',
   'none'
 ] as const;
