@@ -47,7 +47,7 @@ const imgAttributes = {
   usemap: false
 };
 
-export default function Images() {
+export default function ContentImages() {
   const contentWidth = useNuclearContentWidth();
   return (
     <FeatureTemplate>

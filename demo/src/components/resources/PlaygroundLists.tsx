@@ -208,7 +208,7 @@ function UnorderedListTypeTide(props: any) {
   );
 }
 
-export default function Lists() {
+export default function PlaygroundLists() {
   return (
     <PlaygroundTemplate sourceMap={sourceMap} initialSource="shortOl">
       <PlaygroundControls>

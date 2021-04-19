@@ -12,14 +12,14 @@ import BodyRefReactNativeSymbolMolecule from '../BodyRefReactNativeSymbolMolecul
 import BodyRefRenderHtmlPropMolecule from '../BodyRefRenderHtmlPropMolecule';
 import FeatureTemplate from '../templates/FeatureTemplate';
 
-export default function Css() {
+export default function ConceptHtml() {
   const contentWidth = useNuclearContentWidth();
   return (
     <FeatureTemplate>
       <ArticleHeaderAtom
         imageSource={require('../../../assets/images/soragrit-wongsa-pictures.jpg')}>
         <BodyParagraphAtom>
-          This article is an introduction to CSS parsing in
+          This article is an introduction to HTML parsing in
           react-native-render-html.
         </BodyParagraphAtom>
       </ArticleHeaderAtom>
