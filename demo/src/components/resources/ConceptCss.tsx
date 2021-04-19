@@ -12,15 +12,15 @@ import BodyRefReactNativeSymbolMolecule from '../BodyRefReactNativeSymbolMolecul
 import BodyRefRenderHtmlPropMolecule from '../BodyRefRenderHtmlPropMolecule';
 import FeatureTemplate from '../templates/FeatureTemplate';
 
-export default function Tre() {
+export default function ConceptCss() {
   const contentWidth = useNuclearContentWidth();
   return (
     <FeatureTemplate>
       <ArticleHeaderAtom
         imageSource={require('../../../assets/images/soragrit-wongsa-pictures.jpg')}>
         <BodyParagraphAtom>
-          This article is an introduction to the react-native-render-html
-          Transient Render Engine.
+          This article is an introduction to CSS parsing in
+          react-native-render-html.
         </BodyParagraphAtom>
       </ArticleHeaderAtom>
     </FeatureTemplate>

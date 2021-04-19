@@ -50,7 +50,7 @@ function LefIcon({
   color,
   name,
   ...nucProps
-}: Pick<IconNucleonProps, 'name' | 'color'> & BoxNucleonProps<any>) {
+}: Pick<IconNucleonProps, 'name' | 'color'> & BoxNucleonProps) {
   return (
     <BoxNucleon alignY="center" {...nucProps}>
       <IconNucleon color={color} size={ICON_SIZE} name={name} />
@@ -62,7 +62,7 @@ function Right({
   right,
   rightIconName,
   ...nucProps
-}: Pick<TideAtomProps, 'right' | 'rightIconName'> & BoxNucleonProps<any>) {
+}: Pick<TideAtomProps, 'right' | 'rightIconName'> & BoxNucleonProps) {
   return (
     <BoxNucleon
       alignX="center"

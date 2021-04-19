@@ -10,6 +10,9 @@ import { ScrollView } from 'react-native-gesture-handler';
 import BodyRefLibraryMolecule from '../BodyRefLibaryMolecule';
 import TextRoleNucleon from '../nucleons/TextRoleNucleon';
 import BodyListAtom from '../BodyListAtom';
+import BoxNucleon from '../nucleons/BoxNucleon';
+import UINavResourceTideMolecule from '../UINavResourceTide';
+import { View } from 'react-native';
 
 const codeSnippet = `import RenderHtml from 'react-native-render-html';
 
@@ -25,7 +28,7 @@ function BodyListItemAtom({ children }: PropsWithChildren<{}>) {
   );
 }
 
-export default function Architecture() {
+export default function ConceptArchitecture() {
   const contentWidth = useNuclearContentWidth();
   return (
     <FeatureTemplate>
@@ -121,6 +124,13 @@ export default function Architecture() {
           </BodyListItemAtom>
         </BodyListAtom>
       </BodyChapterMolecule>
+      <View>
+        <BoxNucleon paddingX={2}>
+          <TextRoleNucleon role="caption">See also</TextRoleNucleon>
+        </BoxNucleon>
+        <UINavResourceTideMolecule route="ConceptTRE" />
+        <UINavResourceTideMolecule route="ConceptCSSProcessing" />
+      </View>
     </FeatureTemplate>
   );
 }

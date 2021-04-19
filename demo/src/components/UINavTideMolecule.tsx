@@ -4,17 +4,22 @@ import TextRoleNucleon from './nucleons/TextRoleNucleon';
 import { useNavigation } from '@react-navigation/core';
 import { useColorRoles } from '../theme/colorSystem';
 
+export type UINavTideMoleculeProps<R extends string> = Omit<
+  TideAtomProps,
+  'rightIconName' | 'onPress' | 'title'
+> & {
+  description?: string;
+  route: R;
+  label: string;
+};
+
 export default function UINavTideMolecule<R extends string>({
   leftIconName,
   description,
   label,
   route,
   ...listProps
-}: Omit<TideAtomProps, 'rightIconName' | 'onPress' | 'title'> & {
-  description?: string;
-  route: R;
-  label: string;
-}) {
+}: UINavTideMoleculeProps<R>) {
   const navigation = useNavigation();
   const { surface } = useColorRoles();
   const bottom = description
