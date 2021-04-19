@@ -13,6 +13,7 @@ import {
   usePlaygroundStateSlice
 } from '../templates/PlaygroundTemplate/playgroundStore';
 import BodyRefHtmlElementMolecule from '../BodyRefHtmlElementMolecule';
+import BodyRefCssPropertyMolecule from '../BodyRefCssPropertyMolecule';
 
 const sourceMap = {
   shortOl: {
@@ -228,12 +229,7 @@ export default function Lists() {
           <BodyRefHtmlElementMolecule name="ol" /> elements react to varying
           style constraints. The renderer for both is the same. The style of the
           prefix (or marker in CSS terminology) is determined by{' '}
-          <TextRoleNucleon role="bodyInlineCode">
-            list-style-type
-          </TextRoleNucleon>{' '}
-          CSS rule, camel-cased{' '}
-          <TextRoleNucleon role="bodyInlineCode">listStyleType</TextRoleNucleon>
-          .
+          <BodyRefCssPropertyMolecule name="list-style-type" /> CSS rule .
         </TextRoleNucleon>
       </PlaygroundDescription>
     </PlaygroundTemplate>
