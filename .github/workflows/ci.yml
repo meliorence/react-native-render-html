@@ -27,12 +27,14 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn install --immutable
-    - run: yarn test:ts
+    - run: yarn workspace react-native-render-html test:ts
       name: Typescript Tests
-    - run: yarn test:jest --coverage
+    - run: yarn workspace react-native-render-html test:jest --coverage
       name: Jest Tests
-    - run: yarn test:lint
+    - run: yarn workspace react-native-render-html test:lint
       name: Linting Tests
+    - run: yarn workspace react-native-render-html build
+      name: Build
     - uses: codecov/codecov-action@v1
       with:
         file: ./packages/render-html/coverage/clover.xml # optional

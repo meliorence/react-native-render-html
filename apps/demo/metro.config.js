@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const { getDefaultConfig } = require('@expo/metro-config');
 
-const packagesRoot = path.resolve(__dirname, '../packages');
+const packagesRoot = path.resolve(__dirname, '../../packages');
 
 const localPkgs = fs.readdirSync(packagesRoot);
 
