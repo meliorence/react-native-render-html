@@ -29,7 +29,6 @@ function BodyListItemAtom({ children }: PropsWithChildren<{}>) {
 }
 
 export default function ConceptArchitecture() {
-  const contentWidth = useNuclearContentWidth();
   return (
     <FeatureTemplate>
       <ArticleHeaderAtom
@@ -52,13 +51,12 @@ export default function ConceptArchitecture() {
         </BodyParagraphAtom>
         <RenderHtmlCardOrganism
           caption="This card shows the result of rendering a simple HTML code snippet."
-          contentWidth={contentWidth}
           html="<p style='text-align:center;'>Hello World!</p>"
         />
         <BodyParagraphAtom>
           The minimal code to produce such output would look like this:
         </BodyParagraphAtom>
-        <ScrollView horizontal>
+        <ScrollView style={{ flexGrow: 0 }} horizontal>
           <UISourceDisplayMolecule language="jsx" content={codeSnippet} />
         </ScrollView>
         <BodyParagraphAtom>
