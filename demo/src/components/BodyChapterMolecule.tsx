@@ -3,7 +3,9 @@ import React, { PropsWithChildren } from 'react';
 import { StyleSheet } from 'react-native';
 import { useColorRoles } from '../theme/colorSystem';
 import BodyDividerAtom from './BodyDividerAtom';
+import MaxWidthContainerAtom from './MaxWidthContainerAtom';
 import BoxNucleon from './nucleons/BoxNucleon';
+import stylesNucleon from './nucleons/stylesNucleon';
 import TextRoleNucleon from './nucleons/TextRoleNucleon';
 import { PropsWithStyle } from './nucleons/types';
 
@@ -37,12 +39,14 @@ export default function BodyChapterMolecule({
   children
 }: BodyChapterMoleculeProps) {
   return (
-    <Stack style={style} space={4}>
-      <BodyHeader1>
-        {prefix}
-        {title}
-      </BodyHeader1>
-      {children}
-    </Stack>
+    <MaxWidthContainerAtom style={style}>
+      <Stack style={stylesNucleon.bodyContent} space={4}>
+        <BodyHeader1>
+          {prefix}
+          {title}
+        </BodyHeader1>
+        {children}
+      </Stack>
+    </MaxWidthContainerAtom>
   );
 }
