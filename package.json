@@ -12,6 +12,7 @@
   "scripts": {
     "render-html": "yarn workspace react-native-render-html",
     "demo": "yarn workspace demo",
+    "website": "yarn workspace website",
     "start": "yarn workspace demo start"
   },
   "devDependencies": {
