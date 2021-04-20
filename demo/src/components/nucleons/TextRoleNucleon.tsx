@@ -12,5 +12,11 @@ export default function TextRoleNucleon({
   ...props
 }: TextRoleNucleonProps) {
   const generatedStyle = useTextRoleNucleon(props);
-  return <NativeText {...props} style={[generatedStyle, style]} />;
+  return (
+    <NativeText
+      {...props}
+      textBreakStrategy="highQuality"
+      style={[generatedStyle, style]}
+    />
+  );
 }
