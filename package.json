@@ -37,8 +37,8 @@
   "resolutions": {
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz",
-    "react-native-webview": "10.7.0"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
+    "react-native-webview": "11.2.3"
   },
   "workspaces": [
     "packages/*",
