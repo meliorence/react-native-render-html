@@ -7,32 +7,38 @@ import BoxNucleon from './nucleons/BoxNucleon';
 import IconNucleon from './nucleons/IconNucleon';
 import { useColorRoles } from '../theme/colorSystem';
 import TextRoleNucleon from './nucleons/TextRoleNucleon';
+import { useNuclearContentWidth } from './nucleons/useContentWidthContext';
+import { PropsWithStyle } from './nucleons/types';
 
 export default function RenderHtmlCardOrganism({
   html,
-  contentWidth,
-  caption
-}: {
+  caption,
+  style
+}: PropsWithStyle<{
   html: string;
-  contentWidth: number;
   caption: string;
-}) {
+}>) {
   const hzSpace = useSpacing(0);
   const vtSpace = useSpacing(0);
   const borderWidth = 0;
   const { surface } = useColorRoles();
+  const contentWidth = useNuclearContentWidth();
   const sourceDisplayStyle = {
     backgroundColor: 'rgba(125,125,125,.0)',
     minWidth: contentWidth
   };
   return (
     <BoxNucleon
-      style={{
-        marginHorizontal: hzSpace,
-        paddingVertical: vtSpace
-      }}>
+      grow={false}
+      style={[
+        {
+          marginHorizontal: hzSpace,
+          paddingVertical: vtSpace
+        },
+        style
+      ]}>
       <Stack space={2}>
-        <ScrollView indicatorStyle="white" horizontal>
+        <ScrollView style={{ flexGrow: 0 }} horizontal>
           <UISourceDisplayMolecule
             paddingVertical={2}
             style={sourceDisplayStyle}
@@ -54,7 +60,7 @@ export default function RenderHtmlCardOrganism({
           supportsLegacy={false}
           contentWidth={contentWidth - (hzSpace + borderWidth) * 2}
         />
-        <BoxNucleon paddingX={2}>
+        <BoxNucleon grow={false} paddingX={2}>
           <TextRoleNucleon
             role="caption"
             style={{ flexShrink: 1 }}
