@@ -8421,7 +8421,6 @@ __metadata:
     "@expo-google-fonts/source-code-pro": ^0.1.0
     "@expo-google-fonts/space-mono": ^0.1.0
     "@expo-google-fonts/work-sans": ^0.1.0
-    "@expo/metro-config": ^0.1.59
     "@expo/vector-icons": ^12.0.0
     "@expo/webpack-config": ~0.12.63
     "@gorhom/bottom-sheet": ^3.6.3
