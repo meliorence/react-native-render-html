@@ -10,14 +10,9 @@
   "main": "lib/index.js",
   "homepage": "https://github.com/meliorence/react-native-render-html",
   "scripts": {
-    "build": "yarn workspace react-native-render-html build",
-    "start": "yarn workspace demo start",
     "render-html": "yarn workspace react-native-render-html",
-    "test:jest": "yarn workspace react-native-render-html test:jest",
-    "test:ts": "yarn workspace react-native-render-html test:ts",
-    "test:lint": "yarn workspace react-native-render-html test:lint",
-    "release": "yarn workspace react-native-render-html release-it",
-    "publish:demo": "yarn workspace demo expo publish"
+    "demo": "yarn workspace demo",
+    "start": "yarn workspace demo start"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
@@ -42,6 +37,6 @@
   },
   "workspaces": [
     "packages/*",
-    "demo"
+    "apps/*"
   ]
 }

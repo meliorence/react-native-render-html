@@ -24,7 +24,7 @@
     "@expo-google-fonts/work-sans": "^0.1.0",
     "@expo/metro-config": "^0.1.59",
     "@expo/vector-icons": "^12.0.0",
-    "@gorhom/bottom-sheet": "^2",
+    "@gorhom/bottom-sheet": "^3.6.3",
     "@mobily/stacks": "^1.1.1",
     "@react-native-community/masked-view": "0.1.10",
     "@react-native-community/slider": "3.0.3",

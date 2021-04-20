@@ -2466,21 +2466,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gorhom/bottom-sheet@npm:^2":
-  version: 2.2.6
-  resolution: "@gorhom/bottom-sheet@npm:2.2.6"
+"@gorhom/bottom-sheet@npm:^3.6.3":
+  version: 3.6.3
+  resolution: "@gorhom/bottom-sheet@npm:3.6.3"
   dependencies:
     "@gorhom/portal": ^1.0.4
     invariant: ^2.2.4
     lodash.isequal: ^4.5.0
     nanoid: ^3.1.20
-    react-native-redash: ^14.2.4
+    react-native-redash: ^16.0.8
   peerDependencies:
     react: "*"
     react-native: "*"
-    react-native-gesture-handler: ">=1.8.0"
-    react-native-reanimated: ">=1.9.0"
-  checksum: 3168223e0e274df80a3c5fbb08ace57ecf712621ad2a26b68eba57e0262bc9f46b985bb6782046417d7f7a850a95b3631cd33cc112423f04bf5ce05156483b3b
+    react-native-gesture-handler: ">=1.9.0"
+    react-native-reanimated: ">=2.0.0-rc.2"
+  checksum: 13e9775ea4b9e80bd1bfd3487b6a1b27f340c8d73d3de4426708b05ba23d8f4c625eb703742e7310f99db1cf137e40f481056880b14094cd7e1d04435f88f53a
   languageName: node
   linkType: hard
 
@@ -8408,9 +8408,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"demo@workspace:demo":
+"demo@workspace:apps/demo":
   version: 0.0.0-use.local
-  resolution: "demo@workspace:demo"
+  resolution: "demo@workspace:apps/demo"
   dependencies:
     "@babel/core": ~7.9.0
     "@expo-google-fonts/ibm-plex-mono": ^0.1.0
@@ -8424,7 +8424,7 @@ __metadata:
     "@expo/metro-config": ^0.1.59
     "@expo/vector-icons": ^12.0.0
     "@expo/webpack-config": ~0.12.63
-    "@gorhom/bottom-sheet": ^2
+    "@gorhom/bottom-sheet": ^3.6.3
     "@mobily/stacks": ^1.1.1
     "@react-native-community/masked-view": 0.1.10
     "@react-native-community/slider": 3.0.3
@@ -17742,9 +17742,9 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-native-redash@npm:^14.2.4":
-  version: 14.2.4
-  resolution: "react-native-redash@npm:14.2.4"
+"react-native-redash@npm:^16.0.8":
+  version: 16.0.11
+  resolution: "react-native-redash@npm:16.0.11"
   dependencies:
     abs-svg-path: ^0.1.1
     normalize-svg-path: ^1.0.1
@@ -17753,8 +17753,8 @@ fsevents@^1.2.7:
     react: "*"
     react-native: "*"
     react-native-gesture-handler: "*"
-    react-native-reanimated: "*"
-  checksum: 264fc893a833a40483bed76ba5aa193ac2cc9300258b986918a95d22a2fc67f0a2cc4f95fb06e5ffb42d4bf1c3ddecc89af793f1214d7862d9683937c1a96c5c
+    react-native-reanimated: ">=2.0.0-rc.0"
+  checksum: ea08aef2e81847c0f03bb0eeb57ac22b38200d900fbd502cdeb3ccc46ec17019adf2bfea2168ded3779582aaa794c528cd6d1d08a666f1d84a18cbd11d6311c8
   languageName: node
   linkType: hard
 
