@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNuclearContentWidth } from '../nucleons/useContentWidthContext';
 import RenderHtmlCardOrganism from '../RenderHtmlCardOrganism';
 import BodyParagraphAtom from '../BodyParagraphAtom';
 import BodyTipBoxAtom from '../BodyTipBoxAtom';
@@ -48,7 +47,6 @@ const imgAttributes = {
 };
 
 export default function ContentImages() {
-  const contentWidth = useNuclearContentWidth();
   return (
     <FeatureTemplate>
       <ArticleHeaderAtom
@@ -84,7 +82,6 @@ export default function ContentImages() {
             'This image dimensions are set with inline styles. Note that both the width/height couple and the style attributes are evaluated, but the style attribute takes precedence. The relative width (50%) is computed against contentWidth.'
           }
           html={inlineExample}
-          contentWidth={contentWidth}
         />
         <BodyParagraphAtom>
           The next image will be sized automatically thanks to the{' '}
@@ -99,7 +96,6 @@ export default function ContentImages() {
             "This image has no inline style. Its width and height are determined by the width and height attributes, scaled down to fit the result of computeEmbeddedMaxWidth('img')."
           }
           html={autoSizeExample}
-          contentWidth={contentWidth}
         />
       </BodyChapterMolecule>
       <BodyChapterMolecule title="Preloading">
@@ -120,7 +116,6 @@ export default function ContentImages() {
             'When an image is unreachable, the image renderer will print a box while preserving its requested dimensions. It will also display at the center of the box the content of alt attribute.'
           }
           html={unreachableExample}
-          contentWidth={contentWidth}
         />
       </BodyChapterMolecule>
     </FeatureTemplate>
