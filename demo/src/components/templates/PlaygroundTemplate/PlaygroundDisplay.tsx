@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
-import { StyleSheet, useWindowDimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { RenderHTMLProps, TNode } from 'react-native-render-html';
 import {
   PlaygroundInitParams,
@@ -12,6 +12,7 @@ import BoxNucleon from '../../nucleons/BoxNucleon';
 import { SheetProps } from './Sheet';
 import sheetSnapPoints from './sheetSnapPoints';
 import { useColorRoles } from '../../../theme/colorSystem';
+import { useNuclearContentWidth } from '../../nucleons/useContentWidthContext';
 
 export interface PlaygroundTemplateProps<Sk extends string>
   extends PlaygroundInitParams<Sk> {
@@ -78,7 +79,7 @@ export default function PlaygroundDisplay({
       onTTreeChange
     ]
   );
-  const { width: contentWidth } = useWindowDimensions();
+  const contentWidth = useNuclearContentWidth();
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <BoxNucleon padding={0}>
