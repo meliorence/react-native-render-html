@@ -5,7 +5,6 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest --watchAll",
     "test:ts": "tsc --noEmit"
@@ -68,7 +67,6 @@
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
-    "@expo/webpack-config": "~0.12.63",
     "@types/react": "~16.9.35",
     "@types/react-native": "~0.63.2",
     "babel-preset-expo": "8.3.0",
