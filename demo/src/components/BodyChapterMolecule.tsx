@@ -5,7 +5,6 @@ import { useColorRoles } from '../theme/colorSystem';
 import BodyDividerAtom from './BodyDividerAtom';
 import MaxWidthContainerAtom from './MaxWidthContainerAtom';
 import BoxNucleon from './nucleons/BoxNucleon';
-import stylesNucleon from './nucleons/stylesNucleon';
 import TextRoleNucleon from './nucleons/TextRoleNucleon';
 import { PropsWithStyle } from './nucleons/types';
 
@@ -40,7 +39,7 @@ export default function BodyChapterMolecule({
 }: BodyChapterMoleculeProps) {
   return (
     <MaxWidthContainerAtom style={style}>
-      <Stack style={stylesNucleon.bodyContent} space={4}>
+      <Stack space={4}>
         <BodyHeader1>
           {prefix}
           {title}
