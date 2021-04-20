@@ -10,6 +10,7 @@ import { useColorScheme, useWindowDimensions } from 'react-native';
 import UILinkPressDisplayMolecule from './src/components/UILinkPressDisplayMolecule';
 import { StacksProvider } from '@mobily/stacks';
 import contentWidthContextNucleon from './src/components/nucleons/contentWidthContextNucleon';
+import PageToolkitProvider from './src/providers/PageToolkitProvider';
 
 enableScreens();
 
@@ -22,18 +23,20 @@ export default function App() {
   } else {
     return (
       <contentWidthContextNucleon.Provider value={contentWidth}>
-        <StacksProvider spacing={5}>
-          <SafeAreaProvider>
-            <ColorSchemeProvider initialColorScheme={initialColorScheme}>
-              <ThemeProvider>
-                <UILinkPressDisplayMolecule>
-                  <Navigation />
-                  <StatusBar style="light" />
-                </UILinkPressDisplayMolecule>
-              </ThemeProvider>
-            </ColorSchemeProvider>
-          </SafeAreaProvider>
-        </StacksProvider>
+        <PageToolkitProvider>
+          <StacksProvider spacing={5}>
+            <SafeAreaProvider>
+              <ColorSchemeProvider initialColorScheme={initialColorScheme}>
+                <ThemeProvider>
+                  <UILinkPressDisplayMolecule>
+                    <Navigation />
+                    <StatusBar style="light" />
+                  </UILinkPressDisplayMolecule>
+                </ThemeProvider>
+              </ColorSchemeProvider>
+            </SafeAreaProvider>
+          </StacksProvider>
+        </PageToolkitProvider>
       </contentWidthContextNucleon.Provider>
     );
   }

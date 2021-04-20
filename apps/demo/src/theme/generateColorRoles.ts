@@ -32,7 +32,13 @@ export default function generateColorRoles({
       scrim: primitives.scrim
     },
     hyperlinkColor: isDark ? Colors.blue300 : Colors.blue700,
-    tipColor: isDark ? Colors.amber300 : Colors.amber700,
+    admonition: {
+      caution: isDark ? Colors.red300 : Colors.red700,
+      important: primitives.accent.color,
+      note: surfaceContent,
+      tip: isDark ? Colors.green200 : Colors.green700,
+      warning: isDark ? Colors.amber300 : Colors.amber700
+    },
     sheetHandle: {
       slot: shiftColor(surfaceColor, 1, 0.3),
       background: shiftColor(surfaceColor, 0.3, 0.07)

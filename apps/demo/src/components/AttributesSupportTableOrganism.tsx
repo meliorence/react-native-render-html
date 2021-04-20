@@ -4,7 +4,6 @@ import { View } from 'react-native';
 import TextRoleNucleon from './nucleons/TextRoleNucleon';
 import { PropsWithStyle } from './nucleons/types';
 import IconNucleon from './nucleons/IconNucleon';
-import BodyRefHtmlAttrMolecule from './BodyRefHtmlAttrMolecule';
 
 // TODO polish (WIP)
 export default function AttributesSupportTableOrganism({
@@ -24,7 +23,7 @@ export default function AttributesSupportTableOrganism({
             <Stack horizontal space={4} key={attr}>
               <View
                 style={{ width: 150, justifyContent: 'center', flexGrow: 1 }}>
-                <BodyRefHtmlAttrMolecule name={attr} />
+                <TextRoleNucleon role="source">{attr}</TextRoleNucleon>
               </View>
               <View
                 style={{ width: 100, justifyContent: 'center', flexGrow: 1 }}>

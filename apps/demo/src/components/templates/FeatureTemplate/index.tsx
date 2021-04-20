@@ -1,46 +1,28 @@
 import { Stack } from '@mobily/stacks';
-import React, {
-  Children,
-  PropsWithChildren,
-  FunctionComponentElement
-} from 'react';
+import React, { PropsWithChildren } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
-import upperRoman from '@jsamr/counter-style/presets/upperRoman';
 import BoxNucleon from '../../nucleons/BoxNucleon';
 import useSurfaceBackgroundStyleNucleon from '../../nucleons/useSurfaceBackgroundStyleNucleon';
-import BodyChapterMolecule, {
-  BodyChapterMoleculeProps
-} from '../../BodyChapterMolecule';
+import {
+  BODY_CHAPTER_SPACING,
+  BODY_PARAGRAPH_SPACING
+} from '../../../constants';
+import { Image, ImageRequireSource } from 'react-native';
+import { useNuclearContentWidth } from '../../nucleons/useContentWidthContext';
 
-function isBodyChapterElement(
-  candidate: unknown
-): candidate is FunctionComponentElement<BodyChapterMoleculeProps> {
-  return (
-    typeof candidate === 'object' &&
-    candidate != null &&
-    (candidate as any).type === BodyChapterMolecule
-  );
-}
-
-export default function FeatureTemplate({ children }: PropsWithChildren<{}>) {
-  const counter = upperRoman;
-  let index = 1;
+export default function FeatureTemplate({
+  children,
+  imageSource
+}: PropsWithChildren<{ imageSource: ImageRequireSource }>) {
+  const width = useNuclearContentWidth();
+  const height = Math.min((9 / 16) * width, 300);
   return (
     <ScrollView
       style={{ flexGrow: 1 }}
       contentContainerStyle={useSurfaceBackgroundStyleNucleon()}>
-      <BoxNucleon paddingBottom={2}>
-        <Stack space={8}>
-          {Children.map(children, (c) => {
-            if (isBodyChapterElement(c)) {
-              return React.cloneElement(c, {
-                ...c.props,
-                prefix: counter.renderMarker(index++)
-              });
-            }
-            return c;
-          })}
-        </Stack>
+      <Image style={{ width, height }} source={imageSource} />
+      <BoxNucleon paddingBottom={BODY_PARAGRAPH_SPACING}>
+        <Stack space={BODY_CHAPTER_SPACING}>{children}</Stack>
       </BoxNucleon>
     </ScrollView>
   );

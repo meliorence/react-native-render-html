@@ -7,44 +7,78 @@ import { StackScreenProps } from '@react-navigation/stack';
 import CustomDrawerContent from './CustomDrawerContent';
 import DrawerPlaygroundHeader from './DrawerPlaygroundHeader';
 import useSurfaceBackgroundStyleNucleon from '../../nucleons/useSurfaceBackgroundStyleNucleon';
-import resources, { ResourceRouteDefinition } from '../../../resources';
+import { pagesSpecs, PageId, PageGroup } from '@doc/pages';
+import FeatureTemplate from '../../templates/FeatureTemplate';
+import groupBy from './groupBy';
+import PlaygroundLists from '../../resources/PlaygroundLists';
+import {
+  ResourceRouteDefinition,
+  ResourceRoute,
+  resourceRoutesIndex
+} from '../../../nav-model';
 
-type RouteName = string;
+interface ResourceRouteNav extends ResourceRouteDefinition {
+  component: React.ComponentType<any>;
+}
 
-const Drawer = createDrawerNavigator<Record<RouteName, {}>>();
-const initialRouteName = 'Architecture';
+const Drawer = createDrawerNavigator<Record<ResourceRoute, {}>>();
+
+const initialRouteName: ResourceRoute = 'concept-architecture';
+
+const fallbackAsset = require('../../../../assets/images/anders-jilden-architecture.jpg');
+
+const headerImagesMap: Record<PageId, number> = {
+  architecture: require('../../../../assets/images/anders-jilden-architecture.jpg'),
+  'css-processing': fallbackAsset,
+  'html-processing': fallbackAsset,
+  'transient-render-engine': fallbackAsset,
+  images: require('../../../../assets/images/soragrit-wongsa-pictures.jpg')
+};
 
 interface GroupDefinition {
   groupLabel: string;
   group: string;
   header: DrawerNavigationOptions['header'];
-  routes: Array<ResourceRouteDefinition>;
+  routes: Array<ResourceRouteNav>;
 }
 
-const conceptsGroup: GroupDefinition = {
-  groupLabel: 'Concepts',
-  group: 'concepts',
-  header: (props) => <DrawerPlaygroundHeader {...props} />,
-  routes: [
-    resources.ConceptArchitecture,
-    resources.ConceptHTMLProcessing,
-    resources.ConceptTRE,
-    resources.ConceptCSSProcessing
-  ]
-};
+const specsByGroups = groupBy(
+  Object.values(pagesSpecs).sort((a, b) => a.position - b.position),
+  'group'
+);
+
+const groups: Array<GroupDefinition> = Object.entries(specsByGroups).map(
+  ([groupName, pages]) => {
+    return {
+      group: groupName,
+      groupLabel: groupName,
+      header: (props) => <DrawerPlaygroundHeader {...props} />,
+      routes: pages.map<ResourceRouteNav>((page) => ({
+        component: function Page() {
+          return (
+            <FeatureTemplate imageSource={headerImagesMap[page.id]}>
+              {React.createElement(page.component)}
+            </FeatureTemplate>
+          );
+        },
+        iconName: page.iconName as any,
+        name: `${groupName as PageGroup}-${page.id}` as const,
+        title: page.title
+      }))
+    };
+  }
+);
 
 const playgroundsGroup: GroupDefinition = {
   groupLabel: 'Playgrounds',
   group: 'playgrounds',
   header: (props) => <DrawerPlaygroundHeader {...props} />,
-  routes: [resources.PlaygroundLists]
-};
-
-const contentGroup: GroupDefinition = {
-  groupLabel: 'Content',
-  group: 'content',
-  header: (props) => <DrawerPlaygroundHeader {...props} />,
-  routes: [resources.ContentImages]
+  routes: [
+    {
+      ...resourceRoutesIndex['playground-lists'],
+      component: PlaygroundLists
+    }
+  ]
 };
 
 function mapGroup({ routes, group, groupLabel, header }: GroupDefinition) {
@@ -77,8 +111,7 @@ export default function HomeScreen({}: StackScreenProps<any>) {
         headerShown: true,
         headerTitleAllowFontScaling: true
       }}>
-      {mapGroup(conceptsGroup)}
-      {mapGroup(contentGroup)}
+      {groups.map(mapGroup)}
       {mapGroup(playgroundsGroup)}
     </Drawer.Navigator>
   );

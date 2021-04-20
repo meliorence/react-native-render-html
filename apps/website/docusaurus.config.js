@@ -5,10 +5,11 @@ module.exports = {
   url: 'https://your-docusaurus-test-site.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
-  organizationName: 'meliorence', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'meliorence',
+  projectName: 'react-native-render-html',
+  plugins: [],
   themeConfig: {
     navbar: {
       title: 'My Site',
