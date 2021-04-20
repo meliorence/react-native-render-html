@@ -1,7 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
-import { Stack } from '@mobily/stacks';
+import { Stack, useSpacing } from '@mobily/stacks';
 import React from 'react';
 import * as ReactNative from 'react-native';
+import { View } from 'react-native';
 import { useColorRoles } from '../theme/colorSystem';
 import BodyDividerAtom from './BodyDividerAtom';
 import BodyParagraphAtom from './BodyParagraphAtom';
@@ -12,44 +13,46 @@ export default function BodyTipBoxAtom({
   children,
   ...props
 }: BoxNucleonProps) {
-  const { surface, tipColor } = useColorRoles();
+  const { tipColor } = useColorRoles();
   const dividerHeight = ReactNative.StyleSheet.hairlineWidth;
   const contentColor = useColorRoles().surface.secondaryContent;
+  const iconSize = 16;
+  const iconPadX = useSpacing(2);
   const renderDivider = () => (
     <BoxNucleon paddingX={2}>
       <BodyDividerAtom height={dividerHeight} color={tipColor} />
     </BoxNucleon>
   );
   return (
-    <BoxNucleon {...props} style={[props.style]}>
+    <View {...props} style={props.style}>
       <Stack space={1}>
         {renderDivider()}
-        <BoxNucleon
+        <View
           style={{
             flexDirection: 'row',
+            flex: 0,
             alignItems: 'center'
           }}>
-          <BoxNucleon
+          <BodyParagraphAtom
             style={{
               flexGrow: 1,
               flexShrink: 1,
               alignSelf: 'stretch',
               justifyContent: 'center'
-            }}>
-            <BodyParagraphAtom color={contentColor}>
-              {children}
-            </BodyParagraphAtom>
-          </BoxNucleon>
-          <BoxNucleon padding={2} backgroundColor={surface.background}>
+            }}
+            color={contentColor}>
+            {children}
+          </BodyParagraphAtom>
+          <View style={{ paddingHorizontal: iconPadX }}>
             <IconNucleon
               color={tipColor}
               name="lightbulb-on-outline"
-              size={16}
+              size={iconSize}
             />
-          </BoxNucleon>
-        </BoxNucleon>
+          </View>
+        </View>
         {renderDivider()}
       </Stack>
-    </BoxNucleon>
+    </View>
   );
 }
