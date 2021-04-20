@@ -1,4 +1,5 @@
 import React from 'react';
+import { usePageUIToolkit } from '@doc/pages';
 import TextRoleNucleon from '../nucleons/TextRoleNucleon';
 import PlaygroundTemplate, {
   PlaygroundControls,
@@ -12,8 +13,6 @@ import {
   usePlaygroundSetter,
   usePlaygroundStateSlice
 } from '../templates/PlaygroundTemplate/playgroundStore';
-import BodyRefHtmlElementMolecule from '../BodyRefHtmlElementMolecule';
-import BodyRefCssPropertyMolecule from '../BodyRefCssPropertyMolecule';
 
 const sourceMap = {
   shortOl: {
@@ -209,6 +208,7 @@ function UnorderedListTypeTide(props: any) {
 }
 
 export default function PlaygroundLists() {
+  const { RefCssProperty, RefHtmlElement } = usePageUIToolkit();
   return (
     <PlaygroundTemplate sourceMap={sourceMap} initialSource="shortOl">
       <PlaygroundControls>
@@ -225,11 +225,11 @@ export default function PlaygroundLists() {
       </PlaygroundControls>
       <PlaygroundDescription>
         <TextRoleNucleon role="body">
-          Discover how <BodyRefHtmlElementMolecule name="ul" /> and{' '}
-          <BodyRefHtmlElementMolecule name="ol" /> elements react to varying
-          style constraints. The renderer for both is the same. The style of the
+          Discover how <RefHtmlElement name="ul" /> and{' '}
+          <RefHtmlElement name="ol" /> elements react to varying style
+          constraints. The renderer for both is the same. The style of the
           prefix (or marker in CSS terminology) is determined by{' '}
-          <BodyRefCssPropertyMolecule name="list-style-type" /> CSS rule .
+          <RefCssProperty name="list-style-type" /> CSS rule .
         </TextRoleNucleon>
       </PlaygroundDescription>
     </PlaygroundTemplate>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { BODY_HZ_SPACING } from '../constants';
 import BoxNucleon from './nucleons/BoxNucleon';
 import TextRoleNucleon, {
   TextRoleNucleonProps
@@ -8,7 +9,7 @@ export default function BodyParagraphAtom(
   props: Omit<TextRoleNucleonProps, 'role'>
 ) {
   return (
-    <BoxNucleon paddingX={2}>
+    <BoxNucleon paddingX={BODY_HZ_SPACING}>
       <TextRoleNucleon role="body" {...props} />
     </BoxNucleon>
   );

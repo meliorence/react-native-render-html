@@ -3,16 +3,31 @@ const fs = require('fs');
 const { getDefaultConfig } = require('expo/metro-config');
 
 const packagesRoot = path.resolve(__dirname, '../../packages');
+const docToolsRoot = path.resolve(__dirname, '../../doc-tools');
 
 const localPkgs = fs.readdirSync(packagesRoot);
+const docToolksPkgs = fs.readdirSync(docToolsRoot);
+
+const watchFolders = localPkgs
+  .map((f) => path.join(packagesRoot, f))
+  .concat(docToolksPkgs.map((f) => path.join(docToolsRoot, f)));
 
 module.exports = (async () => {
-  const { resolver, ...other } = await getDefaultConfig(__dirname);
+  const {
+    resolver: { assetExts, sourceExts },
+    transformer,
+    ...other
+  } = await getDefaultConfig(__dirname);
   return {
     ...other,
-    watchFolders: localPkgs.map((f) => path.join(packagesRoot, f)),
+    watchFolders,
+    transformer: {
+      ...transformer,
+      babelTransformerPath: require.resolve('react-native-svg-transformer')
+    },
     resolver: {
-      ...resolver,
+      assetExts: assetExts.filter((ext) => ext !== 'svg'),
+      sourceExts: [...sourceExts, 'svg'],
       extraNodeModules: new Proxy(
         {},
         {

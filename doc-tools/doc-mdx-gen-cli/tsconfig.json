@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig-base.json",
+  "compilerOptions": {
+    "outDir": "./lib",
+    "noEmit": false,
+    "noImplicitAny": false,
+    "lib": ["ES2019"],
+    "jsx": "react"
+  },
+  "exclude": ["node_modules", "**/__tests__", "lib", "types"]
+}

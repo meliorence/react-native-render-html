@@ -1,0 +1,11 @@
+.expoContainer {
+    margin-bottom: var(--ifm-leading);
+    box-sizing: 'content-box';
+    border: 1px solid;
+    border-radius: var(--ifm-global-radius);
+    overflow: hidden;
+}
+
+.expoIframe {
+    display: block;
+}

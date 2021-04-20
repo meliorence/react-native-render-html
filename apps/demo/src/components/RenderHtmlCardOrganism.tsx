@@ -13,10 +13,13 @@ import { PropsWithStyle } from './nucleons/types';
 export default function RenderHtmlCardOrganism({
   html,
   caption,
+  snippet,
   style
 }: PropsWithStyle<{
   html: string;
-  caption: string;
+  title: string;
+  snippet: string;
+  caption?: string;
 }>) {
   const hzSpace = useSpacing(0);
   const vtSpace = useSpacing(0);
@@ -24,7 +27,6 @@ export default function RenderHtmlCardOrganism({
   const { surface } = useColorRoles();
   const contentWidth = useNuclearContentWidth();
   const sourceDisplayStyle = {
-    backgroundColor: 'rgba(125,125,125,.0)',
     minWidth: contentWidth
   };
   return (
@@ -42,9 +44,9 @@ export default function RenderHtmlCardOrganism({
           <UISourceDisplayMolecule
             paddingVertical={2}
             style={sourceDisplayStyle}
-            content={html}
-            language="html"
-            showLineNumbers={false}
+            content={snippet}
+            language="jsx"
+            showLineNumbers
           />
         </ScrollView>
         <BoxNucleon alignX="center">

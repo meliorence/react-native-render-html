@@ -13,7 +13,13 @@
     "render-html": "yarn workspace react-native-render-html",
     "demo": "yarn workspace demo",
     "website": "yarn workspace website",
-    "start": "yarn workspace demo start"
+    "start:demo": "yarn workspace demo start",
+    "start:website": "yarn workspace website start",
+    "@doc/pages": "yarn workspace @doc/pages",
+    "@doc/mdx-gen-cli": "yarn workspace @doc/mdx-gen-cli",
+    "build:tools": "yarn @doc/pages build && yarn @doc/mdx-gen-cli build",
+    "build:docs": "yarn @doc/pages build && yarn website build-docs",
+    "process-svg-assets": "node scripts/processSvgAssets.js"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
@@ -27,17 +33,26 @@
     "eslint-plugin-compat": "^3.9.0",
     "eslint-plugin-prettier": "^3.3.1",
     "husky": "^4.3.0",
+    "inkscape": "^3.1.1",
     "metro-react-native-babel-preset": "^0.64.0",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "svgo": "^2.3.0"
   },
   "resolutions": {
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "@mdx-js/react": "2.0.0-next.9",
     "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
-    "react-native-webview": "11.2.3"
+    "react-native-webview": "11.2.3",
+    "@svgr/webpack": "5.5.0",
+    "@svgr/babel-preset": "5.5.0",
+    "@svgr/core": "5.5.0",
+    "@svgr/hast-util-to-babel-ast": "5.5.0",
+    "@svgr/plugin-svgo": "5.5.0"
   },
   "workspaces": [
     "packages/*",
-    "apps/*"
+    "apps/*",
+    "doc-tools/*"
   ]
 }

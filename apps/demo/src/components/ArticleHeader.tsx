@@ -1,23 +1,18 @@
 import React from 'react';
 import { Stack, StackProps } from '@mobily/stacks';
 import { PropsWithStyle } from './nucleons/types';
-import { useNuclearContentWidth } from './nucleons/useContentWidthContext';
-import { Image } from 'react-native';
 import MaxWidthContainerAtom from './MaxWidthContainerAtom';
+import { BODY_PARAGRAPH_SPACING } from '../constants';
 
 export default function ArticleHeaderAtom({
   style,
-  imageSource,
   children
-}: PropsWithStyle<StackProps & { imageSource: number }>) {
-  const width = useNuclearContentWidth();
-  const height = Math.min((9 / 16) * width, 300);
+}: PropsWithStyle<StackProps>) {
   return (
-    <Stack space={4} style={style}>
-      <Image style={{ width, height }} source={imageSource} />
-      <MaxWidthContainerAtom>
-        <Stack space={4}>{children}</Stack>
-      </MaxWidthContainerAtom>
-    </Stack>
+    <MaxWidthContainerAtom style={style}>
+      <Stack paddingTop={BODY_PARAGRAPH_SPACING} space={BODY_PARAGRAPH_SPACING}>
+        {children}
+      </Stack>
+    </MaxWidthContainerAtom>
   );
 }

@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="550.00006"
+   height="770"
+   viewBox="0 0 145.52086 203.72916"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
+   sodipodi:docname="data-flow.svg">
+  <defs
+     id="defs86" />
+  <style
+     id="style14"
+     type="text/css">.link { fill:none;    stroke:red;    stroke-width:0.2px; }
+text { fill: blue;   font-family:'Fira Code'; }
+.step { font-size:5px; }
+.delimiter { stroke:blue;    stroke-width:1px; }
+.transition-title { font-style:italic;    font-size:4px;    fill:blue; }
+.transition { font-style:italic;    font-size:3px; }
+.arrow { fill:red;    stroke:red;    stroke-width:0.2px; }
+.code { fill:red;    font-size:3.0px; }
+.box-title { font-weight:bold;    font-size:3px; }
+.box { 
+    fill:lightgray;
+    fill-opacity:1;
+}
+</style>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.5"
+     inkscape:cx="-409.61106"
+     inkscape:cy="391.03534"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     units="px"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-edge-midpoints="false"
+     inkscape:bbox-paths="false"
+     inkscape:snap-bbox-midpoints="false"
+     inkscape:object-nodes="false"
+     inkscape:snap-midpoints="true"
+     inkscape:snap-global="true"
+     inkscape:window-width="1914"
+     inkscape:window-height="935"
+     inkscape:window-x="0"
+     inkscape:window-y="142"
+     inkscape:window-maximized="1"
+     inkscape:snap-page="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     objecttolerance="7.2"
+     inkscape:object-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-nodes="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid114"
+       spacingx="0.52916667"
+       spacingy="0.52916667"
+       dotted="false"
+       originx="4.417969e-06"
+       originy="-18.520832" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-70.128198,-33.441769)">
+    <g
+       id="g187"
+       transform="translate(-26.458344,3.0868109)">
+      <rect
+         id="rect116-6"
+         width="66.145836"
+         height="29.104166"
+         x="175.96153"
+         y="86.358437"
+         class="box"
+         ry="2.6458328"
+         style="fill:#d3d3d3;fill-opacity:1;stroke:#ff0000;stroke-width:0" />
+      <text
+         xml:space="preserve"
+         x="178.44737"
+         y="90.968567"
+         id="text38"
+         class="box-title"><tspan
+           sodipodi:role="line"
+           id="tspan36"
+           x="178.44737"
+           y="90.968567">Document Object Model (DOM)</tspan></text>
+      <text
+         xml:space="preserve"
+         x="178.60738"
+         y="96.568245"
+         id="text933"
+         class="code"><tspan
+           sodipodi:role="line"
+           id="tspan931"
+           x="178.60738"
+           y="96.568245">&lt;Element</tspan><tspan
+           sodipodi:role="line"
+           x="178.60738"
+           y="100.31824"
+           id="tspan2919">  tagName=&quot;p&quot;</tspan><tspan
+           sodipodi:role="line"
+           x="178.60738"
+           y="104.06824"
+           id="tspan2917">  style={{ color: &quot;blue&quot; }}&gt;</tspan><tspan
+           sodipodi:role="line"
+           x="178.60738"
+           y="107.81824"
+           id="tspan935">  &lt;TextNode data=&quot;Hello World!&quot;/&gt;</tspan><tspan
+           sodipodi:role="line"
+           x="178.60738"
+           y="111.56824"
+           id="tspan937">&lt;/Element&gt;</tspan></text>
+    </g>
+    <g
+       id="g199"
+       transform="translate(-26.458344,-13.670128)">
+      <rect
+         id="rect116-6-7"
+         width="66.145836"
+         height="31.749998"
+         x="175.96153"
+         y="160.44177"
+         class="box"
+         ry="2.6458328"
+         style="fill:#d3d3d3;fill-opacity:1;stroke:#ff0000;stroke-width:0" />
+      <text
+         xml:space="preserve"
+         x="178.53815"
+         y="165.57683"
+         id="text38-6"
+         class="box-title"><tspan
+           sodipodi:role="line"
+           id="tspan36-7"
+           x="178.53815"
+           y="165.57683">Transient Render Tree</tspan></text>
+      <text
+         xml:space="preserve"
+         x="178.60738"
+         y="170.68388"
+         id="text933-6"
+         class="code"><tspan
+           sodipodi:role="line"
+           id="tspan931-2"
+           x="178.60738"
+           y="170.68388">&lt;TBlock tagName=&quot;p&quot;&gt;</tspan><tspan
+           sodipodi:role="line"
+           x="178.60738"
+           y="174.43388"
+           id="tspan935-9">  &lt;TPhrasing</tspan><tspan
+           sodipodi:role="line"
+           x="178.60738"
+           y="178.18388"
+           id="tspan2923">    style={{ color: &quot;blue&quot; }}&gt;</tspan><tspan
+           sodipodi:role="line"
+           x="178.60738"
+           y="181.93388"
+           id="tspan973">    &lt;TText data=&quot;Hello World!&quot; /&gt;</tspan><tspan
+           sodipodi:role="line"
+           x="178.60738"
+           y="185.68388"
+           id="tspan971">  &lt;/TPhrasing&gt;</tspan><tspan
+           sodipodi:role="line"
+           x="178.60738"
+           y="189.43388"
+           id="tspan937-1">&lt;/TBlock&gt;</tspan></text>
+    </g>
+    <g
+       id="g211"
+       transform="translate(-26.458344,-31.750001)">
+      <rect
+         id="rect116-6-7-5"
+         width="66.145836"
+         height="31.749998"
+         x="175.96155"
+         y="237.17094"
+         class="box"
+         ry="2.6458328"
+         style="fill:#d3d3d3;fill-opacity:1;stroke:#ff0000;stroke-width:0" />
+      <text
+         xml:space="preserve"
+         x="178.42891"
+         y="242.41029"
+         id="text38-6-3"
+         class="box-title"><tspan
+           sodipodi:role="line"
+           id="tspan36-7-5"
+           x="178.42891"
+           y="242.41029">React Native VDOM</tspan></text>
+      <text
+         xml:space="preserve"
+         x="178.60738"
+         y="247.06818"
+         id="text933-6-2"
+         class="code"
+         style="stroke-width:1"><tspan
+           sodipodi:role="line"
+           id="tspan931-2-7"
+           x="178.60738"
+           y="247.06818"
+           style="stroke-width:0.264582">&lt;View&gt;</tspan><tspan
+           sodipodi:role="line"
+           x="178.60738"
+           y="250.81818"
+           style="stroke-width:0.264582"
+           id="tspan973-9">  &lt;Text</tspan><tspan
+           sodipodi:role="line"
+           x="178.60738"
+           y="254.56818"
+           style="stroke-width:0.264582"
+           id="tspan2921">    style={{ color: &quot;blue&quot; }}&gt;</tspan><tspan
+           sodipodi:role="line"
+           x="178.60738"
+           y="258.31818"
+           style="stroke-width:0.264582"
+           id="tspan1015">    Hello World!</tspan><tspan
+           sodipodi:role="line"
+           x="178.60738"
+           y="262.06818"
+           style="stroke-width:0.264582"
+           id="tspan971-3">  &lt;/Text&gt;</tspan><tspan
+           sodipodi:role="line"
+           x="178.60738"
+           y="265.81818"
+           style="stroke-width:0.264582"
+           id="tspan937-1-6">&lt;/View&gt;</tspan></text>
+    </g>
+    <g
+       id="g122"
+       transform="translate(-26.458344)">
+      <rect
+         id="rect116"
+         width="66.145836"
+         height="23.8125"
+         x="175.96153"
+         y="33.441769"
+         class="box"
+         ry="2.6458328" />
+      <text
+         xml:space="preserve"
+         x="178.44737"
+         y="37.892281"
+         id="text38-9"
+         class="box-title"><tspan
+           sodipodi:role="line"
+           id="tspan36-2"
+           x="178.44737"
+           y="37.892281">HTML Markup</tspan></text>
+      <text
+         xml:space="preserve"
+         x="178.60738"
+         y="43.206963"
+         id="text933-2"
+         class="code"><tspan
+           sodipodi:role="line"
+           id="tspan931-3"
+           x="178.60738"
+           y="43.206963">&lt;p</tspan><tspan
+           sodipodi:role="line"
+           x="178.60738"
+           y="46.956963"
+           id="tspan2915">  style=&quot;color:blue;&quot;&gt;</tspan><tspan
+           sodipodi:role="line"
+           x="178.60738"
+           y="50.706963"
+           id="tspan935-7">  Hello World!</tspan><tspan
+           sodipodi:role="line"
+           x="178.60738"
+           y="54.456963"
+           id="tspan937-5">&lt;/p&gt;</tspan></text>
+    </g>
+    <g
+       id="g287"
+       transform="translate(0,-23.692289)">
+      <g
+         id="g3226"
+         transform="translate(-21.29299,72.716146)">
+        <text
+           xml:space="preserve"
+           x="91.096573"
+           y="152.49992"
+           id="text2783-9-3"
+           class="transition"><tspan
+             sodipodi:role="line"
+             id="tspan2781-7-1"
+             x="91.096573"
+             y="152.49992" /><tspan
+             sodipodi:role="line"
+             x="91.096573"
+             y="156.24992"
+             id="tspan2787-3-9">with RenderTTree component from</tspan><tspan
+             sodipodi:role="line"
+             x="91.096573"
+             y="159.99992"
+             id="tspan3144">react-native-render-html</tspan></text>
+        <text
+           xml:space="preserve"
+           x="91.295547"
+           y="131.37723"
+           id="text3057-4-4"
+           class="step"><tspan
+             sodipodi:role="line"
+             x="91.295547"
+             y="131.37723"
+             id="tspan3099-3">C. TTree is</tspan><tspan
+             sodipodi:role="line"
+             x="91.295547"
+             y="137.62723"
+             id="tspan3138">rendered into</tspan><tspan
+             sodipodi:role="line"
+             x="91.295547"
+             y="143.87723"
+             id="tspan3140">VDOM.</tspan></text>
+      </g>
+      <path
+         d="M 130.48237,200.00906 V 234.5251"
+         id="path3236-6-1"
+         class="transition-title  delimiter"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <path
+       d="m 130.59367,131.2376 h 18.99226"
+       id="path3282-7"
+       sodipodi:nodetypes="cc"
+       class="link" />
+    <g
+       id="g332"
+       transform="translate(-5.3202947e-7,0.12513435)">
+      <g
+         id="g299"
+         transform="translate(0,-2.6458334)">
+        <text
+           xml:space="preserve"
+           x="69.972816"
+           y="140.54939"
+           id="text2783-9-3-6"
+           class="transition"><tspan
+             sodipodi:role="line"
+             x="69.972816"
+             y="140.54939"
+             id="tspan3144-3" /><tspan
+             sodipodi:role="line"
+             x="69.972816"
+             y="144.29939"
+             id="tspan250">with TRenderEngine.buildTTree</tspan><tspan
+             sodipodi:role="line"
+             x="69.972816"
+             y="148.04939"
+             id="tspan248">method from @native-html/</tspan><tspan
+             sodipodi:role="line"
+             x="69.972816"
+             y="151.79939"
+             id="tspan112">transient-render-engine</tspan></text>
+        <text
+           xml:space="preserve"
+           x="70.44458"
+           y="119.42671"
+           id="text3057-4-4-5"
+           class="step"><tspan
+             sodipodi:role="line"
+             x="70.44458"
+             y="119.42671"
+             id="tspan3140-9">B. Transient</tspan><tspan
+             sodipodi:role="line"
+             x="70.44458"
+             y="125.67671"
+             id="tspan237">Render Tree is</tspan><tspan
+             sodipodi:role="line"
+             x="70.44458"
+             y="131.92671"
+             id="tspan239">assembled.</tspan></text>
+        <path
+           d="m 130.48237,115.33747 v 37.01409"
+           id="path3236-6-1-1"
+           class="transition-title  delimiter"
+           sodipodi:nodetypes="cc" />
+      </g>
+    </g>
+    <path
+       d="M 130.78802,73.12927 H 149.4797"
+       id="path3282-7-7"
+       sodipodi:nodetypes="cc"
+       class="link" />
+    <g
+       id="g255"
+       transform="translate(0,21.166667)">
+      <g
+         id="g3226-7"
+         transform="translate(-24.63407,-95.602995)">
+        <text
+           xml:space="preserve"
+           x="94.453041"
+           y="154.13156"
+           id="text2783-9-3-0"
+           class="transition"><tspan
+             sodipodi:role="line"
+             x="94.453041"
+             y="154.13156"
+             id="tspan3144-6" /><tspan
+             sodipodi:role="line"
+             x="94.453041"
+             y="157.88156"
+             id="tspan346">with parseDom function from</tspan><tspan
+             sodipodi:role="line"
+             x="94.453041"
+             y="161.63156"
+             id="tspan348">htmlparser2</tspan></text>
+        <text
+           xml:space="preserve"
+           x="94.924812"
+           y="132.88579"
+           id="text3057-4-4-0"
+           class="step"><tspan
+             sodipodi:role="line"
+             x="94.924812"
+             y="132.88579"
+             id="tspan3140-6">A. HTML markup</tspan><tspan
+             sodipodi:role="line"
+             x="94.924812"
+             y="139.13579"
+             id="tspan337">is parsed</tspan><tspan
+             sodipodi:role="line"
+             x="94.924812"
+             y="145.38579"
+             id="tspan339">into DOM.</tspan></text>
+      </g>
+      <path
+         d="m 130.48237,33.367874 v 34.33027"
+         id="path3236-6-1-18"
+         class="transition-title  delimiter"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       id="g129"
+       transform="translate(-26.458344,0.22038787)">
+      <g
+         id="g102"
+         transform="translate(0,18.221061)">
+        <text
+           xml:space="preserve"
+           x="204.82776"
+           y="56.684299"
+           id="text2791"
+           class="transition-title"><tspan
+             sodipodi:role="line"
+             id="tspan2789"
+             x="204.82776"
+             y="56.684299">parseDom()</tspan></text>
+        <g
+           id="arrowBottom"
+           transform="matrix(0.0463821,0,0,0.04666677,193.31117,52.261757)"
+           style="stroke-width:21.4942">
+          <path
+             d="M -46.298961,-56.583262 V 155.78648 l 51.3931951,-53.44404 20.0233209,21.09633 -85.432842,103.20736 -85.432853,-103.20736 20.02333,-21.09633 51.393198,53.44404 V -56.583262 Z"
+             class="arrow"
+             id="path84"
+             sodipodi:nodetypes="cccccccccc" />
+        </g>
+      </g>
+    </g>
+    <g
+       id="g135"
+       transform="translate(-26.458344,1.0701139)">
+      <g
+         id="g107"
+         transform="translate(0,-1.1729662)">
+        <text
+           xml:space="preserve"
+           x="204.6534"
+           y="134.58205"
+           id="text2791-6"
+           class="transition-title"><tspan
+             sodipodi:role="line"
+             id="tspan2789-1"
+             x="204.6534"
+             y="134.58205">buildTTree()</tspan></text>
+        <use
+           xlink:href="#arrowBottom"
+           x="0"
+           y="0"
+           id="use87"
+           transform="translate(0,77.193605)"
+           width="100%"
+           height="100%" />
+      </g>
+    </g>
+    <g
+       id="g141"
+       transform="translate(-26.458344,1.070122)">
+      <g
+         id="g112"
+         transform="translate(0,-17.894418)">
+        <text
+           xml:space="preserve"
+           x="204.48314"
+           y="209.66362"
+           id="text2791-6-2"
+           class="transition-title"><tspan
+             sodipodi:role="line"
+             id="tspan2789-1-9"
+             x="204.48314"
+             y="209.66362">&lt;RenderTTree /&gt;</tspan></text>
+        <use
+           xlink:href="#arrowBottom"
+           x="0"
+           y="0"
+           id="use88"
+           transform="translate(0,152.56436)"
+           width="100%"
+           height="100%" />
+      </g>
+    </g>
+    <path
+       d="m 131.01124,192.19177 h 18.42765"
+       id="path3282-7-5"
+       sodipodi:nodetypes="cc"
+       class="link"
+       style="fill:none;stroke:#ff0000;stroke-width:0.2px" />
+  </g>
+</svg>

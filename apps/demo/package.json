@@ -13,6 +13,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@doc/svg-component": "workspace:*",
     "@expo-google-fonts/ibm-plex-mono": "^0.1.0",
     "@expo-google-fonts/ibm-plex-serif": "^0.1.0",
     "@expo-google-fonts/josefin-sans": "^0.1.0",
@@ -57,6 +58,8 @@
     "react-native-render-html-v5": "npm:react-native-render-html@^5.0.0",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.0.0",
+    "react-native-svg": "11.0.1",
+    "react-native-svg-transformer": "^0.14.3",
     "react-native-tab-view": "^3.0.1",
     "react-native-web": "~0.13.12",
     "react-native-webview": "11.2.3",
@@ -67,6 +70,7 @@
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
+    "@doc/svgr-conf": "workspace:*",
     "@types/react": "~16.9.35",
     "@types/react-native": "~0.63.2",
     "babel-preset-expo": "8.3.0",

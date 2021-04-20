@@ -5,6 +5,7 @@ import decimal from '@jsamr/counter-style/presets/decimal';
 import { PropsWithChildren } from 'react';
 import useTextRoleNucleon from './nucleons/useTextRoleNucleon';
 import BoxNucleon from './nucleons/BoxNucleon';
+import { BODY_HZ_SPACING } from '../constants';
 
 export default function BodyListAtom({
   children,
@@ -12,7 +13,7 @@ export default function BodyListAtom({
 }: PropsWithChildren<{ type?: 'upper-alpha' | 'decimal' }>) {
   const prefixStyle = useTextRoleNucleon({ role: 'body' });
   return (
-    <BoxNucleon paddingX={2}>
+    <BoxNucleon paddingX={BODY_HZ_SPACING}>
       <MarkedList
         markerTextStyle={{
           ...prefixStyle,

@@ -1,0 +1,21 @@
+---
+id: architecture
+title: Architecture
+description: An introduction to react-native-render-html architecture.
+---
+import ExpoSnippet from "@site/src/components/ExpoSnippet";
+import SvgFigure from "@site/src/components/SvgFigure";
+
+<p>This article is an introduction to the <a href="https://github.com/meliorence/react-native-render-html#readme">react-native-render-html</a> architecture.</p>
+
+## Synopsis
+
+<p>Let&apos;s start with a simple example:</p>
+<ExpoSnippet title="Minimal working example" caption="This card shows the result of rendering a simple HTML code snippet." snippet="import%20React%20from%20'react'%3B%0Aimport%20RenderHtml%20from%20'react-native-render-html'%3B%0A%0Aconst%20html%3D%60%0A%3Cp%20style%3D'text-align%3Acenter%3B'%3E%0A%20%20Hello%20World!%0A%3C%2Fp%3E%60%3B%0A%0Aexport%20default%20function%20App()%20%7B%0A%20%20return%20%3CRenderHtml%20source%3D%7B%7B%20html%20%7D%7D%20%2F%3E%3B%0A%7D" />
+<p>This looks pretty simple. But what exactly is happening under the hood? Consumers of this library need to understand the basic data flow model of this library to leverage its capabilities. Features such as props will touch on different areas of the data flow.</p>
+
+## Data Flow
+
+
+<SvgFigure asset="data-flow" description="Depiction of data transformations involved in the rendering of an HTML snippet." />
+<p>We can roughly split the transformations from an HTML string to a React tree in 3 steps:</p><ol style={{"listStyleType":"upper-alpha"}}><li>HTML parsing. In this step, the HTML code is parsed to form a DOM tree. This step is performed by the <a href="https://github.com/fb55/htmlparser2#readme">htmlparser2</a> library.</li><li><abbr about="Structured data matching closely the React tree to render." title="Transient Render Tree">TRT</abbr> Construction. In this step, the DOM tree is transformed in a TRT. Each node of this tree is referred to as a Transient Node (TNode) which has React-Native compatible styles. This step is performed by <a href="https://github.com/native-html/core/tree/master/packages/transient-render-engine#readme">@native-html/transient-render-engine</a> module.</li><li>Transient Render Tree Rendering. In this step, the TRT is transformed in a React render tree (VDOM). TNodes are passed to internal and custom renderers.</li></ol><p>One might wonder why the need for a step B: why not just render a DOM tree? There are a few answers:</p><ol style={{"listStyleType":"decimal"}}><li>To mitigate the discrepancies between Web standards and React Native layout engine. The DOM and Transient Render trees will not have the exact same structure to account for React Native limitations.</li><li>To support CSS inheritance. For example, a <a href="https://mdn.io/div">&lt;div&gt;</a> element could have a style with text properties such as <a href="https://mdn.io/color">color</a>, but a React Native <a href="https://reactnative.dev/docs/View">View</a> element which is the default mapping for <a href="https://mdn.io/div">&lt;div&gt;</a> will not support such style properties.</li><li>For the sake of separation of concerns. By decoupling the parsing and rendering logics, we end up with a more robust product where areas of the code with distinct reponsibilities can be tested in isolation.</li></ol>

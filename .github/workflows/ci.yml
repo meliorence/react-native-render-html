@@ -27,6 +27,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn install --immutable
+    - run: yarn build:tools
+      name: Build Tooling Libraries
     - run: yarn workspace react-native-render-html test:ts
       name: Typescript Tests
     - run: yarn workspace react-native-render-html test:jest --coverage

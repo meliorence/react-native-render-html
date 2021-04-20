@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "docusaurus start",
-    "build": "docusaurus build",
+    "start": "yarn build-docs && docusaurus start",
+    "build": "yarn build-docs && docusaurus build",
+    "build-docs": "doc-mdx-gen-cli docs",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -14,6 +15,7 @@
     "write-heading-ids": "docusaurus write-heading-ids"
   },
   "dependencies": {
+    "@doc/svg-component": "workspace:*",
     "@docusaurus/core": "2.0.0-alpha.73",
     "@docusaurus/preset-classic": "2.0.0-alpha.73",
     "@mdx-js/react": "^1.6.21",
@@ -32,5 +34,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@doc/mdx-gen-cli": "workspace:*",
+    "@doc/pages": "workspace:*",
+    "@doc/svgr-conf": "workspace:*",
+    "@docusaurus/module-type-aliases": "^2.0.0-alpha.73",
+    "@tsconfig/docusaurus": "^1.0.2",
+    "@types/react": "^17.0.3",
+    "@types/react-helmet": "^6.1.1",
+    "@types/react-router-dom": "^5.1.7",
+    "typescript": "^4.2.4"
   }
 }

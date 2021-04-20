@@ -1,0 +1,20 @@
+{
+  "name": "@doc/mdx-gen-cli",
+  "private": true,
+  "bin": {
+    "doc-mdx-gen-cli": "lib/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepack": "yarn build"
+  },
+  "dependencies": {
+    "@doc/pages": "workspace:*",
+    "@types/fbjs": "^3.0.0",
+    "@types/react-reconciler": "^0.26.1",
+    "commander": "^7.2.0",
+    "fbjs": "^3.0.0",
+    "html-entities": "^2.3.2",
+    "react-reconciler": "^0.26.2"
+  }
+}

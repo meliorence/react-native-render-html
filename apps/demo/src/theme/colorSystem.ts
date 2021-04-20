@@ -1,4 +1,5 @@
 import createColorSystem, { ColorPrimitive } from '../substratum';
+import type { AdmonitionType } from '@doc/pages';
 
 export interface ColorPrimitivesDeclaration {
   primary: ColorPrimitive;
@@ -24,6 +25,10 @@ export interface ColorRoles {
    */
   statusBarBackground: string;
   /**
+   * Semantic colors for admonitions.
+   */
+  admonition: Record<AdmonitionType, string>;
+  /**
    * The underlying container styling for all other things.
    */
   surface: {
@@ -33,7 +38,6 @@ export interface ColorRoles {
     scrim: string;
   };
   hyperlinkColor: string;
-  tipColor: string;
   /**
    * Used for horizontal lines, list separators, dividers...
    */
