@@ -271,7 +271,7 @@ export interface ContainerProps<P = {}> {
   /**
    * Target some specific nested children and change them, see [altering content](https://github.com/meliorence/react-native-render-html#alterchildren)
    */
-  alterChildren?: (node: HTMLNode) => HTMLNode | Falsy;
+  alterChildren?: (node: HTMLNode) => HTMLNode[] | Falsy;
   /**
    * Target a specific node and change it, see [altering content](https://github.com/meliorence/react-native-render-html#alternode)
    */
