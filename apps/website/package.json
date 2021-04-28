@@ -18,10 +18,10 @@
     "@doc/svg-component": "workspace:*",
     "@docusaurus/core": "2.0.0-alpha.73",
     "@docusaurus/preset-classic": "2.0.0-alpha.73",
-    "@mdx-js/react": "^1.6.21",
+    "@mdx-js/react": "^1.6.22",
     "clsx": "^1.1.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "browserslist": {
     "production": [
@@ -41,7 +41,7 @@
     "@doc/svgr-conf": "workspace:*",
     "@docusaurus/module-type-aliases": "^2.0.0-alpha.73",
     "@tsconfig/docusaurus": "^1.0.2",
-    "@types/react": "^17.0.3",
+    "@types/react": "^17.0.4",
     "@types/react-helmet": "^6.1.1",
     "@types/react-router-dom": "^5.1.7",
     "typescript": "^4.2.4"
