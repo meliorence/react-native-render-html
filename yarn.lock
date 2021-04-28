@@ -20201,7 +20201,7 @@ fsevents@^1.2.7:
     release-it: ^14.2.1
     stringify-entities: ^3.1.0
     typescript: ~4.2.4
-    urijs: ^1.19.5
+    urijs: ^1.19.6
   peerDependencies:
     react: "*"
     react-native: ^0.63.0
@@ -23918,7 +23918,7 @@ typescript@~4.1.3:
   languageName: node
   linkType: hard
 
-"urijs@npm:^1.19.5":
+"urijs@npm:^1.19.6":
   version: 1.19.6
   resolution: "urijs@npm:1.19.6"
   checksum: 8c5c469d2e38ce1ddc0b2ed08e3dbce4e432e5f020c0fde07437aceafd2fc249f545e17921ea137b541bacb46508b414d1f0ec62ee5afd0ed5dad404f47653be
