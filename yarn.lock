@@ -1914,12 +1914,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/config-conventional@npm:^11.0.0":
-  version: 11.0.0
-  resolution: "@commitlint/config-conventional@npm:11.0.0"
+"@commitlint/cli@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "@commitlint/cli@npm:12.1.1"
+  dependencies:
+    "@commitlint/format": ^12.1.1
+    "@commitlint/lint": ^12.1.1
+    "@commitlint/load": ^12.1.1
+    "@commitlint/read": ^12.1.1
+    "@commitlint/types": ^12.1.1
+    get-stdin: 8.0.0
+    lodash: ^4.17.19
+    resolve-from: 5.0.0
+    resolve-global: 1.0.0
+    yargs: ^16.2.0
+  bin:
+    commitlint: cli.js
+  checksum: d43562ef8792c7428d0a4908d61ff11f1653d479be83513fc3e3839f703d2671c61b7edcafc2ce4d37cf6c4a6c896e0d0a07ebf0a6df4f658158254a8728b798
+  languageName: node
+  linkType: hard
+
+"@commitlint/config-conventional@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "@commitlint/config-conventional@npm:12.1.1"
   dependencies:
     conventional-changelog-conventionalcommits: ^4.3.1
-  checksum: 2c5288d2686660976cb272c190704be14d7117c5723982b9ff586b2fb958260760d3d56506a702ab65f344cb95231b40c0d0e7248b657c450e5bb93c48bcee7a
+  checksum: 3474a7b70abb485e3cb1c25f7e8d11340712b724ba852b18128f87c5524b50c6cc47ee3c189025037bc336fb38014031bfa8247d5a352b83f3bdcbe91eb38ccb
   languageName: node
   linkType: hard
 
@@ -1933,10 +1953,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@commitlint/ensure@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "@commitlint/ensure@npm:12.1.1"
+  dependencies:
+    "@commitlint/types": ^12.1.1
+    lodash: ^4.17.19
+  checksum: 6e0e0cdef6cdae590efcccca83a7f7e0f52f041493cc3f74787eea713fdbff7ed202bf423a7ac0253c3ae994b4a525468092218d0625dc31c82d42952a72263f
+  languageName: node
+  linkType: hard
+
 "@commitlint/execute-rule@npm:^11.0.0":
   version: 11.0.0
   resolution: "@commitlint/execute-rule@npm:11.0.0"
   checksum: 3becd2e5a7c4bef6e0fe1627bf6761834f12b79b8fe67c042ce45b476c5dc7b53047d7690645038a48b37033392ddc1d638d06c100b796205407e3c1924aa44c
+  languageName: node
+  linkType: hard
+
+"@commitlint/execute-rule@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "@commitlint/execute-rule@npm:12.1.1"
+  checksum: 46ed03f716373f9a8195dd478159f400af5fe01caa15ebeffc7d894deafe856dc5af4486351471c15b89dc63bf4e2a7a0381791fbe175a0e99830b863c0fc952
   languageName: node
   linkType: hard
 
@@ -1950,6 +1987,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@commitlint/format@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "@commitlint/format@npm:12.1.1"
+  dependencies:
+    "@commitlint/types": ^12.1.1
+    chalk: ^4.0.0
+  checksum: 3b3afaba5932c9902a8a745d9e053e318440a7935ed80313477d20ed9c062488cd9cfc56e613377658b45c343f86ee5df5508a79f0bc14dfce4c1dbdd0dc517b
+  languageName: node
+  linkType: hard
+
 "@commitlint/is-ignored@npm:^11.0.0":
   version: 11.0.0
   resolution: "@commitlint/is-ignored@npm:11.0.0"
@@ -1957,6 +2004,16 @@ __metadata:
     "@commitlint/types": ^11.0.0
     semver: 7.3.2
   checksum: 1be0a8113c439213fe9c600bc53b8f9cc7358902b5990f271d5504c51ad58bbc2b63fe4069a432ec9454edeeed3d26e9e817898de2e2d53abf46dd90d41dc7f1
+  languageName: node
+  linkType: hard
+
+"@commitlint/is-ignored@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "@commitlint/is-ignored@npm:12.1.1"
+  dependencies:
+    "@commitlint/types": ^12.1.1
+    semver: 7.3.5
+  checksum: b843e29b1401fc52325db153654a03604de51f8647bccad1faa447b66b661909352ace4b20538a9ac586065bf64a99f67f6bd4aff8ea3414bba13ec0bcb9e192
   languageName: node
   linkType: hard
 
@@ -1969,6 +2026,18 @@ __metadata:
     "@commitlint/rules": ^11.0.0
     "@commitlint/types": ^11.0.0
   checksum: a3f10a51af554679a796606200b3c4849079c3f9c53a7655d300200f0c05f40b141245947b673140f81c3417a751d86be081cd01e915150e03d8b871f4ad7452
+  languageName: node
+  linkType: hard
+
+"@commitlint/lint@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "@commitlint/lint@npm:12.1.1"
+  dependencies:
+    "@commitlint/is-ignored": ^12.1.1
+    "@commitlint/parse": ^12.1.1
+    "@commitlint/rules": ^12.1.1
+    "@commitlint/types": ^12.1.1
+  checksum: 14e79d1a15087904f2f347dbcff39ddeee1b41413e8ea688e4ea84e628da339a9d4a7b03a6f357955ee06519d7a0ef51150e968fed1c4d66e6becb929ff8d866
   languageName: node
   linkType: hard
 
@@ -1987,10 +2056,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@commitlint/load@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "@commitlint/load@npm:12.1.1"
+  dependencies:
+    "@commitlint/execute-rule": ^12.1.1
+    "@commitlint/resolve-extends": ^12.1.1
+    "@commitlint/types": ^12.1.1
+    chalk: ^4.0.0
+    cosmiconfig: ^7.0.0
+    lodash: ^4.17.19
+    resolve-from: ^5.0.0
+  checksum: 0219855239cbfb112c410182bd43e41e09affeffc9a656eab3e5e9d79b7cd79f7d1d5d9b190ac19b8d9917cd5ab26fece60f6787b97ca71109c8482b1b2f0e6b
+  languageName: node
+  linkType: hard
+
 "@commitlint/message@npm:^11.0.0":
   version: 11.0.0
   resolution: "@commitlint/message@npm:11.0.0"
   checksum: 1b4cfab0fe2517f2a725c623702fa2aa4f3893e934bc323f5981e76b60d3a09dd87ded28576de7bee91b3acc82cd902d0d132102ef06df7ef301e59de709381a
+  languageName: node
+  linkType: hard
+
+"@commitlint/message@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "@commitlint/message@npm:12.1.1"
+  checksum: 4a5ffffab099397b7602b0c8a463ab1d2bca96bf20e7b3818e0fca6344e4fa7c5edf62a82394a138303683cbbbd875c7ead1664ebba8429e73a5d914784e85da
   languageName: node
   linkType: hard
 
@@ -2004,6 +2095,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@commitlint/parse@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "@commitlint/parse@npm:12.1.1"
+  dependencies:
+    "@commitlint/types": ^12.1.1
+    conventional-changelog-angular: ^5.0.11
+    conventional-commits-parser: ^3.0.0
+  checksum: 2f20e684da0e777313c90afc73845f6dc55cb91140921e67cf1c0aca55278ee68ce18ff0fc084447e38dc56a1cbb44ee9983876b5cec8917e62c519445a7b47f
+  languageName: node
+  linkType: hard
+
 "@commitlint/read@npm:^11.0.0":
   version: 11.0.0
   resolution: "@commitlint/read@npm:11.0.0"
@@ -2012,6 +2114,18 @@ __metadata:
     fs-extra: ^9.0.0
     git-raw-commits: ^2.0.0
   checksum: fb8cec3da49395300c7656e061ab29d7a7b242826bc51516769fbc4f36eb3661ba3abaf693a181a2491c3c776208ddc292fc6156678d4fed2dcaa62445df17df
+  languageName: node
+  linkType: hard
+
+"@commitlint/read@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "@commitlint/read@npm:12.1.1"
+  dependencies:
+    "@commitlint/top-level": ^12.1.1
+    "@commitlint/types": ^12.1.1
+    fs-extra: ^9.0.0
+    git-raw-commits: ^2.0.0
+  checksum: adf7d3fcca6fb9df56ba564513ffce370936d1613b71ec88362dbe04fb9bfa2e3ddac2d76be317602a99e3692898d4e0ccc6fa4ffccda1fac997e0c582c22822
   languageName: node
   linkType: hard
 
@@ -2027,6 +2141,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@commitlint/resolve-extends@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "@commitlint/resolve-extends@npm:12.1.1"
+  dependencies:
+    import-fresh: ^3.0.0
+    lodash: ^4.17.19
+    resolve-from: ^5.0.0
+    resolve-global: ^1.0.0
+  checksum: 6826bc4d8d6f55352b26c9481fbb8b16af02499d6db03494085085fa848c3ae34df86c182a6027336cc96d6e2e04d4798faa6d73be4d0875fb1d3e83720bbd02
+  languageName: node
+  linkType: hard
+
 "@commitlint/rules@npm:^11.0.0":
   version: 11.0.0
   resolution: "@commitlint/rules@npm:11.0.0"
@@ -2039,10 +2165,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@commitlint/rules@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "@commitlint/rules@npm:12.1.1"
+  dependencies:
+    "@commitlint/ensure": ^12.1.1
+    "@commitlint/message": ^12.1.1
+    "@commitlint/to-lines": ^12.1.1
+    "@commitlint/types": ^12.1.1
+  checksum: 90ae6a58e8370c909d7a4729a1fc26790bee1b47224f2a82ab296da889a5a1310436470ea5405dfad2ecdd3b66966888254c5deb92edf3706bb92328efe559ff
+  languageName: node
+  linkType: hard
+
 "@commitlint/to-lines@npm:^11.0.0":
   version: 11.0.0
   resolution: "@commitlint/to-lines@npm:11.0.0"
   checksum: 70c55a9b162a8a858c955e7cbedec3ac7fc4ca3bec3f791d0ce944fad504f688b783e6af4734378f4c5387abbfb894911a7239621be02c8b4153126ba5ff0384
+  languageName: node
+  linkType: hard
+
+"@commitlint/to-lines@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "@commitlint/to-lines@npm:12.1.1"
+  checksum: 5119752fe17097d69f0361ae5ffa8c5cac6d302371543911bc697fb1647414d7fcf90e3857ca66844ff74a708c85553d0811edd6a776fd526bb1bfb4646b09d3
   languageName: node
   linkType: hard
 
@@ -2055,10 +2200,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@commitlint/top-level@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "@commitlint/top-level@npm:12.1.1"
+  dependencies:
+    find-up: ^5.0.0
+  checksum: 918b96e70a698d3fd3e6664fd6051faae4e7e92a9b3a816b2a61f313995129c90bcf640dbd023da53d7d42b6b9457fc4ad077a13e42b8e20b3aaf159a9ecf873
+  languageName: node
+  linkType: hard
+
 "@commitlint/types@npm:^11.0.0":
   version: 11.0.0
   resolution: "@commitlint/types@npm:11.0.0"
   checksum: 4dcf1993f195d2dbe055cfe28c5e7b1d607e3b90cc999a67f93ca85146d445f72a6198374c924f1226f9699b73a716d41fa40708dbb4737ab3ed99c37c2b7c73
+  languageName: node
+  linkType: hard
+
+"@commitlint/types@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "@commitlint/types@npm:12.1.1"
+  dependencies:
+    chalk: ^4.0.0
+  checksum: c9a93f6eb6c256edb061c96f98167dd9595bb82eae543a04f00fccdb83d11900d4f8d60e371d102c730416dc8c9b725dc0be0f9f1a48280cc1ac45dd016208ea
   languageName: node
   linkType: hard
 
@@ -8437,7 +8600,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"conventional-changelog-angular@npm:^5.0.0, conventional-changelog-angular@npm:^5.0.12":
+"conventional-changelog-angular@npm:^5.0.0, conventional-changelog-angular@npm:^5.0.11, conventional-changelog-angular@npm:^5.0.12":
   version: 5.0.12
   resolution: "conventional-changelog-angular@npm:5.0.12"
   dependencies:
@@ -20227,8 +20390,8 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "react-native-render-html-project@workspace:."
   dependencies:
-    "@commitlint/cli": ^11.0.0
-    "@commitlint/config-conventional": ^11.0.0
+    "@commitlint/cli": ^12.1.1
+    "@commitlint/config-conventional": ^12.1.1
     "@react-native-community/eslint-config": ^2.0.0
     "@tsconfig/react-native": ^1.0.2
     commitlint: ^11.0.0
