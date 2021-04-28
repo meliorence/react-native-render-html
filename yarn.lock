@@ -8202,6 +8202,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"colors@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "colors@npm:1.4.0"
+  checksum: a0f266ac041a9774d92cc9624a984707678d2eeec125d54e8d8231075ce36c24c5352fb5d0f90c6ee420d0f63e354417cec716386ad341309334aad18e32b933
+  languageName: node
+  linkType: hard
+
 "colors@npm:~1.2.1":
   version: 1.2.5
   resolution: "colors@npm:1.2.5"
@@ -9861,6 +9868,16 @@ __metadata:
   dependencies:
     esutils: ^2.0.2
   checksum: 2eae469bd2889ceee9892083a67340b3622568fe5290edce620e5d5ddab23d644b2a780e9a7c68ad9c8a62716a70c5e484402ac93a398fa78b54b7505592aa7f
+  languageName: node
+  linkType: hard
+
+"docusaurus-plugin-typedoc@npm:^0.12.1":
+  version: 0.12.1
+  resolution: "docusaurus-plugin-typedoc@npm:0.12.1"
+  peerDependencies:
+    typedoc: ">=0.20.19"
+    typedoc-plugin-markdown: ">=3.6.0"
+  checksum: f029395c530ae55c9a4fc307d9fc1ce08d4e94946402c5ccb8d114df287237fd014877748aaf042507fc3b2e2f8b52fa9d5ba47984fd7e2168427c37ad2c52ec
   languageName: node
   linkType: hard
 
@@ -12349,7 +12366,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"handlebars@npm:^4.7.6":
+"handlebars@npm:^4.7.6, handlebars@npm:^4.7.7":
   version: 4.7.7
   resolution: "handlebars@npm:4.7.7"
   dependencies:
@@ -16222,6 +16239,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"lunr@npm:^2.3.9":
+  version: 2.3.9
+  resolution: "lunr@npm:2.3.9"
+  checksum: a2b66320c2f6632322b91c43621eed9e623c0f1b81e7c2d74c238884a02229698baa4478bd238e9b32d7abf0db5ae9233b311c28e1edbcc481774e1ce83bec6f
+  languageName: node
+  linkType: hard
+
 "macos-release@npm:^2.2.0":
   version: 2.4.1
   resolution: "macos-release@npm:2.4.1"
@@ -16314,6 +16338,15 @@ fsevents@^1.2.7:
   version: 1.0.4
   resolution: "markdown-escapes@npm:1.0.4"
   checksum: eea95364eccadf6fa656f2fd3f8e0837aee3a86b582a80d9c301c794512caaf0dba021614fcc5b93bfdb6110f2d8b9902da9bc915b33362fc335dca285d6d902
+  languageName: node
+  linkType: hard
+
+"marked@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "marked@npm:2.0.3"
+  bin:
+    marked: bin/marked
+  checksum: 18940065203f4eacf84538d57478cdab170ca024c01e8cb992871f48fedb8a534bb69a908edd5b2c4d0468fb751ed4da52996cda5a45f063e71e433bbb7f04f7
   languageName: node
   linkType: hard
 
@@ -17115,7 +17148,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"minimatch@npm:3.0.4, minimatch@npm:^3.0.4":
+"minimatch@npm:3.0.4, minimatch@npm:^3.0.0, minimatch@npm:^3.0.4":
   version: 3.0.4
   resolution: "minimatch@npm:3.0.4"
   dependencies:
@@ -17977,6 +18010,15 @@ fsevents@^1.2.7:
   dependencies:
     mimic-fn: ^2.1.0
   checksum: e425f6caeb20cf2598ffece94be5663932e34d074f1631b682b13d5f01cc1e0712a7dc711eff1706bb5a5aaab8a52e37bd5edcf560334e3222219d7e8b09c21c
+  languageName: node
+  linkType: hard
+
+"onigasm@npm:^2.2.5":
+  version: 2.2.5
+  resolution: "onigasm@npm:2.2.5"
+  dependencies:
+    lru-cache: ^5.1.1
+  checksum: 9db74810f55bc0b9718991d36ea445e2095f09743f22d5e76bc37a31e34b9b5204b1224ea2fb30253e810fe57222bf86274d5b38073b1c14534fee4c6da300b4
   languageName: node
   linkType: hard
 
@@ -19463,7 +19505,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"progress@npm:^2.0.0":
+"progress@npm:^2.0.0, progress@npm:^2.0.3":
   version: 2.0.3
   resolution: "progress@npm:2.0.3"
   checksum: c46ef5a1de4d527dfd32fe56a7df0c1c8b420a4c02617196813bf7f10ac7c2a929afc265d44fdd68f5c439a7e7cb3d70d569716c82d6b4148ec72089860a1312
@@ -21902,6 +21944,16 @@ resolve@~1.19.0:
   languageName: node
   linkType: hard
 
+"shiki@npm:^0.9.3":
+  version: 0.9.3
+  resolution: "shiki@npm:0.9.3"
+  dependencies:
+    onigasm: ^2.2.5
+    vscode-textmate: ^5.2.0
+  checksum: fce8084727491c496187abe5b8f831dbecdada11ebcc2861335a31fb7eb3d3ebceaf50aec2f2d855f76af626ddb66dabd860536e334b3cb9feff7e79d61ccde0
+  languageName: node
+  linkType: hard
+
 "side-channel@npm:^1.0.3, side-channel@npm:^1.0.4":
   version: 1.0.4
   resolution: "side-channel@npm:1.0.4"
@@ -23528,6 +23580,47 @@ resolve@~1.19.0:
   languageName: node
   linkType: hard
 
+"typedoc-default-themes@npm:^0.12.10":
+  version: 0.12.10
+  resolution: "typedoc-default-themes@npm:0.12.10"
+  checksum: 3a420c405b00122c20018762ce145186219f26651a051216b1d4dafa1b3756a7e47290bf27898d3e2769af3a0da44591e3c93268c2a6503fcf28eb8b0f32980b
+  languageName: node
+  linkType: hard
+
+"typedoc-plugin-markdown@npm:^3.7.2":
+  version: 3.7.2
+  resolution: "typedoc-plugin-markdown@npm:3.7.2"
+  dependencies:
+    handlebars: ^4.7.7
+  peerDependencies:
+    typedoc: ">=0.20.0"
+  checksum: 77f85b8fff2b936d9c258c45c96a5f054c8c1bfbdf97ed0ff44dca870f0dcf16bb85724a8e2ca949c6008ba279695159a97d6538c79aad689df08e173e7ffff1
+  languageName: node
+  linkType: hard
+
+"typedoc@npm:^0.20.36":
+  version: 0.20.36
+  resolution: "typedoc@npm:0.20.36"
+  dependencies:
+    colors: ^1.4.0
+    fs-extra: ^9.1.0
+    handlebars: ^4.7.7
+    lodash: ^4.17.21
+    lunr: ^2.3.9
+    marked: ^2.0.3
+    minimatch: ^3.0.0
+    progress: ^2.0.3
+    shelljs: ^0.8.4
+    shiki: ^0.9.3
+    typedoc-default-themes: ^0.12.10
+  peerDependencies:
+    typescript: 3.9.x || 4.0.x || 4.1.x || 4.2.x
+  bin:
+    typedoc: bin/typedoc
+  checksum: 362a576deee8225e7f0e2722c91f9de553d8d821f0a7b07ac4bf9b9fa704452f495aba035e7c73af415b7363c88e80689f666e0b2dab3f29bb42eb5f2d7ae93c
+  languageName: node
+  linkType: hard
+
 "typescript@^4.2.4, typescript@~4.2.4":
   version: 4.2.4
   resolution: "typescript@npm:4.2.4"
@@ -24282,6 +24375,13 @@ typescript@~4.1.3:
   languageName: node
   linkType: hard
 
+"vscode-textmate@npm:^5.2.0":
+  version: 5.4.0
+  resolution: "vscode-textmate@npm:5.4.0"
+  checksum: 7f1e6f534d478126967cb3230a363dcd2d82374f9e0bd1e9b1f35f540d1bb515eeaa2e20b61c09ec337a245a236ea8fee2beaf5f3590b7d83be1821c2d898c4b
+  languageName: node
+  linkType: hard
+
 "w3c-hr-time@npm:^1.0.1, w3c-hr-time@npm:^1.0.2":
   version: 1.0.2
   resolution: "w3c-hr-time@npm:1.0.2"
@@ -24600,8 +24700,11 @@ typescript@~4.1.3:
     "@types/react-helmet": ^6.1.1
     "@types/react-router-dom": ^5.1.7
     clsx: ^1.1.1
+    docusaurus-plugin-typedoc: ^0.12.1
     react: ^17.0.2
     react-dom: ^17.0.2
+    typedoc: ^0.20.36
+    typedoc-plugin-markdown: ^3.7.2
     typescript: ^4.2.4
   languageName: unknown
   linkType: soft

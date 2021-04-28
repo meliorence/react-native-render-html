@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "yarn build-docs && docusaurus start",
-    "build": "yarn build-docs && docusaurus build",
+    "start": "yarn build-docs && DOCUSAURUS_NO_DUPLICATE_TITLE_WARNING=false docusaurus start",
+    "build": "yarn build-docs && DOCUSAURUS_NO_DUPLICATE_TITLE_WARNING=false docusaurus build",
     "build-docs": "doc-mdx-gen-cli docs",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
@@ -44,6 +44,9 @@
     "@types/react": "^17.0.4",
     "@types/react-helmet": "^6.1.1",
     "@types/react-router-dom": "^5.1.7",
+    "docusaurus-plugin-typedoc": "^0.12.1",
+    "typedoc": "^0.20.36",
+    "typedoc-plugin-markdown": "^3.7.2",
     "typescript": "^4.2.4"
   }
 }

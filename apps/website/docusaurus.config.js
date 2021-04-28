@@ -9,7 +9,18 @@ module.exports = {
   favicon: 'img/favicon.ico',
   organizationName: 'meliorence',
   projectName: 'react-native-render-html',
-  plugins: [],
+  plugins: [
+    [
+      'docusaurus-plugin-typedoc',
+      // Plugin / TypeDoc options
+      {
+        entryPoints: ['../../packages/render-html/src/index.ts'],
+        tsconfig: '../../packages/render-html/tsconfig.json',
+        readme: 'none',
+        disableOutputCheck: true
+      }
+    ]
+  ],
   themeConfig: {
     navbar: {
       title: 'My Site',
