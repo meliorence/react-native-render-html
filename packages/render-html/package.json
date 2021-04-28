@@ -38,12 +38,12 @@
     "prepack": "yarn run build"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.13",
-    "@babel/core": "^7.12.13",
-    "@babel/plugin-transform-react-jsx": "^7.12.13",
-    "@babel/preset-react": "^7.12.13",
-    "@babel/preset-typescript": "^7.12.13",
-    "@babel/runtime": "^7.12.13",
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.13.16",
+    "@babel/plugin-transform-react-jsx": "^7.13.12",
+    "@babel/preset-react": "^7.13.13",
+    "@babel/preset-typescript": "^7.13.0",
+    "@babel/runtime": "^7.13.17",
     "@microsoft/api-extractor": "^7.13.5",
     "@release-it/conventional-changelog": "^2.0.0",
     "@testing-library/react-hooks": "^5.0.3",
