@@ -19,7 +19,8 @@
     "@doc/mdx-gen-cli": "yarn workspace @doc/mdx-gen-cli",
     "build:tools": "yarn @doc/pages build && yarn @doc/mdx-gen-cli build",
     "build:docs": "yarn @doc/pages build && yarn website build-docs",
-    "process-svg-assets": "node scripts/processSvgAssets.js"
+    "process-svg-assets": "node scripts/processSvgAssets.js",
+    "postinstall": "husky install"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",
@@ -32,7 +33,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-compat": "^3.9.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "husky": "^4.3.8",
+    "husky": "^6.0.0",
     "inkscape": "^3.1.1",
     "metro-react-native-babel-preset": "^0.66.0",
     "prettier": "^2.2.1",
