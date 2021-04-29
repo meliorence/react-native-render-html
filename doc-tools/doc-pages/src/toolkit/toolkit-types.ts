@@ -34,6 +34,8 @@ export interface UIToolkitBase {
   >;
   List: ComponentType<PropsWithChildren<{ type?: 'upper-alpha' | 'decimal' }>>;
   ListItem: ComponentType<PropsWithChildren<{}>>;
+  InlineCode: ComponentType<PropsWithChildren<{}>>;
+  Hyperlink: ComponentType<PropsWithChildren<{ url: string }>>;
 }
 
 export interface UIToolkitRefs {
