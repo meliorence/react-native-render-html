@@ -8,14 +8,70 @@ import SvgFigure from "@site/src/components/SvgFigure";
 
 <p>This article is an introduction to the <a href="https://github.com/meliorence/react-native-render-html#readme">react-native-render-html</a> architecture.</p>
 
-## Synopsis
+## A Naive Implementation
+
+<p>Let&apos;s abide by Richard Feynman principle which states, &quot;What I cannot create, I do not understand&quot;, and create the most simple, naive implementation of this library in just about 40 lines. To do so, we will need an HTML parsing library which will give us some sort of proxy DOM representation of the HTML source. In this very example, we will use <a href="https://github.com/fb55/htmlparser2#readme">htmlparser2</a> libarary:</p>
+
+```jsx title="RenderHtml.jsx"
+import {Text, View} from 'react-native';
+import {parseDocument, ElementType} from 'htmlparser2';
+import React, {PureComponent} from 'react';
+
+export default class RenderHtml extends PureComponent {
+  ignoredTags = ['head'];
+  textTags = ['span', 'strong', 'em'];
+
+  renderTextNode(textNode, index) {
+    return <Text key={index}>{textNode.data}</Text>;
+  }
+
+  renderElement(element, index) {
+    if (this.ignoredTags.indexOf(element.name) > -1) {
+      return null;
+    }
+    const Wrapper = this.textTags.indexOf(element.name) > -1 ? Text : View;
+    return (
+      <Wrapper key={index}>
+        {element.children.map((c, i) => this.renderNode(c, i))}
+      </Wrapper>
+    );
+  }
+
+  renderNode(node, index) {
+    switch (node.type) {
+      case ElementType.Text:
+        return this.renderTextNode(node, index);
+      case ElementType.Tag:
+        return this.renderElement(node, index);
+    }
+    return null;
+  }
+
+  render() {
+    const document = parseDocument(this.props.html);
+    return document.children.map((c, i) => this.renderNode(c, i));
+  }
+}
+```
+
+<p>Perhaps your requirements are so simple that this might actually be sufficient for your use-case. You could try to extend this naive implementation with the below, easy to implement features:</p><ol style={{"listStyleType":"decimal"}}><li>Add custom renderers for specific tags such as <a href="https://mdn.io/img">&lt;img&gt;</a>, <a href="https://mdn.io/ul">&lt;ul&gt;</a>...</li><li>Add styles for specific tags and classes.</li></ol><p>However, you will get involved in a much substantial and complex task if you have requirements such as: </p><ol style={{"listStyleType":"decimal"}}><li>Support inline styles. You would need to transform those styles into React Native compatible styles. Beware that unsupported styles on the native side could easily crash your app.</li><li>Support <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/white-space">whitespace collapsing</a> such as in <a href="https://mdn.io/white-space">white-space</a> CSS property.</li><li>Support URL resolutions, such as relative URLs, <a href="https://mdn.io/base">&lt;base&gt;</a> elements... etc.</li><li>Support hoisting. Because React Native <a href="https://reactnative.dev/docs/View">View</a> elements are not well handled inside <a href="https://reactnative.dev/docs/Text">Text</a> elements, these should be hoisted up in the tree to be rendered inside <code>Views</code>.</li><li>Support CSS styles inheritance. For example, a <a href="https://mdn.io/div">&lt;div&gt;</a> element could have a style with text properties such as <a href="https://mdn.io/color">color</a>, but a React Native <a href="https://reactnative.dev/docs/View">View</a> element which is the default mapping for <a href="https://mdn.io/div">&lt;div&gt;</a> will not support such style properties.</li></ol><p><code>react-native-render-html</code> supports many of those edge-cases out of the box!</p>
+
+## Hello World!
 
 <p>Let&apos;s start with a simple example:</p>
 <ExpoSnippet title="Minimal working example" caption="This card shows the result of rendering a simple HTML code snippet." snippet="import%20React%20from%20'react'%3B%0Aimport%20RenderHtml%20from%20'react-native-render-html'%3B%0A%0Aconst%20html%3D%60%0A%3Cp%20style%3D'text-align%3Acenter%3B'%3E%0A%20%20Hello%20World!%0A%3C%2Fp%3E%60%3B%0A%0Aexport%20default%20function%20App()%20%7B%0A%20%20return%20%3CRenderHtml%20source%3D%7B%7B%20html%20%7D%7D%20%2F%3E%3B%0A%7D" />
-<p>This looks pretty simple. But what exactly is happening under the hood? Consumers of this library need to understand the basic data flow model of this library to leverage its capabilities. Features such as props will touch on different areas of the data flow.</p>
+<p>This looks pretty simple. But what exactly is happening under the hood? As seen in the previous section, we need some logic to translate the DOM into a structure easily translatable into native elements and support all the above-mentionned features. This data structure is called the Transient Render Tree, see figure below.</p>
+
+:::important 
+
+Consumers of this library can benefit greatly from understanding the basic data flow model to leverage its capabilities. Features such as props will touch on different areas of this data flow.
+    
+:::
+
+
 
 ## Data Flow
 
 
 <SvgFigure asset="data-flow" description="Depiction of data transformations involved in the rendering of an HTML snippet." />
-<p>We can roughly split the transformations from an HTML string to a React tree in 3 steps:</p><ol style={{"listStyleType":"upper-alpha"}}><li>HTML parsing. In this step, the HTML code is parsed to form a DOM tree. This step is performed by the <a href="https://github.com/fb55/htmlparser2#readme">htmlparser2</a> library.</li><li><abbr about="Structured data matching closely the React tree to render." title="Transient Render Tree">TRT</abbr> Construction. In this step, the DOM tree is transformed in a TRT. Each node of this tree is referred to as a Transient Node (TNode) which has React-Native compatible styles. This step is performed by <a href="https://github.com/native-html/core/tree/master/packages/transient-render-engine#readme">@native-html/transient-render-engine</a> module.</li><li>Transient Render Tree Rendering. In this step, the TRT is transformed in a React render tree (VDOM). TNodes are passed to internal and custom renderers.</li></ol><p>One might wonder why the need for a step B: why not just render a DOM tree? There are a few answers:</p><ol style={{"listStyleType":"decimal"}}><li>To mitigate the discrepancies between Web standards and React Native layout engine. The DOM and Transient Render trees will not have the exact same structure to account for React Native limitations.</li><li>To support CSS inheritance. For example, a <a href="https://mdn.io/div">&lt;div&gt;</a> element could have a style with text properties such as <a href="https://mdn.io/color">color</a>, but a React Native <a href="https://reactnative.dev/docs/View">View</a> element which is the default mapping for <a href="https://mdn.io/div">&lt;div&gt;</a> will not support such style properties.</li><li>For the sake of separation of concerns. By decoupling the parsing and rendering logics, we end up with a more robust product where areas of the code with distinct reponsibilities can be tested in isolation.</li></ol>
+<p>We can roughly split the transformations from an HTML string to a React tree in 3 steps:</p><ol style={{"listStyleType":"upper-alpha"}}><li>HTML parsing. In this step, the HTML code is parsed to form a DOM tree. This step is performed by the <a href="https://github.com/fb55/htmlparser2#readme">htmlparser2</a> library.</li><li><abbr about="Structured data matching closely the React tree to render." title="Transient Render Tree">TRT</abbr> Construction. In this step, the DOM tree is transformed in a TRT. Each node of this tree is referred to as a Transient Node (TNode) which has React-Native compatible styles. This step is performed by <a href="https://github.com/native-html/core/tree/master/packages/transient-render-engine#readme">@native-html/transient-render-engine</a> module.</li><li>Transient Render Tree Rendering. In this step, the TRT is transformed in a React render tree (VDOM). TNodes are passed to internal and custom renderers.</li></ol>

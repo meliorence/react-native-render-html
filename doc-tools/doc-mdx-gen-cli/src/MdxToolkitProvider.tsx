@@ -45,7 +45,9 @@ const config: UIToolkitConfig = {
   ),
   SvgFigure: ({ asset, description }) => (
     <svgfigure asset={asset} description={description} />
-  )
+  ),
+  InlineCode: ({ children }) => <code>{children}</code>,
+  Hyperlink: ({ children, url }) => <a href={url}>{children}</a>
 };
 
 export default function MdxToolkitProvider({

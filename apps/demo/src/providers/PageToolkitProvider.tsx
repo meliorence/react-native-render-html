@@ -95,7 +95,11 @@ const toolkitConfig: UIToolkitConfig = {
     <CardColorRolesProvider>
       <SvgFigure {...props} />
     </CardColorRolesProvider>
-  )
+  ),
+  Hyperlink: ({ url, children }) => (
+    <RefBuilder name={children as any} url={url} />
+  ),
+  InlineCode: (props) => <TextRoleNucleon role="bodyInlineCode" {...props} />
 };
 
 export default function PageToolkitProvider({
