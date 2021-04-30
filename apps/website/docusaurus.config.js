@@ -12,6 +12,7 @@ module.exports = {
   organizationName: 'meliorence',
   projectName: 'react-native-render-html',
   plugins: [
+    'docusaurus-plugin-sass',
     [
       'docusaurus-plugin-typedoc',
       // Plugin / TypeDoc options
@@ -107,7 +108,7 @@ module.exports = {
             'https://github.com/facebook/docusaurus/edit/master/website/blog/'
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css')
+          customCss: require.resolve('./src/css/custom.scss')
         }
       }
     ]
