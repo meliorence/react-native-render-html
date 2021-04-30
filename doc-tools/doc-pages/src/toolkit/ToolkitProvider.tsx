@@ -24,13 +24,6 @@ function buildRefs(Builder: UIToolkitConfig['RefBuilder']): UIToolkitRefs {
     RefLibrary: ({ name, url }) => <Builder name={name} url={url} />,
     RefRNSymbol: ({ name }) => (
       <Builder name={name} url={`https://reactnative.dev/docs/${name}`} />
-    ),
-    // FIXME
-    RefRenderHtmlProp: ({ name }) => (
-      <Builder
-        name={name}
-        url={`https://google.com?q=react-native-render-html%20${name}`}
-      />
     )
   };
 }
@@ -58,6 +51,7 @@ export default function ToolkitProvider({
     RefDoc,
     Acronym,
     SvgFigure,
+    RefRenderHtmlProp,
     ...other
   } = config;
   const uitoolkit = useMemo<UIToolkit>(
@@ -87,6 +81,19 @@ export default function ToolkitProvider({
       SvgFigure({ asset }) {
         const assetSpecs = figuresIndex[asset];
         return <SvgFigure asset={asset} description={assetSpecs.description} />;
+      },
+      RefRenderHtmlProp({ name }) {
+        const fragment = name.toLowerCase();
+        const docRelativePath = 'api/interfaces/renderhtmlprops';
+        const pageAbsoluteUrl = `/docs/${docRelativePath}#${fragment}`;
+        return (
+          <RefRenderHtmlProp
+            name={name}
+            pageAbsoluteUrl={pageAbsoluteUrl}
+            docRelativePath={docRelativePath}
+            fragment={fragment}
+          />
+        );
       }
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps

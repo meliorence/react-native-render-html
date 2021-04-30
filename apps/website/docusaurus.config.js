@@ -1,9 +1,11 @@
+const { WEBSITE_ROOT, WEBSITE_BASE } = require('@doc/constants');
+
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: 'Discover React Native Render HTML',
   tagline: 'Dinosaurs are cool',
-  url: 'https://your-docusaurus-test-site.com',
-  baseUrl: '/',
+  url: WEBSITE_ROOT,
+  baseUrl: WEBSITE_BASE,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
@@ -23,7 +25,7 @@ module.exports = {
   ],
   themeConfig: {
     navbar: {
-      title: 'My Site',
+      title: 'react-native-render-html',
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.svg'

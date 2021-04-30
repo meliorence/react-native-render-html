@@ -2064,6 +2064,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@doc/constants@workspace:*, @doc/constants@workspace:doc-tools/doc-constants":
+  version: 0.0.0-use.local
+  resolution: "@doc/constants@workspace:doc-tools/doc-constants"
+  languageName: unknown
+  linkType: soft
+
 "@doc/mdx-gen-cli@workspace:*, @doc/mdx-gen-cli@workspace:doc-tools/doc-mdx-gen-cli":
   version: 0.0.0-use.local
   resolution: "@doc/mdx-gen-cli@workspace:doc-tools/doc-mdx-gen-cli"
@@ -9623,6 +9629,7 @@ __metadata:
   resolution: "demo@workspace:apps/demo"
   dependencies:
     "@babel/core": ~7.13.16
+    "@doc/constants": "workspace:*"
     "@doc/svg-component": "workspace:*"
     "@doc/svgr-conf": "workspace:*"
     "@expo-google-fonts/ibm-plex-mono": ^0.1.0
@@ -9682,6 +9689,7 @@ __metadata:
     react-syntax-highlighter: ^15.4.3
     scheduler: ^0.20.2
     typescript: ~4.2.4
+    urijs: "*"
     use-context-selector: ^1.3.7
     zustand: ^3.4.2
   languageName: unknown
@@ -24011,7 +24019,7 @@ typescript@~4.1.3:
   languageName: node
   linkType: hard
 
-"urijs@npm:^1.19.6":
+"urijs@npm:*, urijs@npm:^1.19.6":
   version: 1.19.6
   resolution: "urijs@npm:1.19.6"
   checksum: 8c5c469d2e38ce1ddc0b2ed08e3dbce4e432e5f020c0fde07437aceafd2fc249f545e17921ea137b541bacb46508b414d1f0ec62ee5afd0ed5dad404f47653be
@@ -24687,6 +24695,7 @@ typescript@~4.1.3:
   version: 0.0.0-use.local
   resolution: "website@workspace:apps/website"
   dependencies:
+    "@doc/constants": "workspace:*"
     "@doc/mdx-gen-cli": "workspace:*"
     "@doc/pages": "workspace:*"
     "@doc/svg-component": "workspace:*"
