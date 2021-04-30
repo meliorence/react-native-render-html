@@ -1,13 +1,23 @@
 import { ComponentType } from 'react';
 
-export type PageGroup = 'concept' | 'content';
+export type PageGroup = 'root' | 'concept' | 'content' | 'guides';
 
 export type PageId =
-  | 'images'
+  | 'intro'
+  // concepts
   | 'html-processing'
   | 'architecture'
   | 'css-processing'
-  | 'transient-render-engine';
+  | 'transient-render-engine'
+  // guides
+  | 'styling-components'
+  | 'dom-tampering'
+  | 'custom-renderers'
+  // content
+  | 'images'
+  | 'anchors'
+  | 'textual'
+  | 'lists';
 
 export interface PageSpecs {
   title: string;

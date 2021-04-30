@@ -23,16 +23,23 @@ interface ResourceRouteNav extends ResourceRouteDefinition {
 
 const Drawer = createDrawerNavigator<Record<ResourceRoute, {}>>();
 
-const initialRouteName: ResourceRoute = 'concept-architecture';
+const initialRouteName: ResourceRoute = 'root-intro';
 
-const fallbackAsset = require('../../../../assets/images/anders-jilden-architecture.jpg');
+const fallbackAsset = require('../../../../assets/images/fallback.png');
 
 const headerImagesMap: Record<PageId, number> = {
   architecture: require('../../../../assets/images/anders-jilden-architecture.jpg'),
+  intro: fallbackAsset,
   'css-processing': fallbackAsset,
   'html-processing': fallbackAsset,
   'transient-render-engine': fallbackAsset,
-  images: require('../../../../assets/images/soragrit-wongsa-pictures.jpg')
+  images: require('../../../../assets/images/soragrit-wongsa-pictures.jpg'),
+  lists: fallbackAsset,
+  'custom-renderers': fallbackAsset,
+  'dom-tampering': fallbackAsset,
+  'styling-components': fallbackAsset,
+  anchors: fallbackAsset,
+  textual: fallbackAsset
 };
 
 interface GroupDefinition {
