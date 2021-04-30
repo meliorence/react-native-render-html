@@ -23,3 +23,22 @@
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
 }
+
+@counter-style codeblock-line {
+  system: extends decimal;
+  suffix: ""
+}
+
+.codeblock--with-line-numbers .prism-code {
+  list-style: codeblock-line;
+}
+
+.codeblock--with-line-numbers .prism-code .token-line::marker {
+  color: var(--ifm-color-gray-700);
+}
+
+.codeblock--with-line-numbers .prism-code .token-line {
+  display: list-item;
+  padding-left: var(--ifm-pre-padding);
+  margin-left: var(--ifm-global-spacing);
+}

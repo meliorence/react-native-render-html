@@ -91,6 +91,7 @@ export default function PageConceptArchitecture() {
           lang="jsx"
           title="RenderHtml.jsx"
           content={minimalHtmlRenderer}
+          showLineNumbers
         />
         <Paragraph>
           Perhaps your requirements are so simple that this might actually be

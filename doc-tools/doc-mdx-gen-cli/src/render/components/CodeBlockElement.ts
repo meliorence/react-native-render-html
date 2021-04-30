@@ -2,8 +2,9 @@ import NodeWithChildren from './NodeWithChildren';
 
 export type CodeBlockElementProps = {
   lang: string;
-  title?: string;
   content: string;
+  title?: string;
+  showLineNumbers: boolean;
 };
 
 export default class CodeBlockElement extends NodeWithChildren {
@@ -14,9 +15,11 @@ export default class CodeBlockElement extends NodeWithChildren {
   }
 
   toMdx(): string {
-    const { lang, title, content } = this.props;
-    return `\n\n\`\`\`${lang} ${title ? `title="${title}"` : ''}
+    const { lang, title, content, showLineNumbers } = this.props;
+    return `<div class="${
+      showLineNumbers ? 'codeblock--with-line-numbers' : ''
+    }">\n\n\`\`\`${lang} ${title ? `title="${title}"` : ''}
 ${content}
-\`\`\`\n\n`;
+\`\`\`\n\n</div>`;
   }
 }
