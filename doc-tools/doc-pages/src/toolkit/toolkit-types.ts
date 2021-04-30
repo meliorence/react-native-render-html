@@ -46,7 +46,6 @@ export interface UIToolkitRefs {
   RefESSymbol: RefComponent;
   RefCssProperty: RefComponent;
   RefRNSymbol: RefComponent<keyof typeof RN>;
-  RefRenderHtmlProp: RefComponent<keyof RenderHTMLProps>;
   RefLibrary: ComponentType<{ name: string; url: string }>;
 }
 
@@ -59,6 +58,7 @@ export interface UIToolkit extends UIToolkitBase, UIToolkitRefs {
   RefDoc: ComponentType<{ target: PageId }>;
   Acronym: ComponentType<{ name: Acronym }>;
   SvgFigure: ComponentType<{ asset: SvgAssetType }>;
+  RefRenderHtmlProp: RefComponent<keyof RenderHTMLProps>;
 }
 
 export type UIToolkitConfig = {
@@ -72,4 +72,10 @@ export type UIToolkitConfig = {
   RefDoc: ComponentType<{ target: PageSpecs }>;
   Acronym: ComponentType<AcronymDefinition>;
   SvgFigure: ComponentType<{ asset: SvgAssetType; description: string }>;
+  RefRenderHtmlProp: ComponentType<{
+    name: keyof RenderHTMLProps;
+    pageAbsoluteUrl: string;
+    docRelativePath: string;
+    fragment: string;
+  }>;
 } & UIToolkitBase;

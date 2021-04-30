@@ -21,6 +21,8 @@ import { useSpacing } from '@mobily/stacks';
 import CardColorRolesProvider from '../components/croles/CardColorRolesProvider';
 import { View } from 'react-native';
 import BoxNucleon from '../components/nucleons/BoxNucleon';
+import { WEBSITE_URL } from '@doc/constants';
+import URI from 'urijs';
 
 const BottomCaption = ({ caption }: { caption: string }) => (
   <BoxNucleon paddingX={2} paddingTop={1}>
@@ -120,7 +122,13 @@ const toolkitConfig: UIToolkitConfig = {
   Hyperlink: ({ url, children }) => (
     <RefBuilder name={children as any} url={url} />
   ),
-  InlineCode: (props) => <TextRoleNucleon role="bodyInlineCode" {...props} />
+  InlineCode: (props) => <TextRoleNucleon role="bodyInlineCode" {...props} />,
+  RefRenderHtmlProp: ({ name, pageAbsoluteUrl }) => (
+    <RefBuilder
+      name={name}
+      url={new URI(WEBSITE_URL + pageAbsoluteUrl).normalizePath().href()}
+    />
+  )
 };
 
 export default function PageToolkitProvider({

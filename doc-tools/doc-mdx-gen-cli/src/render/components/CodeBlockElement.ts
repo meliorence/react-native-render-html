@@ -16,7 +16,7 @@ export default class CodeBlockElement extends NodeWithChildren {
 
   toMdx(): string {
     const { lang, title, content, showLineNumbers } = this.props;
-    return `<div class="${
+    return `<div className="${
       showLineNumbers ? 'codeblock--with-line-numbers' : ''
     }">\n\n\`\`\`${lang} ${title ? `title="${title}"` : ''}
 ${content}
