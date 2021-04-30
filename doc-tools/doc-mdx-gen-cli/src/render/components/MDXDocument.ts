@@ -24,10 +24,11 @@ export default class MDXDocument extends NodeWithChildren {
   }
 
   renderFrontMatter() {
-    const { id, title, description } = this.props;
+    const { id, title, description, position } = this.props;
     return `---
 id: ${id}
 title: ${title}
+sidebar_position: ${position}
 description: ${description}
 ---
 `;
