@@ -37,12 +37,14 @@ function buildRefs(Builder: UIToolkitConfig['RefBuilder']): UIToolkitRefs {
 
 function makeSnippet(html: string) {
   return `import React from 'react';
+import { useWindowDimensions } from 'react-native';
 import RenderHtml from 'react-native-render-html';
 
 const html=\`${html.replace('`', '\\`')}\`;
 
 export default function App() {
-  return <RenderHtml source={{ html }} />;
+  const { width } = useWindowDimensions();
+  return <RenderHtml source={{ html }} contentWidth={width} />;
 }`;
 }
 

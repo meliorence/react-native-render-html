@@ -22,14 +22,39 @@ import CardColorRolesProvider from '../components/croles/CardColorRolesProvider'
 import { View } from 'react-native';
 import BoxNucleon from '../components/nucleons/BoxNucleon';
 
+const BottomCaption = ({ caption }: { caption: string }) => (
+  <BoxNucleon paddingX={2} paddingTop={1}>
+    <TextRoleNucleon
+      color={useColorRoles().surface.secondaryContent}
+      role="caption">
+      {caption}
+    </TextRoleNucleon>
+  </BoxNucleon>
+);
+
 const RefBuilder: UIToolkitConfig['RefBuilder'] = ({ name, url }) => {
   const onLinkPress = useOnLinkPress(url);
   return <UIHyperlinkAtom onPress={onLinkPress}>{name}</UIHyperlinkAtom>;
 };
 
-const SourceDisplay: UIToolkitConfig['SourceDisplay'] = ({ content, lang }) => (
-  <ScrollView horizontal style={{ flexGrow: 0 }}>
-    <UISourceDisplayMolecule content={content} language={lang as any} />
+const SourceDisplay: UIToolkitConfig['SourceDisplay'] = ({
+  content,
+  lang,
+  showLineNumbers,
+  title
+}) => (
+  <ScrollView
+    horizontal
+    style={{ flexGrow: 0 }}
+    contentContainerStyle={{ minWidth: '100%', flexDirection: 'column' }}>
+    <UISourceDisplayMolecule
+      content={content}
+      language={lang as any}
+      showLineNumbers={showLineNumbers}
+      paddingVertical={2}
+      style={{ alignSelf: 'stretch' }}
+    />
+    {title && <BottomCaption caption={title} />}
   </ScrollView>
 );
 
@@ -69,11 +94,7 @@ const SvgFigure: UIToolkitConfig['SvgFigure'] = ({ asset, description }) => {
           codeBlockBg={'rgba(125,125,125,0.2)'}
         />
       </ScrollView>
-      <BoxNucleon paddingX={2} paddingTop={1}>
-        <TextRoleNucleon color={surface.secondaryContent} role="caption">
-          {description}
-        </TextRoleNucleon>
-      </BoxNucleon>
+      <BottomCaption caption={description} />
     </View>
   );
 };

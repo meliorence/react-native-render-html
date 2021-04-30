@@ -19,16 +19,18 @@ export type AdmonitionType =
   | 'important'
   | 'caution';
 
+export type SourceDisplayProps = {
+  lang: string;
+  content: string;
+  title?: string;
+  showLineNumbers: boolean;
+};
 export interface UIToolkitBase {
   Container?: ComponentType<PropsWithChildren<{}>>;
   Header: ComponentType<PropsWithChildren<{}>>;
   Chapter: ComponentType<{ title: string }>;
   Paragraph: ComponentType<{}>;
-  SourceDisplay: ComponentType<{
-    lang: string;
-    content: string;
-    title: string;
-  }>;
+  SourceDisplay: ComponentType<SourceDisplayProps>;
   Admonition: ComponentType<
     PropsWithChildren<{ type: AdmonitionType; title?: string }>
   >;

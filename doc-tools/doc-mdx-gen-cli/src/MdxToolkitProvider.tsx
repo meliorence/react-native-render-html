@@ -28,18 +28,20 @@ const config: UIToolkitConfig = {
       html={html}
     />
   ),
-  SourceDisplay: ({ content, lang, title }) => (
-    <codeblockds lang={lang} title={title} content={content} />
-  ),
+  SourceDisplay: (props) => <codeblockds {...props} />,
   Admonition: ({ children, type, title }) => (
     <admonition type={type} title={title}>
       {children}
     </admonition>
   ),
   RefBuilder: ({ name, url }) => <a href={url}>{name}</a>,
-  RefDoc: ({ target, children }) => (
-    <a href={`../${target.group}/${target.id}`}>{children || target.title}</a>
-  ),
+  RefDoc: ({ target, children }) => {
+    const linkFragments =
+      target.group === 'root'
+        ? ['/docs', target.id]
+        : ['/docs', target.group, target.id];
+    return <a href={linkFragments.join('/')}>{children || target.title}</a>;
+  },
   Acronym: ({ fullName, name, definition }) => (
     <abbr about={definition} children={name} title={fullName} />
   ),
