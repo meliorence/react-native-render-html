@@ -19,6 +19,15 @@ export type AdmonitionType =
   | 'important'
   | 'caution';
 
+export type RefType =
+  | 'html-attr'
+  | 'html-el'
+  | 'es-symbol'
+  | 'css-prop'
+  | 'rn-symbol'
+  | 'library'
+  | 'doc';
+
 export type SourceDisplayProps = {
   lang: string;
   content: string;
@@ -29,15 +38,20 @@ export interface UIToolkitBase {
   Container?: ComponentType<PropsWithChildren<{}>>;
   Header: ComponentType<PropsWithChildren<{}>>;
   Chapter: ComponentType<{ title: string }>;
+  Section: ComponentType<{ title: string }>;
   Paragraph: ComponentType<{}>;
+  Bold: ComponentType<{}>;
   SourceDisplay: ComponentType<SourceDisplayProps>;
   Admonition: ComponentType<
     PropsWithChildren<{ type: AdmonitionType; title?: string }>
   >;
-  List: ComponentType<PropsWithChildren<{ type?: 'upper-alpha' | 'decimal' }>>;
+  List: ComponentType<
+    PropsWithChildren<{ type?: 'upper-alpha' | 'decimal' | 'disc' }>
+  >;
   ListItem: ComponentType<PropsWithChildren<{}>>;
   InlineCode: ComponentType<PropsWithChildren<{}>>;
   Hyperlink: ComponentType<PropsWithChildren<{ url: string }>>;
+  Conditional: ComponentType<{ platform: 'web' | 'mobile' }>;
 }
 
 export interface UIToolkitRefs {
@@ -51,9 +65,9 @@ export interface UIToolkitRefs {
 
 export interface UIToolkit extends UIToolkitBase, UIToolkitRefs {
   RenderHtmlCard: ComponentType<{
-    html: string;
     title: string;
     caption?: string;
+    props: RenderHTMLProps;
   }>;
   RefDoc: ComponentType<{ target: PageId }>;
   Acronym: ComponentType<{ name: Acronym }>;
@@ -62,12 +76,12 @@ export interface UIToolkit extends UIToolkitBase, UIToolkitRefs {
 }
 
 export type UIToolkitConfig = {
-  RefBuilder: ComponentType<{ name: string; url: string }>;
+  RefBuilder: ComponentType<{ name: string; url: string; type: RefType }>;
   RenderHtmlCard: ComponentType<{
-    html: string;
     snippet: string;
     title: string;
     caption?: string;
+    props: RenderHTMLProps;
   }>;
   RefDoc: ComponentType<{ target: PageSpecs }>;
   Acronym: ComponentType<AcronymDefinition>;

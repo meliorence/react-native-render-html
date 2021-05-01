@@ -1,7 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { PropsWithChildren, useCallback } from 'react';
+import React, { Fragment, PropsWithChildren, useCallback } from 'react';
 import { ToolkitProvider, UIToolkitConfig } from '@doc/pages';
 import BodyChapterMolecule from '../components/BodyChapterMolecule';
+import BodySectionMolecule from '../components/BodySectionMolecule';
 import BodyListAtom from '../components/BodyListAtom';
 import BodyListItemAtom from '../components/BodyListItemAtom';
 import BodyParagraphAtom from '../components/BodyParagraphAtom';
@@ -19,10 +20,16 @@ import svgAssetsIndex from '../svgAssetsIndex';
 import { useColorRoles } from '../theme/colorSystem';
 import { useSpacing } from '@mobily/stacks';
 import CardColorRolesProvider from '../components/croles/CardColorRolesProvider';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import BoxNucleon from '../components/nucleons/BoxNucleon';
 import { WEBSITE_URL } from '@doc/constants';
 import URI from 'urijs';
+
+const styles = StyleSheet.create({
+  underline: {
+    textDecorationLine: 'underline'
+  }
+});
 
 const BottomCaption = ({ caption }: { caption: string }) => (
   <BoxNucleon paddingX={2} paddingTop={1}>
@@ -34,9 +41,15 @@ const BottomCaption = ({ caption }: { caption: string }) => (
   </BoxNucleon>
 );
 
-const RefBuilder: UIToolkitConfig['RefBuilder'] = ({ name, url }) => {
+const RefBuilder: UIToolkitConfig['RefBuilder'] = ({ name, url, type }) => {
   const onLinkPress = useOnLinkPress(url);
-  return <UIHyperlinkAtom onPress={onLinkPress}>{name}</UIHyperlinkAtom>;
+  return (
+    <UIHyperlinkAtom
+      role={type === 'doc' ? 'body' : 'bodyInlineCode'}
+      onPress={onLinkPress}>
+      {name}
+    </UIHyperlinkAtom>
+  );
 };
 
 const SourceDisplay: UIToolkitConfig['SourceDisplay'] = ({
@@ -66,7 +79,7 @@ const RefDoc: UIToolkitConfig['RefDoc'] = ({ target, children }) => {
     navigation.navigate(`${target.group}-${target.id}`);
   }, [navigation, target.group, target.id]);
   return (
-    <UIHyperlinkAtom onPress={onPress}>
+    <UIHyperlinkAtom role="body" style={styles.underline} onPress={onPress}>
       {children || target.title}
     </UIHyperlinkAtom>
   );
@@ -75,6 +88,10 @@ const RefDoc: UIToolkitConfig['RefDoc'] = ({ target, children }) => {
 const Acronym: UIToolkitConfig['Acronym'] = ({ fullName, name }) => {
   return <TextRoleNucleon role="body" children={`${fullName} (${name})`} />;
 };
+
+const Bold: UIToolkitConfig['Bold'] = ({ children }) => (
+  <TextRoleNucleon role="bodyBold" children={children} />
+);
 
 const SvgFigure: UIToolkitConfig['SvgFigure'] = ({ asset, description }) => {
   const Component = svgAssetsIndex[asset];
@@ -104,11 +121,13 @@ const SvgFigure: UIToolkitConfig['SvgFigure'] = ({ asset, description }) => {
 const toolkitConfig: UIToolkitConfig = {
   Container: ArticleContainerAtom,
   Chapter: BodyChapterMolecule,
+  Section: BodySectionMolecule,
   Header: ArticleHeaderAtom as any,
   List: BodyListAtom,
   ListItem: BodyListItemAtom,
   Paragraph: BodyParagraphAtom,
-  RenderHtmlCard: RenderHtmlCardOrganism as any,
+  Bold,
+  RenderHtmlCard: RenderHtmlCardOrganism,
   SourceDisplay,
   Admonition: BodyAdmonitionAtom,
   RefBuilder,
@@ -120,15 +139,24 @@ const toolkitConfig: UIToolkitConfig = {
     </CardColorRolesProvider>
   ),
   Hyperlink: ({ url, children }) => (
-    <RefBuilder name={children as any} url={url} />
+    <UIHyperlinkAtom
+      role="body"
+      style={styles.underline}
+      onPress={useOnLinkPress(url)}>
+      {children}
+    </UIHyperlinkAtom>
   ),
   InlineCode: (props) => <TextRoleNucleon role="bodyInlineCode" {...props} />,
   RefRenderHtmlProp: ({ name, pageAbsoluteUrl }) => (
     <RefBuilder
+      type="rn-symbol"
       name={name}
       url={new URI(WEBSITE_URL + pageAbsoluteUrl).normalizePath().href()}
     />
-  )
+  ),
+  Conditional: ({ platform, children }) => {
+    return platform === 'mobile' ? <Fragment>{children}</Fragment> : null;
+  }
 };
 
 export default function PageToolkitProvider({

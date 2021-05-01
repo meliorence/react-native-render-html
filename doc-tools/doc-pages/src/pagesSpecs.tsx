@@ -2,7 +2,8 @@ import React from 'react';
 import { PageId, PageSpecs } from './pages-types';
 import useToolkit from './toolkit/useToolkit';
 import PageIntroduction from './pages/PageIntroduction';
-import PageConceptArchitecture from './pages/PageConceptArchitecture';
+import PageReinventTheWheel from './pages/PageReinventTheWheel';
+import PageArchitecture from './pages/PageArchitecture';
 import PageGuideCustomRenderers from './pages/PageGuideCustomRenderers';
 import PageGuideDomTampering from './pages/PageGuideCustomRenderers';
 import PageGuideStylingComponents from './pages/PageGuideStylingComponents';
@@ -30,12 +31,31 @@ const defaultDescription = 'WIP';
 const pagesIndex: Record<PageId, PageSpecs> = {
   intro: {
     title: 'Introduction',
-    iconName: 'react',
+    iconName: 'information-variant',
     component: PageIntroduction,
     description: 'An introduction to react-native-render-html library.',
     group: 'root',
     id: 'intro',
     position: 0
+  },
+  'reinvent-the-wheel': {
+    id: 'reinvent-the-wheel',
+    title: 'Reinvent the Wheel',
+    iconName: 'ship-wheel',
+    component: PageReinventTheWheel,
+    description:
+      'How to implement a super simple HTML renderer in React Native?',
+    group: 'root',
+    position: 1
+  },
+  architecture: {
+    component: PageArchitecture,
+    group: 'root',
+    position: 1,
+    title: 'Architecture',
+    description: 'An overview of react-native-render-html architecture.',
+    id: 'architecture',
+    iconName: 'pillar'
   },
   'css-processing': {
     title: 'CSS Processing',
@@ -63,15 +83,6 @@ const pagesIndex: Record<PageId, PageSpecs> = {
     id: 'transient-render-engine',
     description: defaultDescription,
     component: Empty
-  },
-  architecture: {
-    component: PageConceptArchitecture,
-    group: 'concept',
-    position: 1,
-    title: 'Architecture',
-    description: 'An overview of react-native-render-html architecture.',
-    id: 'architecture',
-    iconName: 'atom'
   },
   'custom-renderers': {
     component: PageGuideCustomRenderers,

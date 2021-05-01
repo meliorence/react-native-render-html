@@ -9,14 +9,15 @@ import { useColorRoles } from '../theme/colorSystem';
 import TextRoleNucleon from './nucleons/TextRoleNucleon';
 import { useNuclearContentWidth } from './nucleons/useContentWidthContext';
 import { PropsWithStyle } from './nucleons/types';
+import { RenderHTMLProps } from 'react-native-render-html';
 
 export default function RenderHtmlCardOrganism({
-  html,
+  props: renderHtmlProps,
   caption,
   snippet,
   style
 }: PropsWithStyle<{
-  html: string;
+  props: RenderHTMLProps;
   title: string;
   snippet: string;
   caption?: string;
@@ -57,7 +58,7 @@ export default function RenderHtmlCardOrganism({
             borderWidth: borderWidth,
             borderColor: surface.secondaryContent
           }}
-          renderHtmlProps={{ source: { html } }}
+          renderHtmlProps={renderHtmlProps}
           useLegacy={false}
           supportsLegacy={false}
           contentWidth={contentWidth - (hzSpace + borderWidth) * 2}

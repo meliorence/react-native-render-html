@@ -64,7 +64,7 @@ export default function PageContentImages() {
           caption={
             'This image dimensions are set with inline styles. Note that both the width/height couple and the style attributes are evaluated, but the style attribute takes precedence. The relative width (50%) is computed against contentWidth.'
           }
-          html={inlineExample}
+          props={{ source: { html: inlineExample } }}
         />
         <Paragraph>
           The next image will be sized automatically thanks to the{' '}
@@ -79,7 +79,7 @@ export default function PageContentImages() {
           caption={
             "This image has no inline style. Its width and height are determined by the width and height attributes, scaled down to fit the result of computeEmbeddedMaxWidth('img')."
           }
-          html={autoSizeExample}
+          props={{ source: { html: autoSizeExample } }}
         />
       </Chapter>
       <Chapter title="Preloading">
@@ -98,7 +98,7 @@ export default function PageContentImages() {
           caption={
             'When an image is unreachable, the image renderer will print a box while preserving its requested dimensions. It will also display at the center of the box the content of alt attribute.'
           }
-          html={unreachableExample}
+          props={{ source: { html: unreachableExample } }}
         />
       </Chapter>
     </Page>

@@ -7,12 +7,13 @@ import { NativeViewGestureHandler } from 'react-native-gesture-handler';
 
 export default function UIHyperlinkAtom({
   children,
+  role = 'bodyInlineCode',
   ...props
-}: Omit<TextRoleNucleonProps, 'role'>) {
+}: Partial<TextRoleNucleonProps>) {
   const { hyperlinkColor } = useColorRoles();
   const textStyle = useTextRoleNucleon({
     color: hyperlinkColor,
-    role: 'bodyInlineCode'
+    role
   });
   return (
     <NativeViewGestureHandler>
