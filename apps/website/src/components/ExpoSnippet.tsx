@@ -128,7 +128,7 @@ export default function ExpoSnippet({
   const { isDarkTheme } = useThemeContext();
   const normalSnippet = decodeURIComponent(snippet);
   const style: React.CSSProperties = {
-    height: Math.max(normalSnippet.split('\n').length * 20 + 48 + 36),
+    height: Math.max(normalSnippet.split('\n').length * 18 + 48 + 36),
     backgroundColor: isDarkTheme ? '#212121' : '#f9f9f9',
     borderColor: isDarkTheme ? 'transparent' : 'lightgray'
   };

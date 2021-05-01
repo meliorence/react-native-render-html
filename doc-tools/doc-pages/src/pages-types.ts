@@ -4,9 +4,10 @@ export type PageGroup = 'root' | 'concept' | 'content' | 'guides';
 
 export type PageId =
   | 'intro'
+  | 'reinvent-the-wheel'
+  | 'architecture'
   // concepts
   | 'html-processing'
-  | 'architecture'
   | 'css-processing'
   | 'transient-render-engine'
   // guides

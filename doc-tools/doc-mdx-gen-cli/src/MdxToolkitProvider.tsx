@@ -18,19 +18,21 @@ export default function MdxToolkitProvider({
 }: PropsWithChildren<{ docRelativeRoot: string }>) {
   const config: UIToolkitConfig = {
     Chapter,
+    Section: ({ children, title }) => (
+      <Fragment>
+        <h3>{title}</h3>
+        {children}
+      </Fragment>
+    ),
     Header,
     List: ({ children, type = 'decimal' }) => (
       <ol style={{ listStyleType: type }}>{children}</ol>
     ),
     ListItem: ({ children }) => <li>{children}</li>,
     Paragraph: ({ children }) => <p>{children}</p>,
-    RenderHtmlCard: ({ caption, html, snippet, title }) => (
-      <exposnippet
-        title={title}
-        caption={caption}
-        snippet={snippet}
-        html={html}
-      />
+    Bold: ({ children }) => <strong>{children}</strong>,
+    RenderHtmlCard: ({ caption, snippet, title }) => (
+      <exposnippet title={title} caption={caption} snippet={snippet} />
     ),
     SourceDisplay: (props) => <codeblockds {...props} />,
     Admonition: ({ children, type, title }) => (
@@ -63,7 +65,9 @@ export default function MdxToolkitProvider({
           {name}
         </a>
       );
-    }
+    },
+    Conditional: ({ platform, children }) =>
+      platform === 'web' ? <Fragment>{children}</Fragment> : null
   };
   return <ToolkitProvider config={config}>{children}</ToolkitProvider>;
 }

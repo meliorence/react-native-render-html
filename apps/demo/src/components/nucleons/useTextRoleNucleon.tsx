@@ -15,9 +15,11 @@ export type TextRole =
   | 'uiHyperlink'
   // Body roles
   | 'body'
+  | 'bodyBold'
   | 'bodyTable'
   | 'bodyTableHeader'
   | 'bodyHeader1'
+  | 'bodyHeader2'
   | 'bodyInlineCode'
   | 'caption';
 
@@ -35,12 +37,18 @@ const roleDefs: Record<
   headerTitle: { fontSize: 22, fontFamily: FONT_UI, letterSpacing: 2 },
   headerSubtitle: { fontSize: 14, fontFamily: FONT_MONO },
   body: { fontSize: 16, fontFamily: FONT_BODY, lineHeight: 26 },
+  bodyBold: { fontFamily: FONT_BODY_BOLD, fontSize: 16 },
   bodyTable: { fontSize: 14, fontFamily: FONT_BODY },
   bodyTableHeader: { fontSize: 14, fontFamily: FONT_BODY_BOLD },
   bodyHeader1: {
     fontSize: 24,
     fontFamily: FONT_BODY_ITALIC,
     letterSpacing: 1.5
+  },
+  bodyHeader2: {
+    fontSize: 20,
+    fontFamily: FONT_BODY_BOLD,
+    letterSpacing: 1.2
   },
   caption: { fontSize: 11, fontFamily: FONT_BODY_ITALIC },
   uiDescription: { fontSize: 11, fontFamily: FONT_UI },

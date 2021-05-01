@@ -4,41 +4,43 @@ import figuresIndex from '../figuresIndex';
 import pagesSpecs from '../pagesSpecs';
 import { UIToolkit, UIToolkitConfig, UIToolkitRefs } from './toolkit-types';
 import toolkitContext from './toolkitContext';
+import makeSnippet from './makeSnippet';
 
 function buildRefs(Builder: UIToolkitConfig['RefBuilder']): UIToolkitRefs {
   return {
     RefCssProperty: ({ name }) => (
-      <Builder name={name} url={`https://mdn.io/${name}`} />
+      <Builder type="css-prop" name={name} url={`https://mdn.io/${name}`} />
     ),
     RefESSymbol: ({ name }) => (
-      <Builder name={name} url={`https://mdn.io/${name}`} />
+      <Builder type="es-symbol" name={name} url={`https://mdn.io/${name}`} />
     ),
     // TODO enhance this by parsing this page and generating a linkmap in a
     // buildstep: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes
     RefHtmlAttr: ({ name }) => (
-      <Builder name={name} url={`https://mdn.io/attribute/${name}`} />
+      <Builder
+        type="html-attr"
+        name={name}
+        url={`https://mdn.io/attribute/${name}`}
+      />
     ),
     RefHtmlElement: ({ name }) => (
-      <Builder name={`<${name}>`} url={`https://mdn.io/${name}`} />
+      <Builder
+        type="html-el"
+        name={`<${name}>`}
+        url={`https://mdn.io/${name}`}
+      />
     ),
-    RefLibrary: ({ name, url }) => <Builder name={name} url={url} />,
+    RefLibrary: ({ name, url }) => (
+      <Builder type="library" name={name} url={url} />
+    ),
     RefRNSymbol: ({ name }) => (
-      <Builder name={name} url={`https://reactnative.dev/docs/${name}`} />
+      <Builder
+        type="rn-symbol"
+        name={name}
+        url={`https://reactnative.dev/docs/${name}`}
+      />
     )
   };
-}
-
-function makeSnippet(html: string) {
-  return `import React from 'react';
-import { useWindowDimensions } from 'react-native';
-import RenderHtml from 'react-native-render-html';
-
-const html=\`${html.replace('`', '\\`')}\`;
-
-export default function App() {
-  const { width } = useWindowDimensions();
-  return <RenderHtml source={{ html }} contentWidth={width} />;
-}`;
 }
 
 export default function ToolkitProvider({
@@ -58,13 +60,13 @@ export default function ToolkitProvider({
     () => ({
       ...other,
       ...buildRefs(RefBuilder),
-      RenderHtmlCard({ html, title, caption }) {
+      RenderHtmlCard({ title, caption, props }) {
         return (
           <RenderHtmlCard
-            html={html}
             title={title}
             caption={caption}
-            snippet={makeSnippet(html)}
+            snippet={makeSnippet(props)}
+            props={props}
           />
         );
       },
