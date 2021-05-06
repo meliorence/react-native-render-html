@@ -5,17 +5,8 @@ export {
   DOMNode,
   DOMText,
   HTMLContentModel,
-  isSerializableElement,
-  isSerializableText,
-  TBlock,
-  TDocument,
-  TEmpty,
-  TNode,
   tnodeToString,
-  toSerializableNode,
-  TPhrasing,
-  TRenderEngine,
-  TStyles
+  TRenderEngine
 } from '@native-html/transient-render-engine';
 export type { MixedStyleDeclaration } from '@native-html/css-processor';
 export type {
@@ -29,13 +20,16 @@ export type {
   MetadataTagNames,
   MixedStyleRecord,
   SectioningTagNames,
-  SerializableElement,
-  SerializableNode,
-  SerializableText,
   TabularTagNames,
   TagName,
+  TBlock,
+  TDocument,
+  TEmpty,
   TextLevelTagNames,
+  TNode,
+  TPhrasing,
   TRenderEngineOptions,
+  TStylesShape,
   UnsupportedTagNames,
   UntranslatableTagNames
 } from '@native-html/transient-render-engine';

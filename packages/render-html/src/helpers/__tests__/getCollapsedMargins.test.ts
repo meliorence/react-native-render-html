@@ -5,7 +5,7 @@ function getNode(
   marginTop: number | undefined,
   marginBottom: number | undefined
 ): TBlock {
-  const node = new TBlock({
+  const node = {
     styles: {
       nativeBlockFlow: {},
       nativeBlockRet: {
@@ -16,7 +16,7 @@ function getNode(
       nativeTextRet: {},
       webTextFlow: {}
     }
-  } as any);
+  } as any;
   return node;
 }
 

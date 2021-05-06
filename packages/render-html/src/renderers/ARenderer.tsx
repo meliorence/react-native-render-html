@@ -1,10 +1,7 @@
 import React from 'react';
 import { DefaultMixedRenderer } from '../render/render-types';
 import {
-  TBlock,
   TNode,
-  TPhrasing,
-  TText,
   defaultHTMLElementModels,
   DocumentContext
 } from '@native-html/transient-render-engine';
@@ -16,7 +13,7 @@ import { useDocumentMetadata } from '../context/DocumentMetadataProvider';
 import { useRendererProps } from '../context/RenderersPropsProvider';
 
 function useAnchorOnLinkPress(
-  tnode: TBlock | TPhrasing | TText,
+  tnode: TNode,
   onPress: RenderersPropsBase['a']['onPress']
 ) {
   const href: string = tnode.attributes.href;

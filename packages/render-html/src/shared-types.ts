@@ -17,7 +17,8 @@ import type {
   TBlock,
   TText,
   TPhrasing,
-  DocumentContext as TREDocumentContext
+  DocumentContext as TREDocumentContext,
+  TDocument
 } from '@native-html/transient-render-engine';
 import type { CounterStyleRenderer } from '@jsamr/counter-style';
 import type { ComponentType, ReactElement, ReactNode } from 'react';
@@ -25,7 +26,7 @@ import type {
   CSSPropertyNameList,
   MixedStyleDeclaration
 } from '@native-html/css-processor';
-import type { TStyles } from '@native-html/transient-render-engine';
+import type { TStylesShape } from '@native-html/transient-render-engine';
 import type { CustomTagRendererRecord } from './render/render-types';
 import type { ParserOptions as HtmlParserOptions } from 'htmlparser2';
 
@@ -532,7 +533,7 @@ export interface RenderHTMLFragmentProps<
   /**
    * Triggered when the transient render tree changes. Useful for debugging.
    */
-  onTTreeChange?: (ttree: TNode) => void;
+  onTTreeChange?: (ttree: TDocument) => void;
   /**
    * Triggered when HTML is available to the RenderHTML component.
    */
@@ -635,18 +636,18 @@ export interface PropsFromParent extends Record<string, any> {
  *
  * @public
  */
-export type NativeBlockStyles = TStyles['nativeBlockFlow'] &
-  TStyles['nativeBlockRet'];
+export type NativeBlockStyles = TStylesShape['nativeBlockFlow'] &
+  TStylesShape['nativeBlockRet'];
 
 /**
  * Mixed styles which can be passed to `Text` elements.
  *
  * @public
  */
-export type NativeTextStyles = TStyles['nativeBlockFlow'] &
-  TStyles['nativeBlockRet'] &
-  TStyles['nativeTextFlow'] &
-  TStyles['nativeTextRet'];
+export type NativeTextStyles = TStylesShape['nativeBlockFlow'] &
+  TStylesShape['nativeBlockRet'] &
+  TStylesShape['nativeTextFlow'] &
+  TStylesShape['nativeTextRet'];
 
 /**
  * Mixed styles supported by a TNode.
@@ -688,7 +689,7 @@ export interface TChildrenBaseProps {
  * @public
  */
 export interface TChildrenRendererProps extends TChildrenBaseProps {
-  tchildren: TNode[];
+  tchildren: ReadonlyArray<TNode>;
 }
 
 /**

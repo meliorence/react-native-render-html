@@ -1,8 +1,8 @@
 import strigifyEntities from 'stringify-entities';
 import {
-  SerializableNode,
-  isSerializableElement,
-  isSerializableText
+  DOMNode,
+  isDOMElement,
+  isDOMText
 } from '@native-html/transient-render-engine';
 
 function renderOpeningTag(tag: string, attributes: Record<string, string>) {
@@ -25,12 +25,12 @@ function renderOpeningTag(tag: string, attributes: Record<string, string>) {
  * model of the rendered tag must have `isOpaque` field set to `true`.
  */
 export default function domNodeToHTMLString(
-  root: SerializableNode | null,
+  root: DOMNode | null,
   reporter?: DomNodeToHtmlReporter,
   depth = 0
 ) {
   let html = '';
-  if (isSerializableElement(root)) {
+  if (isDOMElement(root)) {
     const strChildren = root.children.reduce((prev, curr) => {
       const convertedNode = domNodeToHTMLString(curr, reporter, depth + 1);
       return `${prev}${convertedNode}`;
@@ -38,7 +38,7 @@ export default function domNodeToHTMLString(
     html = `${renderOpeningTag(root.tagName, root.attribs)}${strChildren}</${
       root.tagName
     }>`;
-  } else if (isSerializableText(root)) {
+  } else if (isDOMText(root)) {
     const text = strigifyEntities(root.data);
     html = text;
   }
@@ -52,5 +52,5 @@ export interface DomNodeToHtmlReporter {
    * @param depth - How many parents this node have.
    * @param html - The HTML representation of this node and its children.
    */
-  (node: SerializableNode | null, depth: number, html: string): void;
+  (node: DOMNode | null, depth: number, html: string): void;
 }
