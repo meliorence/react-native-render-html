@@ -10,6 +10,7 @@ import TextRoleNucleon from './nucleons/TextRoleNucleon';
 import { useNuclearContentWidth } from './nucleons/useContentWidthContext';
 import { PropsWithStyle } from './nucleons/types';
 import { RenderHTMLProps } from 'react-native-render-html';
+import { StyleSheet } from 'react-native';
 
 export default function RenderHtmlCardOrganism({
   props: renderHtmlProps,
@@ -24,7 +25,7 @@ export default function RenderHtmlCardOrganism({
 }>) {
   const hzSpace = useSpacing(0);
   const vtSpace = useSpacing(0);
-  const borderWidth = 0;
+  const borderWidth = StyleSheet.hairlineWidth;
   const { surface } = useColorRoles();
   const contentWidth = useNuclearContentWidth();
   const sourceDisplayStyle = {
@@ -55,10 +56,14 @@ export default function RenderHtmlCardOrganism({
         </BoxNucleon>
         <UIHtmlDisplayMolecule
           style={{
-            borderWidth: borderWidth,
+            borderTopWidth: borderWidth,
+            borderBottomWidth: borderWidth,
             borderColor: surface.secondaryContent
           }}
-          renderHtmlProps={renderHtmlProps}
+          renderHtmlProps={{
+            ...renderHtmlProps,
+            debug: true
+          }}
           useLegacy={false}
           supportsLegacy={false}
           contentWidth={contentWidth - (hzSpace + borderWidth) * 2}
