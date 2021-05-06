@@ -17,7 +17,12 @@ export default function useTTree(props: RenderResolvedHTMLProps) {
     onTTreeChange?.call(null, ttree);
     if (debug && __DEV__) {
       console.info(
-        `Transient Render Tree update ${++updateNumber.current}:\n${ttree.toString()}`
+        `Transient Render Tree update ${++updateNumber.current}:\n${ttree.snapshot(
+          {
+            withNodeIndex: false,
+            withStyles: false
+          }
+        )}`
       );
     }
   }, [ttree, onTTreeChange, debug]);

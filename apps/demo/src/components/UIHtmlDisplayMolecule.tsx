@@ -112,22 +112,22 @@ const UIHtmlDisplayMolecule = React.memo(
 
     const renderHtml = useLegacy ? (
       <LegacyHTML
+        debug={false}
         {...sharedProps}
         html={sharedProps.html}
         onLinkPress={onLinkPress}
         baseFontStyle={stripUnsupportedStylesInLegacy(baseStyle)}
         classesStyles={stripPropsFromStylesheet(sharedProps.classesStyles)}
         tagsStyles={stripPropsFromStylesheet(mergedTagsStyles)}
-        debug={false}
       />
     ) : (
       <RenderHTML
+        debug={false}
         {...sharedProps}
         tagsStyles={mergedTagsStyles}
         baseStyle={baseStyle}
         enableUserAgentStyles
         enableExperimentalMarginCollapsing={true}
-        debug={false}
         systemFonts={SYSTEM_FONTS}
         remoteLoadingView={() => <UIDisplayLoadingAtom />}
         triggerTREInvalidationPropNames={['baseStyle', 'tagsStyles']}
