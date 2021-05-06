@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import TBlockRenderer from './TBlockRenderer';
 import TPhrasingRenderer from './TPhrasingRenderer';
 import TTextRenderer from './TTextRenderer';
-import { Markers, TNodeRendererProps } from './shared-types';
+import {
+  Markers,
+  PropsFromParent,
+  TNodeRendererProps,
+  TNodeSubRendererProps
+} from './shared-types';
 import { getMarkersFromTNode } from './helpers/getMarkersFromTNode';
 import { useSharedProps } from './context/SharedPropsProvider';
+import { TNode } from '@native-html/transient-render-engine';
 
 export type { TNodeRendererProps } from './shared-types';
 
 const TNodeRenderer = function TNodeRenderer(
   props: Omit<TNodeRendererProps<any>, 'markers'> & { parentMarkers: Markers }
-) {
+): ReactElement<TNodeSubRendererProps<TNode, PropsFromParent>> | null {
   const { tnode } = props;
   const sharedProps = useSharedProps();
   const markers = getMarkersFromTNode(tnode, props.parentMarkers);
@@ -31,7 +37,7 @@ const TNodeRenderer = function TNodeRenderer(
     sharedProps,
     markers: resolvedMarkers || props.parentMarkers
   };
-  if (tnode.type === 'block') {
+  if (tnode.type === 'block' || tnode.type === 'document') {
     return React.createElement(TBlockRenderer, tnodeProps);
   }
   if (tnode.type === 'phrasing') {
