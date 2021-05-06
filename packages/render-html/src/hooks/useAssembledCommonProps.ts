@@ -12,7 +12,7 @@ import { useRendererConfig } from '../context/RenderRegistryProvider';
 import { useDefaultContainerProps } from '../context/SharedPropsProvider';
 
 function getStylesForTnode<T extends TNode>(tnode: T): NativeStyleProp<T> {
-  if (tnode.type === 'block') {
+  if (tnode.type === 'block' || tnode.type === 'document') {
     return {
       ...tnode.styles.nativeBlockFlow,
       ...tnode.styles.nativeBlockRet
@@ -58,7 +58,7 @@ export default function useAssembledCommonProps<T extends TNode>(
       propsFromParent.collapsedMarginTop,
       getStylesForTnode(tnode)
     ) as any,
-    type: 'text',
+    type: tnode.type === 'text' || tnode.type === 'phrasing' ? 'text' : 'block',
     propsForChildren: tnode.tagName ? {} : propsFromParent,
     DefaultTagRenderer: Default || (TDefault as any),
     ...containerProps
