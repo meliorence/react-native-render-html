@@ -1,10 +1,4 @@
 import React from 'react';
-import {
-  TBlock,
-  TEmpty,
-  TPhrasing,
-  TText
-} from '@native-html/transient-render-engine';
 import TBlockRenderer from './TBlockRenderer';
 import TPhrasingRenderer from './TPhrasingRenderer';
 import TTextRenderer from './TTextRenderer';
@@ -37,16 +31,16 @@ const TNodeRenderer = function TNodeRenderer(
     sharedProps,
     markers: resolvedMarkers || props.parentMarkers
   };
-  if (tnode instanceof TBlock) {
+  if (tnode.type === 'block') {
     return React.createElement(TBlockRenderer, tnodeProps);
   }
-  if (tnode instanceof TPhrasing) {
+  if (tnode.type === 'phrasing') {
     return React.createElement(TPhrasingRenderer, tnodeProps);
   }
-  if (tnode instanceof TText) {
+  if (tnode.type === 'text') {
     return React.createElement(TTextRenderer, tnodeProps);
   }
-  if (tnode instanceof TEmpty && __DEV__) {
+  if (tnode.type === 'empty' && __DEV__) {
     if (tnode.isUnregistered) {
       console.warn(
         `There is no custom renderer registered for tag "${tnode.tagName}" which is not part of the HTML5 standard. The tag will not be rendered.` +

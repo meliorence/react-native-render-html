@@ -1,11 +1,11 @@
 import React from 'react';
-import { TBlock, TNode, TPhrasing } from '@native-html/transient-render-engine';
+import { TNode } from '@native-html/transient-render-engine';
 import TNodeRenderer from './TNodeRenderer';
 import { TChildrenRendererProps } from './shared-types';
 import getCollapsedMarginTop from './helpers/getCollapsedMarginTop';
 
 function isCollapsible(tnode: TNode) {
-  return tnode instanceof TBlock || tnode instanceof TPhrasing;
+  return tnode.type === 'block' || tnode.type === 'phrasing';
 }
 
 const TChildrenRenderer = function TChildrenRenderer({

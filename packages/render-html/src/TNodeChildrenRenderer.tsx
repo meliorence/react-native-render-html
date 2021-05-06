@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  TBlock,
-  TNode,
-  TPhrasing,
-  TText
-} from '@native-html/transient-render-engine';
+import { TNode } from '@native-html/transient-render-engine';
 import { useSharedProps } from './context/SharedPropsProvider';
 import TChildrenRenderer, {
   tchildrenRendererDefaultProps
@@ -15,7 +10,7 @@ import {
 } from './shared-types';
 
 function isCollapsible(tnode: TNode) {
-  return tnode instanceof TBlock || tnode instanceof TPhrasing;
+  return tnode.type === 'block' || tnode.type === 'phrasing';
 }
 
 export function useTNodeChildrenProps({
@@ -48,7 +43,7 @@ const TNodeWithChildrenRenderer = function TNodeChildrenRenderer(
 const TNodeChildrenRenderer = function TNodeChildrenRenderer(
   props: TNodeChildrenRendererProps
 ) {
-  if (props.tnode instanceof TText) {
+  if (props.tnode.type === 'text') {
     return <>{props.tnode.data}</>;
   }
   return React.createElement(TNodeWithChildrenRenderer, props);

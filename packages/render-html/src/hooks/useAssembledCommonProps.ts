@@ -1,9 +1,4 @@
-import {
-  TBlock,
-  TNode,
-  TPhrasing,
-  TText
-} from '@native-html/transient-render-engine';
+import { TNode } from '@native-html/transient-render-engine';
 import {
   CustomTagRenderer,
   CustomTagRendererProps,
@@ -17,13 +12,13 @@ import { useRendererConfig } from '../context/RenderRegistryProvider';
 import { useDefaultContainerProps } from '../context/SharedPropsProvider';
 
 function getStylesForTnode<T extends TNode>(tnode: T): NativeStyleProp<T> {
-  if (tnode instanceof TBlock) {
+  if (tnode.type === 'block') {
     return {
       ...tnode.styles.nativeBlockFlow,
       ...tnode.styles.nativeBlockRet
     } as any;
   }
-  if (tnode instanceof TPhrasing || tnode instanceof TText) {
+  if (tnode.type === 'phrasing' || tnode.type === 'text') {
     return {
       ...tnode.styles.nativeBlockFlow,
       ...tnode.styles.nativeBlockRet,

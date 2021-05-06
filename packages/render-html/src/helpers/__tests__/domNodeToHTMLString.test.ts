@@ -1,13 +1,9 @@
 import domNodeToHTMLString from '../domNodeToHTMLString';
 import { parseDOM } from 'htmlparser2';
-import {
-  toSerializableNode,
-  SerializableNode
-} from '@native-html/transient-render-engine';
 
 function parseHTML(html: string) {
   const root = parseDOM(html);
-  return toSerializableNode(root[0]) as SerializableNode;
+  return root[0];
 }
 
 describe('domNodeToHTMLString', () => {

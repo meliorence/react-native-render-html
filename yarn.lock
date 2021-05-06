@@ -3883,17 +3883,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jsamr/react-native-li@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@jsamr/react-native-li@npm:2.0.0"
-  peerDependencies:
-    "@jsamr/counter-style": ^1.0.0 || ^2.0.0
-    react: "*"
-    react-native: "*"
-  checksum: ebddcaca851fb9bd235aa3e182d9f4a570bec40677abc116b9404b684fcd21802531bc3ba05708f04b9764f41f15a035cb8896e4a69e8b2167a8069154934842
-  languageName: node
-  linkType: hard
-
 "@jsamr/react-native-li@npm:^2.1.0":
   version: 2.1.0
   resolution: "@jsamr/react-native-li@npm:2.1.0"
@@ -4019,32 +4008,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@native-html/css-processor@npm:1.6.1":
-  version: 1.6.1
-  resolution: "@native-html/css-processor@npm:1.6.1"
+"@native-html/css-processor@npm:1.7.0":
+  version: 1.7.0
+  resolution: "@native-html/css-processor@npm:1.7.0"
   dependencies:
     css-to-react-native: ^3.0.0
   peerDependencies:
     "@types/react-native": "*"
     csstype: ^3.0.4
-  checksum: 8cbb5bc0d82044fcb6b52224b55454f3e55d14731b1cf3bb3b520257df20d114547f327badee0e236f83fe1dc6151ea38638b7c74770cdd929cbf7e0f2796e1d
+  checksum: 7bc4714b5ff2f89c2bf792c0475c212e97f19316537059d481e8b406253eb59cfef5409d5ffdfc35cff09855314c67db30a9e42c765a09c18b9b299a3559dc84
   languageName: node
   linkType: hard
 
-"@native-html/transient-render-engine@npm:4.4.1":
-  version: 4.4.1
-  resolution: "@native-html/transient-render-engine@npm:4.4.1"
+"@native-html/transient-render-engine@npm:5.1.1":
+  version: 5.1.1
+  resolution: "@native-html/transient-render-engine@npm:5.1.1"
   dependencies:
-    "@native-html/css-processor": 1.6.1
-    "@types/ramda": ^0.27.32
-    csstype: ^3.0.4
-    domelementtype: ^2.1.0
-    htmlparser2: ^6.0.0
+    "@native-html/css-processor": 1.7.0
+    "@types/ramda": ^0.27.40
+    csstype: ^3.0.8
+    domelementtype: ^2.2.0
+    htmlparser2: ^6.1.0
     ramda: ^0.27.1
   peerDependencies:
     "@types/react-native": "*"
     react-native: ^0.63.0
-  checksum: be86a0d33b79dae83df2d58cd6ef2a2fa795a7a03df49f1e7b18cf54c2ad15c28049020cadb4d910970f8b14011d254c74d5a0c51f9736ba997014e843289dd0
+  checksum: 4a2ec440d48d7767a5c5b1a8b8c3d5a36ead39ad1df7d6dc0d77be575d6fcd16d28229317e81912c558654daeece90e91d326b22837022a9765b8781b93d6501
   languageName: node
   linkType: hard
 
@@ -5206,7 +5195,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ramda@npm:^0.27.32, @types/ramda@npm:^0.27.40":
+"@types/ramda@npm:^0.27.40":
   version: 0.27.40
   resolution: "@types/ramda@npm:0.27.40"
   dependencies:
@@ -9319,7 +9308,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csstype@npm:^3.0.2, csstype@npm:^3.0.4":
+"csstype@npm:^3.0.2, csstype@npm:^3.0.8":
   version: 3.0.8
   resolution: "csstype@npm:3.0.8"
   checksum: e15233592a2c580fd72c4346a5c921044b8f4f29bcb81628a81199c4d6a91eb8f8e4875f440ef9c990e85f179a3370f3b842fe55e4743119ad0ce712519e7123
@@ -10027,7 +10016,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"domelementtype@npm:^2.0.1, domelementtype@npm:^2.1.0, domelementtype@npm:^2.2.0":
+"domelementtype@npm:^2.0.1, domelementtype@npm:^2.2.0":
   version: 2.2.0
   resolution: "domelementtype@npm:2.2.0"
   checksum: 70af22cd69a8e0c0cd4fbbba0459991aacb015f60765050b4a6d1750fd201b4bd4fd1e6922e945200f9cc725cd61be1cd393a3b9b576187759e3b046f33a4a30
@@ -12980,7 +12969,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"htmlparser2@npm:^6.0.0, htmlparser2@npm:^6.1.0":
+"htmlparser2@npm:^6.1.0":
   version: 6.1.0
   resolution: "htmlparser2@npm:6.1.0"
   dependencies:
@@ -20438,9 +20427,9 @@ fsevents@^1.2.7:
     "@babel/preset-typescript": ^7.13.0
     "@babel/runtime": ^7.13.17
     "@jsamr/counter-style": ^2.0.0
-    "@jsamr/react-native-li": ^2.0.0
+    "@jsamr/react-native-li": ^2.1.0
     "@microsoft/api-extractor": ^7.14.0
-    "@native-html/transient-render-engine": 4.4.1
+    "@native-html/transient-render-engine": 5.1.1
     "@release-it/conventional-changelog": ^2.0.1
     "@testing-library/react-hooks": ^5.1.2
     "@types/jest": ^26.0.23
