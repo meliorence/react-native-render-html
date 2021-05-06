@@ -1,5 +1,4 @@
-import { tnodeToString } from '@native-html/transient-render-engine';
-import { useMemo, useEffect } from 'react';
+import { useMemo, useEffect, useRef } from 'react';
 import { RenderResolvedHTMLProps } from '../internal-types';
 import { useAmbiantTRenderEngine } from '../TRenderEngineProvider';
 
@@ -7,21 +6,18 @@ import { useAmbiantTRenderEngine } from '../TRenderEngineProvider';
  * @internal
  */
 export default function useTTree(props: RenderResolvedHTMLProps) {
+  const { onTTreeChange, debug, html } = props;
+  const updateNumber = useRef(0);
   const trenderEngine = useAmbiantTRenderEngine();
-  const ttree = useMemo(() => trenderEngine.buildTTree(props.html), [
-    props.html,
+  const ttree = useMemo(() => trenderEngine.buildTTree(html), [
+    html,
     trenderEngine
   ]);
-  const { onTTreeChange, debug } = props;
   useEffect(() => {
     onTTreeChange?.call(null, ttree);
     if (debug && __DEV__) {
       console.info(
-        `Transient Render Tree update:\n${tnodeToString(ttree, {
-          isChild: false,
-          isLast: false,
-          parentLeftPrefix: ' '
-        })}`
+        `Transient Render Tree update ${++updateNumber.current}:\n${ttree.toString()}`
       );
     }
   }, [ttree, onTTreeChange, debug]);
