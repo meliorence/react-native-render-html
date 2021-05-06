@@ -2,8 +2,8 @@ import React, { memo, useEffect, useMemo } from 'react';
 import { TDocument } from '@native-html/transient-render-engine';
 import { DocumentMetadata, RenderHTMLFragmentProps } from './shared-types';
 import DocumentMetadataProvider from './context/DocumentMetadataProvider';
-import { useTNodeChildrenRenderer } from './context/TChildrenRendererContext';
 import { defaultMarkers } from './helpers/getMarkersFromTNode';
+import TNodeRenderer from './TNodeRenderer';
 
 const TDocumentRenderer = memo(
   ({
@@ -15,7 +15,6 @@ const TDocumentRenderer = memo(
     baseUrl?: string;
     onDocumentMetadataLoaded?: RenderHTMLFragmentProps['onDocumentMetadataLoaded'];
   }) => {
-    const TNodeChildrenRenderer = useTNodeChildrenRenderer();
     const metadata: DocumentMetadata = useMemo(() => {
       const {
         baseHref,
@@ -49,7 +48,7 @@ const TDocumentRenderer = memo(
     );
     return (
       <DocumentMetadataProvider value={metadata}>
-        <TNodeChildrenRenderer parentMarkers={parentMarkers} tnode={tdoc} />
+        <TNodeRenderer parentMarkers={parentMarkers} tnode={tdoc} />
       </DocumentMetadataProvider>
     );
   }

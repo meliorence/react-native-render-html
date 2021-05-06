@@ -21,12 +21,25 @@ export const TDefaultPhrasingRenderer: TDefaultRenderer<TPhrasing> = ({
   return React.createElement(TDefaultTextualRenderer, props, resolvedChildren);
 };
 
-export default function TPhrasingRenderer(
-  props: TNodeSubRendererProps<TPhrasing>
-) {
+function InnerTPhrasingRenderer(props: TNodeSubRendererProps<TPhrasing>) {
   const { assembledProps, Renderer } = useAssembledCommonProps(
     props,
     TDefaultPhrasingRenderer
   );
   return React.createElement(Renderer, assembledProps);
+}
+
+export default function TPhrasingRenderer(
+  props: TNodeSubRendererProps<TPhrasing>
+) {
+  const TNodeChildrenRenderer = useTNodeChildrenRenderer();
+  // When a TPhrasing node is anonymous and has only one child, its
+  // rendering amounts to rendering its only child.
+  if (props.tnode.tagName == null && props.tnode.children.length <= 1) {
+    return React.createElement(TNodeChildrenRenderer, {
+      parentMarkers: props.markers,
+      tnode: props.tnode
+    });
+  }
+  return React.createElement(InnerTPhrasingRenderer, props);
 }
