@@ -79,6 +79,7 @@ export default function RenderHTMLFragment(props: RenderHTMLFragmentProps) {
     remoteLoadingView,
     onDocumentMetadataLoaded,
     renderersProps,
+    debug,
     ...sharedProps
   } = props;
   const sourceLoaderProps = {
@@ -89,6 +90,7 @@ export default function RenderHTMLFragment(props: RenderHTMLFragmentProps) {
     children: (resolvedProps: ResolvedResourceProps) => (
       <RenderResolvedHTML
         {...resolvedProps}
+        debug={debug}
         onDocumentMetadataLoaded={onDocumentMetadataLoaded}
         onTTreeChange={onTTreeChange}
       />
