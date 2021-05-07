@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import HTML from '../index';
+import HTML from '../RenderHTML';
 import { render } from 'react-native-testing-library';
 
 /**

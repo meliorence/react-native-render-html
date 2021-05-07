@@ -1,4 +1,5 @@
-import React, { ReactElement } from 'react';
+import equals from 'ramda/src/equals';
+import React, { memo, ReactElement } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import isUriSource from './helpers/isUriSource';
 import InlineSourceLoader from './InlineSourceLoader';
@@ -37,7 +38,7 @@ function defaultRenderLoading() {
   );
 }
 
-export default function SourceLoader({
+function SourceLoader({
   source,
   ...props
 }: SourceLoaderProps): ReactElement | null {
@@ -54,3 +55,11 @@ SourceLoader.defaultProps = {
   remoteErrorView: defaultRenderError,
   remoteLoadingView: defaultRenderLoading
 };
+
+const MemoizedSourceLoader = memo(
+  SourceLoader,
+  ({ source: prevSource, ...prev }, { source: currSource, ...curr }) =>
+    equals(prevSource, currSource) && equals(prev, curr)
+);
+
+export default MemoizedSourceLoader;

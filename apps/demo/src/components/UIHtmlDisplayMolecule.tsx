@@ -11,10 +11,6 @@ import { useColorRoles } from '../theme/colorSystem';
 import { SYSTEM_FONTS } from '../constants';
 import TextRoleNucleon from './nucleons/TextRoleNucleon';
 
-const DEFAULT_PROPS: Pick<RenderHTMLProps, 'debug'> = {
-  debug: true
-};
-
 function stripUnsupportedStylesInLegacy(style: Record<string, any>) {
   return Object.keys(style)
     .filter((k) => k != 'whiteSpace' && k != 'listStyleType')
@@ -71,7 +67,6 @@ const UIHtmlDisplayMolecule = React.memo(
       ...renderHtmlProps.baseStyle
     };
     const sharedProps = {
-      ...DEFAULT_PROPS,
       contentWidth,
       ...(renderHtmlProps as any),
       renderersProps: {
@@ -109,7 +104,6 @@ const UIHtmlDisplayMolecule = React.memo(
         </View>
       );
     }
-
     const renderHtml = useLegacy ? (
       <LegacyHTML
         debug={false}

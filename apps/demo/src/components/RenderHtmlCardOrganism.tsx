@@ -60,10 +60,7 @@ export default function RenderHtmlCardOrganism({
             borderBottomWidth: borderWidth,
             borderColor: surface.secondaryContent
           }}
-          renderHtmlProps={{
-            ...renderHtmlProps,
-            debug: true
-          }}
+          renderHtmlProps={renderHtmlProps}
           useLegacy={false}
           supportsLegacy={false}
           contentWidth={contentWidth - (hzSpace + borderWidth) * 2}
