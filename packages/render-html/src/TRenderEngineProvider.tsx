@@ -70,7 +70,7 @@ export const defaultTRenderEngineProviderProps: TransientRenderEngineConfig = {
   triggerTREInvalidationPropNames: []
 };
 
-export function useAmbiantTRenderEngine() {
+export function useAmbientTRenderEngine() {
   const engine = React.useContext(TRenderEngineContext);
   if (__DEV__ && engine === defaultTRenderEngine) {
     console.error('TRenderEngineProvider is missing in the render tree.');

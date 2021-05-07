@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RenderHTMLSourceUri } from './shared-types';
 import { SourceLoaderProps } from './internal-types';
 
@@ -74,7 +74,12 @@ function useUriSourceLoader({ source, onHTMLLoaded }: UriSourceLoaderProps) {
 }
 
 export default function UriSourceLoader(props: UriSourceLoaderProps) {
-  const { remoteErrorView, remoteLoadingView, children } = props;
+  const {
+    remoteErrorView,
+    remoteLoadingView,
+    ResolvedHtmlRenderer: ChildrenRenderer,
+    tamperDOM
+  } = props;
   const { resolvedHTML, error, loading } = useUriSourceLoader(props);
   if (error) {
     return remoteErrorView!.call(null, props);
@@ -82,10 +87,9 @@ export default function UriSourceLoader(props: UriSourceLoaderProps) {
   if (loading) {
     return remoteLoadingView!.call(null, props);
   }
-  return (
-    children?.call(null, {
-      html: resolvedHTML!,
-      baseUrl: props.source.uri
-    }) || null
-  );
+  return React.createElement(ChildrenRenderer, {
+    tamperDOM,
+    html: resolvedHTML!,
+    baseUrl: props.source.uri
+  });
 }

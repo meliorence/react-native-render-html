@@ -18,7 +18,8 @@ import type {
   TText,
   TPhrasing,
   DocumentContext as TREDocumentContext,
-  TDocument
+  TDocument,
+  DOMDocument
 } from '@native-html/transient-render-engine';
 import type { CounterStyleRenderer } from '@jsamr/counter-style';
 import type { ComponentType, ReactElement, ReactNode } from 'react';

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { SourceLoaderProps } from './internal-types';
 import { RenderHTMLSourceInline } from './shared-types';
 
@@ -18,12 +18,11 @@ function useInlineSourceLoader({
 }
 
 export default function InlineSourceLoader(props: InlineSourceLoaderProps) {
-  const { children } = props;
+  const { ResolvedHtmlRenderer: ChildrenRenderer, tamperDOM } = props;
   const { html } = useInlineSourceLoader(props);
-  return (
-    children?.call(null, {
-      html,
-      baseUrl: props.source.baseUrl
-    }) || null
-  );
+  return React.createElement(ChildrenRenderer, {
+    html,
+    tamperDOM,
+    baseUrl: props.source.baseUrl
+  });
 }

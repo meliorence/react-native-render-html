@@ -13,7 +13,7 @@ const Header = ({ children }: PropsWithChildren<{}>) => (
 );
 
 export default function MdxToolkitProvider({
-  children,
+  children: toolkitChildren,
   docRelativeRoot
 }: PropsWithChildren<{ docRelativeRoot: string }>) {
   const config: UIToolkitConfig = {
@@ -69,5 +69,5 @@ export default function MdxToolkitProvider({
     Conditional: ({ platform, children }) =>
       platform === 'web' ? <Fragment>{children}</Fragment> : null
   };
-  return <ToolkitProvider config={config}>{children}</ToolkitProvider>;
+  return <ToolkitProvider config={config}>{toolkitChildren}</ToolkitProvider>;
 }

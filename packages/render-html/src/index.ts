@@ -1,11 +1,11 @@
 import RenderHTML from './RenderHTML';
 export {
   defaultHTMLElementModels,
+  DOMDocument,
   DOMElement,
   DOMNode,
   DOMText,
   HTMLContentModel,
-  tnodeToString,
   TRenderEngine
 } from '@native-html/transient-render-engine';
 export type { MixedStyleDeclaration } from '@native-html/css-processor';

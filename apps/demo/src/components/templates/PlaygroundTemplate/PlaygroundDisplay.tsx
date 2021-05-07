@@ -62,8 +62,7 @@ export default function PlaygroundDisplay({
         }
       },
       source: { html },
-      onTTreeChange,
-      debug: true
+      onTTreeChange
     }),
     [
       color,
