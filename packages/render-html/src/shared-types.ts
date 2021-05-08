@@ -11,15 +11,13 @@ import type {
 import type {
   MixedStyleRecord,
   DOMNode,
-  DOMText,
-  DOMElement,
   TNode,
   TBlock,
   TText,
   TPhrasing,
   DocumentContext as TREDocumentContext,
   TDocument,
-  DOMDocument
+  DomVisitorCallbacks
 } from '@native-html/transient-render-engine';
 import type { CounterStyleRenderer } from '@jsamr/counter-style';
 import type { ComponentType, ReactElement, ReactNode } from 'react';
@@ -358,13 +356,16 @@ export interface TransientRenderEngineConfig {
    */
   ignoreDomNode?: (node: DOMNode) => boolean;
   /**
-   * Change specific DOM nodes children.
+   * An object which callbacks will be invoked when a DOM element or text node
+   * has been parsed and its children attached. This is great to tamper the dom,
+   * remove children, insert nodes, change text nodes data... etc.
    *
-   * @param elementNode - The DOM element to check.
-   * @returns An array of DOM nodes if the children should be altered, `false`
-   * or `void` otherwise.
+   * @remark Each callback is applied during DOM parsing, thus with very little
+   * overhead. However, it means that one node next siblings won't be available
+   * since it has not yet been parsed. If you need some siblings logic, apply
+   * this logic to the children of this node.
    */
-  alterDOMChildren?: (elementNode: DOMElement) => DOMNode[] | false | void;
+  domVisitors?: DomVisitorCallbacks;
   /**
    * Change specific DOM elements.
    *

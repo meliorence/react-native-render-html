@@ -13,6 +13,7 @@ export type {
   AnchorTagName,
   AttribTagNames,
   DefaultHTMLElementModels,
+  DomVisitorCallbacks,
   EditsTagNames,
   EmbeddedTagNames,
   GroupingTagNames,
