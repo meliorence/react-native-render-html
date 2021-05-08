@@ -367,17 +367,12 @@ export interface TransientRenderEngineConfig {
    */
   domVisitors?: DomVisitorCallbacks;
   /**
-   * Change specific DOM elements.
+   * A list of tags which should not be included in the DOM.
    *
-   * @param elementNode - The DOM element to check.
-   * @returns The new or altered DOM element if you intended to change it,
-   * `false` or `void` otherwise.
+   * @remark The filtering is happening during parsing, thus with very little
+   * overhead.
    */
-  alterDOMElement?: (elementNode: DOMElement) => DOMElement | false | void;
-  /**
-   * HTML tags that should be dropped.
-   */
-  ignoredTags?: string[];
+  ignoredDomTags?: string[];
   /**
    * Whitelist specific inline CSS style properties and ignore the others.
    *
