@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { RenderHTMLSourceUri } from './shared-types';
 import { SourceLoaderProps } from './internal-types';
+import RenderTTree from './RenderTTree';
 
 interface LoaderInternalState {
   loading: boolean;
@@ -74,12 +75,7 @@ function useUriSourceLoader({ source, onHTMLLoaded }: UriSourceLoaderProps) {
 }
 
 export default function UriSourceLoader(props: UriSourceLoaderProps) {
-  const {
-    remoteErrorView,
-    remoteLoadingView,
-    ResolvedHtmlRenderer: ChildrenRenderer,
-    tamperDOM
-  } = props;
+  const { remoteErrorView, remoteLoadingView } = props;
   const { resolvedHTML, error, loading } = useUriSourceLoader(props);
   if (error) {
     return remoteErrorView!.call(null, props);
@@ -87,8 +83,7 @@ export default function UriSourceLoader(props: UriSourceLoaderProps) {
   if (loading) {
     return remoteLoadingView!.call(null, props);
   }
-  return React.createElement(ChildrenRenderer, {
-    tamperDOM,
+  return React.createElement(RenderTTree, {
     html: resolvedHTML!,
     baseUrl: props.source.uri
   });

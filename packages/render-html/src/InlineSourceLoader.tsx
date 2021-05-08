@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { SourceLoaderProps } from './internal-types';
+import RenderTTree from './RenderTTree';
 import { RenderHTMLSourceInline } from './shared-types';
 
 export type InlineSourceLoaderProps = {
@@ -18,11 +19,9 @@ function useInlineSourceLoader({
 }
 
 export default function InlineSourceLoader(props: InlineSourceLoaderProps) {
-  const { ResolvedHtmlRenderer: ChildrenRenderer, tamperDOM } = props;
   const { html } = useInlineSourceLoader(props);
-  return React.createElement(ChildrenRenderer, {
+  return React.createElement(RenderTTree, {
     html,
-    tamperDOM,
     baseUrl: props.source.baseUrl
   });
 }

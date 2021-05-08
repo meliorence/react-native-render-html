@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import domContext from './context/domContext';
 import useTTree from './hooks/useTTree';
-import { RenderDOMProps } from './internal-types';
+import { RenderTTreeProps } from './internal-types';
 import TDocumentRenderer from './TDocumentRenderer';
 
-export default function RenderDOM(props: RenderDOMProps) {
+export default function RenderTTree(props: RenderTTreeProps) {
   const ttree = useTTree(props);
   const { onDocumentMetadataLoaded } = useContext(domContext);
   return (

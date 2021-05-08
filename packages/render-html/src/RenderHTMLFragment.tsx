@@ -1,21 +1,15 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { RenderHTMLFragmentProps } from './shared-types';
-import {
-  DOMProps,
-  SourceLoaderProps,
-  ResolvedHtmlRendererProps
-} from './internal-types';
+import { DOMProps, SourceLoaderProps } from './internal-types';
 import TChildrenRenderersContext from './context/TChildrenRendererContext';
 import TNodeChildrenRenderer from './TNodeChildrenRenderer';
 import RenderHTMLFragmentDebug from './RenderHTMLFragmentDebug';
 import SourceLoader from './SourceLoader';
 import TChildrenRenderer from './TChildrenRenderer';
-import RenderDOM from './RenderDOM';
 import SharedPropsProvider from './context/SharedPropsProvider';
 import defaultSharedProps from './context/defaultSharedProps';
 import RenderersPropsProvider from './context/RenderersPropsProvider';
-import { useAmbientTRenderEngine } from './TRenderEngineProvider';
 import domContext from './context/domContext';
 
 export type RenderHTMLFragmentPropTypes = Record<
@@ -53,8 +47,7 @@ export const renderHtmlFragmentPropTypes: RenderHTMLFragmentPropTypes = {
   setMarkersForTNode: PropTypes.func,
   onDocumentMetadataLoaded: PropTypes.func,
   pressableHightlightColor: PropTypes.string,
-  customListStyleSpecs: PropTypes.object,
-  tamperDOM: PropTypes.func
+  customListStyleSpecs: PropTypes.object
 };
 
 export const renderHTMLFragmentDefaultProps: {
@@ -68,20 +61,6 @@ const childrenRendererContext = {
   TChildrenRenderer,
   TNodeChildrenRenderer
 };
-
-function ResolvedHtmlRenderer({
-  baseUrl,
-  html,
-  tamperDOM
-}: ResolvedHtmlRendererProps) {
-  const engine = useAmbientTRenderEngine();
-  const dom = useMemo(() => engine.parseDocument(html, tamperDOM), [
-    engine,
-    html,
-    tamperDOM
-  ]);
-  return <RenderDOM dom={dom} baseUrl={baseUrl} />;
-}
 
 /**
  * Render a HTML snippet, given that there is a `TRenderEngineProvider` up in
@@ -101,7 +80,6 @@ export default function RenderHTMLFragment(props: RenderHTMLFragmentProps) {
     onDocumentMetadataLoaded,
     renderersProps,
     debug,
-    tamperDOM,
     ...sharedProps
   } = props;
   const domProps: DOMProps = useMemo(
@@ -116,9 +94,7 @@ export default function RenderHTMLFragment(props: RenderHTMLFragmentProps) {
     source,
     onHTMLLoaded,
     remoteErrorView,
-    remoteLoadingView,
-    tamperDOM,
-    ResolvedHtmlRenderer
+    remoteLoadingView
   };
   return (
     <RenderHTMLFragmentDebug {...props}>
