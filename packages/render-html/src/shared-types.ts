@@ -350,20 +350,13 @@ export interface TransientRenderEngineConfig {
   /**
    * Ignore specific DOM nodes.
    *
-   * @remarks Use `ignoredTags` if you simply need to discard specific tags.
-   *
-   * @param node - The DOM node to check.
-   * @returns `true` if the node should be dropped, `false` otherwise.
+   * @remarks
+   * - Use `ignoredDomTags` if you just need to target specific tag names.
+   * - The function is applied during DOM parsing, thus with very little
+   *   overhead. However, it means that one node next siblings won't be
+   *   available since it has not yet been parsed.
    */
-  ignoreDOMNode?: (node: DOMNode) => boolean;
-  /**
-   * Change the data of specific DOM text nodes.
-   *
-   * @param textNode - The DOM text node to check.
-   * @returns A string if the node data should be altered, `false` or `void`
-   * otherwise.
-   */
-  alterDOMData?: (textNode: DOMText) => string | false | void;
+  ignoreDomNode?: (node: DOMNode) => boolean;
   /**
    * Change specific DOM nodes children.
    *
