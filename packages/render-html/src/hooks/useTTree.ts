@@ -1,21 +1,20 @@
-import { DOMDocument } from '@native-html/transient-render-engine';
 import { useMemo, useEffect, useRef, useContext } from 'react';
 import domContext from '../context/domContext';
-import { RenderDOMProps } from '../internal-types';
+import { RenderTTreeProps } from '../internal-types';
 import { useAmbientTRenderEngine } from '../TRenderEngineProvider';
 
 /**
  * @internal
  */
-export default function useTTree(props: RenderDOMProps) {
-  const { dom } = props;
+export default function useTTree(props: RenderTTreeProps) {
+  const { html } = props;
   const { onTTreeChange, debug } = useContext(domContext);
   const updateNumber = useRef(0);
   const trenderEngine = useAmbientTRenderEngine();
-  const ttree = useMemo(
-    () => trenderEngine.buildTTreeFromDoc(dom as DOMDocument),
-    [dom, trenderEngine]
-  );
+  const ttree = useMemo(() => trenderEngine.buildTTree(html), [
+    html,
+    trenderEngine
+  ]);
   useEffect(() => {
     onTTreeChange?.call(null, ttree);
     if (debug && __DEV__) {

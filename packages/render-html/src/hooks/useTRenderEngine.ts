@@ -3,8 +3,7 @@ import TRenderEngine, {
   HTMLContentModel,
   HTMLElementModel,
   HTMLModelRecord,
-  TagName,
-  DOMElement
+  TagName
 } from '@native-html/transient-render-engine';
 import { TransientRenderEngineConfig } from '../shared-types';
 import { CustomRendererSpecs } from '../render/render-types';
@@ -17,11 +16,9 @@ export default function useTRenderEngine(props: TransientRenderEngineConfig) {
   const {
     allowedStyles,
     ignoredStyles,
-    ignoredTags,
-    ignoreDOMNode,
-    alterDOMChildren,
-    alterDOMData,
-    alterDOMElement,
+    ignoredDomTags,
+    ignoreDomNode,
+    domVisitors,
     htmlParserOptions,
     baseStyle,
     classesStyles,
@@ -57,7 +54,7 @@ export default function useTRenderEngine(props: TransientRenderEngineConfig) {
     const customRenderersKeys = Object.keys(renderers) as Array<
       keyof typeof renderers
     >;
-    if (!customRenderersKeys.length && !ignoredTags?.length) {
+    if (!customRenderersKeys.length && !ignoredDomTags?.length) {
       return defaultModels;
     }
     customRenderersKeys.forEach((key) => {
@@ -124,19 +121,9 @@ export default function useTRenderEngine(props: TransientRenderEngineConfig) {
           idsStyles,
           tagsStyles
         },
-        alterDOMParams: {
-          ignoreDOMNode(node) {
-            return (
-              ((ignoredTags?.indexOf((node as DOMElement).tagName) ?? -1) !==
-                -1 ||
-                ignoreDOMNode?.call(null, node)) ??
-              false
-            );
-          },
-          alterDOMChildren,
-          alterDOMData,
-          alterDOMElement
-        }
+        ignoredDomTags,
+        ignoreDomNode,
+        domVisitors
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [...tbuilderDeps, isFontSupported]
