@@ -3,11 +3,6 @@ import { render } from 'react-native-testing-library';
 import debugMessage, { DebugType } from '../debugMessages';
 import RenderHTMLDebug from '../RenderHTMLDebug';
 
-beforeAll(function () {
-  //@ts-expect-error
-  global.__DEV__ = true;
-});
-
 function createOutdatedPropTest(
   propName: string,
   propValue: any,
@@ -19,9 +14,11 @@ function createOutdatedPropTest(
       //@ts-ignore
       React.createElement(RenderHTMLDebug, {
         [propName]: propValue,
-        debug: false
+        debug: false,
+        contentWidth: 10
       })
     );
+    expect(debugMessage[debugName]).toBeDefined();
     expect(console.warn).toHaveBeenNthCalledWith(1, debugMessage[debugName]);
   });
 }
@@ -45,4 +42,44 @@ describe('RenderHTMLDebug', () => {
     false,
     'outdatedEnableExperimentalPercentWidth'
   );
+  createOutdatedPropTest(
+    'ignoreNodesFunction',
+    () => {},
+    'outdatedIgnoreNodesFunction'
+  );
+  createOutdatedPropTest('alterNode', () => {}, 'outdatedAlterNode');
+  createOutdatedPropTest('alterData', () => {}, 'outdatedAlterData');
+  createOutdatedPropTest('alterChildren', () => {}, 'outdatedAlterChildren');
+  createOutdatedPropTest(
+    'computeImagesMaxWidth',
+    () => {},
+    'outdatedComputeImagesMaxWidth'
+  );
+  it('should warn of allowedStyles items with hyphens', () => {
+    console.warn = jest.fn();
+    render(
+      //@ts-ignore
+      React.createElement(RenderHTMLDebug, {
+        //@ts-expect-error
+        allowedStyles: ['hello-world'],
+        debug: false,
+        contentWidth: 10
+      })
+    );
+    expect(console.warn).toHaveBeenCalledTimes(1);
+  });
+
+  it('should warn of ignoredStyles items with hyphens', () => {
+    console.warn = jest.fn();
+    render(
+      //@ts-ignore
+      React.createElement(RenderHTMLDebug, {
+        //@ts-expect-error
+        ignoredStyles: ['hello-world'],
+        debug: false,
+        contentWidth: 10
+      })
+    );
+    expect(console.warn).toHaveBeenCalledTimes(1);
+  });
 });

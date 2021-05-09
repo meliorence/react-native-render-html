@@ -27,6 +27,39 @@ const RenderHTMLDebug = function RenderHTMLDebug<
     if ('enableExperimentalPercentWidth' in props) {
       console.warn(debugMessage.outdatedEnableExperimentalPercentWidth);
     }
+    if ('ignoreNodesFunction' in props) {
+      console.warn(debugMessage.outdatedIgnoreNodesFunction);
+    }
+    if ('alterNode' in props) {
+      console.warn(debugMessage.outdatedAlterNode);
+    }
+    if ('alterChildren' in props) {
+      console.warn(debugMessage.outdatedAlterChildren);
+    }
+    if ('alterData' in props) {
+      console.warn(debugMessage.outdatedAlterData);
+    }
+    if ('computeImagesMaxWidth' in props) {
+      console.warn(debugMessage.outdatedComputeImagesMaxWidth);
+    }
+    if (Array.isArray(props.allowedStyles)) {
+      props.allowedStyles.forEach((s) => {
+        if (s.indexOf('-') > -1) {
+          console.warn(
+            `Style property '${s}' of 'allowedStyles' prop array must be camelCased.`
+          );
+        }
+      });
+    }
+    if (Array.isArray(props.ignoredStyles)) {
+      props.ignoredStyles.forEach((s) => {
+        if (s.indexOf('-') > -1) {
+          console.warn(
+            `Style property '${s}' of 'ignoredStyles' prop array must be camelCased.`
+          );
+        }
+      });
+    }
   }
   return <Fragment>{props.children}</Fragment>;
 };
