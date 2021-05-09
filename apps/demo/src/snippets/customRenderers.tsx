@@ -46,7 +46,7 @@ This is different from the old API where you passed functions taking four argume
 <ol>
 <li><code>tnode</code>: the TNode to render;</li>
 <li><code>TDefaultRenderer</code>: the default renderer for this TNode;</li>
-<li><code>DefaultTagRenderer</code>: the default renderer for this tagName;</li>
+<li><code>InternalRenderer</code>: the internal renderer for this tagName;</li>
 <li><code>style</code>: the flatten style object which should be passed to the root element returned by this component;</li>
 <li><code>key</code>: the key which shall be passed to the root element returned by this component;</li>
 <li><code>textProps</code> to use when you render a <code>Text</code>-based element;</li>

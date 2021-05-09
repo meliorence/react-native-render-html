@@ -12,6 +12,8 @@ import type {
   MixedStyleRecord,
   DOMNode,
   TNode,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  TNodeType,
   TBlock,
   TText,
   TPhrasing,
@@ -742,6 +744,11 @@ export interface TRendererBaseProps<
   type: 'text' | 'block';
 }
 
+/**
+ * Props for {@link TDefaultRenderer}.
+ *
+ * @public
+ */
 export interface TDefaultRendererProps<
   T extends TNode,
   P extends PropsFromParent = PropsFromParent
@@ -766,6 +773,9 @@ export interface TDefaultRendererProps<
   propsForChildren?: Partial<PropsFromParent>;
 }
 
+/**
+ * @public
+ */
 export interface DefaultTagRendererProps<
   T extends TNode,
   P extends PropsFromParent = PropsFromParent
@@ -784,33 +794,57 @@ export interface DefaultTagRendererProps<
   TDefaultRenderer: TDefaultRenderer<T>;
 }
 
+/**
+ * Props for custom renderers, such as provided in the `renderers` prop.
+ *
+ * @public
+ */
 export interface CustomTagRendererProps<
   T extends TNode,
   P extends PropsFromParent = PropsFromParent
 > extends DefaultTagRendererProps<T, P> {
   /**
    * Internal renderer for this _tagName_, not to be confused with
-   * {@link TDefaultRenderer}, which is the default renderer for the _tnode_.
+   * {@link TDefaultRenderer}, which is the fallback renderer for any _tnode_.
    *
    * @remarks For example, when rendering `img` tags, `TDefaultRenderer` and
-   * `DefaultTagRenderer` won't be equal.
+   * `InternalRenderer` won't be equal.
    *
    * When there is no default tag renderer for this tag, this prop will fallback
    * to the `TDefaultRenderer`.
    */
-  DefaultTagRenderer: DefaultTagRenderer<T>;
+  InternalRenderer: InternalRenderer<T>;
 }
 
+/**
+ * Default renderer for any {@link TNode}. The renderer behavior will only
+ * change by the {@link TNodeType | type} of the {@link TNode}.
+ *
+ * @public
+ */
 export type TDefaultRenderer<
   T extends TNode,
   P extends PropsFromParent = PropsFromParent
 > = React.ComponentType<TDefaultRendererProps<T, P>>;
 
-export type DefaultTagRenderer<
+/**
+ * An "internal renderer" is an internal custom renderer, adding custom
+ * features to the fallback `TDefaultRenderer`. For example, `<img/>` tags will
+ * be rendered via an internal renderer, while `<div>` will fallback to a
+ * {@link TDefaultRenderer}.
+ *
+ * @public
+ */
+export type InternalRenderer<
   T extends TNode,
   P extends PropsFromParent = PropsFromParent
 > = React.ComponentType<DefaultTagRendererProps<T, P>>;
 
+/**
+ * A custom renderer, such as provided in the `renderers` prop.
+ *
+ * @public
+ */
 export type CustomTagRenderer<
   T extends TNode,
   P extends PropsFromParent = PropsFromParent

@@ -60,7 +60,7 @@ export default function useAssembledCommonProps<T extends TNode>(
     ) as any,
     type: tnode.type === 'text' || tnode.type === 'phrasing' ? 'text' : 'block',
     propsForChildren: tnode.tagName ? {} : propsFromParent,
-    DefaultTagRenderer: Default || (TDefault as any),
+    InternalRenderer: Default || (TDefault as any),
     ...containerProps
   };
   return {
