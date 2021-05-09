@@ -164,13 +164,6 @@ export interface RenderHTMLPassedProps<
  */
 export interface RenderHTMLSharedProps {
   /**
-   * The width of the HTML content to display. The recommended practice is to pass
-   * `useWindowDimensions().width` minus any padding or margins.
-   *
-   * @defaultValue `Dimensions.get('window').width`
-   */
-  contentWidth?: number;
-  /**
    * A function which takes contentWidth and tagName as arguments and returns a
    * new width. Can return Infinity to denote unconstrained widths.
    *
@@ -528,6 +521,13 @@ export interface RenderHTMLSourceProps {
    * The object source to render (either `{ uri }` or `{ html }`).
    */
   source: RenderHTMLSource;
+  /**
+   * The width of the HTML content to display. The recommended practice is to pass
+   * `useWindowDimensions().width` minus any padding or margins.
+   *
+   * @defaultValue `Dimensions.get('window').width`
+   */
+  contentWidth?: number;
   /**
    * Triggered when the transient render tree changes. Useful for debugging.
    */

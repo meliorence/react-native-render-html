@@ -43,13 +43,13 @@ if (__DEV__) {
       "Use 'customListStyleSpecs' instead.",
     outdatedImagesDimensions:
       "You're attempting to use an outdated prop, 'imagesInitialDimensions'. This prop has been discontinued in version 6. " +
-      "Use 'renderersProps.img.initialDimensions' instead.",
+      "Use 'renderersProps={{ img: { initialDimensions } }}' instead.",
     outdatedOnLinkPressProp:
       "You're attempting to use an outdated prop, 'onLinkPress'. This prop has been discontinued in version 6. " +
-      "Use 'renderersProps.a.onPress' instead.",
+      "Use 'renderersProps={{ a: { onPress } }}' instead.",
     outdatedEnableExperimentalPercentWidth:
       "You're attempting to use an outdated prop, 'enableExperimentalPercentWidth'. This prop has been discontinued in version 6. " +
-      "Use 'renderersProps.img.enableExperimentalPercentWidth' instead.",
+      "Use 'renderersProps={{ img: { enableExperimentalPercentWidth } }}' instead.",
     noSource: 'No source prop was provided. Nothing will be rendered',
     contentWidth:
       'You should always pass contentWidth prop to properly handle screen rotations ' +

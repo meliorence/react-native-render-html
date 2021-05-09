@@ -46,6 +46,9 @@ export default function domNodeToHTMLString(
   return html;
 }
 
+/**
+ * @public
+ */
 export interface DomNodeToHtmlReporter {
   /**
    * @param node - The node being parsed.

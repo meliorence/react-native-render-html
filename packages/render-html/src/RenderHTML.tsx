@@ -24,6 +24,7 @@ export default function RenderHTML(props: RenderHTMLProps) {
     onHTMLLoaded,
     onTTreeChange,
     onDocumentMetadataLoaded,
+    contentWidth,
     ...config
   } = props;
   return (
@@ -34,7 +35,8 @@ export default function RenderHTML(props: RenderHTMLProps) {
             source,
             onHTMLLoaded,
             onTTreeChange,
-            onDocumentMetadataLoaded
+            onDocumentMetadataLoaded,
+            contentWidth
           })}
         </RenderHTMLConfigProvider>
       </TRenderEngineProvider>

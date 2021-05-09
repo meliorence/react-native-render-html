@@ -8,12 +8,13 @@ import { defaultHTMLElementModels } from '@native-html/transient-render-engine';
 import { DefaultTagRendererProps } from '../shared-types';
 import useNormalizedUrl from '../hooks/useNormalizedUrl';
 import { useRendererProps } from '../context/RenderersPropsProvider';
+import useContentWidth from '../hooks/useContentWidth';
 
 export function useIMGElementProps(
   props: DefaultTagRendererProps<TBlock>
 ): IMGElementProps & ClassAttributes<any> {
-  const { style, tnode, onPress, key, sharedProps } = props;
-  const { contentWidth } = sharedProps;
+  const { style, tnode, onPress, key } = props;
+  const contentWidth = useContentWidth();
   const {
     initialDimensions,
     enableExperimentalPercentWidth

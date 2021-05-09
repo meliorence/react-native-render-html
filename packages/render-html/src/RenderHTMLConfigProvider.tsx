@@ -24,7 +24,6 @@ export const renderHTMLConfigPropTypes: RenderHTMLConfigPropTypes = {
   remoteLoadingView: PropTypes.func,
   debug: PropTypes.bool,
   computeEmbeddedMaxWidth: PropTypes.func,
-  contentWidth: PropTypes.number,
   renderersProps: PropTypes.object,
   WebView: PropTypes.any,
   GenericPressable: PropTypes.any,
