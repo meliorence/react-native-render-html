@@ -1,5 +1,5 @@
 import {
-  extendDefaultRenderer,
+  extendInternalRenderer,
   HTMLContentModel
 } from 'react-native-render-html';
 import { SnippetDeclaration } from '../../types';
@@ -7,7 +7,7 @@ import { SnippetDeclaration } from '../../types';
 const html = `
 <p>
 In the below example, we are changing the element model of the &lt;img&gt; tag
-to support inline rendering. For this purpose, we take advantage of the <code>extendDefaultRenderer</code> utility!
+to support inline rendering. For this purpose, we take advantage of the <code>extendInternalRenderer</code> utility!
 </p>
 <p>
 Be advised, this is yet <strong>experimental</strong>, and React Native has many open bugs regarding inline views and images.</p>
@@ -28,7 +28,7 @@ const modelTampering: SnippetDeclaration = {
   props: {
     source: { html },
     renderers: {
-      img: extendDefaultRenderer('img', {
+      img: extendInternalRenderer('img', {
         contentModel: HTMLContentModel.mixed
       })
     }

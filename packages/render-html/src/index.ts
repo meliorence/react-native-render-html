@@ -55,7 +55,7 @@ export type {
   InternalSpecialRenderedTag,
   InternalRendererConfig
 } from './hooks/useInternalRenderer';
-export { default as extendDefaultRenderer } from './render/extendDefaultRenderer';
+export { default as extendInternalRenderer } from './render/extendInternalRenderer';
 export { default as splitBoxModelStyle } from './helpers/splitBoxModelStyle';
 
 // HOOKS
@@ -71,7 +71,7 @@ export type { DomNodeToHtmlReporter } from './helpers/domNodeToHTMLString';
 
 // DEFAULTS
 export { default as defaultSystemFonts } from './defaultSystemFonts';
-export { default as defaultRenderers } from './render/defaultRenderers';
+export { default as internalRenderers } from './render/internalRenderers';
 export { default as defaultListStyleSpecs } from './elements/defaultListStyleSpecs';
 
 // IMG

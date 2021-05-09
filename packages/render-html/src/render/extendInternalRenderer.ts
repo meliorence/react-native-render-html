@@ -8,25 +8,25 @@ import {
   DefaultTagRendererFromModel
 } from './render-types';
 import { HTMLElementModelProperties } from '@native-html/transient-render-engine/lib/typescript/model/HTMLElementModel';
-import defaultRenderers from './defaultRenderers';
+import internalRenderers from './internalRenderers';
 
 /**
- * Extend a default renderer to override its element model.
+ * Extend an internal renderer to override its element model.
  *
- * @param Renderer - The default component to extend, or the corresponding tagName.
+ * @param Renderer - The internal renderer to extend, or the corresponding tagName.
  * @param model - The new element model.
  */
-export default function extendDefaultRenderer<N extends HTMLContentModel>(
+export default function extendInternalRenderer<N extends HTMLContentModel>(
   renderer:
     | DefaultTagRendererFromModel<any>
-    | Extract<TagName, keyof typeof defaultRenderers>,
+    | Extract<TagName, keyof typeof internalRenderers>,
   model: Partial<HTMLElementModelProperties<any, N>>
 ) {
   const localRenderer =
-    typeof renderer === 'string' ? defaultRenderers[renderer] : renderer;
+    typeof renderer === 'string' ? internalRenderers[renderer] : renderer;
   if (!localRenderer && typeof renderer === 'string') {
     throw new TypeError(
-      'extendDefaultRenderer: there is no default renderer to extend for tag ' +
+      'extendInternalRenderer: there is no default renderer to extend for tag ' +
         renderer
     );
   }
