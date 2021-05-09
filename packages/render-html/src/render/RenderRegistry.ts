@@ -8,7 +8,7 @@ import lookupRecord from '../helpers/lookupRecord';
 import BRRenderer from '../renderers/BRRenderer';
 import WBRRenderer from '../renderers/WBRRenderer';
 import { CustomTagRenderer, DefaultTagRenderer } from '../shared-types';
-import defaultRenderers from './defaultRenderers';
+import internalRenderers from './internalRenderers';
 import {
   CustomTagRendererRecord,
   InternalTextContentRenderer
@@ -53,8 +53,8 @@ export default class RenderRegistry {
   private getDefaultRendererForTNode<T extends TNode>(
     tnode: T
   ): DefaultTagRenderer<T> | null {
-    if (lookupRecord(defaultRenderers, tnode.tagName)) {
-      return defaultRenderers[tnode.tagName] as any;
+    if (lookupRecord(internalRenderers, tnode.tagName)) {
+      return internalRenderers[tnode.tagName] as any;
     }
     return null;
   }
