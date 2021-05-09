@@ -1,5 +1,6 @@
 import equals from 'ramda/src/equals';
 import React, { memo, ReactElement, useMemo } from 'react';
+import { Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
 import ttreeEventsContext from './context/ttreeEventsContext';
 import isUriSource from './helpers/isUriSource';
@@ -12,6 +13,7 @@ import {
 } from './shared-types';
 import UriSourceLoader from './UriSourceLoader';
 import debugMessage from './debugMessages';
+import contentWidthContext from './context/contentWidthContext';
 
 export type RenderHTMLSourcePropTypes = Record<
   keyof RenderHTMLSourceProps,
@@ -33,7 +35,8 @@ export const renderSourcePropTypes: RenderHTMLSourcePropTypes = {
   ]),
   onTTreeChange: PropTypes.func,
   onHTMLLoaded: PropTypes.func,
-  onDocumentMetadataLoaded: PropTypes.func
+  onDocumentMetadataLoaded: PropTypes.func,
+  contentWidth: PropTypes.number
 };
 
 function isEmptySource(
@@ -66,6 +69,7 @@ const RenderHTMLSource = memo(
   function RenderHtmlSource({
     onDocumentMetadataLoaded,
     onTTreeChange,
+    contentWidth,
     ...props
   }: RenderHTMLSourceProps) {
     const ttreeEvents: TTreeEvents = useMemo(
@@ -77,7 +81,10 @@ const RenderHTMLSource = memo(
     );
     return (
       <ttreeEventsContext.Provider value={ttreeEvents}>
-        {React.createElement(RawSourceLoader, props)}
+        <contentWidthContext.Provider
+          value={contentWidth || Dimensions.get('window').width}>
+          {React.createElement(RawSourceLoader, props)}
+        </contentWidthContext.Provider>
       </ttreeEventsContext.Provider>
     );
   },

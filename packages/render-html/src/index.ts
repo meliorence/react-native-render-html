@@ -57,12 +57,15 @@ export type {
 } from './hooks/useInternalRenderer';
 export { default as extendDefaultRenderer } from './render/extendDefaultRenderer';
 export { default as splitBoxModelStyle } from './helpers/splitBoxModelStyle';
+
+// HOOKS
 export {
   useComputeMaxWidthForTag,
   useSharedProps
 } from './context/SharedPropsProvider';
 export { useRendererProps } from './context/RenderersPropsProvider';
 export { useDocumentMetadata } from './context/DocumentMetadataProvider';
+export { default as useContentWidth } from './hooks/useContentWidth';
 export { default as domNodeToHTMLString } from './helpers/domNodeToHTMLString';
 export type { DomNodeToHtmlReporter } from './helpers/domNodeToHTMLString';
 
