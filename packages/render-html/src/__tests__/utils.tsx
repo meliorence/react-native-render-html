@@ -79,19 +79,6 @@ export function expectTranslatedInlineCSSValueToEqual({
   });
 }
 
-// export function expectTranslatedInlineCSSValueToBeInt({
-//   cssInlineRules,
-//   reactNativePropStyleName,
-//   render
-// }) {
-//   expectTranslatedInlineCSSRuleTo({
-//     render,
-//     cssInlineRules,
-//     test: (flatStyle) =>
-//       expect(flatStyle[reactNativePropStyleName]).toEqual(expect.any(Number))
-//   });
-// }
-
 export function elementHasAncestorOfType(
   element: ReactTestInstance | null | undefined,
   Type: React.ElementType<any> | string

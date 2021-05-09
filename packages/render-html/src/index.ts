@@ -47,7 +47,8 @@ export {
   default as TRenderEngineProvider,
   defaultFallbackFonts
 } from './TRenderEngineProvider';
-export { default as RenderHTMLFragment } from './RenderHTMLFragment';
+export { default as RenderHTMLConfigProvider } from './RenderHTMLConfigProvider';
+export { default as RenderHTMLSource } from './RenderHTMLSource';
 export { default as useInternalRenderer } from './hooks/useInternalRenderer';
 export { default as useNormalizedUrl } from './hooks/useNormalizedUrl';
 export type {

@@ -500,26 +500,34 @@ export interface RenderHTMLSourceInline {
 export type RenderHTMLSource = RenderHTMLSourceInline | RenderHTMLSourceUri;
 
 /**
- * Props for the `RenderHTMLFragment` component.
+ *
  *
  * @public
  */
-export interface RenderHTMLFragmentProps<
+export interface RenderHTMLConfig<
   P extends RenderersPropsBase = RenderersPropsBase
 > extends RenderHTMLSharedProps,
     RenderHTMLPassedProps<P> {
   /**
-   * The object source to render (either `{ uri }` or `{ html }`).
-   */
-  source: RenderHTMLSource;
-  /**
    * Replace the default loader while fetching a remote website's content.
    */
-  remoteLoadingView?: (props: RenderHTMLProps<P>) => ReactElement;
+  remoteLoadingView?: (source: RenderHTMLSourceUri) => ReactElement;
   /**
    * Replace the default error if a remote website's content could not be fetched.
    */
-  remoteErrorView?: (props: RenderHTMLProps<P>) => ReactElement;
+  remoteErrorView?: (source: RenderHTMLSourceUri) => ReactElement;
+}
+
+/**
+ * Props for the {@link RenderHTMLSource} component.
+ *
+ * @public
+ */
+export interface RenderHTMLSourceProps {
+  /**
+   * The object source to render (either `{ uri }` or `{ html }`).
+   */
+  source: RenderHTMLSource;
   /**
    * Triggered when the transient render tree changes. Useful for debugging.
    */
@@ -542,7 +550,8 @@ export interface RenderHTMLFragmentProps<
  */
 export interface RenderHTMLProps<
   P extends RenderersPropsBase = RenderersPropsBase
-> extends RenderHTMLFragmentProps<P>,
+> extends RenderHTMLConfig<P>,
+    RenderHTMLSourceProps,
     TransientRenderEngineConfig {}
 
 /**

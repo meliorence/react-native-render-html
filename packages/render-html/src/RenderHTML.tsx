@@ -1,9 +1,9 @@
 import React from 'react';
-
 import { RenderHTMLProps } from './shared-types';
-
+import RenderHTMLDebug from './RenderHTMLDebug';
 import TRenderEngineProvider from './TRenderEngineProvider';
-import RenderHTMLFragment from './RenderHTMLFragment';
+import RenderHTMLConfigProvider from './RenderHTMLConfigProvider';
+import RenderHTMLSource from './RenderHTMLSource';
 
 /**
  * Render HTML text in native views!
@@ -19,9 +19,25 @@ import RenderHTMLFragment from './RenderHTMLFragment';
  * @public
  */
 export default function RenderHTML(props: RenderHTMLProps) {
+  const {
+    source,
+    onHTMLLoaded,
+    onTTreeChange,
+    onDocumentMetadataLoaded,
+    ...config
+  } = props;
   return (
-    <TRenderEngineProvider {...props}>
-      {React.createElement(RenderHTMLFragment, props)}
-    </TRenderEngineProvider>
+    <RenderHTMLDebug {...props}>
+      <TRenderEngineProvider {...props}>
+        <RenderHTMLConfigProvider {...config}>
+          {React.createElement(RenderHTMLSource, {
+            source,
+            onHTMLLoaded,
+            onTTreeChange,
+            onDocumentMetadataLoaded
+          })}
+        </RenderHTMLConfigProvider>
+      </TRenderEngineProvider>
+    </RenderHTMLDebug>
   );
 }

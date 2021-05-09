@@ -2,7 +2,7 @@ import { RenderHTMLProps } from './shared-types';
 
 export type SourceLoaderProps = Pick<
   RenderHTMLProps,
-  'source' | 'remoteLoadingView' | 'remoteErrorView' | 'onHTMLLoaded'
+  'source' | 'onHTMLLoaded'
 >;
 
 export interface RenderTTreeProps {
@@ -10,7 +10,7 @@ export interface RenderTTreeProps {
   baseUrl?: string;
 }
 
-export type DOMProps = Pick<
+export type TTreeEvents = Pick<
   RenderHTMLProps,
-  'onTTreeChange' | 'onDocumentMetadataLoaded' | 'debug'
+  'onTTreeChange' | 'onDocumentMetadataLoaded'
 >;

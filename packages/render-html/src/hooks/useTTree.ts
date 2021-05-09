@@ -1,5 +1,6 @@
 import { useMemo, useEffect, useRef, useContext } from 'react';
-import domContext from '../context/domContext';
+import ttreeEventsContext from '../context/ttreeEventsContext';
+import { useSharedProps } from '../context/SharedPropsProvider';
 import { RenderTTreeProps } from '../internal-types';
 import { useAmbientTRenderEngine } from '../TRenderEngineProvider';
 
@@ -8,7 +9,8 @@ import { useAmbientTRenderEngine } from '../TRenderEngineProvider';
  */
 export default function useTTree(props: RenderTTreeProps) {
   const { html } = props;
-  const { onTTreeChange, debug } = useContext(domContext);
+  const { onTTreeChange } = useContext(ttreeEventsContext);
+  const { debug } = useSharedProps();
   const updateNumber = useRef(0);
   const trenderEngine = useAmbientTRenderEngine();
   const ttree = useMemo(() => trenderEngine.buildTTree(html), [
