@@ -26,7 +26,7 @@ export default function extendInternalRenderer<N extends HTMLContentModel>(
     typeof renderer === 'string' ? internalRenderers[renderer] : renderer;
   if (!localRenderer && typeof renderer === 'string') {
     throw new TypeError(
-      'extendInternalRenderer: there is no default renderer to extend for tag ' +
+      'extendInternalRenderer: there is no internal renderer to extend for tag ' +
         renderer
     );
   }
