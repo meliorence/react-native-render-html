@@ -1,4 +1,4 @@
-type Feedback =
+export type DebugType =
   | 'outdatedUriProp'
   | 'outdatedHtmlProp'
   | 'outdatedListPrefixRenderersProps'
@@ -8,7 +8,9 @@ type Feedback =
   | 'outdatedOnLinkPressProp'
   | 'outdatedEnableExperimentalPercentWidth';
 
-let debugMessage: Record<Feedback, string>;
+let debugMessage: Record<DebugType, string>;
+
+export type DebugMessages = typeof debugMessage;
 
 if (__DEV__) {
   debugMessage = {
@@ -20,8 +22,7 @@ if (__DEV__) {
       "Use 'source={{ html }}' instead.",
     outdatedListPrefixRenderersProps:
       "You're attempting to use an outdated prop, 'listPrefixRenderers'. This prop has been discontinued in version 6.",
-    noSource:
-      'No source prop was provided to RenderHTML. Nothing will be rendered',
+    noSource: 'No source prop was provided. Nothing will be rendered',
     contentWidth:
       'You should always pass contentWidth prop to properly handle screen rotations ' +
       'and have a seamless support for images scaling. ' +

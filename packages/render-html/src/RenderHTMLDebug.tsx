@@ -1,17 +1,13 @@
-import React, { Fragment } from 'react';
-import { PropsWithChildren } from 'react';
+import React, { Fragment, PropsWithChildren } from 'react';
 import debugMessage from './debugMessages';
-import { RenderHTMLFragmentProps } from './shared-types';
+import { RenderersPropsBase, RenderHTMLProps } from './shared-types';
 
-const RenderHTMLFragmentDebug = function RenderHTMLDebug(
-  props: PropsWithChildren<RenderHTMLFragmentProps>
-) {
+const RenderHTMLDebug = function RenderHTMLDebug<
+  P extends RenderersPropsBase = RenderersPropsBase
+>(props: PropsWithChildren<RenderHTMLProps<P>>) {
   if (__DEV__) {
     if (typeof props.contentWidth !== 'number') {
       console.warn(debugMessage.contentWidth);
-    }
-    if (!props.source) {
-      console.warn(debugMessage.noSource);
     }
     if ('html' in props) {
       console.warn(debugMessage.outdatedHtmlProp);
@@ -35,4 +31,4 @@ const RenderHTMLFragmentDebug = function RenderHTMLDebug(
   return <Fragment>{props.children}</Fragment>;
 };
 
-export default RenderHTMLFragmentDebug;
+export default RenderHTMLDebug;
