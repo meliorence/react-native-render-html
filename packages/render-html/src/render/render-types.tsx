@@ -9,7 +9,7 @@ import {
 import { ComponentType } from 'react';
 import {
   CustomTagRenderer,
-  DefaultTagRenderer,
+  InternalRenderer,
   PropsFromParent
 } from '../shared-types';
 
@@ -36,7 +36,7 @@ export type CustomLiteRenderer<
   M extends HTMLContentModel
 > = CustomRendererSpecs<M>;
 
-export type DefaultBlockRenderer = DefaultTagRenderer<TBlock> &
+export type DefaultBlockRenderer = InternalRenderer<TBlock> &
   DefaultRendererSpecs<HTMLContentModel.block>;
 
 /**
@@ -49,7 +49,7 @@ export type CustomBlockRenderer<
 
 export type DefaultTextualRenderer<
   P extends PropsFromParent = PropsFromParent
-> = DefaultTagRenderer<TText | TPhrasing, P> &
+> = InternalRenderer<TText | TPhrasing, P> &
   DefaultRendererSpecs<HTMLContentModel.textual>;
 
 /**
@@ -62,7 +62,7 @@ export type CustomTextualRenderer<
 
 export type DefaultMixedRenderer<
   P extends PropsFromParent = PropsFromParent
-> = DefaultTagRenderer<TBlock | TPhrasing | TText, P> &
+> = InternalRenderer<TBlock | TPhrasing | TText, P> &
   DefaultRendererSpecs<HTMLContentModel.mixed>;
 
 /**

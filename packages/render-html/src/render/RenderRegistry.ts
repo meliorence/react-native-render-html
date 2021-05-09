@@ -7,7 +7,7 @@ import { CustomTagRendererProps } from '..';
 import lookupRecord from '../helpers/lookupRecord';
 import BRRenderer from '../renderers/BRRenderer';
 import WBRRenderer from '../renderers/WBRRenderer';
-import { CustomTagRenderer, DefaultTagRenderer } from '../shared-types';
+import { CustomTagRenderer, InternalRenderer } from '../shared-types';
 import internalRenderers from './internalRenderers';
 import {
   CustomTagRendererRecord,
@@ -20,7 +20,7 @@ const internalTextRenderers: Record<string, InternalTextContentRenderer> = {
 };
 
 export interface RendererConfig<T extends TNode> {
-  Default: DefaultTagRenderer<T> | null;
+  Default: InternalRenderer<T> | null;
   Custom: CustomTagRenderer<T> | null;
 }
 
@@ -52,7 +52,7 @@ export default class RenderRegistry {
 
   private getDefaultRendererForTNode<T extends TNode>(
     tnode: T
-  ): DefaultTagRenderer<T> | null {
+  ): InternalRenderer<T> | null {
     if (lookupRecord(internalRenderers, tnode.tagName)) {
       return internalRenderers[tnode.tagName] as any;
     }
