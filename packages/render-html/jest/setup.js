@@ -1,1 +1,3 @@
-global.__DEV__ = false;
+global.__DEV__ = true;
+
+console.warn = () => {};
