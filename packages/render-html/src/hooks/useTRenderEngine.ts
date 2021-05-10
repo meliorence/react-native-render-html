@@ -30,6 +30,7 @@ export default function useTRenderEngine(props: TransientRenderEngineConfig) {
     systemFonts,
     renderers = {},
     emSize,
+    setMarkersForTNode,
     triggerTREInvalidationPropNames
   } = props;
   const isFontSupported = useMemo(() => {
@@ -123,7 +124,8 @@ export default function useTRenderEngine(props: TransientRenderEngineConfig) {
         },
         ignoredDomTags,
         ignoreDomNode,
-        domVisitors
+        domVisitors,
+        setMarkersForTNode
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [...tbuilderDeps, isFontSupported]

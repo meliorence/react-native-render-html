@@ -12,8 +12,7 @@ const TChildrenRenderer = function TChildrenRenderer({
   tchildren,
   propsForChildren,
   disableMarginCollapsing,
-  renderChild,
-  parentMarkers
+  renderChild
 }: TChildrenRendererProps) {
   let collapsedMarginTop: number | null = null;
   const elements = tchildren.map((childTnode, i) => {
@@ -27,7 +26,6 @@ const TChildrenRenderer = function TChildrenRenderer({
     }
     const propsFromParent = { ...propsForChildren, collapsedMarginTop };
     const childElement = React.createElement(TNodeRenderer, {
-      parentMarkers,
       propsFromParent,
       tnode: childTnode,
       key: i

@@ -101,7 +101,7 @@ describe('RenderHTML', () => {
         />
       );
       const ttext = UNSAFE_getByType(TTextRenderer);
-      expect(ttext.props.markers.anchor).toBe(true);
+      expect(ttext.props.tnode.markers.anchor).toBe(true);
     });
     it('should set `edits` marker to "ins" for `ins` tags', () => {
       const { UNSAFE_getByType } = render(
@@ -112,7 +112,7 @@ describe('RenderHTML', () => {
         />
       );
       const ttext = UNSAFE_getByType(TTextRenderer);
-      expect(ttext.props.markers.edits).toBe('ins');
+      expect(ttext.props.tnode.markers.edits).toBe('ins');
     });
     it('should set `edits` marker to "del" for `del` tags', () => {
       const { UNSAFE_getByType } = render(
@@ -123,7 +123,7 @@ describe('RenderHTML', () => {
         />
       );
       const ttext = UNSAFE_getByType(TTextRenderer);
-      expect(ttext.props.markers.edits).toBe('del');
+      expect(ttext.props.tnode.markers.edits).toBe('del');
     });
     it('should set `lang` marker for `lang` attributes', () => {
       const { UNSAFE_getByType } = render(
@@ -134,7 +134,7 @@ describe('RenderHTML', () => {
         />
       );
       const ttext = UNSAFE_getByType(TTextRenderer);
-      expect(ttext.props.markers.lang).toBe('fr');
+      expect(ttext.props.tnode.markers.lang).toBe('fr');
     });
     it('should set `dir` marker for `dir` attributes', () => {
       const { UNSAFE_getByType } = render(
@@ -145,7 +145,7 @@ describe('RenderHTML', () => {
         />
       );
       const ttext = UNSAFE_getByType(TTextRenderer);
-      expect(ttext.props.markers.direction).toBe('rtl');
+      expect(ttext.props.tnode.markers.direction).toBe('rtl');
     });
     it('should pass markers deep down in the tree', () => {
       const EmRenderer: CustomTextualRenderer = ({
@@ -163,7 +163,7 @@ describe('RenderHTML', () => {
         />
       );
       const em = UNSAFE_getByType(EmRenderer);
-      expect(em.props.markers.lang).toBe('test');
+      expect(em.props.tnode.markers.lang).toBe('test');
     });
     it('should handle setMarkersForTNode prop', () => {
       const { UNSAFE_getByType } = render(
@@ -172,14 +172,17 @@ describe('RenderHTML', () => {
             html: '<em>Two</em>'
           }}
           debug={false}
-          setMarkersForTNode={(tnode) =>
-            tnode.tagName === 'em' ? { em: true } : null
-          }
+          setMarkersForTNode={(targetMarkers, __parent, tnode) => {
+            if (tnode.tagName === 'em') {
+              //@ts-expect-error
+              targetMarkers.em = true;
+            }
+          }}
           contentWidth={100}
         />
       );
       const em = UNSAFE_getByType(TTextRenderer);
-      expect(em.props.markers.em).toBe(true);
+      expect(em.props.tnode.markers.em).toBe(true);
     });
   });
   describe('regarding propsFromParent prop in custom renderers', () => {

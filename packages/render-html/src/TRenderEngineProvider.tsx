@@ -37,6 +37,7 @@ export const tRenderEngineProviderPropTypes: Record<
     'sans-serif': PropTypes.string,
     monospace: PropTypes.string
   }),
+  setMarkersForTNode: PropTypes.func,
   triggerTREInvalidationPropNames: PropTypes.arrayOf(PropTypes.string)
 };
 
