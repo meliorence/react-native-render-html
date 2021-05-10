@@ -6,6 +6,7 @@ export {
   DOMNode,
   DOMText,
   HTMLContentModel,
+  HTMLElementModel,
   TRenderEngine
 } from '@native-html/transient-render-engine';
 export type { MixedStyleDeclaration } from '@native-html/css-processor';
@@ -55,7 +56,6 @@ export type {
   InternalSpecialRenderedTag,
   InternalRendererConfig
 } from './hooks/useInternalRenderer';
-export { default as extendInternalRenderer } from './render/extendInternalRenderer';
 export { default as splitBoxModelStyle } from './helpers/splitBoxModelStyle';
 
 // HOOKS

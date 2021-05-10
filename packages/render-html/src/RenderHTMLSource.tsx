@@ -79,6 +79,11 @@ const RenderHTMLSource = memo(
       }),
       [onDocumentMetadataLoaded, onTTreeChange]
     );
+    if (__DEV__) {
+      if (!(typeof contentWidth === 'number')) {
+        console.warn(debugMessage.contentWidth);
+      }
+    }
     return (
       <ttreeEventsContext.Provider value={ttreeEvents}>
         <contentWidthContext.Provider

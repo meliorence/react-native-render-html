@@ -3,7 +3,10 @@ import { Text, View } from 'react-native';
 import RenderHTML from '../RenderHTML';
 import { render } from 'react-native-testing-library';
 import { CustomBlockRenderer } from '../render/render-types';
-import { HTMLContentModel } from '@native-html/transient-render-engine';
+import {
+  HTMLContentModel,
+  HTMLElementModel
+} from '@native-html/transient-render-engine';
 
 /**
  * https://github.com/meliorence/react-native-render-html/issues/276
@@ -21,9 +24,6 @@ describe('RenderHTML component', () => {
           <Span />
         </View>
       );
-      SpanRenderer.model = {
-        contentModel: HTMLContentModel.block
-      };
       const customRenderers = {
         span: SpanRenderer
       };
@@ -32,6 +32,12 @@ describe('RenderHTML component', () => {
           debug={false}
           source={{ html: '<p>foo<span>hello world</span></p>' }}
           renderers={customRenderers}
+          customHTMLElementModels={{
+            span: HTMLElementModel.fromCustomModel({
+              tagName: 'span',
+              contentModel: HTMLContentModel.block
+            })
+          }}
         />
       );
       const span = UNSAFE_getByType(Span);

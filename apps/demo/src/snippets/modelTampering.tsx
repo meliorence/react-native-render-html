@@ -1,13 +1,13 @@
 import {
-  extendInternalRenderer,
-  HTMLContentModel
+  HTMLContentModel,
+  defaultHTMLElementModels
 } from 'react-native-render-html';
 import { SnippetDeclaration } from '../../types';
 
 const html = `
 <p>
 In the below example, we are changing the element model of the &lt;img&gt; tag
-to support inline rendering. For this purpose, we take advantage of the <code>extendInternalRenderer</code> utility!
+to support inline rendering. For this purpose, we take advantage of the <code>customHTMLElementModels</code> prop!
 </p>
 <p>
 Be advised, this is yet <strong>experimental</strong>, and React Native has many open bugs regarding inline views and images.</p>
@@ -27,8 +27,8 @@ const modelTampering: SnippetDeclaration = {
   codeSource: '/demo/snippets/modelTampering.tsx',
   props: {
     source: { html },
-    renderers: {
-      img: extendInternalRenderer('img', {
+    customHTMLElementModels: {
+      img: defaultHTMLElementModels.img.extend({
         contentModel: HTMLContentModel.mixed
       })
     }

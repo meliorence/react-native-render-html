@@ -7,7 +7,8 @@ import { RenderHTMLConfig, RenderersPropsBase } from './shared-types';
 import TNodeChildrenRenderer from './TNodeChildrenRenderer';
 import TChildrenRenderer from './TChildrenRenderer';
 import sourceLoaderContext from './context/sourceLoaderContext';
-import debugMessage from './debugMessages';
+import RenderRegistryProvider from './context/RenderRegistryProvider';
+import { useAmbientTRenderEngine } from './TRenderEngineProvider';
 
 const childrenRendererContext = {
   TChildrenRenderer,
@@ -29,7 +30,8 @@ export const renderHTMLConfigPropTypes: RenderHTMLConfigPropTypes = {
   GenericPressable: PropTypes.any,
   defaultWebViewProps: PropTypes.object,
   pressableHightlightColor: PropTypes.string,
-  customListStyleSpecs: PropTypes.object
+  customListStyleSpecs: PropTypes.object,
+  renderers: PropTypes.object
 };
 
 export default function RenderHTMLConfigProvider<
@@ -41,8 +43,10 @@ export default function RenderHTMLConfigProvider<
     renderersProps,
     debug,
     children,
+    renderers,
     ...sharedProps
   } = props;
+  const engine = useAmbientTRenderEngine();
   const sourceLoaderConfig = useMemo(
     () => ({
       remoteErrorView,
@@ -50,21 +54,20 @@ export default function RenderHTMLConfigProvider<
     }),
     [remoteErrorView, remoteLoadingView]
   );
-  if (__DEV__) {
-    if (!('contentWidth' in props)) {
-      console.warn(debugMessage.contentWidth);
-    }
-  }
   return (
-    <SharedPropsProvider {...sharedProps}>
-      <RenderersPropsProvider renderersProps={renderersProps}>
-        <TChildrenRenderersContext.Provider value={childrenRendererContext}>
-          <sourceLoaderContext.Provider value={sourceLoaderConfig}>
-            {children}
-          </sourceLoaderContext.Provider>
-        </TChildrenRenderersContext.Provider>
-      </RenderersPropsProvider>
-    </SharedPropsProvider>
+    <RenderRegistryProvider
+      renderers={renderers}
+      elementModels={engine.getHTMLElementsModels()}>
+      <SharedPropsProvider {...sharedProps}>
+        <RenderersPropsProvider renderersProps={renderersProps}>
+          <TChildrenRenderersContext.Provider value={childrenRendererContext}>
+            <sourceLoaderContext.Provider value={sourceLoaderConfig}>
+              {children}
+            </sourceLoaderContext.Provider>
+          </TChildrenRenderersContext.Provider>
+        </RenderersPropsProvider>
+      </SharedPropsProvider>
+    </RenderRegistryProvider>
   );
 }
 
