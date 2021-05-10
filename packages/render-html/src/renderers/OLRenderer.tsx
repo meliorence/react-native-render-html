@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  defaultHTMLElementModels,
-  TBlock
-} from '@native-html/transient-render-engine';
+import { TBlock } from '@native-html/transient-render-engine';
 import { DefaultBlockRenderer } from '../render/render-types';
 import {
   DefaultTagRendererProps,
@@ -40,7 +37,5 @@ export function useOLElementProps(
 const OLRenderer: DefaultBlockRenderer = (props) => {
   return React.createElement(OLElement, useOLElementProps(props));
 };
-
-OLRenderer.model = defaultHTMLElementModels.ol;
 
 export default OLRenderer;

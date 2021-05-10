@@ -1,5 +1,4 @@
 import React from 'react';
-import { defaultHTMLElementModels } from '@native-html/transient-render-engine';
 import { DefaultBlockRenderer } from '../render/render-types';
 import {
   DefaultTagRendererProps,
@@ -38,7 +37,5 @@ export function useULElementProps(
 const ULRenderer: DefaultBlockRenderer = (props) => {
   return React.createElement(ULElement, useULElementProps(props));
 };
-
-ULRenderer.model = defaultHTMLElementModels.ul;
 
 export default ULRenderer;

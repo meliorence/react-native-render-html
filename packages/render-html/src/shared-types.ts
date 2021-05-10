@@ -20,7 +20,10 @@ import type {
   DocumentContext as TREDocumentContext,
   TDocument,
   DomVisitorCallbacks,
-  SetMarkersForTNode
+  SetMarkersForTNode,
+  HTMLContentModel,
+  CustomElementModel,
+  HTMLElementModel
 } from '@native-html/transient-render-engine';
 import type { CounterStyleRenderer } from '@jsamr/counter-style';
 import type { ComponentType, ReactElement, ReactNode } from 'react';
@@ -31,6 +34,17 @@ import type {
 import type { TStylesShape } from '@native-html/transient-render-engine';
 import type { CustomTagRendererRecord } from './render/render-types';
 import type { ParserOptions as HtmlParserOptions } from 'htmlparser2';
+
+/**
+ * A record of HTMLElementModels.
+ *
+ * @public
+ */
+export type HTMLElementModelRecord = Record<
+  string,
+  | CustomElementModel<string, HTMLContentModel>
+  | HTMLElementModel<string, HTMLContentModel>
+>;
 
 /**
  * @public
@@ -394,9 +408,9 @@ export interface TransientRenderEngineConfig {
    */
   fallbackFonts?: FallbackFontsDefinitions;
   /**
-   * Your custom renderers.
+   * Customize element models for target tags.
    */
-  renderers?: CustomTagRendererRecord;
+  customHTMLElementModels?: HTMLElementModelRecord;
   /**
    * The default value in pixels for 1em
    */
@@ -499,6 +513,10 @@ export interface RenderHTMLConfig<
   P extends RenderersPropsBase = RenderersPropsBase
 > extends RenderHTMLSharedProps,
     RenderHTMLPassedProps<P> {
+  /**
+   * Your custom renderers.
+   */
+  renderers?: CustomTagRendererRecord;
   /**
    * Replace the default loader while fetching a remote website's content.
    */

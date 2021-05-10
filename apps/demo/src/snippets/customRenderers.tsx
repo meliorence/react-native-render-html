@@ -3,8 +3,7 @@ import {
   CustomBlockRenderer,
   defaultHTMLElementModels,
   TChildrenRenderer,
-  HTMLContentModel,
-  TChildrenRendererProps
+  HTMLContentModel
 } from 'react-native-render-html';
 import { View, Text } from 'react-native';
 import { SnippetDeclaration } from '../../types';
@@ -27,8 +26,7 @@ The new renderer API is at the same time more strict and more flexible. To get r
 
 <h3>Element Model</h3>
 
-When you register a renderer in the new API, you must attach a model. The model corresponds to the constrains on this element.
-The recommended way to attach the model is to assign the corresponding model from <code>defaultHTMLElementModels</code>.
+When you register a renderer in the new API, you can separately define a model for this tag. The model defines constraints on this element during TTree construction.
 The important field of this model is <code>contentModel</code>, which can have 4 values:
 
 <ol>
@@ -92,20 +90,17 @@ function AdComponent() {
 }
 
 const ArticleRenderer: CustomBlockRenderer = function ArticleRenderer(props) {
-  const { tnode, TDefaultRenderer, markers, ...defaultRendererProps } = props;
-  const tchildrenProps: Pick<TChildrenRendererProps, 'parentMarkers'> = {
-    parentMarkers: markers
-  };
+  const { tnode, TDefaultRenderer, ...defaultRendererProps } = props;
   const firstChildrenChunk = tnode.children.slice(0, 2);
   const secondChildrenChunk = tnode.children.slice(2, 4);
   const thirdChildrenChunk = tnode.children.slice(4);
   return (
-    <TDefaultRenderer tnode={tnode} markers={markers} {...defaultRendererProps}>
-      <TChildrenRenderer {...tchildrenProps} tchildren={firstChildrenChunk} />
+    <TDefaultRenderer tnode={tnode} {...defaultRendererProps}>
+      <TChildrenRenderer tchildren={firstChildrenChunk} />
       {firstChildrenChunk.length === 2 ? <AdComponent /> : null}
-      <TChildrenRenderer {...tchildrenProps} tchildren={secondChildrenChunk} />
+      <TChildrenRenderer tchildren={secondChildrenChunk} />
       {secondChildrenChunk.length === 2 ? <AdComponent /> : null}
-      <TChildrenRenderer {...tchildrenProps} tchildren={thirdChildrenChunk} />
+      <TChildrenRenderer tchildren={thirdChildrenChunk} />
     </TDefaultRenderer>
   );
 };
@@ -131,7 +126,7 @@ const ButtonRenderer: CustomBlockRenderer = function ({
   );
 };
 
-ButtonRenderer.model = defaultHTMLElementModels.button.extend({
+const buttonModel = defaultHTMLElementModels.button.extend({
   contentModel: HTMLContentModel.block,
   mixedUAStyles: {
     textAlign: 'center',
@@ -139,8 +134,6 @@ ButtonRenderer.model = defaultHTMLElementModels.button.extend({
     backgroundColor: 'rgba(125, 125, 125, 0.5)'
   }
 });
-
-ArticleRenderer.model = defaultHTMLElementModels.article;
 
 const customRenderers: SnippetDeclaration = {
   name: 'Custom Renderers',
@@ -151,6 +144,9 @@ const customRenderers: SnippetDeclaration = {
     renderers: {
       article: ArticleRenderer,
       button: ButtonRenderer
+    },
+    customHTMLElementModels: {
+      button: buttonModel
     },
     classesStyles: {
       tip: {

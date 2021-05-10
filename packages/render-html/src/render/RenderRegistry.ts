@@ -1,13 +1,14 @@
-import {
-  defaultHTMLElementModels,
-  TNode
-} from '@native-html/transient-render-engine';
+import { TNode } from '@native-html/transient-render-engine';
 import { ComponentType } from 'react';
 import { CustomTagRendererProps } from '..';
 import lookupRecord from '../helpers/lookupRecord';
 import BRRenderer from '../renderers/BRRenderer';
 import WBRRenderer from '../renderers/WBRRenderer';
-import { CustomTagRenderer, InternalRenderer } from '../shared-types';
+import {
+  CustomTagRenderer,
+  HTMLElementModelRecord,
+  InternalRenderer
+} from '../shared-types';
 import internalRenderers from './internalRenderers';
 import {
   CustomTagRendererRecord,
@@ -26,14 +27,14 @@ export interface RendererConfig<T extends TNode> {
 
 export default class RenderRegistry {
   private readonly customRenderers: CustomTagRendererRecord = {};
+  private readonly elementModels: HTMLElementModelRecord;
 
-  constructor(customRenderers: CustomTagRendererRecord = {}) {
-    // Filter model-only components
-    Object.keys(customRenderers || {}).forEach((key) => {
-      if (typeof customRenderers[key] === 'function') {
-        this.customRenderers[key] = customRenderers[key];
-      }
-    });
+  constructor(
+    customRenderers: CustomTagRendererRecord = {},
+    elementModels: HTMLElementModelRecord
+  ) {
+    this.customRenderers = customRenderers;
+    this.elementModels = elementModels;
   }
 
   getInternalTextRenderer(tagName: string | null) {
@@ -53,8 +54,9 @@ export default class RenderRegistry {
   private getDefaultRendererForTNode<T extends TNode>(
     tnode: T
   ): InternalRenderer<T> | null {
-    if (lookupRecord(internalRenderers, tnode.tagName)) {
-      return internalRenderers[tnode.tagName] as any;
+    if (tnode.tagName! in internalRenderers) {
+      //@ts-ignore
+      return internalRenderers[tnode.tagName!];
     }
     return null;
   }
@@ -62,26 +64,22 @@ export default class RenderRegistry {
   private getCustomRendererForTNode<T extends TNode>(
     tnode: T
   ): ComponentType<CustomTagRendererProps<T>> | null {
-    if (lookupRecord(this.customRenderers, tnode.tagName)) {
-      const renderer = this.customRenderers[tnode.tagName];
-      const tagName = tnode.tagName;
-      const rendererModel =
-        renderer.model ??
-        (lookupRecord(defaultHTMLElementModels, tagName)
-          ? defaultHTMLElementModels[tagName]
-          : null);
-      if (
-        rendererModel &&
-        tnode.matchContentModel(rendererModel.contentModel)
-      ) {
-        return renderer as any;
-      } else {
-        __DEV__ &&
+    if (tnode.tagName! in this.customRenderers) {
+      const renderer = this.customRenderers[tnode.tagName!];
+      if (__DEV__) {
+        // In DEV, check for discrepancies.
+        const elementModel = this.elementModels[tnode.tagName!];
+        if (!elementModel) {
           console.warn(
-            `You are attempting to render "${tnode.tagName}" of type "${tnode.displayName}", but the registered renderer is of content model type ${rendererModel?.contentModel} which is incompatible with "${tnode.displayName}". The custom renderer will be ignored.`
+            `You are attempting to render a ${tnode.tagName!} tag but you didn't provide an HTMLElementModel. Make sure you register a model for this tag in "customHTMLElementModels" prop. `
           );
+        } else if (!tnode.matchContentModel(elementModel.contentModel)) {
+          console.warn(
+            `You are attempting to render "${tnode.tagName}" of type "${tnode.displayName}", but the registered renderer is of content model type ${elementModel?.contentModel} which is incompatible with "${tnode.displayName}".`
+          );
+        }
       }
-      return null;
+      return renderer as any;
     }
     return null;
   }

@@ -1,10 +1,6 @@
 import React from 'react';
 import { DefaultMixedRenderer } from '../render/render-types';
-import {
-  TNode,
-  defaultHTMLElementModels,
-  DocumentContext
-} from '@native-html/transient-render-engine';
+import { TNode, DocumentContext } from '@native-html/transient-render-engine';
 import { DefaultTagRendererProps, RenderersPropsBase } from '../shared-types';
 import { AccessibilityProps, GestureResponderEvent } from 'react-native';
 import AElement from '../elements/AElement';
@@ -59,7 +55,5 @@ export function useAElementProps<T extends TNode>(
 const ARenderer: DefaultMixedRenderer = (props) => {
   return React.createElement(AElement, useAElementProps(props));
 };
-
-ARenderer.model = defaultHTMLElementModels.a;
 
 export default ARenderer;

@@ -4,7 +4,6 @@ import { Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import useTRenderEngine from './hooks/useTRenderEngine';
 import { TransientRenderEngineConfig } from './shared-types';
-import RenderRegistryProvider from './context/RenderRegistryProvider';
 import defaultSystemFonts from './defaultSystemFonts';
 
 const defaultTRenderEngine = {} as any;
@@ -17,7 +16,7 @@ export const tRenderEngineProviderPropTypes: Record<
   keyof TransientRenderEngineConfig,
   any
 > = {
-  renderers: PropTypes.object.isRequired,
+  customHTMLElementModels: PropTypes.object.isRequired,
   enableCSSInlineProcessing: PropTypes.bool,
   enableUserAgentStyles: PropTypes.bool,
   idsStyles: PropTypes.object,
@@ -63,7 +62,7 @@ export const defaultTRenderEngineProviderProps: TransientRenderEngineConfig = {
   classesStyles: {},
   enableUserAgentStyles: true,
   enableCSSInlineProcessing: true,
-  renderers: {},
+  customHTMLElementModels: {},
   fallbackFonts: defaultFallbackFonts,
   systemFonts: defaultSystemFonts,
   triggerTREInvalidationPropNames: []
@@ -92,9 +91,7 @@ export default function TRenderEngineProvider({
   const engine = useTRenderEngine(config);
   return (
     <TRenderEngineContext.Provider value={engine}>
-      <RenderRegistryProvider renderers={config.renderers}>
-        {children}
-      </RenderRegistryProvider>
+      {children}
     </TRenderEngineContext.Provider>
   );
 }

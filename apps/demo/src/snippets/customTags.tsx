@@ -1,5 +1,5 @@
 import React from 'react';
-import { CustomLiteRenderer, HTMLContentModel } from 'react-native-render-html';
+import { HTMLContentModel, HTMLElementModel } from 'react-native-render-html';
 import { Text } from 'react-native';
 import { CustomTextualRenderer } from 'react-native-render-html';
 import { SnippetDeclaration } from '../../types';
@@ -53,14 +53,15 @@ const InlineBar: CustomTextualRenderer = function InlineBar({ key, style }) {
   );
 };
 
-InlineBar.model = {
+const inlineBarModel = HTMLElementModel.fromCustomModel({
+  tagName: 'inlinebar',
   mixedUAStyles: {
     fontFamily: 'serif',
     fontStyle: 'italic',
     color: GREEN
   },
   contentModel: HTMLContentModel.textual
-};
+});
 
 const MixedOtherTag: CustomTextualRenderer = function InlineOtherTag({
   TDefaultRenderer,
@@ -69,27 +70,27 @@ const MixedOtherTag: CustomTextualRenderer = function InlineOtherTag({
   return <TDefaultRenderer {...props}>Mixed!</TDefaultRenderer>;
 };
 
-MixedOtherTag.model = {
+const mixedOtherTagModel = HTMLElementModel.fromCustomModel({
+  tagName: 'myothertag',
   mixedUAStyles: {
     fontFamily: 'serif',
     fontStyle: 'italic',
     color: BLUE
   },
   contentModel: HTMLContentModel.textual
-};
+});
 
-const BlueCirclerRenderer: CustomLiteRenderer<HTMLContentModel.block> = {
-  model: {
-    mixedUAStyles: {
-      width: 50,
-      height: 50,
-      borderRadius: 25,
-      alignSelf: 'center',
-      backgroundColor: BLUE
-    },
-    contentModel: HTMLContentModel.block
-  }
-};
+const blueCircleModel = HTMLElementModel.fromCustomModel({
+  tagName: 'bluecircle',
+  mixedUAStyles: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    alignSelf: 'center',
+    backgroundColor: BLUE
+  },
+  contentModel: HTMLContentModel.block
+});
 
 const customTags: SnippetDeclaration = {
   name: 'Custom Tags',
@@ -98,9 +99,13 @@ const customTags: SnippetDeclaration = {
   props: {
     source: { html },
     renderers: {
-      bluecircle: BlueCirclerRenderer,
       mytag: InlineBar,
       myothertag: MixedOtherTag
+    },
+    customHTMLElementModels: {
+      inlinebar: inlineBarModel,
+      myothertag: mixedOtherTagModel,
+      bluecircle: blueCircleModel
     },
     classesStyles: {
       'make-me-green': { backgroundColor: GREEN },
