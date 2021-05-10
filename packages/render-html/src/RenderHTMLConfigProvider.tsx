@@ -28,7 +28,6 @@ export const renderHTMLConfigPropTypes: RenderHTMLConfigPropTypes = {
   WebView: PropTypes.any,
   GenericPressable: PropTypes.any,
   defaultWebViewProps: PropTypes.object,
-  setMarkersForTNode: PropTypes.func,
   pressableHightlightColor: PropTypes.string,
   customListStyleSpecs: PropTypes.object
 };

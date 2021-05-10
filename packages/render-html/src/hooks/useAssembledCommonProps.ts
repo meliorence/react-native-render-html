@@ -33,13 +33,7 @@ function getStylesForTnode<T extends TNode>(tnode: T): NativeStyleProp<T> {
  * @internal
  */
 export default function useAssembledCommonProps<T extends TNode>(
-  {
-    tnode,
-    key,
-    propsFromParent,
-    markers,
-    sharedProps
-  }: TNodeSubRendererProps<T>,
+  { tnode, key, propsFromParent, sharedProps }: TNodeSubRendererProps<T>,
   TDefault: TDefaultRenderer<T>
 ): {
   assembledProps: CustomTagRendererProps<T> & TDefaultRendererProps<T>;
@@ -50,7 +44,6 @@ export default function useAssembledCommonProps<T extends TNode>(
   const assembledProps: CustomTagRendererProps<T> & TDefaultRendererProps<T> = {
     key,
     tnode,
-    markers,
     propsFromParent,
     sharedProps,
     TDefaultRenderer: TDefault,

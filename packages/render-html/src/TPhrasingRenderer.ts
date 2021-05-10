@@ -9,12 +9,11 @@ export const TDefaultPhrasingRenderer: TDefaultRenderer<TPhrasing> = ({
   children,
   ...props
 }) => {
-  const { tnode, markers: parentMarkers, propsForChildren } = props;
+  const { tnode, propsForChildren } = props;
   const TNodeChildrenRenderer = useTNodeChildrenRenderer();
   const resolvedChildren =
     children ??
     React.createElement(TNodeChildrenRenderer, {
-      parentMarkers,
       tnode,
       propsForChildren
     });
@@ -37,7 +36,6 @@ export default function TPhrasingRenderer(
   // rendering amounts to rendering its only child.
   if (props.tnode.tagName == null && props.tnode.children.length <= 1) {
     return React.createElement(TNodeChildrenRenderer, {
-      parentMarkers: props.markers,
       tnode: props.tnode
     });
   }

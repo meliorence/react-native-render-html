@@ -19,7 +19,8 @@ import type {
   TPhrasing,
   DocumentContext as TREDocumentContext,
   TDocument,
-  DomVisitorCallbacks
+  DomVisitorCallbacks,
+  SetMarkersForTNode
 } from '@native-html/transient-render-engine';
 import type { CounterStyleRenderer } from '@jsamr/counter-style';
 import type { ComponentType, ReactElement, ReactNode } from 'react';
@@ -241,25 +242,6 @@ export interface RenderHTMLSharedProps {
    */
   GenericPressable?: ComponentType<GenericPressableProps>;
   /**
-   * Set custom markers from a TNode and all its descendants. Markers will be
-   * accessible in custom renderers via `markers` prop.
-   *
-   * @param tnode - The TNode to inspect
-   * @param parentMarkers - Markers from the parent TNode.
-   *
-   * @returns a record of markers if one or many markers should be added,
-   * `null` otherwise.
-   *
-   * @remarks
-   * Changes to this prop will cause a react tree update. Always memoize it.
-   *
-   * @defaultValue `() => null`
-   */
-  setMarkersForTNode?: (
-    tnode: TNode,
-    parentMarkers: Markers
-  ) => Partial<Markers> | null;
-  /**
    * Color used for pressable items, either for the ripple effect (Android), or
    * highlight (other platforms).
    *
@@ -420,6 +402,20 @@ export interface TransientRenderEngineConfig {
    */
   emSize?: number;
   /**
+   * Set custom markers from a TNode and all its descendants. Markers will be
+   * accessible in custom renderers via `tnode.markers` prop.
+   *
+   * @param targetMarkers - The markers to modify.
+   * @param parentMarkers - Markers from the parent TNode.
+   * @param tnode - The TNode to inspect
+   *
+   * @remarks
+   * Changes to this prop will cause a react tree update. Always memoize it.
+   *
+   * @defaultValue `() => null`
+   */
+  setMarkersForTNode?: SetMarkersForTNode;
+  /**
    * Name of props which should trigger a rebuild of the Transient Render
    * Engine (TRE).
    *
@@ -568,61 +564,6 @@ export interface FallbackFontsDefinitions {
 }
 
 /**
- * Markers form an abstraction in which one node provides semantic information
- * to itself and all its descendants. For example, `ins` elements, which stand
- * for "insertion" of content in the context of an edit will provide the {
- * edits: 'ins' } marker to all its descendants.
- *
- * Custom renderers can use markers to change their layout and convey their
- * semantic meaning. Markers can be derived from attributes, such as `lang` and
- * `dir` attributes, or tag names, such as `a`, `ins`, `del`...
- */
-export interface Markers extends Record<string, any> {
-  /**
-   * If this node is an `a` or has one as ancestor, this field will be set to
-   * `true`.
-   *
-   * @defaultValue false
-   */
-  anchor: boolean;
-  /**
-   * If this node is a `del` or `ins` or has either as ancestor, this field
-   * will be set accordingly. Otherwise, it will be set to 'none'.
-   *
-   * https://html.spec.whatwg.org/#edits
-   *
-   * @defaultValue 'none'
-   */
-  edits: 'ins' | 'del' | 'none';
-  /**
-   * The direction for this content. Follows `dir` attribute.
-   *
-   * https://html.spec.whatwg.org/#the-dir-attribute
-   *
-   * @defaultValue 'ltr'
-   */
-  direction: 'ltr' | 'rtl';
-  /**
-   * The language for this content. Follows `lang` attribute.
-   *
-   * https://html.spec.whatwg.org/#the-lang-and-xml:lang-attributes
-   */
-  lang: string;
-  /**
-   * * -1: this node is not an `ol` and has no `ol` parents
-   * * 0: this node is an `ol` or has one `ol` parent
-   * * 1: ...
-   */
-  olNestLevel: number;
-  /**
-   * * -1: this node is not an `ul` and has no `ul` parents
-   * * 0: this node is an `ul` or has one `ul` parent
-   * * 1: ...
-   */
-  ulNestLevel: number;
-}
-
-/**
  * Props passed from parents to children.
  *
  * @remarks Anonymous nodes will pass those props from their parents to
@@ -681,7 +622,6 @@ export interface TChildrenBaseProps {
   disableMarginCollapsing?: boolean;
   renderChild?: (props: TChildProps) => ReactNode;
   propsForChildren?: Partial<PropsFromParent>;
-  parentMarkers: Markers;
 }
 
 /**
@@ -708,7 +648,6 @@ export interface TNodeRendererProps<
 > {
   tnode: T;
   key?: string | number;
-  markers: Markers;
   propsFromParent: P;
 }
 

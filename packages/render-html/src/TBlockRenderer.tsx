@@ -9,7 +9,6 @@ import useAssembledCommonProps from './hooks/useAssembledCommonProps';
 export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
   tnode,
   children: overridingChildren,
-  markers,
   style,
   onPress,
   viewProps,
@@ -18,11 +17,7 @@ export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
 }) => {
   const TNodeChildrenRenderer = useTNodeChildrenRenderer();
   const children = overridingChildren ?? (
-    <TNodeChildrenRenderer
-      parentMarkers={markers}
-      tnode={tnode}
-      propsForChildren={propsForChildren}
-    />
+    <TNodeChildrenRenderer tnode={tnode} propsForChildren={propsForChildren} />
   );
   const commonProps = {
     ...viewProps,

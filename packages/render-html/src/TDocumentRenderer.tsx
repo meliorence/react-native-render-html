@@ -2,7 +2,6 @@ import React, { memo, useEffect, useMemo } from 'react';
 import { TDocument } from '@native-html/transient-render-engine';
 import { DocumentMetadata, RenderHTMLSourceProps } from './shared-types';
 import DocumentMetadataProvider from './context/DocumentMetadataProvider';
-import { defaultMarkers } from './helpers/getMarkersFromTNode';
 import TNodeRenderer from './TNodeRenderer';
 
 const TDocumentRenderer = memo(
@@ -38,17 +37,9 @@ const TDocumentRenderer = memo(
     useEffect(() => {
       onDocumentMetadataLoaded?.call(null, metadata);
     }, [onDocumentMetadataLoaded, metadata]);
-    const parentMarkers = useMemo(
-      () => ({
-        ...defaultMarkers,
-        direction: metadata.dir,
-        lang: metadata.lang
-      }),
-      [metadata.dir, metadata.lang]
-    );
     return (
       <DocumentMetadataProvider value={metadata}>
-        <TNodeRenderer parentMarkers={parentMarkers} tnode={tdoc} />
+        <TNodeRenderer tnode={tdoc} />
       </DocumentMetadataProvider>
     );
   }

@@ -92,13 +92,13 @@ export default function ListElement({
   listType,
   style,
   getFallbackListStyleTypeFromNestLevel: getListStyleTypeFromNestLevel,
-  markers,
   enableExperimentalRtl = false,
   enableRemoveTopMarginIfNested = true,
   enableRemoveBottomMarginIfNested = true,
   listStyleSpecs,
   ...props
 }: ListElementProps<any>) {
+  const markers = tnode.markers;
   const nestLevel =
     listType === 'ol' ? markers.olNestLevel : markers.ulNestLevel;
   const TChildrenRenderer = useTChildrenRenderer();
@@ -177,7 +177,6 @@ export default function ListElement({
   return (
     <TDefaultRenderer
       tnode={tnode}
-      markers={markers}
       style={[
         style,
         removeTopMarginStyle,
@@ -185,11 +184,7 @@ export default function ListElement({
         dynamicPaddingStyle
       ]}
       {...props}>
-      <TChildrenRenderer
-        tchildren={tnode.children}
-        renderChild={renderChild}
-        parentMarkers={markers}
-      />
+      <TChildrenRenderer tchildren={tnode.children} renderChild={renderChild} />
     </TDefaultRenderer>
   );
 }

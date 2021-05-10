@@ -17,8 +17,7 @@ export function useTNodeChildrenProps({
   tnode,
   propsForChildren,
   disableMarginCollapsing = false,
-  renderChild,
-  parentMarkers
+  renderChild
 }: TNodeChildrenRendererProps): TChildrenRendererProps {
   const { enableExperimentalMarginCollapsing } = useSharedProps();
   const shouldCollapseChildren =
@@ -27,7 +26,6 @@ export function useTNodeChildrenProps({
     isCollapsible(tnode);
   return {
     propsForChildren,
-    parentMarkers,
     disableMarginCollapsing: !shouldCollapseChildren,
     tchildren: tnode.children,
     renderChild

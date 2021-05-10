@@ -3,39 +3,23 @@ import TBlockRenderer from './TBlockRenderer';
 import TPhrasingRenderer from './TPhrasingRenderer';
 import TTextRenderer from './TTextRenderer';
 import {
-  Markers,
   PropsFromParent,
   TNodeRendererProps,
   TNodeSubRendererProps
 } from './shared-types';
-import { getMarkersFromTNode } from './helpers/getMarkersFromTNode';
 import { useSharedProps } from './context/SharedPropsProvider';
 import { TNode } from '@native-html/transient-render-engine';
 
 export type { TNodeRendererProps } from './shared-types';
 
 const TNodeRenderer = function TNodeRenderer(
-  props: Omit<TNodeRendererProps<any>, 'markers'> & { parentMarkers: Markers }
+  props: TNodeRendererProps<any>
 ): ReactElement<TNodeSubRendererProps<TNode, PropsFromParent>> | null {
   const { tnode } = props;
   const sharedProps = useSharedProps();
-  const markers = getMarkersFromTNode(tnode, props.parentMarkers);
-  const customMarkers = sharedProps.setMarkersForTNode(
-    tnode,
-    props.parentMarkers
-  );
-  const resolvedMarkers =
-    markers && !customMarkers
-      ? markers
-      : !markers && customMarkers
-      ? { ...props.parentMarkers, ...customMarkers }
-      : markers && customMarkers
-      ? ({ ...markers, ...customMarkers } as Markers)
-      : null;
   const tnodeProps = {
     ...props,
-    sharedProps,
-    markers: resolvedMarkers || props.parentMarkers
+    sharedProps
   };
   if (tnode.type === 'block' || tnode.type === 'document') {
     return React.createElement(TBlockRenderer, tnodeProps);
