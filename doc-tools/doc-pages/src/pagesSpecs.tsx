@@ -11,6 +11,7 @@ import PageContentImages from './pages/PageContentImages';
 import PageContentTextual from './pages/PageContentTextual';
 import PageContentLists from './pages/PageContentLists';
 import PageContentAnchors from './pages/PageContentAnchors';
+import PageConceptTRE from './pages/PageConceptTRE';
 
 const Empty = () => {
   const { Header, Paragraph, RefDoc } = useToolkit();
@@ -82,7 +83,7 @@ const pagesIndex: Record<PageId, PageSpecs> = {
     position: 3,
     id: 'transient-render-engine',
     description: defaultDescription,
-    component: Empty
+    component: PageConceptTRE
   },
   'custom-renderers': {
     component: PageGuideCustomRenderers,

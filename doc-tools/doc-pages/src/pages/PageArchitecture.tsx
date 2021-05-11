@@ -104,6 +104,11 @@ export default function PageArchitecture() {
             TNodes are passed to internal and custom renderers.
           </ListItem>
         </List>
+        <Paragraph>
+          For more information on <Acronym name="TRT" /> construction, see{' '}
+          <RefDoc target="transient-render-engine" /> and{' '}
+          <RefDoc target="css-processing" /> pages.
+        </Paragraph>
       </Chapter>
     </Page>
   );
