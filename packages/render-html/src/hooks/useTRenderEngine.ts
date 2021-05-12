@@ -27,6 +27,7 @@ export default function useTRenderEngine(props: TransientRenderEngineConfig) {
     customHTMLElementModels = {},
     emSize,
     setMarkersForTNode,
+    selectDomRoot,
     triggerTREInvalidationPropNames
   } = props;
   const isFontSupported = useMemo(() => {
@@ -74,7 +75,8 @@ export default function useTRenderEngine(props: TransientRenderEngineConfig) {
         ignoredDomTags,
         ignoreDomNode,
         domVisitors,
-        setMarkersForTNode
+        setMarkersForTNode,
+        selectDomRoot
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [...tbuilderDeps, isFontSupported]
