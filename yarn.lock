@@ -4039,23 +4039,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@native-html/css-processor@npm:1.8.0":
-  version: 1.8.0
-  resolution: "@native-html/css-processor@npm:1.8.0"
+"@native-html/css-processor@npm:1.8.1":
+  version: 1.8.1
+  resolution: "@native-html/css-processor@npm:1.8.1"
   dependencies:
     css-to-react-native: ^3.0.0
   peerDependencies:
     "@types/react-native": "*"
     csstype: ^3.0.4
-  checksum: 729285b387d710b0894f756084d7e6a873080785eb77c92ed1ab1552f0a349c971b357d3be51478dbb6477833ecdc58587e4cc6cbbf9e71ce6543865509f84ec
+  checksum: 6c42ce1fb600b2e59922059453f09ca0ad77a95044efb53378befcb53fc858f762fa5979b4fb44d49de27c01ef32c3cae284d87813a4913e9560f0a7fd3a210c
   languageName: node
   linkType: hard
 
-"@native-html/transient-render-engine@npm:^7.3.0":
-  version: 7.3.0
-  resolution: "@native-html/transient-render-engine@npm:7.3.0"
+"@native-html/transient-render-engine@npm:^8.1.0":
+  version: 8.1.0
+  resolution: "@native-html/transient-render-engine@npm:8.1.0"
   dependencies:
-    "@native-html/css-processor": 1.8.0
+    "@native-html/css-processor": 1.8.1
     "@types/ramda": ^0.27.40
     csstype: ^3.0.8
     domelementtype: ^2.2.0
@@ -4064,7 +4064,7 @@ __metadata:
   peerDependencies:
     "@types/react-native": "*"
     react-native: ^0.63.0
-  checksum: f7239711eb759031d2f828dc676bbce8b93f8af0832abecee8c4928f49897432b304d29e348be9bdfb94a2925f8de7a87cf199b6e8425fcbe825de14f348f1b6
+  checksum: b564204bee03e0e0045cb49570ecfb8dc416349ffcd116e80995677c0ac7d1c7e6f077c7dd04a630e1ceffac983e033eea655068197f0e9d05a1e874012f1fae
   languageName: node
   linkType: hard
 
@@ -20270,7 +20270,7 @@ fsevents@^1.2.7:
     "@jsamr/counter-style": ^2.0.0
     "@jsamr/react-native-li": ^2.1.0
     "@microsoft/api-extractor": ^7.14.0
-    "@native-html/transient-render-engine": ^7.3.0
+    "@native-html/transient-render-engine": ^8.1.0
     "@release-it/conventional-changelog": ^2.0.1
     "@testing-library/react-hooks": ^5.1.2
     "@types/jest": ^26.0.23

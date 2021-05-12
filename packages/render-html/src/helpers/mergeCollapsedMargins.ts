@@ -1,10 +1,9 @@
-import { TNode } from '@native-html/transient-render-engine';
-import { NativeStyleProp } from '../shared-types';
+import { TNodeShape, TNodeType } from '@native-html/transient-render-engine';
 
-export default function mergeCollapsedMargins<T extends TNode>(
+export default function mergeCollapsedMargins<T extends TNodeType>(
   collapsedMarginTop: number | null,
-  nativeStyle: NativeStyleProp<T>
-): NativeStyleProp<T> {
+  nativeStyle: ReturnType<TNodeShape<T>['getNativeStyles']>
+): ReturnType<TNodeShape<T>['getNativeStyles']> {
   if (typeof collapsedMarginTop !== 'number') {
     return nativeStyle;
   }

@@ -104,8 +104,7 @@ export default function ListElement({
   const TChildrenRenderer = useTChildrenRenderer();
   const rtl =
     enableExperimentalRtl &&
-    (tnode.styles.nativeBlockFlow.direction === 'rtl' ||
-      markers.direction === 'rtl');
+    (style.direction === 'rtl' || markers.direction === 'rtl');
   const removeTopMarginStyle =
     enableRemoveTopMarginIfNested &&
     tnode.parent?.tagName === 'li' &&
@@ -166,7 +165,7 @@ export default function ListElement({
   const fixedPaddingRule = rtl
     ? ('paddingRight' as const)
     : ('paddingLeft' as const);
-  const paddingValue = tnode.styles.nativeBlockRet[fixedPaddingRule];
+  const paddingValue = style[fixedPaddingRule];
   const dynamicPaddingStyle = {
     position: 'relative' as const,
     [fixedPaddingRule]:

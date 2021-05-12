@@ -1,6 +1,6 @@
-import { NativeStyleProp } from '../shared-types';
 import pick from 'ramda/src/pick';
 import omit from 'ramda/src/omit';
+import { TNodeShape, TNodeType } from '@native-html/transient-render-engine';
 
 const borderBoxProps = [
   'backgroundColor',
@@ -37,7 +37,9 @@ const omitBorderBox = omit(borderBoxProps);
  *
  * @param styles - The native styles to split.
  */
-export default function splitBoxModelStyle(style: NativeStyleProp<any>) {
+export default function splitBoxModelStyle(
+  style: ReturnType<TNodeShape<TNodeType>['getNativeStyles']>
+) {
   return {
     boxModelStyle: pickBorderBox(style),
     otherStyle: omitBorderBox(style)

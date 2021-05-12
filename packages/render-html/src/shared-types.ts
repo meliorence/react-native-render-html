@@ -14,7 +14,6 @@ import type {
   TNode,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   TNodeType,
-  TBlock,
   TText,
   TPhrasing,
   DocumentContext as TREDocumentContext,
@@ -32,7 +31,6 @@ import type {
   CSSPropertyNameList,
   MixedStyleDeclaration
 } from '@native-html/css-processor';
-import type { TStylesShape } from '@native-html/transient-render-engine';
 import type { CustomTagRendererRecord } from './render/render-types';
 import type { ParserOptions as HtmlParserOptions } from 'htmlparser2';
 
@@ -621,33 +619,6 @@ export interface PropsFromParent extends Record<string, any> {
 }
 
 /**
- * Mixed styles which can be passed to `View` elements.
- *
- * @public
- */
-export type NativeBlockStyles = TStylesShape['nativeBlockFlow'] &
-  TStylesShape['nativeBlockRet'];
-
-/**
- * Mixed styles which can be passed to `Text` elements.
- *
- * @public
- */
-export type NativeTextStyles = TStylesShape['nativeBlockFlow'] &
-  TStylesShape['nativeBlockRet'] &
-  TStylesShape['nativeTextFlow'] &
-  TStylesShape['nativeTextRet'];
-
-/**
- * Mixed styles supported by a TNode.
- *
- * @public
- */
-export type NativeStyleProp<T extends TNode> = T extends TBlock
-  ? NativeBlockStyles
-  : NativeTextStyles;
-
-/**
  * Props to render a child.
  *
  * @public
@@ -767,9 +738,9 @@ export interface DefaultTagRendererProps<
   P extends PropsFromParent = PropsFromParent
 > extends TRendererBaseProps<T, P> {
   /**
-   * Styles extracted from tnode.style
+   * Styles extracted with tnode.getNativeStyles
    */
-  style: NativeStyleProp<T>;
+  style: ReturnType<T['getNativeStyles']>;
   /**
    * Props shared across the whole render tree.
    */
