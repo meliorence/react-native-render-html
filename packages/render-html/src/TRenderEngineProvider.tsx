@@ -37,6 +37,9 @@ export const tRenderEngineProviderPropTypes: Record<
     monospace: PropTypes.string
   }),
   setMarkersForTNode: PropTypes.func,
+  dangerouslyDisableHoisting: PropTypes.bool,
+  dangerouslyDisableWhitespaceCollapsing: PropTypes.bool,
+  selectDomRoot: PropTypes.func,
   triggerTREInvalidationPropNames: PropTypes.arrayOf(PropTypes.string)
 };
 
