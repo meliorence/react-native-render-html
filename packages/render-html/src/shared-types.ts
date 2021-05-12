@@ -23,7 +23,8 @@ import type {
   SetMarkersForTNode,
   HTMLContentModel,
   CustomElementModel,
-  HTMLElementModel
+  HTMLElementModel,
+  TRenderEngineOptions
 } from '@native-html/transient-render-engine';
 import type { CounterStyleRenderer } from '@jsamr/counter-style';
 import type { ComponentType, ReactElement, ReactNode } from 'react';
@@ -364,6 +365,16 @@ export interface TransientRenderEngineConfig {
    * overhead.
    */
   ignoredDomTags?: string[];
+  /**
+   * Select the DOM root before TTree generation. For example, you could
+   * iterate over children until you reach an article element and return this
+   * element.
+   *
+   * @remarks Applied after DOM parsing, before normalization and TTree
+   * construction. Before normalization implies that a body will be added in
+   * the tree **after** selecting root.
+   */
+  selectDomRoot?: TRenderEngineOptions['selectDomRoot'];
   /**
    * Whitelist specific inline CSS style properties and ignore the others.
    *
