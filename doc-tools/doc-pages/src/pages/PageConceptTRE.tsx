@@ -1,7 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import Page from '../Page';
 import useToolkit from '../toolkit/useToolkit';
+
+function ListItemCode({ name, children }: PropsWithChildren<{ name: string }>) {
+  const { ListItem, InlineCode } = useToolkit();
+  return (
+    <ListItem>
+      <InlineCode>{name}</InlineCode>
+      {': '}
+      {children}
+    </ListItem>
+  );
+}
 
 export default function PageConceptTRE() {
   const {
@@ -114,8 +125,8 @@ export default function PageConceptTRE() {
             <Bold>The Hoisting Constraint</Bold> in the <Acronym name="TRT" />{' '}
             results in enforcing <Bold>The View Constraint</Bold> at render
             time. You can disable <Bold>hoisting</Bold> via{' '}
-            <Bold>TODO MAKE PROP AVAIL</Bold> prop, but be advised this is yet
-            experimental.
+            <RefRenderHtmlProp name="dangerouslyDisableHoisting" /> prop, but be
+            advised this is yet experimental.
           </Paragraph>
         </Section>
         <Section title="Whitespace Collapsing">
@@ -127,12 +138,66 @@ export default function PageConceptTRE() {
               CSS Text Module Level 3
             </Hyperlink>{' '}
             standard, by which unsignificant white-spaces are removed from the{' '}
-            <Acronym name="TRT" />.
+            <Acronym name="TRT" />. You can disable <Bold>hoisting</Bold> via{' '}
+            <RefRenderHtmlProp name="dangerouslyDisableWhitespaceCollapsing" />{' '}
+            prop, but be advised this is yet experimental.
           </Paragraph>
         </Section>
       </Chapter>
       <Chapter title="Anatomy of a TNode">
-        <Paragraph>Blah blah blah</Paragraph>
+        <Paragraph>
+          A <InlineCode>TNode</InlineCode> has the following fields:
+        </Paragraph>
+        <List>
+          <ListItemCode name="attributes">
+            The list of attributes attached to the underlying DOM Node.
+          </ListItemCode>
+          <ListItemCode name="id">
+            The id attached to the underlying DOM Node.
+          </ListItemCode>
+          <ListItemCode name="classes">
+            An array of classes associated with the underlying DOM Node.
+          </ListItemCode>
+          <ListItemCode name="domNode">
+            The underlying DOM Node, if present.
+          </ListItemCode>
+          <ListItemCode name="styles">
+            A <InlineCode>TStylesShape</InlineCode> record of styles grouped by
+            scopes.
+          </ListItemCode>
+          <ListItemCode name="tagName">
+            The tag name attached to the underlying DOM Node.
+          </ListItemCode>
+          <ListItemCode name="parent">
+            The parent <InlineCode>TNode</InlineCode>, if present, determined{' '}
+            <Bold>before hoisting</Bold>.
+          </ListItemCode>
+          <ListItemCode name="nodeIndex">
+            The position of this element relative to its parent,{' '}
+            <Bold>before hoisting</Bold> and{' '}
+            <Bold>after whitespace collapsing</Bold>.
+          </ListItemCode>
+          <ListItemCode name="children">
+            An array of <InlineCode>TNode</InlineCode> descendents to this node.
+          </ListItemCode>
+          <ListItemCode name="type">
+            The <Bold>type</Bold> of this <InlineCode>TNode</InlineCode>. Either{' '}
+            <Bold>text</Bold>, <Bold>phrasing</Bold>, <Bold>block</Bold>,{' '}
+            <Bold>document</Bold> or <Bold>empty</Bold>.
+          </ListItemCode>
+          <ListItemCode name="markers">
+            A registry of markers for this <InlineCode>TNode</InlineCode>.
+          </ListItemCode>
+          <ListItemCode name="snapshot()">
+            A utility function to create a JSX-like string representation of
+            this node and its children. <Bold>Very handy for debugging.</Bold>
+          </ListItemCode>
+        </List>
+        <Admonition type="warning">
+          The <InlineCode>styles</InlineCode> field <Bold>is not</Bold>{' '}
+          consumable as a React Native component <InlineCode>style</InlineCode>{' '}
+          prop.
+        </Admonition>
       </Chapter>
       <Chapter title="CSS Processing and Styles">
         <Paragraph>Blah blah blah</Paragraph>

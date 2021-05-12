@@ -441,6 +441,24 @@ export interface TransientRenderEngineConfig {
    */
   setMarkersForTNode?: SetMarkersForTNode;
   /**
+   * **Experimental**
+   *
+   * Disable hoisting. Especially useful for rendering with react-native-web.
+   * Note that your layout might break in native!
+   *
+   * @defaultValue false
+   */
+  dangerouslyDisableHoisting?: boolean;
+  /**
+   * **Experimental**
+   *
+   * Disable whitespace collapsing. Especially useful if your html is
+   * being pre-processed server-side with a minifier.
+   *
+   * @defaultValue false
+   */
+  dangerouslyDisableWhitespaceCollapsing?: boolean;
+  /**
    * Name of props which should trigger a rebuild of the Transient Render
    * Engine (TRE).
    *
