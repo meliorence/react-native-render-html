@@ -8,7 +8,7 @@ const html = `<p style="text-align:center">
   Those are inline images!<br/><br/>
   <strong>before</strong>
   <img src="https://www.fillmurray.com/50/50" width="50" height="50" />&nbsp;
-  <img src="https://www.fillmurray.com/70/50" width="70" height="50" />
+  <img src="https://www.fillmurray.com/70/50" width="70" height="50" />&nbsp;
   <strong>after</strong>
 </p>`;
 
@@ -20,8 +20,7 @@ const inlineImagesConfig: UIRenderHtmlCardProps = {
       img: defaultHTMLElementModels.img.extend({
         contentModel: HTMLContentModel.mixed
       })
-    },
-    debug: true
+    }
   },
   exprSrcMap: {
     customHTMLElementModels: `{

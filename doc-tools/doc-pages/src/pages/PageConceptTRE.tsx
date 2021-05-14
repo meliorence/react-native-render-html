@@ -34,6 +34,85 @@ export default function PageConceptTRE() {
         This article is an introduction to the <Acronym name="TRE" />{' '}
         architecture.
       </Paragraph>
+      <Chapter title="Element Models">
+        <Paragraph>
+          <Bold>Element models</Bold> form the building block of the engine.
+          These models specify how a DOM element of a peculiar tag should be
+          translated. You can tamper with those models and add you own models,
+          making this library extremly customizable.
+        </Paragraph>
+        <Section title="HTMLElementModel">
+          <Paragraph>
+            To each standard tag is attached an <Bold>element model</Bold>,
+            instance of the <InlineCode>HTMLElementModel</InlineCode> class.
+            Such model has multiple fields describing different behaviors
+            related to translation of those DOM elements:
+          </Paragraph>
+          <List>
+            <ListItemCode name="contentModel">
+              How should this tag be translated? See next chapter.
+            </ListItemCode>
+            <ListItemCode name="isVoid">
+              Will be <InlineCode>true</InlineCode> for void aka{' '}
+              <Hyperlink url="https://developer.mozilla.org/en-US/docs/Glossary/Empty_element">
+                empty elements
+              </Hyperlink>{' '}
+              , e.g. DOM elements which can't have children.
+            </ListItemCode>
+            <ListItemCode name="isOpaque">
+              Will be <InlineCode>true</InlineCode> for those elements which
+              children should not be translated. Useful for{' '}
+              <RefHtmlElement name="svg" /> and other custom markups.
+            </ListItemCode>
+            <ListItemCode name="mixedUAStyles">
+              Mixed User-Agent styles, e.g. default styles for this element.
+              This is how default styles are set for tags.
+            </ListItemCode>
+            <ListItemCode name="getUADerivedStyleFromAttributes">
+              A function which returns mixed UA styles given the DOM node{' '}
+              <Bold>attributes</Bold> and <InlineCode>TNode</InlineCode>{' '}
+              <Bold>markers</Bold>.
+            </ListItemCode>
+          </List>
+        </Section>
+        <Section title="HTMLContentModel">
+          <Paragraph>
+            There are 4 content models that can be attached to a tag:
+          </Paragraph>
+          <List>
+            <ListItem>
+              <Bold>textual</Bold> for elements which can be translated to{' '}
+              <InlineCode>TText</InlineCode> or{' '}
+              <InlineCode>TPhrasing</InlineCode>. Examples:{' '}
+              <RefHtmlElement name="span" />, <RefHtmlElement name="strong" />{' '}
+              ...
+            </ListItem>
+            <ListItem>
+              <Bold>block</Bold> for elements which can only be translated to
+              <InlineCode>TBlock</InlineCode>. Examples:{' '}
+              <RefHtmlElement name="div" />, <RefHtmlElement name="p" />,{' '}
+              <RefHtmlElement name="article" /> ...
+            </ListItem>
+            <ListItem>
+              <Bold>mixed</Bold> (rare) for elements which can be translated to
+              <InlineCode>TText</InlineCode>, <InlineCode>TPhrasing</InlineCode>{' '}
+              or <InlineCode>TBlock</InlineCode>. The sole mixed elements are{' '}
+              <RefHtmlElement name="a" />, <RefHtmlElement name="ins" /> and{' '}
+              <RefHtmlElement name="del" />.
+            </ListItem>
+            <ListItem>
+              <Bold>none</Bold> for element which shall not be rendered.
+              Examples: <RefHtmlElement name="button" />,{' '}
+              <RefHtmlElement name="map" /> ...
+            </ListItem>
+          </List>
+          <Paragraph>
+            A powerful feature of the <Bold>Foundry</Bold> engine is that the
+            models attached to a tag name can be customized! See the{' '}
+            <RefDoc target="custom-renderers" /> page.
+          </Paragraph>
+        </Section>
+      </Chapter>
       <Chapter title="Steps">
         <Paragraph>
           The <Acronym name="TRT" /> construction is broadly comprised of three
@@ -53,22 +132,35 @@ export default function PageConceptTRE() {
             </ListItem>
             <ListItem>
               Text nodes will be translated to <InlineCode>TText</InlineCode>,
-              and will be merged with a parent textual DOM element when they are
-              its only child. For example, a Text node with no siblings which
-              parent is a <RefHtmlElement name="span" /> will be merged into a{' '}
-              <InlineCode>TText</InlineCode> which{' '}
-              <InlineCode>tagName</InlineCode> is "span".
+              and will be merged with a parent DOM element if the parent's{' '}
+              <Bold>content model</Bold> is <Bold>textual</Bold> or{' '}
+              <Bold>mixed</Bold> when they are its only child. For example, a
+              Text node with no siblings which parent is a{' '}
+              <RefHtmlElement name="span" /> will be merged into a{' '}
+              <InlineCode>TText</InlineCode> with
+              <InlineCode>tagName</InlineCode> set to "span".
             </ListItem>
             <ListItem>
-              Textual DOM elements with multiple children will be translated to{' '}
+              DOM elements which content model is <Bold>textual</Bold> with
+              multiple children will be translated to{' '}
               <InlineCode>TPhrasing</InlineCode> nodes.
             </ListItem>
             <ListItem>
-              Translatable non-textual DOM elements will be translated to{' '}
+              DOM elements with children which <Bold>content model</Bold> is{' '}
+              <Bold>mixed</Bold> will be translated to{' '}
+              <InlineCode>TPhrasing</InlineCode> if they only have{' '}
+              <InlineCode>TPhrasing</InlineCode> or{' '}
+              <InlineCode>TText</InlineCode> children,
+              <InlineCode>TBlock</InlineCode> otherwise.
+            </ListItem>
+            <ListItem>
+              DOM elements which <Bold>content model</Bold> is{' '}
+              <Bold>block</Bold> will be translated to{' '}
               <InlineCode>TBlock</InlineCode> nodes.
             </ListItem>
             <ListItem>
-              Finally, untranslatable DOM elements will be translated to{' '}
+              Finally, DOM elements which <Bold>content model</Bold> is{' '}
+              <Bold>none</Bold> will be translated to{' '}
               <InlineCode>TEmpty</InlineCode>.
             </ListItem>
             <ListItem>
@@ -83,8 +175,8 @@ export default function PageConceptTRE() {
             it is an interactive element such as a form, input or button.
           </Admonition>
           <Paragraph>
-            In addition during translation, inline styles, User Agent styles and
-            mixed styles are processed by the CSS Processor, see{' '}
+            In addition, inline styles, User Agent styles and mixed styles are
+            processed by the CSS Processor, see{' '}
             <RefDoc target="css-processing" /> for more details.
           </Paragraph>
         </Section>
