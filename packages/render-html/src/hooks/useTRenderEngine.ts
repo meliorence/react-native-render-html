@@ -47,7 +47,7 @@ export default function useTRenderEngine(props: TransientRenderEngineConfig) {
   const tbuilderDeps = (triggerTREInvalidationPropNames || []).map(
     (key) => props[key]
   );
-  const customizeHTMLModels = !Object.keys(customHTMLElementModels).length
+  const customizeHTMLModels = Object.keys(customHTMLElementModels).length
     ? (defaultModels: HTMLModelRecord<TagName>): HTMLModelRecord<TagName> => {
         return { ...defaultModels, ...customHTMLElementModels };
       }

@@ -4,6 +4,10 @@ import RenderHTML from '../RenderHTML';
 import ImgTag from '../elements/IMGElement';
 import TTextRenderer from '../TTextRenderer';
 import { CustomTextualRenderer } from '../render/render-types';
+import {
+  defaultHTMLElementModels,
+  HTMLContentModel
+} from '@native-html/transient-render-engine';
 
 describe('RenderHTML', () => {
   it('should render without error when providing a source', () => {
@@ -36,6 +40,28 @@ describe('RenderHTML', () => {
       />
     );
     expect(UNSAFE_getByType(ImgTag).props.contentWidth).toBe(nextContentWidth);
+  });
+  describe('regarding customHTMLElementsModels prop', () => {
+    it('should support changing block content model to mixed', () => {
+      const contentWidth = 300;
+      const onTTreeChange = jest.fn((ttree) =>
+        expect(ttree.snapshot()).toMatchSnapshot()
+      );
+      render(
+        <RenderHTML
+          source={{ html: '<span><img src="https://img.com/1" /> Text</span>' }}
+          debug={false}
+          customHTMLElementModels={{
+            img: defaultHTMLElementModels.img.extend({
+              contentModel: HTMLContentModel.mixed
+            })
+          }}
+          contentWidth={contentWidth}
+          onTTreeChange={onTTreeChange}
+        />
+      );
+      expect(onTTreeChange).toHaveBeenCalledTimes(1);
+    });
   });
   it('should support fonts from tagsStyles specified in systemFonts', () => {
     const tagsStyles = {
