@@ -1,12 +1,13 @@
 import type { RenderHTMLProps } from 'react-native-render-html';
+import { RendererCardConfig } from './toolkit-types';
 
 function serializeValue(
   key: keyof RenderHTMLProps,
   value: RenderHTMLProps[keyof RenderHTMLProps],
-  fnSrcMap: Record<string, string>,
-  exprSrcMap: Record<string, string>,
+  config: Required<RendererCardConfig>,
   indent: number = 1
 ) {
+  const { exprSrcMap, fnSrcMap } = config;
   let ret = '';
   const pad = '  '.repeat(indent);
   if (key in exprSrcMap) {
@@ -41,8 +42,7 @@ function serializeValue(
           return `${pad}${key}: ${serializeValue(
             key as any,
             val,
-            fnSrcMap,
-            exprSrcMap,
+            config,
             indent + 1
           )}`;
         })
@@ -54,9 +54,9 @@ function serializeValue(
 
 function declareProps(
   props: RenderHTMLProps,
-  fnSrcMap: Record<string, string>,
-  exprSrcMap: Record<string, string>
+  config: Required<RendererCardConfig>
 ) {
+  const { fnSrcMap } = config;
   let output = '';
   for (const key in fnSrcMap) {
     output += `${fnSrcMap[key]}\n\n`;
@@ -67,8 +67,7 @@ function declareProps(
       key as any,
       //@ts-ignore
       props[key],
-      fnSrcMap,
-      exprSrcMap
+      config
     )};\n\n`;
   }
   return output;
@@ -86,14 +85,14 @@ function inlineProps(props: RenderHTMLProps, padLeft: number) {
 
 export default function makeSnippet(
   props: RenderHTMLProps,
-  fnSrcMap: Record<string, string>,
-  exprSrcMap: Record<string, string>
+  config: Required<RendererCardConfig>
 ) {
   return `import React from 'react';
 import { useWindowDimensions } from 'react-native';
 import RenderHtml from 'react-native-render-html';
+${config.importStatements.join('\n')}
 
-${declareProps(props, fnSrcMap, exprSrcMap)}\
+${declareProps(props, config)}\
 export default function App() {
   const { width } = useWindowDimensions();
   return (

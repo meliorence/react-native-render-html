@@ -10,6 +10,7 @@ export type PageId =
   | 'html-processing'
   | 'css-processing'
   | 'transient-render-engine'
+  | 'rendering'
   // guides
   | 'styling-components'
   | 'dom-tampering'

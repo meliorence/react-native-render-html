@@ -22,12 +22,20 @@ const inlineImagesConfig: UIRenderHtmlCardProps = {
       })
     }
   },
-  exprSrcMap: {
-    customHTMLElementModels: `{
-  img: defaultHTMLElementModels.img.extend({
-    contentModel: HTMLContentModel.mixed
-  })
-}`
+  config: {
+    importStatements: [
+      `import {
+  HTMLContentModel,
+  defaultHTMLElementModels
+} from 'react-native-render-html';`
+    ],
+    exprSrcMap: {
+      customHTMLElementModels: `{
+    img: defaultHTMLElementModels.img.extend({
+      contentModel: HTMLContentModel.mixed
+    })
+  }`
+    }
   }
 };
 

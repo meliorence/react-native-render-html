@@ -72,7 +72,7 @@ export default function PageReinventTheWheel() {
           implementation of an HTML renderer in just about{' '}
           <Bold>40 lines of code</Bold>. Of course, it has many limitations that
           are overcomed by <InlineCode>react-native-render-html</InlineCode>,
-          but it will give you a good glimps at how things work internally.
+          but it will give you a good glimpse at how things work internally.
         </Paragraph>
       </Header>
       <Chapter title="Implementation">

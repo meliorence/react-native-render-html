@@ -63,12 +63,17 @@ export interface UIToolkitRefs {
   RefLibrary: ComponentType<{ name: string; url: string }>;
 }
 
+export interface RendererCardConfig {
+  fnSrcMap?: Record<string, string>;
+  exprSrcMap?: Record<string, string>;
+  importStatements?: string[];
+}
+
 export interface UIRenderHtmlCardProps {
   title: string;
   caption?: string;
   props: RenderHTMLProps;
-  fnSrcMap?: Record<string, string>;
-  exprSrcMap?: Record<string, string>;
+  config?: RendererCardConfig;
 }
 
 export interface UIToolkit extends UIToolkitBase, UIToolkitRefs {
