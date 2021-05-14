@@ -1,6 +1,7 @@
 {
   "name": "@doc/mdx-gen-cli",
   "private": true,
+  "type": "commonjs",
   "bin": {
     "doc-mdx-gen-cli": "lib/index.js"
   },
