@@ -5,12 +5,12 @@ import useToolkit from '../toolkit/useToolkit';
 const inlineExample = `<img
   width="1200" height="800"
   style="width: 50%; height: 100px; align-self: center"
-  src="https://i.imgur.com/gSmWCJF.jpg"
+  src="http://placeimg.com/1200/800/nature"
 />`;
 
 const autoSizeExample = `<img
   width="1200" height="800"
-  src="https://i.imgur.com/XP2BE7q.jpg"
+  src="http://placeimg.com/1200/800/nature"
 />`;
 
 const unreachableExample = `<img

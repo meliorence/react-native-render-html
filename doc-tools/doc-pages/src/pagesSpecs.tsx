@@ -5,13 +5,14 @@ import PageIntroduction from './pages/PageIntroduction';
 import PageReinventTheWheel from './pages/PageReinventTheWheel';
 import PageArchitecture from './pages/PageArchitecture';
 import PageGuideCustomRenderers from './pages/PageGuideCustomRenderers';
-import PageGuideDomTampering from './pages/PageGuideCustomRenderers';
+import PageGuideDomTampering from './pages/PageGuideDomTampering';
 import PageGuideStylingComponents from './pages/PageGuideStylingComponents';
 import PageContentImages from './pages/PageContentImages';
 import PageContentTextual from './pages/PageContentTextual';
 import PageContentLists from './pages/PageContentLists';
 import PageContentAnchors from './pages/PageContentAnchors';
 import PageConceptTRE from './pages/PageConceptTRE';
+import PageConceptRendering from './pages/PageConceptRendering';
 
 const Empty = () => {
   const { Header, Paragraph, RefDoc } = useToolkit();
@@ -85,6 +86,15 @@ const pagesIndex: Record<PageId, PageSpecs> = {
     description: defaultDescription,
     component: PageConceptTRE
   },
+  rendering: {
+    title: 'Rendering',
+    description: '',
+    group: 'concept',
+    iconName: 'react',
+    position: 4,
+    id: 'rendering',
+    component: PageConceptRendering
+  },
   'custom-renderers': {
     component: PageGuideCustomRenderers,
     group: 'guides',
@@ -93,7 +103,7 @@ const pagesIndex: Record<PageId, PageSpecs> = {
     iconName: 'eye-settings',
     id: 'custom-renderers',
     position: 2,
-    title: 'Custom Renderers'
+    title: 'Custom Rendering'
   },
   'dom-tampering': {
     component: PageGuideDomTampering,

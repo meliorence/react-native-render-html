@@ -22,20 +22,25 @@ const bluecircleConfig: UIRenderHtmlCardProps = {
       })
     }
   },
-  exprSrcMap: {
-    customHTMLElementModels: `{
-  bluecircle: HTMLElementModel.fromCustomModel({
-    tagName: 'bluecircle',
-    mixedUAStyles: {
-      width: 50,
-      height: 50,
-      borderRadius: 25,
-      alignSelf: 'center',
-      backgroundColor: 'blue'
-    },
-    contentModel: HTMLContentModel.block
-  })
-}`
+  config: {
+    importStatements: [
+      "import { HTMLElementModel, HTMLContentModel } from 'react-native-render-html';"
+    ],
+    exprSrcMap: {
+      customHTMLElementModels: `{
+    bluecircle: HTMLElementModel.fromCustomModel({
+      tagName: 'bluecircle',
+      mixedUAStyles: {
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        alignSelf: 'center',
+        backgroundColor: 'blue'
+      },
+      contentModel: HTMLContentModel.block
+    })
+  }`
+    }
   }
 };
 
