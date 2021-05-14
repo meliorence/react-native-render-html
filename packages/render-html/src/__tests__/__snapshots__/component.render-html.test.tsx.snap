@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RenderHTML regarding customHTMLElementsModels prop should support changing block content model to mixed 1`] = `
+"<TDocument tagName=\\"html\\">
+  <TBlock tagName=\\"body\\">
+    <TPhrasing anonymous>
+      <TPhrasing tagName=\\"span\\">
+        <TText tagName=\\"img\\" data=\\"\\" src=\\"https://img.com/1\\" />
+        <TText anonymous data=\\"Text\\" />
+      </TPhrasing>
+    </TPhrasing>
+  </TBlock>
+</TDocument>
+"
+`;
