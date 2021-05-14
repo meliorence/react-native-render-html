@@ -63,12 +63,16 @@ export interface UIToolkitRefs {
   RefLibrary: ComponentType<{ name: string; url: string }>;
 }
 
+export interface UIRenderHtmlCardProps {
+  title: string;
+  caption?: string;
+  props: RenderHTMLProps;
+  fnSrcMap?: Record<string, string>;
+  exprSrcMap?: Record<string, string>;
+}
+
 export interface UIToolkit extends UIToolkitBase, UIToolkitRefs {
-  RenderHtmlCard: ComponentType<{
-    title: string;
-    caption?: string;
-    props: RenderHTMLProps;
-  }>;
+  RenderHtmlCard: ComponentType<UIRenderHtmlCardProps>;
   RefDoc: ComponentType<{ target: PageId }>;
   Acronym: ComponentType<{ name: Acronym }>;
   SvgFigure: ComponentType<{ asset: SvgAssetType }>;

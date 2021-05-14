@@ -60,12 +60,18 @@ export default function ToolkitProvider({
     () => ({
       ...other,
       ...buildRefs(RefBuilder),
-      RenderHtmlCard({ title, caption, props }) {
+      RenderHtmlCard({
+        title,
+        caption,
+        props,
+        fnSrcMap = {},
+        exprSrcMap = {}
+      }) {
         return (
           <RenderHtmlCard
             title={title}
             caption={caption}
-            snippet={makeSnippet(props)}
+            snippet={makeSnippet(props, fnSrcMap, exprSrcMap)}
             props={props}
           />
         );

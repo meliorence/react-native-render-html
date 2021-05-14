@@ -1,18 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { PropsWithChildren } from 'react';
 import Page from '../Page';
+import ListItemCode from '../components/ListItemCode';
 import useToolkit from '../toolkit/useToolkit';
-
-function ListItemCode({ name, children }: PropsWithChildren<{ name: string }>) {
-  const { ListItem, InlineCode } = useToolkit();
-  return (
-    <ListItem>
-      <InlineCode>{name}</InlineCode>
-      {': '}
-      {children}
-    </ListItem>
-  );
-}
 
 export default function PageConceptTRE() {
   const {
@@ -28,6 +18,7 @@ export default function PageConceptTRE() {
     RefHtmlElement,
     RefCssProperty,
     RefRenderHtmlProp,
+    RefHtmlAttr,
     RefDoc,
     RenderHtmlCard,
     Section,
@@ -91,6 +82,11 @@ export default function PageConceptTRE() {
             custom HTML element model registered for it. An other reason is that
             it is an interactive element such as a form, input or button.
           </Admonition>
+          <Paragraph>
+            In addition during translation, inline styles, User Agent styles and
+            mixed styles are processed by the CSS Processor, see{' '}
+            <RefDoc target="css-processing" /> for more details.
+          </Paragraph>
         </Section>
         <Section title="Hoisting">
           <Paragraph>
@@ -146,7 +142,7 @@ export default function PageConceptTRE() {
       </Chapter>
       <Chapter title="Anatomy of a TNode">
         <Paragraph>
-          A <InlineCode>TNode</InlineCode> has the following fields:
+          A <InlineCode>TNode</InlineCode> has the following relevant fields:
         </Paragraph>
         <List>
           <ListItemCode name="attributes">
@@ -160,10 +156,6 @@ export default function PageConceptTRE() {
           </ListItemCode>
           <ListItemCode name="domNode">
             The underlying DOM Node, if present.
-          </ListItemCode>
-          <ListItemCode name="styles">
-            A <InlineCode>TStylesShape</InlineCode> record of styles grouped by
-            scopes.
           </ListItemCode>
           <ListItemCode name="tagName">
             The tag name attached to the underlying DOM Node.
@@ -186,7 +178,8 @@ export default function PageConceptTRE() {
             <Bold>document</Bold> or <Bold>empty</Bold>.
           </ListItemCode>
           <ListItemCode name="markers">
-            A registry of markers for this <InlineCode>TNode</InlineCode>.
+            A registry of markers for this <InlineCode>TNode</InlineCode>. See
+            explaination in below section.
           </ListItemCode>
           <ListItemCode name="snapshot()">
             A utility function to create a JSX-like string representation of
@@ -194,16 +187,30 @@ export default function PageConceptTRE() {
           </ListItemCode>
         </List>
         <Admonition type="warning">
-          The <InlineCode>styles</InlineCode> field <Bold>is not</Bold>{' '}
-          consumable as a React Native component <InlineCode>style</InlineCode>{' '}
-          prop.
+          The <InlineCode>styles</InlineCode> field which is not listed here{' '}
+          <Bold>is not</Bold> consumable as a React Native component{' '}
+          <InlineCode>style</InlineCode> prop.
         </Admonition>
       </Chapter>
-      <Chapter title="CSS Processing and Styles">
-        <Paragraph>Blah blah blah</Paragraph>
-      </Chapter>
       <Chapter title="Markers">
-        <Paragraph>Blah blah blah</Paragraph>
+        <Paragraph>
+          Markers form an abstraction in which one{' '}
+          <InlineCode>TNode</InlineCode> provides semantic information to itself
+          and all its descendants. For example, <RefHtmlElement name="ins" />{' '}
+          elements, which stand for "insertion" of content in the context of an
+          edit will provide the <InlineCode>edits</InlineCode> marker with value{' '}
+          <InlineCode>"ins"</InlineCode> to all its descendants. Similarly,{' '}
+          <RefHtmlElement name="a" />, <RefHtmlElement name="ol" /> and{' '}
+          <RefHtmlElement name="ul" /> elements will set their own markers. List
+          markers such as <InlineCode>olNestLevel</InlineCode> are integers
+          which are incremented each time a list is nested.
+        </Paragraph>
+        <Paragraph>
+          Markers can also be derived from attributes. This is the case with{' '}
+          <RefHtmlAttr name="dir" /> and <RefHtmlAttr name="lang" /> attributes.
+          Finally, you can customize the markers extraction logic with{' '}
+          <RefRenderHtmlProp name="setMarkersForTNode" /> prop.
+        </Paragraph>
       </Chapter>
     </Page>
   );
