@@ -75,7 +75,7 @@ function useUriSourceLoader({ source, onHTMLLoaded }: UriSourceLoaderProps) {
   return loadState;
 }
 
-export default function UriSourceLoader(props: UriSourceLoaderProps) {
+export default function SourceLoaderUri(props: UriSourceLoaderProps) {
   const { remoteErrorView, remoteLoadingView } = useContext(
     sourceLoaderContext
   );
@@ -87,7 +87,7 @@ export default function UriSourceLoader(props: UriSourceLoaderProps) {
     return remoteLoadingView!.call(null, props.source);
   }
   return React.createElement(RenderTTree, {
-    html: resolvedHTML!,
+    document: resolvedHTML!,
     baseUrl: props.source.uri
   });
 }

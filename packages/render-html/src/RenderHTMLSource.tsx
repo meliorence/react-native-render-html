@@ -4,16 +4,19 @@ import { Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
 import ttreeEventsContext from './context/ttreeEventsContext';
 import isUriSource from './helpers/isUriSource';
-import InlineSourceLoader from './InlineSourceLoader';
 import { SourceLoaderProps, TTreeEvents } from './internal-types';
 import {
+  RenderHTMLSourceDom,
   RenderHTMLSourceInline,
   RenderHTMLSourceProps,
   RenderHTMLSourceUri
 } from './shared-types';
-import UriSourceLoader from './UriSourceLoader';
+import SourceLoaderUri from './SourceLoaderUri';
+import SourceLoaderInline from './SourceLoaderInline';
+import SourceLoaderDom from './SourceLoaderDom';
 import debugMessage from './debugMessages';
 import contentWidthContext from './context/contentWidthContext';
+import isDomSource from './helpers/isDomSource';
 
 export type RenderHTMLSourcePropTypes = Record<
   keyof RenderHTMLSourceProps,
@@ -40,12 +43,17 @@ export const renderSourcePropTypes: RenderHTMLSourcePropTypes = {
 };
 
 function isEmptySource(
-  source: undefined | RenderHTMLSourceUri | RenderHTMLSourceInline
+  source:
+    | undefined
+    | RenderHTMLSourceUri
+    | RenderHTMLSourceInline
+    | RenderHTMLSourceDom
 ) {
   return (
     !source ||
     (typeof (source as RenderHTMLSourceUri).uri !== 'string' &&
-      !(source as RenderHTMLSourceInline).html)
+      typeof (source as RenderHTMLSourceInline).html !== 'string' &&
+      !(source as RenderHTMLSourceDom).dom)
   );
 }
 
@@ -60,9 +68,12 @@ function RawSourceLoader({
     return null;
   }
   if (isUriSource(source)) {
-    return React.createElement(UriSourceLoader, { source, ...props });
+    return React.createElement(SourceLoaderUri, { source, ...props });
   }
-  return React.createElement(InlineSourceLoader, { source, ...props });
+  if (isDomSource(source)) {
+    return React.createElement(SourceLoaderDom, { source, ...props });
+  }
+  return React.createElement(SourceLoaderInline, { source, ...props });
 }
 
 const RenderHTMLSource = memo(

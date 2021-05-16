@@ -1,3 +1,4 @@
+import { DOMDocument, DOMElement } from '@native-html/transient-render-engine';
 import { RenderHTMLProps } from './shared-types';
 
 export type SourceLoaderProps = Pick<
@@ -6,7 +7,7 @@ export type SourceLoaderProps = Pick<
 >;
 
 export interface RenderTTreeProps {
-  html: string;
+  document: string | DOMElement | DOMDocument;
   baseUrl?: string;
 }
 

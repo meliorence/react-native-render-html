@@ -23,7 +23,10 @@ import type {
   HTMLContentModel,
   CustomElementModel,
   HTMLElementModel,
-  TRenderEngineOptions
+  TRenderEngineOptions,
+  DOMNodeWithChildren,
+  DOMElement,
+  DOMDocument
 } from '@native-html/transient-render-engine';
 import type { CounterStyleRenderer } from '@jsamr/counter-style';
 import type { ComponentType, ReactElement, ReactNode } from 'react';
@@ -338,13 +341,23 @@ export interface TransientRenderEngineConfig {
   /**
    * Ignore specific DOM nodes.
    *
+   * **Warning**: when this function is invoked, the node has not yet been
+   * attached to its parent or siblings. Use the second argument (`parent`)
+   * if you need to perform logic based on parent.
+   *
    * @remarks
    * - Use `ignoredDomTags` if you just need to target specific tag names.
    * - The function is applied during DOM parsing, thus with very little
    *   overhead. However, it means that one node next siblings won't be
    *   available since it has not yet been parsed.
+   *
+   * @returns `true` if this node should not be included in the DOM, anything
+   * else otherwise.
    */
-  ignoreDomNode?: (node: DOMNode) => boolean;
+  ignoreDomNode?: (
+    node: DOMNode,
+    parent: DOMNodeWithChildren
+  ) => boolean | void | unknown;
   /**
    * An object which callbacks will be invoked when a DOM element or text node
    * has been parsed and its children attached. This is great to tamper the dom,
@@ -525,11 +538,39 @@ export interface RenderHTMLSourceInline {
 }
 
 /**
+ * A source which content is a DOM tree created by the transient render
+ * engine `parseDocument` method.
+ *
+ * See {@link useAmbientTRenderEngine}.
+ *
+ * @remarks When you use a DOM source, the `onHTMLLoaded` callback will never
+ * be invoked for this source, since the source loader hasn't access to the
+ * HTML source of the DOM.
+ *
+ * @public
+ */
+export interface RenderHTMLSourceDom {
+  /**
+   * A DOM object. This object **must** have been created with
+   * the transient render engine `parseDocument` method.
+   */
+  dom: DOMElement | DOMDocument;
+  /**
+   * The base URL to resolve relative URLs in the HTML code.
+   * See {@link useNormalizedUrl}.
+   */
+  baseUrl?: string;
+}
+
+/**
  * The source to render.
  *
  * @public
  */
-export type RenderHTMLSource = RenderHTMLSourceInline | RenderHTMLSourceUri;
+export type RenderHTMLSource =
+  | RenderHTMLSourceInline
+  | RenderHTMLSourceDom
+  | RenderHTMLSourceUri;
 
 /**
  *
