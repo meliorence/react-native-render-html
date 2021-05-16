@@ -18,10 +18,10 @@ function useInlineSourceLoader({
   return source;
 }
 
-export default function InlineSourceLoader(props: InlineSourceLoaderProps) {
+export default function SourceLoaderInline(props: InlineSourceLoaderProps) {
   const { html } = useInlineSourceLoader(props);
   return React.createElement(RenderTTree, {
-    html,
+    document: html,
     baseUrl: props.source.baseUrl
   });
 }

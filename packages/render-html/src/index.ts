@@ -5,6 +5,7 @@ export {
   DOMElement,
   DOMNode,
   DOMText,
+  DOMNodeWithChildren,
   HTMLContentModel,
   HTMLElementModel,
   TRenderEngine
@@ -46,7 +47,8 @@ export {
 export { default as TNodeRenderer } from './TNodeRenderer';
 export {
   default as TRenderEngineProvider,
-  defaultFallbackFonts
+  defaultFallbackFonts,
+  useAmbientTRenderEngine
 } from './TRenderEngineProvider';
 export { default as RenderHTMLConfigProvider } from './RenderHTMLConfigProvider';
 export { default as RenderHTMLSource } from './RenderHTMLSource';

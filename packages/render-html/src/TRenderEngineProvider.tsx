@@ -71,6 +71,13 @@ export const defaultTRenderEngineProviderProps: TransientRenderEngineConfig = {
   triggerTREInvalidationPropNames: []
 };
 
+/**
+ * Use the ambient transient render engine.
+ *
+ * @returns The ambient transient render engine.
+ *
+ * @public
+ */
 export function useAmbientTRenderEngine() {
   const engine = React.useContext(TRenderEngineContext);
   if (__DEV__ && engine === defaultTRenderEngine) {
