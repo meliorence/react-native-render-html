@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import Page from '../Page';
 import useToolkit from '../toolkit/useToolkit';
@@ -21,16 +22,28 @@ const unreachableExample = `<img
 
 export default function PageContentImages() {
   const {
+    Acronym,
+    Admonition,
+    Bold,
     Header,
     Paragraph,
     Chapter,
-    Admonition,
-    RefHtmlElement,
-    RefRenderHtmlProp,
+    SourceDisplay,
+    RefLibrary,
     RefRNSymbol,
+    RefHtmlElement,
+    RefCssProperty,
     RefESSymbol,
+    RefRenderHtmlProp,
     RefHtmlAttr,
-    RenderHtmlCard
+    RefDoc,
+    RenderHtmlCard,
+    Section,
+    InlineCode,
+    Hyperlink,
+    List,
+    ListItem,
+    SvgFigure
   } = useToolkit();
   return (
     <Page>
@@ -65,6 +78,7 @@ export default function PageContentImages() {
             'This image dimensions are set with inline styles. Note that both the width/height couple and the style attributes are evaluated, but the style attribute takes precedence. The relative width (50%) is computed against contentWidth.'
           }
           props={{ source: { html: inlineExample } }}
+          preferHtmlSrc
         />
         <Paragraph>
           The next image will be sized automatically thanks to the{' '}
@@ -80,6 +94,7 @@ export default function PageContentImages() {
             "This image has no inline style. Its width and height are determined by the width and height attributes, scaled down to fit the result of computeEmbeddedMaxWidth('img')."
           }
           props={{ source: { html: autoSizeExample } }}
+          preferHtmlSrc
         />
       </Chapter>
       <Chapter title="Preloading">
@@ -99,6 +114,7 @@ export default function PageContentImages() {
             'When an image is unreachable, the image renderer will print a box while preserving its requested dimensions. It will also display at the center of the box the content of alt attribute.'
           }
           props={{ source: { html: unreachableExample } }}
+          preferHtmlSrc
         />
       </Chapter>
     </Page>
