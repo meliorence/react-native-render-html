@@ -21,7 +21,7 @@ import generateLines, { SimpleNode } from './generateLines';
 
 export interface HighlighterProps extends ViewProps {
   content: string;
-  language: 'html' | 'js' | 'jsx';
+  language: 'html' | 'js' | 'jsx' | 'xml';
   highlightJsStyle: HighlightJsStyles;
   fontSize?: number;
   fontFamily?: string;
