@@ -9,19 +9,24 @@ import { useColorRoles } from '../theme/colorSystem';
 import TextRoleNucleon from './nucleons/TextRoleNucleon';
 import { useNuclearContentWidth } from './nucleons/useContentWidthContext';
 import { PropsWithStyle } from './nucleons/types';
-import { RenderHTMLProps } from 'react-native-render-html';
+import {
+  RenderHTMLProps,
+  RenderHTMLSourceInline
+} from 'react-native-render-html';
 import { StyleSheet } from 'react-native';
 
 export default function RenderHtmlCardOrganism({
   props: renderHtmlProps,
   caption,
   snippet,
-  style
+  style,
+  preferHtmlSrc
 }: PropsWithStyle<{
   props: RenderHTMLProps;
   title: string;
   snippet: string;
   caption?: string;
+  preferHtmlSrc: boolean;
 }>) {
   const hzSpace = useSpacing(0);
   const vtSpace = useSpacing(0);
@@ -43,13 +48,23 @@ export default function RenderHtmlCardOrganism({
       ]}>
       <Stack space={2}>
         <ScrollView style={{ flexGrow: 0 }} horizontal>
-          <UISourceDisplayMolecule
-            paddingVertical={2}
-            style={sourceDisplayStyle}
-            content={snippet}
-            language="jsx"
-            showLineNumbers
-          />
+          {preferHtmlSrc ? (
+            <UISourceDisplayMolecule
+              paddingVertical={2}
+              style={sourceDisplayStyle}
+              content={(renderHtmlProps.source as RenderHTMLSourceInline).html}
+              language="html"
+              showLineNumbers={false}
+            />
+          ) : (
+            <UISourceDisplayMolecule
+              paddingVertical={2}
+              style={sourceDisplayStyle}
+              content={snippet}
+              language="jsx"
+              showLineNumbers
+            />
+          )}
         </ScrollView>
         <BoxNucleon alignX="center">
           <IconNucleon size={30} name="transfer-down" />
