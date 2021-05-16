@@ -13,6 +13,7 @@ import PageContentLists from './pages/PageContentLists';
 import PageContentAnchors from './pages/PageContentAnchors';
 import PageConceptTRE from './pages/PageConceptTRE';
 import PageConceptRendering from './pages/PageConceptRendering';
+import PageConceptCSS from './pages/PageConceptCSS';
 
 const Empty = () => {
   const { Header, Paragraph, RefDoc } = useToolkit();
@@ -65,8 +66,8 @@ const pagesIndex: Record<PageId, PageSpecs> = {
     position: 4,
     id: 'css-processing',
     group: 'concept',
-    description: defaultDescription,
-    component: Empty
+    description: 'An overview of CSS processing in react-native-render-html.',
+    component: PageConceptCSS
   },
   'html-processing': {
     title: 'HTML Processing',
@@ -83,12 +84,14 @@ const pagesIndex: Record<PageId, PageSpecs> = {
     group: 'concept',
     position: 3,
     id: 'transient-render-engine',
-    description: defaultDescription,
+    description:
+      'An overview of the transient render engine features in react-native-render-html.',
     component: PageConceptTRE
   },
   rendering: {
     title: 'Rendering',
-    description: '',
+    description:
+      'An overview of the rendering step in react-native-render-html.',
     group: 'concept',
     iconName: 'react',
     position: 4,

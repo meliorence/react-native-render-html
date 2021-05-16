@@ -74,6 +74,7 @@ export interface UIRenderHtmlCardProps {
   caption?: string;
   props: RenderHTMLProps;
   config?: RendererCardConfig;
+  preferHtmlSrc?: boolean;
 }
 
 export interface UIToolkit extends UIToolkitBase, UIToolkitRefs {
@@ -91,6 +92,7 @@ export type UIToolkitConfig = {
     title: string;
     caption?: string;
     props: RenderHTMLProps;
+    preferHtmlSrc: boolean;
   }>;
   RefDoc: ComponentType<{ target: PageSpecs }>;
   Acronym: ComponentType<AcronymDefinition>;

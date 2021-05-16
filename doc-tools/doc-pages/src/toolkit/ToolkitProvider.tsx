@@ -60,7 +60,13 @@ export default function ToolkitProvider({
     () => ({
       ...other,
       ...buildRefs(RefBuilder),
-      RenderHtmlCard({ title, caption, props, config: renderConfig }) {
+      RenderHtmlCard({
+        title,
+        caption,
+        props,
+        config: renderConfig,
+        preferHtmlSrc = false
+      }) {
         return (
           <RenderHtmlCard
             title={title}
@@ -71,6 +77,7 @@ export default function ToolkitProvider({
               importStatements: [],
               ...renderConfig
             })}
+            preferHtmlSrc={preferHtmlSrc}
             props={props}
           />
         );
