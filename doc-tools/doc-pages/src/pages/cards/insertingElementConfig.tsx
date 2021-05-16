@@ -4,7 +4,7 @@ import { Element } from 'domhandler';
 import { DOMElement } from 'react-native-render-html';
 
 const html = `
-<article>
+<article data-cover-src="https://picsum.photos/640/360">
   <p style="padding: 10px;">
     Lorem ipsum dolor sit amet, consectetur adipiscing
     elit, sed do eiusmod tempor incididunt ut labore et
@@ -20,31 +20,37 @@ const html = `
 `;
 
 function onElement(element: DOMElement) {
-  // Add an image as first child of every article.
+  // Add an image extracted from data-cover-src
+  // attr as first child of every article.
   if (element.tagName === 'article') {
-    const img = new Element('img', {
-      src: 'https://picsum.photos/640/360',
-      alt: 'A random picture'
-    });
-    prependChild(element, img);
+    const cover = element.attribs['data-cover-src'];
+    if (cover) {
+      const img = new Element('img', {
+        src: cover
+      });
+      prependChild(element, img);
+    }
   }
 }
 
 const onElementSrc = `function onElement(element) {
-  // Add an image as first child of every article.
+  // Add an image extracted from data-cover-src
+  // attr as first child of every article.
   if (element.tagName === 'article') {
-    const img = new Element('img', {
-      src: 'https://picsum.photos/640/360',
-      alt: 'A random picture'
-    });
-    prependChild(element, img);
+    const cover = element.attribs['data-cover-src'];
+    if (cover) {
+      const img = new Element('img', {
+        src: cover
+      });
+      prependChild(element, img);
+    }
   }
 }`;
 
 const insertingElementConfig: UIRenderHtmlCardProps = {
   title: 'DOM Visitor to Insert Content',
   caption:
-    'A DOM Visitor which inserts an img element at the top of every article.',
+    'Usage of domVisitors.onElement to insert an <img> element at the top of every article thanks to "prependChild" function from domutils. The source is extracted from the "data-cover-src" attribute of the article element.',
   props: {
     source: { html },
     domVisitors: {

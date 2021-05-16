@@ -43,7 +43,8 @@ const onElementSrc = `function onElement(element) {
 
 const removeOlChildrenConfig: UIRenderHtmlCardProps = {
   title: 'DOM Visitor to Remove First Two Children of an Ol tag',
-  caption: 'A DOM Visitor to Remove First Two Children of an Ol tag.',
+  caption:
+    'Usage of domVisitors.onElement to remove the first two children of ol tags thanks to "removeElement" from domutils. Note that "isTag" from domutils is used to check if the children is a DOM element.',
   props: {
     source: { html },
     domVisitors: {

@@ -13,7 +13,9 @@ const html = `<p style="text-align:center">
 </p>`;
 
 const inlineImagesConfig: UIRenderHtmlCardProps = {
-  title: 'A Children Tampering example',
+  title: 'Customizing Content Model',
+  caption:
+    'A usage of customHTMLElementModels prop to change the content model of <img> tags thanks to "extend" method of HTMLElementModel.',
   props: {
     source: { html },
     customHTMLElementModels: {

@@ -14,7 +14,7 @@ const onTextSrc = `function onText(text) {
 const replaceDataConfig: UIRenderHtmlCardProps = {
   title: 'Altering Text Data',
   caption:
-    'A DOM Visitor to resolve handlebar-style variable in text nodes data.',
+    'Usage of domVisitors.onText to resolve handlebar-style variable in text nodes data. Note that this example might cost render time on very big documents since it will apply to every text node. You might want to add conditional logic to target text nodes children of specific tags.',
   props: {
     source: { html },
     domVisitors: {

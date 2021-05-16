@@ -5,7 +5,8 @@ const html = '<bluecircle></bluecircle>';
 
 const bluecircleConfig: UIRenderHtmlCardProps = {
   title: 'A Custom Tag Example',
-  caption: 'A Custom Tag rendered by defining an element model for this tag.',
+  caption:
+    'A Custom Tag rendered by defining an element model for this tag via HTMLElementModel.fromCustomModel.',
   props: {
     source: { html },
     customHTMLElementModels: {
