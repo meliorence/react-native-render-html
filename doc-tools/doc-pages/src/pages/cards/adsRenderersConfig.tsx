@@ -84,11 +84,18 @@ const props: RenderHTMLProps = {
 };
 
 const adsRenderersConfig: UIRenderHtmlCardProps = {
-  title: 'A Children Tampering example',
+  title: 'Inserting Elements at Render Time',
+  caption:
+    'A custom renderer taking advantage of "TChildrenRenderer" component. When "TDefaultRenderer" is given children, those will replace the default children rendering logic, allowing great customizability.',
   props,
-  fnSrcMap: {
-    AdComponent: adComponentSrc,
-    ArticleWithAds: articleWithAdsSource
+  config: {
+    importStatements: [
+      "import { TChildrenRenderer } from 'react-native-render-html';"
+    ],
+    fnSrcMap: {
+      AdComponent: adComponentSrc,
+      ArticleWithAds: articleWithAdsSource
+    }
   }
 };
 

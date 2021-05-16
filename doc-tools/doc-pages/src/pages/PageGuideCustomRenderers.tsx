@@ -150,11 +150,21 @@ export default function PageGuideDomTampering() {
           <RenderHtmlCard {...simpleCustomRenderersConfig} />
           <Admonition type="tip">
             The wrapper component injected when handling{' '}
-            <InlineCode>onPress</InlineCode> for non-textual{' '}
-            <InlineCode>TNodes</InlineCode> is defined by the{' '}
+            <InlineCode>onPress</InlineCode> for <InlineCode>TBlock</InlineCode>{' '}
+            nodes is defined by the{' '}
             <RefRenderHtmlProp name="GenericPressable" /> prop. You can also
             customize the highlight color with{' '}
-            <RefRenderHtmlProp name="pressableHightlightColor" />.
+            <RefRenderHtmlProp name="pressableHightlightColor" />. Also note
+            that <InlineCode>onPress</InlineCode> works with textual nodes, in
+            which case the eponym prop of React Native{' '}
+            <RefRNSymbol name="Text" /> element will be used instead.
+          </Admonition>
+          <Admonition type="tip">
+            <InlineCode>TDefaultRenderer</InlineCode> can receive{' '}
+            <InlineCode>textProps</InlineCode> prop which will be used when
+            rendering a <InlineCode>Text</InlineCode> element, and{' '}
+            <InlineCode>viewProps</InlineCode> for <InlineCode>View</InlineCode>{' '}
+            elements.
           </Admonition>
         </Section>
         <Section title="Children Tampering">
@@ -171,12 +181,9 @@ export default function PageGuideDomTampering() {
             rendering logic.
           </Paragraph>
           <Admonition type="tip">
-            <InlineCode>TDefaultRenderer</InlineCode> can receive{' '}
-            <InlineCode>onPress</InlineCode> prop,{' '}
-            <InlineCode>textProps</InlineCode> when rendering a{' '}
-            <InlineCode>Text</InlineCode> element, and{' '}
-            <InlineCode>viewProps</InlineCode> when rendering a{' '}
-            <InlineCode>View</InlineCode> element.
+            <InlineCode>TChildrenRenderer</InlineCode> can receive a{' '}
+            <InlineCode>renderChild</InlineCode> prop to customize the rendering
+            logic for each child.
           </Admonition>
         </Section>
         <Section title="Renderer Props Summary">

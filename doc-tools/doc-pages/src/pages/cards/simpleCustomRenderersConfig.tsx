@@ -48,9 +48,14 @@ const props: RenderHTMLProps = {
 };
 
 const simpleCustomRenderersConfig: UIRenderHtmlCardProps = {
-  title: 'A simple custom renderer',
+  title: 'A Custom Renderer Making H1 Interactive',
+  caption:
+    'A custom renderer taking advantage of onPress prop available in TDefaultRenderer passed component.',
   props,
-  fnSrcMap: { H1Renderer: h1RendererSrc }
+  config: {
+    importStatements: ["import { Alert } from 'react-native';"],
+    fnSrcMap: { H1Renderer: h1RendererSrc }
+  }
 };
 
 export default simpleCustomRenderersConfig;

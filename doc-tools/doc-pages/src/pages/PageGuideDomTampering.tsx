@@ -9,8 +9,57 @@ import removeOlChildrenConfig from './cards/removeOlChildrenConfig';
 import replaceDataConfig from './cards/replaceDataConfig';
 import insertingElementConfig from './cards/insertingElementConfig';
 import ignoreDomNodeConfig from './cards/ignoreDomNodeConfig';
+import selectDomRootConfig from './cards/selectDomRootConfig';
 
-export default function PageGuideCustomRenderers() {
+const prerenderingSrc = `import React, { useState, useEffect, useMemo } from 'react';
+import {
+  TRenderEngineProvider,
+  RenderHTMLConfigProvider,
+  RenderHTMLSource,
+  useAmbientTRenderEngine
+} from 'react-native-render-html';
+import { findAll } from 'domutils';
+
+function isImgElement(node) {
+  return node.name === 'img';
+}
+
+function RenderSource({ html }) {
+  const [isDomReady, setIsDomReady] = useState(false);
+  // Let's use the TRE provided from the root of our app
+  // via TRenderEngineProvider to build the DOM
+  const engine = useAmbientTRenderEngine();
+  const dom = useMemo(() => engine.parseDocument(html), [html, engine]);
+  // Use effect to inspect the DOM
+  useEffect(function inspectDom(){
+    // Do any pre-rendering logic here
+    const images = findAll(isImgElement, dom, true);
+    // Do stuff with images such as preloading
+    // ...
+    // When preloading is done, set isDomReady to true!
+    setIsDomReady(true);
+  },[dom]);
+  return isDomReady ?
+    <RenderHTMLSource source={{ dom }} />
+    : null;
+}
+
+const html = \`
+hello world!
+<img src='https://img.io/001.jpg' />
+\`
+
+export default function App() {
+  return (
+    <TRenderEngineProvider>
+      <RenderHTMLConfigProvider>
+        <RenderSource html={html} />
+      </RenderHTMLConfigProvider>
+    </TRenderEngineProvider>
+  );
+}`;
+
+export default function PageGuideDomTampering() {
   const {
     Acronym,
     Admonition,
@@ -46,10 +95,9 @@ export default function PageGuideCustomRenderers() {
         </Paragraph>
         <Admonition type="caution">
           One important downside is that{' '}
-          <Bold>
-            a DOM node next sibling and parent won't have been parsed yet
-          </Bold>
-          . However, the children of this node are guaranteed to be ready.
+          <Bold>a DOM node next sibling won't have been parsed yet</Bold>.
+          However, the children and parent of this node are guaranteed to be
+          attached to this node.
         </Admonition>
       </Header>
       <Chapter title="Altering the DOM Tree">
@@ -104,30 +152,80 @@ export default function PageGuideCustomRenderers() {
         <Section title="Example: Ignoring Nodes Conditionally">
           <RenderHtmlCard {...ignoreDomNodeConfig} />
           <Admonition type="caution">
-            As stated before, <InlineCode>node.parent</InlineCode> will always
-            be <InlineCode>null</InlineCode> at parse time. If you need to
-            ignore a node based on its parents, you have to use an{' '}
-            <InlineCode>onElement</InlineCode> callback (
-            <RefRenderHtmlProp name="domVisitors" />
-            ) and remove anchors children of <RefHtmlElement name="div" />{' '}
-            elements, or ignore this node at render time.
+            When <InlineCode>ignoreDomNode</InlineCode> is invoked, the passed
+            node has not been attached to his parent yet. But the parent is
+            given as a second argument.
           </Admonition>
         </Section>
       </Chapter>
-      <Chapter title="Root Selection"></Chapter>
+      <Chapter title="Root Selection">
+        <Paragraph>
+          This library provides <RefRenderHtmlProp name="selectDomRoot" /> prop
+          to select a subtree to render. See example below:
+        </Paragraph>
+        <RenderHtmlCard {...selectDomRootConfig} />
+        <Admonition type="note">
+          When <RefRenderHtmlProp name="selectDomRoot" /> returns a falsy value,
+          the initial root will be selected.
+        </Admonition>
+      </Chapter>
       <Chapter title="Prerendering">
         <Paragraph>
           In some scenarios, you might want to inspect the DOM{' '}
           <Bold>before</Bold> rendering, and even perform asynchronous
-          operations based on your findings. This is possible thanks to the
-          extremely flexible Rendering layer (see <RefDoc target="rendering" />
-          ). Use cases might involve, for example:
+          operations based on your findings. Use cases might involve, for
+          example:
         </Paragraph>
         <List>
           <ListItem>Fetching data from a Web API;</ListItem>
           <ListItem>Pre-caching media assets.</ListItem>
         </List>
       </Chapter>
+      <Paragraph>
+        To do so, we will take advantage of the decoupled{' '}
+        <RefDoc target="rendering" /> architecture and the dom source feature:
+      </Paragraph>
+      <SourceDisplay
+        showLineNumbers={true}
+        content={prerenderingSrc}
+        lang="jsx"
+      />
+      <Paragraph>Let's note a few important details in this example:</Paragraph>
+      <List>
+        <ListItem>
+          <InlineCode>TRenderEngineProvider</InlineCode> accepts all{' '}
+          <InlineCode>RenderHTML</InlineCode> component props pertaining to the{' '}
+          <RefDoc target="transient-render-engine" /> layer such as{' '}
+          <RefRenderHtmlProp name="customHTMLElementModels" />,{' '}
+          <RefRenderHtmlProp name="classesStyles" /> (all styling props) and DOM
+          related such as <RefRenderHtmlProp name="domVisitors" />,{' '}
+          <RefRenderHtmlProp name="selectDomRoot" />
+          ...
+        </ListItem>
+        <ListItem>
+          <InlineCode>RenderHTMLConfigProvider</InlineCode> accepts all{' '}
+          <InlineCode>RenderHTML</InlineCode> component props pertaining to the{' '}
+          <RefDoc target="rendering" /> layer such as{' '}
+          <RefRenderHtmlProp name="renderers" />,{' '}
+          <RefRenderHtmlProp name="renderersProps" />,{' '}
+          <RefRenderHtmlProp name="computeEmbeddedMaxWidth" />, ...
+        </ListItem>
+        <ListItem>
+          <InlineCode>RenderHTMLSource</InlineCode> accepts all{' '}
+          <InlineCode>RenderHTML</InlineCode> component props pertaining to the
+          document such as <RefRenderHtmlProp name="source" />,{' '}
+          <RefRenderHtmlProp name="onTTreeChange" />,{' '}
+          <RefRenderHtmlProp name="contentWidth" />
+          ...
+        </ListItem>
+        <ListItem>
+          The general recommendation for this three-layers rendering
+          architecture is that the engine and configuration should be put near
+          the top of your App to factor the cost of instantiating the engine.
+          This is especially usefull for apps which will render hundreds to
+          thousands of small snippets such as chat apps.
+        </ListItem>
+      </List>
     </Page>
   );
 }
