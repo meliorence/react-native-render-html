@@ -39,7 +39,8 @@ const headerImagesMap: Record<PageId, number> = {
   'dom-tampering': fallbackAsset,
   'styling-components': fallbackAsset,
   anchors: fallbackAsset,
-  textual: fallbackAsset
+  textual: fallbackAsset,
+  'reinvent-the-wheel': fallbackAsset
 };
 
 interface GroupDefinition {

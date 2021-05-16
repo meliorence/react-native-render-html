@@ -75,6 +75,7 @@ function HtmlDisplayBox({ html, style }: { html: string; style?: any }) {
         content={html}
         paddingVertical={2}
         language="html"
+        showLineNumbers={false}
       />
     </SourceBoxAtom>
   );
@@ -109,9 +110,11 @@ export default function SheetSourceRoute() {
             <HtmlDisplayBox html={html} />
           </SourceRouteSection>
           <SourceRouteSection title="Transient Render Tree">
-            <SourceBoxAtom padding={2}>
-              <UITTreeDisplayMolecule ttree={ttree} />
-            </SourceBoxAtom>
+            <UITTreeDisplayMolecule
+              paddingVertical={2}
+              clipLines
+              ttree={ttree}
+            />
           </SourceRouteSection>
         </Stack>
       </BoxNucleon>

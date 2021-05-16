@@ -1,5 +1,5 @@
 import React from 'react';
-import { usePageUIToolkit } from '@doc/pages';
+import { useToolkit } from '@doc/pages';
 import TextRoleNucleon from '../nucleons/TextRoleNucleon';
 import PlaygroundTemplate, {
   PlaygroundControls,
@@ -208,7 +208,7 @@ function UnorderedListTypeTide(props: any) {
 }
 
 export default function PlaygroundLists() {
-  const { RefCssProperty, RefHtmlElement } = usePageUIToolkit();
+  const { RefCssProperty, RefHtmlElement } = useToolkit();
   return (
     <PlaygroundTemplate sourceMap={sourceMap} initialSource="shortOl">
       <PlaygroundControls>

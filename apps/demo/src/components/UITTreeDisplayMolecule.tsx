@@ -1,23 +1,27 @@
-import React from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
-import { TNode, tnodeToString } from 'react-native-render-html';
-import TextRoleNucleon from './nucleons/TextRoleNucleon';
+import React, { useMemo } from 'react';
+import { TNode } from 'react-native-render-html';
+import { HighlighterProps } from '../highlight/Highlighter';
+import { TextRoleNucleonProps } from './nucleons/TextRoleNucleon';
+import UISourceDisplayMolecule from './UISourceDisplayMolecule';
 
 export default function UITTreeDisplayMolecule({
   ttree,
-  style
+  ...props
 }: {
   ttree?: TNode;
-  style?: StyleProp<ViewStyle>;
+  style?: HighlighterProps['style'];
+  language?: HighlighterProps['language'];
+  paddingVertical?: number;
+  clipLines?: boolean;
+  textRole?: TextRoleNucleonProps['role'];
 }) {
-  const lines = ((ttree && tnodeToString(ttree)) || '').split('\n');
-  return (
-    <View style={style}>
-      {lines.map((t, i) => (
-        <TextRoleNucleon role="source" key={i} numberOfLines={1}>
-          {t}
-        </TextRoleNucleon>
-      ))}
-    </View>
-  );
+  const xml = useMemo(() => ttree?.snapshot(), [ttree]);
+  return xml ? (
+    <UISourceDisplayMolecule
+      showLineNumbers={false}
+      language="xml"
+      content={xml}
+      {...props}
+    />
+  ) : null;
 }
