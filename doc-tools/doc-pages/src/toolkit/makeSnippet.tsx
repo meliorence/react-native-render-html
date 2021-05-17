@@ -1,6 +1,10 @@
 import type { RenderHTMLProps } from 'react-native-render-html';
 import { RendererCardConfig } from './toolkit-types';
 
+function normalizeKey(key: string) {
+  return key.match(/-/) ? `'${key}'` : key;
+}
+
 function serializeValue(
   key: keyof RenderHTMLProps,
   value: RenderHTMLProps[keyof RenderHTMLProps],
@@ -11,6 +15,7 @@ function serializeValue(
   let ret = '';
   const pad = '  '.repeat(indent);
   if (key in exprSrcMap) {
+    console.info('Key in exprSrcMap', key);
     return exprSrcMap[key];
   }
   switch (typeof value) {
@@ -39,7 +44,7 @@ function serializeValue(
       let output = '';
       output = Object.entries(value)
         .map(([key, val]) => {
-          return `${pad}${key}: ${serializeValue(
+          return `${pad}${normalizeKey(key)}: ${serializeValue(
             key as any,
             val,
             config,
