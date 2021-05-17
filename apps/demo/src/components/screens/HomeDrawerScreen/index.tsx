@@ -40,7 +40,8 @@ const headerImagesMap: Record<PageId, number> = {
   'styling-components': fallbackAsset,
   anchors: fallbackAsset,
   textual: fallbackAsset,
-  'reinvent-the-wheel': fallbackAsset
+  'reinvent-the-wheel': fallbackAsset,
+  rendering: fallbackAsset
 };
 
 interface GroupDefinition {

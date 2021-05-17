@@ -9,10 +9,12 @@ export default function MaxWidthContainerAtom({
   style
 }: PropsWithStyle<PropsWithChildren<{}>>) {
   const width = useNuclearContentWidth();
-  const containerWidth = Math.min(width, 700);
+  const containerWidth = Math.min(width, 650);
   return (
     <contentWidthContextNucleon.Provider value={containerWidth}>
-      <View style={[style, { width: containerWidth }]}>{children}</View>
+      <View style={[style, { width: containerWidth, alignSelf: 'center' }]}>
+        {children}
+      </View>
     </contentWidthContextNucleon.Provider>
   );
 }
