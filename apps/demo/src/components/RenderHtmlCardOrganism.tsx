@@ -9,10 +9,7 @@ import { useColorRoles } from '../theme/colorSystem';
 import TextRoleNucleon from './nucleons/TextRoleNucleon';
 import { useNuclearContentWidth } from './nucleons/useContentWidthContext';
 import { PropsWithStyle } from './nucleons/types';
-import {
-  RenderHTMLProps,
-  RenderHTMLSourceInline
-} from 'react-native-render-html';
+import { RenderHTMLProps, HTMLSourceInline } from 'react-native-render-html';
 import { StyleSheet } from 'react-native';
 
 export default function RenderHtmlCardOrganism({
@@ -52,7 +49,7 @@ export default function RenderHtmlCardOrganism({
             <UISourceDisplayMolecule
               paddingVertical={2}
               style={sourceDisplayStyle}
-              content={(renderHtmlProps.source as RenderHTMLSourceInline).html}
+              content={(renderHtmlProps.source as HTMLSourceInline).html}
               language="html"
               showLineNumbers={false}
             />
