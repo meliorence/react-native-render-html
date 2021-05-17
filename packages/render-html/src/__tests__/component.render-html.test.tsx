@@ -8,6 +8,7 @@ import {
   defaultHTMLElementModels,
   HTMLContentModel
 } from '@native-html/transient-render-engine';
+import { StyleSheet } from 'react-native';
 
 describe('RenderHTML', () => {
   it('should render without error when providing a source', () => {
@@ -255,6 +256,43 @@ describe('RenderHTML', () => {
       );
       const em = UNSAFE_getByType(EmRenderer);
       expect(em.props.propsFromParent.test).toBeUndefined();
+    });
+  });
+  describe('regarding enableExperimentalMarginCollapsing prop', () => {
+    it('should collapse margins of sibling children when enabled', () => {
+      const { getByTestId } = render(
+        <RenderHTML
+          source={{
+            html:
+              '<div style="margin-bottom: 10px;"></div><p style="margin-top: 10px;"></p>'
+          }}
+          debug={false}
+          contentWidth={100}
+          enableExperimentalMarginCollapsing
+        />
+      );
+      const div = getByTestId('div');
+      const p = getByTestId('p');
+      expect(StyleSheet.flatten(div.props.style).marginBottom).toBe(10);
+      expect(StyleSheet.flatten(p.props.style).marginTop).toBe(0);
+    });
+
+    it('should not collapse margins of sibling children when disabled', () => {
+      const { getByTestId } = render(
+        <RenderHTML
+          source={{
+            html:
+              '<div style="margin-bottom: 10px;"></div><p style="margin-top: 10px;"></p>'
+          }}
+          debug={false}
+          contentWidth={100}
+          enableExperimentalMarginCollapsing={false}
+        />
+      );
+      const div = getByTestId('div');
+      const p = getByTestId('p');
+      expect(StyleSheet.flatten(div.props.style).marginBottom).toBe(10);
+      expect(StyleSheet.flatten(p.props.style).marginTop).toBe(10);
     });
   });
 });
