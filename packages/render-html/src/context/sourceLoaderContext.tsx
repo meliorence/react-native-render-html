@@ -1,6 +1,6 @@
 import React from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
-import { RenderHTMLConfig, RenderHTMLSourceUri } from '../shared-types';
+import { RenderHTMLConfig, HTMLSourceUri } from '../shared-types';
 
 const styles = StyleSheet.create({
   alignCenter: {
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   }
 });
 
-function defaultRenderError(source: RenderHTMLSourceUri) {
+function defaultRenderError(source: HTMLSourceUri) {
   return (
     <View style={styles.alignCenter}>
       <Text style={styles.errorText}>

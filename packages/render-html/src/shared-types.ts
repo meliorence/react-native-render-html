@@ -499,7 +499,7 @@ export interface TransientRenderEngineConfig {
  *
  * @public
  */
-export interface RenderHTMLSourceUri {
+export interface HTMLSourceUri {
   /**
    * The URI to load in the `HTML` component. Can be a local or remote file.
    */
@@ -525,7 +525,7 @@ export interface RenderHTMLSourceUri {
  *
  * @public
  */
-export interface RenderHTMLSourceInline {
+export interface HTMLSourceInline {
   /**
    * A static HTML page to display in the HTML component.
    */
@@ -549,7 +549,7 @@ export interface RenderHTMLSourceInline {
  *
  * @public
  */
-export interface RenderHTMLSourceDom {
+export interface HTMLSourceDom {
   /**
    * A DOM object. This object **must** have been created with
    * the transient render engine `parseDocument` method.
@@ -567,10 +567,7 @@ export interface RenderHTMLSourceDom {
  *
  * @public
  */
-export type RenderHTMLSource =
-  | RenderHTMLSourceInline
-  | RenderHTMLSourceDom
-  | RenderHTMLSourceUri;
+export type HTMLSource = HTMLSourceInline | HTMLSourceDom | HTMLSourceUri;
 
 /**
  *
@@ -588,11 +585,11 @@ export interface RenderHTMLConfig<
   /**
    * Replace the default loader while fetching a remote website's content.
    */
-  remoteLoadingView?: (source: RenderHTMLSourceUri) => ReactElement;
+  remoteLoadingView?: (source: HTMLSourceUri) => ReactElement;
   /**
    * Replace the default error if a remote website's content could not be fetched.
    */
-  remoteErrorView?: (source: RenderHTMLSourceUri) => ReactElement;
+  remoteErrorView?: (source: HTMLSourceUri) => ReactElement;
 }
 
 /**
@@ -602,9 +599,9 @@ export interface RenderHTMLConfig<
  */
 export interface RenderHTMLSourceProps {
   /**
-   * The object source to render (either `{ uri }` or `{ html }`).
+   * The object source to render (either `{ uri }`, `{ html }` or `{ dom }`).
    */
-  source: RenderHTMLSource;
+  source: HTMLSource;
   /**
    * The width of the HTML content to display. The recommended practice is to pass
    * `useWindowDimensions().width` minus any padding or margins.

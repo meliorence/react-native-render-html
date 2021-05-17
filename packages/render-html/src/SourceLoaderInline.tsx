@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { SourceLoaderProps } from './internal-types';
 import RenderTTree from './RenderTTree';
-import { RenderHTMLSourceInline } from './shared-types';
+import { HTMLSourceInline } from './shared-types';
 
 export type InlineSourceLoaderProps = {
-  source: RenderHTMLSourceInline;
+  source: HTMLSourceInline;
 } & SourceLoaderProps;
 
 function useInlineSourceLoader({

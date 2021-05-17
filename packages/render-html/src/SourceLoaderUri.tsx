@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { RenderHTMLSourceUri } from './shared-types';
+import { HTMLSourceUri } from './shared-types';
 import { SourceLoaderProps } from './internal-types';
 import RenderTTree from './RenderTTree';
 import sourceLoaderContext from './context/sourceLoaderContext';
@@ -18,7 +18,7 @@ const ERROR_STATE = {
 
 async function loadHTMLResource(
   uri: string,
-  { body, headers, method }: Omit<RenderHTMLSourceUri, 'uri'>
+  { body, headers, method }: Omit<HTMLSourceUri, 'uri'>
 ): Promise<LoaderInternalState> {
   const response = await fetch(uri, {
     body,
@@ -37,7 +37,7 @@ async function loadHTMLResource(
 }
 
 export type UriSourceLoaderProps = {
-  source: RenderHTMLSourceUri;
+  source: HTMLSourceUri;
 } & SourceLoaderProps;
 
 function useUriSourceLoader({ source, onHTMLLoaded }: UriSourceLoaderProps) {
