@@ -1,13 +1,13 @@
 import { UIRenderHtmlCardProps } from '../../toolkit/toolkit-types';
 
-const html = `<p style="font-size: 1.2rem; padding: 10px;">
+const html = `<p style="font-size: 1.2rem; padding: 0 10px;">
   Lorem ipsum dolor sit amet, consectetur adipiscing
   elit, sed do eiusmod tempor incididunt ut labore et
   dolore magna aliqua. Ut enim ad minim veniam, quis
   nostrud exercitation ullamco laboris nisi ut aliquip
   ex ea commodo consequat. 
 </p>
-<p style="color: purple; padding: 10px;">
+<p style="color: purple; padding: 0 10px;">
   Duis aute irure dolor in
   reprehenderit in voluptate velit esse cillum dolore
   eu fugiat nulla pariatur. Excepteur sint occaecat

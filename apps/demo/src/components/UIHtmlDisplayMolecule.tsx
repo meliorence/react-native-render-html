@@ -121,7 +121,6 @@ const UIHtmlDisplayMolecule = React.memo(
         tagsStyles={mergedTagsStyles}
         baseStyle={baseStyle}
         enableUserAgentStyles
-        enableExperimentalMarginCollapsing={true}
         systemFonts={SYSTEM_FONTS}
         remoteLoadingView={() => <UIDisplayLoadingAtom />}
         triggerTREInvalidationPropNames={['baseStyle', 'tagsStyles']}
