@@ -89,7 +89,7 @@ export default function PageContentTextual() {
           The default font for the <RefHtmlElement name="pre" /> tag is
           monospace and <RefCssProperty name="white-space" /> property is "pre".
           These default styles are set via the{' '}
-          <InlineCode>defaultUAStyles</InlineCode> associated with this tag. See{' '}
+          <InlineCode>mixedUAStyles</InlineCode> associated with this tag. See{' '}
           <RefDoc target="transient-render-engine" /> page, element model
           section.
         </Admonition>
