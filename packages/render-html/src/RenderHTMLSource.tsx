@@ -31,6 +31,10 @@ export const renderSourcePropTypes: RenderHTMLSourcePropTypes = {
       baseUrl: PropTypes.string
     }),
     PropTypes.shape({
+      dom: PropTypes.object.isRequired,
+      baseUrl: PropTypes.string
+    }),
+    PropTypes.shape({
       uri: PropTypes.string.isRequired,
       method: PropTypes.string,
       body: PropTypes.any,
