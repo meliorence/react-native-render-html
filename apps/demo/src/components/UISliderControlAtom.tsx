@@ -46,6 +46,8 @@ export default function SliderControlAtom({
   return (
     <View style={style}>
       <GestureSlider
+        // Must be reinstantiated after rotations, otherwise crashes.
+        key={syntheticContentWidth}
         style={getFixedStyle(syntheticContentWidth)}
         minimumValue={minimumValue}
         maximumValue={maximumValue}
