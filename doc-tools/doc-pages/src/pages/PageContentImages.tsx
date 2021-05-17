@@ -5,7 +5,7 @@ import useToolkit from '../toolkit/useToolkit';
 
 const inlineExample = `<img
   width="1200" height="800"
-  style="width: 50%; height: 100px; align-self: center"
+  style="width: 50%; height: 100px; align-self: center;"
   src="http://placeimg.com/1200/800/nature"
 />`;
 
