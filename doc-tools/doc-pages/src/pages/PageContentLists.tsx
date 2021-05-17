@@ -151,6 +151,12 @@ export default function PageContentLists() {
           Thanks to <RefRenderHtmlProp name="renderersProps" /> prop, you can
           enable experimental RTL support for lists.
         </Paragraph>
+        <Admonition type="note">
+          For RTL mode to take effect, you need to have a{' '}
+          <RefHtmlAttr name="dir" /> attribute set for the list tag or one of
+          its parents, or the <RefCssProperty name="direction" /> style set for
+          the list tag or one of its parents.
+        </Admonition>
         <Section title="Example: Unordered Lists">
           <RenderHtmlCard {...rtlListDiscConfig} />
         </Section>

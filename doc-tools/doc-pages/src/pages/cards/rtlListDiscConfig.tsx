@@ -1,6 +1,6 @@
 import { UIRenderHtmlCardProps } from '../../toolkit/toolkit-types';
 
-const html = `<ul style="list-style-type: disc;">
+const html = `<ul dir="rtl" style="list-style-type: disc;">
   <li>واحد</li>
   <li>اثنين</li>
   <li>ثلاثة</li>
