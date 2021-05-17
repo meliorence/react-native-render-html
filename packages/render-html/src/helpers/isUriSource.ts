@@ -1,7 +1,7 @@
-import { RenderHTMLSource, RenderHTMLSourceUri } from '../shared-types';
+import { HTMLSource, HTMLSourceUri } from '../shared-types';
 
 export default function isUriSource(
-  source: RenderHTMLSource
-): source is RenderHTMLSourceUri {
+  source: HTMLSource
+): source is HTMLSourceUri {
   return 'uri' in source && typeof source.uri === 'string';
 }

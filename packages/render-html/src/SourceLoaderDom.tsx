@@ -1,10 +1,10 @@
 import React from 'react';
 import { SourceLoaderProps } from './internal-types';
 import RenderTTree from './RenderTTree';
-import { RenderHTMLSourceDom } from './shared-types';
+import { HTMLSourceDom } from './shared-types';
 
 export type DomSourceLoaderProps = {
-  source: RenderHTMLSourceDom;
+  source: HTMLSourceDom;
 } & SourceLoaderProps;
 
 export default function SourceLoaderDom(props: DomSourceLoaderProps) {

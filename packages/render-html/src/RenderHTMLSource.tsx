@@ -6,10 +6,11 @@ import ttreeEventsContext from './context/ttreeEventsContext';
 import isUriSource from './helpers/isUriSource';
 import { SourceLoaderProps, TTreeEvents } from './internal-types';
 import {
-  RenderHTMLSourceDom,
-  RenderHTMLSourceInline,
+  HTMLSourceDom,
+  HTMLSourceInline,
   RenderHTMLSourceProps,
-  RenderHTMLSourceUri
+  HTMLSourceUri,
+  HTMLSource
 } from './shared-types';
 import SourceLoaderUri from './SourceLoaderUri';
 import SourceLoaderInline from './SourceLoaderInline';
@@ -42,18 +43,12 @@ export const renderSourcePropTypes: RenderHTMLSourcePropTypes = {
   contentWidth: PropTypes.number
 };
 
-function isEmptySource(
-  source:
-    | undefined
-    | RenderHTMLSourceUri
-    | RenderHTMLSourceInline
-    | RenderHTMLSourceDom
-) {
+function isEmptySource(source: undefined | HTMLSource) {
   return (
     !source ||
-    (typeof (source as RenderHTMLSourceUri).uri !== 'string' &&
-      typeof (source as RenderHTMLSourceInline).html !== 'string' &&
-      !(source as RenderHTMLSourceDom).dom)
+    (typeof (source as HTMLSourceUri).uri !== 'string' &&
+      typeof (source as HTMLSourceInline).html !== 'string' &&
+      !(source as HTMLSourceDom).dom)
   );
 }
 
