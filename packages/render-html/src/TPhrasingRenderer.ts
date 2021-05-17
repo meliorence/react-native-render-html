@@ -13,7 +13,7 @@ export const TDefaultPhrasingRenderer: TDefaultRenderer<TPhrasing> = ({
   const TNodeChildrenRenderer = useTNodeChildrenRenderer();
   const resolvedChildren =
     children ??
-    React.createElement(TNodeChildrenRenderer, {
+    React.createElement((TNodeChildrenRenderer as unknown) as any, {
       tnode,
       propsForChildren
     });
@@ -35,7 +35,7 @@ export default function TPhrasingRenderer(
   // When a TPhrasing node is anonymous and has only one child, its
   // rendering amounts to rendering its only child.
   if (props.tnode.tagName == null && props.tnode.children.length <= 1) {
-    return React.createElement(TNodeChildrenRenderer, {
+    return React.createElement((TNodeChildrenRenderer as unknown) as any, {
       tnode: props.tnode
     });
   }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { TNode } from '@native-html/transient-render-engine';
 import { useSharedProps } from './context/SharedPropsProvider';
 import TChildrenRenderer, {
@@ -40,9 +40,9 @@ const TNodeWithChildrenRenderer = function TNodeChildrenRenderer(
 
 const TNodeChildrenRenderer = function TNodeChildrenRenderer(
   props: TNodeChildrenRendererProps
-) {
+): ReactNode {
   if (props.tnode.type === 'text') {
-    return <>{props.tnode.data}</>;
+    return props.tnode.data;
   }
   return React.createElement(TNodeWithChildrenRenderer, props);
 };
