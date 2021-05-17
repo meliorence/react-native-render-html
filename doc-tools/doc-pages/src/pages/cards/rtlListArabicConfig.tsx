@@ -1,7 +1,7 @@
 import { UIRenderHtmlCardProps } from '../../toolkit/toolkit-types';
 import arabicIndic from '@jsamr/counter-style/presets/arabicIndic';
 
-const html = `<ol style="list-style-type: arabic-indic;">
+const html = `<ol dir="rtl" style="list-style-type: arabic-indic;">
   <li>واحد</li>
   <li>اثنين</li>
   <li>ثلاثة</li>

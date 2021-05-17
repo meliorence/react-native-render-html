@@ -15,7 +15,6 @@ function serializeValue(
   let ret = '';
   const pad = '  '.repeat(indent);
   if (key in exprSrcMap) {
-    console.info('Key in exprSrcMap', key);
     return exprSrcMap[key];
   }
   switch (typeof value) {
