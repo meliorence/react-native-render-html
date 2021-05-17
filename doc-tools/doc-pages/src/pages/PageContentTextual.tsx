@@ -50,6 +50,13 @@ export default function PageContentTextual() {
           .
         </Paragraph>
         <RenderHtmlCard {...paragraphsConfig} />
+        <Admonition type="caution">
+          <RefRenderHtmlProp name="enableExperimentalMarginCollapsing" /> is
+          considered experimental because the <Acronym name="TRE" /> doesn't
+          support <RefCssProperty name="display" /> CSS property yet. However,
+          margin collapsing should not apply to flex flows while this prop will
+          apply margin collapsing indiscriminitly.
+        </Admonition>
       </Chapter>
       <Chapter title="Whitespace Collapsing">
         <Paragraph>
