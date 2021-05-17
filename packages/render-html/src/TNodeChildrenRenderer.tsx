@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 import { TNode } from '@native-html/transient-render-engine';
 import { useSharedProps } from './context/SharedPropsProvider';
 import TChildrenRenderer, {
@@ -40,9 +40,10 @@ const TNodeWithChildrenRenderer = function TNodeChildrenRenderer(
 
 const TNodeChildrenRenderer = function TNodeChildrenRenderer(
   props: TNodeChildrenRendererProps
-): ReactNode {
+): ReactElement | null {
   if (props.tnode.type === 'text') {
-    return props.tnode.data;
+    // see https://github.com/DefinitelyTyped/DefinitelyTyped/issues/20544
+    return (props.tnode.data as unknown) as ReactElement;
   }
   return React.createElement(TNodeWithChildrenRenderer, props);
 };
