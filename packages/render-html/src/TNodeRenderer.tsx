@@ -36,7 +36,7 @@ const TNodeRenderer = function TNodeRenderer(
         `There is no custom renderer registered for tag "${tnode.tagName}" which is not part of the HTML5 standard. The tag will not be rendered.` +
           ' If you don\'t want this tag to be rendered, add it to "ignoredTags" prop array. If you do, register a custom renderer for this tag.'
       );
-    } else {
+    } else if (tnode.tagName !== 'head') {
       console.warn(
         `The "${tnode.tagName}" tag is a valid HTML element but is not handled by this library. You must register a custom renderer or plugin and make sure its content model is not set to "none".` +
           ' If you don\'t want this tag to be rendered, add it to "ignoredTags" prop array.'
