@@ -7,7 +7,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import CustomDrawerContent from './CustomDrawerContent';
 import DrawerPlaygroundHeader from './DrawerPlaygroundHeader';
 import useSurfaceBackgroundStyleNucleon from '../../nucleons/useSurfaceBackgroundStyleNucleon';
-import { pagesSpecs, PageId, PageGroup } from '@doc/pages';
+import { pagesSpecs, PageGroup } from '@doc/pages';
 import FeatureTemplate from '../../templates/FeatureTemplate';
 import groupBy from './groupBy';
 import PlaygroundLists from '../../resources/PlaygroundLists';
@@ -16,6 +16,7 @@ import {
   ResourceRoute,
   resourceRoutesIndex
 } from '../../../nav-model';
+import imagesMap from '../../../imagesMap';
 
 interface ResourceRouteNav extends ResourceRouteDefinition {
   component: React.ComponentType<any>;
@@ -24,25 +25,6 @@ interface ResourceRouteNav extends ResourceRouteDefinition {
 const Drawer = createDrawerNavigator<Record<ResourceRoute, {}>>();
 
 const initialRouteName: ResourceRoute = 'root-intro';
-
-const fallbackAsset = require('../../../../assets/images/fallback.png');
-
-const headerImagesMap: Record<PageId, number> = {
-  architecture: require('../../../../assets/images/anders-jilden-architecture.jpg'),
-  intro: fallbackAsset,
-  'css-processing': fallbackAsset,
-  'html-processing': fallbackAsset,
-  'transient-render-engine': fallbackAsset,
-  images: require('../../../../assets/images/soragrit-wongsa-pictures.jpg'),
-  lists: fallbackAsset,
-  'custom-renderers': fallbackAsset,
-  'dom-tampering': fallbackAsset,
-  'styling-components': fallbackAsset,
-  anchors: fallbackAsset,
-  textual: fallbackAsset,
-  'reinvent-the-wheel': fallbackAsset,
-  rendering: fallbackAsset
-};
 
 interface GroupDefinition {
   groupLabel: string;
@@ -65,7 +47,7 @@ const groups: Array<GroupDefinition> = Object.entries(specsByGroups).map(
       routes: pages.map<ResourceRouteNav>((page) => ({
         component: function Page() {
           return (
-            <FeatureTemplate imageSource={headerImagesMap[page.id]}>
+            <FeatureTemplate imageSource={imagesMap[page.id]}>
               {React.createElement(page.component)}
             </FeatureTemplate>
           );
