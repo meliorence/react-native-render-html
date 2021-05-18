@@ -35,6 +35,18 @@ export default function MdxToolkitProvider({
       <exposnippet title={title} caption={caption} snippet={snippet} />
     ),
     SourceDisplay: (props) => <codeblockds {...props} />,
+    TNodeTransformDisplay: ({ html, snaphost, caption, title }) => {
+      return (
+        <figure>
+          <strong>{title}</strong>
+          <codeblockds content={html} lang="html" showLineNumbers={false} />
+          {/*@ts-ignore*/}
+          <p align="center">↓</p>
+          <codeblockds content={snaphost} lang="xml" showLineNumbers={false} />
+          {caption && <figcaption>{caption}</figcaption>}
+        </figure>
+      );
+    },
     Admonition: ({ children, type, title }) => (
       <admonition type={type} title={title}>
         {children}

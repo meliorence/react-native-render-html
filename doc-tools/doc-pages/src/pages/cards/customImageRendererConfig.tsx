@@ -25,7 +25,7 @@ function IMGElementContentLoading({
   );
 }
 
-const CustomImageRenderer: CustomBlockRenderer = function CustomImageRenderer(
+const Renderer: CustomBlockRenderer = function CustomImageRenderer(
   props
 ) {
   const imgElementProps = useIMGElementProps(props);
@@ -91,7 +91,7 @@ const customImageRendererConfig: UIRenderHtmlCardProps = {
   props: {
     source: { html },
     renderers: {
-      img: CustomImageRenderer
+      img: Renderer
     }
   },
   config: {

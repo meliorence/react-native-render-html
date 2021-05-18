@@ -25,7 +25,7 @@ const adComponentSrc = `function AdComponent() {
   );
 }`;
 
-const ArticleWithAds: CustomBlockRenderer = function ArticleWithAds({
+const Renderer: CustomBlockRenderer = function ArticleWithAds({
   TDefaultRenderer,
   tnode,
   ...defaultRendererProps
@@ -79,7 +79,7 @@ const props: RenderHTMLProps = {
     }
   },
   renderers: {
-    article: ArticleWithAds
+    article: Renderer
   }
 };
 

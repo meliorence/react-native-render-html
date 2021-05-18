@@ -2150,14 +2150,24 @@ __metadata:
   resolution: "@doc/mdx-gen-cli@workspace:doc-tools/doc-mdx-gen-cli"
   dependencies:
     "@doc/pages": "workspace:*"
+    "@tsconfig/react-native": ^1.0.3
     "@types/fbjs": ^3.0.0
+    "@types/react": ^17.0.4
     "@types/react-reconciler": ^0.26.1
     commander: ^7.2.0
+    esbuild: ^0.12.0
+    esbuild-plugin-alias: ^0.1.2
+    esbuild-plugin-flow: ^0.3.2
+    eslint: ^7.25.0
     fbjs: ^3.0.0
     html-entities: ^2.3.2
+    react: 17.0.2
+    react-native-web: ^0.16.3
     react-reconciler: ^0.26.2
+    react-test-renderer: 17.0.2
+    typescript: ~4.2.4
   bin:
-    doc-mdx-gen-cli: lib/index.js
+    doc-mdx-gen-cli: bin/bundle.js
   languageName: unknown
   linkType: soft
 
@@ -8909,7 +8919,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"create-react-class@npm:^15.6.2":
+"create-react-class@npm:^15.6.2, create-react-class@npm:^15.7.0":
   version: 15.7.0
   resolution: "create-react-class@npm:15.7.0"
   dependencies:
@@ -10383,6 +10393,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-plugin-alias@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "esbuild-plugin-alias@npm:0.1.2"
+  checksum: 44c70cab4c7a2f08573940f6d9877f161b03f00fb7404735cc68954795dc6ad1b82651e60029bb825383c4cd6b47543751d9e094c8544c92472ba62fa4fa19c9
+  languageName: node
+  linkType: hard
+
+"esbuild-plugin-flow@npm:^0.3.2":
+  version: 0.3.2
+  resolution: "esbuild-plugin-flow@npm:0.3.2"
+  dependencies:
+    flow-remove-types: ^2.137.0
+  checksum: ef9dbe6da3635ab57ea57893297d7ed3dc4532a1f8e9408737e93491c54b2139f552e5c90ced96b06fed456294dddb78c28460fa34f357a1656e439f71f622e2
+  languageName: node
+  linkType: hard
+
+"esbuild@npm:^0.12.0":
+  version: 0.12.0
+  resolution: "esbuild@npm:0.12.0"
+  bin:
+    esbuild: bin/esbuild
+  checksum: 73be24fcbd943776f92e2d6f71d0f6a31c9c3426163391e1351eb5f2bbcfed5eece22230319a9f353d20b293a3b50daa81d1b32af587fd0d5ae787d988bb5cdb
+  languageName: node
+  linkType: hard
+
 "escalade@npm:^3.0.2, escalade@npm:^3.1.1":
   version: 3.1.1
   resolution: "escalade@npm:3.1.1"
@@ -11656,6 +11691,27 @@ __metadata:
   version: 3.1.1
   resolution: "flatted@npm:3.1.1"
   checksum: 1065cd78294ea651b8c1b96c298a3e70893a23da655e2288e40c06d5d9b1ebce4bd977e604678e01065a92580f3de5078d60d9ee4cdcede9a9989859d7eb5057
+  languageName: node
+  linkType: hard
+
+"flow-parser@npm:^0.151.0":
+  version: 0.151.0
+  resolution: "flow-parser@npm:0.151.0"
+  checksum: d7c071841aceec1fd448e0e0475794736037133d8c5e968a709766f3feb7f78db2fce8df55382cf0de3f4fcc0ef750a56be0f4016fbfe32c04fd82404ad2ecc2
+  languageName: node
+  linkType: hard
+
+"flow-remove-types@npm:^2.137.0":
+  version: 2.151.0
+  resolution: "flow-remove-types@npm:2.151.0"
+  dependencies:
+    flow-parser: ^0.151.0
+    pirates: ^3.0.2
+    vlq: ^0.2.1
+  bin:
+    flow-node: flow-node
+    flow-remove-types: flow-remove-types
+  checksum: 1d6d135f14086d76df1f4ffe97b3d279eca0578d46d025b8bb3e100693454da9276e32a58b10ca032ab39bf8c443f7a613a4bac454bb652f3f0a12b57107e127
   languageName: node
   linkType: hard
 
@@ -13083,7 +13139,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"hyphenate-style-name@npm:^1.0.2, hyphenate-style-name@npm:^1.0.3":
+"hyphenate-style-name@npm:^1.0.2, hyphenate-style-name@npm:^1.0.3, hyphenate-style-name@npm:^1.0.4":
   version: 1.0.4
   resolution: "hyphenate-style-name@npm:1.0.4"
   checksum: 4cfeb47e98eab9c25e6dece20da772cc914a9f8e5ee794cf8db105b0649dd64a61d8ee8ff32acf23ae0ac181db8fcbe4a6abb2f7de48ae52b42a85bbf1aacb86
@@ -13364,6 +13420,15 @@ fsevents@^1.2.7:
   dependencies:
     css-in-js-utils: ^2.0.0
   checksum: 175c4bc3d1ba599558d3ddc526c6ba4471df8869ab374181c724cbf8015bfe4399fa2b54cbfbfa6b72b6e0c1f1fc07ea8b4dee1c2f4cacc27929ee2c6280e6c8
+  languageName: node
+  linkType: hard
+
+"inline-style-prefixer@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "inline-style-prefixer@npm:6.0.0"
+  dependencies:
+    css-in-js-utils: ^2.0.0
+  checksum: c7067ab95748b51d83004bdbb08964130893341e1026d42f7e519a0ca50c005e755887179bd7010bf0e57ac167c11c91be4b6984a4ba44e41e78125a72f58a58
   languageName: node
   linkType: hard
 
@@ -18805,6 +18870,15 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"pirates@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "pirates@npm:3.0.2"
+  dependencies:
+    node-modules-regexp: ^1.0.0
+  checksum: 20fce260583a809fc724b607d7b7fc7972b5e22643b8ea0531e0685799570879e92dab16b9ab8d2198e2bc53cc269f7c6470572b2db29189310805cc50d5fec0
+  languageName: node
+  linkType: hard
+
 "pirates@npm:^4.0.0, pirates@npm:^4.0.1":
   version: 4.0.1
   resolution: "pirates@npm:4.0.1"
@@ -20385,6 +20459,26 @@ fsevents@^1.2.7:
     react: ">=16.0.0"
     react-test-renderer: ">=16.0.0"
   checksum: 5f8ef603c6c300d785876290e03ea3f0d1b34518e5ded994dc4a1024a3794311e57f2516bdacf01c668edb896ae1d0bffe9461e47dbafe5469ead28f9fd97178
+  languageName: node
+  linkType: hard
+
+"react-native-web@npm:^0.16.3":
+  version: 0.16.3
+  resolution: "react-native-web@npm:0.16.3"
+  dependencies:
+    array-find-index: ^1.0.2
+    create-react-class: ^15.7.0
+    deep-assign: ^3.0.0
+    fbjs: ^3.0.0
+    hyphenate-style-name: ^1.0.4
+    inline-style-prefixer: ^6.0.0
+    normalize-css-color: ^1.0.2
+    prop-types: ^15.6.0
+    react-timer-mixin: ^0.13.4
+  peerDependencies:
+    react: ">=17.0.1"
+    react-dom: ">=17.0.1"
+  checksum: 507e17a38b628e7c46b08e4620c744dd0abd8389fb18053477cbfceba19f1cfa59b85eb6beab73af1af4656758d403e21e67e25e4610b407112de1274eb474f8
   languageName: node
   linkType: hard
 
@@ -24414,6 +24508,13 @@ resolve@~1.19.0:
     unist-util-stringify-position: ^2.0.0
     vfile-message: ^2.0.0
   checksum: ee33bee7fb29cae493c3263c4298a28319ab6383ad2f017c036e7213911c6ca6e25d38e6347e59ab8fd0470b123b5522d1d2f6872e418c2e08fd3216fb160e39
+  languageName: node
+  linkType: hard
+
+"vlq@npm:^0.2.1":
+  version: 0.2.3
+  resolution: "vlq@npm:0.2.3"
+  checksum: 48055a9675a8f58c7e78f02707d0e9daa25a7eacbe49d2b215bf35c05eca6399d4ad645c51a512d05c0acd138fb4c003a0e3534a71338f0f2f634a3746d2f03f
   languageName: node
   linkType: hard
 
