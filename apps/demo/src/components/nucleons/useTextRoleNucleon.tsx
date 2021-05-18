@@ -50,7 +50,7 @@ const roleDefs: Record<
     fontFamily: FONT_BODY_BOLD,
     letterSpacing: 1.2
   },
-  caption: { fontSize: 11, fontFamily: FONT_BODY_ITALIC },
+  caption: { fontSize: 14, fontFamily: FONT_BODY_ITALIC },
   uiDescription: { fontSize: 11, fontFamily: FONT_UI },
   uiLabel: { fontSize: 14, fontFamily: FONT_UI },
   uiMono: { fontSize: 14, fontFamily: FONT_MONO },

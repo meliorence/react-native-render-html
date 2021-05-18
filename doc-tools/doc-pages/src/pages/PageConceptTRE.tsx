@@ -1,8 +1,31 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 import Page from '../Page';
 import ListItemCode from '../components/ListItemCode';
 import useToolkit from '../toolkit/useToolkit';
+import { TRenderEngine } from '@native-html/transient-render-engine';
+
+const translateEngine = new TRenderEngine({
+  dangerouslyDisableHoisting: true,
+  dangerouslyDisableWhitespaceCollapsing: true
+});
+
+const hoistingEngine = new TRenderEngine({
+  dangerouslyDisableHoisting: false,
+  dangerouslyDisableWhitespaceCollapsing: true
+});
+
+const collapsingEngine = new TRenderEngine({
+  dangerouslyDisableHoisting: false,
+  dangerouslyDisableWhitespaceCollapsing: false
+});
+
+const source = `<a href="https://domain.com">
+This is
+<span>phrasing content</span>
+<img src="https://domain.com/logo.jpg" />
+    and this is <strong>too</strong>.
+</a>`;
 
 export default function PageConceptTRE() {
   const {
@@ -26,6 +49,7 @@ export default function PageConceptTRE() {
     Hyperlink,
     List,
     ListItem,
+    TNodeTransformDisplay,
     SvgFigure
   } = useToolkit();
   return (
@@ -179,6 +203,21 @@ export default function PageConceptTRE() {
             processed by the CSS Processor, see{' '}
             <RefDoc target="css-processing" /> for more details.
           </Paragraph>
+          <Paragraph>
+            Below is an example of a <Bold>translation</Bold> transformation
+            from HTML to <Acronym name="TRT" />:
+          </Paragraph>
+          <TNodeTransformDisplay
+            html={source}
+            snaphost={translateEngine.buildTTree(source).snapshot()}
+            caption="This flow depicts the translation step. The TRT is represented in a JSX-like format thanks to TNode.snapshot() method."
+          />
+          <Admonition type="note">
+            You will notice that a <RefHtmlElement name="body" /> has been
+            added, and the root is an instance of{' '}
+            <InlineCode>TDocument</InlineCode>. This process is called{' '}
+            <Bold>normalization</Bold>, and is also performed by Web browsers.
+          </Admonition>
         </Section>
         <Section title="Hoisting">
           <Paragraph>
@@ -216,10 +255,19 @@ export default function PageConceptTRE() {
             <RefRenderHtmlProp name="dangerouslyDisableHoisting" /> prop, but be
             advised this is yet experimental.
           </Paragraph>
+          <Paragraph>
+            Below is an example of <Bold>translation + hoisting</Bold>{' '}
+            transformation from HTML to <Acronym name="TRT" />:
+          </Paragraph>
+          <TNodeTransformDisplay
+            html={source}
+            snaphost={hoistingEngine.buildTTree(source).snapshot()}
+            caption="Notice that contrary to the translate-only example, the <a> element is now wrapped in a TBlock. Also, text preceding and following the <img> tag are wrapped in an anonymous TPhrasing node."
+          />
         </Section>
         <Section title="Whitespace Collapsing">
           <Paragraph>
-            The <Bold>whitespace collapsing phrase</Bold> consists in
+            The <Bold>whitespace collapsing phase</Bold> consists in
             implementing the algorithm associated with the{' '}
             <RefCssProperty name="white-space" /> CSS property, depicted in the{' '}
             <Hyperlink url="https://www.w3.org/TR/css-text-3/">
@@ -230,6 +278,16 @@ export default function PageConceptTRE() {
             <RefRenderHtmlProp name="dangerouslyDisableWhitespaceCollapsing" />{' '}
             prop, but be advised this is yet experimental.
           </Paragraph>
+          <Paragraph>
+            Below is an example of{' '}
+            <Bold>translating + hoisting + collapsing</Bold> transformation from
+            HTML to <Acronym name="TRT" />:
+          </Paragraph>
+          <TNodeTransformDisplay
+            html={source}
+            snaphost={collapsingEngine.buildTTree(source).snapshot()}
+            caption="Notice when comparing with the previous example, the line returns and extraneous spaces have been removed."
+          />
         </Section>
       </Chapter>
       <Chapter title="Anatomy of a TNode">

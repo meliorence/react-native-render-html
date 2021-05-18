@@ -24,6 +24,7 @@ import { StyleSheet, View } from 'react-native';
 import BoxNucleon from '../components/nucleons/BoxNucleon';
 import { WEBSITE_URL } from '@doc/constants';
 import URI from 'urijs';
+import TNodeTransformDisplayOrganism from '../components/TNodeTransformDisplayOrganism';
 
 const styles = StyleSheet.create({
   underline: {
@@ -128,6 +129,7 @@ const toolkitConfig: UIToolkitConfig = {
   Paragraph: BodyParagraphAtom,
   Bold,
   RenderHtmlCard: RenderHtmlCardOrganism,
+  TNodeTransformDisplay: TNodeTransformDisplayOrganism,
   SourceDisplay,
   Admonition: BodyAdmonitionAtom,
   RefBuilder,

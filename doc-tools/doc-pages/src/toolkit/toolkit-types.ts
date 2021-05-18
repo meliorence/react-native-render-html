@@ -34,6 +34,14 @@ export type SourceDisplayProps = {
   title?: string;
   showLineNumbers: boolean;
 };
+
+export type TNodeTransformDisplayProps = {
+  title?: string;
+  caption?: string;
+  html: string;
+  snaphost: string;
+};
+
 export interface UIToolkitBase {
   Container?: ComponentType<PropsWithChildren<{}>>;
   Header: ComponentType<PropsWithChildren<{}>>;
@@ -42,6 +50,7 @@ export interface UIToolkitBase {
   Paragraph: ComponentType<{}>;
   Bold: ComponentType<{}>;
   SourceDisplay: ComponentType<SourceDisplayProps>;
+  TNodeTransformDisplay: ComponentType<TNodeTransformDisplayProps>;
   Admonition: ComponentType<
     PropsWithChildren<{ type: AdmonitionType; title?: string }>
   >;
