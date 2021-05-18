@@ -12,6 +12,12 @@ const inlineExample = `<img
   src="http://placeimg.com/1200/800/animals"
 />`;
 
+const objectFitExample = `<img
+  width="1200" height="800"
+  style="object-fit: contain; width: 50%; height: 100px; align-self: center;"
+  src="http://placeimg.com/1200/800/animals"
+/>`;
+
 const autoSizeExample = `<img
   width="1200" height="800"
   src="http://placeimg.com/1200/800/nature"
@@ -56,49 +62,69 @@ export default function PageContentImages() {
           renderer. <RefHtmlElement name="picture" /> is not yet supported.
         </Admonition>
       </Header>
-      <Chapter title={'Sizing'}>
-        <Paragraph>
-          To determine the display size of an image, the renderer will go
-          through the following steps:{'\n'}
-          1. 2. 3.
-        </Paragraph>
-      </Chapter>
       <Chapter title={'Scaling'}>
-        <Paragraph>
-          The renderer will automatically scale images down to the available
-          width, even when the provided inline style width is greater than the
-          container width.
-        </Paragraph>
-        <Admonition type="important">
-          You are strongly advised to provide a{' '}
-          <RefRenderHtmlProp name="contentWidth" /> property from{' '}
-          <RefRNSymbol name="useWindowDimensions" /> official hook to help this
-          component handle the scaling.
-        </Admonition>
-        <RenderHtmlCard
-          title="Image with inline styles"
-          caption={
-            'This image dimensions are set with inline styles. Note that both the width/height couple and the style attributes are evaluated, but the style attribute takes precedence. The relative width (50%) is computed against contentWidth.'
-          }
-          props={{ source: { html: inlineExample } }}
-          preferHtmlSrc
-        />
-        <Paragraph>
-          The next image will be sized automatically thanks to the{' '}
-          <RefRenderHtmlProp name="contentWidth" /> and{' '}
-          <RefRenderHtmlProp name="computeEmbeddedMaxWidth" /> props. The latter
-          allows you to set the maximum width from{' '}
-          <RefRenderHtmlProp name="contentWidth" />, or disabling scaling by
-          returning <RefESSymbol name="Infinity" />.
-        </Paragraph>
-        <RenderHtmlCard
-          title="Image with width and height attributes"
-          caption={
-            "This image has no inline style. Its width and height are determined by the width and height attributes, scaled down to fit the result of computeEmbeddedMaxWidth('img')."
-          }
-          props={{ source: { html: autoSizeExample } }}
-          preferHtmlSrc
-        />
+        <Section title="Inline Styles">
+          <Paragraph>
+            The renderer will automatically scale images down to the available
+            width, even when the provided inline style width is greater than the
+            container width.
+          </Paragraph>
+          <Admonition type="important">
+            You are strongly advised to provide a{' '}
+            <RefRenderHtmlProp name="contentWidth" /> property from{' '}
+            <RefRNSymbol name="useWindowDimensions" /> official hook to help
+            this component handle the scaling.
+          </Admonition>
+          <RenderHtmlCard
+            title="Image with inline styles"
+            caption={
+              'This image dimensions are set with inline styles. Note that both the width/height couple and the style attributes are evaluated, but the style attribute takes precedence. The relative width (50%) is computed against contentWidth.'
+            }
+            props={{ source: { html: inlineExample } }}
+            preferHtmlSrc
+          />
+        </Section>
+        <Section title="Object Fit">
+          <Paragraph>
+            This library supports <RefCssProperty name="object-fit" /> CSS
+            property. In the below example, which is very similar to the
+            previous one, we set explicitly{' '}
+            <InlineCode>object-fit:&nbsp;contain;</InlineCode> to letterbox the
+            image in the container of width <InlineCode>50%</InlineCode> and
+            height <InlineCode>100px</InlineCode>.
+          </Paragraph>
+          <RenderHtmlCard
+            title="Object Fit Support"
+            caption={
+              'Object-fit "cover", "contain", "fill" and "scale-down" values are supported, and will be translated to React Native "resizeMode" style property.'
+            }
+            props={{ source: { html: objectFitExample } }}
+            preferHtmlSrc
+          />
+          <Admonition type="tip">
+            <RefCssProperty name="object-fit" /> is a mixed style and thus you
+            can use it in mixed styles declarations such as{' '}
+            <RefRenderHtmlProp name="tagsStyles" />.
+          </Admonition>
+        </Section>
+        <Section title="Automatic Sizing">
+          <Paragraph>
+            The next image will be sized automatically thanks to the{' '}
+            <RefRenderHtmlProp name="contentWidth" /> and{' '}
+            <RefRenderHtmlProp name="computeEmbeddedMaxWidth" /> props. The
+            latter allows you to set the maximum width from{' '}
+            <RefRenderHtmlProp name="contentWidth" />, or disabling scaling by
+            returning <RefESSymbol name="Infinity" />.
+          </Paragraph>
+          <RenderHtmlCard
+            title="Image with width and height attributes"
+            caption={
+              "This image has no inline style. Its width and height are determined by the width and height attributes, scaled down to fit the result of computeEmbeddedMaxWidth('img')."
+            }
+            props={{ source: { html: autoSizeExample } }}
+            preferHtmlSrc
+          />
+        </Section>
       </Chapter>
       <Chapter title="Preloading">
         <Paragraph>
