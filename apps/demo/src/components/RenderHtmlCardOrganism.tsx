@@ -77,14 +77,16 @@ export default function RenderHtmlCardOrganism({
           supportsLegacy={false}
           contentWidth={contentWidth - (hzSpace + borderWidth) * 2}
         />
-        <BoxNucleon grow={false} paddingX={2}>
-          <TextRoleNucleon
-            role="caption"
-            style={{ flexShrink: 1 }}
-            color={surface.secondaryContent}>
-            {caption}
-          </TextRoleNucleon>
-        </BoxNucleon>
+        {!!caption && (
+          <BoxNucleon grow={false} paddingX={2}>
+            <TextRoleNucleon
+              role="caption"
+              style={{ flexShrink: 1 }}
+              color={surface.secondaryContent}>
+              {caption}
+            </TextRoleNucleon>
+          </BoxNucleon>
+        )}
       </Stack>
     </BoxNucleon>
   );
