@@ -221,6 +221,7 @@ function HighlighterContent({
   ]);
   return (
     <formattingSpecContext.Provider
+      key={content}
       value={{
         clipLines,
         lineNumberFormatter,
