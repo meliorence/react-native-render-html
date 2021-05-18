@@ -1,6 +1,4 @@
-import React from 'react';
 import { PageId, PageSpecs } from './pages-types';
-import useToolkit from './toolkit/useToolkit';
 import PageIntroduction from './pages/PageIntroduction';
 import PageReinventTheWheel from './pages/PageReinventTheWheel';
 import PageArchitecture from './pages/PageArchitecture';
@@ -14,22 +12,6 @@ import PageContentAnchors from './pages/PageContentAnchors';
 import PageConceptTRE from './pages/PageConceptTRE';
 import PageConceptRendering from './pages/PageConceptRendering';
 import PageConceptCSS from './pages/PageConceptCSS';
-
-const Empty = () => {
-  const { Header, Paragraph, RefDoc } = useToolkit();
-  return (
-    <Header>
-      <Paragraph>
-        This article is yet a Work In Progress. See also{' '}
-        <RefDoc target="architecture">
-          This is a link to the architecture!
-        </RefDoc>
-      </Paragraph>
-    </Header>
-  );
-};
-
-const defaultDescription = 'WIP';
 
 const pagesIndex: Record<PageId, PageSpecs> = {
   intro: {
@@ -65,23 +47,14 @@ const pagesIndex: Record<PageId, PageSpecs> = {
     iconName: 'language-css3',
     position: 4,
     id: 'css-processing',
-    group: 'concept',
+    group: 'flow',
     description: 'An overview of CSS processing in react-native-render-html.',
     component: PageConceptCSS
-  },
-  'html-processing': {
-    title: 'HTML Processing',
-    iconName: 'language-html5',
-    group: 'concept',
-    position: 2,
-    id: 'html-processing',
-    description: defaultDescription,
-    component: Empty
   },
   'transient-render-engine': {
     title: 'Transient Render Engine',
     iconName: 'file-tree',
-    group: 'concept',
+    group: 'flow',
     position: 3,
     id: 'transient-render-engine',
     description:
@@ -92,7 +65,7 @@ const pagesIndex: Record<PageId, PageSpecs> = {
     title: 'Rendering',
     description:
       'An overview of the rendering step in react-native-render-html.',
-    group: 'concept',
+    group: 'flow',
     iconName: 'react',
     position: 4,
     id: 'rendering',

@@ -1,13 +1,12 @@
 import { ComponentType } from 'react';
 
-export type PageGroup = 'root' | 'concept' | 'content' | 'guides';
+export type PageGroup = 'root' | 'flow' | 'content' | 'guides';
 
 export type PageId =
   | 'intro'
   | 'reinvent-the-wheel'
   | 'architecture'
-  // concepts
-  | 'html-processing'
+  // flow
   | 'css-processing'
   | 'transient-render-engine'
   | 'rendering'
