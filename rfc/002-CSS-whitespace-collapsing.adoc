@@ -7,7 +7,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 :author: Jules Sam. Randolph
-:revnumber: 2.0.0
+:revnumber: 2.1.0
 :toc: left
 
 = CSS Whitespace Collapsing
@@ -176,35 +176,6 @@ isEmpty():: Returns _true_ if _data_ has length 0.
 trimLeft():: Replace _data_ with the substring starting at index 1.
 trimRight():: Replace _data_ with the substring ending at the penultimate index.
 
-[[tphrasinganchor]]
-=== TPhrasingAnchor
-
-Constrains:: inherits from <<tphrasing>>.
-Rendering::
-Phrasing anchors will be rendered as React Native `<Text/>` nodes with
-`onPress` prop.
-
-```ts
-interface TPhrasingAnchor extends TPhrasing {
-    isAnchor: true;
-    href: string
-}
-```
-
-[[tblockanchor]]
-=== TBlockAnchor
-
-Constrains:: inherits from <<tblock>>.
-Rendering::
-At render time, block renderers will receive `onPressAnchor` and `isAnchor` props.
-
-```ts
-interface TBlockAnchor extends TBlock {
-    isAnchor: true;
-    href: string
-}
-```
-
 [[tempty]]
 === TEmpty
 
@@ -272,12 +243,6 @@ Given _node_ a document node:
 .. *Let* _tnode_ be a <<ttext>>
 .. *Let* _tnode.data_ be _node.data_
 .. *Return* _tnode_
-. *Else if* _node_ is an anchor element
-... *Let* _tnode_ be a <<tphrasinganchor>>
-... *Set* _tnode.attributes_ to _node.attributes_
-... *Set* _tnode.href_ to _node.href_
-... *Set* _tnode.children_ to the mapping of each of _node.children_ to the
-    result of <<translate-node>>
 . *Else if* _node_ is a <<text-phrasing-el>>
 .. *If* _node.children_ has length 0
 ... *Let* _tnode_ be a <<ttext>>
@@ -332,7 +297,7 @@ Given _tnode_ a <<tnode>>:
 . *If* _tnode_ is a <<tphrasing>> node
 .. *For each* _cnode_ from _tnode.children_
 ... *If* _cnode_ is a <<tblock>> node
-.... *Let* _newnode_ be a (<<tblockanchor>> node if _tnode_ is <<tphrasinganchor>>, <<tblock>> node otherwise)
+.... *Let* _newnode_ be a <<tblock>> node
 .... *Copy* every attribute of _tnode_ to _newnode_
 .... *Return* the result of applying <<group-text>> to _(newnode)_
 ... *End if*
@@ -365,10 +330,9 @@ copied if present)_
 .. *Else*
 ... *Push* _wrapper_ to _newchildren_
 ... *Let* _wrapper_ be a copy of _wrappernode_
-... *If* _wrappernode_ is a <<tphrasinganchor>> node
-.... *Let* _nextchild_ be a <<tblockanchor>> node
+... *If* _wrappernode_ is a <<tphrasing>> node
+.... *Let* _nextchild_ be a <<tblock>> node
 .... *Copy* _newchild_ into _nextchild_
-.... *Set* _nextchild.href_ to _wrappernode.href_
 .... *Push* _nextchild_ to _newchildren_
 ... *Else*
 .... *Push* _newchild_ to _newchildren_
@@ -533,7 +497,7 @@ The document tree is walked over to generate an initial transient render tree:
 .After Translating
 [source,xml]
 ----
-<TPhrasingAnchor href="https://domain.com">
+<TPhrasing href="https://domain.com">
   <TText>\nThis is\n<TText/>
   <TText tagName="span">phrasing content</TText>
   <TText>\n</TText>
@@ -541,7 +505,7 @@ The document tree is walked over to generate an initial transient render tree:
   <TText>\n    and this is </TText>
   <TText tagName="strong">too</TText>
   <TText>.\n</TText>
-</TPhrasingAnchor>
+</TPhrasing>
 ----
 
 See <<translate-tree>> algorithm.
@@ -553,7 +517,7 @@ Hoisting is applied to enforce transient node constrains:
 .After Hoisting
 [source,xml]
 ----
-<TBlockAnchor href="https://domain.com">
+<TBlock href="https://domain.com">
   <TPhrasing>
     <TText>\nThis is\n<TText/>
     <TText tagName="span">phrasing content</TText>
@@ -565,7 +529,7 @@ Hoisting is applied to enforce transient node constrains:
     <TText tagName="strong">too</TText>
     <TText>.\n</TText>
   </TPhrasing>
-</TBlockAnchor>
+</TBlock>
 ----
 
 See <<hoist-tree>> algorithm.
@@ -578,16 +542,16 @@ Collapsing is applied to enforce limited whitespace collapsing requirements:
 [source,xml]
 ----
 <TBlock>
-  <TPhrasingAnchor href="https://domain.com">
+  <TPhrasing href="https://domain.com">
     <TText>This is <TText/>
     <TText tagName="span">phrasing content</TText>
-  <TPhrasingAnchor>
-  <TBlockAnchor href="https://domain.com" tagName="img"/>
-  <TPhrasingAnchor href="https://domain.com">
+  <TPhrasing>
+  <TBlock href="https://domain.com" tagName="img"/>
+  <TPhrasing href="https://domain.com">
     <TText>and this is </TText>
     <TText tagName="strong">too</TText>
     <TText>.</TText>
-  </TPhrasingAnchor>
+  </TPhrasing>
 </TBlock>
 ----
 
