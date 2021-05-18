@@ -6,6 +6,7 @@ import {
   ViewStyle
 } from 'react-native';
 import { ImageDimensions } from '../shared-types';
+import { WebBlockStyles } from '@native-html/transient-render-engine';
 
 export type UseIMGElementStateWithCacheProps = UseIMGElementStateProps &
   Required<Pick<UseIMGElementStateProps, 'cachedNaturalDimensions'>>;
@@ -17,6 +18,7 @@ export interface UseIMGElementStateProps {
   height?: string | number;
   width?: string | number;
   style?: StyleProp<ImageStyle>;
+  objectFit?: WebBlockStyles['objectFit'];
   computeMaxWidth?: (containerWidth: number) => number;
   contentWidth?: number;
   enableExperimentalPercentWidth?: boolean;

@@ -33,7 +33,8 @@ export function useIMGElementProps(
     source: { uri: useNormalizedUrl(src) },
     style: style as ImageStyle,
     width: tnode.attributes.width,
-    height: tnode.attributes.height
+    height: tnode.attributes.height,
+    objectFit: tnode.styles.webBlockRet.objectFit
   };
 }
 
