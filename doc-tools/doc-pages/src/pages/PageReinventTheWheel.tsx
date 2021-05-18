@@ -47,16 +47,19 @@ export default class RenderHtml extends PureComponent {
 export default function PageReinventTheWheel() {
   const {
     Acronym,
-    Bold,
     Admonition,
+    Bold,
     Header,
     Paragraph,
     Chapter,
+    Section,
     SourceDisplay,
     RefLibrary,
     RefRNSymbol,
     RefHtmlElement,
     RefCssProperty,
+    RefDoc,
+    RefRenderHtmlProp,
     RenderHtmlCard,
     InlineCode,
     Hyperlink,
@@ -184,7 +187,7 @@ export default function PageReinventTheWheel() {
             style with text properties such as <RefCssProperty name="color" />,
             but a React Native <RefRNSymbol name="View" /> element which is the
             default mapping for <RefHtmlElement name="div" /> will not support
-            such style property.
+            such style property. See <RefDoc target="css-processing" /> page.
           </ListItem>
         </List>
         <Paragraph>
