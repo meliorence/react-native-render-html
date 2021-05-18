@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { RenderHTMLProps } from 'react-native-render-html';
+import RefCssProcessor from '../components/RefCssProcessor';
 import Page from '../Page';
 import useToolkit from '../toolkit/useToolkit';
+import inlineStylesConfig from './cards/inlineStylesConfig';
 
 const mixedStyleExample = `const tagsStyles = {
   body: {
@@ -45,6 +47,7 @@ export default function PageGuideStylingComponents() {
     Section,
     SourceDisplay,
     RefLibrary,
+    RefDoc,
     RefRNSymbol,
     RefHtmlElement,
     RefCssProperty,
@@ -58,15 +61,47 @@ export default function PageGuideStylingComponents() {
   } = useToolkit();
   return (
     <Page>
+      <Header>
+        <Admonition type="tip">
+          You are kindly advised to read <RefDoc target="css-processing" />{' '}
+          before continuing.
+        </Admonition>
+      </Header>
       <Chapter title="Inline Styles">
-        <Paragraph>Blah</Paragraph>
+        <Paragraph>
+          Inline styles are processed by the <RefCssProcessor /> library. You
+          don't need to wonder if a CSS property will break your app: the CSS
+          processor acts as a compatibility layer between React Native styles
+          and CSS properties. This library gives you leverage on inline CSS
+          processing:
+        </Paragraph>
+        <List>
+          <ListItem>
+            You can chose to disable inline styles processing altogether with
+            the <RefRenderHtmlProp name="enableCSSInlineProcessing" /> prop.
+          </ListItem>
+          <ListItem>
+            You can whitelist CSS properties with the{' '}
+            <RefRenderHtmlProp name="allowedStyles" /> prop.
+          </ListItem>
+          <ListItem>
+            Or blacklist CSS properties with the{' '}
+            <RefRenderHtmlProp name="ignoredStyles" /> prop.
+          </ListItem>
+        </List>
+        <Paragraph>Let's try it out:</Paragraph>
+        <RenderHtmlCard {...inlineStylesConfig} />
       </Chapter>
       <Chapter title="Props">
         <Paragraph>
-          The <InlineCode>RenderHTML</InlineCode> component has three props to
+          The <InlineCode>RenderHTML</InlineCode> component has four props to
           customize elements styles:
         </Paragraph>
         <List>
+          <ListItem>
+            <RefRenderHtmlProp name="baseStyle" />, the styles for the root
+            component. Inheritable styles will be inherited by all children.
+          </ListItem>
           <ListItem>
             <RefRenderHtmlProp name="idsStyles" /> which target elements by the{' '}
             <InlineCode>id</InlineCode> attribute;
@@ -94,26 +129,19 @@ export default function PageGuideStylingComponents() {
           with an extension.
         </Admonition>
       </Chapter>
-      <Chapter title="Mixed style declarations">
+      <Chapter title="Mixed Style Records">
         <Section title="Introduction">
           <Paragraph>
             A mixed style declaration is an object similar to{' '}
             <RefRNSymbol name="StyleSheet" />
             's <InlineCode>create</InlineCode> method argument values. However,
-            it supports a mix of React Native <InlineCode>ViewStyle</InlineCode>
-            , <InlineCode>TextStyle</InlineCode> and camel-cased{' '}
+            it supports a blend of React Native{' '}
+            <InlineCode>ViewStyle</InlineCode>,{' '}
+            <InlineCode>TextStyle</InlineCode> and camel-cased{' '}
             <Hyperlink url="https://developer.mozilla.org/docs/Web/CSS/CSS_Properties_Reference">
               CSS properties
             </Hyperlink>
-            . This is one of the <Bold>most powerful features</Bold> of this
-            library, enabling for example <RefCssProperty name="white-space" />{' '}
-            collapsing, <RefCssProperty name="list-style-type" /> and font
-            selection! Inheritable style properties will be transfered to all
-            descending <Acronym name="TNode" />
-            s, bypassing React Native own limitations, e.g. you cannot set a{' '}
-            <InlineCode>fontSize</InlineCode> style property to a React Native{' '}
-            <RefRNSymbol name="View" /> component and expects its{' '}
-            <RefRNSymbol name="Text" /> children inherit this property.
+            . See <RefDoc target="css-processing" /> for a complete reference.
           </Paragraph>
           <SourceDisplay
             title="A mixed styles declaration record."

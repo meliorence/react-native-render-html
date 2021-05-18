@@ -2,6 +2,9 @@
 import React from 'react';
 import Page from '../Page';
 import useToolkit from '../toolkit/useToolkit';
+import RefRNRH from '../components/RefRNRH';
+import RefHtmlparser2 from '../components/RefHtmlparser2';
+import RefTRE from '../components/RefTRE';
 
 export default function PageArchitecture() {
   const {
@@ -27,12 +30,7 @@ export default function PageArchitecture() {
     <Page>
       <Header>
         <Paragraph>
-          This article is an introduction to the{' '}
-          <RefLibrary
-            name="react-native-render-html"
-            url="https://github.com/meliorence/react-native-render-html#readme"
-          />{' '}
-          architecture.
+          This article is an introduction to the <RefRNRH /> architecture.
         </Paragraph>
       </Header>
       <Chapter title="Hello World!">
@@ -72,12 +70,7 @@ export default function PageArchitecture() {
         <List type="upper-alpha">
           <ListItem>
             HTML parsing. In this step, the HTML code is parsed to form a DOM
-            tree. This step is performed by the{' '}
-            <RefLibrary
-              name="htmlparser2"
-              url="https://github.com/fb55/htmlparser2#readme"
-            />{' '}
-            library.
+            tree. This step is performed by the <RefHtmlparser2 /> library.
           </ListItem>
           {/* <ListItem>
             Inline CSS Parsing. This step is performed by{' '}
@@ -91,12 +84,7 @@ export default function PageArchitecture() {
             <Acronym name="TRT" /> Construction. In this step, the DOM tree is
             transformed in a TRT. Each node of this tree is referred to as a
             Transient Node (TNode) which has React-Native compatible styles.
-            This step is performed by{' '}
-            <RefLibrary
-              name="@native-html/transient-render-engine"
-              url="https://github.com/native-html/core/tree/master/packages/transient-render-engine#readme"
-            />{' '}
-            module.
+            This step is performed by <RefTRE /> module.
           </ListItem>
           <ListItem>
             Transient Render Tree Rendering. In this step, the{' '}
