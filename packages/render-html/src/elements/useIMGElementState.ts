@@ -78,6 +78,7 @@ export default function useIMGElementState(
     source,
     contentWidth,
     computeMaxWidth,
+    objectFit,
     initialDimensions = defaultImageInitialDimensions
   } = props;
   const {
@@ -112,7 +113,7 @@ export default function useIMGElementState(
         source,
         onError,
         containerStyle: flatStyle,
-        imageStyle: extractImageStyleProps(flatStyle),
+        imageStyle: extractImageStyleProps(flatStyle, objectFit),
         dimensions: concreteDimensions
       }
     : {

@@ -22,6 +22,7 @@ export default function useIMGElementStateWithCache(
     source,
     contentWidth,
     computeMaxWidth,
+    objectFit,
     initialDimensions = defaultImageInitialDimensions
   } = props;
   const {
@@ -53,7 +54,7 @@ export default function useIMGElementStateWithCache(
         alt,
         altColor,
         containerStyle: flatStyle as any,
-        imageStyle: extractImageStyleProps(flatStyle),
+        imageStyle: extractImageStyleProps(flatStyle, objectFit),
         dimensions: concreteDimensions,
         source,
         onError

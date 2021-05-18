@@ -52,6 +52,7 @@ const propTypes: Record<keyof IMGElementProps, any> = {
   initialDimensions: imgDimensionsType,
   onPress: PropTypes.func,
   testID: PropTypes.string,
+  objectFit: PropTypes.string,
   cachedNaturalDimensions: imgDimensionsType
 };
 

@@ -4039,23 +4039,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@native-html/css-processor@npm:1.8.1":
-  version: 1.8.1
-  resolution: "@native-html/css-processor@npm:1.8.1"
+"@native-html/css-processor@npm:1.9.0":
+  version: 1.9.0
+  resolution: "@native-html/css-processor@npm:1.9.0"
   dependencies:
     css-to-react-native: ^3.0.0
   peerDependencies:
+    "@types/react": "*"
     "@types/react-native": "*"
-    csstype: ^3.0.4
-  checksum: 6c42ce1fb600b2e59922059453f09ca0ad77a95044efb53378befcb53fc858f762fa5979b4fb44d49de27c01ef32c3cae284d87813a4913e9560f0a7fd3a210c
+    csstype: ^3.0.8
+  checksum: 912edb8283ed20fb1340401403c0f6209d92e225431075423af6344df5f31fb0eff8cdbc8c19b769eefd9d100a59b8c77b7270986f6a9fe253d9e363f849a06e
   languageName: node
   linkType: hard
 
-"@native-html/transient-render-engine@npm:^8.2.0":
-  version: 8.2.0
-  resolution: "@native-html/transient-render-engine@npm:8.2.0"
+"@native-html/transient-render-engine@npm:^8.4.0":
+  version: 8.4.0
+  resolution: "@native-html/transient-render-engine@npm:8.4.0"
   dependencies:
-    "@native-html/css-processor": 1.8.1
+    "@native-html/css-processor": 1.9.0
     "@types/ramda": ^0.27.40
     csstype: ^3.0.8
     domelementtype: ^2.2.0
@@ -4065,7 +4066,7 @@ __metadata:
   peerDependencies:
     "@types/react-native": "*"
     react-native: ^0.63.0
-  checksum: 0e72f1f857a3998af45855eca3112bf028fef2ad9cd5aba98c368b4f24cdb548ca7d45c718bd006b43fc4901940abc4cd8d84d435042540ff261edbe6d719305
+  checksum: 6ced1df682d8cff6c09acbfcf8b15178b9ffdd5511484f62698a0de12fb8d852362bb3759ce9132224512d6d60bb55e4071039c14a7e67679410ac769574d957
   languageName: node
   linkType: hard
 
@@ -20271,7 +20272,7 @@ fsevents@^1.2.7:
     "@jsamr/counter-style": ^2.0.0
     "@jsamr/react-native-li": ^2.1.0
     "@microsoft/api-extractor": ^7.14.0
-    "@native-html/transient-render-engine": ^8.2.0
+    "@native-html/transient-render-engine": ^8.4.0
     "@release-it/conventional-changelog": ^2.0.1
     "@testing-library/react-hooks": ^5.1.2
     "@types/jest": ^26.0.23
