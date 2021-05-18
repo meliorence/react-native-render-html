@@ -3,10 +3,10 @@
   "private": true,
   "type": "commonjs",
   "bin": {
-    "doc-mdx-gen-cli": "lib/index.js"
+    "doc-mdx-gen-cli": "bin/bundle.js"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "node ./build.js",
     "prepack": "yarn build"
   },
   "dependencies": {
@@ -17,5 +17,16 @@
     "fbjs": "^3.0.0",
     "html-entities": "^2.3.2",
     "react-reconciler": "^0.26.2"
+  },
+  "devDependencies": {
+    "@tsconfig/react-native": "^1.0.3",
+    "@types/react": "^17.0.4",
+    "esbuild": "^0.12.0",
+    "esbuild-plugin-alias": "^0.1.2",
+    "eslint": "^7.25.0",
+    "react": "17.0.2",
+    "react-native-web": "^0.16.3",
+    "react-test-renderer": "17.0.2",
+    "typescript": "~4.2.4"
   }
 }

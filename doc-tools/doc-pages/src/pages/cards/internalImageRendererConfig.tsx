@@ -8,7 +8,7 @@ import { UIRenderHtmlCardProps } from '../../toolkit/toolkit-types';
 
 const html = '<img src="https://dummyimage.com/1200x800">';
 
-const CustomImageRenderer: CustomBlockRenderer = function CustomImageRenderer(
+const Renderer: CustomBlockRenderer = function CustomImageRenderer(
   props
 ) {
   const { Renderer, rendererProps } = useInternalRenderer('img', props);
@@ -69,7 +69,7 @@ const internalImageRendererConfig: UIRenderHtmlCardProps = {
       }
     },
     renderers: {
-      img: CustomImageRenderer
+      img: Renderer
     }
   },
   config: {

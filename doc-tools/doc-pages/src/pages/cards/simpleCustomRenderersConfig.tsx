@@ -3,7 +3,7 @@ import { Alert } from 'react-native';
 import { CustomBlockRenderer, RenderHTMLProps } from 'react-native-render-html';
 import { UIRenderHtmlCardProps } from '../../toolkit/toolkit-types';
 
-const H1Renderer: CustomBlockRenderer = function H1Renderer({
+const Renderer: CustomBlockRenderer = function H1Renderer({
   TDefaultRenderer,
   ...props
 }) {
@@ -43,7 +43,7 @@ const props: RenderHTMLProps = {
 `
   },
   renderers: {
-    h1: H1Renderer
+    h1: Renderer
   }
 };
 
