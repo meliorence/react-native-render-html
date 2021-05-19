@@ -1,0 +1,20 @@
+@import '../css/shared.scss';
+
+.arrow {
+  text-align: center;
+  font-size: 50px;
+  padding-bottom: var(--ifm-leading);
+}
+
+.figure {
+  @extend .figure;
+}
+
+.figure__caption {
+  @extend .figure__caption;
+}
+
+.figure__title {
+  text-align: center;
+  font-weight: bold;
+}

@@ -33,7 +33,7 @@ export default function MdxToolkitProvider({
     Paragraph: ({ children }) => <p>{children}</p>,
     Bold: ({ children }) => <strong>{children}</strong>,
     RenderHtmlCard: ({ caption, snippet, title, props, preferHtmlSrc }) => (
-      <exposnippet
+      <renderhtmlcard
         preferHtmlSrc={preferHtmlSrc}
         html={(props.source as HTMLSourceInline).html}
         title={title}
@@ -42,17 +42,8 @@ export default function MdxToolkitProvider({
       />
     ),
     SourceDisplay: (props) => <codeblockds {...props} />,
-    TNodeTransformDisplay: ({ html, snaphost, caption, title }) => {
-      return (
-        <figure>
-          {title && <strong>{title}</strong>}
-          <codeblockds content={html} lang="html" showLineNumbers={false} />
-          {/*@ts-ignore*/}
-          <p align="center">↓</p>
-          <codeblockds content={snaphost} lang="xml" showLineNumbers={false} />
-          {caption && <figcaption>{caption}</figcaption>}
-        </figure>
-      );
+    TNodeTransformDisplay: ({ snaphost, ...props }) => {
+      return <tnodetransformdisplay snapshot={snaphost} {...props} />;
     },
     Admonition: ({ children, type, title }) => (
       <admonition type={type} title={title}>

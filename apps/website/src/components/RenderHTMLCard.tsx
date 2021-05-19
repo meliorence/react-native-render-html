@@ -7,7 +7,7 @@ import React, {
   useState
 } from 'react';
 import useThemeContext from '@theme/hooks/useThemeContext';
-import styles from './ExpoSnippet.module.scss';
+import styles from './RenderHTMLCard.module.scss';
 import ReactModal from 'react-modal';
 import CodeBlock from '@theme/CodeBlock';
 
@@ -219,6 +219,12 @@ export default function RenderHTMLCard({
         {caption && (
           <figcaption className={styles.caption}>{caption}</figcaption>
         )}
+        <small
+          style={caption && { paddingTop: 'var(--ifm-leading)' }}
+          className={styles.notice}>
+          Press on the button below to show how this code renders on your
+          device.
+        </small>
       </div>
       <div className={styles.expoBox}>
         <button
@@ -227,7 +233,7 @@ export default function RenderHTMLCard({
           role="button">
           <ExpoLogo color="var(--ifm-button-color)" size={40} />
           <span className={styles.expoBox__span}>
-            Open in Expo to See it Live
+            Run on Your Device with Expo
           </span>
         </button>
       </div>

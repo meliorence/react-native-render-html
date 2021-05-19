@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { AdmonitionProps } from './components/AdmonitionElement';
 import { CodeBlockElementProps } from './components/CodeBlockElement';
-import { ExpoSnippetElementProps } from './components/ExpoSnippetElement';
+import { RenderHTMLCardElementProps } from './components/RenderHTMLCardElement';
 import { SvgFigureElementProps } from './components/SvgFigureElement';
+import { TNodeTransformDisplayElementProps } from './components/TNodeTransformDisplayElement';
 export { default as renderMdx } from './renderMdx';
 
 declare global {
@@ -10,8 +11,9 @@ declare global {
     interface IntrinsicElements {
       admonition: AdmonitionProps;
       codeblockds: CodeBlockElementProps;
-      exposnippet: ExpoSnippetElementProps;
+      renderhtmlcard: RenderHTMLCardElementProps;
       svgfigure: SvgFigureElementProps;
+      tnodetransformdisplay: TNodeTransformDisplayElementProps;
     }
   }
 }
