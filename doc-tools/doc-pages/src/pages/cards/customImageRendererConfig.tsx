@@ -25,9 +25,7 @@ function IMGElementContentLoading({
   );
 }
 
-const Renderer: CustomBlockRenderer = function CustomImageRenderer(
-  props
-) {
+const Renderer: CustomBlockRenderer = function CustomImageRenderer(props) {
   const imgElementProps = useIMGElementProps(props);
   const state = useIMGElementState(imgElementProps);
   let content: ReactNode = false;

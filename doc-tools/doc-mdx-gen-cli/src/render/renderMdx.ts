@@ -26,10 +26,14 @@ async function renderMdx(
   try {
     await fs.writeFile(filePath, container.toMdx());
   } catch (e) {
-    console.error('An error occurred while generating the document.');
+    console.error(
+      `An error occurred while generating the document at ${path.resolve(
+        filePath
+      )}.`
+    );
     throw e;
   }
-  console.log(`✨  MDX document generated at ${path.resolve(filePath)}.`);
+  console.log(`✨ MDX document generated at ${path.resolve(filePath)}.`);
 }
 
 export default renderMdx;

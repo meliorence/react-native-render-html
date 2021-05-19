@@ -47,6 +47,7 @@
     "@types/react-helmet": "^6.1.1",
     "@types/react-router-dom": "^5.1.7",
     "docusaurus-plugin-typedoc": "^0.12.1",
+    "sass": "^1.32.13",
     "typedoc": "^0.20.36",
     "typedoc-plugin-markdown": "^3.7.2",
     "typescript": "^4.2.4"

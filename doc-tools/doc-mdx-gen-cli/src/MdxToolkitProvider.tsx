@@ -38,7 +38,7 @@ export default function MdxToolkitProvider({
     TNodeTransformDisplay: ({ html, snaphost, caption, title }) => {
       return (
         <figure>
-          <strong>{title}</strong>
+          {title && <strong>{title}</strong>}
           <codeblockds content={html} lang="html" showLineNumbers={false} />
           {/*@ts-ignore*/}
           <p align="center">↓</p>

@@ -37,11 +37,13 @@ function makeIframeSrcParamsQuery({
 function installIframeListener({
   iframe,
   iframeId,
-  code
+  code,
+  version
 }: {
   iframe: HTMLIFrameElement;
   iframeId: string;
   code: string;
+  version: string;
 }) {
   const listener = function (event: MessageEvent) {
     var eventName = event.data[0];
@@ -52,8 +54,8 @@ function installIframeListener({
           'expoDataEvent',
           {
             iframeId: iframeId,
-            dependencies: 'react-native-render-html@6.0.0-alpha.22',
-            code: code,
+            dependencies: `react-native-render-html@${version},domutils,domhandler`,
+            code,
             files: ''
           }
         ],
@@ -70,12 +72,14 @@ const ExpoIframe = memo(function ExpoIframe({
   name,
   description,
   theme,
-  code
+  code,
+  version
 }: {
   name?: string;
   description?: string;
   theme: 'light' | 'dark';
   code: string;
+  version: string;
 }) {
   // see https://git.io/JOX5X
   const iframeId = useRef(Math.random().toString(36).substr(2, 10));
@@ -96,11 +100,12 @@ const ExpoIframe = memo(function ExpoIframe({
       const cleanup = installIframeListener({
         iframe: ref.current,
         iframeId: iframeId.current,
-        code
+        code,
+        version
       });
       return cleanup;
     },
-    [code]
+    [code, version]
   );
   return (
     <iframe
@@ -119,11 +124,13 @@ const ExpoIframe = memo(function ExpoIframe({
 export default function ExpoSnippet({
   snippet,
   title,
-  caption
+  caption,
+  version
 }: PropsWithChildren<{
   title: string;
   snippet: string;
   caption?: string;
+  version: string;
 }>) {
   const { isDarkTheme } = useThemeContext();
   const normalSnippet = decodeURIComponent(snippet);
@@ -139,6 +146,7 @@ export default function ExpoSnippet({
         theme={isDarkTheme ? 'dark' : 'light'}
         name={title}
         description={caption}
+        version={version}
       />
     </div>
   );

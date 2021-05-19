@@ -66,13 +66,15 @@ function declareProps(
     output += `${fnSrcMap[key]}\n\n`;
   }
   for (const key in props) {
-    //@ts-ignore
-    output += `const ${key} = ${serializeValue(
-      key as any,
+    if (!(key in fnSrcMap)) {
       //@ts-ignore
-      props[key],
-      config
-    )};\n\n`;
+      output += `const ${key} = ${serializeValue(
+        key as any,
+        //@ts-ignore
+        props[key],
+        config
+      )};\n\n`;
+    }
   }
   return output;
 }
