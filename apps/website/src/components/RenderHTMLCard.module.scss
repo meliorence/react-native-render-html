@@ -26,6 +26,12 @@
   padding-bottom: 0;
 }
 
+.notice {
+  display: block;
+  text-align: center;
+  color: var(--ifm-font-color-secondary);
+}
+
 .expoBox {
   display: flex;
   justify-content: center;

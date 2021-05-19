@@ -1,6 +1,6 @@
 import AdmonitionElement from './components/AdmonitionElement';
 import CodeBlockElement from './components/CodeBlockElement';
-import ExpoSnippetElement from './components/ExpoSnippetElement';
+import RenderHTMLCardElement from './components/RenderHTMLCardElement';
 import SvgFigureElement from './components/SvgFigureElement';
 import H2Element from './components/H2Element';
 import HTMLElement from './components/HTMLElement';
@@ -10,6 +10,7 @@ import BoldElement from './components/AnchorElement';
 import ParagraphElement from './components/ParagraphElement';
 import StrongElement from './components/StrongElement';
 import H3Element from './components/H3Element';
+import TNodeTransformDisplayElement from './components/TNodeTransformDisplayElement';
 
 export type NodeType = 'ROOT' | keyof JSX.IntrinsicElements;
 
@@ -24,10 +25,12 @@ function createElement(type: NodeType, props: any, root: MDXDocument) {
       return new AdmonitionElement(props);
     case 'codeblockds':
       return new CodeBlockElement(props);
-    case 'exposnippet':
-      return new ExpoSnippetElement(props, root!);
+    case 'renderhtmlcard':
+      return new RenderHTMLCardElement(props, root!);
     case 'svgfigure':
       return new SvgFigureElement(props, root!);
+    case 'tnodetransformdisplay':
+      return new TNodeTransformDisplayElement(props, root!);
     case 'h2':
       return new H2Element();
     case 'h3':

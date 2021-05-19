@@ -3,7 +3,7 @@ import NodeWithChildren from './NodeWithChildren';
 
 const version = require('react-native-render-html/package.json').version;
 
-export type ExpoSnippetElementProps = {
+export type RenderHTMLCardElementProps = {
   snippet: string;
   title: string;
   html: string;
@@ -11,16 +11,16 @@ export type ExpoSnippetElementProps = {
   preferHtmlSrc: boolean;
 };
 
-export default class ExpoSnippetElement extends NodeWithChildren {
-  props: ExpoSnippetElementProps;
-  constructor(props: ExpoSnippetElementProps, root: MDXDocument) {
+export default class RenderHTMLCardElement extends NodeWithChildren {
+  props: RenderHTMLCardElementProps;
+  constructor(props: RenderHTMLCardElementProps, root: MDXDocument) {
     super();
     this.props = props;
-    root.registerImport('ExpoSnippet');
+    root.registerImport('RenderHTMLCard');
   }
 
   toMdx(): string {
-    const tagName = 'ExpoSnippet';
+    const tagName = 'RenderHTMLCard';
     const { snippet, html, preferHtmlSrc, ...inlineProps } = this.props;
     const identifiers = [tagName, ...this.getInlineProps(inlineProps)];
     return `\n<${identifiers.join(
