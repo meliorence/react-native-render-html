@@ -1,7 +1,7 @@
 import { UIRenderHtmlCardProps } from '../../toolkit/toolkit-types';
 import thaiCounterStyle from '@jsamr/counter-style/presets/thai';
 
-const html = `<ul style="list-style-type: katana;">
+const html = `<ul style="list-style-type: thai;">
   <li>One</li>
   <li>Two</li>
   <li>Three</li>
@@ -12,14 +12,14 @@ const html = `<ul style="list-style-type: katana;">
   <li>Eight</li>
 </ul>`;
 
-const customListKatanaConfig: UIRenderHtmlCardProps = {
-  title: 'Katana List Style Type',
+const customListThaiConfig: UIRenderHtmlCardProps = {
+  title: 'Thai List Style Type',
   props: {
     source: {
       html
     },
     customListStyleSpecs: {
-      katana: {
+      thai: {
         type: 'textual',
         counterStyleRenderer: thaiCounterStyle
       }
@@ -35,4 +35,4 @@ const customListKatanaConfig: UIRenderHtmlCardProps = {
   }
 };
 
-export default customListKatanaConfig;
+export default customListThaiConfig;

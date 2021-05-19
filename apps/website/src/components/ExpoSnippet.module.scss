@@ -1,0 +1,91 @@
+@import '../css/shared.scss';
+
+.figure {
+  @extend .figure;
+  margin: 0 0 var(--ifm-leading) 0 !important;
+  padding: 0 !important;
+}
+
+.sourceContainer {
+  // padding: 0 var(--ifm-leading) 0 var(--ifm-leading);
+}
+
+.sourceContainer__code {
+  border-top-left-radius: var(--ifm-global-radius);
+  border-top-right-radius: var(--ifm-global-radius);
+  overflow: hidden;
+}
+
+.sourceContainer__fixRadius {
+  --ifm-global-radius: 0;
+  --ifm-leading: 0;
+}
+
+.caption {
+  @extend .figure__caption;
+  padding-bottom: 0;
+}
+
+.expoBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: var(--ifm-leading);
+  padding-bottom: var(--ifm-leading);
+}
+
+.expoBox__button {
+  cursor: grab;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.expoBox__span {
+  margin-left: var(--ifm-leading);
+  font-weight: bold;
+}
+
+/* EXPO */
+
+.expoIframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.modalContent {
+  width: calc(100vw - var(--modal-inset) * 2 - var(--scrollbar-width));
+  height: calc(100vh - var(--modal-inset) * 2);
+  max-width: 1024px;
+  margin: auto;
+}
+
+.modalContainer {
+  --modal-inset: calc(var(--ifm-leading) * 3);
+  --scrollbar-width: 10px;
+  margin: var(--modal-inset);
+  padding: 0;
+  z-index: 1000;
+  width: calc(100vw - var(--modal-inset) * 2) - var(--scrollbar-width);
+  height: calc(100vh - var(--modal-inset) * 2);
+}
+
+.modal__closeButton {
+  position: absolute;
+  top: var(--ifm-leading);
+  right: var(--ifm-leading);
+  font-size: 30px;
+  appearance: none;
+  background-color: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  border-radius: calc(var(--ifm-leading) * 2);
+  border: 0;
+  cursor: grab;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0px;
+  background-color: rgba(0, 0, 0, 0.75);
+}

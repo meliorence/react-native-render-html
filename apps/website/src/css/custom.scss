@@ -16,6 +16,11 @@
   --ifm-color-primary-lighter: rgb(102, 212, 189);
   --ifm-color-primary-lightest: rgb(146, 224, 208);
   --ifm-code-font-size: 95%;
+  --ifm-font-color-secondary: rgb(131, 149, 167);
+}
+
+.ReactModal__Body--open .navbar.navbar--fixed-top {
+  z-index: 0;
 }
 
 .docusaurus-highlight-code-line {
