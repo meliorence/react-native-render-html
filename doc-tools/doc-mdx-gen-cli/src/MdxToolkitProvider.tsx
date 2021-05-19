@@ -1,4 +1,5 @@
 import React, { PropsWithChildren, Fragment } from 'react';
+import { HTMLSourceInline } from 'react-native-render-html';
 import { ToolkitProvider, UIToolkitConfig } from '@doc/pages';
 
 const Chapter = ({ children, title }: PropsWithChildren<{ title: string }>) => (
@@ -31,8 +32,14 @@ export default function MdxToolkitProvider({
     ListItem: ({ children }) => <li>{children}</li>,
     Paragraph: ({ children }) => <p>{children}</p>,
     Bold: ({ children }) => <strong>{children}</strong>,
-    RenderHtmlCard: ({ caption, snippet, title }) => (
-      <exposnippet title={title} caption={caption} snippet={snippet} />
+    RenderHtmlCard: ({ caption, snippet, title, props, preferHtmlSrc }) => (
+      <exposnippet
+        preferHtmlSrc={preferHtmlSrc}
+        html={(props.source as HTMLSourceInline).html}
+        title={title}
+        caption={caption}
+        snippet={snippet}
+      />
     ),
     SourceDisplay: (props) => <codeblockds {...props} />,
     TNodeTransformDisplay: ({ html, snaphost, caption, title }) => {

@@ -6,7 +6,9 @@ const version = require('react-native-render-html/package.json').version;
 export type ExpoSnippetElementProps = {
   snippet: string;
   title: string;
+  html: string;
   caption?: string;
+  preferHtmlSrc: boolean;
 };
 
 export default class ExpoSnippetElement extends NodeWithChildren {
@@ -19,10 +21,14 @@ export default class ExpoSnippetElement extends NodeWithChildren {
 
   toMdx(): string {
     const tagName = 'ExpoSnippet';
-    const { snippet, ...inlineProps } = this.props;
+    const { snippet, html, preferHtmlSrc, ...inlineProps } = this.props;
     const identifiers = [tagName, ...this.getInlineProps(inlineProps)];
     return `\n<${identifiers.join(
       ' '
-    )} version="${version}" snippet="${encodeURIComponent(snippet)}" />\n`;
+    )} version="${version}" html="${encodeURIComponent(
+      html
+    )}" snippet="${encodeURIComponent(
+      snippet
+    )}" preferHtmlSrc={${preferHtmlSrc}} />\n`;
   }
 }

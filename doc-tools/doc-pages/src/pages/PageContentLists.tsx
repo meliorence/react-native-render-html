@@ -5,7 +5,7 @@ import Page from '../Page';
 import useToolkit from '../toolkit/useToolkit';
 import olUpperRomanConfig from './cards/olUpperRomanConfig';
 import ulSquareConfig from './cards/ulSquareConfig';
-import customListKatanaConfig from './cards/customListKatanaConfig';
+import customListThaiConfig from './cards/customListThaiConfig';
 import customListRussianConfig from './cards/customListRussianConfig';
 import rtlListArabicConfig from './cards/rtlListArabicConfig';
 import rtlListDiscConfig from './cards/rtlListDiscConfig';
@@ -129,7 +129,7 @@ export default function PageContentLists() {
             of presets with a one-liner! See below example with the{' '}
             <Bold>Thai</Bold> preset:
           </Paragraph>
-          <RenderHtmlCard {...customListKatanaConfig} />
+          <RenderHtmlCard {...customListThaiConfig} />
         </Section>
         <Section title="Creating a Counter Style">
           <Paragraph>

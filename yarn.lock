@@ -5271,6 +5271,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-modal@npm:^3.12.0":
+  version: 3.12.0
+  resolution: "@types/react-modal@npm:3.12.0"
+  dependencies:
+    "@types/react": "*"
+  checksum: a4af510d433d04e4007acf70f281bd4b9dd54a82c2718c9ea926a08e5840cbd7fc1159ff85609d10b0ec3b853c60666d184531ec3764c565600c2d7aeaf71092
+  languageName: node
+  linkType: hard
+
 "@types/react-native@npm:^0.63.8":
   version: 0.63.52
   resolution: "@types/react-native@npm:0.63.52"
@@ -10938,6 +10947,13 @@ __metadata:
     signal-exit: ^3.0.2
     strip-final-newline: ^2.0.0
   checksum: 79bd736acd63aa7c0afb32cc99af21cfd70db696580686c7cd56c177857b93b78bc0b9bb2b4410f377f46c71c566c8e723987e71ef0bc9b23791bfbced02f75c
+  languageName: node
+  linkType: hard
+
+"exenv@npm:^1.2.0":
+  version: 1.2.2
+  resolution: "exenv@npm:1.2.2"
+  checksum: 09fd080c0478739f0154916b73dea07f30f97972e1b3be3368d2b96d282d889b509f05e163d830e323c9ab1e94b0a293a9947b410651325df467c404f37f32f1
   languageName: node
   linkType: hard
 
@@ -19655,7 +19671,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.5.0, prop-types@npm:^15.5.7, prop-types@npm:^15.6.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
+"prop-types@npm:^15.5.0, prop-types@npm:^15.5.10, prop-types@npm:^15.5.7, prop-types@npm:^15.6.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.7.2
   resolution: "prop-types@npm:15.7.2"
   dependencies:
@@ -20102,7 +20118,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-lifecycles-compat@npm:^3.0.4":
+"react-lifecycles-compat@npm:^3.0.0, react-lifecycles-compat@npm:^3.0.4":
   version: 3.0.4
   resolution: "react-lifecycles-compat@npm:3.0.4"
   checksum: 82176a55ef7526414d770d5e07dc1d28b4c7f20281f22c6f53f3a98df9dbbb5d70c94bebee57b4ea8ccc2eee430b907ca7b564a42fbdd0ed21e7c43bfee35404
@@ -20129,6 +20145,21 @@ fsevents@^1.2.7:
   peerDependencies:
     react: "*"
   checksum: fb14650fe86f20c2554e3645482ed67eb4ce0e46d72e06f91a7f57739e90b1b42c31e8597d7d415ee69bc16f85211bafec7b24ddadd7f3fe72c176f45931158d
+  languageName: node
+  linkType: hard
+
+"react-modal@npm:^3.13.1":
+  version: 3.13.1
+  resolution: "react-modal@npm:3.13.1"
+  dependencies:
+    exenv: ^1.2.0
+    prop-types: ^15.5.10
+    react-lifecycles-compat: ^3.0.0
+    warning: ^4.0.3
+  peerDependencies:
+    react: ^0.14.0 || ^15.0.0 || ^16 || ^17
+    react-dom: ^0.14.0 || ^15.0.0 || ^16 || ^17
+  checksum: 02eebfc199f1be0af1db1de1099e3f715480cb98a1950cf297c3cfba4646dedd4401f71f1b62534794b88dc4e7d1fa68c0649b75167adb5853caa90c84db5f35
   languageName: node
   linkType: hard
 
@@ -24565,6 +24596,15 @@ resolve@~1.19.0:
   languageName: node
   linkType: hard
 
+"warning@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "warning@npm:4.0.3"
+  dependencies:
+    loose-envify: ^1.0.0
+  checksum: 20ef5d29ff9c20af3060e504914a00d5a90ce346e75e6691efbedb540481cdc82070c966d75195f812de64bb0bd7f1b02315fcb52469db151c0f15e29002781c
+  languageName: node
+  linkType: hard
+
 "watchpack-chokidar2@npm:^2.0.1":
   version: 2.0.1
   resolution: "watchpack-chokidar2@npm:2.0.1"
@@ -24820,12 +24860,14 @@ resolve@~1.19.0:
     "@tsconfig/docusaurus": ^1.0.2
     "@types/react": ^17.0.4
     "@types/react-helmet": ^6.1.1
+    "@types/react-modal": ^3.12.0
     "@types/react-router-dom": ^5.1.7
     clsx: ^1.1.1
     docusaurus-plugin-sass: ^0.1.12
     docusaurus-plugin-typedoc: ^0.12.1
     react: ^17.0.2
     react-dom: ^17.0.2
+    react-modal: ^3.13.1
     sass: ^1.32.13
     typedoc: ^0.20.36
     typedoc-plugin-markdown: ^3.7.2

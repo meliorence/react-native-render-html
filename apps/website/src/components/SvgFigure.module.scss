@@ -1,0 +1,13 @@
+@import '../css/shared.scss';
+
+.figure {
+  @extend .figure;
+}
+
+.figure__caption {
+  @extend .figure__caption;
+}
+
+.svgContainer {
+  padding: 0 var(--ifm-leading);
+}
