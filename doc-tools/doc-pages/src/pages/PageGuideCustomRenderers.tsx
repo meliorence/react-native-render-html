@@ -8,7 +8,7 @@ import adsRenderersConfig from './cards/adsRenderersConfig';
 import inlineImagesConfig from './cards/inlineImagesConfig';
 import bluecircleConfig from './cards/bluecircleConfig';
 
-export default function PageGuideDomTampering() {
+export default function PageGuideCustomRenderers() {
   const {
     Acronym,
     Admonition,
@@ -75,11 +75,8 @@ export default function PageGuideDomTampering() {
         </Paragraph>
         <List>
           <ListItem>
-            During{' '}
-            <Bold>
-              <Acronym name="TRT" /> generation.
-            </Bold>{' '}
-            via HTML model definition.
+            During <Acronym name="TRT" />
+            generation. via HTML model definition.
           </ListItem>
           <ListItem>At (React) render time via custom renderers.</ListItem>
         </List>

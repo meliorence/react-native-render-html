@@ -76,7 +76,7 @@ export default function PageContentAnchors() {
           renderers thanks to <InlineCode>useNormalizedUrl</InlineCode> hook.
         </Admonition>
       </Chapter>
-      <Chapter title="configuring">
+      <Chapter title="Configuring">
         <Paragraph>
           We can take advantage of the{' '}
           <RefRenderHtmlProp name="renderersProps" /> to customize anchors

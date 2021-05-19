@@ -8,7 +8,7 @@ import { UIRenderHtmlCardProps } from '../../toolkit/toolkit-types';
 
 const html = '<img src="https://dummyimage.com/1200x800">';
 
-const Renderer: CustomBlockRenderer = function CustomImageRenderer(
+const CustomRenderer: CustomBlockRenderer = function CustomImageRenderer(
   props
 ) {
   const { Renderer, rendererProps } = useInternalRenderer('img', props);
@@ -40,7 +40,7 @@ const customImageRendererSrc = `function CustomImageRenderer(
   const [isModalOpen, setIsModalOpen] = useState(false);
   const onPress = () => setIsModalOpen(true);
   const onModalClose = () => setIsModalOpen(false);
-  const uri = rendererProps.source.uri!;
+  const uri = rendererProps.source.uri;
   const thumbnailSource = {
     ...rendererProps.source,
     // You could change the uri here, for example to provide a thumbnail.
@@ -69,7 +69,7 @@ const internalImageRendererConfig: UIRenderHtmlCardProps = {
       }
     },
     renderers: {
-      img: Renderer
+      img: CustomRenderer
     }
   },
   config: {

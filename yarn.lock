@@ -2157,7 +2157,6 @@ __metadata:
     commander: ^7.2.0
     esbuild: ^0.12.0
     esbuild-plugin-alias: ^0.1.2
-    esbuild-plugin-flow: ^0.3.2
     eslint: ^7.25.0
     fbjs: ^3.0.0
     html-entities: ^2.3.2
@@ -7876,6 +7875,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chokidar@npm:>=3.0.0 <4.0.0, chokidar@npm:^3.4.0, chokidar@npm:^3.4.1, chokidar@npm:^3.5.1":
+  version: 3.5.1
+  resolution: "chokidar@npm:3.5.1"
+  dependencies:
+    anymatch: ~3.1.1
+    braces: ~3.0.2
+    fsevents: ~2.3.1
+    glob-parent: ~5.1.0
+    is-binary-path: ~2.1.0
+    is-glob: ~4.0.1
+    normalize-path: ~3.0.0
+    readdirp: ~3.5.0
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  checksum: 61b3f710f9e7dc69d76f638d8b0d37bad586497444165125ca8062f7192695f35403b5f622cbd7dfdd06805201ceaba40ff90e53ea2974df9a8087861192a99b
+  languageName: node
+  linkType: hard
+
 "chokidar@npm:^2.1.8":
   version: 2.1.8
   resolution: "chokidar@npm:2.1.8"
@@ -7896,25 +7914,6 @@ __metadata:
     fsevents:
       optional: true
   checksum: 0758dcc7c6c7ace5924cf3c68088210932d391ab41026376b0adb8e07013ac87232e029f13468dfc9ca4dd59adae62a2b7eaedebb6c4e4f0ba92cbf3ac9e3721
-  languageName: node
-  linkType: hard
-
-"chokidar@npm:^3.4.0, chokidar@npm:^3.4.1, chokidar@npm:^3.5.1":
-  version: 3.5.1
-  resolution: "chokidar@npm:3.5.1"
-  dependencies:
-    anymatch: ~3.1.1
-    braces: ~3.0.2
-    fsevents: ~2.3.1
-    glob-parent: ~5.1.0
-    is-binary-path: ~2.1.0
-    is-glob: ~4.0.1
-    normalize-path: ~3.0.0
-    readdirp: ~3.5.0
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  checksum: 61b3f710f9e7dc69d76f638d8b0d37bad586497444165125ca8062f7192695f35403b5f622cbd7dfdd06805201ceaba40ff90e53ea2974df9a8087861192a99b
   languageName: node
   linkType: hard
 
@@ -10400,15 +10399,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild-plugin-flow@npm:^0.3.2":
-  version: 0.3.2
-  resolution: "esbuild-plugin-flow@npm:0.3.2"
-  dependencies:
-    flow-remove-types: ^2.137.0
-  checksum: ef9dbe6da3635ab57ea57893297d7ed3dc4532a1f8e9408737e93491c54b2139f552e5c90ced96b06fed456294dddb78c28460fa34f357a1656e439f71f622e2
-  languageName: node
-  linkType: hard
-
 "esbuild@npm:^0.12.0":
   version: 0.12.0
   resolution: "esbuild@npm:0.12.0"
@@ -11691,27 +11681,6 @@ __metadata:
   version: 3.1.1
   resolution: "flatted@npm:3.1.1"
   checksum: 1065cd78294ea651b8c1b96c298a3e70893a23da655e2288e40c06d5d9b1ebce4bd977e604678e01065a92580f3de5078d60d9ee4cdcede9a9989859d7eb5057
-  languageName: node
-  linkType: hard
-
-"flow-parser@npm:^0.151.0":
-  version: 0.151.0
-  resolution: "flow-parser@npm:0.151.0"
-  checksum: d7c071841aceec1fd448e0e0475794736037133d8c5e968a709766f3feb7f78db2fce8df55382cf0de3f4fcc0ef750a56be0f4016fbfe32c04fd82404ad2ecc2
-  languageName: node
-  linkType: hard
-
-"flow-remove-types@npm:^2.137.0":
-  version: 2.151.0
-  resolution: "flow-remove-types@npm:2.151.0"
-  dependencies:
-    flow-parser: ^0.151.0
-    pirates: ^3.0.2
-    vlq: ^0.2.1
-  bin:
-    flow-node: flow-node
-    flow-remove-types: flow-remove-types
-  checksum: 1d6d135f14086d76df1f4ffe97b3d279eca0578d46d025b8bb3e100693454da9276e32a58b10ca032ab39bf8c443f7a613a4bac454bb652f3f0a12b57107e127
   languageName: node
   linkType: hard
 
@@ -18870,15 +18839,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"pirates@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "pirates@npm:3.0.2"
-  dependencies:
-    node-modules-regexp: ^1.0.0
-  checksum: 20fce260583a809fc724b607d7b7fc7972b5e22643b8ea0531e0685799570879e92dab16b9ab8d2198e2bc53cc269f7c6470572b2db29189310805cc50d5fec0
-  languageName: node
-  linkType: hard
-
 "pirates@npm:^4.0.0, pirates@npm:^4.0.1":
   version: 4.0.1
   resolution: "pirates@npm:4.0.1"
@@ -21712,6 +21672,17 @@ resolve@~1.19.0:
   languageName: node
   linkType: hard
 
+"sass@npm:^1.32.13":
+  version: 1.32.13
+  resolution: "sass@npm:1.32.13"
+  dependencies:
+    chokidar: ">=3.0.0 <4.0.0"
+  bin:
+    sass: sass.js
+  checksum: 93913232ec9efbd9edbe63e9c32e08c90e2ca7e1b75079b570207aa828386ad1391a0944a06411f2b2add88803a41dd3ecbfbbcf45ec4c2b288154e17243e71f
+  languageName: node
+  linkType: hard
+
 "sax@npm:>=0.6.0, sax@npm:^1.2.1, sax@npm:^1.2.4, sax@npm:~1.2.4":
   version: 1.2.4
   resolution: "sax@npm:1.2.4"
@@ -24511,13 +24482,6 @@ resolve@~1.19.0:
   languageName: node
   linkType: hard
 
-"vlq@npm:^0.2.1":
-  version: 0.2.3
-  resolution: "vlq@npm:0.2.3"
-  checksum: 48055a9675a8f58c7e78f02707d0e9daa25a7eacbe49d2b215bf35c05eca6399d4ad645c51a512d05c0acd138fb4c003a0e3534a71338f0f2f634a3746d2f03f
-  languageName: node
-  linkType: hard
-
 "vlq@npm:^1.0.0":
   version: 1.0.1
   resolution: "vlq@npm:1.0.1"
@@ -24862,6 +24826,7 @@ resolve@~1.19.0:
     docusaurus-plugin-typedoc: ^0.12.1
     react: ^17.0.2
     react-dom: ^17.0.2
+    sass: ^1.32.13
     typedoc: ^0.20.36
     typedoc-plugin-markdown: ^3.7.2
     typescript: ^4.2.4

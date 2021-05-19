@@ -90,6 +90,7 @@ const adsRenderersConfig: UIRenderHtmlCardProps = {
   props,
   config: {
     importStatements: [
+      "import { View, Text } from 'react-native';",
       "import { TChildrenRenderer } from 'react-native-render-html';"
     ],
     fnSrcMap: {
