@@ -13,12 +13,35 @@ export default function HomepageHeader() {
         <p className={clsx('hero__subtitle', styles.subtitle)}>
           {siteConfig.tagline}
         </p>
-        <div className={clsx(styles.buttons, 'margin-top--xl')}>
+        <div
+          className={clsx(
+            styles.buttons,
+            'margin-top--xl',
+            'margin-bottom--xl'
+          )}>
           <Link
-            className="button button--outline button--primary button--lg"
+            className={clsx(
+              'button button--outline button--primary button--lg',
+              styles.buttonGetStarted
+            )}
             to="/docs/intro">
             Get Started!
           </Link>
+        </div>
+        <div className={styles.stats}>
+          <a
+            className="margin-right--md"
+            href="https://openbase.com/js/react-native-render-html?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge">
+            <img src="https://badges.openbase.com/js/rating/react-native-render-html.svg" />
+          </a>
+          <iframe
+            src="https://ghbtns.com/github-btn.html?user=meliorence&repo=react-native-render-html&type=star&count=true&size=small"
+            frameBorder="0"
+            scrolling="0"
+            width="100"
+            height="30"
+            title="GitHub"
+          />
         </div>
       </div>
     </header>

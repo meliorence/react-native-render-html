@@ -26,10 +26,14 @@ module.exports = {
     ]
   ],
   themeConfig: {
+    colorMode: {
+      defaultMode: 'dark',
+      respectPrefersColorScheme: true
+    },
     navbar: {
       title: 'react-native-render-html',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'React Native Render HTML Logo',
         src: 'img/logo.svg'
       },
       items: [
@@ -38,6 +42,13 @@ module.exports = {
           docId: 'intro',
           position: 'left',
           label: 'Docs'
+        },
+        {
+          type: 'doc',
+          docId: 'migration-guide',
+          position: 'left',
+          label: 'Migration Guide',
+          activeSidebarClassName: '__fun'
         },
         { to: '/blog', label: 'Blog', position: 'left' },
         {
@@ -51,7 +62,7 @@ module.exports = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Overview',
           items: [
             {
               label: 'Introduction',
@@ -60,7 +71,12 @@ module.exports = {
             {
               label: 'Architecture',
               to: '/docs/architecture'
-            },
+            }
+          ]
+        },
+        {
+          title: 'Content',
+          items: [
             {
               label: 'Textual',
               to: '/docs/content/textual'

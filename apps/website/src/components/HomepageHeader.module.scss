@@ -14,6 +14,10 @@
   font-family: var(--ifm-font-family-monospace);
 }
 
+.buttonGetStarted:not(:hover) {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
 .content {
   // margin-top: 250px;
   // --ifm-font-color-base: white;
@@ -30,7 +34,8 @@
   }
 }
 
-.buttons {
+.buttons,
+.stats {
   display: flex;
   align-items: center;
   justify-content: center;
