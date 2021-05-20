@@ -30,6 +30,14 @@ module.exports = {
       defaultMode: 'dark',
       respectPrefersColorScheme: true
     },
+    announcementBar: {
+      id: 'supportus',
+      content:
+        '⭐️ If you like react-native-render-html, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/meliorence/react-native-render-html">GitHub</a> and <a target="_blank" rel="noopener noreferrer" href="https://openbase.com/js/react-native-render-html?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge">write a review on openbase</a>! ⭐️',
+      isCloseable: true,
+      backgroundColor: 'rgb(20, 36, 83)',
+      textColor: 'var(--ifm-color-white)'
+    },
     navbar: {
       logo: {
         alt: 'React Native Render HTML Logo',
