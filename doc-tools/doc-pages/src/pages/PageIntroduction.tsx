@@ -89,7 +89,7 @@ export default function PageIntroduction() {
         <Paragraph>Let's start with a simple example:</Paragraph>
         <RenderHtmlCard
           title="Minimal working example"
-          caption="This card shows the result of rendering a simple HTML code snippet."
+          caption="This example shows the rendering of simple HTML code snippet."
           props={{
             source: {
               html: `
@@ -101,14 +101,21 @@ export default function PageIntroduction() {
         />
         <Conditional platform="web">
           <Admonition type="tip">
-            Play with the html constant and see how it renders! You can try it
-            out in your device, just press the "My Device" button.
+            Press the "Run on Your Device with Expo" button to try it out on
+            your device, and change the HTML from the Expo editor.
+          </Admonition>
+          <Admonition type="tip">
+            Inspect the pre-render tree representation with the "TRT Snapshot"
+            tab.
           </Admonition>
         </Conditional>
         <Paragraph>
           The <RefRenderHtmlProp name="source" /> prop specifies the HTML
           content to load. This prop also supports an{' '}
-          <InlineCode>uri</InlineCode> field for remote loading!
+          <InlineCode>uri</InlineCode> field for remote loading and a{' '}
+          <InlineCode>dom</InlineCode> field for asynchronous DOM pre-processing
+          (see <RefDoc target="dom-tampering" />
+          ).
         </Paragraph>
         <Admonition type="important">
           The <RefRenderHtmlProp name="contentWidth" /> prop allows proper image
