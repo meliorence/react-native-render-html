@@ -7,15 +7,11 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: rgb(31, 47, 97);
+  background-color: rgb(20, 36, 83);
   background-blend-mode: multiply;
   min-height: min(600px, 100vh);
-  --ifm-hero-text-color: var(--ifm-font-color-base);
-}
-
-html[data-theme='light'] .heroBanner {
-  background-color: rgb(231, 235, 255);
-  background-blend-mode: overlay;
+  --ifm-hero-text-color: var(--ifm-color-white);
+  font-family: var(--ifm-font-family-monospace);
 }
 
 .content {

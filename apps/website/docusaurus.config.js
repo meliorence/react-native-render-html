@@ -4,7 +4,7 @@ const { WEBSITE_ROOT, WEBSITE_BASE } = require('@doc/constants');
 module.exports = {
   title: 'Discover React Native Render HTML',
   tagline:
-    'The most hackable and powerful HTML rendering library for React Native!',
+    'The hackable, full-featured HTML rendering solution for React Native.',
   url: WEBSITE_ROOT,
   baseUrl: WEBSITE_BASE,
   onBrokenLinks: 'throw',

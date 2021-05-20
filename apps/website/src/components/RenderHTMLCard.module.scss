@@ -79,11 +79,13 @@
   position: absolute;
   top: var(--ifm-leading);
   right: var(--ifm-leading);
-  font-size: 30px;
+  font-size: 22px;
+  width: 30px;
+  height: 30px;
   appearance: none;
-  background-color: var(--ifm-background-color);
+  background-color: var(--ifm-background-surface-color);
   color: var(--ifm-font-color-base);
-  border-radius: calc(var(--ifm-leading) * 2);
+  border-radius: 30px;
   border: 0;
   cursor: grab;
 }
@@ -92,4 +94,5 @@
   position: fixed;
   inset: 0px;
   background-color: rgba(0, 0, 0, 0.75);
+  z-index: 999;
 }

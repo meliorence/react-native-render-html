@@ -9,12 +9,14 @@ export default function HomepageHeader() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className={clsx('container', styles.content)}>
-        <h1 className="hero__title">{siteConfig.title}</h1>
+        <h1 className="hero__title">React Native Render HTML</h1>
         <p className={clsx('hero__subtitle', styles.subtitle)}>
           {siteConfig.tagline}
         </p>
-        <div className={styles.buttons}>
-          <Link className="button button--primary button--lg" to="/docs/intro">
+        <div className={clsx(styles.buttons, 'margin-top--xl')}>
+          <Link
+            className="button button--outline button--primary button--lg"
+            to="/docs/intro">
             Get Started!
           </Link>
         </div>
