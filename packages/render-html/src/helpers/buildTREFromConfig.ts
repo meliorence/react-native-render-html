@@ -1,0 +1,73 @@
+import { TransientRenderEngineConfig } from '../shared-types';
+import TRenderEngine, {
+  HTMLModelRecord,
+  TagName
+} from '@native-html/transient-render-engine';
+
+export default function buildTREFromConfig(props: TransientRenderEngineConfig) {
+  const {
+    allowedStyles,
+    ignoredStyles,
+    ignoredDomTags,
+    ignoreDomNode,
+    domVisitors,
+    htmlParserOptions,
+    baseStyle,
+    classesStyles,
+    tagsStyles,
+    idsStyles,
+    enableCSSInlineProcessing,
+    enableUserAgentStyles,
+    fallbackFonts,
+    systemFonts,
+    customHTMLElementModels = {},
+    emSize,
+    setMarkersForTNode,
+    selectDomRoot,
+    dangerouslyDisableHoisting,
+    dangerouslyDisableWhitespaceCollapsing
+  } = props;
+  const customizeHTMLModels = Object.keys(customHTMLElementModels).length
+    ? (defaultModels: HTMLModelRecord<TagName>): HTMLModelRecord<TagName> => {
+        return { ...defaultModels, ...customHTMLElementModels };
+      }
+    : undefined;
+  const fontMap = {} as Record<string, true>;
+  systemFonts!.forEach((font) => {
+    fontMap[font] = true;
+  });
+  const isFontSupported = (fontFamily: string) => {
+    if (fallbackFonts![fontFamily as keyof typeof fallbackFonts]) {
+      return fallbackFonts![fontFamily as keyof typeof fallbackFonts];
+    }
+    return fontMap[fontFamily] || false;
+  };
+  return new TRenderEngine({
+    customizeHTMLModels,
+    cssProcessorConfig: {
+      isFontSupported,
+      inlinePropertiesBlacklist: ignoredStyles,
+      inlinePropertiesWhitelist: allowedStyles,
+      rootFontSize: emSize
+    },
+    htmlParserOptions: {
+      decodeEntities: true,
+      ...htmlParserOptions
+    },
+    stylesConfig: {
+      baseStyle,
+      enableCSSInlineProcessing,
+      enableUserAgentStyles,
+      classesStyles,
+      idsStyles,
+      tagsStyles
+    },
+    ignoredDomTags,
+    ignoreDomNode,
+    domVisitors,
+    setMarkersForTNode,
+    selectDomRoot,
+    dangerouslyDisableHoisting,
+    dangerouslyDisableWhitespaceCollapsing
+  });
+}
