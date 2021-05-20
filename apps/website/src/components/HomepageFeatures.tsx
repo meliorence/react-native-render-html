@@ -5,31 +5,70 @@ import styles from './HomepageFeatures.module.scss';
 const FeatureList = [
   {
     title: 'Easy to Use',
-    Svg: require('../../static/img/undraw_docusaurus_mountain.svg').default,
+    Svg: require('../../static/img/undraw_relaxation.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Despite its rich features and plugins,{' '}
+        <code>react-native-render-html</code> was designed for ease of use in
+        mind. Getting started is a matter of seconds.
       </>
     )
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('../../static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Transparent',
+    Svg: require('../../static/img/undraw_back_home.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        The internal data structure to render elements is{' '}
+        <strong>entirely transparent</strong>. You can easily{' '}
+        <strong>inspect</strong> the transient tree structure and have an
+        immediate glimpse of the engine belly.
       </>
     )
   },
   {
-    title: 'Powered by React',
-    Svg: require('../../static/img/undraw_docusaurus_react.svg').default,
+    title: 'Hackable',
+    Svg: require('../../static/img/undraw_hacker_mind.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Every step of the data flow can be tampered with. You can{' '}
+        <strong>alter the DOM</strong>,{' '}
+        <strong>customize and define elements models</strong>, implement{' '}
+        <strong>custom renderers</strong> and <strong>defer rendering</strong>{' '}
+        for asynchronous DOM inspection in a breeze.
+      </>
+    )
+  },
+  {
+    title: 'Standards Compliance',
+    Svg: require('../../static/img/undraw_static_assets.svg').default,
+    description: (
+      <>
+        This library aims at balancing adherance to the W3C and WHATWG standards
+        with complexity and speed.
+      </>
+    )
+  },
+  {
+    title: 'Styles Safety',
+    Svg: require('../../static/img/undraw_security_on.svg').default,
+    description: (
+      <>
+        Despite React Native styles and W3C CSS numerous incompatibilities, this
+        library <strong>reconciles both standards</strong>, and brings support
+        for properties unavailable in React Native such as{' '}
+        <code>list-style-type</code>, <code>white-space</code>...
+      </>
+    )
+  },
+  {
+    title: 'Production Ready',
+    Svg: require('../../static/img/undraw_certificate.svg').default,
+    description: (
+      <>
+        This library is ready for production, and its development{' '}
+        <strong>test-driven</strong>. The transient node engine is{' '}
+        <strong>CI-benchmarked</strong> to safeguard its speed.
       </>
     )
   }

@@ -1,4 +1,10 @@
-import React, { PropsWithChildren, useState } from 'react';
+import React, {
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import ReactModal from 'react-modal';
 import CodeBlock from '@theme/CodeBlock';
 import Tabs from '@theme/Tabs';
@@ -45,10 +51,21 @@ export default function RenderHTMLCard({
   version: string;
 }>) {
   const [isOpen, setIsOpen] = useState(false);
+  const modalRef = useRef(null);
   const normalSnippet = decodeURIComponent(snippet);
   const normalHtml = decodeURIComponent(html);
   const normalSnapshot = decodeURIComponent(snapshot);
-  const onModalClose = () => setIsOpen(false);
+  const onModalClose = useCallback(() => setIsOpen(false), []);
+  useEffect(
+    function fixClickOverlay() {
+      const current = modalRef.current;
+      current.node.addEventListener('click', onModalClose);
+      return () => {
+        current.node.removeEventListener('click', onModalClose);
+      };
+    },
+    [onModalClose]
+  );
   return (
     <figure className={styles.figure}>
       <div className={styles.sourceContainer}>
@@ -81,6 +98,7 @@ export default function RenderHTMLCard({
           shouldCloseOnEsc
           shouldCloseOnOverlayClick
           appElement={document.body}
+          ref={modalRef}
           contentLabel="Expo Interactive Source">
           <ExpoSnippet
             snippet={normalSnippet}

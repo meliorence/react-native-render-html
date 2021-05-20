@@ -55,7 +55,7 @@
   --ifm-code-padding-vertical: 0;
   --ifm-code-padding-horizontal: 0;
   --ifm-code-background: transparent;
-  --ifm-font-family-monospace: 'Source Code Pro';
+  --ifm-font-family-monospace: 'Source Code Pro', monospace;
 }
 
 /* Avoid bug with react-modal */
@@ -63,9 +63,22 @@
   z-index: 0;
 }
 
+.navbar__title {
+  font-family: var(--ifm-font-family-monospace);
+}
+
+.navbar__logo {
+  width: 50px;
+  height: 50px;
+}
+
 code {
   font-weight: var(--ifm-font-weight-semibold);
   font-style: italic;
+}
+
+.button {
+  font-family: var(--ifm-font-family-monospace);
 }
 
 .docusaurus-highlight-code-line {
