@@ -9,6 +9,7 @@ import ReactModal from 'react-modal';
 import CodeBlock from '@theme/CodeBlock';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import ExpoSnippet from './ExpoSnippet';
 import styles from './RenderHTMLCard.module.scss';
 
@@ -33,6 +34,51 @@ const tabs = [
   { label: 'TRT Snapshot', value: 'snapshot' }
 ];
 
+function ExpoModal({
+  isOpen,
+  onModalClose,
+  ...props
+}: {
+  isOpen: boolean;
+  onModalClose: any;
+  snippet: string;
+  title: string;
+  caption?: string;
+  preferHtmlSrc: boolean;
+  version: string;
+}) {
+  const modalRef = useRef(null);
+  useEffect(
+    function fixClickOverlay() {
+      const current = modalRef.current;
+      current.node.addEventListener('click', onModalClose);
+      return () => {
+        current.node.removeEventListener('click', onModalClose);
+      };
+    },
+    [onModalClose]
+  );
+  return (
+    <ReactModal
+      parentSelector={() => document.querySelector('body')}
+      overlayClassName={styles.overlay}
+      portalClassName={styles.portal}
+      className={styles.modalContainer}
+      isOpen={isOpen}
+      onRequestClose={onModalClose}
+      shouldCloseOnEsc
+      shouldCloseOnOverlayClick
+      appElement={document.body}
+      ref={modalRef}
+      contentLabel="Expo Interactive Source">
+      <ExpoSnippet className={styles.modalContent} {...props} />
+      <button className={styles.modal__closeButton} onClick={onModalClose}>
+        X
+      </button>
+    </ReactModal>
+  );
+}
+
 export default function RenderHTMLCard({
   snippet,
   title,
@@ -51,21 +97,12 @@ export default function RenderHTMLCard({
   version: string;
 }>) {
   const [isOpen, setIsOpen] = useState(false);
-  const modalRef = useRef(null);
+
   const normalSnippet = decodeURIComponent(snippet);
   const normalHtml = decodeURIComponent(html);
   const normalSnapshot = decodeURIComponent(snapshot);
   const onModalClose = useCallback(() => setIsOpen(false), []);
-  useEffect(
-    function fixClickOverlay() {
-      const current = modalRef.current;
-      current.node.addEventListener('click', onModalClose);
-      return () => {
-        current.node.removeEventListener('click', onModalClose);
-      };
-    },
-    [onModalClose]
-  );
+
   return (
     <figure className={styles.figure}>
       <div className={styles.sourceContainer}>
@@ -88,29 +125,19 @@ export default function RenderHTMLCard({
             </Tabs>
           </div>
         </div>
-        <ReactModal
-          parentSelector={() => document.querySelector('body')}
-          overlayClassName={styles.overlay}
-          portalClassName={styles.portal}
-          className={styles.modalContainer}
-          isOpen={isOpen}
-          onRequestClose={onModalClose}
-          shouldCloseOnEsc
-          shouldCloseOnOverlayClick
-          appElement={document.body}
-          ref={modalRef}
-          contentLabel="Expo Interactive Source">
-          <ExpoSnippet
-            snippet={normalSnippet}
-            title={title}
-            caption={caption}
-            className={styles.modalContent}
-            {...props}
-          />
-          <button className={styles.modal__closeButton} onClick={onModalClose}>
-            X
-          </button>
-        </ReactModal>
+        <BrowserOnly>
+          {() => (
+            <ExpoModal
+              isOpen={isOpen}
+              onModalClose={onModalClose}
+              {...props}
+              snippet={normalSnippet}
+              title={title}
+              caption={caption}
+              preferHtmlSrc={preferHtmlSrc}
+            />
+          )}
+        </BrowserOnly>
         {caption && (
           <figcaption className={styles.caption}>{caption}</figcaption>
         )}
