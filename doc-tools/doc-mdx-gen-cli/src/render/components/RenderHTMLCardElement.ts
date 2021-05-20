@@ -7,6 +7,7 @@ export type RenderHTMLCardElementProps = {
   snippet: string;
   title: string;
   html: string;
+  snapshot: string;
   caption?: string;
   preferHtmlSrc: boolean;
 };
@@ -21,14 +22,20 @@ export default class RenderHTMLCardElement extends NodeWithChildren {
 
   toMdx(): string {
     const tagName = 'RenderHTMLCard';
-    const { snippet, html, preferHtmlSrc, ...inlineProps } = this.props;
+    const {
+      snippet,
+      html,
+      preferHtmlSrc,
+      snapshot,
+      ...inlineProps
+    } = this.props;
     const identifiers = [tagName, ...this.getInlineProps(inlineProps)];
     return `\n<${identifiers.join(
       ' '
     )} version="${version}" html="${encodeURIComponent(
       html
-    )}" snippet="${encodeURIComponent(
-      snippet
-    )}" preferHtmlSrc={${preferHtmlSrc}} />\n`;
+    )}" snippet="${encodeURIComponent(snippet)}" snapshot="${encodeURIComponent(
+      snapshot
+    )}" />\n`;
   }
 }

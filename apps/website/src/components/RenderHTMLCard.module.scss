@@ -6,6 +6,10 @@
   padding: 0 !important;
 }
 
+.figure__title {
+  @extend .figure__title;
+}
+
 .sourceContainer {
   // padding: 0 var(--ifm-leading) 0 var(--ifm-leading);
 }
@@ -52,13 +56,7 @@
   font-weight: bold;
 }
 
-/* EXPO */
-
-.expoIframe {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
+/* MODAL */
 
 .modalContent {
   width: calc(100vw - var(--modal-inset) * 2 - var(--scrollbar-width));
