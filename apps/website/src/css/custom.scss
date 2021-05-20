@@ -6,21 +6,33 @@
  * See https://github.com/facebookincubator/infima/blob/master/packages/core/styles/common/variables.pcss
  */
 
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,300;0,500;1,300;1,500&display=swap');
+
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: rgb(33, 175, 144);
-  --ifm-color-primary-darker: rgb(31, 165, 136);
-  --ifm-color-primary-darkest: rgb(26, 136, 112);
-  --ifm-color-primary-light: rgb(70, 203, 174);
-  --ifm-color-primary-lighter: rgb(102, 212, 189);
-  --ifm-color-primary-lightest: rgb(146, 224, 208);
+  --ifm-color-primary: #0f9ec5;
+  --ifm-color-primary-dark: #0d8eb1;
+  --ifm-color-primary-darker: #0d86a7;
+  --ifm-color-primary-darkest: #0a6f8a;
+  --ifm-color-primary-light: #10aed9;
+  --ifm-color-primary-lighter: #11b6e3;
+  --ifm-color-primary-lightest: #00c8ff;
   --ifm-code-font-size: 95%;
   --ifm-font-color-secondary: rgb(131, 149, 167);
+  --ifm-code-padding-vertical: 0;
+  --ifm-code-padding-horizontal: 0;
+  --ifm-code-background: transparent;
+  --ifm-font-family-monospace: 'Source Code Pro';
 }
 
+/* Avoid bug with react-modal */
 .ReactModal__Body--open .navbar.navbar--fixed-top {
   z-index: 0;
+}
+
+code {
+  font-weight: var(--ifm-font-weight-semibold);
+  font-style: italic;
 }
 
 .docusaurus-highlight-code-line {

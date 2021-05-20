@@ -3,12 +3,13 @@ const { WEBSITE_ROOT, WEBSITE_BASE } = require('@doc/constants');
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: 'Discover React Native Render HTML',
-  tagline: 'Dinosaurs are cool',
+  tagline:
+    'The most hackable and powerful HTML rendering library for React Native!',
   url: WEBSITE_ROOT,
   baseUrl: WEBSITE_BASE,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.ico?v=1.0.0',
   organizationName: 'meliorence',
   projectName: 'react-native-render-html',
   plugins: [
@@ -36,11 +37,11 @@ module.exports = {
           type: 'doc',
           docId: 'intro',
           position: 'left',
-          label: 'Tutorial'
+          label: 'Docs'
         },
         { to: '/blog', label: 'Blog', position: 'left' },
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/meliorence/react-native-render-html',
           label: 'GitHub',
           position: 'right'
         }
@@ -53,8 +54,45 @@ module.exports = {
           title: 'Docs',
           items: [
             {
-              label: 'Tutorial',
+              label: 'Introduction',
               to: '/docs/intro'
+            },
+            {
+              label: 'Architecture',
+              to: '/docs/architecture'
+            },
+            {
+              label: 'Textual',
+              to: '/docs/content/textual'
+            },
+            {
+              label: 'Images',
+              to: '/docs/content/images'
+            },
+            {
+              label: 'Lists',
+              to: '/docs/content/anchors'
+            },
+            {
+              label: 'Anchors',
+              to: '/docs/content/anchors'
+            }
+          ]
+        },
+        {
+          title: 'Guides',
+          items: [
+            {
+              label: 'Custom Rendering',
+              to: '/docs/guides/custom-renderers'
+            },
+            {
+              label: 'Styling',
+              to: '/docs/guides/styling-components'
+            },
+            {
+              label: 'DOM Tampering',
+              to: '/docs/guides/dom-tampering'
             }
           ]
         },
@@ -63,15 +101,12 @@ module.exports = {
           items: [
             {
               label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus'
+              href:
+                'https://stackoverflow.com/questions/tagged/react-native-render-html'
             },
             {
               label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus'
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus'
+              href: 'https://discord.gg/dbEMMJM'
             }
           ]
         },
@@ -84,12 +119,12 @@ module.exports = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus'
+              href: 'https://github.com/meliorence/react-native-render-html'
             }
           ]
         }
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`
+      copyright: `Copyright © ${new Date().getFullYear()} Meliorence, Inc and Jules Sam. Randolph.`
     }
   },
   presets: [
