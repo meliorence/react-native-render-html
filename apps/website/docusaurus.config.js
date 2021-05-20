@@ -104,7 +104,7 @@ module.exports = {
             },
             {
               label: 'Styling',
-              to: '/docs/guides/styling-components'
+              to: '/docs/guides/styling'
             },
             {
               label: 'DOM Tampering',
