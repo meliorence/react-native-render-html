@@ -58,7 +58,10 @@ export type {
   InternalSpecialRenderedTag,
   InternalRendererConfig
 } from './hooks/useInternalRenderer';
+
+// HELPERS
 export { default as splitBoxModelStyle } from './helpers/splitBoxModelStyle';
+export { default as buildTREFromConfig } from './helpers/buildTREFromConfig';
 
 // HOOKS
 export {
