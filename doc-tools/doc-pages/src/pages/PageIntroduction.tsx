@@ -46,10 +46,8 @@ export default function PageIntroduction() {
             <RefDoc target="custom-renderers">define custom renderers</RefDoc>{' '}
             targetting specific tags with a mean to define children rendering,
             provide{' '}
-            <RefDoc target="styling-components">
-              styles for tags, classes and ids
-            </RefDoc>
-            , and <RefDoc target="dom-tampering">tamper with the DOM</RefDoc>.
+            <RefDoc target="styling">styles for tags, classes and ids</RefDoc>,
+            and <RefDoc target="dom-tampering">tamper with the DOM</RefDoc>.
           </ListItem>
         </List>
         <Paragraph>

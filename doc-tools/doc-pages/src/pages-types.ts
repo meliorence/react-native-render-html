@@ -11,7 +11,7 @@ export type PageId =
   | 'transient-render-engine'
   | 'rendering'
   // guides
-  | 'styling-components'
+  | 'styling'
   | 'dom-tampering'
   | 'custom-renderers'
   // content

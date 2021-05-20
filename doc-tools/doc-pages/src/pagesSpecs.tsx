@@ -90,15 +90,15 @@ const pagesIndex: Record<PageId, PageSpecs> = {
     position: 3,
     title: 'DOM Tampering'
   },
-  'styling-components': {
+  styling: {
     component: PageGuideStylingComponents,
     description:
       'How to add custom styles to components in react-native-render-html?',
     group: 'guides',
     iconName: 'format-paint',
-    id: 'styling-components',
+    id: 'styling',
     position: 2,
-    title: 'Styling Components'
+    title: 'Styling'
   },
   // content
   textual: {
