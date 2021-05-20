@@ -10,6 +10,5 @@ exports[`RenderHTML regarding customHTMLElementsModels prop should support chang
       </TPhrasing>
     </TPhrasing>
   </TBlock>
-</TDocument>
-"
+</TDocument>"
 `;
