@@ -8,6 +8,7 @@
 [![github issues](https://img.shields.io/github/issues/meliorence/react-native-render-html.svg)](https://github.com/meliorence/react-native-render-html/issues)
 [![github closed issues](https://img.shields.io/github/issues-closed/meliorence/react-native-render-html.svg?colorB=44cc11)](https://github.com/meliorence/react-native-render-html/issues?q=is%3Aissue+is%3Aclosed)
 [![](https://img.shields.io/discord/736906960041148476?label=discord)](https://discord.gg/dbEMMJM)
+[![Rate on Openbase](https://badges.openbase.com/js/rating/react-native-render-html.svg)](https://openbase.com/js/react-native-render-html?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 
 <br>
 <p align="center">
