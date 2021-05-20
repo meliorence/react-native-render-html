@@ -12,17 +12,16 @@
   height: min(600px, 100vh);
   --ifm-hero-text-color: var(--ifm-color-white);
   font-family: var(--ifm-font-family-monospace);
+  display: flex;
+  justify-content: center;
+
 }
 
 .buttonGetStarted:not(:hover) {
   background-color: rgba(0, 0, 0, 0.6);
 }
 
-.content {
-  // margin-top: 250px;
-  // --ifm-font-color-base: white;
-  // --ifm-heading-color: white;
-}
+.content {}
 
 .subtitle {
   font-weight: bold;
@@ -39,4 +38,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.stats {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
