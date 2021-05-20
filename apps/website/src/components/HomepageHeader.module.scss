@@ -1,0 +1,41 @@
+.heroBanner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background-image: url('/img/banner.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgb(31, 47, 97);
+  background-blend-mode: multiply;
+  min-height: min(600px, 100vh);
+  --ifm-hero-text-color: var(--ifm-font-color-base);
+}
+
+html[data-theme='light'] .heroBanner {
+  background-color: rgb(231, 235, 255);
+  background-blend-mode: overlay;
+}
+
+.content {
+  // margin-top: 250px;
+  // --ifm-font-color-base: white;
+  // --ifm-heading-color: white;
+}
+
+.subtitle {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 966px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

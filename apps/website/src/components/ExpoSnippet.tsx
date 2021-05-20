@@ -55,7 +55,7 @@ function installIframeListener({
           'expoDataEvent',
           {
             iframeId: iframeId,
-            dependencies: `react-native-render-html@${version},domutils,domhandler`,
+            dependencies: `react-native-render-html@${version},domutils,domhandler,@jsamr/counter-style,@jsamr/counter-style/presets/thai`,
             code,
             files: ''
           }
