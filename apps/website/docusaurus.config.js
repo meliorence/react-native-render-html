@@ -31,7 +31,6 @@ module.exports = {
       respectPrefersColorScheme: true
     },
     navbar: {
-      title: 'react-native-render-html',
       logo: {
         alt: 'React Native Render HTML Logo',
         src: 'img/logo.svg'
