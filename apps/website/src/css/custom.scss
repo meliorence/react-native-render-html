@@ -17,6 +17,39 @@
   --ifm-color-primary-light: #10aed9;
   --ifm-color-primary-lighter: #11b6e3;
   --ifm-color-primary-lightest: #00c8ff;
+
+  --ifm-color-success: #7df17d;
+  --ifm-color-success-dark: #5ced5c;
+  --ifm-color-success-darker: #4bec4b;
+  --ifm-color-success-darkest: #1ae61a;
+  --ifm-color-success-light: #9ef59e;
+  --ifm-color-success-lighter: #aff6af;
+  --ifm-color-success-lightest: #d0fad0;
+
+  --ifm-color-info: #7bcfeb;
+  --ifm-color-info-dark: #5cc4e6;
+  --ifm-color-info-darker: #4cbee4;
+  --ifm-color-info-darkest: #21abda;
+  --ifm-color-info-light: #9adaf0;
+  --ifm-color-info-lighter: #aae0f2;
+  --ifm-color-info-lightest: #c9ebf7;
+
+  --ifm-color-warning: #f8cf5d;
+  --ifm-color-warning-dark: #f7c53c;
+  --ifm-color-warning-darker: #f6c02c;
+  --ifm-color-warning-darkest: #e5ab0a;
+  --ifm-color-warning-light: #f9d97e;
+  --ifm-color-warning-lighter: #fade8e;
+  --ifm-color-warning-lightest: #fce7af;
+
+  --ifm-color-danger: #f76469;
+  --ifm-color-danger-dark: #f54349;
+  --ifm-color-danger-darker: #f43339;
+  --ifm-color-danger-darkest: #e70c13;
+  --ifm-color-danger-light: #f98589;
+  --ifm-color-danger-lighter: #fa9599;
+  --ifm-color-danger-lightest: #fbb6b9;
+
   --ifm-code-font-size: 95%;
   --ifm-font-color-secondary: rgb(131, 149, 167);
   --ifm-code-padding-vertical: 0;
@@ -62,4 +95,35 @@ code {
     margin-top: 0;
     margin-bottom: 0;
   }
+}
+
+// Admonitions
+
+.alert--success {
+  --ifm-alert-background-color: var(--ifm-color-success-lightest);
+  --ifm-alert-border-color: var(--ifm-color-success-lightest);
+  --ifm-alert-color: var(--ifm-color-gray-900);
+}
+.alert--info {
+  --ifm-alert-background-color: var(--ifm-color-info-lightest);
+  --ifm-alert-border-color: var(--ifm-color-info-lightest);
+  --ifm-alert-color: var(--ifm-color-gray-900);
+}
+.alert--warning {
+  --ifm-alert-background-color: var(--ifm-color-warning-light);
+  --ifm-alert-border-color: var(--ifm-color-warning-light);
+  --ifm-alert-color: var(--ifm-color-gray-900);
+}
+.alert--danger {
+  --ifm-alert-background-color: var(--ifm-color-danger-lightest);
+  --ifm-alert-border-color: var(--ifm-color-danger-light);
+  --ifm-alert-color: var(--ifm-color-gray-900);
+}
+
+.alert svg {
+  fill: var(--ifm-alert-color);
+}
+
+.alert {
+  --ifm-code-color: var(--ifm-alert-color);
 }
