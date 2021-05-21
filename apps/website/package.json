@@ -8,7 +8,7 @@
     "build": "yarn build-docs && DOCUSAURUS_NO_DUPLICATE_TITLE_WARNING=false docusaurus build",
     "build-docs": "doc-mdx-gen-cli docs",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
+    "deploy": "yarn build-docs && docusaurus deploy",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
