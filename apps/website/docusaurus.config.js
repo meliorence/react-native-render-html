@@ -57,6 +57,18 @@ module.exports = {
           label: 'Migration Guide',
           activeSidebarClassName: '__fun'
         },
+        {
+          to:
+            'https://github.com/meliorence/react-native-render-html/blob/master/HELP.adoc',
+          label: 'Help',
+          position: 'left'
+        },
+        {
+          to:
+            'https://github.com/meliorence/react-native-render-html/blob/master/CONTRIBUTING.adoc',
+          label: 'Contributing',
+          position: 'left'
+        },
         { to: '/blog', label: 'Blog', position: 'left' },
         {
           href: 'https://github.com/meliorence/react-native-render-html',
