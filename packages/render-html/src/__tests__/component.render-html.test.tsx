@@ -9,6 +9,7 @@ import {
   HTMLContentModel
 } from '@native-html/transient-render-engine';
 import { StyleSheet } from 'react-native';
+import { useRendererProps } from '../context/RenderersPropsProvider';
 
 describe('RenderHTML', () => {
   it('should render without error when providing a source', () => {
@@ -294,5 +295,28 @@ describe('RenderHTML', () => {
       expect(StyleSheet.flatten(div.props.style).marginBottom).toBe(10);
       expect(StyleSheet.flatten(p.props.style).marginTop).toBe(10);
     });
+  });
+  describe('regarding renderersProps prop', () => {
+    const DivRenderer = jest.fn(function DivRenderer() {
+      expect(useRendererProps('div')).toBeDefined();
+      return null;
+    });
+    render(
+      <RenderHTML
+        source={{
+          html: '<div></div>'
+        }}
+        debug={false}
+        renderers={{
+          div: DivRenderer
+        }}
+        renderersProps={{
+          div: {}
+        }}
+        contentWidth={100}
+        enableExperimentalMarginCollapsing={false}
+      />
+    );
+    expect(DivRenderer).toHaveBeenCalledTimes(1);
   });
 });
