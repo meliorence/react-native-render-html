@@ -1,3 +1,66 @@
+# [6.0.0-alpha.25](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.24...v6.0.0-alpha.25) (2021-05-21)
+
+**This should be the last alpha. The most notable breaking change is for custom renderers: you should not attach a model to your renderer anymore. Instead, use `customHTMLElementModels` prop.** A guide will be available soon on the new documentation website.
+
+### Bug Fixes
+
+* debug being ignored ([010315d](https://github.com/meliorence/react-native-render-html/commit/010315d064df4a23be10052ae699e1e3fc89cc90))
+* erroneous TDefaultRenderer "type" prop ([0d3a676](https://github.com/meliorence/react-native-render-html/commit/0d3a676fd21ce2032525930898cd783cb7d2a93f))
+
+### Code Refactoring
+
+* **typescript:** rename RenderHTMLSource to HTMLSource ([1cf8536](https://github.com/meliorence/react-native-render-html/commit/1cf8536b90b2e38c2af61e2bbebc30cd19a222bf))
+* move `contentWidth` prop to `RenderHTMLSource` ([5a1ab50](https://github.com/meliorence/react-native-render-html/commit/5a1ab5062d46d7f2c1b8d518716c392a983dadf6))
+* move markers to `TNode` ([0b9a39d](https://github.com/meliorence/react-native-render-html/commit/0b9a39d2e33db315968c1c85c6d34c603ce549de))
+* rename `DefaultTagRenderer` to `InternalRenderer` ([a31ea0d](https://github.com/meliorence/react-native-render-html/commit/a31ea0d419d28ac1c756787914b9d72f658a2a60))
+* rename `extendDefaultRenderer` to `extendInternalRenderer` ([c05198a](https://github.com/meliorence/react-native-render-html/commit/c05198abc296efebd4e30707ca78ca90a897b397))
+* separate HTML element models and renderers ([71ddd74](https://github.com/meliorence/react-native-render-html/commit/71ddd74cd6e1a20b997f57f6f7d360f28737f781))
+
+
+### Features
+
+* experimental `dangerouslyDisableHoisting` prop ([2507be1](https://github.com/meliorence/react-native-render-html/commit/2507be18fff5cd378d8cc01e69a932f8ced4e674))
+* export buildTREFromConfig for testing ([e7351ce](https://github.com/meliorence/react-native-render-html/commit/e7351ce8c9fbcc72f206dd02f9984fda312c49dd))
+* in debug mode, add the update # ([8999b7d](https://github.com/meliorence/react-native-render-html/commit/8999b7dd20b85e37807ef5155f8aaf0c1c4d0278))
+* new `selectDomRoot` prop to select a custom root ([dbcf6e4](https://github.com/meliorence/react-native-render-html/commit/dbcf6e4f27957dbd5f3e3dd5ba7a4bd9b8b6ffdd))
+* new source type "RenderHTMLSourceDom" to render a DOM object ([f2c0b64](https://github.com/meliorence/react-native-render-html/commit/f2c0b64d7a4b0fe1fa3523717586214966d20c2c))
+* performant multi-instance HTML rendering with `RenderHTMLSource` ([7616236](https://github.com/meliorence/react-native-render-html/commit/76162366b1bcddd89d5b0e94913eca23f0b9d208))
+* support "object-fit" CSS property for images ([7b89444](https://github.com/meliorence/react-native-render-html/commit/7b8944492f2c490837cf81584145720edf38137a))
+
+
+### Performance Improvements
+
+* bypass anonymous TPhrasing nodes with one child or less ([d361872](https://github.com/meliorence/react-native-render-html/commit/d361872e149d12512ba1ca5296fe6bc8ea671dc7))
+* drop `alter*` props in favor of `domVisitors` ([bf7352e](https://github.com/meliorence/react-native-render-html/commit/bf7352e0c6c0dee1022c7bfa6c5f74212a0b4c71))
+* increase transient parsing speed by 30% after upgrade to v6.2.1 ([89ab1aa](https://github.com/meliorence/react-native-render-html/commit/89ab1aa94d4b7b54bba82df610d132c1ef65cadd))
+* migrate to transient-render-engine v5.1.1, +30% speed gains ([21e9420](https://github.com/meliorence/react-native-render-html/commit/21e942085af0587188d8f2d3593b6155d25a81f3))
+* replace `ignoreDOMNode` with `ignoreDomNode` ([e484cda](https://github.com/meliorence/react-native-render-html/commit/e484cda501fe9e900b800c3637fd1fa09993094f))
+* replace `ignoredTags` with `ignoredDomTags` ([6416a21](https://github.com/meliorence/react-native-render-html/commit/6416a21bec3c7dfce6550baa2adbea790ecb4936))
+* upgrade transient-render-engine to 7.1.0 ([4ebba8e](https://github.com/meliorence/react-native-render-html/commit/4ebba8ed2cbafa816f442f1458a1160b4d272313))
+
+
+### BREAKING CHANGES
+
+* **typescript:** for TypeScript users, RenderHTMLSource type has been renamed to HTMLSource for disambiguity with the new RenderHTMLSource component.
+* custom renderers provided in `renderers` prop don't support attaching an HTMLElementModel as the `model` property. Instead,
+use the new `customHTMLElementModels` prop. To create element models, either use `.extend` method from models in the
+`defaultHTMLElementModels` export, or use `HTMLElementModel.fromCustomModel` method.
+* `markers` prop is not available anymore to custom renderers. The marker logic has been moved to the Transient Render Engine. Instead, use `tnode.markers`. 
+* `setMarkersForTNode` signature has changed and is now a config option for the `TRenderEngineProvider`. You must not return a new
+marker. Instead, assign properties directly to the markers instance passed by reference as the first argument of this function.
+* `DefaultTagRenderer` has been renamed to `InternalRenderer` for naming consistency. "Internal renderers" are custom internal renderers for specific tags such as `<img>`, which require custom logic to feature expected behavior. On the contrary, `TDefaultRenderer`s are fallback renderers for a `TNode`. 
+* `extendDefaultRenderer` has been renamed to `extendInternalRenderer` for the sake of naming consistency.
+* `contentWidth` has been removed from the `sharedProps` prop of custom renderers. Consume `useContentWidth` hook instead.
+* `RenderHTMLFragment` has been dropped. Instead, use `RenderHTMLSource` which must have both `RenderHTMLConfigProvider` and
+`TRenderEngineProvider` as ascendants. This decoupling allows global sharing and loading of configuration for best performance when  rendering multiple HTML snippets down in the tree. Best gains will be observed when rendering dozens to hundred of snippets.
+* `ignoredTags` has been replaced with `ignoredDomTags` for naming consistency.
+* `alterDOMNode`, `alterDOMData` and `alterDOMChildren` have been dropped in favor of `domVisitors`. The latter is an object
+with 3 optional callbacks, `onElement`, `onDocument` and `onText` which you can use to intercept and tamper nodes during parsing. Take advantage of [domutils](https://github.com/fb55/domutils) library to delete, insert and manipulate those nodes.
+* `ignoreDOMNode` is now `ignoreDomNode` for naming consistency.
+* `tnodeToString` is not available anymore. Use `TNode.snapshot()` method instead.
+* Serialization related exports have been dropped. The TRE doesn't serialize DOMNodes anymore for performance sake. DOMNodes attached to a TNode are now instances of htmlparser2 "Node". 
+* exported TNode, TText ... are now type-only. If you were using `instanceof TText` for example, replace with a type-garded check: `tnode.type === "text"`.
+
 # [6.0.0-alpha.24](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.23...v6.0.0-alpha.24) (2021-04-17)
 
 
