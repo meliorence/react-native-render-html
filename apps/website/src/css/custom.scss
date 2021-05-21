@@ -75,6 +75,9 @@
 code {
   font-weight: var(--ifm-font-weight-semibold);
   font-style: italic;
+  background-color: transparent;
+  border-width: 0;
+  padding: 0;
 }
 
 .button {
