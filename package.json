@@ -18,10 +18,10 @@
     "@doc/pages": "yarn workspace @doc/pages",
     "@doc/mdx-gen-cli": "yarn workspace @doc/mdx-gen-cli",
     "build:tools": "yarn @doc/pages build && yarn @doc/mdx-gen-cli build",
-    "build:docs": "yarn @doc/pages build && yarn website build-docs",
+    "build:docs": "yarn build:tools && yarn website build-docs",
     "process-svg-assets": "node scripts/processSvgAssets.js",
     "postinstall": "husky install",
-    "publish:website": "GIT_USER=$USER USE_SSH=true CURRENT_BRANCH=dev/foundry yarn workspace website deploy"
+    "publish:website": "yarn build:docs && GIT_USER=$USER USE_SSH=true CURRENT_BRANCH=dev/foundry yarn workspace website deploy"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",

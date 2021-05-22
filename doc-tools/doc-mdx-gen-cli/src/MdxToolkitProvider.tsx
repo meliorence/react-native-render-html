@@ -33,7 +33,14 @@ export default function MdxToolkitProvider({
     ListItem: ({ children }) => <li>{children}</li>,
     Paragraph: ({ children }) => <p>{children}</p>,
     Bold: ({ children }) => <strong>{children}</strong>,
-    RenderHtmlCard: ({ caption, snippet, title, props, preferHtmlSrc }) => {
+    RenderHtmlCard: ({
+      caption,
+      snippet,
+      expoSource,
+      title,
+      props,
+      preferHtmlSrc
+    }) => {
       const html = (props.source as HTMLSourceInline).html;
       return (
         <renderhtmlcard
@@ -42,6 +49,7 @@ export default function MdxToolkitProvider({
           title={title}
           caption={caption}
           snippet={snippet}
+          expoSource={expoSource}
           snapshot={new TRenderEngine(props).buildTTree(html).snapshot()}
         />
       );

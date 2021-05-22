@@ -67,16 +67,18 @@ export default function ToolkitProvider({
         config: renderConfig,
         preferHtmlSrc = false
       }) {
+        const conf = {
+          exprSrcMap: {},
+          fnSrcMap: {},
+          importStatements: [],
+          ...renderConfig
+        };
         return (
           <RenderHtmlCard
             title={title}
             caption={caption}
-            snippet={makeSnippet(props, {
-              exprSrcMap: {},
-              fnSrcMap: {},
-              importStatements: [],
-              ...renderConfig
-            })}
+            snippet={makeSnippet(props, conf, false)}
+            expoSource={makeSnippet(props, conf, true)}
             preferHtmlSrc={preferHtmlSrc}
             props={props}
           />
