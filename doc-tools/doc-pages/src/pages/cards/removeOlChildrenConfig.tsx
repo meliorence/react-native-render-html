@@ -52,7 +52,12 @@ const removeOlChildrenConfig: UIRenderHtmlCardProps = {
     }
   },
   config: {
-    importStatements: ["import { removeElement, isTag } from 'domutils';"],
+    importStatements: [
+      {
+        package: 'domutils',
+        named: ['removeElement', 'isTag']
+      }
+    ],
     fnSrcMap: {
       onElement: onElementSrc
     }

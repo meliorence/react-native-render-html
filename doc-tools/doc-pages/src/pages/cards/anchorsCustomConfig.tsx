@@ -30,7 +30,7 @@ const anchorsCustomConfig: UIRenderHtmlCardProps = {
   },
   preferHtmlSrc: false,
   config: {
-    importStatements: ["import { Alert } from 'react-native';"],
+    importStatements: [{ package: 'react-native', named: ['Alert'] }],
     fnSrcMap: {
       onPress: onPressSrc
     }

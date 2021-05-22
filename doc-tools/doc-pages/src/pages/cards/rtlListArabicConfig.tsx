@@ -32,7 +32,10 @@ const rtlListArabicConfig: UIRenderHtmlCardProps = {
   },
   config: {
     importStatements: [
-      "import arabicIndic from '@jsamr/counter-style/presets/arabicIndic';"
+      {
+        package: '@jsamr/counter-style/presets/arabicIndic',
+        default: 'arabicIndic'
+      }
     ],
     exprSrcMap: {
       counterStyleRenderer: 'arabicIndic'

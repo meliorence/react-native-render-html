@@ -48,7 +48,12 @@ const selectDomRootConfig: UIRenderHtmlCardProps = {
     selectDomRoot
   },
   config: {
-    importStatements: ["import { findOne } from 'domutils';"],
+    importStatements: [
+      {
+        package: 'domutils',
+        named: ['findOne']
+      }
+    ],
     fnSrcMap: {
       selectDomRoot: selectDomRootSrc
     }

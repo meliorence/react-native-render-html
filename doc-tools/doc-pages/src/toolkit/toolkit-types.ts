@@ -72,10 +72,15 @@ export interface UIToolkitRefs {
   RefLibrary: ComponentType<{ name: string; url: string }>;
 }
 
+export interface StatementDeclaration {
+  package: string;
+  default?: string;
+  named?: string[];
+}
 export interface RendererCardConfig {
   fnSrcMap?: Record<string, string>;
   exprSrcMap?: Record<string, string>;
-  importStatements?: string[];
+  importStatements?: StatementDeclaration[];
 }
 
 export interface UIRenderHtmlCardProps {
@@ -103,6 +108,7 @@ export type UIToolkitConfig = {
     caption?: string;
     props: RenderHTMLProps;
     preferHtmlSrc: boolean;
+    extraneousDeps: string[];
   }>;
   RefDoc: ComponentType<{ target: PageSpecs }>;
   Acronym: ComponentType<AcronymDefinition>;

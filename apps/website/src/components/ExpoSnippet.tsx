@@ -39,23 +39,30 @@ function installIframeListener({
   iframe,
   iframeId,
   code,
-  version
+  version,
+  extraneousDeps
 }: {
   iframe: HTMLIFrameElement;
   iframeId: string;
   code: string;
   version: string;
+  extraneousDeps: string[];
 }) {
   const listener = function (event: MessageEvent) {
     var eventName = event.data[0];
     var data = event.data[1];
+    const deps = [
+      `react-native-render-html@${version}`,
+      'react-native-safe-area-context',
+      ...extraneousDeps
+    ];
     if (eventName === 'expoFrameLoaded' && data.iframeId === iframeId) {
       iframe.contentWindow.postMessage(
         [
           'expoDataEvent',
           {
             iframeId: iframeId,
-            dependencies: `react-native-render-html@${version},domutils,domhandler,@jsamr/counter-style,@jsamr/counter-style/presets/thai,react-native-safe-area-context`,
+            dependencies: deps.join(','),
             code,
             files: ''
           }
@@ -74,13 +81,15 @@ const ExpoIframe = memo(function ExpoIframe({
   description,
   theme,
   code,
-  version
+  version,
+  extraneousDeps
 }: {
   name?: string;
   description?: string;
   theme: 'light' | 'dark';
   code: string;
   version: string;
+  extraneousDeps: string[];
 }) {
   // see https://git.io/JOX5X
   const iframeId = useRef(Math.random().toString(36).substr(2, 10));
@@ -102,11 +111,12 @@ const ExpoIframe = memo(function ExpoIframe({
         iframe: ref.current,
         iframeId: iframeId.current,
         code,
-        version
+        version,
+        extraneousDeps
       });
       return cleanup;
     },
-    [code, version]
+    [code, extraneousDeps, version]
   );
   return (
     <iframe
@@ -125,13 +135,15 @@ export default function ExpoSnippet({
   title,
   caption,
   version,
-  className
+  className,
+  extraneousDeps
 }: PropsWithChildren<{
   title: string;
   expoSource: string;
   caption?: string;
   version: string;
   className?: string;
+  extraneousDeps: string[];
 }>) {
   const { isDarkTheme } = useThemeContext();
   const style: React.CSSProperties = {
@@ -145,6 +157,7 @@ export default function ExpoSnippet({
         name={title}
         description={caption}
         version={version}
+        extraneousDeps={extraneousDeps}
       />
     </div>
   );

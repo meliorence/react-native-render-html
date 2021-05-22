@@ -26,10 +26,10 @@ const inlineImagesConfig: UIRenderHtmlCardProps = {
   },
   config: {
     importStatements: [
-      `import {
-  HTMLContentModel,
-  defaultHTMLElementModels
-} from 'react-native-render-html';`
+      {
+        package: 'react-native-render-html',
+        named: ['HTMLContentModel', 'defaultHTMLElementModels']
+      }
     ],
     exprSrcMap: {
       customHTMLElementModels: `{

@@ -74,14 +74,6 @@ const customImageRendererSrc = `function CustomImageRenderer(
   );
 }`;
 
-const importRNStmt = `import {
-  IMGElementContainer,
-  IMGElementContentError,
-  IMGElementContentSuccess,
-  useIMGElementProps,
-  useIMGElementState
-} from 'react-native-render-html';`;
-
 const customImageRendererConfig: UIRenderHtmlCardProps = {
   title: 'A Custom Tag Example',
   caption:
@@ -94,8 +86,17 @@ const customImageRendererConfig: UIRenderHtmlCardProps = {
   },
   config: {
     importStatements: [
-      "import { View, ActivityIndicator } from 'react-native';",
-      importRNStmt
+      { package: 'react-native', named: ['View', 'ActivityIndicator'] },
+      {
+        package: 'react-native-render-html',
+        named: [
+          'IMGElementContainer',
+          'IMGElementContentError',
+          'IMGElementContentSuccess',
+          'useIMGElementProps',
+          'useIMGElementState'
+        ]
+      }
     ],
     fnSrcMap: {
       IMGElementContentLoading: imgElementContentLoadingSrc,

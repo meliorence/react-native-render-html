@@ -32,7 +32,12 @@ const ignoreDomNodeConfig: UIRenderHtmlCardProps = {
     ignoreDomNode
   },
   config: {
-    importStatements: ["import { isTag } from 'domutils';"],
+    importStatements: [
+      {
+        package: 'domutils',
+        named: ['isTag']
+      }
+    ],
     fnSrcMap: {
       ignoreDomNode: ignoreDomNodeSrc
     }

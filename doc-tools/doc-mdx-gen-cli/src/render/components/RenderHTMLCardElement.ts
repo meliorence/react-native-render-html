@@ -11,6 +11,7 @@ export type RenderHTMLCardElementProps = {
   snapshot: string;
   caption?: string;
   preferHtmlSrc: boolean;
+  extraneousDeps: string[];
 };
 
 export default class RenderHTMLCardElement extends NodeWithChildren {
@@ -29,6 +30,7 @@ export default class RenderHTMLCardElement extends NodeWithChildren {
       preferHtmlSrc,
       snapshot,
       expoSource,
+      extraneousDeps,
       ...inlineProps
     } = this.props;
     const identifiers = [tagName, ...this.getInlineProps(inlineProps)];
@@ -38,6 +40,8 @@ export default class RenderHTMLCardElement extends NodeWithChildren {
       html
     )}" snippet="${encodeURIComponent(snippet)}" snapshot="${encodeURIComponent(
       snapshot
-    )}" expoSource="${encodeURIComponent(expoSource)}" />\n`;
+    )}" expoSource="${encodeURIComponent(
+      expoSource
+    )}" extraneousDeps={${JSON.stringify(extraneousDeps)}} />\n`;
   }
 }

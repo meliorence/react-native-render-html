@@ -1,5 +1,6 @@
 import type { RenderHTMLProps } from 'react-native-render-html';
-import { RendererCardConfig } from './toolkit-types';
+import { RendererCardConfig, StatementDeclaration } from './toolkit-types';
+import defaultImports from './defaultImports';
 
 function normalizeKey(key: string) {
   return key.match(/-/) ? `'${key}'` : key;
@@ -89,6 +90,52 @@ function inlineProps(props: RenderHTMLProps, padLeft: number) {
   }, '');
 }
 
+function mergeStatements(
+  statement1: StatementDeclaration,
+  statement2: StatementDeclaration
+): StatementDeclaration {
+  return {
+    package: statement1.package,
+    default: statement1.default || statement2.default,
+    named: [...(statement1.named || []), ...(statement2.named || [])]
+  };
+}
+
+function serializeStatement({
+  package: pkg,
+  default: dft,
+  named
+}: StatementDeclaration): string {
+  const hasNamedImports = !!named?.length;
+  return `import ${dft || ''}${dft && hasNamedImports ? ', ' : ''}${
+    hasNamedImports ? `{ ${named!.join(', ')} }` : ''
+  } from '${pkg}';`;
+}
+
+function flattenStatements(importStmts: StatementDeclaration[]) {
+  const mergeReg: Record<string, boolean> = {
+    react: false,
+    'react-native': false,
+    'react-native-render-html': false
+  };
+  const merged = importStmts.map((stmt) => {
+    if (stmt.package in defaultImports) {
+      mergeReg[stmt.package] = true;
+      return mergeStatements(defaultImports[stmt.package], stmt);
+    }
+    return stmt;
+  });
+  const unmergedBaseStmts = Object.entries(mergeReg)
+    .map(([key, isMerged]) => {
+      if (isMerged) {
+        return null;
+      }
+      return defaultImports[key];
+    })
+    .filter((s) => s !== null);
+  return [...unmergedBaseStmts, ...merged] as StatementDeclaration[];
+}
+
 export default function makeSnippet(
   props: RenderHTMLProps,
   config: Required<RendererCardConfig>,
@@ -96,8 +143,11 @@ export default function makeSnippet(
 ) {
   const importStmts = includeSafeAreaView
     ? [
-        "import { SafeAreaView } from 'react-native-safe-area-context';",
-        ...config.importStatements
+        ...config.importStatements,
+        {
+          package: 'react-native-safe-area-context',
+          named: ['SafeAreaView']
+        }
       ]
     : config.importStatements;
   const returnStmt = includeSafeAreaView
@@ -113,10 +163,7 @@ ${inlineProps(props, 8)}      />
       contentWidth={width}
 ${inlineProps(props, 6)}    />
 `;
-  return `import React from 'react';
-import { useWindowDimensions } from 'react-native';
-import RenderHtml from 'react-native-render-html';
-${importStmts.map((s) => s + '\n')}\
+  return `${flattenStatements(importStmts).map(serializeStatement).join('\n')}
 
 ${declareProps(props, config)}\
 export default function App() {

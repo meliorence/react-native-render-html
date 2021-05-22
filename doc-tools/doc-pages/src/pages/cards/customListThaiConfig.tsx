@@ -27,7 +27,10 @@ const customListThaiConfig: UIRenderHtmlCardProps = {
   },
   config: {
     importStatements: [
-      "import thaiCounterStyle from '@jsamr/counter-style/presets/thai';"
+      {
+        package: '@jsamr/counter-style/presets/thai',
+        default: 'thaiCounterStyle'
+      }
     ],
     exprSrcMap: {
       counterStyleRenderer: 'thaiCounterStyle'
