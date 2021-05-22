@@ -58,6 +58,10 @@
   --ifm-font-family-monospace: 'Source Code Pro', monospace;
 }
 
+html[data-theme='light'] {
+  --ifm-font-color-secondary: rgb(123, 162, 201);
+}
+
 /* Avoid bug with react-modal */
 .ReactModal__Body--open .navbar.navbar--fixed-top {
   z-index: 0;
@@ -70,6 +74,25 @@
 .navbar__logo {
   width: 50px;
   height: 50px;
+}
+
+.menu__link.menu__link--sublist {
+  text-transform: uppercase;
+  cursor: unset;
+  font-size: 85%;
+  color: var(--ifm-font-color-secondary);
+}
+
+.menu__link.menu__link--sublist.menu__link--active {
+  color: var(--ifm-menu-color-active);
+}
+
+.menu__link.menu__link--sublist::after {
+  display: none;
+}
+
+.menu__link.menu__link--sublist:hover {
+  background-color: transparent;
 }
 
 code {
