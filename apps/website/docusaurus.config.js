@@ -4,7 +4,7 @@ const { WEBSITE_ROOT, WEBSITE_BASE } = require('@doc/constants');
 module.exports = {
   title: 'Discover React Native Render HTML',
   tagline:
-    'The hackable, full-featured HTML rendering solution for React Native.',
+    'The hackable, full-featured Open Source HTML rendering solution for React Native.',
   url: WEBSITE_ROOT,
   baseUrl: WEBSITE_BASE,
   onBrokenLinks: 'throw',
@@ -67,9 +67,9 @@ module.exports = {
           to:
             'https://github.com/meliorence/react-native-render-html/blob/master/CONTRIBUTING.adoc',
           label: 'Contributing',
-          position: 'left'
+          position: 'right'
         },
-        { to: '/blog', label: 'Blog', position: 'left' },
+        { to: '/blog', label: 'Blog', position: 'right' },
         {
           href: 'https://github.com/meliorence/react-native-render-html',
           label: 'GitHub',
