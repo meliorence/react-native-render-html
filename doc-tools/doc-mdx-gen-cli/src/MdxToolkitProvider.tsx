@@ -83,10 +83,7 @@ export default function MdxToolkitProvider({
     Hyperlink: ({ children, url }) => <a href={url}>{children}</a>,
     RefRenderHtmlProp: ({ name, docRelativePath, fragment }) => {
       return (
-        <a
-          href={`${docRelativeRoot}/${docRelativePath}.md${
-            fragment ? `#${fragment}` : ''
-          }`}>
+        <a href={`/${docRelativePath}${fragment ? `#${fragment}` : ''}`}>
           {name}
         </a>
       );

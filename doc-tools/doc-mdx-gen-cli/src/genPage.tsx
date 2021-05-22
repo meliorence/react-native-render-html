@@ -11,7 +11,7 @@ export default async function genPage(pageSpecs: PageSpecs, genFolder: string) {
       : [genFolder, pageSpecs.group, `${pageSpecs.id}.mdx`];
   return renderMdx(
     <MdxToolkitProvider
-      docRelativeRoot={pageSpecs.group === 'root' ? '.' : '..'}>
+      docRelativeRoot={pageSpecs.group === 'root' ? '../..' : '../../..'}>
       {React.createElement(pageSpecs.component)}
     </MdxToolkitProvider>,
     pageSpecs,

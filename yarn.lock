@@ -9619,13 +9619,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docusaurus-plugin-typedoc@npm:^0.12.1":
-  version: 0.12.1
-  resolution: "docusaurus-plugin-typedoc@npm:0.12.1"
+"docusaurus-plugin-typedoc@npm:^0.14.1":
+  version: 0.14.1
+  resolution: "docusaurus-plugin-typedoc@npm:0.14.1"
   peerDependencies:
     typedoc: ">=0.20.19"
     typedoc-plugin-markdown: ">=3.6.0"
-  checksum: f029395c530ae55c9a4fc307d9fc1ce08d4e94946402c5ccb8d114df287237fd014877748aaf042507fc3b2e2f8b52fa9d5ba47984fd7e2168427c37ad2c52ec
+  checksum: f4ad56f01b6d7ea69eacae8f2556c4ff8fb5e33f646408e8607dde845a7906aacd9c51ec0c6ae8cda4f580abbf260a51c1d84a937f3f5f17f2d8dbb2f45564ff
   languageName: node
   linkType: hard
 
@@ -23949,7 +23949,7 @@ resolve@~1.19.0:
     "@types/react-router-dom": ^5.1.7
     clsx: ^1.1.1
     docusaurus-plugin-sass: ^0.1.12
-    docusaurus-plugin-typedoc: ^0.12.1
+    docusaurus-plugin-typedoc: ^0.14.1
     react: ^17.0.2
     react-dom: ^17.0.2
     react-modal: ^3.13.1
