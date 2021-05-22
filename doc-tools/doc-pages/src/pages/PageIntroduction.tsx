@@ -119,14 +119,6 @@ export default function PageIntroduction() {
           The <RefRenderHtmlProp name="contentWidth" /> prop allows proper image
           scaling. See <RefDoc target="images" /> page for more details.
         </Admonition>
-        <Conditional platform="web">
-          <Admonition type="note">
-            You won't be able to load external resources such as with{' '}
-            <InlineCode>source.uri</InlineCode> prop from the Expo playground
-            Web preview because of CORS restrictions, but you can try it out on
-            your device, just press the "My Device" button.
-          </Admonition>
-        </Conditional>
       </Chapter>
     </Page>
   );
