@@ -25,30 +25,6 @@ An iOS/Android pure javascript react-native component that renders your HTML int
     <a href="#"><img src="http://i.giphy.com/26tkmjBLvThP0TSak.gif"></a>
 </p>
 
-## Table of contents
-
-- [react-native-render-html](#react-native-render-html)
-  - [Table of contents](#table-of-contents)
-  - [Versions](#versions)
-  - [Install](#install)
-  - [Basic usage](#basic-usage)
-  - [Props](#props)
-  - [Demo](#demo)
-  - [Creating custom renderers](#creating-custom-renderers)
-    - [Custom HTML tags](#custom-html-tags)
-    - [Making your custom component block or inline](#making-your-custom-component-block-or-inline)
-    - [Lists prefixes](#lists-prefixes)
-  - [Styling](#styling)
-  - [Images](#images)
-  - [Altering content](#altering-content)
-    - [alterData](#alterdata)
-    - [alterChildren](#alterchildren)
-    - [alterNode](#alternode)
-    - [onParsed](#onparsed)
-  - [Ignoring HTML content](#ignoring-html-content)
-  - [Utilities](#useful-functions)
-  - [Help](#help)
-
 ## Versions
 
 > :warning: **You are on the master branch which is home for the latest development.**
