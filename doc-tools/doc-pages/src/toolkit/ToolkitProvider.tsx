@@ -6,7 +6,8 @@ import {
   UIToolkit,
   UIToolkitConfig,
   UIToolkitRefs,
-  StatementDeclaration
+  ImportStmt,
+  RendererCardConfig
 } from './toolkit-types';
 import toolkitContext from './toolkitContext';
 import makeSnippet from './makeSnippet';
@@ -73,10 +74,11 @@ export default function ToolkitProvider({
         config: renderConfig,
         preferHtmlSrc = false
       }) {
-        const conf = {
+        const conf: Required<RendererCardConfig> = {
           exprSrcMap: {},
           fnSrcMap: {},
-          importStatements: [] as StatementDeclaration[],
+          importStatements: [] as ImportStmt[],
+          wrapperComponent: null,
           ...renderConfig
         };
         return (

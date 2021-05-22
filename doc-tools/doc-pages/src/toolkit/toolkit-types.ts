@@ -72,7 +72,7 @@ export interface UIToolkitRefs {
   RefLibrary: ComponentType<{ name: string; url: string }>;
 }
 
-export interface StatementDeclaration {
+export interface ImportStmt {
   package: string;
   default?: string;
   named?: string[];
@@ -80,7 +80,8 @@ export interface StatementDeclaration {
 export interface RendererCardConfig {
   fnSrcMap?: Record<string, string>;
   exprSrcMap?: Record<string, string>;
-  importStatements?: StatementDeclaration[];
+  importStatements?: ImportStmt[];
+  wrapperComponent?: string | null;
 }
 
 export interface UIRenderHtmlCardProps {

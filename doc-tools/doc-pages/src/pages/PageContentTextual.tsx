@@ -133,6 +133,11 @@ export default function PageContentTextual() {
         <Section title="Example: Space Mono Font Selection">
           <RenderHtmlCard {...fontSelectionSpaceMonoConfig} />
         </Section>
+        <Admonition type="caution">
+          Fonts registered in <InlineCode>systemFonts</InlineCode> should not be
+          surrounded with quotes; however you <Bold>must</Bold> surround the
+          font name with quotes in inline and mixed styles, as per CSS standard.
+        </Admonition>
       </Chapter>
     </Page>
   );

@@ -1,6 +1,6 @@
-import { StatementDeclaration } from './toolkit-types';
+import { ImportStmt } from './toolkit-types';
 
-const defaultImports: Record<string, StatementDeclaration> = {
+const defaultImports: Record<string, ImportStmt> = {
   react: {
     package: 'react',
     default: 'React'
