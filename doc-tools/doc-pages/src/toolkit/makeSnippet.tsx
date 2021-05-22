@@ -91,20 +91,36 @@ function inlineProps(props: RenderHTMLProps, padLeft: number) {
 
 export default function makeSnippet(
   props: RenderHTMLProps,
-  config: Required<RendererCardConfig>
+  config: Required<RendererCardConfig>,
+  includeSafeAreaView: boolean
 ) {
+  const importStmts = includeSafeAreaView
+    ? [
+        "import { SafeAreaView } from 'react-native-safe-area-context';",
+        ...config.importStatements
+      ]
+    : config.importStatements;
+  const returnStmt = includeSafeAreaView
+    ? `
+    <SafeAreaView>
+      <RenderHtml
+        contentWidth={width}
+${inlineProps(props, 8)}      />
+    </SafeAreaView>
+`
+    : `
+    <RenderHtml
+      contentWidth={width}
+${inlineProps(props, 6)}    />
+`;
   return `import React from 'react';
 import { useWindowDimensions } from 'react-native';
 import RenderHtml from 'react-native-render-html';
-${config.importStatements.join('\n')}
+${importStmts.map((s) => s + '\n')}\
 
 ${declareProps(props, config)}\
 export default function App() {
   const { width } = useWindowDimensions();
-  return (
-    <RenderHtml
-      contentWidth={width}
-${inlineProps(props, 6)}    />
-  );
+  return (${returnStmt}  );
 }`;
 }

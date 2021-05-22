@@ -55,7 +55,7 @@ function installIframeListener({
           'expoDataEvent',
           {
             iframeId: iframeId,
-            dependencies: `react-native-render-html@${version},domutils,domhandler,@jsamr/counter-style,@jsamr/counter-style/presets/thai`,
+            dependencies: `react-native-render-html@${version},domutils,domhandler,@jsamr/counter-style,@jsamr/counter-style/presets/thai,react-native-safe-area-context`,
             code,
             files: ''
           }
@@ -121,14 +121,14 @@ const ExpoIframe = memo(function ExpoIframe({
 });
 
 export default function ExpoSnippet({
-  snippet,
+  expoSource,
   title,
   caption,
   version,
   className
 }: PropsWithChildren<{
   title: string;
-  snippet: string;
+  expoSource: string;
   caption?: string;
   version: string;
   className?: string;
@@ -140,7 +140,7 @@ export default function ExpoSnippet({
   return (
     <div className={className} style={style}>
       <ExpoIframe
-        code={snippet}
+        code={expoSource}
         theme={isDarkTheme ? 'dark' : 'light'}
         name={title}
         description={caption}

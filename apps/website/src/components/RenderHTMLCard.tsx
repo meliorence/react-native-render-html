@@ -41,7 +41,7 @@ function ExpoModal({
 }: {
   isOpen: boolean;
   onModalClose: any;
-  snippet: string;
+  expoSource: string;
   title: string;
   caption?: string;
   preferHtmlSrc: boolean;
@@ -86,9 +86,11 @@ export default function RenderHTMLCard({
   html,
   preferHtmlSrc,
   snapshot,
+  expoSource,
   ...props
 }: PropsWithChildren<{
   snippet: string;
+  expoSource: string;
   html: string;
   snapshot: string;
   title: string;
@@ -99,6 +101,7 @@ export default function RenderHTMLCard({
   const [isOpen, setIsOpen] = useState(false);
 
   const normalSnippet = decodeURIComponent(snippet);
+  const normalExpoSource = decodeURIComponent(expoSource);
   const normalHtml = decodeURIComponent(html);
   const normalSnapshot = decodeURIComponent(snapshot);
   const onModalClose = useCallback(() => setIsOpen(false), []);
@@ -131,7 +134,7 @@ export default function RenderHTMLCard({
               isOpen={isOpen}
               onModalClose={onModalClose}
               {...props}
-              snippet={normalSnippet}
+              expoSource={normalExpoSource}
               title={title}
               caption={caption}
               preferHtmlSrc={preferHtmlSrc}

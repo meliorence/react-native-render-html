@@ -5,6 +5,7 @@ const version = require('react-native-render-html/package.json').version;
 
 export type RenderHTMLCardElementProps = {
   snippet: string;
+  expoSource: string;
   title: string;
   html: string;
   snapshot: string;
@@ -27,6 +28,7 @@ export default class RenderHTMLCardElement extends NodeWithChildren {
       html,
       preferHtmlSrc,
       snapshot,
+      expoSource,
       ...inlineProps
     } = this.props;
     const identifiers = [tagName, ...this.getInlineProps(inlineProps)];
@@ -36,6 +38,6 @@ export default class RenderHTMLCardElement extends NodeWithChildren {
       html
     )}" snippet="${encodeURIComponent(snippet)}" snapshot="${encodeURIComponent(
       snapshot
-    )}" />\n`;
+    )}" expoSource="${encodeURIComponent(expoSource)}" />\n`;
   }
 }

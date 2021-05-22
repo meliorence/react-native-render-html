@@ -98,6 +98,7 @@ export type UIToolkitConfig = {
   RefBuilder: ComponentType<{ name: string; url: string; type: RefType }>;
   RenderHtmlCard: ComponentType<{
     snippet: string;
+    expoSource: string;
     title: string;
     caption?: string;
     props: RenderHTMLProps;
