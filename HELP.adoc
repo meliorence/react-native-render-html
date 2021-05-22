@@ -55,7 +55,7 @@ B. Going to https://discord.gg/dbEMMJM[our Discord #support channel].
 
 For example, it doesn't render tag YYY or replicate the behavior of attribute
 XXX. This library is not meant for an exact compliance with the standard. First
-and foremost, because React Native imposes some constrains that we cannot
+and foremost, because React Native imposes some constraints that we cannot
 overcome, and secondly, because the philosophy of the library is to let you
 customize rendering to fit your needs rather than strictly honoring the
 standards. Finally, because the https://github.com/react-native-community/react-native-webview[`react-native-webview`] library fits this purpose.
