@@ -74,9 +74,18 @@ const internalImageRendererConfig: UIRenderHtmlCardProps = {
   },
   config: {
     importStatements: [
-      "import { Modal, Button, Text, View } from 'react-native';",
-      "import { useState } from 'react';",
-      "import { useInternalRenderer } from 'react-native-render-html';"
+      {
+        package: 'react-native',
+        named: ['Modal', 'Button', 'Text', 'View']
+      },
+      {
+        package: 'react',
+        named: ['useState']
+      },
+      {
+        package: 'react-native-render-html',
+        named: ['useInternalRenderer']
+      }
     ],
     fnSrcMap: {
       CustomImageRenderer: customImageRendererSrc

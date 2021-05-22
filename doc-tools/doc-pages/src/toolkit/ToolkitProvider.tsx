@@ -2,9 +2,15 @@ import React, { PropsWithChildren, useMemo } from 'react';
 import acronymsIndex from '../acronymsIndex';
 import figuresIndex from '../figuresIndex';
 import pagesSpecs from '../pagesSpecs';
-import { UIToolkit, UIToolkitConfig, UIToolkitRefs } from './toolkit-types';
+import {
+  UIToolkit,
+  UIToolkitConfig,
+  UIToolkitRefs,
+  StatementDeclaration
+} from './toolkit-types';
 import toolkitContext from './toolkitContext';
 import makeSnippet from './makeSnippet';
+import defaultImports from './defaultImports';
 
 function buildRefs(Builder: UIToolkitConfig['RefBuilder']): UIToolkitRefs {
   return {
@@ -70,7 +76,7 @@ export default function ToolkitProvider({
         const conf = {
           exprSrcMap: {},
           fnSrcMap: {},
-          importStatements: [],
+          importStatements: [] as StatementDeclaration[],
           ...renderConfig
         };
         return (
@@ -81,6 +87,9 @@ export default function ToolkitProvider({
             expoSource={makeSnippet(props, conf, true)}
             preferHtmlSrc={preferHtmlSrc}
             props={props}
+            extraneousDeps={conf.importStatements
+              .map((v) => v.package)
+              .filter((pck) => !(pck in defaultImports))}
           />
         );
       },

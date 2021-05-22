@@ -39,7 +39,8 @@ export default function MdxToolkitProvider({
       expoSource,
       title,
       props,
-      preferHtmlSrc
+      preferHtmlSrc,
+      extraneousDeps
     }) => {
       const html = (props.source as HTMLSourceInline).html;
       return (
@@ -50,6 +51,7 @@ export default function MdxToolkitProvider({
           caption={caption}
           snippet={snippet}
           expoSource={expoSource}
+          extraneousDeps={extraneousDeps}
           snapshot={new TRenderEngine(props).buildTTree(html).snapshot()}
         />
       );

@@ -22,7 +22,10 @@ const fontSelectionSpaceMonoConfig: UIRenderHtmlCardProps = {
   },
   config: {
     importStatements: [
-      "import { defaultSystemFonts } from 'react-native-render-html';"
+      {
+        package: 'react-native-render-html',
+        named: ['defaultSystemFonts']
+      }
     ],
     exprSrcMap: {
       systemFonts: '["\'space-mono\'", ...defaultSystemFonts]'

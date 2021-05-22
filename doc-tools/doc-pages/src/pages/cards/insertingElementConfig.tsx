@@ -59,8 +59,14 @@ const insertingElementConfig: UIRenderHtmlCardProps = {
   },
   config: {
     importStatements: [
-      "import { prependChild } from 'domutils';",
-      "import { Element } from 'domhandler';"
+      {
+        package: 'domutils',
+        named: ['prependChild']
+      },
+      {
+        package: 'domhandler',
+        named: ['Element']
+      }
     ],
     fnSrcMap: {
       onElement: onElementSrc

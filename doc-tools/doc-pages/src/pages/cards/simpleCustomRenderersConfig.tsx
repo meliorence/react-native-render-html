@@ -53,7 +53,12 @@ const simpleCustomRenderersConfig: UIRenderHtmlCardProps = {
     'A custom renderer taking advantage of onPress prop available in TDefaultRenderer passed component.',
   props,
   config: {
-    importStatements: ["import { Alert } from 'react-native';"],
+    importStatements: [
+      {
+        package: 'react-native',
+        named: ['Alert']
+      }
+    ],
     fnSrcMap: { H1Renderer: h1RendererSrc }
   }
 };

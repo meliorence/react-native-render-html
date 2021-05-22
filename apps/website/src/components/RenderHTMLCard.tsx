@@ -46,6 +46,7 @@ function ExpoModal({
   caption?: string;
   preferHtmlSrc: boolean;
   version: string;
+  extraneousDeps: string[];
 }) {
   const modalRef = useRef(null);
   useEffect(
@@ -97,6 +98,7 @@ export default function RenderHTMLCard({
   caption?: string;
   preferHtmlSrc: boolean;
   version: string;
+  extraneousDeps: string[];
 }>) {
   const [isOpen, setIsOpen] = useState(false);
 

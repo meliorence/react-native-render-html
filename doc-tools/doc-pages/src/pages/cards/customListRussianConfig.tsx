@@ -31,7 +31,9 @@ const customListRussianConfig: UIRenderHtmlCardProps = {
     }
   },
   config: {
-    importStatements: ["import CounterStyle from '@jsamr/counter-style';"],
+    importStatements: [
+      { package: '@jsamr/counter-style', default: 'CounterStyle' }
+    ],
     exprSrcMap: {
       counterStyleRenderer: `CounterStyle.alphabeticFromUnicodeRange(
       0x430, // а

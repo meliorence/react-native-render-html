@@ -25,7 +25,10 @@ const bluecircleConfig: UIRenderHtmlCardProps = {
   },
   config: {
     importStatements: [
-      "import { HTMLElementModel, HTMLContentModel } from 'react-native-render-html';"
+      {
+        package: 'react-native-render-html',
+        named: ['HTMLElementModel', 'HTMLContentModel']
+      }
     ],
     exprSrcMap: {
       customHTMLElementModels: `{
