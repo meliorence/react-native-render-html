@@ -75,7 +75,7 @@ ____
 |dpi
 |`containerWidth` minus inner left and right padding.
 
-|_image box constrains_
+|_image box constraints_
 |dpi
 |See section bellow.
 |===
@@ -94,30 +94,30 @@ assigned to this element;
 After having applied the rules of specificity, we end up with a set of
 rules which are meant to influence the dimensions of the Embedded Box
 Element. For the sake of simplicity, we will ignore the following
-constrains:
+constraints:
 
 * margins and padding;
-* constrains expressed in relative units (%, vh);
-* constrains on parents in the DOM.
+* constraints expressed in relative units (%, vh);
+* constraints on parents in the DOM.
 
 Therefore we have `width`, `height`, `maxWidth`, `maxHeight`, `minWidth`
 and `minHeight`, all expressed in dpi. For the sake of clarity, we
 introduce new definitions:
 
-* The _minimum constrains_ is the rectangle formed by `minWidth` and
+* The _minimum constraints_ is the rectangle formed by `minWidth` and
 `minHeight`.
-* The _maximum constrains_ is the rectangle formed by `maxWidth` and
+* The _maximum constraints_ is the rectangle formed by `maxWidth` and
 `maxHeight`.
-* The _required constrains_ is the rectangle formed by `width` and
+* The _required constraints_ is the rectangle formed by `width` and
 `height`.
 
-Default _minimum constrains_ are (0, 0) and default _maximum constrains_
+Default _minimum constraints_ are (0, 0) and default _maximum constraints_
 are (Infinity, Infinity).
 
 == Consumer Behaviors
 
 These functions pertain to ``injected behaviors'' and give library
-consumers great flexibility in implementing their own constrains
+consumers great flexibility in implementing their own constraints
 regarding embedded scaling logic.
 
 [width="100%",cols="13%,7%,80%",options="header",]
@@ -152,9 +152,9 @@ Let _box dimensions_ be the `width` and `height` of the Embedded Box
 Element with each width and height `undefined`.
 
 [arabic]
-. *If* _required constrains_ `width` and `height` are both defined,
-assign _box dimensions_ to the value of _required constrains_. +
-*Else if* one of both dimensions of _required constrains_ is defined,
+. *If* _required constraints_ `width` and `height` are both defined,
+assign _box dimensions_ to the value of _required constraints_. +
+*Else if* one of both dimensions of _required constraints_ is defined,
 infer the other dimension from the original embedded aspect ratio
 (`embeddedPhysicalHeight / embeddedPhysicalWidth`). +
 *Else*, assign _box dimensions_ to the result of applying `convertUnit`
@@ -169,7 +169,7 @@ Let _box dimensions_ be the `width` and `height` of the Embedded Box
 Element an argument of this algorithm.
 
 [arabic]
-. Apply _minimum constrains_ and _maximum constrains_ to _box_
+. Apply _minimum constraints_ and _maximum constraints_ to _box_
 _dimensions_ width and height whilst preserving aspect ratio.
 . *If* `computeEmbeddedMaxWidth` function is defined, apply max-width
 constrain to _box dimensions_ whilst preserving aspect ratio. +

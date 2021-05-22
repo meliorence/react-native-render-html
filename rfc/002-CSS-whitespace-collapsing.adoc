@@ -52,13 +52,13 @@ The below flow is proposed to account for the new whitespace collapsing requirem
 
 . *Parsing*: the HTML is parsed into a document tree.
 . *Render Tree Generation*: a transient render tree is build to account
-for React-Native constrains and prepare a structure to be rendered in a React
+for React-Native constraints and prepare a structure to be rendered in a React
 tree.
 .. *Translating*: each document node is translated to a transient node (see
 <<translate-tree>> algorithm).
 .. *Transforming*: the transient tree is mutated.
-... *Hoisting*: the tree is reordered to account for transient node constrains,
-which are derived from React Native constrains (see <<hoist-tree>> algorithm).
+... *Hoisting*: the tree is reordered to account for transient node constraints,
+which are derived from React Native constraints (see <<hoist-tree>> algorithm).
 ... *Collapsing*: the transient render tree is walked over in order to collapse
   white spaces according to the limited whitespace collapsing requirements (see
   <<collapse-tree>> algorithm).
@@ -512,7 +512,7 @@ See <<translate-tree>> algorithm.
 
 === Hoisting
 
-Hoisting is applied to enforce transient node constrains:
+Hoisting is applied to enforce transient node constraints:
 
 .After Hoisting
 [source,xml]
