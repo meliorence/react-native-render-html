@@ -15,13 +15,29 @@ module.exports = {
   plugins: [
     'docusaurus-plugin-sass',
     [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'api',
+        path: 'api',
+        routeBasePath: 'api',
+        sidebarPath: require.resolve('./apiSidebar.js'),
+        disableVersioning: false
+      }
+    ],
+    [
       'docusaurus-plugin-typedoc',
       // Plugin / TypeDoc options
       {
         entryPoints: ['../../packages/render-html/src/index.ts'],
         tsconfig: '../../packages/render-html/tsconfig.json',
         readme: 'none',
-        disableOutputCheck: true
+        disableOutputCheck: true,
+        docsRoot: './',
+        out: 'api',
+        sidebar: {
+          indexLabel: 'Index',
+          position: 0
+        }
       }
     ]
   ],
@@ -51,8 +67,13 @@ module.exports = {
           label: 'Docs'
         },
         {
-          type: 'doc',
-          docId: 'migration-guide',
+          to: 'api/api',
+          activeBasePath: 'api',
+          position: 'left',
+          label: 'API'
+        },
+        {
+          to: 'migration-guide',
           position: 'left',
           label: 'Migration Guide',
           activeSidebarClassName: '__fun'
@@ -61,7 +82,7 @@ module.exports = {
           to:
             'https://github.com/meliorence/react-native-render-html/blob/master/HELP.adoc',
           label: 'Help',
-          position: 'left'
+          position: 'right'
         },
         {
           to:
@@ -169,7 +190,9 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/facebook/docusaurus/edit/master/website/'
+          editUrl:
+            'https://github.com/facebook/docusaurus/edit/master/website/',
+          disableVersioning: false
         },
         blog: {
           showReadingTime: true,

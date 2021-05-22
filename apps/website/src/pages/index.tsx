@@ -13,7 +13,7 @@ export default function Home() {
       <HomepageHeader />
       <div className={styles.annoucement}>
         Coming from v4 or v5 ? Check out our{' '}
-        <Link to="/docs/migration-guide">migration guide</Link>.
+        <Link to="/migration-guide">migration guide</Link>.
       </div>
       <main>
         <HomepageFeatures />
