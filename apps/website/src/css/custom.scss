@@ -6,7 +6,7 @@
  * See https://github.com/facebookincubator/infima/blob/master/packages/core/styles/common/variables.pcss
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,300;0,500;1,300;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
 
 /* You can override the default Infima variables here. */
 :root {
@@ -55,7 +55,7 @@
   --ifm-code-padding-vertical: 0;
   --ifm-code-padding-horizontal: 0;
   --ifm-code-background: transparent;
-  --ifm-font-family-monospace: 'Source Code Pro', monospace;
+  --ifm-font-family-monospace: 'Fira Code', monospace;
 }
 
 html[data-theme='light'] {
@@ -136,6 +136,13 @@ code {
   }
   table {
     table-layout: fixed;
+
+    th,
+    td {
+      > p {
+        margin-bottom: 0;
+      }
+    }
   }
 }
 

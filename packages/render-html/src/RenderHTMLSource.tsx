@@ -117,6 +117,9 @@ const RenderHTMLSource = memo(
     equals(prevSource, currSource) && equals(prev, curr)
 );
 
+/**
+ * @ignore
+ */
 (RenderHTMLSource as any).propTypes = renderSourcePropTypes;
 
 export default RenderHTMLSource;

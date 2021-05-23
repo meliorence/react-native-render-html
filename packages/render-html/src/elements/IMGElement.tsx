@@ -69,8 +69,14 @@ const propTypes: Record<keyof IMGElementProps, any> = {
   cachedNaturalDimensions: imgDimensionsType
 };
 
+/**
+ * @ignore
+ */
 IMGElement.propTypes = propTypes;
 
+/**
+ * @ignore
+ */
 IMGElement.defaultProps = {
   enableExperimentalPercentWidth: false,
   computeMaxWidth: identity,

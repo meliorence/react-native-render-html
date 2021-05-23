@@ -106,5 +106,12 @@ export default function TRenderEngineProvider({
   );
 }
 
+/**
+ * @ignore
+ */
 TRenderEngineProvider.defaultProps = defaultTRenderEngineProviderProps;
+
+/**
+ * @ignore
+ */
 TRenderEngineProvider.propTypes = tRenderEngineProviderPropTypes;

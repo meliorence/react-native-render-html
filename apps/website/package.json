@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "DOCUSAURUS_NO_DUPLICATE_TITLE_WARNING=false docusaurus start",
+    "start": "DOCUSAURUS_NO_DUPLICATE_TITLE_WARNING=false docusaurus start --no-open",
     "build": "DOCUSAURUS_NO_DUPLICATE_TITLE_WARNING=false docusaurus build",
     "build-docs": "doc-mdx-gen-cli docs",
     "swizzle": "docusaurus swizzle",
@@ -12,13 +12,15 @@
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids"
+    "write-heading-ids": "docusaurus write-heading-ids",
+    "typedoc-build": "node typedoc-build.js",
+    "apidoc-gen": "node apidoc-gen.js"
   },
   "dependencies": {
     "@doc/constants": "workspace:*",
     "@doc/svg-component": "workspace:*",
-    "@docusaurus/core": "2.0.0-beta.ff31de0ff",
-    "@docusaurus/preset-classic": "2.0.0-beta.ff31de0ff",
+    "@docusaurus/core": "2.0.0-beta.0",
+    "@docusaurus/preset-classic": "2.0.0-beta.0",
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.1.1",
     "docusaurus-plugin-sass": "^0.1.12",
@@ -42,16 +44,15 @@
     "@doc/mdx-gen-cli": "workspace:*",
     "@doc/pages": "workspace:*",
     "@doc/svgr-conf": "workspace:*",
-    "@docusaurus/module-type-aliases": "^2.0.0-beta.ff31de0ff",
+    "@docusaurus/module-type-aliases": "^2.0.0-beta.0",
     "@tsconfig/docusaurus": "^1.0.2",
     "@types/react": "^17.0.4",
     "@types/react-helmet": "^6.1.1",
     "@types/react-modal": "^3.12.0",
     "@types/react-router-dom": "^5.1.7",
-    "docusaurus-plugin-typedoc": "^0.14.1",
+    "doc-docusaurus-typedoc-plugin": "workspace:*",
     "sass": "^1.32.13",
     "typedoc": "^0.20.36",
-    "typedoc-plugin-markdown": "^3.7.2",
     "typescript": "^4.2.4"
   }
 }

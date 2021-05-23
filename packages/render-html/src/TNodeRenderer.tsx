@@ -47,6 +47,9 @@ const defaultProps: Required<
   }
 };
 
+/**
+ * @ignore
+ */
 TNodeRenderer.defaultProps = defaultProps;
 
 export default TNodeRenderer;

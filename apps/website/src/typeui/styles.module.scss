@@ -1,0 +1,144 @@
+.container {
+  background-color: rgb(41, 45, 62);
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  color: white;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  border-bottom-left-radius: var(--ifm-global-radius);
+  border-bottom-right-radius: var(--ifm-global-radius);
+}
+
+.container {
+  line-height: 1.5;
+  white-space: nowrap;
+  code {
+    font-style: normal;
+    display: inline;
+  }
+  a .token {
+    background-color: rgba(247, 247, 205, 0.1);
+    // border-bottom: black 1px solid;
+    border-radius: 0;
+    padding: 0 2px;
+    position: relative;
+  }
+  a:hover {
+    text-decoration: none;
+    .token {
+      background-color: rgba(253, 253, 251, 0.719);
+      color: var(--ifm-color-gray-800);
+      text-decoration: underline;
+      text-decoration-color: var(--ifm-color-gray-800);
+    }
+  }
+}
+
+.token {
+  color: var(--token-color);
+  --ifm-link-hover-color: var(--token-color);
+}
+
+.token--punctuation {
+  --token-color: rgb(199, 146, 234);
+}
+
+.token--attr-name {
+  --token-color: rgb(255, 203, 107);
+}
+
+.token--plain {
+  --token-color: rgb(191, 199, 213);
+}
+
+.token--keyword {
+  font-style: italic;
+  --token-color: rgb(194, 59, 142);
+}
+
+.token--literal {
+  --token-color: rgb(136, 194, 59);
+}
+
+.token--type {
+  font-weight: bolder;
+  --token-color: rgb(89, 138, 243);
+}
+
+.token--primitive {
+  --token-color: rgb(89, 187, 243);
+}
+
+.typeContainer {
+  flex-grow: 1;
+  overflow-x: auto;
+}
+
+.flagBox {
+  font-size: 70%;
+  text-transform: uppercase;
+  font-family: var(--ifm-font-family-monospace);
+  vertical-align: center;
+  padding: 0 0.5rem;
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  height: var(--decorator-size);
+}
+
+.flagBox--optional {
+  background-color: var(--ifm-color-info);
+  color: var(--ifm-color-black);
+}
+
+.flagBox--required {
+  background-color: var(--ifm-color-success);
+  color: var(--ifm-color-black);
+}
+
+.flagBox--static {
+  background-color: var(--ifm-color-info);
+  color: var(--ifm-color-black);
+}
+
+.logo, .logo > svg {
+  height: var(--decorator-size);
+  flex-shrink: 0;
+}
+
+.logo {
+  --logo-color-fill: white;
+  --logo-color-bg: #3178c6;
+  &:hover {
+    --logo-color-fill:#3178c6;
+    --logo-color-bg:  white;
+    outline: solid 3px #3178c6;
+  }
+}
+
+.badges {
+  --decorator-size: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(37, 57, 150, 0.342);
+  border-top-left-radius: var(--ifm-global-radius);
+  border-top-right-radius: var(--ifm-global-radius);
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.sourceBox, .sourceBox > code {
+  font-style: normal;
+  font-weight: 900;
+  padding-left: 0.25rem;
+  color: var(--ifm-base-font-color);
+  text-decoration: underline;
+}
+
+.headerTypeBox {
+  // font-size: 150%;
+  background-color: rgb(41, 45, 62);
+}
+
