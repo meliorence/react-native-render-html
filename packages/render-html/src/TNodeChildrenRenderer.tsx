@@ -48,6 +48,9 @@ function TNodeChildrenRenderer(
   return React.createElement(TNodeWithChildrenRenderer, props);
 }
 
+/**
+ * @ignore
+ */
 TNodeChildrenRenderer.defaultProps = tchildrenRendererDefaultProps;
 
 export default TNodeChildrenRenderer;

@@ -1,4 +1,5 @@
 const { WEBSITE_ROOT, WEBSITE_BASE } = require('@doc/constants');
+const version = require('react-native-render-html/package.json').version;
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
@@ -20,23 +21,20 @@ module.exports = {
         id: 'api',
         path: 'api',
         routeBasePath: 'api',
-        sidebarPath: require.resolve('./apiSidebar.js'),
+        sidebarPath: require.resolve('./apisidebar.json'),
         disableVersioning: false
       }
     ],
     [
-      'docusaurus-plugin-typedoc',
-      // Plugin / TypeDoc options
+      'doc-docusaurus-typedoc-plugin',
       {
-        entryPoints: ['../../packages/render-html/src/index.ts'],
-        tsconfig: '../../packages/render-html/tsconfig.json',
-        readme: 'none',
-        disableOutputCheck: true,
-        docsRoot: './',
-        out: 'api',
-        sidebar: {
-          indexLabel: 'Index',
-          position: 0
+        version,
+        outDir: './api',
+        sidebarFile: './apisidebar.json',
+        typedoc: {
+          entryPoints: ['../../packages/render-html/src/index.ts'],
+          tsconfig: '../../packages/render-html/tsconfig.json',
+          excludePrivate: true
         }
       }
     ]
@@ -67,7 +65,7 @@ module.exports = {
           label: 'Docs'
         },
         {
-          to: 'api/api',
+          to: 'api/',
           activeBasePath: 'api',
           position: 'left',
           label: 'API'
@@ -127,7 +125,7 @@ module.exports = {
             },
             {
               label: 'Lists',
-              to: '/docs/content/anchors'
+              to: '/docs/content/lists'
             },
             {
               label: 'Anchors',

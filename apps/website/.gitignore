@@ -22,4 +22,4 @@ yarn-error.log*
 # Typedoc
 /typedoc-sidebar.js
 
-/api/**/*.md
+/api/**/*.mdx

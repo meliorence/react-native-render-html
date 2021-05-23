@@ -71,4 +71,7 @@ export default function RenderHTMLConfigProvider<
   );
 }
 
+/**
+ * @ignore
+ */
 RenderHTMLConfigProvider.propTypes = renderHTMLConfigPropTypes;

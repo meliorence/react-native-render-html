@@ -1,0 +1,14 @@
+{
+  "name": "doc-docusaurus-typedoc-plugin",
+  "type": "commonjs",
+  "main": "src/index.js",
+  "dependencies": {
+    "@docusaurus/core": "^2.0.0-beta.ff31de0ff",
+    "@docusaurus/plugin-content-docs": "^2.0.0-beta.ff31de0ff",
+    "@docusaurus/types": "^2.0.0-beta.ff31de0ff",
+    "typedoc": "^0.20.36"
+  },
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
+}

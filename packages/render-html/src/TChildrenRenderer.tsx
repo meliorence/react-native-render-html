@@ -50,6 +50,9 @@ export const tchildrenRendererDefaultProps: Pick<
   propsForChildren: {}
 };
 
+/**
+ * @ignore
+ */
 TChildrenRenderer.defaultProps = tchildrenRendererDefaultProps;
 
 export default TChildrenRenderer;
