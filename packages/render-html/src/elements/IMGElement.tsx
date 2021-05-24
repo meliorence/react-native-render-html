@@ -14,7 +14,7 @@ function identity(arg: any) {
   return arg;
 }
 
-const IMGElement = ({ onPress, testID, ...props }: IMGElementProps) => {
+function IMGElement({ onPress, testID, ...props }: IMGElementProps) {
   const state = useIMGElementState(props);
   let content: ReactNode = false;
   if (state.type === 'success') {
@@ -32,7 +32,7 @@ const IMGElement = ({ onPress, testID, ...props }: IMGElementProps) => {
       {content}
     </IMGElementContainer>
   );
-};
+}
 
 const imgDimensionsType = PropTypes.shape({
   width: PropTypes.number,

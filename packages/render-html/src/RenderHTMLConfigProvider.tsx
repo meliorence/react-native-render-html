@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useMemo } from 'react';
+import React, { PropsWithChildren, ReactElement, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import RenderersPropsProvider from './context/RenderersPropsProvider';
 import SharedPropsProvider from './context/SharedPropsProvider';
@@ -36,7 +36,7 @@ export const renderHTMLConfigPropTypes: RenderHTMLConfigPropTypes = {
 
 export default function RenderHTMLConfigProvider<
   P extends RenderersPropsBase = RenderersPropsBase
->(props: PropsWithChildren<RenderHTMLConfig<P>>) {
+>(props: PropsWithChildren<RenderHTMLConfig<P>>): ReactElement {
   const {
     remoteErrorView,
     remoteLoadingView,

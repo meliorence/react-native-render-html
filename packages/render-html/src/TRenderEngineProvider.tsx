@@ -1,5 +1,5 @@
 import TRenderEngine from '@native-html/transient-render-engine';
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, ReactElement } from 'react';
 import { Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import useTRenderEngine from './hooks/useTRenderEngine';
@@ -97,7 +97,7 @@ export function useAmbientTRenderEngine() {
 export default function TRenderEngineProvider({
   children,
   ...config
-}: PropsWithChildren<TransientRenderEngineConfig>) {
+}: PropsWithChildren<TransientRenderEngineConfig>): ReactElement {
   const engine = useTRenderEngine(config);
   return (
     <TRenderEngineContext.Provider value={engine}>

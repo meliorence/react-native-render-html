@@ -31,6 +31,7 @@ export type {
   TextLevelTagNames,
   TNode,
   TPhrasing,
+  TText,
   TRenderEngineOptions,
   TStylesShape,
   UnsupportedTagNames,

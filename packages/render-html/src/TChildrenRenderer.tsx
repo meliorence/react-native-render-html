@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { TNode } from '@native-html/transient-render-engine';
 import TNodeRenderer from './TNodeRenderer';
 import { TChildrenRendererProps } from './shared-types';
@@ -8,12 +8,12 @@ function isCollapsible(tnode: TNode) {
   return tnode.type === 'block' || tnode.type === 'phrasing';
 }
 
-const TChildrenRenderer = function TChildrenRenderer({
+function TChildrenRenderer({
   tchildren,
   propsForChildren,
   disableMarginCollapsing,
   renderChild
-}: TChildrenRendererProps) {
+}: TChildrenRendererProps): ReactElement {
   let collapsedMarginTop: number | null = null;
   const elements = tchildren.map((childTnode, i) => {
     if (
@@ -41,7 +41,7 @@ const TChildrenRenderer = function TChildrenRenderer({
       : childElement;
   });
   return <>{elements}</>;
-};
+}
 
 export const tchildrenRendererDefaultProps: Pick<
   TChildrenRendererProps,

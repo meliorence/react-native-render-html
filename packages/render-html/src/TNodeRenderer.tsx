@@ -2,19 +2,12 @@ import React, { ReactElement } from 'react';
 import TBlockRenderer from './TBlockRenderer';
 import TPhrasingRenderer from './TPhrasingRenderer';
 import TTextRenderer from './TTextRenderer';
-import {
-  PropsFromParent,
-  TNodeRendererProps,
-  TNodeSubRendererProps
-} from './shared-types';
+import { TNodeRendererProps } from './shared-types';
 import { useSharedProps } from './context/SharedPropsProvider';
-import { TNode } from '@native-html/transient-render-engine';
 
 export type { TNodeRendererProps } from './shared-types';
 
-const TNodeRenderer = function TNodeRenderer(
-  props: TNodeRendererProps<any>
-): ReactElement<TNodeSubRendererProps<TNode, PropsFromParent>> | null {
+function TNodeRenderer(props: TNodeRendererProps<any>): ReactElement | null {
   const { tnode } = props;
   const sharedProps = useSharedProps();
   const tnodeProps = {
@@ -44,7 +37,7 @@ const TNodeRenderer = function TNodeRenderer(
     }
   }
   return null;
-};
+}
 
 const defaultProps: Required<
   Pick<TNodeRendererProps<any>, 'propsFromParent'>

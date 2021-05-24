@@ -1,9 +1,4 @@
-import {
-  TBlock,
-  TPhrasing,
-  TText,
-  HTMLContentModel
-} from '@native-html/transient-render-engine';
+import { TBlock, TPhrasing, TText } from '@native-html/transient-render-engine';
 import { ComponentType } from 'react';
 import {
   CustomTagRenderer,
@@ -19,7 +14,23 @@ export type InternalTextContentRenderer = ComponentType<{
 }> & {
   isNativeInternalTextRenderer: true;
 };
-export type DefaultBlockRenderer = InternalRenderer<TBlock>;
+
+/**
+ * Internal renderer for tags with a **block** content model.
+ */
+export type InternalBlockRenderer = InternalRenderer<TBlock>;
+
+/**
+ * Internal renderer for tags with a **mixed** content model.
+ */
+export type InternalMixedRenderer = InternalRenderer<
+  TBlock | TPhrasing | TText
+>;
+
+/**
+ * Internal renderer for tags with a **textual** content model.
+ */
+export type InternalTextualRenderer = InternalRenderer<TPhrasing | TText>;
 
 /**
  * Block renderers can only render tnodes of type TBlock.
@@ -28,20 +39,12 @@ export type CustomBlockRenderer<
   P extends PropsFromParent = PropsFromParent
 > = CustomTagRenderer<TBlock, P>;
 
-export type DefaultTextualRenderer<
-  P extends PropsFromParent = PropsFromParent
-> = InternalRenderer<TText | TPhrasing, P>;
-
 /**
  * Textual renderers can render tnodes of type TText or TPhrasing.
  */
 export type CustomTextualRenderer<
   P extends PropsFromParent = PropsFromParent
 > = CustomTagRenderer<TText | TPhrasing, P>;
-
-export type DefaultMixedRenderer<
-  P extends PropsFromParent = PropsFromParent
-> = InternalRenderer<TBlock | TPhrasing | TText, P>;
 
 /**
  * Mixed renderers can can render tnodes of type TText, TPhrasing or TBlock.
@@ -50,32 +53,12 @@ export type CustomMixedRenderer<
   P extends PropsFromParent = PropsFromParent
 > = CustomTagRenderer<TBlock | TPhrasing | TText, P>;
 
-export type CustomTagRendererFromModel<
-  T extends HTMLContentModel
-> = T extends HTMLContentModel.block
-  ? CustomBlockRenderer<any>
-  : T extends HTMLContentModel.textual
-  ? CustomTextualRenderer<any>
-  : T extends HTMLContentModel.mixed
-  ? CustomMixedRenderer<any>
-  : never;
-
-export type DefaultTagRendererFromModel<
-  T extends HTMLContentModel
-> = T extends HTMLContentModel.block
-  ? DefaultBlockRenderer
-  : T extends HTMLContentModel.textual
-  ? DefaultTextualRenderer
-  : T extends HTMLContentModel.mixed
-  ? DefaultMixedRenderer
-  : never;
-
-export type DefaultTagRendererRecord<T extends string> = Record<
-  T,
-  DefaultTagRendererFromModel<any>
->;
-
+/**
+ * A record of custom renderers.
+ */
 export type CustomTagRendererRecord = Record<
   string,
-  CustomTagRendererFromModel<any>
+  | CustomBlockRenderer<any>
+  | CustomTextualRenderer<any>
+  | CustomMixedRenderer<any>
 >;

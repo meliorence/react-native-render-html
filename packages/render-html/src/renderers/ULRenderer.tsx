@@ -1,5 +1,5 @@
 import React from 'react';
-import { DefaultBlockRenderer } from '../render/render-types';
+import { InternalBlockRenderer } from '../render/render-types';
 import {
   DefaultTagRendererProps,
   DefaultSupportedListStyleType
@@ -34,7 +34,7 @@ export function useULElementProps(
   };
 }
 
-const ULRenderer: DefaultBlockRenderer = (props) => {
+const ULRenderer: InternalBlockRenderer = (props) => {
   return React.createElement(ULElement, useULElementProps(props));
 };
 
