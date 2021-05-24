@@ -1,6 +1,6 @@
 import React from 'react';
 import { TBlock } from '@native-html/transient-render-engine';
-import { DefaultBlockRenderer } from '../render/render-types';
+import { InternalBlockRenderer } from '../render/render-types';
 import {
   DefaultTagRendererProps,
   DefaultSupportedListStyleType
@@ -34,7 +34,7 @@ export function useOLElementProps(
   };
 }
 
-const OLRenderer: DefaultBlockRenderer = (props) => {
+const OLRenderer: InternalBlockRenderer = (props) => {
   return React.createElement(OLElement, useOLElementProps(props));
 };
 

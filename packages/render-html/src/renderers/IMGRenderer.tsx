@@ -1,7 +1,7 @@
 import React, { ClassAttributes } from 'react';
 import { TBlock } from '@native-html/transient-render-engine';
 import IMGElement, { IMGElementProps } from '../elements/IMGElement';
-import { DefaultBlockRenderer } from '../render/render-types';
+import { InternalBlockRenderer } from '../render/render-types';
 import { useComputeMaxWidthForTag } from '../context/SharedPropsProvider';
 import { ImageStyle } from 'react-native';
 import { DefaultTagRendererProps } from '../shared-types';
@@ -38,7 +38,7 @@ export function useIMGElementProps(
   };
 }
 
-const IMGRenderer: DefaultBlockRenderer = (props) => {
+const IMGRenderer: InternalBlockRenderer = (props) => {
   return React.createElement(IMGElement, useIMGElementProps(props));
 };
 

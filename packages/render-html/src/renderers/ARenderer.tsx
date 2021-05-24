@@ -1,5 +1,5 @@
 import React from 'react';
-import { DefaultMixedRenderer } from '../render/render-types';
+import { InternalMixedRenderer } from '../render/render-types';
 import { TNode, DocumentContext } from '@native-html/transient-render-engine';
 import { DefaultTagRendererProps, RenderersPropsBase } from '../shared-types';
 import { AccessibilityProps, GestureResponderEvent } from 'react-native';
@@ -52,7 +52,7 @@ export function useAElementProps<T extends TNode>(
   };
 }
 
-const ARenderer: DefaultMixedRenderer = (props) => {
+const ARenderer: InternalMixedRenderer = (props) => {
   return React.createElement(AElement, useAElementProps(props));
 };
 

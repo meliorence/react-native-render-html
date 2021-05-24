@@ -32,21 +32,21 @@ export function useTNodeChildrenProps({
   };
 }
 
-const TNodeWithChildrenRenderer = function TNodeChildrenRenderer(
+const TNodeWithChildrenRenderer = function TNodeWithChildrenRenderer(
   props: TNodeChildrenRendererProps
 ) {
   return React.createElement(TChildrenRenderer, useTNodeChildrenProps(props));
 };
 
-const TNodeChildrenRenderer = function TNodeChildrenRenderer(
+function TNodeChildrenRenderer(
   props: TNodeChildrenRendererProps
-): ReactElement | null {
+): ReactElement {
   if (props.tnode.type === 'text') {
     // see https://github.com/DefinitelyTyped/DefinitelyTyped/issues/20544
     return (props.tnode.data as unknown) as ReactElement;
   }
   return React.createElement(TNodeWithChildrenRenderer, props);
-};
+}
 
 TNodeChildrenRenderer.defaultProps = tchildrenRendererDefaultProps;
 

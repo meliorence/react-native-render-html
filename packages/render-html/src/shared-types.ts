@@ -829,6 +829,9 @@ export type TDefaultRenderer<
  * {@link TDefaultRenderer}.
  *
  * @public
+ *
+ * @typeParam T - The concrete type of {@link TNode} for this renderer.
+ * @typeParam P - The type for props from parent.
  */
 export type InternalRenderer<
   T extends TNode,
@@ -879,9 +882,9 @@ export interface DocumentMetadata {
   /**
    * How anchors should be actioned on press?
    *
-   * @remarks By default, `onLinkPress` will always open the system browser,
-   * equivalent to `_blank` target. However, you can customize the behavior by
-   * providing your own `onLinkPress` implementation.
+   * @remarks By default, `renderersProps.a.onPress` will always open the
+   * system browser, equivalent to `_blank` target. However, you can customize
+   * the behavior by providing your own implementation.
    */
   baseTarget: TREDocumentContext['baseTarget'];
   /**
