@@ -75,6 +75,16 @@ function RawSourceLoader({
   return React.createElement(SourceLoaderInline, { source, ...props });
 }
 
+/**
+ * A React component to render HTML snippets.
+ *
+ * @remarks This component is useful when you have to load dozens of HTML
+ * snippets with the same config. Performance is expected to improve in such
+ * scenarios.
+ *
+ * @warning This component requires to have {@link TRenderEngineProvider}
+ * and {@link RenderHTMLConfigProvider} as parents.
+ */
 const RenderHTMLSource = memo(
   function RenderHtmlSource({
     onDocumentMetadataLoaded,

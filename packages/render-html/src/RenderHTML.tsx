@@ -10,11 +10,9 @@ import RenderHTMLSource from './RenderHTMLSource';
  *
  * @remarks If your application uses many instances of this component, you
  * should share the render engine across those instances via the
- * {@link TRenderEngineProvier} and {@link RenderHTMLConfigProvider}
+ * {@link TRenderEngineProvider} and {@link RenderHTMLConfigProvider}
  * components, and render the HTML with {@link RenderHTMLSource} instead. That
  * should significantly increase performance.
- *
- * @param props - Props for this component.
  *
  * @public
  */
