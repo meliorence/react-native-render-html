@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { ReactElement, useCallback } from 'react';
 import {
   Image,
   ImageErrorEventData,
@@ -9,13 +9,16 @@ import { IMGElementStateSuccess } from './img-types';
 
 const defaultImageStyle: ImageStyle = { resizeMode: 'cover' };
 
+/**
+ * Default success "image" view for the {@link IMGElement} component.
+ */
 export default function IMGElementContentSuccess({
   alt,
   source,
   imageStyle,
   dimensions,
   onError
-}: IMGElementStateSuccess) {
+}: IMGElementStateSuccess): ReactElement {
   const onImageError = useCallback(
     ({ nativeEvent: { error } }: NativeSyntheticEvent<ImageErrorEventData>) =>
       onError(error),
