@@ -67,7 +67,8 @@ function useFetchedNaturalDimensions(props: UseIMGElementStateProps) {
 }
 
 /**
- * This hook will compute concrete dimensions from
+ * This hook will compute concrete dimensions from image natural dimensions and
+ * constraints.
  */
 export default function useIMGElementState(
   props: UseIMGElementStateProps

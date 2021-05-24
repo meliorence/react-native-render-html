@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, ReactElement } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { IMGElementStateBase } from './img-types';
 
@@ -11,13 +11,16 @@ const styles = StyleSheet.create({
   altText: { textAlign: 'center', fontStyle: 'italic' }
 });
 
+/**
+ * Alt view for the {@link IMGElement} component.
+ */
 export default function IMGElementContentAlt({
   dimensions,
   alt,
   altColor,
   testID,
   children
-}: PropsWithChildren<IMGElementStateBase & { testID?: string }>) {
+}: PropsWithChildren<IMGElementStateBase & { testID?: string }>): ReactElement {
   return (
     <View
       style={[styles.altBox, dimensions, { borderColor: altColor }]}

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import useIMGElementState from './useIMGElementState';
 import IMGElementContentSuccess from './IMGElementContentSuccess';
@@ -14,7 +14,20 @@ function identity(arg: any) {
   return arg;
 }
 
-function IMGElement({ onPress, testID, ...props }: IMGElementProps) {
+/**
+ * A component to render images based on an internal loading state.
+ *
+ * @remarks This component will attempt to draw a box of paint dimensions
+ * before retrieving the physical dimensions of the image to avoid layout
+ * shifts. See also {@link useIMGElementState}, {@link IMGElementContainer},
+ * {@link IMGElementContentSuccess}, {@link IMGElementContentLoading}
+ * and {@link IMGElementContentError} for customization.
+ */
+function IMGElement({
+  onPress,
+  testID,
+  ...props
+}: IMGElementProps): ReactElement {
   const state = useIMGElementState(props);
   let content: ReactNode = false;
   if (state.type === 'success') {
