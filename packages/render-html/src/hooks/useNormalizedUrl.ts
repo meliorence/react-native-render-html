@@ -3,7 +3,7 @@ import normalizeResourceLocator from '../helpers/normalizeResourceLocator';
 
 /**
  * This hook transforms relative and protocol-relative URLs to absolute URLs as
- * per {@link https://tools.ietf.org/html/rfc1808 RFC1808}. The base URL is
+ * per {@link https://tools.ietf.org/html/rfc1808 | RFC1808}. The base URL is
  * determined by the `<base />` element, `source.uri` or `source.baseUrl`.
  *
  * @remarks
