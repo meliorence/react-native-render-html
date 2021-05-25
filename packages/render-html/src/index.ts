@@ -33,6 +33,8 @@ export type {
   TEmpty,
   TextLevelTagNames,
   TNode,
+  TNodeShape,
+  TNodeType,
   TPhrasing,
   TText,
   TRenderEngineOptions,
