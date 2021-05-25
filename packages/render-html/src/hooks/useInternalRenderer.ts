@@ -52,6 +52,7 @@ export interface InternalRendererConfig<P> {
  *
  * @param tagName - **Invariant** The tag name to extend.
  * @param props - The props passed to the custom renderer.
+ * @typeParam T - The type literal for the tag to target.
  * @returns An object with two fields: `Renderer` (the internal react
  * component) and `rendererProps`, the internal component props.
  *

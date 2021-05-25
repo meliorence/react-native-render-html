@@ -11,7 +11,8 @@ const RenderersPropsContext = React.createContext<Required<RenderersPropsBase>>(
 /**
  * Consume props from {@link RenderHTMLProps.renderersProps}.
  *
- * @param k - The name of the renderer's associated element.
+ * @param tagName - The name of the element.
+ * @typeParam K - The type literal corresponding to the element name.
  * @returns props for this renderer.
  *
  * @public
@@ -19,9 +20,9 @@ const RenderersPropsContext = React.createContext<Required<RenderersPropsBase>>(
 export function useRendererProps<
   RendererProps extends RenderersPropsBase = RenderersPropsBase,
   K extends keyof RendererProps = keyof RendererProps
->(k: K) {
+>(tagName: K) {
   const userProps = React.useContext(RenderersPropsContext) as RendererProps;
-  return userProps[k];
+  return userProps[tagName];
 }
 
 /**
