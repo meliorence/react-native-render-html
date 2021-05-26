@@ -1,6 +1,8 @@
 import RenderHTML from './RenderHTML';
 export {
   defaultHTMLElementModels,
+  isDomElement,
+  isDomText,
   Document,
   Element,
   Node,
