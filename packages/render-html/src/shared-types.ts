@@ -168,8 +168,13 @@ export interface RenderHTMLPassedProps {
   /**
    * Props to use in custom renderers with `useRendererProps`.
    *
-   * **Typescript users**: If you need to add fields to the {@link RenderersPropsBase} interface,
-   * you should use module augmentation:
+   * @warning
+   * Changes to this prop will cause a react tree update. Always memoize it.
+   *
+   * @remarks
+   * - When you use the hook, you'll get this object deep-merged with default renderers props.
+   * - **Typescript users**: If you need to add fields to the {@link RenderersPropsBase} interface,
+   *     you should use module augmentation:
    *
    * ```ts
    * import { RenderersPropsBase } from 'react-native-render-html';
@@ -182,10 +187,6 @@ export interface RenderHTMLPassedProps {
    *   }
    * }
    * ```
-   *
-   * @remarks
-   * - When you use the hook, you'll get this object deep-merged with default renderers props.
-   * - Changes to this prop will cause a react tree update. Always memoize it.
    */
   renderersProps?: Partial<RenderersPropsBase>;
 }
@@ -498,7 +499,7 @@ export interface TransientRenderEngineConfig {
    *
    * @example
    * ```ts
-   * triggerTREInvalidationPropNames = ['tagsStyles', 'allowedStyles']
+   * const triggerTREInvalidationPropNames = ['tagsStyles', 'allowedStyles']
    * ```
    */
   triggerTREInvalidationPropNames?: Array<
@@ -594,6 +595,36 @@ export interface RenderHTMLConfig
     RenderHTMLPassedProps {
   /**
    * Your custom renderers.
+   *
+   * @remarks
+   *
+   * **TypeScript users**: To have intellisense for custom renderers, explicitly
+   * set your custom renderer type to one of {@link CustomBlockRenderer},
+   * {@link CustomTextualRenderer} or {@link CustomMixedRenderer} depending
+   * on the {@link HTMLContentModel} defined for this tag (see example below).
+   *
+   * @example
+   *
+   * A custom renderer for `<div>` tags which trigger an alert on press.
+   *
+   * ```tsx
+   * import React from 'react';
+   * import RenderHTML, { CustomBlockRenderer } from 'react-native-render-html';
+   * import { Alert } from 'react-native';
+   *
+   * const onPress = () => Alert.alert("I pressed a div!");
+   *
+   * // (TypeScript) Notice the type for intellisense
+   * const DivRenderer: CustomBlockRenderer = function DivRenderer({ TDefaultRenderer, ...props }) {
+   *  return <TDefaultRenderer {...props} onPress={onPress} />;
+   * }
+   *
+   * const renderers = { div: DivRenderer }
+   *
+   * //
+   *
+   * return <RenderHTML renderers={renderers} />
+   * ```
    */
   renderers?: CustomTagRendererRecord;
   /**
@@ -662,8 +693,12 @@ export interface FallbackFontsDefinitions {
 /**
  * Props passed from parents to children.
  *
- * **Typescript users**: If you need to customize this type, use module
- * augmentation:
+ *
+ * @remarks
+ * - Anonymous nodes will pass those props from their parents to
+ *   children.
+ * - **Typescript users**: If you need to customize this type, use module
+ *   augmentation:
  *
  * ```ts
  * import { RenderersPropsBase } from 'react-native-render-html';
@@ -675,8 +710,6 @@ export interface FallbackFontsDefinitions {
  * }
  * ```
  *
- * @remarks Anonymous nodes will pass those props from their parents to
- * children.
  */
 export interface PropsFromParent {
   collapsedMarginTop: number | null;
