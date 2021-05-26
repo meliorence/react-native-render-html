@@ -30,6 +30,7 @@ export type {
   NativeBlockStyles,
   NativeTextStyles,
   SectioningTagNames,
+  SetMarkersForTNode,
   TabularTagNames,
   TagName,
   TBlock,
