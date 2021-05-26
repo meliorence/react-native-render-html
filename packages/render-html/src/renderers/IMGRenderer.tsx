@@ -4,13 +4,13 @@ import IMGElement, { IMGElementProps } from '../elements/IMGElement';
 import { InternalBlockRenderer } from '../render/render-types';
 import { useComputeMaxWidthForTag } from '../context/SharedPropsProvider';
 import { ImageStyle } from 'react-native';
-import { DefaultTagRendererProps } from '../shared-types';
+import { InternalRendererProps } from '../shared-types';
 import useNormalizedUrl from '../hooks/useNormalizedUrl';
 import { useRendererProps } from '../context/RenderersPropsProvider';
 import useContentWidth from '../hooks/useContentWidth';
 
 export function useIMGElementProps(
-  props: DefaultTagRendererProps<TBlock>
+  props: InternalRendererProps<TBlock>
 ): IMGElementProps & ClassAttributes<any> {
   const { style, tnode, onPress, key } = props;
   const contentWidth = useContentWidth();

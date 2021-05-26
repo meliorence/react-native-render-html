@@ -26,7 +26,9 @@ import type {
   TRenderEngineOptions,
   DOMNodeWithChildren,
   DOMElement,
-  DOMDocument
+  DOMDocument,
+  NativeTextStyles,
+  NativeBlockStyles
 } from '@native-html/transient-render-engine';
 import type { CounterStyleRenderer } from '@jsamr/counter-style';
 import type { ComponentType, ReactElement, ReactNode } from 'react';
@@ -162,17 +164,30 @@ export interface RenderersPropsBase extends Record<string, any> {
  *
  * @public
  */
-export interface RenderHTMLPassedProps<
-  RendererProps extends RenderersPropsBase = RenderersPropsBase
-> {
+export interface RenderHTMLPassedProps {
   /**
    * Props to use in custom renderers with `useRendererProps`.
+   *
+   * **Typescript users**: If you need to add fields to the {@link RenderersPropsBase} interface,
+   * you should use module augmentation:
+   *
+   * ```ts
+   * import { RenderersPropsBase } from 'react-native-render-html';
+   *
+   * declare module 'react-native-render-html' {
+   *   interface RenderersPropsBase {
+   *     div?: {
+   *       customProp: boolean;
+   *     };
+   *   }
+   * }
+   * ```
    *
    * @remarks
    * - When you use the hook, you'll get this object deep-merged with default renderers props.
    * - Changes to this prop will cause a react tree update. Always memoize it.
    */
-  renderersProps?: Partial<RendererProps>;
+  renderersProps?: Partial<RenderersPropsBase>;
 }
 
 /**
@@ -574,10 +589,9 @@ export type HTMLSource = HTMLSourceInline | HTMLSourceDom | HTMLSourceUri;
  *
  * @public
  */
-export interface RenderHTMLConfig<
-  P extends RenderersPropsBase = RenderersPropsBase
-> extends RenderHTMLSharedProps,
-    RenderHTMLPassedProps<P> {
+export interface RenderHTMLConfig
+  extends RenderHTMLSharedProps,
+    RenderHTMLPassedProps {
   /**
    * Your custom renderers.
    */
@@ -629,9 +643,8 @@ export interface RenderHTMLSourceProps {
  *
  * @public
  */
-export interface RenderHTMLProps<
-  P extends RenderersPropsBase = RenderersPropsBase
-> extends RenderHTMLConfig<P>,
+export interface RenderHTMLProps
+  extends RenderHTMLConfig,
     RenderHTMLSourceProps,
     TransientRenderEngineConfig {}
 
@@ -649,10 +662,23 @@ export interface FallbackFontsDefinitions {
 /**
  * Props passed from parents to children.
  *
+ * **Typescript users**: If you need to customize this type, use module
+ * augmentation:
+ *
+ * ```ts
+ * import { RenderersPropsBase } from 'react-native-render-html';
+ *
+ * declare module 'react-native-render-html' {
+ *   interface PropsFromParent {
+ *     customProp?: boolean;
+ *   }
+ * }
+ * ```
+ *
  * @remarks Anonymous nodes will pass those props from their parents to
  * children.
  */
-export interface PropsFromParent extends Record<string, any> {
+export interface PropsFromParent {
   collapsedMarginTop: number | null;
 }
 
@@ -698,29 +724,33 @@ export interface TNodeChildrenRendererProps extends TChildrenBaseProps {
   tnode: TNode;
 }
 
-export interface TNodeRendererProps<
-  T extends TNode,
-  P extends PropsFromParent = PropsFromParent
-> {
-  tnode: T;
-  key?: string | number;
-  propsFromParent: P;
-}
-
-export interface TNodeSubRendererProps<
-  T extends TNode,
-  P extends PropsFromParent = PropsFromParent
-> extends TNodeRendererProps<T, P> {
+/**
+ * Props for {@link TNodeRenderer} component.
+ *
+ * @typeParam T - The concrete type of {@link TNode}.
+ */
+export interface TNodeRendererProps<T extends TNode> {
   /**
-   * Props shared across the whole render tree.
+   * The {@link TNode} to render.
    */
-  sharedProps: Required<RenderHTMLSharedProps>;
+  tnode: T;
+  /**
+   * The key that must be passed to the root of the returned element.
+   */
+  key?: string | number;
+  /**
+   * Props passed by direct parents.
+   */
+  propsFromParent: PropsFromParent;
 }
 
-export interface TRendererBaseProps<
-  T extends TNode,
-  P extends PropsFromParent = PropsFromParent
-> extends TNodeRendererProps<T, P> {
+/**
+ * Abstract interface for renderers.
+ *
+ * @typeParam T - The concrete type of {@link TNode}.
+ */
+export interface RendererBaseProps<T extends TNode>
+  extends TNodeRendererProps<T> {
   /**
    * Any default renderer should be able to handle press.
    */
@@ -742,23 +772,20 @@ export interface TRendererBaseProps<
 /**
  * Props for {@link TDefaultRenderer}.
  *
+ * @typeParam T - The concrete type of {@link TNode}.
  * @public
  */
-export interface TDefaultRendererProps<
-  T extends TNode,
-  P extends PropsFromParent = PropsFromParent
-> extends TRendererBaseProps<T, P> {
+export interface TDefaultRendererProps<T extends TNode>
+  extends RendererBaseProps<T> {
   /**
    * When children is present, renderChildren will not be invoked.
    */
   children?: ReactNode;
   /**
-   * The style for this renderer will depend on the type of tnode.
+   * The style for this renderer will depend on the type of {@link TNode}.
    * You can check if a node is textual with `props.type === 'text'`.
    */
-  style: T extends TText
-    ? StyleProp<TextStyle>
-    : T extends TPhrasing
+  style: T extends TText | TPhrasing
     ? StyleProp<TextStyle>
     : StyleProp<ViewStyle>;
   /**
@@ -769,22 +796,23 @@ export interface TDefaultRendererProps<
 }
 
 /**
+ * Props for {@link InternalRenderer} components.
+ *
+ * @typeParam T - The concrete type of {@link TNode}.
  * @public
  */
-export interface DefaultTagRendererProps<
-  T extends TNode,
-  P extends PropsFromParent = PropsFromParent
-> extends TRendererBaseProps<T, P> {
+export interface InternalRendererProps<T extends TNode>
+  extends RendererBaseProps<T> {
   /**
-   * Styles extracted with tnode.getNativeStyles
+   * Styles extracted with {@link TNode.getNativeStyles}.
    */
-  style: ReturnType<T['getNativeStyles']>;
+  style: T extends TText | TPhrasing ? NativeTextStyles : NativeBlockStyles;
   /**
    * Props shared across the whole render tree.
    */
   sharedProps: Required<RenderHTMLSharedProps>;
   /**
-   * Default renderer for this tnode.
+   * Default renderer for this {@link TNode}.
    */
   TDefaultRenderer: TDefaultRenderer<T>;
 }
@@ -792,65 +820,62 @@ export interface DefaultTagRendererProps<
 /**
  * Props for custom renderers, such as provided in the `renderers` prop.
  *
+ * @typeParam T - The concrete type of {@link TNode}.
  * @public
  */
-export interface CustomTagRendererProps<
-  T extends TNode,
-  P extends PropsFromParent = PropsFromParent
-> extends DefaultTagRendererProps<T, P> {
+export interface CustomRendererProps<T extends TNode>
+  extends InternalRendererProps<T> {
   /**
    * Internal renderer for this _tagName_, not to be confused with
-   * {@link TDefaultRenderer}, which is the fallback renderer for any _tnode_.
+   * {@link TDefaultRenderer}, which is the fallback renderer for any {@link TNode}.
    *
    * @remarks For example, when rendering `img` tags, `TDefaultRenderer` and
    * `InternalRenderer` won't be equal.
    *
-   * When there is no default tag renderer for this tag, this prop will fallback
-   * to the `TDefaultRenderer`.
+   * When there is no internal renderer for this tag, this prop will fallback
+   * to `TDefaultRenderer`.
    */
   InternalRenderer: InternalRenderer<T>;
 }
 
 /**
  * Default renderer for any {@link TNode}. The renderer behavior will only
- * change by the {@link TNodeType | type} of the {@link TNode}.
+ * change given the {@link TNodeType | type} of the {@link TNode}.
  *
+ * @typeParam T - The concrete type of {@link TNode}.
  * @public
  */
-export type TDefaultRenderer<
-  T extends TNode,
-  P extends PropsFromParent = PropsFromParent
-> = React.ComponentType<TDefaultRendererProps<T, P>>;
+export type TDefaultRenderer<T extends TNode> = React.ComponentType<
+  TDefaultRendererProps<T>
+>;
 
 /**
- * An "internal renderer" is an internal custom renderer, adding custom
+ * An "internal renderer" is an internal custom renderer, adding specific
  * features to the fallback `TDefaultRenderer`. For example, `<img/>` tags will
  * be rendered via an internal renderer, while `<div>` will fallback to a
  * {@link TDefaultRenderer}.
  *
  * @public
  *
- * @typeParam T - The concrete type of {@link TNode} for this renderer.
- * @typeParam P - The type for props from parent.
+ * @typeParam T - The concrete type of {@link TNode}.
  */
-export type InternalRenderer<
-  T extends TNode,
-  P extends PropsFromParent = PropsFromParent
-> = React.ComponentType<DefaultTagRendererProps<T, P>>;
+export type InternalRenderer<T extends TNode> = React.ComponentType<
+  InternalRendererProps<T>
+>;
 
 /**
- * A custom renderer, such as provided in the `renderers` prop.
+ * A custom renderer, such as provided in the {@link RenderHTMLProps.renderers} prop.
  *
+ * @typeParam T - The concrete type of {@link TNode}.
  * @public
  */
-export type CustomTagRenderer<
-  T extends TNode,
-  P extends PropsFromParent = PropsFromParent
-> = React.ComponentType<CustomTagRendererProps<T, P>>;
+export type CustomRenderer<T extends TNode> = React.ComponentType<
+  CustomRendererProps<T>
+>;
 
 /**
  * An object containing meta-data extracted from resource URL and HTML
- * &lt;head&gt; element.
+ * `<head>` element.
  *
  * @public
  */

@@ -1,11 +1,11 @@
 import { TNode } from '@native-html/transient-render-engine';
 import {
-  CustomTagRenderer,
-  CustomTagRendererProps,
+  CustomRenderer,
+  CustomRendererProps,
   TDefaultRenderer,
-  TDefaultRendererProps,
-  TNodeSubRendererProps
+  TDefaultRendererProps
 } from '../shared-types';
+import { TNodeSubRendererProps } from '../internal-types';
 import mergeCollapsedMargins from '../helpers/mergeCollapsedMargins';
 import { useRendererConfig } from '../context/RenderRegistryProvider';
 import { useDefaultContainerProps } from '../context/SharedPropsProvider';
@@ -17,12 +17,12 @@ export default function useAssembledCommonProps<T extends TNode>(
   { tnode, key, propsFromParent, sharedProps }: TNodeSubRendererProps<T>,
   TDefault: TDefaultRenderer<T>
 ): {
-  assembledProps: CustomTagRendererProps<T> & TDefaultRendererProps<T>;
-  Renderer: CustomTagRenderer<T>;
+  assembledProps: CustomRendererProps<T> & TDefaultRendererProps<T>;
+  Renderer: CustomRenderer<T>;
 } {
   const { Default, Custom } = useRendererConfig(tnode);
   const containerProps = useDefaultContainerProps();
-  const assembledProps: CustomTagRendererProps<T> & TDefaultRendererProps<T> = {
+  const assembledProps: CustomRendererProps<T> & TDefaultRendererProps<T> = {
     key,
     tnode,
     propsFromParent,

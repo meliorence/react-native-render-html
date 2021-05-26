@@ -1,11 +1,11 @@
 import { TNode } from '@native-html/transient-render-engine';
 import { ComponentType } from 'react';
-import { CustomTagRendererProps } from '..';
+import { CustomRendererProps } from '..';
 import lookupRecord from '../helpers/lookupRecord';
 import BRRenderer from '../renderers/BRRenderer';
 import WBRRenderer from '../renderers/WBRRenderer';
 import {
-  CustomTagRenderer,
+  CustomRenderer,
   HTMLElementModelRecord,
   InternalRenderer
 } from '../shared-types';
@@ -22,7 +22,7 @@ const internalTextRenderers: Record<string, InternalTextContentRenderer> = {
 
 export interface RendererConfig<T extends TNode> {
   Default: InternalRenderer<T> | null;
-  Custom: CustomTagRenderer<T> | null;
+  Custom: CustomRenderer<T> | null;
 }
 
 export default class RenderRegistry {
@@ -63,7 +63,7 @@ export default class RenderRegistry {
 
   private getCustomRendererForTNode<T extends TNode>(
     tnode: T
-  ): ComponentType<CustomTagRendererProps<T>> | null {
+  ): ComponentType<CustomRendererProps<T>> | null {
     if (tnode.tagName! in this.customRenderers) {
       const renderer = this.customRenderers[tnode.tagName!];
       if (__DEV__) {

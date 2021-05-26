@@ -1,10 +1,10 @@
 import React, { Fragment, PropsWithChildren } from 'react';
 import debugMessage from './debugMessages';
-import { RenderersPropsBase, RenderHTMLProps } from './shared-types';
+import { RenderHTMLProps } from './shared-types';
 
-const RenderHTMLDebug = function RenderHTMLDebug<
-  P extends RenderersPropsBase = RenderersPropsBase
->(props: PropsWithChildren<RenderHTMLProps<P>>) {
+const RenderHTMLDebug = function RenderHTMLDebug(
+  props: PropsWithChildren<RenderHTMLProps>
+) {
   if (__DEV__) {
     if (typeof props.contentWidth !== 'number') {
       console.warn(debugMessage.contentWidth);

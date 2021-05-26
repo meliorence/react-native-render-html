@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, useCallback, useMemo } from 'react';
 import defaultListStyleSpecs from '../elements/defaultListStyleSpecs';
 import selectSharedProps from '../helpers/selectSharedProps';
-import { RenderHTMLSharedProps, TRendererBaseProps } from '../shared-types';
+import { RenderHTMLSharedProps, RendererBaseProps } from '../shared-types';
 import defaultSharedProps from './defaultSharedProps';
 
 const SharedPropsContext = React.createContext<Required<RenderHTMLSharedProps>>(
@@ -23,7 +23,7 @@ export function useSharedProps() {
  * @internal
  */
 export function useDefaultContainerProps(): Pick<
-  TRendererBaseProps<any>,
+  RendererBaseProps<any>,
   'viewProps' | 'textProps'
 > {
   const sharedProps = useSharedProps();
