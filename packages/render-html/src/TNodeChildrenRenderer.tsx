@@ -13,6 +13,29 @@ function isCollapsible(tnode: TNode) {
   return tnode.type === 'block' || tnode.type === 'phrasing';
 }
 
+/**
+ * A hook especially useful when one need to tamper with children in a custom
+ * renderer. For example, a custom renderer which inserts ads in an article:
+ *
+ * ```tsx
+ * function ArticleRenderer(props) {
+ *   const { tnode, TDefaultRenderer, ...defaultRendererProps } = props;
+ *   const tchildrenProps = useTNodeChildrenProps(props);
+ *   const firstChildrenChunk = tnode.children.slice(0, 2);
+ *   const secondChildrenChunk = tnode.children.slice(2, 4);
+ *   const thirdChildrenChunk = tnode.children.slice(4, 5);
+ *   return (
+ *     <TDefaultRenderer tnode={tnode} {...defaultRendererProps}>
+ *       <TChildrenRenderer {...tchildrenProps} tchildren={firstChildrenChunk} />
+ *       {firstChildrenChunk.length === 2 ? <AdComponent /> : null}
+ *       <TChildrenRenderer {...tchildrenProps} tchildren={secondChildrenChunk} />
+ *       {secondChildrenChunk.length === 2 ? <AdComponent /> : null}
+ *       <TChildrenRenderer {...tchildrenProps} tchildren={thirdChildrenChunk} />
+ *     </TDefaultRenderer>
+ *   );
+ * };
+ * ```
+ */
 export function useTNodeChildrenProps({
   tnode,
   propsForChildren,

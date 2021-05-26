@@ -40,6 +40,12 @@ export function useDefaultContainerProps(): Pick<
 }
 
 /**
+ * Compute max width for a given tag. Uses
+ * {@link RenderHTMLProps.computeEmbeddedMaxWidth}
+ * and {@link RenderHTMLProps.contentWidth} under the hood.
+ *
+ * @param tagName - The tag to target.
+ *
  * @public
  */
 export function useComputeMaxWidthForTag(tagName: string) {

@@ -9,6 +9,10 @@ import useNormalizedUrl from '../hooks/useNormalizedUrl';
 import { useRendererProps } from '../context/RenderersPropsProvider';
 import useContentWidth from '../hooks/useContentWidth';
 
+/**
+ * A hook to produce props consumable by {@link IMGElement} component
+ * from custom renderer props.
+ */
 export function useIMGElementProps(
   props: InternalRendererProps<TBlock>
 ): IMGElementProps & ClassAttributes<any> {

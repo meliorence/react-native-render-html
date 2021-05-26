@@ -13,6 +13,9 @@ const DocumentMetadataContext = React.createContext<DocumentMetadata>({
 
 const DocumentMetadataProvider = DocumentMetadataContext.Provider;
 
+/**
+ * Get access to the parsed HTML metadata anywhere in the render tree.
+ */
 export function useDocumentMetadata() {
   return useContext(DocumentMetadataContext);
 }

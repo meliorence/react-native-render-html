@@ -1,4 +1,4 @@
-import { TagName } from '@native-html/transient-render-engine';
+import { TagName, TNode } from '@native-html/transient-render-engine';
 import { ComponentType } from 'react';
 import AElement from '../elements/AElement';
 import IMGElement from '../elements/IMGElement';
@@ -49,7 +49,7 @@ export interface InternalRendererConfig<P> {
  *
  * @param tagName - **Invariant** The tag name to extend.
  * @param props - The props passed to the custom renderer.
- * @typeParam T - The type literal for the tag to target.
+ * @typeParam T - The name of the tag to target.
  * @returns An object with two fields: `Renderer` (the internal react
  * component) and `rendererProps`, the internal component props.
  *
@@ -57,7 +57,7 @@ export interface InternalRendererConfig<P> {
  */
 export default function useInternalRenderer<T extends TagName>(
   tagName: T,
-  props: InternalRendererProps<any>
+  props: InternalRendererProps<TNode>
 ): T extends InternalSpecialRenderedTag
   ? InternalRendererConfig<ReturnType<typeof specialRenderersConfig[T]['hook']>>
   : InternalRendererConfig<TDefaultRendererProps<any>> {
@@ -65,7 +65,7 @@ export default function useInternalRenderer<T extends TagName>(
   if (hasSpecialInternalRenderer(tagName)) {
     return {
       Renderer: specialRenderersConfig[tagName].Element,
-      rendererProps: specialRenderersConfig[tagName].hook(props)
+      rendererProps: specialRenderersConfig[tagName].hook(props as any)
     } as any;
   }
   return {
