@@ -21,6 +21,7 @@ export type {
   EditsTagNames,
   EmbeddedTagNames,
   GroupingTagNames,
+  HTMLModelRecord,
   InteractiveTagNames,
   Markers,
   MetadataTagNames,
