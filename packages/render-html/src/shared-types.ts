@@ -10,7 +10,7 @@ import type {
 } from 'react-native';
 import type {
   MixedStyleRecord,
-  DOMNode,
+  Node,
   TNode,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   TNodeType,
@@ -24,9 +24,9 @@ import type {
   CustomElementModel,
   HTMLElementModel,
   TRenderEngineOptions,
-  DOMNodeWithChildren,
-  DOMElement,
-  DOMDocument,
+  NodeWithChildren,
+  Element,
+  Document,
   NativeTextStyles,
   NativeBlockStyles
 } from '@native-html/transient-render-engine';
@@ -370,8 +370,8 @@ export interface TransientRenderEngineConfig {
    * else otherwise.
    */
   ignoreDomNode?: (
-    node: DOMNode,
-    parent: DOMNodeWithChildren
+    node: Node,
+    parent: NodeWithChildren
   ) => boolean | void | unknown;
   /**
    * An object which callbacks will be invoked when a DOM element or text node
@@ -569,7 +569,7 @@ export interface HTMLSourceDom {
    * A DOM object. This object **must** have been created with
    * the transient render engine `parseDocument` method.
    */
-  dom: DOMElement | DOMDocument;
+  dom: Element | Document;
   /**
    * The base URL to resolve relative URLs in the HTML code.
    * See {@link useNormalizedUrl}.

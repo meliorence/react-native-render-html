@@ -1,8 +1,8 @@
 import strigifyEntities from 'stringify-entities';
 import {
-  DOMNode,
-  isDOMElement,
-  isDOMText
+  Node,
+  isDomText,
+  isDomElement
 } from '@native-html/transient-render-engine';
 
 function renderOpeningTag(tag: string, attributes: Record<string, string>) {
@@ -25,12 +25,12 @@ function renderOpeningTag(tag: string, attributes: Record<string, string>) {
  * model of the rendered tag must have `isOpaque` field set to `true`.
  */
 export default function domNodeToHTMLString(
-  root: DOMNode | null,
+  root: Node | null,
   reporter?: DomNodeToHtmlReporter,
   depth = 0
 ) {
   let html = '';
-  if (isDOMElement(root)) {
+  if (isDomElement(root)) {
     const strChildren = root.children.reduce((prev, curr) => {
       const convertedNode = domNodeToHTMLString(curr, reporter, depth + 1);
       return `${prev}${convertedNode}`;
@@ -38,7 +38,7 @@ export default function domNodeToHTMLString(
     html = `${renderOpeningTag(root.tagName, root.attribs)}${strChildren}</${
       root.tagName
     }>`;
-  } else if (isDOMText(root)) {
+  } else if (isDomText(root)) {
     const text = strigifyEntities(root.data);
     html = text;
   }
@@ -55,5 +55,5 @@ export interface DomNodeToHtmlReporter {
    * @param depth - How many parents this node have.
    * @param html - The HTML representation of this node and its children.
    */
-  (node: DOMNode | null, depth: number, html: string): void;
+  (node: Node | null, depth: number, html: string): void;
 }

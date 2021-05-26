@@ -1,5 +1,5 @@
 import { TNode } from '@native-html/transient-render-engine';
-import { DOMDocument, DOMElement } from '@native-html/transient-render-engine';
+import { Document, Element } from '@native-html/transient-render-engine';
 import {
   RenderHTMLProps,
   TNodeRendererProps,
@@ -12,7 +12,7 @@ export type SourceLoaderProps = Pick<
 >;
 
 export interface RenderTTreeProps {
-  document: string | DOMElement | DOMDocument;
+  document: string | Document | Element;
   baseUrl?: string;
 }
 
