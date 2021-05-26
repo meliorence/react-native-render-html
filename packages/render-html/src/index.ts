@@ -1,11 +1,11 @@
 import RenderHTML from './RenderHTML';
 export {
   defaultHTMLElementModels,
-  DOMDocument,
-  DOMElement,
-  DOMNode,
-  DOMText,
-  DOMNodeWithChildren,
+  Document,
+  Element,
+  Node,
+  Text,
+  NodeWithChildren,
   HTMLContentModel,
   HTMLElementModel,
   TRenderEngine
