@@ -80,19 +80,24 @@ module.exports = {
           to:
             'https://github.com/meliorence/react-native-render-html/blob/master/HELP.adoc',
           label: 'Help',
-          position: 'right'
+          position: 'left'
         },
         {
           to:
             'https://github.com/meliorence/react-native-render-html/blob/master/CONTRIBUTING.adoc',
           label: 'Contributing',
+          position: 'left'
+        },
+        {
+          to: `https://github.com/meliorence/react-native-render-html/releases/tag/v${version}`,
+          label: `v${version}`,
           position: 'right'
         },
-        { to: '/blog', label: 'Blog', position: 'right' },
         {
           href: 'https://github.com/meliorence/react-native-render-html',
-          label: 'GitHub',
-          position: 'right'
+          position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub repository'
         }
       ]
     },

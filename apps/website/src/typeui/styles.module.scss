@@ -76,7 +76,7 @@
 }
 
 .flagBox {
-  font-size: 70%;
+  // font-size: 70%;
   text-transform: uppercase;
   font-family: var(--ifm-font-family-monospace);
   vertical-align: center;
@@ -93,8 +93,8 @@
 }
 
 .flagBox--required {
-  background-color: var(--ifm-color-success);
-  color: var(--ifm-color-black);
+  background-color: var(--ifm-color-primary);
+  color: var(--ifm-color-white);
 }
 
 .flagBox--static {
@@ -102,7 +102,18 @@
   color: var(--ifm-color-black);
 }
 
-.logo, .logo > svg {
+.flagBox--reexport {
+  background-color: var(--ifm-color-warning);
+  color: var(--ifm-color-black);
+}
+
+.flagBox--export {
+  background-color: var(--ifm-color-success);
+  color: var(--ifm-color-black);
+}
+
+.logo,
+.logo > svg {
   height: var(--decorator-size);
   flex-shrink: 0;
 }
@@ -111,8 +122,8 @@
   --logo-color-fill: white;
   --logo-color-bg: #3178c6;
   &:hover {
-    --logo-color-fill:#3178c6;
-    --logo-color-bg:  white;
+    --logo-color-fill: #3178c6;
+    --logo-color-bg: white;
     outline: solid 3px #3178c6;
   }
 }
@@ -129,7 +140,8 @@
   margin-bottom: 4px;
 }
 
-.sourceBox, .sourceBox > code {
+.sourceBox,
+.sourceBox > code {
   font-style: normal;
   font-weight: 900;
   padding-left: 0.25rem;
@@ -141,4 +153,3 @@
   // font-size: 150%;
   background-color: rgb(41, 45, 62);
 }
-

@@ -90,19 +90,31 @@ ${parseLinks(warnings.text)}
 
 /**
  *
- * @param {import('typedoc').JSONOutput.Comment} comment
+ * @param {import('typedoc').JSONOutput.CommentTag} example
+ * @param {boolean} isHeader
  */
-function extractComment(comment) {
+function extractExample(example, isHeader) {
+  const title = isHeader ? '## Example' : '#### Example';
+  return `${title}\n\n${parseLinks(example.text)}\n\n`;
+}
+
+/**
+ *
+ * @param {import('typedoc').JSONOutput.Comment} comment
+ * @param {boolean} isHeader
+ */
+function extractComment(comment, isHeader) {
   if (!comment) {
     return '';
   }
   const remarks = comment.tags && comment.tags.find((t) => t.tag === 'remarks');
   const warning = comment.tags && comment.tags.find((t) => t.tag === 'warning');
+  const example = comment.tags && comment.tags.find((t) => t.tag === 'example');
   return `\n${parseLinks(comment.shortText ?? '')}\n\n${parseLinks(
     comment.text ?? ''
   )}\n\n${remarks ? extractRemarks(remarks) : ''}${
     warning ? extractWarning(warning) : ''
-  }\n\n`;
+  }${example ? extractExample(example, isHeader) : ''}\n\n`;
 }
 
 /**
@@ -164,7 +176,7 @@ function extractMemberBox(reflection) {
   }
   return `### \`${reflection.name}\`\n${extractDeclarationBox(
     reflection
-  )}\n${extractComment(reflection.comment)}${extractSignatureComment(
+  )}\n${extractComment(reflection.comment, false)}${extractSignatureComment(
     reflection.signatures
   )}${extractSignatureParams(reflection.signatures)}\n`;
 }
@@ -280,13 +292,12 @@ function extractTypeParameter(reflection) {
   }
   return `## Type Parameters\n\n${parameters
     .map((t) => {
-      return `### \`${t.name}\`\n\n${extractComment(t.comment)}`;
+      return `### \`${t.name}\`\n\n${extractComment(t.comment, false)}`;
     })
     .join('\n\n')}`;
 }
 
 /**
- *
  * @param {import('typedoc').JSONOutput.DeclarationReflection} reflection
  * @param {string} version
  */
@@ -302,9 +313,9 @@ function extractHeader(reflection, version) {
  */
 function serialize(reflection, version) {
   return `${extractFrontmatter(reflection)}
-  ${extractComment(reflection.comment)}
-  ${extractSignatureComment(reflection.signatures)}
   ${extractHeader(reflection, version)}
+  ${extractComment(reflection.comment, true)}
+  ${extractSignatureComment(reflection.signatures)}
 ${extractTypeParameter(reflection)}\n\n${extractBody(reflection)}`;
 }
 

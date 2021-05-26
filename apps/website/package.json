@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "DOCUSAURUS_NO_DUPLICATE_TITLE_WARNING=false docusaurus start --no-open",
-    "build": "DOCUSAURUS_NO_DUPLICATE_TITLE_WARNING=false docusaurus build",
+    "start": "docusaurus api:gen && DOCUSAURUS_NO_DUPLICATE_TITLE_WARNING=false docusaurus start --no-open",
+    "build": "docusaurus api:gen && DOCUSAURUS_NO_DUPLICATE_TITLE_WARNING=false docusaurus build",
     "build-docs": "doc-mdx-gen-cli docs",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
@@ -14,7 +14,7 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typedoc-build": "node typedoc-build.js",
-    "apidoc-gen": "node apidoc-gen.js"
+    "api-gendoc": "docusaurus api:gen"
   },
   "dependencies": {
     "@doc/constants": "workspace:*",
