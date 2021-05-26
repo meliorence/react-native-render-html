@@ -1,10 +1,6 @@
 import { TBlock, TPhrasing, TText } from '@native-html/transient-render-engine';
 import { ComponentType } from 'react';
-import {
-  CustomTagRenderer,
-  InternalRenderer,
-  PropsFromParent
-} from '../shared-types';
+import { CustomRenderer, InternalRenderer } from '../shared-types';
 
 /**
  * Special internal renderers for non-printable text (wbr, br).
@@ -35,30 +31,22 @@ export type InternalTextualRenderer = InternalRenderer<TPhrasing | TText>;
 /**
  * Block renderers can only render tnodes of type TBlock.
  */
-export type CustomBlockRenderer<
-  P extends PropsFromParent = PropsFromParent
-> = CustomTagRenderer<TBlock, P>;
+export type CustomBlockRenderer = CustomRenderer<TBlock>;
 
 /**
  * Textual renderers can render tnodes of type TText or TPhrasing.
  */
-export type CustomTextualRenderer<
-  P extends PropsFromParent = PropsFromParent
-> = CustomTagRenderer<TText | TPhrasing, P>;
+export type CustomTextualRenderer = CustomRenderer<TText | TPhrasing>;
 
 /**
  * Mixed renderers can can render tnodes of type TText, TPhrasing or TBlock.
  */
-export type CustomMixedRenderer<
-  P extends PropsFromParent = PropsFromParent
-> = CustomTagRenderer<TBlock | TPhrasing | TText, P>;
+export type CustomMixedRenderer = CustomRenderer<TBlock | TPhrasing | TText>;
 
 /**
  * A record of custom renderers.
  */
 export type CustomTagRendererRecord = Record<
   string,
-  | CustomBlockRenderer<any>
-  | CustomTextualRenderer<any>
-  | CustomMixedRenderer<any>
+  CustomBlockRenderer | CustomTextualRenderer | CustomMixedRenderer
 >;

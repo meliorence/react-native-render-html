@@ -29,7 +29,7 @@ export function useRendererProps<
  * @internal
  */
 export default function RenderersPropsProvider(
-  props: PropsWithChildren<RenderHTMLPassedProps<RenderersPropsBase>>
+  props: PropsWithChildren<RenderHTMLPassedProps>
 ) {
   const mergedRenderersProps = useMemo(
     () => mergeDeepRight(defaultRendererProps, props.renderersProps || {}),

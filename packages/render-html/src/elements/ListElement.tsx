@@ -9,7 +9,7 @@ import {
 } from '@jsamr/react-native-li';
 import type {
   DefaultSupportedListStyleType,
-  DefaultTagRendererProps,
+  InternalRendererProps,
   ListElementConfig,
   ListStyleSpec,
   TChildProps,
@@ -20,7 +20,7 @@ import { DEFAULT_TEXT_COLOR } from '../constants';
 import pick from 'ramda/src/pick';
 
 export interface ListElementProps<T extends 'ol' | 'ul'>
-  extends DefaultTagRendererProps<TBlock>,
+  extends InternalRendererProps<TBlock>,
     ListElementConfig {
   listType: T;
   listStyleSpecs: Record<string, ListStyleSpec>;

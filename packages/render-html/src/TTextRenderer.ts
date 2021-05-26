@@ -1,10 +1,7 @@
 import React from 'react';
 import { TText } from '@native-html/transient-render-engine';
-import {
-  TDefaultRenderer,
-  TDefaultRendererProps,
-  TNodeSubRendererProps
-} from './shared-types';
+import { TDefaultRenderer, TDefaultRendererProps } from './shared-types';
+import { TNodeSubRendererProps } from './internal-types';
 import { useInternalTextRenderer } from './context/RenderRegistryProvider';
 import useAssembledCommonProps from './hooks/useAssembledCommonProps';
 import TDefaultTextualRenderer from './TDefaultTextualRenderer';

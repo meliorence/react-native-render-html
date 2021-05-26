@@ -8,10 +8,7 @@ import { useAElementProps } from '../renderers/ARenderer';
 import { useIMGElementProps } from '../renderers/IMGRenderer';
 import { useOLElementProps } from '../renderers/OLRenderer';
 import { useULElementProps } from '../renderers/ULRenderer';
-import {
-  DefaultTagRendererProps,
-  TDefaultRendererProps
-} from '../shared-types';
+import { InternalRendererProps, TDefaultRendererProps } from '../shared-types';
 
 const specialRenderersConfig = {
   img: {
@@ -60,7 +57,7 @@ export interface InternalRendererConfig<P> {
  */
 export default function useInternalRenderer<T extends TagName>(
   tagName: T,
-  props: DefaultTagRendererProps<any>
+  props: InternalRendererProps<any>
 ): T extends InternalSpecialRenderedTag
   ? InternalRendererConfig<ReturnType<typeof specialRenderersConfig[T]['hook']>>
   : InternalRendererConfig<TDefaultRendererProps<any>> {

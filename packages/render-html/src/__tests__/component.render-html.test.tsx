@@ -218,7 +218,9 @@ describe('RenderHTML', () => {
       const SpanRenderer: CustomTextualRenderer = ({
         TDefaultRenderer,
         ...props
-      }) => <TDefaultRenderer {...props} propsForChildren={{ test: 1 }} />;
+      }) => (
+        <TDefaultRenderer {...props} propsForChildren={{ test: 1 } as any} />
+      );
       const EmRenderer: CustomTextualRenderer = ({
         TDefaultRenderer,
         ...props
@@ -240,7 +242,9 @@ describe('RenderHTML', () => {
       const SpanRenderer: CustomTextualRenderer = ({
         TDefaultRenderer,
         ...props
-      }) => <TDefaultRenderer {...props} propsForChildren={{ test: 1 }} />;
+      }) => (
+        <TDefaultRenderer {...props} propsForChildren={{ test: 1 } as any} />
+      );
       const EmRenderer: CustomTextualRenderer = ({
         TDefaultRenderer,
         ...props

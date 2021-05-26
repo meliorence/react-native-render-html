@@ -2,7 +2,8 @@ import React from 'react';
 import { View } from 'react-native';
 import { TBlock } from '@native-html/transient-render-engine';
 import { useTNodeChildrenRenderer } from './context/TChildrenRendererContext';
-import { TDefaultRenderer, TNodeSubRendererProps } from './shared-types';
+import { TDefaultRenderer } from './shared-types';
+import { TNodeSubRendererProps } from './internal-types';
 import GenericPressable from './GenericPressable';
 import useAssembledCommonProps from './hooks/useAssembledCommonProps';
 

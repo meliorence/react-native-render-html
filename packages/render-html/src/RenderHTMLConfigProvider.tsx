@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import RenderersPropsProvider from './context/RenderersPropsProvider';
 import SharedPropsProvider from './context/SharedPropsProvider';
 import TChildrenRenderersContext from './context/TChildrenRendererContext';
-import { RenderHTMLConfig, RenderersPropsBase } from './shared-types';
+import { RenderHTMLConfig } from './shared-types';
 import TNodeChildrenRenderer from './TNodeChildrenRenderer';
 import TChildrenRenderer from './TChildrenRenderer';
 import sourceLoaderContext from './context/sourceLoaderContext';
@@ -34,9 +34,13 @@ export const renderHTMLConfigPropTypes: RenderHTMLConfigPropTypes = {
   renderers: PropTypes.object
 };
 
-export default function RenderHTMLConfigProvider<
-  P extends RenderersPropsBase = RenderersPropsBase
->(props: PropsWithChildren<RenderHTMLConfig<P>>): ReactElement {
+/**
+ * A component to provide configuration for {@link RenderHTMLSource}
+ * descendants, to be used in conjunction with {@link TRenderEngineProvider}.
+ */
+export default function RenderHTMLConfigProvider(
+  props: PropsWithChildren<RenderHTMLConfig>
+): ReactElement {
   const {
     remoteErrorView,
     remoteLoadingView,

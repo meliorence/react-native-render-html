@@ -1,7 +1,7 @@
 import React from 'react';
 import { InternalBlockRenderer } from '../render/render-types';
 import {
-  DefaultTagRendererProps,
+  InternalRendererProps,
   DefaultSupportedListStyleType
 } from '../shared-types';
 import { TBlock } from '@native-html/transient-render-engine';
@@ -22,7 +22,7 @@ function getFallbackListStyleTypeFromNestLevel(
 }
 
 export function useULElementProps(
-  props: DefaultTagRendererProps<TBlock>
+  props: InternalRendererProps<TBlock>
 ): ULElementProps {
   const listStyleSpecs = props.sharedProps.customListStyleSpecs;
   const config = useRendererProps('ul');

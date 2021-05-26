@@ -2,7 +2,7 @@ import React from 'react';
 import { TBlock } from '@native-html/transient-render-engine';
 import { InternalBlockRenderer } from '../render/render-types';
 import {
-  DefaultTagRendererProps,
+  InternalRendererProps,
   DefaultSupportedListStyleType
 } from '../shared-types';
 import OLElement, { OLElementProps } from '../elements/OLElement';
@@ -22,7 +22,7 @@ function getFallbackListStyleTypeFromNestLevel(
 }
 
 export function useOLElementProps(
-  props: DefaultTagRendererProps<TBlock>
+  props: InternalRendererProps<TBlock>
 ): OLElementProps {
   const listStyleSpecs = props.sharedProps.customListStyleSpecs;
   const config = useRendererProps('ol');
