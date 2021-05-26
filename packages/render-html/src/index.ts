@@ -37,6 +37,7 @@ export type {
   TNode,
   TNodeShape,
   TNodeType,
+  TNodePrintOptions,
   TPhrasing,
   TText,
   TRenderEngineOptions,
