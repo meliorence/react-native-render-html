@@ -16,6 +16,7 @@ export type { MixedStyleDeclaration } from '@native-html/css-processor';
 export type {
   AnchorTagName,
   AttribTagNames,
+  CustomElementModel,
   DefaultHTMLElementModelsStatic,
   DomVisitorCallbacks,
   EditsTagNames,
