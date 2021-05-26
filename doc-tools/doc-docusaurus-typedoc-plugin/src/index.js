@@ -51,7 +51,6 @@ function plugin(context, { outDir, sidebarFile, version, typedoc }) {
       return task__extractReflections();
     },
     async contentLoaded({ content, actions }) {
-      await task__genPages(content);
       //@ts-ignore
       const reflectionsIndex = Object.fromEntries(
         content.children.map((c) => [c.id, c])

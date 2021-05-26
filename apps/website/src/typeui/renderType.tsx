@@ -207,7 +207,16 @@ export default function renderType(pt: DeclarationType, params: Params) {
           {renderType(query.queryType, params)}
         </>
       );
-
+    case 'predicate':
+      const predicate = pt as JSONOutput.PredicateType;
+      return (
+        <>
+          {predicate.asserts && <TokenKeyword>asserts </TokenKeyword>}
+          <TokenAttrName>{predicate.name}</TokenAttrName>
+          <TokenKeyword> is </TokenKeyword>
+          {predicate.targetType && renderType(predicate.targetType, params)}
+        </>
+      );
     default:
       console.warn('Unhandled type', pt);
       throw new Error(`Unhandled type ${pt.type}`);

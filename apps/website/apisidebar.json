@@ -142,10 +142,6 @@
         },
         {
           "type": "doc",
-          "id": "internalrenderers"
-        },
-        {
-          "type": "doc",
           "id": "splitboxmodelstyle"
         }
       ]
@@ -164,11 +160,11 @@
         },
         {
           "type": "doc",
-          "id": "customtagrenderer"
+          "id": "customrenderer"
         },
         {
           "type": "doc",
-          "id": "customtagrendererprops"
+          "id": "customrendererprops"
         },
         {
           "type": "doc",
@@ -181,10 +177,6 @@
         {
           "type": "doc",
           "id": "defaultsupportedliststyletype"
-        },
-        {
-          "type": "doc",
-          "id": "defaulttagrendererprops"
         },
         {
           "type": "doc",
@@ -268,6 +260,10 @@
         },
         {
           "type": "doc",
+          "id": "internalrendererprops"
+        },
+        {
+          "type": "doc",
           "id": "internalspecialrenderedtag"
         },
         {
@@ -289,6 +285,10 @@
         {
           "type": "doc",
           "id": "propsfromparent"
+        },
+        {
+          "type": "doc",
+          "id": "rendererbaseprops"
         },
         {
           "type": "doc",
@@ -348,15 +348,7 @@
         },
         {
           "type": "doc",
-          "id": "tnodesubrendererprops"
-        },
-        {
-          "type": "doc",
           "id": "transientrenderengineconfig"
-        },
-        {
-          "type": "doc",
-          "id": "trendererbaseprops"
         },
         {
           "type": "doc",
@@ -390,7 +382,7 @@
         },
         {
           "type": "doc",
-          "id": "defaulthtmlelementmodels"
+          "id": "customelementmodel"
         },
         {
           "type": "doc",
@@ -398,23 +390,11 @@
         },
         {
           "type": "doc",
-          "id": "domdocument"
+          "id": "defaulthtmlelementmodelsstatic"
         },
         {
           "type": "doc",
-          "id": "domelement"
-        },
-        {
-          "type": "doc",
-          "id": "domnode"
-        },
-        {
-          "type": "doc",
-          "id": "domnodewithchildren"
-        },
-        {
-          "type": "doc",
-          "id": "domtext"
+          "id": "document"
         },
         {
           "type": "doc",
@@ -423,6 +403,10 @@
         {
           "type": "doc",
           "id": "editstagnames"
+        },
+        {
+          "type": "doc",
+          "id": "element"
         },
         {
           "type": "doc",
@@ -442,7 +426,19 @@
         },
         {
           "type": "doc",
+          "id": "htmlmodelrecord"
+        },
+        {
+          "type": "doc",
           "id": "interactivetagnames"
+        },
+        {
+          "type": "doc",
+          "id": "isdomelement"
+        },
+        {
+          "type": "doc",
+          "id": "isdomtext"
         },
         {
           "type": "doc",
@@ -470,7 +466,19 @@
         },
         {
           "type": "doc",
+          "id": "node"
+        },
+        {
+          "type": "doc",
+          "id": "nodewithchildren"
+        },
+        {
+          "type": "doc",
           "id": "sectioningtagnames"
+        },
+        {
+          "type": "doc",
+          "id": "setmarkersfortnode"
         },
         {
           "type": "doc",
@@ -494,11 +502,23 @@
         },
         {
           "type": "doc",
+          "id": "text"
+        },
+        {
+          "type": "doc",
           "id": "textleveltagnames"
         },
         {
           "type": "doc",
           "id": "tnode"
+        },
+        {
+          "type": "doc",
+          "id": "tnodedescriptor"
+        },
+        {
+          "type": "doc",
+          "id": "tnodeprintoptions"
         },
         {
           "type": "doc",
