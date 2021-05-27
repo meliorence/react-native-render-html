@@ -38,6 +38,7 @@ export type {
   TEmpty,
   TextLevelTagNames,
   TNode,
+  TNodeDescriptor,
   TNodeShape,
   TNodeType,
   TNodePrintOptions,
