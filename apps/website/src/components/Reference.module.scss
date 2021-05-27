@@ -1,0 +1,48 @@
+@import '../css/shared.scss';
+
+a.ref {
+  text-decoration-color: var(--ifm-link-color);
+  text-decoration: none;
+  &:hover {
+    color: var(--ifm-link-color);
+    text-decoration: underline;
+  }
+  > code {
+    color: var(--ifm-link-color);
+  }
+  &--rnrh-prop {
+    @extend .reference;
+    white-space: pre;
+    text-decoration: none !important;
+    font-weight: bolder;
+    --ifm-alert-color: var(--syntax-color-type);
+    code {
+      color: var(--syntax-color-type);
+    }
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  &--html-attr {
+    //
+  }
+  &--html-el {
+    //
+  }
+  &--es-symbol {
+    //
+  }
+  &--css-prop {
+    //
+  }
+  &--rn-symbol {
+  }
+  &--library {
+    color: var(--reference-color-lib);
+  }
+  &--doc {
+    text-decoration: dotted underline;
+    color: var(--reference-color-doc);
+    font-weight: bolder;
+  }
+}

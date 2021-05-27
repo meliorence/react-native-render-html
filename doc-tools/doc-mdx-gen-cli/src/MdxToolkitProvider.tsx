@@ -65,13 +65,21 @@ export default function MdxToolkitProvider({
         {children}
       </admonition>
     ),
-    RefBuilder: ({ name, url }) => <a href={url}>{name}</a>,
+    RefBuilder: ({ name, url, type }) => (
+      <reference name={name} url={url} type={type} />
+    ),
     RefDoc: ({ target, children }) => {
       const linkFragments =
         target.group === 'root'
           ? ['/docs', target.id]
           : ['/docs', target.group, target.id];
-      return <a href={linkFragments.join('/')}>{children || target.title}</a>;
+      return (
+        <reference
+          name={(children as string) || target.title}
+          url={linkFragments.join('/')}
+          type={'doc'}
+        />
+      );
     },
     Acronym: ({ fullName, name, definition }) => (
       <abbr about={definition} children={name} title={fullName} />
@@ -82,11 +90,8 @@ export default function MdxToolkitProvider({
     InlineCode: ({ children }) => <code>{children}</code>,
     Hyperlink: ({ children, url }) => <a href={url}>{children}</a>,
     RefRenderHtmlProp: ({ name, docRelativePath, fragment }) => {
-      return (
-        <a href={`/${docRelativePath}${fragment ? `#${fragment}` : ''}`}>
-          {name}
-        </a>
-      );
+      const url = `/${docRelativePath}${fragment ? `#${fragment}` : ''}`;
+      return <reference name={name} url={url} type={'rnrh-prop'} />;
     },
     Conditional: ({ platform, children }) =>
       platform === 'web' ? <Fragment>{children}</Fragment> : null

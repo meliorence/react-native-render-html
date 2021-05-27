@@ -1,6 +1,6 @@
 import { UIRenderHtmlCardProps } from '../../toolkit/toolkit-types';
 import { removeElement, isTag } from 'domutils';
-import { DOMElement } from 'react-native-render-html';
+import { Element } from 'react-native-render-html';
 
 const html = `
 <ol>
@@ -11,7 +11,7 @@ const html = `
 </ol>
 `;
 
-function onElement(element: DOMElement) {
+function onElement(element: Element) {
   // Remove the first two children of an ol tag.
   if (element.tagName === 'ol') {
     let i = 0;

@@ -1,6 +1,6 @@
 import { UIRenderHtmlCardProps } from '../../toolkit/toolkit-types';
 import { isTag } from 'domutils';
-import type { DOMNode, DOMNodeWithChildren } from 'react-native-render-html';
+import type { Node, NodeWithChildren } from 'react-native-render-html';
 
 const html = `
 <p style="text-align: center">
@@ -16,7 +16,7 @@ const ignoreDomNodeSrc = `function ignoreDomNode(node, parent) {
   );
 }`;
 
-function ignoreDomNode(node: DOMNode, parent: DOMNodeWithChildren) {
+function ignoreDomNode(node: Node, parent: NodeWithChildren) {
   // remove anchors children of <p> elements
   return (
     isTag(node) && node.name === 'a' && isTag(parent) && parent.name === 'p'
