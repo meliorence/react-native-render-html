@@ -14,6 +14,9 @@ import RenderHTMLSource from './RenderHTMLSource';
  * components, and render the HTML with {@link RenderHTMLSource} instead. That
  * should significantly increase performance.
  *
+ * @warning It should never be a child of a React Native `Text` element, as the
+ * layout will break.
+ *
  * @public
  */
 export default function RenderHTML(props: RenderHTMLProps): ReactElement {
