@@ -11,6 +11,7 @@ import ParagraphElement from './components/ParagraphElement';
 import StrongElement from './components/StrongElement';
 import H3Element from './components/H3Element';
 import TNodeTransformDisplayElement from './components/TNodeTransformDisplayElement';
+import ReferenceElement from './components/ReferenceElement';
 
 export type NodeType = 'ROOT' | keyof JSX.IntrinsicElements;
 
@@ -31,6 +32,8 @@ function createElement(type: NodeType, props: any, root: MDXDocument) {
       return new SvgFigureElement(props, root!);
     case 'tnodetransformdisplay':
       return new TNodeTransformDisplayElement(props, root!);
+    case 'reference':
+      return new ReferenceElement(props, root!);
     case 'h2':
       return new H2Element();
     case 'h3':

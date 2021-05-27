@@ -1,7 +1,6 @@
 import { UIRenderHtmlCardProps } from '../../toolkit/toolkit-types';
 import { prependChild } from 'domutils';
 import { Element } from 'domhandler';
-import { DOMElement } from 'react-native-render-html';
 
 const html = `
 <article data-cover-src="https://picsum.photos/640/360">
@@ -19,7 +18,7 @@ const html = `
 </article>
 `;
 
-function onElement(element: DOMElement) {
+function onElement(element: Element) {
   // Add an image extracted from data-cover-src
   // attr as first child of every article.
   if (element.tagName === 'article') {

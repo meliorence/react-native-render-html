@@ -63,7 +63,7 @@ export default function HeaderTypeBox({
           },
           !isExternal && {
             label: 'export',
-            title: 'This definition is an export from react-native-render-html.'
+            title: `This definition is an export from react-native-render-html v${version}.`
           }
         ]}>
         {!isExternal && source && (

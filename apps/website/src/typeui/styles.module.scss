@@ -1,3 +1,5 @@
+@import '../css/shared.scss';
+
 .container {
   background-color: rgb(41, 45, 62);
   width: 100%;
@@ -17,21 +19,8 @@
     font-style: normal;
     display: inline;
   }
-  a .token {
-    background-color: rgba(247, 247, 205, 0.1);
-    // border-bottom: black 1px solid;
-    border-radius: 0;
-    padding: 0 2px;
-    position: relative;
-  }
-  a:hover {
-    text-decoration: none;
-    .token {
-      background-color: rgba(253, 253, 251, 0.719);
-      color: var(--ifm-color-gray-800);
-      text-decoration: underline;
-      text-decoration-color: var(--ifm-color-gray-800);
-    }
+  a {
+    @extend .reference;
   }
 }
 
@@ -41,33 +30,33 @@
 }
 
 .token--punctuation {
-  --token-color: rgb(199, 146, 234);
+  --token-color: var(--syntax-color-punctuation);
 }
 
 .token--attr-name {
-  --token-color: rgb(255, 203, 107);
+  --token-color: var(--syntax-color-attr-name);
 }
 
 .token--plain {
-  --token-color: rgb(191, 199, 213);
+  --token-color: var(--syntax-color-plain);
 }
 
 .token--keyword {
   font-style: italic;
-  --token-color: rgb(194, 59, 142);
+  --token-color: var(--syntax-color-keyword);
 }
 
 .token--literal {
-  --token-color: rgb(136, 194, 59);
+  --token-color: var(--syntax-color-literal);
 }
 
 .token--type {
   font-weight: bolder;
-  --token-color: rgb(89, 138, 243);
+  --token-color: var(--syntax-color-type);
 }
 
 .token--primitive {
-  --token-color: rgb(89, 187, 243);
+  --token-color: var(--syntax-color-primitive);
 }
 
 .typeContainer {
@@ -76,9 +65,8 @@
 }
 
 .flagBox {
-  // font-size: 70%;
-  text-transform: uppercase;
-  font-family: var(--ifm-font-family-monospace);
+  opacity: 0.75;
+  font-style: italic;
   vertical-align: center;
   padding: 0 0.5rem;
   display: flex;
@@ -133,11 +121,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(37, 57, 150, 0.342);
+  background-color: #1c2444;
   border-top-left-radius: var(--ifm-global-radius);
   border-top-right-radius: var(--ifm-global-radius);
   overflow: hidden;
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
+}
+
+.versionBox {
+  // text-align: right;
+  code {
+    font-style: normal;
+    background-color: var(--ifm-color-primary);
+    color: white;
+    padding: 0.25rem;
+    font-size: small;
+    display: inline block;
+  }
 }
 
 .sourceBox,
@@ -145,7 +145,7 @@
   font-style: normal;
   font-weight: 900;
   padding-left: 0.25rem;
-  color: var(--ifm-base-font-color);
+  color: var(--ifm-color-white);
   text-decoration: underline;
 }
 

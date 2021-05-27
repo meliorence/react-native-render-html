@@ -1,6 +1,6 @@
 import { UIRenderHtmlCardProps } from '../../toolkit/toolkit-types';
 import { findOne } from 'domutils';
-import type { DOMNodeWithChildren } from 'react-native-render-html';
+import type { NodeWithChildren } from 'react-native-render-html';
 
 const html = `
 <body>
@@ -35,7 +35,7 @@ const selectDomRootSrc = `function selectDomRoot(node) {
   return findOne((e) => e.name === 'article', node.children, true);
 }`;
 
-function selectDomRoot(node: DOMNodeWithChildren) {
+function selectDomRoot(node: NodeWithChildren) {
   return findOne((e) => e.name === 'article', node.children, true);
 }
 
