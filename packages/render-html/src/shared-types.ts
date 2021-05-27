@@ -221,6 +221,8 @@ export interface RenderHTMLSharedProps {
    * @remarks Limitations:
    * - Only adjacent siblings collapsing is implemented.
    * - If one of the margins height is in percent, no collapsing will occur.
+   * - Will apply indiscriminately to all `display` properties (including
+   *   flex), which is not standard.
    *
    * @defaultValue false
    */
@@ -284,8 +286,9 @@ export interface RenderHTMLSharedProps {
    * Provide support for list style types which are not supported by this
    * library.
    *
-   * @remarks Check the numerous presets provided by `@jsamr/counter-style` as
-   * they require zero-effort!
+   * @remarks Check the numerous presets provided by
+   * {@link `@jsamr/counter-style` | https://github.com/jsamr/react-native-li/tree/master/packages/counter-style#readme}
+   * as they require zero-effort!
    *
    * @example
    *
