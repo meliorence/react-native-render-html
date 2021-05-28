@@ -40,6 +40,14 @@ module.exports = {
     ]
   ],
   themeConfig: {
+    algolia: {
+      apiKey: '4f9905bd301a15034820905263f47dda',
+      indexName: 'meliorence',
+      // Should be set to true for versioned sites
+      contextualSearch: false,
+      // Optional: Algolia search parameters
+      searchParameters: {}
+    },
     colorMode: {
       defaultMode: 'dark',
       respectPrefersColorScheme: true
@@ -172,10 +180,10 @@ module.exports = {
         {
           title: 'More',
           items: [
-            {
-              label: 'Blog',
-              to: '/blog'
-            },
+            // {
+            //   label: 'Blog',
+            //   to: '/blog'
+            // },
             {
               label: 'GitHub',
               href: 'https://github.com/meliorence/react-native-render-html'
