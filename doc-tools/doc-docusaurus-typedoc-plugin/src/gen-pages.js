@@ -275,6 +275,7 @@ function extractBody(reflection) {
     case ReflectionKind.Reference:
       /**@type {import('typedoc').JSONOutput.ReferenceReflection} */
       const ref = reflection;
+      // TODO handle
       return ``;
     default:
       console.warn(reflection.kindString);
@@ -344,14 +345,17 @@ id: index
 slug: ./
 title: API Reference
 ---
+import Reference from '@site/src/components/Reference';
 
 ${definitions.reduce((prev, curr) => {
   return `${prev}\n\n## ${curr.label}
 
+${curr.description}
+
 <ul>
 ${curr.items.reduce((p, c) => {
   const url = join(`/${absolutePath}`, `/${c.name.toLowerCase()}`);
-  return `${p}\n<li><a href="${url}"><code>${c.name}</code></a></li>`;
+  return `${p}\n<li className="li-api-reference"><Reference type="api-def" name="${c.name}" url="${url}"/></li>`;
 }, '')}
 </ul>
 `;
@@ -444,33 +448,41 @@ module.exports = async function genPages(
     {
       type: 'category',
       label: 'Components',
+      description: 'React Components exported by this library.',
       items: sidebarGroups.exportedComponents.sort(sortDefinitions)
     },
     {
       type: 'category',
       label: 'Hooks',
+      description: 'React Hooks exported by this library.',
       items: sidebarGroups.exportedHooks.sort(sortDefinitions)
     },
     {
       type: 'category',
       label: 'Other Exports',
+      description:
+        'Other constants exported by this library, such as defaults and utilities.',
       items: sidebarGroups.exportedValues.sort(sortDefinitions)
     },
     {
       type: 'category',
       label: 'Types',
+      description: 'TypeScript definitions exported by this library.',
       items: sidebarGroups.exportedTypes.sort(sortDefinitions)
     },
     {
       type: 'category',
       label: 'Externals',
+      description:
+        'Reexports from direct dependencies of `react-native-render-html`.',
       items: sidebarGroups.externals.sort(sortDefinitions)
     }
   ];
   const sidebaritems = [{ type: 'doc', id: 'index' }].concat(
-    definitions.map((item) => ({
-      ...item,
-      items: item.items.map(reflectionToSidebar)
+    definitions.map(({ items, type, label }) => ({
+      type,
+      label,
+      items: items.map(reflectionToSidebar)
     }))
   );
   await writeFile(

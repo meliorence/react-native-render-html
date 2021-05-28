@@ -58,6 +58,8 @@
   --ifm-font-family-monospace: 'Source Code Pro', monospace;
   --ifm-font-family-base: 'Raleway', sans-serif;
 
+  --ifm-global-radius: 0;
+
   --syntax-color-punctuation: rgb(199, 146, 234);
   --syntax-color-attr-name: rgb(255, 203, 107);
   --syntax-color-plain: rgb(191, 199, 213);
@@ -70,13 +72,15 @@
   --reference-color-lib: rgb(146, 24, 24);
 }
 
-html[data-theme='light'], .alert {
+html[data-theme='light'] {
   --ifm-font-color-secondary: rgb(123, 162, 201);
   --ifm-font-color-base: var(--ifm-color-gray-800);
   --ifm-color-highlight: var(--ifm-color-gray-900);
   --reference-bg: #cececebe;
   --reference-bg-hover: #253161;
   --reference-color-hover: var(--ifm-color-gray-200);
+  --figure-header-bg: #5f76d4;
+  --figure-header-color: var(--ifm-color-gray-100);
 }
 
 html[data-theme='dark'] {
@@ -86,6 +90,8 @@ html[data-theme='dark'] {
   --reference-bg: #2021259c;
   --reference-bg-hover: #c0c1c5;
   --reference-color-hover: var(--ifm-color-gray-800);
+  --figure-header-bg: #1c2444;
+  --figure-header-color: var(--ifm-color-gray-100);
 }
 
 /* Avoid bug with react-modal */
@@ -159,6 +165,12 @@ code {
 
 // doc and blog pages
 .markdown {
+  li.li-api-reference {
+    &::marker {
+      color: var(--syntax-color-type);
+    }
+    list-style-type: "◆  ";
+  }
   li > p,
   dd > p,
   dt > p {
@@ -206,24 +218,19 @@ code {
 // Admonitions
 
 .alert--success {
-  --ifm-alert-background-color: var(--ifm-color-success-lightest);
-  --ifm-alert-border-color: var(--ifm-color-success-lightest);
-  --ifm-alert-color: var(--ifm-color-gray-900);
+  --ifm-alert-background-color: var(--ifm-color-success);
 }
 .alert--info {
-  --ifm-alert-background-color: var(--ifm-color-info-lightest);
-  --ifm-alert-border-color: var(--ifm-color-info-lightest);
-  --ifm-alert-color: var(--ifm-color-gray-900);
+  --ifm-alert-background-color: var(--ifm-color-info);
 }
 .alert--warning {
-  --ifm-alert-background-color: var(--ifm-color-warning-light);
-  --ifm-alert-border-color: var(--ifm-color-warning-light);
-  --ifm-alert-color: var(--ifm-color-gray-900);
+  --ifm-alert-background-color: var(--ifm-color-warning);
 }
 .alert--danger {
-  --ifm-alert-background-color: var(--ifm-color-danger-lightest);
-  --ifm-alert-border-color: var(--ifm-color-danger-light);
-  --ifm-alert-color: var(--ifm-color-gray-900);
+  --ifm-alert-background-color: var(--ifm-color-danger);
+}
+.alert--secondary {
+  --ifm-alert-background-color: var(--ifm-color-info);
 }
 
 .alert svg {
@@ -231,8 +238,13 @@ code {
 }
 
 .alert {
+  --ifm-alert-color: var(--ifm-font-color-base);
   --ifm-code-color: var(--ifm-alert-color);
   --reference-color-doc: var(--ifm-alert-color);
+  background-color: rgba(5, 5, 5, 0.075);
+  border: none;
+  border-radius: 0;
+  border-left: solid var(--ifm-alert-background-color) 1rem;
 }
 
 .header-github-link::before {
