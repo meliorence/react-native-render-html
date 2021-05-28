@@ -59,7 +59,7 @@ export default function renderType(pt: DeclarationType, params: Params) {
       return (
         <>
           {isLocalRef ? (
-            <Link href={`/api/${ref.name.toLowerCase()}`}>{nameToken}</Link>
+            <Link href={`/api/${name.toLowerCase()}`}>{nameToken}</Link>
           ) : (
             nameToken
           )}
