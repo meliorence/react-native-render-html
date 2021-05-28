@@ -40,11 +40,11 @@ text { fill: blue;   font-family:'Fira Code'; }
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="-409.61106"
-     inkscape:cy="391.03534"
+     inkscape:zoom="1"
+     inkscape:cx="126.15111"
+     inkscape:cy="280.4966"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g107"
      inkscape:document-rotation="0"
      showgrid="true"
      units="px"
@@ -56,9 +56,9 @@ text { fill: blue;   font-family:'Fira Code'; }
      inkscape:snap-midpoints="true"
      inkscape:snap-global="true"
      inkscape:window-width="1914"
-     inkscape:window-height="935"
+     inkscape:window-height="983"
      inkscape:window-x="0"
-     inkscape:window-y="142"
+     inkscape:window-y="94"
      inkscape:window-maximized="1"
      inkscape:snap-page="true"
      fit-margin-top="0"
@@ -86,7 +86,7 @@ text { fill: blue;   font-family:'Fira Code'; }
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -422,21 +422,29 @@ text { fill: blue;   font-family:'Fira Code'; }
         <text
            xml:space="preserve"
            x="94.453041"
-           y="154.13156"
+           y="147.25241"
            id="text2783-9-3-0"
            class="transition"><tspan
              sodipodi:role="line"
              x="94.453041"
-             y="154.13156"
+             y="147.25241"
              id="tspan3144-6" /><tspan
              sodipodi:role="line"
              x="94.453041"
-             y="157.88156"
-             id="tspan346">with parseDom function from</tspan><tspan
+             y="151.00241"
+             id="tspan109" /><tspan
              sodipodi:role="line"
              x="94.453041"
-             y="161.63156"
-             id="tspan348">htmlparser2</tspan></text>
+             y="154.75241"
+             id="tspan113">with TRenderEngine.parseDocument</tspan><tspan
+             sodipodi:role="line"
+             x="94.453041"
+             y="158.50241"
+             id="tspan115">method from @native-html/</tspan><tspan
+             sodipodi:role="line"
+             x="94.453041"
+             y="162.25241"
+             id="tspan117">transient-render-engine</tspan></text>
         <text
            xml:space="preserve"
            x="94.924812"
@@ -473,11 +481,13 @@ text { fill: blue;   font-family:'Fira Code'; }
            x="204.82776"
            y="56.684299"
            id="text2791"
-           class="transition-title"><tspan
+           class="transition-title"
+           inkscape:transform-center-x="-2.1586216"
+           inkscape:transform-center-y="-5.9324387"><tspan
              sodipodi:role="line"
-             id="tspan2789"
              x="204.82776"
-             y="56.684299">parseDom()</tspan></text>
+             y="56.684299"
+             id="tspan103">parseDocument()</tspan></text>
         <g
            id="arrowBottom"
            transform="matrix(0.0463821,0,0,0.04666677,193.31117,52.261757)"
@@ -492,26 +502,26 @@ text { fill: blue;   font-family:'Fira Code'; }
     </g>
     <g
        id="g135"
-       transform="translate(-26.458344,1.0701139)">
+       transform="translate(-19.050009,1.0701139)">
       <g
          id="g107"
          transform="translate(0,-1.1729662)">
         <text
            xml:space="preserve"
-           x="204.6534"
+           x="197.77432"
            y="134.58205"
            id="text2791-6"
            class="transition-title"><tspan
              sodipodi:role="line"
              id="tspan2789-1"
-             x="204.6534"
+             x="197.77432"
              y="134.58205">buildTTree()</tspan></text>
         <use
            xlink:href="#arrowBottom"
            x="0"
            y="0"
            id="use87"
-           transform="translate(0,77.193605)"
+           transform="translate(-7.4083335,77.193605)"
            width="100%"
            height="100%" />
       </g>
