@@ -26,10 +26,7 @@ export default function Reference({
     pluralMark;
   return (
     <>
-      <Link
-        target="_blank"
-        className={clsx(styles.ref, styles[`ref--${type}`])}
-        to={url}>
+      <Link className={clsx(styles.ref, styles[`ref--${type}`])} to={url}>
         {shouldWrapCode ? <code>{fullName}</code> : fullName}
       </Link>{' '}
     </>
