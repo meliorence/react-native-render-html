@@ -407,7 +407,7 @@ export default function PageConceptTRE() {
       </Chapter>
       <Chapter title="Markers">
         <Paragraph>
-          <RefTRE name="Marker" plural /> form an abstraction in which one{' '}
+          <RefTRE name="Markers" /> form an abstraction in which one{' '}
           <RefTRE name="TNode" /> provides semantic information to itself and
           all its descendants. For example, <RefHtmlElement name="ins" />{' '}
           elements, which stand for "insertion" of content in the context of an
