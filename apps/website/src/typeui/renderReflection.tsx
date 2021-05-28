@@ -127,6 +127,7 @@ export default function renderReflection(
   reflection: JSONOutput.DeclarationReflection,
   params: Params
 ) {
+  let nextParams: Params = params;
   switch (reflection.kind) {
     case ReflectionKind.Function:
       return renderFunction(
@@ -184,7 +185,7 @@ export default function renderReflection(
         </>
       );
     case ReflectionKind.Interface:
-      const nextParams = params.withIndent().withMemberLinks();
+      nextParams = params.withIndent().withMemberLinks();
       return (
         <>
           <TokenKeyword>interface</TokenKeyword>
@@ -217,9 +218,10 @@ export default function renderReflection(
         params
       );
     case ReflectionKind.Property:
+      nextParams = params.withoutMemberLinks();
       return renderAttribute(
         reflection.name,
-        renderType(reflection.type, params),
+        renderType(reflection.type, nextParams),
         reflection.flags,
         params
       );
@@ -254,7 +256,10 @@ export default function renderReflection(
     case ReflectionKind.Method:
       return renderAttribute(
         reflection.name,
-        renderArrowSignatures(reflection.signatures, params),
+        renderArrowSignatures(
+          reflection.signatures,
+          params.withoutMemberLinks()
+        ),
         reflection.flags,
         params
       );

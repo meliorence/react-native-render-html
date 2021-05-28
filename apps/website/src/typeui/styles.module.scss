@@ -10,9 +10,6 @@
   flex-wrap: nowrap;
   border-bottom-left-radius: var(--ifm-global-radius);
   border-bottom-right-radius: var(--ifm-global-radius);
-}
-
-.container {
   line-height: 1.5;
   white-space: nowrap;
   code {
@@ -23,9 +20,8 @@
     @extend .reference;
   }
 }
-
 .token {
-  --reference-bg: rgba(19, 24, 54, 0.712);
+  --reference-bg: rgba(19, 24, 54, 0.25);
   --reference-bg-hover: var(--ifm-color-gray-100);
   --reference-color-hover: var(--ifm-color-gray-800);
   color: var(--token-color);
@@ -69,8 +65,9 @@
 
 .flagBox {
   opacity: 0.75;
-  font-style: italic;
-  vertical-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 65%;
   padding: 0 0.5rem;
   display: flex;
   align-items: center;
@@ -84,7 +81,7 @@
 }
 
 .flagBox--required {
-  background-color: var(--ifm-color-primary);
+  background-color: var(--ifm-color-primary-darkest);
   color: var(--ifm-color-white);
 }
 
@@ -128,7 +125,7 @@
   border-top-left-radius: var(--ifm-global-radius);
   border-top-right-radius: var(--ifm-global-radius);
   overflow: hidden;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.1rem;
 }
 
 .versionBox {
@@ -143,19 +140,22 @@
   }
 }
 
-.sourceBox,
-.sourceBox > code {
-  font-style: normal;
-  font-weight: 900;
-}
 .sourceBox {
   text-overflow: ellipsis;
   overflow: hidden;
-  padding-left: 0.25rem;
   flex-shrink: 0;
+  color: var(--ifm-color-white);
+  padding-left: 0.25rem;
   &:not(:hover) {
     text-decoration: none;
+  }
+  &:hover {
     color: var(--ifm-color-white);
+  }
+  > code {
+    font-style: normal;
+    font-weight: 900;
+    padding-left: 0.25rem;
   }
 }
 

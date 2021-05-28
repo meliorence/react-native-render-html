@@ -139,18 +139,22 @@ function extractSignatureParams(signatures) {
     if (!params) {
       return '';
     }
-    const serializedParams = params.map((p) => {
-      if (p.comment) {
-        return `<tr><td><code>${p.name}</code></td><td>
+    const serializedParams = params
+      .map((p) => {
+        if (p.comment) {
+          return `<dt><code>${p.name}</code></dt><dd>
 
 ${extractComment(p.comment)}
         
-</td></tr>`;
-      }
-      return '';
-    });
-    return serializedParams
-      ? `<table><thead><tr><th>parameter</th><th>description</th></tr></thead><tbody>${serializedParams}</tbody></table>`
+</dd>`;
+        }
+        return null;
+      })
+      .filter((p) => p !== null);
+    return serializedParams.length
+      ? `#### Parameters
+      
+<dl>${serializedParams.join('\n')}</dl>`
       : '';
   }
   return '';
