@@ -2,30 +2,9 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://meliorence.github.io/blog</id>
     <title>Discover React Native Render HTML Blog</title>
-    <updated>2019-05-30T00:00:00.000Z</updated>
+    <updated>2015-10-25T23:29:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://meliorence.github.io/blog"/>
     <subtitle>Discover React Native Render HTML Blog</subtitle>
     <icon>https://meliorence.github.io/img/favicon.ico?v=1.0.0</icon>
-    <entry>
-        <title type="html"><![CDATA[Welcome]]></title>
-        <id>welcome</id>
-        <link href="https://meliorence.github.io/react-native-render-html/blog/welcome"/>
-        <updated>2019-05-30T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Blog features are powered by the blog plugin. Simply add files to the blog directory. It supports tags as well!]]></summary>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hello]]></title>
-        <id>hello-world</id>
-        <link href="https://meliorence.github.io/react-native-render-html/blog/hello-world"/>
-        <updated>2019-05-29T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Welcome to this blog. This blog is created with Docusaurus 2 alpha.]]></summary>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hola]]></title>
-        <id>hola</id>
-        <link href="https://meliorence.github.io/react-native-render-html/blog/hola"/>
-        <updated>2019-05-28T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet]]></summary>
-    </entry>
 </feed>
