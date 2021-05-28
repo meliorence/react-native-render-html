@@ -1,5 +1,6 @@
 import React from 'react';
 import { JSONOutput } from 'typedoc';
+import Link from '@docusaurus/Link';
 import {
   TokenPunctuation,
   TokenPrimitive,
@@ -53,10 +54,12 @@ export default function renderType(pt: DeclarationType, params: Params) {
         name = params.resolveReflection(ref.id).name;
       }
       const nameToken = <TokenType>{name}</TokenType>;
+      // TODO fix issue in multiple version docs
+      // See blocking issue on https://github.com/facebook/docusaurus/issues/3372
       return (
         <>
           {isLocalRef ? (
-            <a href={`./${ref.name.toLowerCase()}`}>{nameToken}</a>
+            <Link href={`/api/${ref.name.toLowerCase()}`}>{nameToken}</Link>
           ) : (
             nameToken
           )}
