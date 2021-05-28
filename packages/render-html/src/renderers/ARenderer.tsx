@@ -1,7 +1,7 @@
 import React from 'react';
 import { InternalMixedRenderer } from '../render/render-types';
 import { TNode, DocumentContext } from '@native-html/transient-render-engine';
-import { InternalRendererProps, RenderersPropsBase } from '../shared-types';
+import { InternalRendererProps, RenderersProps } from '../shared-types';
 import { AccessibilityProps, GestureResponderEvent } from 'react-native';
 import AElement from '../elements/AElement';
 import useNormalizedUrl from '../hooks/useNormalizedUrl';
@@ -10,7 +10,7 @@ import { useRendererProps } from '../context/RenderersPropsProvider';
 
 function useAnchorOnLinkPress(
   tnode: TNode,
-  onPress: RenderersPropsBase['a']['onPress']
+  onPress: RenderersProps['a']['onPress']
 ) {
   const href: string = tnode.attributes.href;
   const normalizedHref = useNormalizedUrl(href);

@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import RenderHTML, {
-  RenderersPropsBase,
+  RenderersProps,
   RenderHTMLProps
 } from 'react-native-render-html';
 import LegacyHTML from 'react-native-render-html-v5';
@@ -50,7 +50,7 @@ const UIHtmlDisplayMolecule = React.memo(
     useLegacy = false
   }: {
     contentWidth: number;
-    renderHtmlProps: RenderHTMLProps<RenderersPropsBase>;
+    renderHtmlProps: RenderHTMLProps<RenderersProps>;
     supportsLegacy: boolean;
     useLegacy: boolean;
     style?: StyleProp<ViewStyle>;

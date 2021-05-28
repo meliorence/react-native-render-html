@@ -85,7 +85,7 @@ export default function PageContentAnchors() {
           We can take advantage of the{' '}
           <RefRenderHtmlProp name="renderersProps" /> to customize anchors
           behavior (see{' '}
-          <RefRenderHTMLExport name="RenderersPropsBase" member="a" full />
+          <RefRenderHTMLExport name="RenderersProps" member="a" full />
           ). Anchors support <InlineCode>onPress</InlineCode> prop to handle
           press events.
         </Paragraph>

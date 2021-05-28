@@ -153,8 +153,8 @@ export default function PageContentLists() {
         <Paragraph>
           Thanks to <RefRenderHtmlProp name="renderersProps" /> prop, you can
           enable experimental RTL support for lists (see{' '}
-          <RefRenderHTMLExport name="RenderersPropsBase" member="ol" full /> and{' '}
-          <RefRenderHTMLExport name="RenderersPropsBase" member="ul" full />
+          <RefRenderHTMLExport name="RenderersProps" member="ol" full /> and{' '}
+          <RefRenderHTMLExport name="RenderersProps" member="ul" full />
           ).
         </Paragraph>
         <Admonition type="note">
