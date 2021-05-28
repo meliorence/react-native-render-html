@@ -119,13 +119,19 @@ export default function RenderHTMLCard({
               title={title}
               values={tabs}>
               <TabItem value="html">
-                <CodeBlock className="html">{normalHtml}</CodeBlock>
+                <div className="codeblock--with-line-numbers">
+                  <CodeBlock className="html">{normalHtml}</CodeBlock>
+                </div>
               </TabItem>
               <TabItem value="jsx">
-                <CodeBlock className="jsx">{normalSnippet}</CodeBlock>
+                <div className="codeblock--with-line-numbers">
+                  <CodeBlock className="jsx">{normalSnippet}</CodeBlock>
+                </div>
               </TabItem>
               <TabItem value="snapshot">
-                <CodeBlock className="xml">{normalSnapshot}</CodeBlock>
+                <div className="codeblock--with-line-numbers">
+                  <CodeBlock className="xml">{normalSnapshot}</CodeBlock>
+                </div>
               </TabItem>
             </Tabs>
           </div>

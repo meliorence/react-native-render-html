@@ -19,7 +19,6 @@ export default function Reference({
   type: RefType | 'rnrh-prop' | 'api-def';
   plural?: boolean;
 }) {
-  console.info('name', name, 'member', member, 'full', full);
   const shouldWrapCode = type !== 'doc';
   const pluralMark = plural ? 's' : '';
   const fullName =

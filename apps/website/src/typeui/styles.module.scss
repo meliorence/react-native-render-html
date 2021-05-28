@@ -124,7 +124,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1c2444;
+  background-color: var(--figure-header-bg);
   border-top-left-radius: var(--ifm-global-radius);
   border-top-right-radius: var(--ifm-global-radius);
   overflow: hidden;
