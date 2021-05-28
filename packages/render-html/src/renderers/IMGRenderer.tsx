@@ -1,4 +1,4 @@
-import React, { ClassAttributes } from 'react';
+import React from 'react';
 import { TBlock } from '@native-html/transient-render-engine';
 import IMGElement, { IMGElementProps } from '../elements/IMGElement';
 import { InternalBlockRenderer } from '../render/render-types';
@@ -15,7 +15,7 @@ import useContentWidth from '../hooks/useContentWidth';
  */
 export function useIMGElementProps(
   props: InternalRendererProps<TBlock>
-): IMGElementProps & ClassAttributes<any> {
+): IMGElementProps {
   const { style, tnode, onPress, key } = props;
   const contentWidth = useContentWidth();
   const {
@@ -25,6 +25,7 @@ export function useIMGElementProps(
   const computeImagesMaxWidth = useComputeMaxWidthForTag('img');
   const src = tnode.attributes.src || '';
   return {
+    //@ts-ignore
     key,
     contentWidth,
     computeMaxWidth: computeImagesMaxWidth,

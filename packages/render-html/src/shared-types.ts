@@ -116,9 +116,17 @@ export interface ListElementConfig {
  * Props for custom renderers. The convention is to declare a field per renderer.
  * In doing so, you can benefit from `useRendererProps('tagname')` in custom renderers.
  *
- * @remarks Plugins offering options should augment this declaration.
- * See https://www.typescriptlang.org/docs/handbook/declaration-merging.html
+ * @remarks **Typescript users**: If you need to add fields to the {@link RenderersPropsBase} interface,
+ * you should use {@link https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation | module augmentation}:
  *
+ * ```ts
+ * declare module 'react-native-render-html' {
+ *   interface RenderersPropsBase {
+ *     div?: {
+ *       customProp: boolean;
+ *     };
+ *   }
+ * }
  * @public
  */
 export interface RenderersPropsBase extends Record<string, any> {
@@ -174,11 +182,9 @@ export interface RenderHTMLPassedProps {
    * @remarks
    * - When you use the hook, you'll get this object deep-merged with default renderers props.
    * - **Typescript users**: If you need to add fields to the {@link RenderersPropsBase} interface,
-   *     you should use module augmentation:
+   *     you should use {@link https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation | module augmentation}:
    *
    * ```ts
-   * import { RenderersPropsBase } from 'react-native-render-html';
-   *
    * declare module 'react-native-render-html' {
    *   interface RenderersPropsBase {
    *     div?: {
@@ -259,7 +265,7 @@ export interface RenderHTMLSharedProps {
   debug?: boolean;
   /**
    * The WebView component used by plugins (iframe, table)...
-   * See [@native-html/plugins](https://github.com/native-html/plugins).
+   * See {@link https://github.com/native-html/plugins | @native-html/plugins}.
    *
    * @defaultValue `() => null`
    */
@@ -287,7 +293,7 @@ export interface RenderHTMLSharedProps {
    * library.
    *
    * @remarks Check the numerous presets provided by
-   * {@link `@jsamr/counter-style` | https://github.com/jsamr/react-native-li/tree/master/packages/counter-style#readme}
+   * {@link https://github.com/jsamr/react-native-li/tree/master/packages/counter-style#readme | @jsamr/counter-style}
    * as they require zero-effort!
    *
    * @example
@@ -313,7 +319,7 @@ export interface RenderHTMLSharedProps {
  */
 export interface TransientRenderEngineConfig {
   /**
-   * ParserOptions for [htmlparser2](https://github.com/fb55/htmlparser2/wiki/Parser-options)
+   * ParserOptions for {@link https://github.com/fb55/htmlparser2/wiki/Parser-options | htmlparser2}.
    *
    * @defaultValue  `{ decodeEntities: true }`
    */
@@ -700,12 +706,10 @@ export interface FallbackFontsDefinitions {
  * @remarks
  * - Anonymous nodes will pass those props from their parents to
  *   children.
- * - **Typescript users**: If you need to customize this type, use module
- *   augmentation:
+ * - **Typescript users**: If you need to customize this type, you should use
+ *   {@link https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation | module augmentation}:
  *
  * ```ts
- * import { RenderersPropsBase } from 'react-native-render-html';
- *
  * declare module 'react-native-render-html' {
  *   interface PropsFromParent {
  *     customProp?: boolean;

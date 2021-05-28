@@ -51,6 +51,7 @@ export type {
 } from '@native-html/transient-render-engine';
 export * from './shared-types';
 export * from './render/render-types';
+export { RenderHTML };
 export default RenderHTML;
 export { default as TChildrenRenderer } from './TChildrenRenderer';
 export {

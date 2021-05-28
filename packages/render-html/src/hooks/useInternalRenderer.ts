@@ -1,4 +1,4 @@
-import { TagName, TNode } from '@native-html/transient-render-engine';
+import { TagName } from '@native-html/transient-render-engine';
 import { ComponentType } from 'react';
 import AElement from '../elements/AElement';
 import IMGElement from '../elements/IMGElement';
@@ -57,7 +57,7 @@ export interface InternalRendererConfig<P> {
  */
 export default function useInternalRenderer<T extends TagName>(
   tagName: T,
-  props: InternalRendererProps<TNode>
+  props: InternalRendererProps<any>
 ): T extends InternalSpecialRenderedTag
   ? InternalRendererConfig<ReturnType<typeof specialRenderersConfig[T]['hook']>>
   : InternalRendererConfig<TDefaultRendererProps<any>> {
