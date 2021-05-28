@@ -32,6 +32,9 @@ export default function PageConceptTRE() {
     Acronym,
     Admonition,
     Bold,
+    DList,
+    DListItem,
+    DListTitle,
     Header,
     Paragraph,
     Chapter,
@@ -43,6 +46,7 @@ export default function PageConceptTRE() {
     RefRenderHtmlProp,
     RefHtmlAttr,
     RefDoc,
+    RefTRE,
     RenderHtmlCard,
     Section,
     InlineCode,
@@ -68,68 +72,97 @@ export default function PageConceptTRE() {
         <Section title="HTMLElementModel">
           <Paragraph>
             To each standard tag is attached an <Bold>element model</Bold>,
-            instance of the <InlineCode>HTMLElementModel</InlineCode> class.
-            Such model has multiple fields describing different behaviors
-            related to translation of those DOM elements:
+            instance of the <RefTRE name="HTMLElementModel" /> class. Such model
+            has multiple fields describing different behaviors related to
+            translation of those DOM elements:
           </Paragraph>
-          <List>
-            <ListItemCode name="contentModel">
+          <DList>
+            <DListTitle>
+              <RefTRE name="HTMLElementModel" member="contentModel" />
+            </DListTitle>
+            <DListItem>
               How should this tag be translated? See next chapter.
-            </ListItemCode>
-            <ListItemCode name="isVoid">
+            </DListItem>
+            <DListTitle>
+              <RefTRE name="HTMLElementModel" member="isVoid" />
+            </DListTitle>
+            <DListItem>
               Will be <InlineCode>true</InlineCode> for void aka{' '}
               <Hyperlink url="https://developer.mozilla.org/en-US/docs/Glossary/Empty_element">
                 empty elements
               </Hyperlink>{' '}
               , e.g. DOM elements which can't have children.
-            </ListItemCode>
-            <ListItemCode name="isOpaque">
+            </DListItem>
+            <DListTitle>
+              <RefTRE name="HTMLElementModel" member="isOpaque" />
+            </DListTitle>
+            <DListItem>
               Will be <InlineCode>true</InlineCode> for those elements which
               children should not be translated. Useful for{' '}
               <RefHtmlElement name="svg" /> and other custom markups.
-            </ListItemCode>
-            <ListItemCode name="mixedUAStyles">
+            </DListItem>
+            <DListTitle>
+              <RefTRE name="HTMLElementModel" member="mixedUAStyles" />
+            </DListTitle>
+            <DListItem>
               Mixed User-Agent styles, e.g. default styles for this element.
               This is how default styles are set for tags.
-            </ListItemCode>
-            <ListItemCode name="getUADerivedStyleFromAttributes">
+            </DListItem>
+            <DListTitle>
+              <RefTRE
+                name="HTMLElementModel"
+                member="getUADerivedStyleFromAttributes"
+              />
+            </DListTitle>
+            <DListItem>
               A function which returns mixed UA styles given the DOM node{' '}
-              <Bold>attributes</Bold> and <InlineCode>TNode</InlineCode>{' '}
-              <Bold>markers</Bold>.
-            </ListItemCode>
-          </List>
+              <Bold>attributes</Bold> and <RefTRE name="TNode" />{' '}
+              <RefTRE name="Markers" />.
+            </DListItem>
+          </DList>
         </Section>
         <Section title="HTMLContentModel">
           <Paragraph>
             There are 4 content models that can be attached to a tag:
           </Paragraph>
-          <List>
-            <ListItem>
-              <Bold>textual</Bold> for elements which can be translated to{' '}
-              <InlineCode>TText</InlineCode> or{' '}
-              <InlineCode>TPhrasing</InlineCode>. Examples:{' '}
+          <DList>
+            <DListTitle>
+              <RefTRE name="HTMLContentModel" member="textual" full />
+            </DListTitle>
+            <DListItem>
+              For elements which can be translated to <RefTRE name="TText" /> or{' '}
+              <RefTRE name="TPhrasing" />. Examples:{' '}
               <RefHtmlElement name="span" />, <RefHtmlElement name="strong" />{' '}
               ...
-            </ListItem>
-            <ListItem>
-              <Bold>block</Bold> for elements which can only be translated to
-              <InlineCode>TBlock</InlineCode>. Examples:{' '}
-              <RefHtmlElement name="div" />, <RefHtmlElement name="p" />,{' '}
-              <RefHtmlElement name="article" /> ...
-            </ListItem>
-            <ListItem>
-              <Bold>mixed</Bold> (rare) for elements which can be translated to
-              <InlineCode>TText</InlineCode>, <InlineCode>TPhrasing</InlineCode>{' '}
-              or <InlineCode>TBlock</InlineCode>. The sole mixed elements are{' '}
+            </DListItem>
+            <DListTitle>
+              <RefTRE name="HTMLContentModel" member="block" full />
+            </DListTitle>
+            <DListItem>
+              For elements which can only be translated to{' '}
+              <RefTRE name="TBlock" />. Examples: <RefHtmlElement name="div" />,{' '}
+              <RefHtmlElement name="p" />, <RefHtmlElement name="article" /> ...
+            </DListItem>
+            <DListTitle>
+              <RefTRE name="HTMLContentModel" member="mixed" full />
+            </DListTitle>
+            <DListItem>
+              (rare) for elements which can be translated to{' '}
+              <RefTRE name="TText" />, <RefTRE name="TPhrasing" /> or{' '}
+              <RefTRE name="TBlock" />. The sole mixed elements are{' '}
               <RefHtmlElement name="a" />, <RefHtmlElement name="ins" /> and{' '}
               <RefHtmlElement name="del" />.
-            </ListItem>
-            <ListItem>
-              <Bold>none</Bold> for element which shall not be rendered.
-              Examples: <RefHtmlElement name="button" />,{' '}
-              <RefHtmlElement name="map" /> ...
-            </ListItem>
-          </List>
+            </DListItem>
+            <DListTitle>
+              <RefTRE name="HTMLContentModel" member="none" full />
+            </DListTitle>
+            <DListItem>
+              For element which shall not be rendered and will be translated to{' '}
+              <RefTRE name="TEmpty" />. Examples:{' '}
+              <RefHtmlElement name="button" />, <RefHtmlElement name="map" />{' '}
+              ...
+            </DListItem>
+          </DList>
           <Paragraph>
             A powerful feature of the <Bold>Foundry</Bold> engine is that the
             models attached to a tag name can be customized! See the{' '}
@@ -144,48 +177,48 @@ export default function PageConceptTRE() {
         </Paragraph>
         <Section title="Translation">
           <Paragraph>
-            Each DOM element is translated to a <InlineCode>TNode</InlineCode>.
-            The translation will obide by the following rules:
+            Each DOM element is translated to a <RefTRE name="TNode" />. The
+            translation will obide by the following rules:
           </Paragraph>
           <List type="disc">
             <ListItem>
               The root of the document will be translated to a{' '}
-              <InlineCode>TDocument</InlineCode> node. This node has a special{' '}
+              <RefTRE name="TDocument" /> node. This node has a special{' '}
               <InlineCode>context</InlineCode> field which holds metadata
-              harvested in the <RefHtmlElement name="head" /> DOM element.
+              harvested in the <RefHtmlElement name="head" /> DOM element (see{' '}
+              <RefTRE name="DocumentMetadata" />
+              ).
             </ListItem>
             <ListItem>
-              Text nodes will be translated to <InlineCode>TText</InlineCode>,
-              and will be merged with a parent DOM element if the parent's{' '}
+              Text nodes will be translated to <RefTRE name="TText" />, and will
+              be merged with a parent DOM element if the parent's{' '}
               <Bold>content model</Bold> is <Bold>textual</Bold> or{' '}
               <Bold>mixed</Bold> when they are its only child. For example, a
               Text node with no siblings which parent is a{' '}
               <RefHtmlElement name="span" /> will be merged into a{' '}
-              <InlineCode>TText</InlineCode> with
-              <InlineCode>tagName</InlineCode> set to "span".
+              <RefTRE name="TText" /> with <InlineCode>tagName</InlineCode> set
+              to "span".
             </ListItem>
             <ListItem>
               DOM elements which content model is <Bold>textual</Bold> with
               multiple children will be translated to{' '}
-              <InlineCode>TPhrasing</InlineCode> nodes.
+              <RefTRE name="TPhrasing" /> nodes.
             </ListItem>
             <ListItem>
               DOM elements with children which <Bold>content model</Bold> is{' '}
               <Bold>mixed</Bold> will be translated to{' '}
-              <InlineCode>TPhrasing</InlineCode> if they only have{' '}
-              <InlineCode>TPhrasing</InlineCode> or{' '}
-              <InlineCode>TText</InlineCode> children,
-              <InlineCode>TBlock</InlineCode> otherwise.
+              <RefTRE name="TPhrasing" /> if they only have{' '}
+              <RefTRE name="TPhrasing" /> or <RefTRE name="TText" /> children,{' '}
+              <RefTRE name="TBlock" /> otherwise.
             </ListItem>
             <ListItem>
               DOM elements which <Bold>content model</Bold> is{' '}
-              <Bold>block</Bold> will be translated to{' '}
-              <InlineCode>TBlock</InlineCode> nodes.
+              <Bold>block</Bold> will be translated to <RefTRE name="TBlock" />{' '}
+              nodes.
             </ListItem>
             <ListItem>
               Finally, DOM elements which <Bold>content model</Bold> is{' '}
-              <Bold>none</Bold> will be translated to{' '}
-              <InlineCode>TEmpty</InlineCode>.
+              <Bold>none</Bold> will be translated to <RefTRE name="TEmpty" />.
             </ListItem>
             <ListItem>
               <RefHtmlElement name="script" />, comments and{' '}
@@ -214,9 +247,9 @@ export default function PageConceptTRE() {
           />
           <Admonition type="note">
             You will notice that a <RefHtmlElement name="body" /> has been
-            added, and the root is an instance of{' '}
-            <InlineCode>TDocument</InlineCode>. This process is called{' '}
-            <Bold>normalization</Bold>, and is also performed by Web browsers.
+            added, and the root is an instance of <RefTRE name="TDocument" />.
+            This process is called <Bold>normalization</Bold>, and is also
+            performed by Web browsers.
           </Admonition>
         </Section>
         <Section title="Hoisting">
@@ -225,13 +258,13 @@ export default function PageConceptTRE() {
             constraint:
           </Paragraph>
           <Admonition type="important" title="The Hoisting Constraint">
-            A <InlineCode>TPhrasing</InlineCode> node should only have{' '}
-            <InlineCode>TText</InlineCode>, <InlineCode>TPhrasing</InlineCode>{' '}
-            and <InlineCode>TEmpty</InlineCode> nodes as children.
+            A <RefTRE name="TPhrasing" /> node should only have{' '}
+            <RefTRE name="TText" />, <RefTRE name="TPhrasing" /> and{' '}
+            <RefTRE name="TEmpty" /> nodes as children.
           </Admonition>
           <Paragraph>
-            Therefore, any <InlineCode>TBlock</InlineCode> child of a{' '}
-            <InlineCode>TPhrasing</InlineCode> node will be recursively{' '}
+            Therefore, any <RefTRE name="TBlock" /> child of a{' '}
+            <RefTRE name="TPhrasing" /> node will be recursively{' '}
             <Bold>hoisted</Bold> to the parent, until it meets that constraint.
             This constraint must be enforced to insure that a React Native{' '}
             <RefRNSymbol name="Text" /> elements have no{' '}
@@ -244,14 +277,14 @@ export default function PageConceptTRE() {
             <RefRNSymbol name="View" /> elements as children.
           </Admonition>
           <Paragraph>
-            On one hand <InlineCode>TBlock</InlineCode> will be translated to{' '}
+            On one hand <RefTRE name="TBlock" /> will be translated to{' '}
             <RefRNSymbol name="View" /> elements and on the other hand{' '}
-            <InlineCode>TPhrasing</InlineCode> and{' '}
-            <InlineCode>TText</InlineCode> nodes will be translated to{' '}
-            <RefRNSymbol name="Text" /> elements. Therefore, enforcing{' '}
-            <Bold>The Hoisting Constraint</Bold> in the <Acronym name="TRT" />{' '}
-            results in enforcing <Bold>The View Constraint</Bold> at render
-            time. You can disable <Bold>hoisting</Bold> via{' '}
+            <RefTRE name="TPhrasing" /> and <RefTRE name="TText" /> nodes will
+            be translated to <RefRNSymbol name="Text" /> elements. Therefore,
+            enforcing <Bold>The Hoisting Constraint</Bold> in the{' '}
+            <Acronym name="TRT" /> results in enforcing{' '}
+            <Bold>The View Constraint</Bold> at render time. You can disable{' '}
+            <Bold>hoisting</Bold> via{' '}
             <RefRenderHtmlProp name="dangerouslyDisableHoisting" /> prop, but be
             advised this is yet experimental.
           </Paragraph>
@@ -292,50 +325,80 @@ export default function PageConceptTRE() {
       </Chapter>
       <Chapter title="Anatomy of a TNode">
         <Paragraph>
-          A <InlineCode>TNode</InlineCode> has the following relevant fields:
+          A <RefTRE name="TNode" /> has the following relevant fields (see{' '}
+          <RefTRE name="TNodeShape" /> for a reference):
         </Paragraph>
-        <List>
-          <ListItemCode name="attributes">
+        <DList>
+          <DListTitle>
+            <RefTRE name="TNodeShape" member="attributes" />
+          </DListTitle>
+          <DListItem>
             The list of attributes attached to the underlying DOM Node.
-          </ListItemCode>
-          <ListItemCode name="id">
-            The id attached to the underlying DOM Node.
-          </ListItemCode>
-          <ListItemCode name="classes">
+          </DListItem>
+          <DListTitle>
+            <RefTRE name="TNodeShape" member="id" />
+          </DListTitle>
+          <DListItem>The id attached to the underlying DOM Node.</DListItem>
+          <DListTitle>
+            <RefTRE name="TNodeShape" member="classes" />
+          </DListTitle>
+          <DListItem>
             An array of classes associated with the underlying DOM Node.
-          </ListItemCode>
-          <ListItemCode name="domNode">
-            The underlying DOM Node, if present.
-          </ListItemCode>
-          <ListItemCode name="tagName">
+          </DListItem>
+          <DListTitle>
+            <RefTRE name="TNodeShape" member="domNode" />
+          </DListTitle>
+          <DListItem>The underlying DOM Node, if present.</DListItem>
+          <DListTitle>
+            <RefTRE name="TNodeShape" member="tagName" />
+          </DListTitle>
+          <DListItem>
             The tag name attached to the underlying DOM Node.
-          </ListItemCode>
-          <ListItemCode name="parent">
-            The parent <InlineCode>TNode</InlineCode>, if present, determined{' '}
+          </DListItem>
+          <DListTitle>
+            <RefTRE name="TNodeShape" member="parent" />
+          </DListTitle>
+          <DListItem>
+            The parent <RefTRE name="TNode" />, if present, determined{' '}
             <Bold>before hoisting</Bold>.
-          </ListItemCode>
-          <ListItemCode name="nodeIndex">
+          </DListItem>
+          <DListTitle>
+            <RefTRE name="TNodeShape" member="nodeIndex" />
+          </DListTitle>
+          <DListItem>
             The position of this element relative to its parent,{' '}
             <Bold>before hoisting</Bold> and{' '}
             <Bold>after whitespace collapsing</Bold>.
-          </ListItemCode>
-          <ListItemCode name="children">
-            An array of <InlineCode>TNode</InlineCode> descendents to this node.
-          </ListItemCode>
-          <ListItemCode name="type">
-            The <Bold>type</Bold> of this <InlineCode>TNode</InlineCode>. Either{' '}
+          </DListItem>
+          <DListTitle>
+            <RefTRE name="TNodeShape" member="children" />
+          </DListTitle>
+          <DListItem>
+            An array of <RefTRE name="TNode" /> descendents to this node.
+          </DListItem>
+          <DListTitle>
+            <RefTRE name="TNodeShape" member="type" />
+          </DListTitle>
+          <DListItem>
+            The <Bold>type</Bold> of this <RefTRE name="TNode" />. Either{' '}
             <Bold>text</Bold>, <Bold>phrasing</Bold>, <Bold>block</Bold>,{' '}
             <Bold>document</Bold> or <Bold>empty</Bold>.
-          </ListItemCode>
-          <ListItemCode name="markers">
-            A registry of markers for this <InlineCode>TNode</InlineCode>. See
+          </DListItem>
+          <DListTitle>
+            <RefTRE name="TNodeShape" member="markers" />
+          </DListTitle>
+          <DListItem>
+            A registry of markers for this <RefTRE name="TNode" />. See
             explaination in below section.
-          </ListItemCode>
-          <ListItemCode name="snapshot()">
+          </DListItem>
+          <DListTitle>
+            <RefTRE name="TNodeShape" member="snapshot" />
+          </DListTitle>
+          <DListItem>
             A utility function to create a JSX-like string representation of
             this node and its children. <Bold>Very handy for debugging.</Bold>
-          </ListItemCode>
-        </List>
+          </DListItem>
+        </DList>
         <Admonition type="warning">
           The <InlineCode>styles</InlineCode> field which is not listed here{' '}
           <Bold>is not</Bold> consumable as a React Native component{' '}
@@ -344,9 +407,9 @@ export default function PageConceptTRE() {
       </Chapter>
       <Chapter title="Markers">
         <Paragraph>
-          Markers form an abstraction in which one{' '}
-          <InlineCode>TNode</InlineCode> provides semantic information to itself
-          and all its descendants. For example, <RefHtmlElement name="ins" />{' '}
+          <RefTRE name="Marker" plural /> form an abstraction in which one{' '}
+          <RefTRE name="TNode" /> provides semantic information to itself and
+          all its descendants. For example, <RefHtmlElement name="ins" />{' '}
           elements, which stand for "insertion" of content in the context of an
           edit will provide the <InlineCode>edits</InlineCode> marker with value{' '}
           <InlineCode>"ins"</InlineCode> to all its descendants. Similarly,{' '}

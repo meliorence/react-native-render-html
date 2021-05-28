@@ -16,14 +16,20 @@ export default function PageGuideCustomRenderers() {
     Header,
     Paragraph,
     Chapter,
+    DList,
+    DListItem,
+    DListTitle,
     SourceDisplay,
     RefLibrary,
     RefRNSymbol,
     RefHtmlElement,
     RefCssProperty,
     RefRenderHtmlProp,
+    RefRenderHTMLExport,
+    RefTRE,
     RefHtmlAttr,
     RefDoc,
+    RefDOM,
     RenderHtmlCard,
     Section,
     InlineCode,
@@ -44,24 +50,24 @@ export default function PageGuideCustomRenderers() {
         <List>
           <ListItem>
             During the transient render tree generation, every DOM node is
-            translated to a <InlineCode>TNode</InlineCode>.
+            translated to a <RefTRE name="TNode" />.
           </ListItem>
           <ListItem>
-            <InlineCode>TText</InlineCode> nodes correspond to DOM text nodes (
-            <Bold>anonymous</Bold> <InlineCode>TText</InlineCode> nodes) or DOM
-            elements which children are DOM text nodes (<Bold>named</Bold>{' '}
-            <InlineCode>TText</InlineCode> nodes). So a{' '}
-            <InlineCode>TText</InlineCode> node cannot have children, and its
-            content is a string accessible with the{' '}
-            <InlineCode>data</InlineCode> field.
+            <RefTRE name="TText" /> nodes correspond to DOM{' '}
+            <RefDOM name="Text" /> nodes (<Bold>anonymous</Bold>{' '}
+            <RefTRE name="TText" /> nodes) or DOM elements which children are
+            DOM <RefDOM name="Text" /> nodes (<Bold>named</Bold>{' '}
+            <RefTRE name="TText" /> nodes). So a <RefTRE name="TText" /> node
+            cannot have children, and its content is a string accessible with
+            the <RefDOM name="Text" member="data" /> field.
           </ListItem>
           <ListItem>
-            Thanks to <Bold>hoisting</Bold>, <InlineCode>TPhrasing</InlineCode>{' '}
-            nodes can only have <InlineCode>TText</InlineCode> and{' '}
-            <InlineCode>TPhrasing</InlineCode> nodes as children.
+            Thanks to <Bold>hoisting</Bold>, <RefTRE name="TPhrasing" /> nodes
+            can only have <RefTRE name="TText" /> and{' '}
+            <RefTRE name="TPhrasing" /> nodes as children.
           </ListItem>
           <ListItem>
-            <InlineCode>TBlock</InlineCode> nodes can have any children.
+            <RefTRE name="TBlock" /> nodes can have any children.
           </ListItem>
         </List>
         <Admonition type="tip">
@@ -75,8 +81,7 @@ export default function PageGuideCustomRenderers() {
         </Paragraph>
         <List>
           <ListItem>
-            During <Acronym name="TRT" />
-            generation. via HTML model definition.
+            During <Acronym name="TRT" /> generation. via HTML model definition.
           </ListItem>
           <ListItem>At (React) render time via custom renderers.</ListItem>
         </List>
@@ -119,12 +124,12 @@ export default function PageGuideCustomRenderers() {
           </Paragraph>
           <RenderHtmlCard {...inlineImagesConfig} />
           <Admonition type="note">
-            We used <InlineCode>HTMLElementModel.extend()</InlineCode> method to
+            We used <RefTRE name="HTMLElementModel" member="extend" /> method to
             change the <Bold>content model</Bold> for the{' '}
             <RefHtmlElement name="img" /> tag. This method is immutable: it
-            creates a new <InlineCode>HTMLElementModel</InlineCode> instance.
-            It's thus safe to use this method to create models for new tags
-            derived from models of existing tags.
+            creates a new <RefTRE name="HTMLElementModel" /> instance. It is
+            thus safe to use this method to create models for new tags derived
+            from models of existing tags.
           </Admonition>
           <Admonition type="warning">
             You cannot set the <InlineCode>contentModel</InlineCode>{' '}
@@ -147,20 +152,19 @@ export default function PageGuideCustomRenderers() {
           <RenderHtmlCard {...simpleCustomRenderersConfig} />
           <Admonition type="tip">
             The wrapper component injected when handling{' '}
-            <InlineCode>onPress</InlineCode> for <InlineCode>TBlock</InlineCode>{' '}
-            nodes is defined by the{' '}
-            <RefRenderHtmlProp name="GenericPressable" /> prop. You can also
-            customize the highlight color with{' '}
+            <InlineCode>onPress</InlineCode> for <RefTRE name="TBlock" /> nodes
+            is defined by the <RefRenderHtmlProp name="GenericPressable" />{' '}
+            prop. You can also customize the highlight color with{' '}
             <RefRenderHtmlProp name="pressableHightlightColor" />. Also note
             that <InlineCode>onPress</InlineCode> works with textual nodes, in
             which case the eponym prop of React Native{' '}
             <RefRNSymbol name="Text" /> element will be used instead.
           </Admonition>
           <Admonition type="tip">
-            <InlineCode>TDefaultRenderer</InlineCode> can receive{' '}
+            <RefRenderHTMLExport name="TDefaultRenderer" /> can receive{' '}
             <InlineCode>textProps</InlineCode> prop which will be used when
-            rendering a <InlineCode>Text</InlineCode> element, and{' '}
-            <InlineCode>viewProps</InlineCode> for <InlineCode>View</InlineCode>{' '}
+            rendering a React Native <RefRNSymbol name="Text" /> element, and{' '}
+            <InlineCode>viewProps</InlineCode> for <RefRNSymbol name="View" />{' '}
             elements.
           </Admonition>
         </Section>
@@ -169,7 +173,7 @@ export default function PageGuideCustomRenderers() {
             Let's continue with a common requirement: injecting ads in the body
             of an article. More precisely, after the 2d and 4th children. To
             achieve our goal, we are going to use the{' '}
-            <InlineCode>TChildrenRenderer</InlineCode> component:
+            <RefRenderHTMLExport name="TChildrenRenderer" /> component:
           </Paragraph>
           <RenderHtmlCard {...adsRenderersConfig} />
           <Paragraph>
@@ -178,54 +182,105 @@ export default function PageGuideCustomRenderers() {
             rendering logic.
           </Paragraph>
           <Admonition type="tip">
-            <InlineCode>TChildrenRenderer</InlineCode> can receive a{' '}
-            <InlineCode>renderChild</InlineCode> prop to customize the rendering
-            logic for each child.
+            <RefRenderHTMLExport name="TChildrenRenderer" /> can receive a{' '}
+            <RefRenderHTMLExport
+              name="TChildrenRendererProps"
+              member="renderChild"
+            />{' '}
+            prop to customize the rendering logic for each child.
           </Admonition>
         </Section>
         <Section title="Renderer Props Summary">
           <Paragraph>A custom renderer will receive the below props:</Paragraph>
-          <List type="disc">
-            <ListItemCode name="tnode">
-              the <InlineCode>TNode</InlineCode> to render;
-            </ListItemCode>
-            <ListItemCode name="TDefaultRenderer">
-              the default renderer for this <InlineCode>TNode</InlineCode>;
-            </ListItemCode>
-            <ListItemCode name="InternalRenderer">
-              the internal renderer for this <InlineCode>tagName</InlineCode>.
+          <DList>
+            <DListTitle>
+              <RefRenderHTMLExport name="CustomRendererProps" member="tnode" />
+            </DListTitle>
+            <DListItem>
+              The <RefTRE name="TNode" /> to render.
+            </DListItem>
+            <DListTitle>
+              <RefRenderHTMLExport
+                name="CustomRendererProps"
+                member="TDefaultRenderer"
+              />
+            </DListTitle>
+            <DListItem>
+              The default fallback renderer for this <RefTRE name="TNode" />.
+            </DListItem>
+            <DListTitle>
+              <RefRenderHTMLExport
+                name="CustomRendererProps"
+                member="InternalRenderer"
+              />
+            </DListTitle>
+            <DListItem>
+              The internal renderer for this <InlineCode>tagName</InlineCode>.
               An internal renderer is like a custom renderer, but registered
               internally. If there is no internal renderer registered for this
               tag, <InlineCode>InternalRenderer</InlineCode> will be equal to{' '}
               <InlineCode>TDefaultRenderer</InlineCode>.
-            </ListItemCode>
-            <ListItemCode name="style">
-              the flatten style object which should be passed to the{' '}
+            </DListItem>
+            <DListTitle>
+              <RefRenderHTMLExport name="CustomRendererProps" member="style" />
+            </DListTitle>
+            <DListItem>
+              The flatten style object which should be passed to the{' '}
               <InlineCode>TDefaultRenderer</InlineCode> or{' '}
               <InlineCode>InternalRenderer</InlineCode>
-              element returned by this component;
-            </ListItemCode>
-            <ListItemCode name="key">
-              the key which shall be passed to the root element returned by this
-              component;
-            </ListItemCode>
-            <ListItemCode name="textProps">
-              to use when you render a <InlineCode>Text</InlineCode>
-              -based element;
-            </ListItemCode>
-            <ListItemCode name="viewProps">
-              to use when you render a <InlineCode>View</InlineCode>
-              -based element.
-            </ListItemCode>
-            <ListItemCode name="type">
-              to check whether a <InlineCode>Text</InlineCode> or{' '}
+              element returned by this component.
+            </DListItem>
+            <DListTitle>
+              <RefRenderHTMLExport name="CustomRendererProps" member="key" />
+            </DListTitle>
+            <DListItem>
+              React <InlineCode>key</InlineCode> which shall be passed to the
+              root element returned by this component.
+            </DListItem>
+            <DListTitle>
+              <RefRenderHTMLExport
+                name="CustomRendererProps"
+                member="textProps"
+              />
+            </DListTitle>
+            <DListItem>
+              To use when you render a <InlineCode>Text</InlineCode>
+              -based element (e.g. the <InlineCode>type</InlineCode> prop is{' '}
+              <InlineCode>"text"</InlineCode>).
+            </DListItem>
+            <DListTitle>
+              <RefRenderHTMLExport
+                name="CustomRendererProps"
+                member="viewProps"
+              />
+            </DListTitle>
+            <DListItem>
+              To use when you render a <InlineCode>View</InlineCode>
+              -based element (e.g. the <InlineCode>type</InlineCode> prop is{' '}
+              <InlineCode>"block"</InlineCode>).
+            </DListItem>
+            <DListTitle>
+              <RefRenderHTMLExport name="CustomRendererProps" member="type" />
+            </DListTitle>
+            <DListItem>
+              To check whether a <InlineCode>Text</InlineCode> or{' '}
               <InlineCode>View</InlineCode> is expected as the root element
               returned by this component.
-            </ListItemCode>
-            <ListItemCode name="propsFromParent">
-              props passed directly by the parent renderer.
-            </ListItemCode>
-          </List>
+            </DListItem>
+            <DListTitle>
+              <RefRenderHTMLExport
+                name="CustomRendererProps"
+                member="propsFromParent"
+              />
+            </DListTitle>
+            <DListItem>
+              Props passed directly from the parent custom renderer.
+            </DListItem>
+          </DList>
+          <Paragraph>
+            See <RefRenderHTMLExport name="TChildrenRendererProps" /> for a
+            complete reference.
+          </Paragraph>
         </Section>
       </Chapter>
     </Page>

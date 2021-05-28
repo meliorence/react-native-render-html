@@ -24,6 +24,7 @@ export default function PageContentTextual() {
     RefHtmlElement,
     RefCssProperty,
     RefRenderHtmlProp,
+    RefTRE,
     RefHtmlAttr,
     RefDoc,
     RenderHtmlCard,
@@ -54,16 +55,19 @@ export default function PageContentTextual() {
           <RefRenderHtmlProp name="enableExperimentalMarginCollapsing" /> is
           considered experimental because the <Acronym name="TRE" /> doesn't
           support <RefCssProperty name="display" /> CSS property yet. However,
-          margin collapsing should not apply to flex flows while this prop will
-          apply margin collapsing indiscriminitly.
+          margin collapsing should not apply to flex layouts while this prop
+          will apply margin collapsing indiscriminitly.
         </Admonition>
       </Chapter>
       <Chapter title="Whitespace Collapsing">
         <Paragraph>
           White space collasping occurs in the eponym phase of the{' '}
-          <RefDoc target="transient-render-engine" /> processing step.
-          Insignificant whitespaces are removed from the tree, as per the
-          algorithm depicted in{' '}
+          <RefDoc
+            target="transient-render-engine"
+            fragment="whitespace-collapsing"
+          />{' '}
+          processing step. Insignificant whitespaces are removed from the tree,
+          as per the algorithm depicted in{' '}
           <Hyperlink url="https://www.w3.org/TR/css-text-3/">
             CSS Text Module Level 3
           </Hyperlink>
@@ -96,9 +100,12 @@ export default function PageContentTextual() {
           The default font for the <RefHtmlElement name="pre" /> tag is
           monospace and <RefCssProperty name="white-space" /> property is "pre".
           These default styles are set via the{' '}
-          <InlineCode>mixedUAStyles</InlineCode> associated with this tag. See{' '}
-          <RefDoc target="transient-render-engine" /> page, element model
-          section.
+          <RefTRE name="HTMLElementModel" member="mixedUAStyles" /> associated
+          with this tag element model. See{' '}
+          <RefDoc target="transient-render-engine" fragment="element-models">
+            Element Models
+          </RefDoc>
+          .
         </Admonition>
       </Chapter>
       <Chapter title="Font Selection">
@@ -134,9 +141,10 @@ export default function PageContentTextual() {
           <RenderHtmlCard {...fontSelectionSpaceMonoConfig} />
         </Section>
         <Admonition type="caution">
-          Fonts registered in <InlineCode>systemFonts</InlineCode> should not be
-          surrounded with quotes; however you <Bold>must</Bold> surround the
-          font name with quotes in inline and mixed styles, as per CSS standard.
+          Fonts registered in <RefRenderHtmlProp name="systemFonts" /> should
+          not be surrounded with quotes; however you <Bold>must</Bold> surround
+          the font name with quotes in inline and mixed styles, as per CSS
+          standard.
         </Admonition>
       </Chapter>
     </Page>

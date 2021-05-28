@@ -60,7 +60,7 @@ export default function ToolkitProvider({
     RefDoc,
     Acronym,
     SvgFigure,
-    RefRenderHtmlProp,
+    RefAPI,
     ...other
   } = config;
   const uitoolkit = useMemo<UIToolkit>(
@@ -95,11 +95,17 @@ export default function ToolkitProvider({
           />
         );
       },
-      RefDoc({ target, children }) {
+      RefDoc({ target, children, fragment }) {
         if (!(target in pagesSpecs)) {
           throw new Error(`Target "${target}" is not a registered page.`);
         }
-        return <RefDoc target={pagesSpecs[target]} children={children} />;
+        return (
+          <RefDoc
+            target={pagesSpecs[target]}
+            fragment={fragment}
+            children={children}
+          />
+        );
       },
       Acronym({ name }) {
         const acronym = acronymsIndex[name];
@@ -110,15 +116,60 @@ export default function ToolkitProvider({
         return <SvgFigure asset={asset} description={assetSpecs.description} />;
       },
       RefRenderHtmlProp({ name }) {
-        const fragment = name.toLowerCase();
-        const docRelativePath = 'api/interfaces/renderhtmlprops';
-        const pageAbsoluteUrl = `/docs/${docRelativePath}#${fragment}`;
         return (
-          <RefRenderHtmlProp
+          <RefAPI
+            library="react-native-render-html"
+            url="/api/renderhtmlprops"
             name={name}
-            pageAbsoluteUrl={pageAbsoluteUrl}
-            docRelativePath={docRelativePath}
-            fragment={fragment}
+            member={name}
+          />
+        );
+      },
+      RefCSSProcessor({ name, member, plural, full }) {
+        return (
+          <RefAPI
+            member={member}
+            library="@native-html/css-processor"
+            url={`/api/${name.toLowerCase()}`}
+            name={name}
+            plural={plural}
+            full={full}
+          />
+        );
+      },
+      RefDOM({ name, member, plural, full }) {
+        return (
+          <RefAPI
+            member={member}
+            library="domhandler"
+            url={`/api/${name.toLowerCase()}`}
+            name={name}
+            plural={plural}
+            full={full}
+          />
+        );
+      },
+      RefRenderHTMLExport({ name, member, plural, full }) {
+        return (
+          <RefAPI
+            member={member}
+            library="react-native-render-html"
+            url={`/api/${name.toLowerCase()}`}
+            name={name}
+            plural={plural}
+            full={full}
+          />
+        );
+      },
+      RefTRE({ name, member, plural, full }) {
+        return (
+          <RefAPI
+            member={member}
+            library="@native-html/transient-render-engine"
+            url={`/api/${name.toLowerCase()}`}
+            name={name}
+            plural={plural}
+            full={full}
           />
         );
       }

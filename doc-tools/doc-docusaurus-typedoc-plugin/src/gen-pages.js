@@ -272,6 +272,10 @@ function extractBody(reflection) {
     case ReflectionKind.Class:
     case ReflectionKind.Enum:
       return extractReflectionBody(reflection);
+    case ReflectionKind.Reference:
+      /**@type {import('typedoc').JSONOutput.ReferenceReflection} */
+      const ref = reflection;
+      return ``;
     default:
       console.warn(reflection.kindString);
       throw new Error('Unhandled reflection kind');
