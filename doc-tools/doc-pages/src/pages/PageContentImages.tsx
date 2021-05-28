@@ -217,7 +217,7 @@ export default function PageContentImages() {
           We can take advantage of the{' '}
           <RefRenderHtmlProp name="renderersProps" /> to customize images
           behavior (see{' '}
-          <RefRenderHTMLExport name="RenderersPropsBase" member="img" full />
+          <RefRenderHTMLExport name="RenderersProps" member="img" full />
           ).
         </Paragraph>
       </Chapter>

@@ -1,10 +1,10 @@
 import React, { PropsWithChildren, useMemo } from 'react';
 import mergeDeepRight from 'ramda/src/mergeDeepRight';
 
-import { RenderersPropsBase, RenderHTMLPassedProps } from '../shared-types';
+import { RenderersProps, RenderHTMLPassedProps } from '../shared-types';
 import defaultRendererProps from './defaultRendererProps';
 
-const RenderersPropsContext = React.createContext<Required<RenderersPropsBase>>(
+const RenderersPropsContext = React.createContext<Required<RenderersProps>>(
   defaultRendererProps
 );
 
@@ -18,7 +18,7 @@ const RenderersPropsContext = React.createContext<Required<RenderersPropsBase>>(
  * @public
  */
 export function useRendererProps<
-  RendererProps extends RenderersPropsBase = RenderersPropsBase,
+  RendererProps extends RenderersProps = RenderersProps,
   K extends keyof RendererProps = keyof RendererProps
 >(tagName: K) {
   const userProps = React.useContext(RenderersPropsContext) as RendererProps;

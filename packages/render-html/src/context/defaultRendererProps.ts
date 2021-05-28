@@ -1,7 +1,7 @@
 import { Linking } from 'react-native';
-import { RenderersPropsBase } from '../shared-types';
+import { RenderersProps } from '../shared-types';
 
-const defaultRendererProps: Required<RenderersPropsBase> = {
+const defaultRendererProps: Required<RenderersProps> = {
   img: {
     initialDimensions: {
       height: 50,

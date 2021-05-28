@@ -116,12 +116,12 @@ export interface ListElementConfig {
  * Props for custom renderers. The convention is to declare a field per renderer.
  * In doing so, you can benefit from `useRendererProps('tagname')` in custom renderers.
  *
- * @remarks **Typescript users**: If you need to add fields to the {@link RenderersPropsBase} interface,
+ * @remarks **Typescript users**: If you need to add fields to the {@link RenderersProps} interface,
  * you should use {@link https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation | module augmentation}:
  *
  * ```ts
  * declare module 'react-native-render-html' {
- *   interface RenderersPropsBase {
+ *   interface RenderersProps {
  *     div?: {
  *       customProp: boolean;
  *     };
@@ -129,7 +129,7 @@ export interface ListElementConfig {
  * }
  * @public
  */
-export interface RenderersPropsBase extends Record<string, any> {
+export interface RenderersProps extends Record<string, any> {
   a: {
     /**
      * A callback to handle anchors presses.
@@ -181,12 +181,12 @@ export interface RenderHTMLPassedProps {
    *
    * @remarks
    * - When you use the hook, you'll get this object deep-merged with default renderers props.
-   * - **Typescript users**: If you need to add fields to the {@link RenderersPropsBase} interface,
+   * - **Typescript users**: If you need to add fields to the {@link RenderersProps} interface,
    *     you should use {@link https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation | module augmentation}:
    *
    * ```ts
    * declare module 'react-native-render-html' {
-   *   interface RenderersPropsBase {
+   *   interface RenderersProps {
    *     div?: {
    *       customProp: boolean;
    *     };
@@ -194,7 +194,7 @@ export interface RenderHTMLPassedProps {
    * }
    * ```
    */
-  renderersProps?: Partial<RenderersPropsBase>;
+  renderersProps?: Partial<RenderersProps>;
 }
 
 /**
