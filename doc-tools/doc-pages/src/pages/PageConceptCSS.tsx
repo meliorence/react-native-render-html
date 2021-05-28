@@ -115,7 +115,7 @@ export default function PageConceptCSS() {
       <Chapter title="Mixed Styles Declaration">
         <Paragraph>
           Mixed styles declarations (
-          <RefCSSProcessor name="MixedStylesDeclaration" />) are a blend between
+          <RefCSSProcessor name="MixedStyleDeclaration" />) are a blend between
           React Native styles (<InlineCode>ViewStyle</InlineCode>,{' '}
           <InlineCode>TextStyles</InlineCode>) and{' '}
           <Hyperlink url="https://developer.mozilla.org/docs/Web/CSS/CSS_Properties_Reference">
