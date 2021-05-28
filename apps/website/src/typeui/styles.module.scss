@@ -25,6 +25,9 @@
 }
 
 .token {
+  --reference-bg: rgba(19, 24, 54, 0.712);
+  --reference-bg-hover: var(--ifm-color-gray-100);
+  --reference-color-hover: var(--ifm-color-gray-800);
   color: var(--token-color);
   --ifm-link-hover-color: var(--token-color);
 }
@@ -144,9 +147,16 @@
 .sourceBox > code {
   font-style: normal;
   font-weight: 900;
+}
+.sourceBox {
+  text-overflow: ellipsis;
+  overflow: hidden;
   padding-left: 0.25rem;
-  color: var(--ifm-color-white);
-  text-decoration: underline;
+  flex-shrink: 0;
+  &:not(:hover) {
+    text-decoration: none;
+    color: var(--ifm-color-white);
+  }
 }
 
 .headerTypeBox {

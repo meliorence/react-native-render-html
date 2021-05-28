@@ -107,11 +107,11 @@ export default function PageReinventTheWheel() {
           <ListItem>
             <Bold>Line 25</Bold>, the <InlineCode>renderNode</InlineCode> method
             returns: the result of <InlineCode>renderTextNode</InlineCode> when
-            provided with a DOM <InlineCode>TextNode</InlineCode>, the result of{' '}
-            <InlineCode>renderElement</InlineCode> when the provided node is an{' '}
-            <InlineCode>Element</InlineCode>, and <InlineCode>null</InlineCode>{' '}
-            otherwise, such as when the provided node is a comment, script, or
-            stylesheet.
+            provided with a DOM <InlineCode>Text</InlineCode> node, the result
+            of <InlineCode>renderElement</InlineCode> when the provided node is
+            an <InlineCode>Element</InlineCode>, and{' '}
+            <InlineCode>null</InlineCode> otherwise, such as when the provided
+            node is a comment, script, or stylesheet.
           </ListItem>
         </List>
         <Paragraph>
@@ -126,7 +126,7 @@ export default function PageReinventTheWheel() {
         </Paragraph>
         <Admonition type="note">
           We allude to the DOM an DOM nodes while <RefHtmlparser2 /> only
-          provides a substet of the DOM API for lightweightness sake!
+          provides a substet of the DOM API for lightweightness!
         </Admonition>
       </Chapter>
       <Chapter title="Discussion">
@@ -173,13 +173,17 @@ export default function PageReinventTheWheel() {
             etc.
           </ListItem>
           <ListItem>
-            Support <Bold>hoisting</Bold>. Because React Native{' '}
-            <RefRNSymbol name="View" /> elements are not well handled inside{' '}
-            <RefRNSymbol name="Text" /> elements, these should be hoisted up in
-            the tree to be rendered inside <InlineCode>Views</InlineCode>.
+            Support{' '}
+            <RefDoc target="transient-render-engine" fragment="hoisting">
+              hoisting
+            </RefDoc>
+            . Because React Native <RefRNSymbol name="View" /> elements are not
+            well handled inside <RefRNSymbol name="Text" /> elements, these
+            should be hoisted up in the tree to be rendered inside{' '}
+            <InlineCode>Views</InlineCode>.
           </ListItem>
           <ListItem>
-            Support full{' '}
+            Support complete{' '}
             <Hyperlink url="https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance">
               CSS inheritance
             </Hyperlink>

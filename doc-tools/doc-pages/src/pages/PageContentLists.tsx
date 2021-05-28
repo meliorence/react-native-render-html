@@ -35,6 +35,8 @@ export default function PageContentLists() {
     RefCssProperty,
     RefESSymbol,
     RefRenderHtmlProp,
+    RefRenderHTMLExport,
+    RefTRE,
     RefHtmlAttr,
     RefDoc,
     RenderHtmlCard,
@@ -63,7 +65,8 @@ export default function PageContentLists() {
             url="https://github.com/jsamr/react-native-li/tree/master/packages/react-native-li#readme"
           />{' '}
           and <RefCounterStyle /> libraries for convinience! Fell free to use
-          these outside of a <InlineCode>RenderHTML</InlineCode> component.
+          these outside of a <RefRenderHTMLExport name="RenderHTML" />{' '}
+          component.
         </Admonition>
       </Header>
       <Chapter title="List Style Type">
@@ -71,19 +74,20 @@ export default function PageContentLists() {
           List elements support <RefCssProperty name="list-style-type" /> CSS
           property, which defines how the marker pseudo-element of a list item
           should be rendered. In CSS terminology, a marker is a pseudo-element
-          situated before elements with a display property set to{' '}
-          <InlineCode>list-item</InlineCode>. See{' '}
+          situated before elements with a <RefCssProperty name="display" />{' '}
+          property set to <InlineCode>list-item</InlineCode>. See{' '}
           <Hyperlink url="https://www.w3.org/TR/css-lists-3/#propdef-list-style-type">
             CSS Lists and Counters Module Level 3
           </Hyperlink>{' '}
-          for a standard reference.
+          for a standard reference and{' '}
+          <RefRenderHTMLExport name="DefaultSupportedListStyleType" /> for a
+          list of types supported by this library.
         </Paragraph>
       </Chapter>
       <Chapter title="Ordered Lists">
         <Paragraph>
           Ordered lists <RefHtmlElement name="ol" /> elements support by default
-          6 <RefCssProperty name="list-style-type" />
-          <InlineCode>s</InlineCode>:
+          6 list style types:
         </Paragraph>
         <List type="disc">
           <ListItemCode name="decimal">1, 2, 3 ... (the default)</ListItemCode>
@@ -103,8 +107,7 @@ export default function PageContentLists() {
       <Chapter title="Unordered Lists">
         <Paragraph>
           Unordered lists <RefHtmlElement name="ul" /> elements support by
-          default 5 <RefCssProperty name="list-style-type" />
-          <InlineCode>s</InlineCode>:
+          default 5 list style types:
         </Paragraph>
         <List type="disc">
           <ListItemCode name="disc"> "•" (the default)</ListItemCode>
@@ -149,7 +152,10 @@ export default function PageContentLists() {
       <Chapter title="Experimental RTL Mode">
         <Paragraph>
           Thanks to <RefRenderHtmlProp name="renderersProps" /> prop, you can
-          enable experimental RTL support for lists.
+          enable experimental RTL support for lists (see{' '}
+          <RefRenderHTMLExport name="RenderersPropsBase" member="ol" full /> and{' '}
+          <RefRenderHTMLExport name="RenderersPropsBase" member="ul" full />
+          ).
         </Paragraph>
         <Admonition type="note">
           For RTL mode to take effect, you need to have a{' '}

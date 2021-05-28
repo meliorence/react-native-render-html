@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
-import ListItemCode from '../components/ListItemCode';
 import Page from '../Page';
 import useToolkit from '../toolkit/useToolkit';
 import customImageRendererConfig from './cards/customImageRendererConfig';
@@ -34,6 +33,9 @@ export default function PageContentImages() {
     Acronym,
     Admonition,
     Bold,
+    DList,
+    DListItem,
+    DListTitle,
     Header,
     Paragraph,
     Chapter,
@@ -46,6 +48,8 @@ export default function PageContentImages() {
     RefRenderHtmlProp,
     RefHtmlAttr,
     RefDoc,
+    RefRenderHTMLExport,
+    RefTRE,
     RenderHtmlCard,
     Section,
     InlineCode,
@@ -58,7 +62,7 @@ export default function PageContentImages() {
     <Page>
       <Header>
         <Admonition type="note">
-          This article covers the <RefHtmlElement name="img" /> element
+          This article covers the <RefHtmlElement name="img" /> internal
           renderer. <RefHtmlElement name="picture" /> is not yet supported.
         </Admonition>
       </Header>
@@ -153,14 +157,15 @@ export default function PageContentImages() {
         </Admonition>
         <Section title="Via useInternalRenderer">
           <Paragraph>
-            <InlineCode>useInternalRenderer</InlineCode> has a great advantage
-            over using <InlineCode>InternalRenderer</InlineCode> prop: you have
-            access to the internal component props. In this scenario, we are
-            going to display an interactive thumbnail which will show the full
-            resolution image when pressed. To do so, we are going to read the
-            URI from the internal source prop (although we could also do this
-            from the <InlineCode>TNode</InlineCode> <InlineCode>src</InlineCode>{' '}
-            attribute), and mangle it to get our "thumbnail" URI.
+            <RefRenderHTMLExport name="useInternalRenderer" /> has a great
+            advantage over using <RefRenderHTMLExport name="InternalRenderer" />{' '}
+            prop: you have access to the internal component props. In this
+            scenario, we are going to display an interactive thumbnail which
+            will show the full resolution image when pressed. To do so, we are
+            going to read the URI from the internal source prop (although we
+            could also do this from the <RefTRE name="TNode" />{' '}
+            <InlineCode>src</InlineCode> attribute), and mangle it to get our
+            "thumbnail" URI.
           </Paragraph>
           <RenderHtmlCard {...internalImageRendererConfig} />
         </Section>
@@ -169,38 +174,52 @@ export default function PageContentImages() {
             You can reuse to your advantage some building blocks of the internal
             renderer thanks to the following exports:
           </Paragraph>
-          <List type="disc">
-            <ListItemCode name="IMGElementContainer">
-              to render the container of the <RefHtmlElement name="img" />{' '}
+          <DList>
+            <DListTitle>
+              <RefRenderHTMLExport name="IMGElementContainer" />
+            </DListTitle>
+            <DListItem>
+              To render the container of the <RefHtmlElement name="img" />{' '}
               element.
-            </ListItemCode>
-            <ListItemCode name="useIMGElementProps">
-              To transform generic custom renderer props in props used for the
-              internal image component.
-            </ListItemCode>
-            <ListItemCode name="useIMGElementState">
+            </DListItem>
+            <DListTitle>
+              <RefRenderHTMLExport name="useIMGElementState" />
+            </DListTitle>
+            <DListItem>
               To get the state of the image resource fetching.
-            </ListItemCode>
-            <ListItemCode name="IMGElementContentError">
-              To render the fallback view on error state.
-            </ListItemCode>
-            <ListItemCode name="IMGElementContentLoading">
-              To render the fallback view on loading state.
-            </ListItemCode>
-            <ListItemCode name="IMGElementContentSuccess">
-              To render the image on success state.
-            </ListItemCode>
-          </List>
+            </DListItem>
+            <DListTitle>
+              <RefRenderHTMLExport name="IMGElementContentError" />
+            </DListTitle>
+            <DListItem>To render the fallback view on error state.</DListItem>
+            <DListTitle>
+              <RefRenderHTMLExport name="IMGElementContentLoading" />
+            </DListTitle>
+            <DListItem>To render the fallback view on loading state.</DListItem>
+            <DListTitle>
+              <RefRenderHTMLExport name="IMGElementContentSuccess" />
+            </DListTitle>
+            <DListItem>To render the image on success state..</DListItem>
+          </DList>
           <Paragraph>
             In the below example, our custom renderer will display an activity
             indicator when the state is either "loading" or "success". This is
             for demonstration purposes, and of course you should handle the
             "success" state by rendering the{' '}
-            <InlineCode>IMGElementContentSuccess</InlineCode> component, or a
-            custom component based on a third-party library.
+            <RefRenderHTMLExport name="IMGElementContentSuccess" /> component,
+            or a custom component based on a third-party library.
           </Paragraph>
           <RenderHtmlCard {...customImageRendererConfig} />
         </Section>
+      </Chapter>
+      <Chapter title="Configuring">
+        <Paragraph>
+          We can take advantage of the{' '}
+          <RefRenderHtmlProp name="renderersProps" /> to customize images
+          behavior (see{' '}
+          <RefRenderHTMLExport name="RenderersPropsBase" member="img" full />
+          ).
+        </Paragraph>
       </Chapter>
     </Page>
   );

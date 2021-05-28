@@ -64,6 +64,9 @@ export default function PageGuideDomTampering() {
     Acronym,
     Admonition,
     Bold,
+    DList,
+    DListItem,
+    DListTitle,
     Header,
     Paragraph,
     Chapter,
@@ -74,6 +77,9 @@ export default function PageGuideDomTampering() {
     RefCssProperty,
     RefRenderHtmlProp,
     RefHtmlAttr,
+    RefTRE,
+    RefDOM,
+    RefRenderHTMLExport,
     RefDoc,
     RenderHtmlCard,
     Section,
@@ -105,20 +111,29 @@ export default function PageGuideDomTampering() {
           The API offers one prop, <RefRenderHtmlProp name="domVisitors" />,
           which is a record of 3 optional fields:
         </Paragraph>
-        <List>
-          <ListItemCode name="onDocument">
-            Triggered when the root element has been parsed, at the very end of
-            the parsing phase.
-          </ListItemCode>
-          <ListItemCode name="onElement">
-            Triggered when a DOM element has been parsed along with its
-            children.
-          </ListItemCode>
-          <ListItemCode name="onText">
-            Triggered when a DOM Text node has been parsed along with its
-            content.
-          </ListItemCode>
-        </List>
+        <DList>
+          <DListTitle>
+            <RefTRE name="DomVisitorCallbacks" member="onDocument" />
+          </DListTitle>
+          <DListItem>
+            Triggered when the root DOM <RefDOM name="Document" /> has been
+            parsed, at the very end of the parsing phase.
+          </DListItem>
+          <DListTitle>
+            <RefTRE name="DomVisitorCallbacks" member="onElement" />
+          </DListTitle>
+          <DListItem>
+            Triggered when a DOM <RefDOM name="Element" /> has been parsed along
+            with its children.
+          </DListItem>
+          <DListTitle>
+            <RefTRE name="DomVisitorCallbacks" member="onText" />
+          </DListTitle>
+          <DListItem>
+            Triggered when a DOM <RefDOM name="Text" /> node has been parsed
+            along with its content.
+          </DListItem>
+        </DList>
         <Paragraph>
           Those callback should not return anything. Instead, you should change
           the node or its children in place, or just read its content for
@@ -152,9 +167,9 @@ export default function PageGuideDomTampering() {
         <Section title="Example: Ignoring Nodes Conditionally">
           <RenderHtmlCard {...ignoreDomNodeConfig} />
           <Admonition type="caution">
-            When <InlineCode>ignoreDomNode</InlineCode> is invoked, the passed
-            node has not been attached to his parent yet. But the parent is
-            given as a second argument.
+            When <RefRenderHtmlProp name="ignoreDomNode" /> is invoked, the
+            passed node has not been attached to his parent yet. But the parent
+            is given as a second argument.
           </Admonition>
         </Section>
       </Chapter>
@@ -193,9 +208,9 @@ export default function PageGuideDomTampering() {
       <Paragraph>Let's note a few important details in this example:</Paragraph>
       <List>
         <ListItem>
-          <InlineCode>TRenderEngineProvider</InlineCode> accepts all{' '}
-          <InlineCode>RenderHTML</InlineCode> component props pertaining to the{' '}
-          <RefDoc target="transient-render-engine" /> layer such as{' '}
+          <RefRenderHTMLExport name="TRenderEngineProvider" /> accepts all{' '}
+          <RefRenderHTMLExport name="RenderHTML" /> component props pertaining
+          to the <RefDoc target="transient-render-engine" /> layer such as{' '}
           <RefRenderHtmlProp name="customHTMLElementModels" />,{' '}
           <RefRenderHtmlProp name="classesStyles" /> (all styling props) and DOM
           related such as <RefRenderHtmlProp name="domVisitors" />,{' '}
@@ -203,15 +218,15 @@ export default function PageGuideDomTampering() {
           ...
         </ListItem>
         <ListItem>
-          <InlineCode>RenderHTMLConfigProvider</InlineCode> accepts all{' '}
-          <InlineCode>RenderHTML</InlineCode> component props pertaining to the{' '}
-          <RefDoc target="rendering" /> layer such as{' '}
+          <RefRenderHTMLExport name="RenderHTMLConfigProvider" /> accepts all{' '}
+          <RefRenderHTMLExport name="RenderHTML" /> component props pertaining
+          to the <RefDoc target="rendering" /> layer such as{' '}
           <RefRenderHtmlProp name="renderers" />,{' '}
           <RefRenderHtmlProp name="renderersProps" />,{' '}
           <RefRenderHtmlProp name="computeEmbeddedMaxWidth" />, ...
         </ListItem>
         <ListItem>
-          <InlineCode>RenderHTMLSource</InlineCode> accepts all{' '}
+          <RefRenderHTMLExport name="RenderHTMLSource" /> accepts all{' '}
           <InlineCode>RenderHTML</InlineCode> component props pertaining to the
           document such as <RefRenderHtmlProp name="source" />,{' '}
           <RefRenderHtmlProp name="onTTreeChange" />,{' '}

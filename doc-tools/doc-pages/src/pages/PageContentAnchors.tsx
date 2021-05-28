@@ -21,6 +21,8 @@ export default function PageContentAnchors() {
     RefHtmlElement,
     RefCssProperty,
     RefRenderHtmlProp,
+    RefTRE,
+    RefRenderHTMLExport,
     RefHtmlAttr,
     RefDoc,
     RenderHtmlCard,
@@ -37,9 +39,11 @@ export default function PageContentAnchors() {
         <Paragraph>
           Anchors are rendered with an <Bold>internal renderer</Bold>. See{' '}
           <RefDoc target="rendering" /> page. The <Bold>content model</Bold> of
-          anchors is <Bold>mixed</Bold>, see the{' '}
-          <RefDoc target="transient-render-engine" /> page,{' '}
-          <Bold>element model</Bold> section.
+          anchors is <Bold>mixed</Bold>, see{' '}
+          <RefDoc target="transient-render-engine" fragment="element-models">
+            Element Models
+          </RefDoc>
+          .
         </Paragraph>
       </Header>
       <Chapter title="Minimal Example">
@@ -53,7 +57,7 @@ export default function PageContentAnchors() {
       <Chapter title="Block Example">
         <Paragraph>
           In the below example, the anchor will be translated to a{' '}
-          <InlineCode>TBlock</InlineCode> node, because some of its children (
+          <RefTRE name="TNode" /> node, because some of its children (
           <RefHtmlElement name="img" />) have a <Bold>block</Bold> content
           model. This is a feature of the <Bold>mixed content model</Bold>.
         </Paragraph>
@@ -80,8 +84,10 @@ export default function PageContentAnchors() {
         <Paragraph>
           We can take advantage of the{' '}
           <RefRenderHtmlProp name="renderersProps" /> to customize anchors
-          behavior. Anchors support <InlineCode>onPress</InlineCode> prop to
-          handle press events.
+          behavior (see{' '}
+          <RefRenderHTMLExport name="RenderersPropsBase" member="a" full />
+          ). Anchors support <InlineCode>onPress</InlineCode> prop to handle
+          press events.
         </Paragraph>
         <RenderHtmlCard {...anchorsCustomConfig} />
       </Chapter>

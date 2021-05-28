@@ -20,6 +20,7 @@ export default function PageIntroduction() {
     RefDoc,
     RefRenderHtmlProp,
     RenderHtmlCard,
+    Section,
     InlineCode,
     Hyperlink,
     List,
@@ -29,48 +30,69 @@ export default function PageIntroduction() {
   return (
     <Page>
       <Chapter title="Should I use?">
-        <Paragraph>
-          <Bold>Pros</Bold>
-        </Paragraph>
-        <List type="disc">
-          <ListItem>
-            HTML markup is translated into React Native views. See the{' '}
-            <RefDoc target="architecture" /> page for more details.
-          </ListItem>
-          <ListItem>
-            Its design balances compliance to HTML and CSS standards and
-            lightweightness, despite some limitations and caveats.
-          </ListItem>
-          <ListItem>
-            It aims at being extremely customizable. For example, you can{' '}
-            <RefDoc target="custom-renderers">define custom renderers</RefDoc>{' '}
-            targetting specific tags with a mean to define children rendering,
-            provide{' '}
-            <RefDoc target="styling">styles for tags, classes and ids</RefDoc>,
-            and <RefDoc target="dom-tampering">tamper with the DOM</RefDoc>.
-          </ListItem>
-        </List>
-        <Paragraph>
-          <Bold>Cons</Bold>
-        </Paragraph>
-        <List type="disc">
-          <ListItem>
-            If your use-case is pretty straightforward, you might implement{' '}
-            <RefDoc target="reinvent-the-wheel">
-              your own, lightweight HTML renderer.
-            </RefDoc>
-          </ListItem>
-          <ListItem>
-            This is not a Web engine! If you need to load JavaScript along, you
-            should use{' '}
-            <RefLibrary
-              name="react-native-webview"
-              url="https://github.com/react-native-webview/react-native-webview"
-            />{' '}
-            instead. Beware that it will certainly have a bigger impact on your
-            App's performances, since it will use the system's Web View.
-          </ListItem>
-        </List>
+        <Section title="Yes!">
+          <List type="disc">
+            <ListItem>
+              HTML markup is translated into React Native views. See the{' '}
+              <RefDoc target="architecture" /> page for more details.
+            </ListItem>
+            <ListItem>
+              Its design balances compliance to HTML and CSS standards and
+              lightweightness, despite some limitations and caveats.
+            </ListItem>
+            <ListItem>
+              It aims at being extremely customizable. For example, you can{' '}
+              <RefDoc target="custom-renderers">define custom renderers</RefDoc>{' '}
+              targetting specific tags with a mean to define children rendering,
+              provide{' '}
+              <RefDoc target="styling">styles for tags, classes and ids</RefDoc>
+              , and <RefDoc target="dom-tampering">tamper with the DOM</RefDoc>.
+            </ListItem>
+          </List>
+        </Section>
+        <Section title="No">
+          <List type="disc">
+            <ListItem>
+              If your use-case is pretty straightforward, you might implement{' '}
+              <RefDoc target="reinvent-the-wheel">
+                your own, lightweight HTML renderer.
+              </RefDoc>
+            </ListItem>
+            <ListItem>
+              This is not a Web engine! If you need to load JavaScript along, or
+              you need all features of the Web standards, you should use{' '}
+              <RefLibrary
+                name="react-native-webview"
+                url="https://github.com/react-native-webview/react-native-webview"
+              />{' '}
+              instead. Beware that it will certainly have a bigger impact on
+              your App's performances, since it will use the system's Web View.
+            </ListItem>
+          </List>
+        </Section>
+        <Section title="Synthesis">
+          <List type="disc">
+            <ListItem>
+              The best use case for library is when the content to render is
+              predictable (e.g. you know in advance the tags and classes to
+              support), such as rendering content from a CMS, or via API
+              endpoints.
+            </ListItem>
+            <ListItem>
+              You might also benefit from this library if you need to render
+              sections of a web page such as articles which content is
+              reasonably predictable, (see{' '}
+              <RefDoc target="dom-tampering" fragment="root-selection">
+                Root Selection
+              </RefDoc>{' '}
+              to select an element of the DOM to render).
+            </ListItem>
+            <ListItem>
+              You should probably not use this library if you need to render
+              arbitrary, unpredictable content.
+            </ListItem>
+          </List>
+        </Section>
       </Chapter>
       <Chapter title="Install">
         <Paragraph>
@@ -78,7 +100,7 @@ export default function PageIntroduction() {
           project:
         </Paragraph>
         <SourceDisplay
-          lang="sh"
+          lang="bash"
           content="npm install --save-dev react-native-render-html"
           showLineNumbers={false}
         />
@@ -99,11 +121,12 @@ export default function PageIntroduction() {
         />
         <Conditional platform="web">
           <Admonition type="tip">
-            Press the "Run on Your Device with Expo" button to try it out on
-            your device, and change the HTML from the Expo editor.
+            Press the <Bold>Run on Your Device with Expo</Bold> button to try it
+            out on your device, and change the HTML from the Expo editor.
           </Admonition>
           <Admonition type="tip">
-            Inspect the pre-render tree representation with the "TRT Snapshot"
+            Inspect the pre-render tree representation with the{' '}
+            <Bold>TRT Snapshot</Bold>
             tab.
           </Admonition>
         </Conditional>
@@ -112,7 +135,10 @@ export default function PageIntroduction() {
           content to load. This prop also supports an{' '}
           <InlineCode>uri</InlineCode> field for remote loading and a{' '}
           <InlineCode>dom</InlineCode> field for asynchronous DOM pre-processing
-          (see <RefDoc target="dom-tampering" />
+          (see{' '}
+          <RefDoc target="dom-tampering" fragment="prerendering">
+            Prerendering
+          </RefDoc>
           ).
         </Paragraph>
         <Admonition type="important">

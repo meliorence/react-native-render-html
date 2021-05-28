@@ -49,6 +49,8 @@ export default function PageConceptCSS() {
     RefHtmlAttr,
     RefDoc,
     RenderHtmlCard,
+    RefCSSProcessor,
+    RefRenderHTMLExport,
     Section,
     InlineCode,
     Hyperlink,
@@ -86,7 +88,7 @@ export default function PageConceptCSS() {
           charge of validating values for those rules. Validators are
           multipurposed:
         </Paragraph>
-        <List type="disc">
+        <List type="decimal">
           <ListItem>
             Handle special units such as absolute (<InlineCode>pt</InlineCode>),{' '}
             relative (<InlineCode>rem</InlineCode>) and keywords such as{' '}
@@ -112,8 +114,9 @@ export default function PageConceptCSS() {
       </Chapter>
       <Chapter title="Mixed Styles Declaration">
         <Paragraph>
-          Mixed styles declarations are a blend between React Native styles (
-          <InlineCode>ViewStyle</InlineCode>,{' '}
+          Mixed styles declarations (
+          <RefCSSProcessor name="MixedStylesDeclaration" />) are a blend between
+          React Native styles (<InlineCode>ViewStyle</InlineCode>,{' '}
           <InlineCode>TextStyles</InlineCode>) and{' '}
           <Hyperlink url="https://developer.mozilla.org/docs/Web/CSS/CSS_Properties_Reference">
             CSS properties

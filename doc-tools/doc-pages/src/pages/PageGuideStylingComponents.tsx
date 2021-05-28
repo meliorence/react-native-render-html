@@ -44,14 +44,21 @@ export default function PageGuideStylingComponents() {
     Header,
     Paragraph,
     Chapter,
+    DList,
+    DListItem,
+    DListTitle,
     Section,
     SourceDisplay,
     RefLibrary,
     RefDoc,
     RefRNSymbol,
     RefHtmlElement,
+    RefHtmlAttr,
     RefCssProperty,
     RefRenderHtmlProp,
+    RefRenderHTMLExport,
+    RefTRE,
+    RefCSSProcessor,
     RenderHtmlCard,
     InlineCode,
     Hyperlink,
@@ -69,55 +76,70 @@ export default function PageGuideStylingComponents() {
       </Header>
       <Chapter title="Inline Styles">
         <Paragraph>
-          Inline styles are processed by the <RefCssProcessor /> library. You
-          don't need to wonder if a CSS property will break your app: the CSS
-          processor acts as a compatibility layer between React Native styles
-          and CSS properties. This library gives you leverage on inline CSS
-          processing:
+          Inline styles set via the HTML <RefHtmlAttr name="style" /> attribute
+          are processed by the <RefCssProcessor /> library. You don't need to
+          wonder if a CSS property will break your app: the CSS processor acts
+          as a compatibility layer between React Native styles and CSS
+          properties. This library gives you leverage on inline CSS processing
+          via multiple props:
         </Paragraph>
-        <List>
-          <ListItem>
-            You can chose to disable inline styles processing altogether with
-            the <RefRenderHtmlProp name="enableCSSInlineProcessing" /> prop.
-          </ListItem>
-          <ListItem>
-            You can whitelist CSS properties with the{' '}
-            <RefRenderHtmlProp name="allowedStyles" /> prop.
-          </ListItem>
-          <ListItem>
-            Or blacklist CSS properties with the{' '}
-            <RefRenderHtmlProp name="ignoredStyles" /> prop.
-          </ListItem>
-        </List>
+        <DList>
+          <DListTitle>
+            <RefRenderHtmlProp name="enableCSSInlineProcessing" />
+          </DListTitle>
+          <DListItem>Disable inline styles processing altogether.</DListItem>
+          <DListTitle>
+            <RefRenderHtmlProp name="allowedStyles" />
+          </DListTitle>
+          <DListItem>
+            Whitelist the camel-cased CSS properties that you wish to be
+            included.
+          </DListItem>
+          <DListTitle>
+            <RefRenderHtmlProp name="ignoredStyles" />
+          </DListTitle>
+          <DListItem>
+            Blacklist the camel-cased CSS properties that you wish to be
+            excluded.
+          </DListItem>
+        </DList>
         <Paragraph>Let's try it out:</Paragraph>
         <RenderHtmlCard {...inlineStylesConfig} />
       </Chapter>
       <Chapter title="Props">
         <Paragraph>
-          The <InlineCode>RenderHTML</InlineCode> component has four props to
-          customize elements styles:
+          The <RefRenderHTMLExport name="RenderHTML" /> component has four props
+          to customize elements styles:
         </Paragraph>
-        <List>
-          <ListItem>
-            <RefRenderHtmlProp name="baseStyle" />, the styles for the root
-            component. Inheritable styles will be inherited by all children.
-          </ListItem>
-          <ListItem>
-            <RefRenderHtmlProp name="idsStyles" /> which target elements by the{' '}
-            <InlineCode>id</InlineCode> attribute;
-          </ListItem>
-          <ListItem>
-            <RefRenderHtmlProp name="classesStyles" /> which target elements by{' '}
-            <InlineCode>class</InlineCode>;
-          </ListItem>
-          <ListItem>
-            <RefRenderHtmlProp name="tagsStyles" /> which target elements by tag
-            name.
-          </ListItem>
-        </List>
+        <DList>
+          <DListTitle>
+            <RefRenderHtmlProp name="baseStyle" />
+          </DListTitle>
+          <DListItem>
+            The styles for the root component. Inheritable styles will be
+            inherited by all children.
+          </DListItem>
+          <DListTitle>
+            <RefRenderHtmlProp name="idsStyles" />
+          </DListTitle>
+          <DListItem>
+            Target elements with the HTML <RefHtmlAttr name="id" /> attribute.
+          </DListItem>
+          <DListTitle>
+            <RefRenderHtmlProp name="classesStyles" />
+          </DListTitle>
+          <DListItem>
+            Target elements with the HTML <RefHtmlAttr name="class" />{' '}
+            attribute;
+          </DListItem>
+          <DListTitle>
+            <RefRenderHtmlProp name="tagsStyles" />
+          </DListTitle>
+          <DListItem>Target elements by tag name.</DListItem>
+        </DList>
         <Paragraph>
           Each of these props is a record mapping identifiers with a{' '}
-          <InlineCode>MixedStyleDeclaration</InlineCode>.
+          <RefCSSProcessor name="MixedStyleDeclaration" />.
         </Paragraph>
         <Admonition type="note">
           There is not (yet) ways to provide{' '}

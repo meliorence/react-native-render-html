@@ -1,5 +1,8 @@
 import type { ComponentType, PropsWithChildren } from 'react';
-import type { RenderHTMLProps } from 'react-native-render-html';
+import * as RNRH from 'react-native-render-html';
+import type * as TRE from '@native-html/transient-render-engine';
+import type * as CSS from '@native-html/css-processor';
+import type * as DOM from 'domhandler';
 import type * as RN from 'react-native';
 import type {
   Acronym,
@@ -8,7 +11,9 @@ import type {
   PageSpecs
 } from '../pages-types';
 
-type RefComponent<T extends string = string> = ComponentType<{ name: T }>;
+type RefComponent<T extends string = string, P = {}> = ComponentType<
+  { name: T } & P
+>;
 
 export type SvgAssetType = 'data-flow';
 
@@ -58,6 +63,9 @@ export interface UIToolkitBase {
     PropsWithChildren<{ type?: 'upper-alpha' | 'decimal' | 'disc' }>
   >;
   ListItem: ComponentType<PropsWithChildren<{}>>;
+  DList: ComponentType<PropsWithChildren<{}>>;
+  DListTitle: ComponentType<PropsWithChildren<{}>>;
+  DListItem: ComponentType<PropsWithChildren<{}>>;
   InlineCode: ComponentType<PropsWithChildren<{}>>;
   Hyperlink: ComponentType<PropsWithChildren<{ url: string }>>;
   Conditional: ComponentType<{ platform: 'web' | 'mobile' }>;
@@ -87,17 +95,30 @@ export interface RendererCardConfig {
 export interface UIRenderHtmlCardProps {
   title: string;
   caption?: string;
-  props: RenderHTMLProps;
+  props: RNRH.RenderHTMLProps;
   config?: RendererCardConfig;
   preferHtmlSrc?: boolean;
 }
 
+export interface RefOptionalProps {
+  member?: string;
+  plural?: boolean;
+  full?: boolean;
+}
+
 export interface UIToolkit extends UIToolkitBase, UIToolkitRefs {
   RenderHtmlCard: ComponentType<UIRenderHtmlCardProps>;
-  RefDoc: ComponentType<{ target: PageId }>;
+  RefDoc: ComponentType<{ target: PageId; fragment?: string }>;
   Acronym: ComponentType<{ name: Acronym }>;
   SvgFigure: ComponentType<{ asset: SvgAssetType }>;
-  RefRenderHtmlProp: RefComponent<keyof RenderHTMLProps>;
+  RefRenderHtmlProp: RefComponent<keyof RNRH.RenderHTMLProps>;
+  RefRenderHTMLExport: RefComponent<
+    keyof typeof RNRH | string,
+    RefOptionalProps
+  >;
+  RefTRE: RefComponent<keyof typeof TRE | string, RefOptionalProps>;
+  RefCSSProcessor: RefComponent<keyof typeof CSS | string, RefOptionalProps>;
+  RefDOM: RefComponent<keyof typeof DOM, RefOptionalProps>;
 }
 
 export type UIToolkitConfig = {
@@ -107,17 +128,19 @@ export type UIToolkitConfig = {
     expoSource: string;
     title: string;
     caption?: string;
-    props: RenderHTMLProps;
+    props: RNRH.RenderHTMLProps;
     preferHtmlSrc: boolean;
     extraneousDeps: string[];
   }>;
-  RefDoc: ComponentType<{ target: PageSpecs }>;
+  RefDoc: ComponentType<{ target: PageSpecs; fragment?: string }>;
   Acronym: ComponentType<AcronymDefinition>;
   SvgFigure: ComponentType<{ asset: SvgAssetType; description: string }>;
-  RefRenderHtmlProp: ComponentType<{
-    name: keyof RenderHTMLProps;
-    pageAbsoluteUrl: string;
-    docRelativePath: string;
-    fragment: string;
+  RefAPI: ComponentType<{
+    member?: string;
+    full?: boolean;
+    library: string;
+    url: string;
+    name: string;
+    plural?: boolean;
   }>;
 } & UIToolkitBase;

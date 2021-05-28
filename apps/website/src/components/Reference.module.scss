@@ -10,7 +10,7 @@ a.ref {
   > code {
     color: var(--ifm-link-color);
   }
-  &--rnrh-prop {
+  &--rnrh-prop, &--api-def {
     @extend .reference;
     white-space: pre;
     text-decoration: none !important;

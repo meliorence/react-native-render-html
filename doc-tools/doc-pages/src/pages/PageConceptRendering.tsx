@@ -29,6 +29,8 @@ export default function PageConceptRendering() {
     RefHtmlElement,
     RefCssProperty,
     RefRenderHtmlProp,
+    RefRenderHTMLExport,
+    RefTRE,
     RefHtmlAttr,
     RefDoc,
     RenderHtmlCard,
@@ -50,7 +52,7 @@ export default function PageConceptRendering() {
         <Paragraph>
           When you consume the <InlineCode>RenderHTML</InlineCode> component,
           you are actually using three distinct components. So this (
-          <Bold>implicit</Bold>):
+          <Bold>implicit 3 layers</Bold>):
         </Paragraph>
         <SourceDisplay
           content="<RenderHTML source={{ html }} />"
@@ -58,7 +60,7 @@ export default function PageConceptRendering() {
           showLineNumbers={false}
         />
         <Paragraph>
-          is equivalent to this (<Bold>explicit</Bold>):
+          is equivalent to this (<Bold>explicit 3 layers</Bold>):
         </Paragraph>
         <SourceDisplay
           content={threeLayersSrc}
@@ -84,9 +86,9 @@ export default function PageConceptRendering() {
         <Paragraph>A few remarks:</Paragraph>
         <List>
           <ListItem>
-            <InlineCode>TRenderEngineProvider</InlineCode> accepts all{' '}
-            <InlineCode>RenderHTML</InlineCode> component props pertaining to
-            the <RefDoc target="transient-render-engine" /> layer such as{' '}
+            <RefRenderHTMLExport name="TRenderEngineProvider" /> accepts all{' '}
+            <RefRenderHTMLExport name="RenderHTML" /> component props pertaining
+            to the <RefDoc target="transient-render-engine" /> layer such as{' '}
             <RefRenderHtmlProp name="customHTMLElementModels" />,{' '}
             <RefRenderHtmlProp name="classesStyles" /> (all styling props) and
             DOM related such as <RefRenderHtmlProp name="domVisitors" />,{' '}
@@ -94,15 +96,15 @@ export default function PageConceptRendering() {
             ...
           </ListItem>
           <ListItem>
-            <InlineCode>RenderHTMLConfigProvider</InlineCode> accepts all{' '}
-            <InlineCode>RenderHTML</InlineCode> component props pertaining to
-            the <RefDoc target="rendering" /> layer such as{' '}
+            <RefRenderHTMLExport name="RenderHTMLConfigProvider" /> accepts all{' '}
+            <RefRenderHTMLExport name="RenderHTML" /> component props pertaining
+            to the <RefDoc target="rendering" /> layer such as{' '}
             <RefRenderHtmlProp name="renderers" />,{' '}
             <RefRenderHtmlProp name="renderersProps" />,{' '}
             <RefRenderHtmlProp name="computeEmbeddedMaxWidth" />, ...
           </ListItem>
           <ListItem>
-            <InlineCode>RenderHTMLSource</InlineCode> accepts all{' '}
+            <RefRenderHTMLExport name="RenderHTMLSource" /> accepts all{' '}
             <InlineCode>RenderHTML</InlineCode> component props pertaining to
             the document such as <RefRenderHtmlProp name="source" />,{' '}
             <RefRenderHtmlProp name="onTTreeChange" />,{' '}
@@ -119,12 +121,11 @@ export default function PageConceptRendering() {
           of <InlineCode>TNode</InlineCode> to its dedicated component.{' '}
           <InlineCode>TDocumentRenderer</InlineCode> for{' '}
           <InlineCode>TDocument</InlineCode> nodes,{' '}
-          <InlineCode>TBlockRenderer</InlineCode> for{' '}
-          <InlineCode>TBlock</InlineCode> nodes,{' '}
-          <InlineCode>TPhrasingRenderer</InlineCode> for{' '}
-          <InlineCode>TPhrasing</InlineCode> nodes and{' '}
-          <InlineCode>TTextRenderer</InlineCode> for{' '}
-          <InlineCode>TText</InlineCode> nodes.
+          <InlineCode>TBlockRenderer</InlineCode> for <RefTRE name="TBlock" />{' '}
+          nodes, <InlineCode>TPhrasingRenderer</InlineCode> for{' '}
+          <RefTRE name="TPhrasing" /> nodes and{' '}
+          <InlineCode>TTextRenderer</InlineCode> for <RefTRE name="TText" />{' '}
+          nodes.
         </Paragraph>
         <Paragraph>
           Under the hood, <InlineCode>TPhrasingRenderer</InlineCode> and{' '}

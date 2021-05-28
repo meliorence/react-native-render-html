@@ -29,9 +29,11 @@ export default function PageArchitecture() {
   return (
     <Page>
       <Header>
-        <Paragraph>
-          This article is an introduction to the <RefRNRH /> architecture.
-        </Paragraph>
+        <Admonition type="important">
+          Consumers of this library can benefit greatly from understanding the
+          basic data flow model to leverage its capabilities. Features such as
+          props will touch on different areas of this data flow.
+        </Admonition>
       </Header>
       <Chapter title="Hello World!">
         <Paragraph>Let's start with a simple example:</Paragraph>
@@ -53,13 +55,9 @@ export default function PageArchitecture() {
           we need some logic to translate the DOM into a structure easily
           translatable into native elements and support all the features
           mentioned in the referred page. This data structure is called the
-          Transient Render Tree, see figure below.
+          Transient Render Tree (<Acronym name="TRE" />
+          ), see figure below.
         </Paragraph>
-        <Admonition type="important">
-          Consumers of this library can benefit greatly from understanding the
-          basic data flow model to leverage its capabilities. Features such as
-          props will touch on different areas of this data flow.
-        </Admonition>
       </Chapter>
       <Chapter title="Data Flow">
         <SvgFigure asset="data-flow" />
@@ -72,14 +70,6 @@ export default function PageArchitecture() {
             HTML parsing. In this step, the HTML code is parsed to form a DOM
             tree. This step is performed by the <RefHtmlparser2 /> library.
           </ListItem>
-          {/* <ListItem>
-            Inline CSS Parsing. This step is performed by{' '}
-            <RefLibrary
-              name="@native-html/css-parser"
-              url="https://github.com/native-html/core/tree/master/packages/css-processor#readme"
-            />{' '}
-            module.
-          </ListItem> */}
           <ListItem>
             <Acronym name="TRT" /> Construction. In this step, the DOM tree is
             transformed in a TRT. Each node of this tree is referred to as a
