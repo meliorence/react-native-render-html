@@ -385,7 +385,9 @@ module.exports = async function genPages(
   const files = await readdir(outDir);
   localpaths = {};
   for (const file of files) {
-    await unlink(join(outDir, file));
+    if (file.match(/\.mdx$/)) {
+      await unlink(join(outDir, file));
+    }
   }
   const filteredChildren = reflections.children.filter(
     (c) => c.kind !== ReflectionKind.Namespace
