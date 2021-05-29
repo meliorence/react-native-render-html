@@ -8,6 +8,10 @@ function isCollapsible(tnode: TNode) {
   return tnode.type === 'block' || tnode.type === 'phrasing';
 }
 
+/**
+ * A component to render collections of tnodes.
+ * Especially useful when used with {@link useTNodeChildrenProps}.
+ */
 function TChildrenRenderer({
   tchildren,
   propsForChildren,
