@@ -3,7 +3,7 @@ import React, { PropsWithChildren, ReactElement } from 'react';
 import { Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import useTRenderEngine from './hooks/useTRenderEngine';
-import { TransientRenderEngineConfig } from './shared-types';
+import { TRenderEngineConfig } from './shared-types';
 import defaultSystemFonts from './defaultSystemFonts';
 
 const defaultTRenderEngine = {} as any;
@@ -13,7 +13,7 @@ const TRenderEngineContext = React.createContext<TRenderEngine>(
 );
 
 export const tRenderEngineProviderPropTypes: Record<
-  keyof TransientRenderEngineConfig,
+  keyof TRenderEngineConfig,
   any
 > = {
   customHTMLElementModels: PropTypes.object.isRequired,
@@ -53,7 +53,7 @@ export const defaultFallbackFonts = {
   serif: Platform.select({ ios: 'Times New Roman', default: 'serif' })
 };
 
-export const defaultTRenderEngineProviderProps: TransientRenderEngineConfig = {
+export const defaultTRenderEngineProviderProps: TRenderEngineConfig = {
   htmlParserOptions: {
     decodeEntities: true
   },
@@ -97,7 +97,7 @@ export function useAmbientTRenderEngine() {
 export default function TRenderEngineProvider({
   children,
   ...config
-}: PropsWithChildren<TransientRenderEngineConfig>): ReactElement {
+}: PropsWithChildren<TRenderEngineConfig>): ReactElement {
   const engine = useTRenderEngine(config);
   return (
     <TRenderEngineContext.Provider value={engine}>
