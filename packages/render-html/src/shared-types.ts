@@ -313,11 +313,11 @@ export interface RenderHTMLSharedProps {
 }
 
 /**
- * Configuration for the Transient Render Engine.
+ * Configuration for the {@link TRenderEngineProvider} component.
  *
  * @public
  */
-export interface TransientRenderEngineConfig {
+export interface TRenderEngineConfig {
   /**
    * ParserOptions for {@link https://github.com/fb55/htmlparser2/wiki/Parser-options | htmlparser2}.
    *
@@ -512,10 +512,7 @@ export interface TransientRenderEngineConfig {
    * ```
    */
   triggerTREInvalidationPropNames?: Array<
-    Exclude<
-      keyof TransientRenderEngineConfig,
-      'triggerTREInvalidationPropNames'
-    >
+    Exclude<keyof TRenderEngineConfig, 'triggerTREInvalidationPropNames'>
   >;
 }
 
@@ -686,7 +683,7 @@ export interface RenderHTMLSourceProps {
 export interface RenderHTMLProps
   extends RenderHTMLConfig,
     RenderHTMLSourceProps,
-    TransientRenderEngineConfig {}
+    TRenderEngineConfig {}
 
 /**
  * An object which keys are keyword font names, and values system fonts.

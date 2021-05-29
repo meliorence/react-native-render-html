@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { TransientRenderEngineConfig } from '../shared-types';
+import { TRenderEngineConfig } from '../shared-types';
 import buildTREFromConfig from '../helpers/buildTREFromConfig';
 
 /**
@@ -8,7 +8,7 @@ import buildTREFromConfig from '../helpers/buildTREFromConfig';
 export default function useTRenderEngine({
   triggerTREInvalidationPropNames,
   ...props
-}: TransientRenderEngineConfig) {
+}: TRenderEngineConfig) {
   const tbuilderDeps = (triggerTREInvalidationPropNames || []).map(
     (key) => props[key]
   );

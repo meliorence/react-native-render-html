@@ -1,4 +1,4 @@
-import { TransientRenderEngineConfig } from '../shared-types';
+import { TRenderEngineConfig } from '../shared-types';
 import TRenderEngine, {
   HTMLModelRecord,
   TagName
@@ -12,7 +12,7 @@ import TRenderEngine, {
  *
  * @param props - The configuration from which a TRE should be built.
  */
-export default function buildTREFromConfig(props: TransientRenderEngineConfig) {
+export default function buildTREFromConfig(props: TRenderEngineConfig) {
   const {
     allowedStyles,
     ignoredStyles,
