@@ -15,7 +15,10 @@ function isCollapsible(tnode: TNode) {
 
 /**
  * A hook especially useful when one need to tamper with children in a custom
- * renderer. For example, a custom renderer which inserts ads in an article:
+ * renderer. Should be used with {@link TChildrenRenderer}.
+ *
+ * @example
+ * For example, a custom renderer which inserts ads in an article:
  *
  * ```tsx
  * function ArticleRenderer(props) {
@@ -61,6 +64,9 @@ const TNodeWithChildrenRenderer = function TNodeWithChildrenRenderer(
   return React.createElement(TChildrenRenderer, useTNodeChildrenProps(props));
 };
 
+/**
+ * A component to render all children of a {@link TNode}.
+ */
 function TNodeChildrenRenderer(
   props: TNodeChildrenRendererProps
 ): ReactElement {

@@ -725,10 +725,26 @@ export interface PropsFromParent {
  * @public
  */
 export interface TChildProps {
+  /**
+   * The React `key`.
+   */
   key: string | number;
+  /**
+   * The child element.
+   */
   childElement: ReactElement;
+  /**
+   * The position relative to parent.
+   */
   index: number;
+  /**
+   * The child associated {@link TNode}.
+   */
   childTnode: TNode;
+  /**
+   * Props that have been set via
+   * {@link TChildrenRendererProps.propsForChildren}.
+   */
   propsFromParent: PropsFromParent;
 }
 
@@ -738,8 +754,20 @@ export interface TChildProps {
  * @public
  */
 export interface TChildrenBaseProps {
+  /**
+   * When {@link RenderHTMLProps.enableExperimentalMarginCollapsing} is
+   * enabled, this prop will be true by default. But you can opt-out when
+   * rendering children.
+   */
   disableMarginCollapsing?: boolean;
+  /**
+   * A React render function to render and wrap individual children.
+   */
   renderChild?: (props: TChildProps) => ReactNode;
+  /**
+   * Props that will be passed to children renderers via
+   * {@link CustomRendererProps.propsFromParent}.
+   */
   propsForChildren?: Partial<PropsFromParent>;
 }
 
@@ -749,6 +777,9 @@ export interface TChildrenBaseProps {
  * @public
  */
 export interface TChildrenRendererProps extends TChildrenBaseProps {
+  /**
+   * An array of {@link TNode} to render.
+   */
   tchildren: ReadonlyArray<TNode>;
 }
 
@@ -758,6 +789,9 @@ export interface TChildrenRendererProps extends TChildrenBaseProps {
  * @public
  */
 export interface TNodeChildrenRendererProps extends TChildrenBaseProps {
+  /**
+   * The {@link TNode} from which children will be rendered.
+   */
   tnode: TNode;
 }
 
