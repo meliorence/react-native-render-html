@@ -37,7 +37,7 @@ export default function PageIntroduction() {
               <RefDoc target="architecture" /> page for more details.
             </ListItem>
             <ListItem>
-              Its design balances compliance to HTML and CSS standards and
+              Its design balances compliance to HTML and CSS standards with
               lightweightness, despite some limitations and caveats.
             </ListItem>
             <ListItem>
