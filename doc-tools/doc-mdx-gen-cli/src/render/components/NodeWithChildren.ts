@@ -11,11 +11,17 @@ abstract class NodeWithChildren {
     this.children.push(child);
   }
 
-  childrenToMdx() {
+  childrenToMdx(encodeEntities: boolean = true) {
     return this.children
-      .map((c) =>
-        typeof c === 'string' ? encode(c, { level: 'all' }) : c.toMdx()
-      )
+      .map((c) => {
+        if (typeof c === 'string') {
+          if (encodeEntities) {
+            return encode(c, { level: 'all' });
+          }
+          return c;
+        }
+        return c.toMdx();
+      })
       .join('');
   }
 

@@ -73,9 +73,10 @@ export default function MdxToolkitProvider({
         {children}
       </admonition>
     ),
-    RefBuilder: ({ name, url, type }) => (
-      <reference full={false} name={name} url={url} type={type} />
-    ),
+    RefBuilder: ({ name, url, type }) => {
+      const realName = type === 'rn-symbol' ? `<${name}>` : name;
+      return <reference full={false} name={realName} url={url} type={type} />;
+    },
     RefDoc: ({ target, children, fragment }) => {
       const linkFragments =
         target.group === 'root'

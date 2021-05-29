@@ -4,6 +4,7 @@ import Page from '../Page';
 import useToolkit from '../toolkit/useToolkit';
 import customImageRendererConfig from './cards/customImageRendererConfig';
 import internalImageRendererConfig from './cards/internalImageRendererConfig';
+import InternalRendererAdmonition from '../components/InternalRendererAdmonition';
 
 const inlineExample = `<img
   width="1200" height="800"
@@ -61,10 +62,10 @@ export default function PageContentImages() {
   return (
     <Page>
       <Header>
-        <Admonition type="note">
-          This article covers the <RefHtmlElement name="img" /> internal
-          renderer. <RefHtmlElement name="picture" /> is not yet supported.
-        </Admonition>
+        <InternalRendererAdmonition name="Images" contentModel="block">
+          Also note that this renderer covers the <RefHtmlElement name="img" />{' '}
+          tag. <RefHtmlElement name="picture" /> tag is not yet supported.
+        </InternalRendererAdmonition>
       </Header>
       <Chapter title={'Scaling'}>
         <Section title="Inline Styles">
@@ -136,8 +137,8 @@ export default function PageContentImages() {
           fetching image dimensions when both <RefHtmlAttr name="width" /> and{' '}
           <RefHtmlAttr name="height" /> attributes are provided, or the two
           dimensions are set in the <RefHtmlAttr name="style" /> attribute. This
-          is great to avoid images "jumping" from zero height to their computed
-          height, and is a hint to good web design.
+          is great to avoid layout shifts when images size jumps from 0 to the
+          view box height, and is a hint to good web design.
         </Paragraph>
       </Chapter>
       <Chapter title="Error Handling">
@@ -158,14 +159,19 @@ export default function PageContentImages() {
         <Section title="Via useInternalRenderer">
           <Paragraph>
             <RefRenderHTMLExport name="useInternalRenderer" /> has a great
-            advantage over using <RefRenderHTMLExport name="InternalRenderer" />{' '}
+            advantage over using{' '}
+            <RefRenderHTMLExport
+              name="CustomRendererProps"
+              member="InternalRenderer"
+            />{' '}
             prop: you have access to the internal component props. In this
             scenario, we are going to display an interactive thumbnail which
             will show the full resolution image when pressed. To do so, we are
             going to read the URI from the internal source prop (although we
             could also do this from the <RefTRE name="TNode" />{' '}
-            <InlineCode>src</InlineCode> attribute), and mangle it to get our
-            "thumbnail" URI.
+            <InlineCode>src</InlineCode>{' '}
+            <RefTRE name="TNodeShape" member="attributes" />
+            ), and mangle it to get our "thumbnail" URI.
           </Paragraph>
           <RenderHtmlCard {...internalImageRendererConfig} />
         </Section>
@@ -183,12 +189,6 @@ export default function PageContentImages() {
               element.
             </DListItem>
             <DListTitle>
-              <RefRenderHTMLExport name="useIMGElementState" />
-            </DListTitle>
-            <DListItem>
-              To get the state of the image resource fetching.
-            </DListItem>
-            <DListTitle>
               <RefRenderHTMLExport name="IMGElementContentError" />
             </DListTitle>
             <DListItem>To render the fallback view on error state.</DListItem>
@@ -200,6 +200,12 @@ export default function PageContentImages() {
               <RefRenderHTMLExport name="IMGElementContentSuccess" />
             </DListTitle>
             <DListItem>To render the image on success state..</DListItem>
+            <DListTitle>
+              <RefRenderHTMLExport name="useIMGElementState" />
+            </DListTitle>
+            <DListItem>
+              To get the state of the image resource fetching.
+            </DListItem>
           </DList>
           <Paragraph>
             In the below example, our custom renderer will display an activity
@@ -207,7 +213,7 @@ export default function PageContentImages() {
             for demonstration purposes, and of course you should handle the
             "success" state by rendering the{' '}
             <RefRenderHTMLExport name="IMGElementContentSuccess" /> component,
-            or a custom component based on a third-party library.
+            or a custom component displaying an image.
           </Paragraph>
           <RenderHtmlCard {...customImageRendererConfig} />
         </Section>

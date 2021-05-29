@@ -25,10 +25,8 @@ export default function Reference({
     (member && full ? `${name}.${member}` : member ? member : name) +
     pluralMark;
   return (
-    <>
-      <Link className={clsx(styles.ref, styles[`ref--${type}`])} to={url}>
-        {shouldWrapCode ? <code>{fullName}</code> : fullName}
-      </Link>{' '}
-    </>
+    <Link className={clsx(styles.ref, styles[`ref--${type}`])} to={url}>
+      {shouldWrapCode ? <code>{fullName}</code> : fullName}
+    </Link>
   );
 }

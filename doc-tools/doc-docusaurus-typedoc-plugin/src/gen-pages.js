@@ -3,8 +3,8 @@ const { ReflectionKind } = require('typedoc');
 const { writeFile, readdir, unlink } = require('fs/promises');
 const { join } = require('path');
 
-/** @type {Record<string, string>} */
-let localpaths = {};
+/** @type {Record<string, import('typedoc').JSONOutput.DeclarationReflection>} */
+let reflectionsRegistry = {};
 
 /**
  * @param {import('typedoc').JSONOutput.DeclarationReflection} reflection
@@ -16,7 +16,16 @@ id: ${lowercase}
 title: ${reflection.name}
 ---
 import DeclarationBox from '@site/src/typeui/DeclarationBox';
-import HeaderTypeBox from '@site/src/typeui/HeaderTypeBox';\n\n`;
+import HeaderTypeBox from '@site/src/typeui/HeaderTypeBox';
+import Reference from '@site/src/components/Reference';
+\n\n`;
+}
+
+function renderReference(name, url, member) {
+  const serializedMember = member ? `member=${JSON.stringify(member)}` : '';
+  return `&ZeroWidthSpace;<Reference name=${JSON.stringify(
+    name
+  )} url=${JSON.stringify(url)} type="api-def" ${serializedMember} />`;
 }
 
 /**
@@ -31,14 +40,18 @@ function resolveLink(linkValue) {
   const linkreg = /(\S+)\.(\S+)/.exec(linkValue);
   if (linkreg) {
     const [m, reference, member] = linkreg;
-    if (reference in localpaths) {
-      return `[\`${linkValue}\`](./${
-        localpaths[reference]
-      }#${member.toLowerCase()})`;
+    if (reference in reflectionsRegistry) {
+      const url = `/api/${reflectionsRegistry[
+        reference
+      ].name.toLowerCase()}#${member.toLowerCase()}`;
+      return renderReference(linkValue, url, member);
     }
   }
-  if (linkValue in localpaths) {
-    return `[\`${linkValue}\`](./${localpaths[linkValue]})`;
+  if (linkValue in reflectionsRegistry) {
+    return renderReference(
+      linkValue,
+      `/api/${reflectionsRegistry[linkValue].name.toLowerCase()}`
+    );
   }
   console.warn('Unresolved link to', linkValue);
   return linkValue;
@@ -383,7 +396,7 @@ module.exports = async function genPages(
   version
 ) {
   const files = await readdir(outDir);
-  localpaths = {};
+  reflectionsRegistry = {};
   for (const file of files) {
     if (file.match(/\.mdx$/)) {
       await unlink(join(outDir, file));
@@ -403,12 +416,11 @@ module.exports = async function genPages(
     if (child.name === 'default') {
       child.name = 'RenderHTML';
     }
-    const filename = `${child.name.toLowerCase()}.mdx`;
-    localpaths[child.name] = filename;
+    reflectionsRegistry[child.name] = child;
   }
   for (const child of filteredChildren) {
     await writeFile(
-      `${outDir}/${localpaths[child.name]}`,
+      `${outDir}/${child.name.toLowerCase()}.mdx`,
       serialize(child, version)
     );
     if (child.flags.isExternal) {

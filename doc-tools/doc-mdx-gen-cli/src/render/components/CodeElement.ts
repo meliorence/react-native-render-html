@@ -17,6 +17,6 @@ export default class CodeElement extends NodeWithChildren {
       'string',
       'Code child must be a string'
     );
-    return `\`${this.childrenToMdx()}\``;
+    return `\`${this.childrenToMdx(false)}\``;
   }
 }

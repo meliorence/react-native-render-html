@@ -9,6 +9,7 @@ import customListKatanaConfig from './cards/customListThaiConfig';
 import customListRussianConfig from './cards/customListRussianConfig';
 import rtlListArabicConfig from './cards/rtlListArabicConfig';
 import rtlListDiscConfig from './cards/rtlListDiscConfig';
+import InternalRendererAdmonition from '../components/InternalRendererAdmonition';
 
 function RefCounterStyle() {
   const { RefLibrary } = useToolkit();
@@ -50,14 +51,7 @@ export default function PageContentLists() {
   return (
     <Page>
       <Header>
-        <Paragraph>
-          Lists (<RefHtmlElement name="ol" /> and <RefHtmlElement name="ul" />)
-          are rendered with an <Bold>internal renderer</Bold>. See{' '}
-          <RefDoc target="rendering" /> page. The <Bold>content model</Bold> of
-          anchors is <Bold>block</Bold>, see the{' '}
-          <RefDoc target="transient-render-engine" /> page,{' '}
-          <Bold>element model</Bold> section.
-        </Paragraph>
+        <InternalRendererAdmonition name="Lists" contentModel="block" />
         <Admonition type="tip">
           Lists marker rendering logic has been extracted to{' '}
           <RefLibrary
