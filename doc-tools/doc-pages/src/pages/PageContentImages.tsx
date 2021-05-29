@@ -48,7 +48,6 @@ const imgAttributes = {
   usemap: false
 };
 
-
 export default function PageContentImages() {
   const {
     Acronym,
