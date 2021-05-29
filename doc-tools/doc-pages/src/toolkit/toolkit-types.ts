@@ -106,6 +106,15 @@ export interface RefOptionalProps {
   full?: boolean;
 }
 
+export interface RefAPIProps {
+  member?: string;
+  full?: boolean;
+  library: string;
+  url: string;
+  name: string;
+  plural?: boolean;
+}
+
 export interface UIToolkit extends UIToolkitBase, UIToolkitRefs {
   RenderHtmlCard: ComponentType<UIRenderHtmlCardProps>;
   RefDoc: ComponentType<{ target: PageId; fragment?: string }>;
@@ -135,12 +144,5 @@ export type UIToolkitConfig = {
   RefDoc: ComponentType<{ target: PageSpecs; fragment?: string }>;
   Acronym: ComponentType<AcronymDefinition>;
   SvgFigure: ComponentType<{ asset: SvgAssetType; description: string }>;
-  RefAPI: ComponentType<{
-    member?: string;
-    full?: boolean;
-    library: string;
-    url: string;
-    name: string;
-    plural?: boolean;
-  }>;
+  RefAPI: ComponentType<RefAPIProps>;
 } & UIToolkitBase;

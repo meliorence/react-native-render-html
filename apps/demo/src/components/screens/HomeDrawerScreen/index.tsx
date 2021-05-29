@@ -8,7 +8,7 @@ import CustomDrawerContent from './CustomDrawerContent';
 import DrawerPlaygroundHeader from './DrawerPlaygroundHeader';
 import useSurfaceBackgroundStyleNucleon from '../../nucleons/useSurfaceBackgroundStyleNucleon';
 import { pagesSpecs, PageGroup } from '@doc/pages';
-import FeatureTemplate from '../../templates/FeatureTemplate';
+import ArticleTemplate from '../../templates/ArticleTemplate';
 import groupBy from './groupBy';
 import PlaygroundLists from '../../resources/PlaygroundLists';
 import {
@@ -47,9 +47,9 @@ const groups: Array<GroupDefinition> = Object.entries(specsByGroups).map(
       routes: pages.map<ResourceRouteNav>((page) => ({
         component: function Page() {
           return (
-            <FeatureTemplate imageSource={imagesMap[page.id]}>
+            <ArticleTemplate imageSource={imagesMap[page.id]}>
               {React.createElement(page.component)}
-            </FeatureTemplate>
+            </ArticleTemplate>
           );
         },
         iconName: page.iconName as any,

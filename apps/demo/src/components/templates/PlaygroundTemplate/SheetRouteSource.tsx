@@ -61,7 +61,8 @@ function SourceBoxAtom({
       padding={padding}
       style={style}
       backgroundColor={background.content}
-      color={background.color}>
+      // color={background.color}
+    >
       {children}
     </BoxNucleon>
   );

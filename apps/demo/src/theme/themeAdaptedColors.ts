@@ -28,7 +28,6 @@ function deriveThemeFromDeclaration(
     backdrop: scrim,
     background: surface.color,
     card: card.color,
-    onBackground: surface.content,
     primary: primary.color,
     text: surface.content
   };

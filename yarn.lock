@@ -2916,38 +2916,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo-google-fonts/ibm-plex-mono@npm:^0.1.0":
+"@expo-google-fonts/raleway@npm:^0.1.0":
   version: 0.1.0
-  resolution: "@expo-google-fonts/ibm-plex-mono@npm:0.1.0"
-  checksum: c3ce3acbbb6047d4fe6a7938db5c8634660b1a59435f47468af431906f93eab91c86ca0f7a6cbcdb5211f69b251a8327d37eb2a9a43d95e057a64e48d0a7d418
-  languageName: node
-  linkType: hard
-
-"@expo-google-fonts/ibm-plex-serif@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@expo-google-fonts/ibm-plex-serif@npm:0.1.0"
-  checksum: 43c7d7cae4ca1674d9a844b5109b7f469819bf37a14f2c1819115864a8a397a909bef7d8583667960f52e9a768ad35a0f0ed711b0dbce33403279aebda9be4e1
-  languageName: node
-  linkType: hard
-
-"@expo-google-fonts/josefin-sans@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@expo-google-fonts/josefin-sans@npm:0.1.0"
-  checksum: 3e763a2602ce691316f8067bc45438c043e6b6eec45f64b47007a138a43f2cbd88da9eeaff2bf85dbced339b0b7bf4a90a4bffe2a23169a2f449087f5947e625
-  languageName: node
-  linkType: hard
-
-"@expo-google-fonts/lora@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@expo-google-fonts/lora@npm:0.1.0"
-  checksum: 0f1d6ae9b28996bee55e5b9a6b8e6e8751c70277875fcdedf36f69a7ff69d415df7036c2f2d74fa5efa0a042d3a25218ee552761c3337fd8ff27c116c61e1c93
-  languageName: node
-  linkType: hard
-
-"@expo-google-fonts/merriweather@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@expo-google-fonts/merriweather@npm:0.1.0"
-  checksum: 8c75a3cb0a23bddeecdea240d0f4b2783693239574ca3b7aa0a170eea192afe7858c60cc466aa3c08b6bb53f64d5c2653a7ee6bab46b4d7f0a79d68b4e1de100
+  resolution: "@expo-google-fonts/raleway@npm:0.1.0"
+  checksum: 880434cefa6963ffc700187e8b283346afb8a17d2c46641396094803110206e034a95880de1aa8b3895df39037cd5ec5a61196b16a53e0d8d6bbb4915398c5e5
   languageName: node
   linkType: hard
 
@@ -2962,13 +2934,6 @@ __metadata:
   version: 0.1.0
   resolution: "@expo-google-fonts/space-mono@npm:0.1.0"
   checksum: ff924c69a96ccc279c571ef8f88e1d9d6a08fb38de0ec60a9eebd10ea9055d18983d47a927acdbdc1f82422dbeb099ac5239f8540b6c8db4aa4300557cbd4939
-  languageName: node
-  linkType: hard
-
-"@expo-google-fonts/work-sans@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@expo-google-fonts/work-sans@npm:0.1.0"
-  checksum: c47b18ee56afd8f917d8e284595b4f339c6dbff052d3a7fd85d7dda6bff0cbb70766a2a5bc6aac53504c6d2dbdfc4f910e1b69bcfdc31dc18c8ea3319f637c20
   languageName: node
   linkType: hard
 
@@ -9580,14 +9545,9 @@ __metadata:
     "@doc/constants": "workspace:*"
     "@doc/svg-component": "workspace:*"
     "@doc/svgr-conf": "workspace:*"
-    "@expo-google-fonts/ibm-plex-mono": ^0.1.0
-    "@expo-google-fonts/ibm-plex-serif": ^0.1.0
-    "@expo-google-fonts/josefin-sans": ^0.1.0
-    "@expo-google-fonts/lora": ^0.1.0
-    "@expo-google-fonts/merriweather": ^0.1.0
+    "@expo-google-fonts/raleway": ^0.1.0
     "@expo-google-fonts/source-code-pro": ^0.1.0
     "@expo-google-fonts/space-mono": ^0.1.0
-    "@expo-google-fonts/work-sans": ^0.1.0
     "@expo/vector-icons": ^12.0.4
     "@gorhom/bottom-sheet": ^3.6.4
     "@jsamr/react-native-li": ^2.1.0

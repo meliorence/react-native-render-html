@@ -10,7 +10,7 @@ import {
 import { Image, ImageRequireSource } from 'react-native';
 import { useNuclearContentWidth } from '../../nucleons/useContentWidthContext';
 
-export default function FeatureTemplate({
+export default function ArticleTemplate({
   children,
   imageSource
 }: PropsWithChildren<{ imageSource: ImageRequireSource }>) {

@@ -3,8 +3,6 @@ import {
   createStackNavigator,
   StackNavigationOptions
 } from '@react-navigation/stack';
-import SourceScreen from '../components/screens/SourceScreen';
-import TTreeScreen from '../components/screens/TTreeScreen';
 import HomeScreen from '../components/screens/HomeDrawerScreen';
 import { useLegacyMode } from '../state/store';
 import StackHeader from './StackHeader';
@@ -49,16 +47,6 @@ export default function RootNavigator() {
           name="home"
           options={{ headerShown: false }}
           component={HomeScreen}
-        />
-        <Stack.Screen
-          name="source"
-          options={{ title: 'HTML Source' }}
-          component={SourceScreen}
-        />
-        <Stack.Screen
-          name="ttree"
-          options={{ title: 'Transient Render Tree' }}
-          component={TTreeScreen}
         />
       </Stack.Navigator>
       <LegacySnackbar />

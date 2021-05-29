@@ -1,9 +1,6 @@
 import React, { useCallback } from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
-import RenderHTML, {
-  RenderersProps,
-  RenderHTMLProps
-} from 'react-native-render-html';
+import RenderHTML, { RenderHTMLProps } from 'react-native-render-html';
 import LegacyHTML from 'react-native-render-html-v5';
 import UIDisplayLoadingAtom from './UIDisplayLoadingAtom';
 import useOnLinkPress from '../hooks/useOnLinkPress';
@@ -50,7 +47,7 @@ const UIHtmlDisplayMolecule = React.memo(
     useLegacy = false
   }: {
     contentWidth: number;
-    renderHtmlProps: RenderHTMLProps<RenderersProps>;
+    renderHtmlProps: RenderHTMLProps;
     supportsLegacy: boolean;
     useLegacy: boolean;
     style?: StyleProp<ViewStyle>;
