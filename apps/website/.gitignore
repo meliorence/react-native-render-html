@@ -20,6 +20,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # Typedoc
-/typedoc-sidebar.js
+/apisidebar.json
 
 /api/**/*.mdx
