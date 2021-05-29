@@ -4,7 +4,7 @@ const imagesMap: Record<PageId, number> = {
   architecture: require('../assets/images/anders-jilden-architecture.jpg'),
   images: require('../assets/images/soragrit-wongsa-pictures.jpg'),
   lists: require('../assets/images/markus-winkler-lists.jpg'),
-  'styling-components': require('../assets/images/russn-fckr-painting.jpg'),
+  styling: require('../assets/images/russn-fckr-painting.jpg'),
   anchors: require('../assets/images/jj-ying-anchors.jpg'),
   textual: require('../assets/images/james-barnett-script.jpg'),
   'reinvent-the-wheel': require('../assets/images/jon-cartagena-wheel.jpg'),

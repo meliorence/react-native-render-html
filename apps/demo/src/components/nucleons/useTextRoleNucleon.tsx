@@ -16,56 +16,75 @@ export type TextRole =
   // Body roles
   | 'body'
   | 'bodyBold'
+  | 'bodyDListHeader'
   | 'bodyTable'
   | 'bodyTableHeader'
   | 'bodyHeader1'
   | 'bodyHeader2'
   | 'bodyInlineCode'
+  | 'bodyAPIRef'
   | 'caption';
 
-const FONT_BODY = 'Merriweather_400Regular';
-const FONT_BODY_BOLD = 'Merriweather_700Bold';
-const FONT_BODY_ITALIC = 'Merriweather_400Regular_Italic';
-const FONT_MONO = 'IBMPlexMono_400Regular';
-const FONT_MONO_ITALIC = 'IBMPlexMono_400Regular_Italic';
-const FONT_UI = 'Merriweather_400Regular';
+const FONT_BODY = 'Raleway_400Regular';
+const FONT_BODY_BOLD = 'Raleway_600SemiBold';
+const FONT_BODY_ITALIC = 'Raleway_400Regular_Italic';
+const FONT_MONO = 'SourceCodePro_400Regular';
+const FONT_MONO_ITALIC = 'SourceCodePro_400Regular_Italic';
+const FONT_UI = 'Raleway_400Regular';
+
+const BASE_FONT_SIZE = 16;
 
 const roleDefs: Record<
   TextRole,
   { fontSize: number; fontFamily: string } & TextStyle
 > = {
-  headerTitle: { fontSize: 22, fontFamily: FONT_UI, letterSpacing: 2 },
+  headerTitle: {
+    fontSize: BASE_FONT_SIZE * 1.5,
+    fontFamily: FONT_UI,
+    letterSpacing: 2
+  },
   headerSubtitle: { fontSize: 14, fontFamily: FONT_MONO },
-  body: { fontSize: 16, fontFamily: FONT_BODY, lineHeight: 26 },
+  body: {
+    fontSize: BASE_FONT_SIZE,
+    fontFamily: FONT_BODY,
+    lineHeight: BASE_FONT_SIZE * 2
+  },
   bodyBold: { fontFamily: FONT_BODY_BOLD, fontSize: 16 },
   bodyTable: { fontSize: 14, fontFamily: FONT_BODY },
   bodyTableHeader: { fontSize: 14, fontFamily: FONT_BODY_BOLD },
+  //@ts-ignore
+  bodyDListHeader: {
+    fontSize: BASE_FONT_SIZE * 1.3,
+    lineHeight: BASE_FONT_SIZE * 1.3
+  },
   bodyHeader1: {
-    fontSize: 24,
-    fontFamily: FONT_BODY_ITALIC,
+    fontSize: BASE_FONT_SIZE * 2.5,
+    fontFamily: FONT_BODY,
     letterSpacing: 1.5
   },
   bodyHeader2: {
-    fontSize: 20,
+    fontSize: BASE_FONT_SIZE * 1.8,
     fontFamily: FONT_BODY_BOLD,
     letterSpacing: 1.2
   },
-  caption: { fontSize: 14, fontFamily: FONT_BODY_ITALIC },
-  uiDescription: { fontSize: 11, fontFamily: FONT_UI },
-  uiLabel: { fontSize: 14, fontFamily: FONT_UI },
-  uiMono: { fontSize: 14, fontFamily: FONT_MONO },
+  caption: { fontSize: BASE_FONT_SIZE * 0.9, fontFamily: FONT_BODY_ITALIC },
+  uiDescription: { fontSize: BASE_FONT_SIZE * 0.8, fontFamily: FONT_UI },
+  uiLabel: { fontSize: BASE_FONT_SIZE * 0.9, fontFamily: FONT_UI },
+  uiMono: { fontSize: BASE_FONT_SIZE * 0.9, fontFamily: FONT_MONO },
   uiHyperlink: { fontSize: 5, fontFamily: FONT_MONO_ITALIC },
-  footer: { fontSize: 11, fontFamily: FONT_MONO },
+  footer: { fontSize: BASE_FONT_SIZE * 0.8, fontFamily: FONT_MONO },
   //@ts-expect-error
-  html: { fontSize: 14 },
+  html: { fontSize: BASE_FONT_SIZE * 0.9 },
   //@ts-expect-error
   bodyInlineCode: { fontFamily: FONT_MONO_ITALIC },
+  //@ts-expect-error
+  bodyAPIRef: { fontFamily: FONT_MONO },
   sectionOutline: {
-    fontSize: 11,
+    fontSize: BASE_FONT_SIZE * 0.8,
     fontFamily: FONT_UI,
     textTransform: 'uppercase'
   },
-  source: { fontSize: 14, fontFamily: FONT_MONO }
+  source: { fontSize: BASE_FONT_SIZE * 0.9, fontFamily: FONT_MONO }
 };
 
 export interface TextRoleNucleonProps {

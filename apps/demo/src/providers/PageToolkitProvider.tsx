@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { Fragment, PropsWithChildren, useCallback } from 'react';
-import { ToolkitProvider, UIToolkitConfig } from '@doc/pages';
+import { ToolkitProvider, UIToolkitConfig, RefAPIProps } from '@doc/pages';
 import BodyChapterMolecule from '../components/BodyChapterMolecule';
 import BodySectionMolecule from '../components/BodySectionMolecule';
 import BodyListAtom from '../components/BodyListAtom';
@@ -18,7 +18,7 @@ import { useNavigation } from '@react-navigation/core';
 import TextRoleNucleon from '../components/nucleons/TextRoleNucleon';
 import svgAssetsIndex from '../svgAssetsIndex';
 import { useColorRoles } from '../theme/colorSystem';
-import { useSpacing } from '@mobily/stacks';
+import { Stack, useSpacing } from '@mobily/stacks';
 import CardColorRolesProvider from '../components/croles/CardColorRolesProvider';
 import { StyleSheet, View } from 'react-native';
 import BoxNucleon from '../components/nucleons/BoxNucleon';
@@ -29,6 +29,9 @@ import TNodeTransformDisplayOrganism from '../components/TNodeTransformDisplayOr
 const styles = StyleSheet.create({
   underline: {
     textDecorationLine: 'underline'
+  },
+  apiref: {
+    // backgroundColor: '#1c1e20'
   }
 });
 
@@ -52,6 +55,29 @@ const RefBuilder: UIToolkitConfig['RefBuilder'] = ({ name, url, type }) => {
     </UIHyperlinkAtom>
   );
 };
+
+function RefAPI({
+  name,
+  url,
+  member,
+  full,
+  plural /* ,library */
+}: RefAPIProps) {
+  const pluralMark = plural ? 's' : '';
+  const fullName =
+    (member && full ? `${name}.${member}` : member ? member : name) +
+    pluralMark;
+  const fullUrl = new URI(WEBSITE_URL + url).normalizePath().href();
+  return (
+    <UIHyperlinkAtom
+      role="bodyAPIRef"
+      style={styles.apiref}
+      color={'#4377e7'}
+      onPress={useOnLinkPress(fullUrl)}>
+      {fullName}
+    </UIHyperlinkAtom>
+  );
+}
 
 const SourceDisplay: UIToolkitConfig['SourceDisplay'] = ({
   content,
@@ -86,8 +112,8 @@ const RefDoc: UIToolkitConfig['RefDoc'] = ({ target, children }) => {
   );
 };
 
-const Acronym: UIToolkitConfig['Acronym'] = ({ fullName, name }) => {
-  return <TextRoleNucleon role="body" children={`${fullName} (${name})`} />;
+const Acronym: UIToolkitConfig['Acronym'] = ({ fullName }) => {
+  return <TextRoleNucleon role="body" children={fullName} />;
 };
 
 const Bold: UIToolkitConfig['Bold'] = ({ children }) => (
@@ -133,6 +159,7 @@ const toolkitConfig: UIToolkitConfig = {
   SourceDisplay,
   Admonition: BodyAdmonitionAtom,
   RefBuilder,
+  RefAPI,
   RefDoc,
   Acronym,
   SvgFigure: (props) => (
@@ -149,12 +176,27 @@ const toolkitConfig: UIToolkitConfig = {
     </UIHyperlinkAtom>
   ),
   InlineCode: (props) => <TextRoleNucleon role="bodyInlineCode" {...props} />,
-  RefRenderHtmlProp: ({ name, pageAbsoluteUrl }) => (
-    <RefBuilder
-      type="rn-symbol"
-      name={name}
-      url={new URI(WEBSITE_URL + pageAbsoluteUrl).normalizePath().href()}
-    />
+  DList: ({ children }) => (
+    <Stack
+      padding={2}
+      style={{ backgroundColor: 'rgba(125,125,125,0.2)' }}
+      space={2}>
+      {children}
+    </Stack>
+  ),
+  DListItem: ({ children }) => (
+    <BoxNucleon
+      style={{
+        marginBottom: useSpacing(4),
+        marginLeft: useSpacing(4)
+      }}>
+      <BodyParagraphAtom style={{}}>{children}</BodyParagraphAtom>
+    </BoxNucleon>
+  ),
+  DListTitle: ({ children }) => (
+    <BoxNucleon padding={1} style={{ flex: 1 }}>
+      <TextRoleNucleon role="bodyDListHeader">{children}</TextRoleNucleon>
+    </BoxNucleon>
   ),
   Conditional: ({ platform, children }) => {
     return platform === 'mobile' ? <Fragment>{children}</Fragment> : null;

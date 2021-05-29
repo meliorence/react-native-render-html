@@ -3,7 +3,6 @@ import { Stack, useSpacing } from '@mobily/stacks';
 import React, { PropsWithChildren } from 'react';
 import { View } from 'react-native';
 import { useColorRoles } from '../theme/colorSystem';
-import BodyDividerAtom from './BodyDividerAtom';
 import BodyParagraphAtom from './BodyParagraphAtom';
 import BoxNucleon from './nucleons/BoxNucleon';
 import IconNucleon, { IconNucleonProps } from './nucleons/IconNucleon';
@@ -38,19 +37,13 @@ export default function BodyAdmonitionAtom({
 }>) {
   const { admonition } = useColorRoles();
   const semanticColor = admonition[type];
-  const dividerHeight = 3;
+  const dividerWidth = 6;
   const contentColor = useColorRoles().surface.secondaryContent;
   const iconSize = 22;
   const iconPadX = useSpacing(2);
-  const renderDivider = () => (
-    <BoxNucleon paddingX={2}>
-      <BodyDividerAtom height={dividerHeight} color={semanticColor} />
-    </BoxNucleon>
-  );
   return (
     <View {...props}>
       <Stack space={1}>
-        {renderDivider()}
         <BoxNucleon paddingX={BODY_HZ_SPACING}>
           <Stack
             horizontal
@@ -58,7 +51,9 @@ export default function BodyAdmonitionAtom({
             style={{
               paddingLeft: iconPadX,
               flexDirection: 'row',
-              alignItems: 'center'
+              alignItems: 'center',
+              borderLeftWidth: dividerWidth,
+              borderLeftColor: semanticColor
             }}>
             <IconNucleon
               color={semanticColor}
@@ -73,7 +68,9 @@ export default function BodyAdmonitionAtom({
             style={{
               flexDirection: 'row',
               flex: 0,
-              alignItems: 'center'
+              alignItems: 'center',
+              borderLeftWidth: dividerWidth,
+              borderLeftColor: semanticColor
             }}>
             <BodyParagraphAtom
               style={{
@@ -87,7 +84,6 @@ export default function BodyAdmonitionAtom({
             </BodyParagraphAtom>
           </View>
         </BoxNucleon>
-        {renderDivider()}
       </Stack>
     </View>
   );
