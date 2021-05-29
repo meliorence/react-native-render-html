@@ -18,7 +18,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install Inkscape
       run: |
-        sudo apt-get -y install inkscape pango
+        sudo apt-get -y install inkscape
         inkscape --version
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
