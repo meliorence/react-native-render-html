@@ -16,9 +16,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Install Inkscape
+    - name: Install Latest Stable Inkscape
       run: |
-        sudo apt-get -y install inkscape
+        sudo add-apt-repository ppa:inkscape.dev/stable
+        sudo apt update
+        sudo apt install inkscape
         inkscape --version
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
