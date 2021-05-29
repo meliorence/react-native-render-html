@@ -20,6 +20,9 @@ export default function PageConceptRendering() {
     Acronym,
     Admonition,
     Bold,
+    DList,
+    DListItem,
+    DListTitle,
     Header,
     Paragraph,
     Chapter,
@@ -83,35 +86,50 @@ export default function PageConceptRendering() {
           engine. This is <Bold>especially usefull</Bold> for apps which will
           render hundreds to thousands of small snippets such as chat apps.
         </Admonition>
-        <Paragraph>A few remarks:</Paragraph>
-        <List>
-          <ListItem>
-            <RefRenderHTMLExport name="TRenderEngineProvider" /> accepts all{' '}
-            <RefRenderHTMLExport name="RenderHTML" /> component props pertaining
-            to the <RefDoc target="transient-render-engine" /> layer such as{' '}
-            <RefRenderHtmlProp name="customHTMLElementModels" />,{' '}
+        <Paragraph>
+          Note that props of the <RefRenderHTMLExport name="RenderHTML" />{' '}
+          component are split between the three layers of the rendering
+          architecture:
+        </Paragraph>
+        <DList>
+          <DListTitle>
+            <RefRenderHTMLExport name="TRenderEngineProvider" />
+          </DListTitle>
+          <DListItem>
+            Will take all <RefRenderHTMLExport name="RenderHTML" /> props
+            pertaining to the <RefDoc target="transient-render-engine" /> layer
+            such as <RefRenderHtmlProp name="customHTMLElementModels" />,{' '}
             <RefRenderHtmlProp name="classesStyles" /> (all styling props) and
             DOM related such as <RefRenderHtmlProp name="domVisitors" />,{' '}
             <RefRenderHtmlProp name="selectDomRoot" />
-            ...
-          </ListItem>
-          <ListItem>
-            <RefRenderHTMLExport name="RenderHTMLConfigProvider" /> accepts all{' '}
-            <RefRenderHTMLExport name="RenderHTML" /> component props pertaining
-            to the <RefDoc target="rendering" /> layer such as{' '}
+            ... See <RefRenderHTMLExport name="TRenderEngineConfig" /> for a
+            complete reference.
+          </DListItem>
+          <DListTitle>
+            <RefRenderHTMLExport name="RenderHTMLConfigProvider" />
+          </DListTitle>
+          <DListItem>
+            Will take all <RefRenderHTMLExport name="RenderHTML" /> props
+            pertaining to the <RefDoc target="rendering" /> layer such as{' '}
             <RefRenderHtmlProp name="renderers" />,{' '}
             <RefRenderHtmlProp name="renderersProps" />,{' '}
-            <RefRenderHtmlProp name="computeEmbeddedMaxWidth" />, ...
-          </ListItem>
-          <ListItem>
-            <RefRenderHTMLExport name="RenderHTMLSource" /> accepts all{' '}
-            <InlineCode>RenderHTML</InlineCode> component props pertaining to
-            the document such as <RefRenderHtmlProp name="source" />,{' '}
-            <RefRenderHtmlProp name="onTTreeChange" />,{' '}
-            <RefRenderHtmlProp name="contentWidth" />
-            ...
-          </ListItem>
-        </List>
+            <RefRenderHtmlProp name="computeEmbeddedMaxWidth" />, ... See{' '}
+            <RefRenderHTMLExport name="RenderHTMLConfig" /> for a complete
+            reference.
+          </DListItem>
+          <DListTitle>
+            <RefRenderHTMLExport name="RenderHTMLSource" />
+          </DListTitle>
+          <DListItem>
+            Will take all <RefRenderHTMLExport name="RenderHTML" /> props
+            pertaining to the document such as{' '}
+            <RefRenderHtmlProp name="source" />
+            , <RefRenderHtmlProp name="onTTreeChange" />,{' '}
+            <RefRenderHtmlProp name="contentWidth" />. See{' '}
+            <RefRenderHTMLExport name="RenderHTMLSourceProps" /> for a complete
+            reference.
+          </DListItem>
+        </DList>
       </Chapter>
       <Chapter title="Default TNode Renderers">
         <Paragraph>

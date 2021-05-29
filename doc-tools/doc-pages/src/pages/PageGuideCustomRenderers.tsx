@@ -59,7 +59,7 @@ export default function PageGuideCustomRenderers() {
             DOM <RefDOM name="Text" /> nodes (<Bold>named</Bold>{' '}
             <RefTRE name="TText" /> nodes). So a <RefTRE name="TText" /> node
             cannot have children, and its content is a string accessible with
-            the <RefDOM name="Text" member="data" /> field.
+            the <RefTRE name="TText" member="data" /> field.
           </ListItem>
           <ListItem>
             Thanks to <Bold>hoisting</Bold>, <RefTRE name="TPhrasing" /> nodes
@@ -91,11 +91,6 @@ export default function PageGuideCustomRenderers() {
         </Paragraph>
       </Chapter>
       <Chapter title="Model-based Custom Rendering">
-        <Admonition type="tip">
-          You are kindly advised to read the{' '}
-          <RefDoc target="transient-render-engine" /> page before continuing,
-          especially the chapter related to elements models.
-        </Admonition>
         <Section title="Example: Registering a New Tag">
           <Paragraph>
             Let's say we have defined an advanced, powerful{' '}
@@ -218,16 +213,23 @@ export default function PageGuideCustomRenderers() {
               The internal renderer for this <InlineCode>tagName</InlineCode>.
               An internal renderer is like a custom renderer, but registered
               internally. If there is no internal renderer registered for this
-              tag, <InlineCode>InternalRenderer</InlineCode> will be equal to{' '}
-              <InlineCode>TDefaultRenderer</InlineCode>.
+              tag,{' '}
+              <RefRenderHTMLExport
+                name="CustomRendererProps"
+                member="InternalRenderer"
+              />{' '}
+              will be equal to{' '}
+              <RefRenderHTMLExport
+                name="CustomRendererProps"
+                member="TDefaultRenderer"
+              />
+              .
             </DListItem>
             <DListTitle>
               <RefRenderHTMLExport name="CustomRendererProps" member="style" />
             </DListTitle>
             <DListItem>
-              The flatten style object which should be passed to the{' '}
-              <InlineCode>TDefaultRenderer</InlineCode> or{' '}
-              <InlineCode>InternalRenderer</InlineCode>
+              The flatten style object which should be passed to the root
               element returned by this component.
             </DListItem>
             <DListTitle>
@@ -244,9 +246,13 @@ export default function PageGuideCustomRenderers() {
               />
             </DListTitle>
             <DListItem>
-              To use when you render a <InlineCode>Text</InlineCode>
-              -based element (e.g. the <InlineCode>type</InlineCode> prop is{' '}
-              <InlineCode>"text"</InlineCode>).
+              To use when you render a <RefRNSymbol name="Text" />
+              -based element (e.g. the{' '}
+              <RefRenderHTMLExport
+                name="CustomRendererProps"
+                member="type"
+              />{' '}
+              prop is <InlineCode>"text"</InlineCode>).
             </DListItem>
             <DListTitle>
               <RefRenderHTMLExport
@@ -255,16 +261,21 @@ export default function PageGuideCustomRenderers() {
               />
             </DListTitle>
             <DListItem>
-              To use when you render a <InlineCode>View</InlineCode>
-              -based element (e.g. the <InlineCode>type</InlineCode> prop is{' '}
-              <InlineCode>"block"</InlineCode>).
+              To use when you render a <RefRNSymbol name="Text" />
+              -based element (e.g. the{' '}
+              <RefRenderHTMLExport
+                name="CustomRendererProps"
+                member="type"
+              />{' '}
+              prop is <InlineCode>"block"</InlineCode>).
             </DListItem>
             <DListTitle>
               <RefRenderHTMLExport name="CustomRendererProps" member="type" />
             </DListTitle>
             <DListItem>
-              To check whether a <InlineCode>Text</InlineCode> or{' '}
-              <InlineCode>View</InlineCode> is expected as the root element
+              To check whether a <RefRNSymbol name="Text" /> (
+              <InlineCode>"block"</InlineCode>) or <RefRNSymbol name="View" /> (
+              <InlineCode>"text"</InlineCode>) is expected as the root element
               returned by this component.
             </DListItem>
             <DListTitle>
@@ -274,11 +285,17 @@ export default function PageGuideCustomRenderers() {
               />
             </DListTitle>
             <DListItem>
-              Props passed directly from the parent custom renderer.
+              Props passed directly from the parent custom renderer via{' '}
+              <RefRenderHTMLExport name="TChildrenRenderer" />. See{' '}
+              <RefRenderHTMLExport
+                name="TChildrenRendererProps"
+                member="propsForChildren"
+              />{' '}
+              prop.
             </DListItem>
           </DList>
           <Paragraph>
-            See <RefRenderHTMLExport name="TChildrenRendererProps" /> for a
+            See <RefRenderHTMLExport name="CustomRendererProps" /> for a
             complete reference.
           </Paragraph>
         </Section>

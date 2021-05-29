@@ -87,9 +87,9 @@ export default function PageConceptTRE() {
               <RefTRE name="HTMLElementModel" member="isVoid" />
             </DListTitle>
             <DListItem>
-              Will be <InlineCode>true</InlineCode> for void aka{' '}
-              <Hyperlink url="https://developer.mozilla.org/en-US/docs/Glossary/Empty_element">
-                empty elements
+              Will be <InlineCode>true</InlineCode> for{' '}
+              <Hyperlink url="https://html.spec.whatwg.org/multipage/syntax.html#void-elements">
+                void elements
               </Hyperlink>{' '}
               , e.g. DOM elements which can't have children.
             </DListItem>

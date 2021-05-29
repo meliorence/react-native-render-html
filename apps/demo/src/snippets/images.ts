@@ -3,7 +3,7 @@ import { SnippetDeclaration } from '../../types';
 const html = `
 <p>
   Similarly to browsers, this library will place a print box before fetching image dimensions when both <em>width</em> and <em>height</em> attributes are provided.
-  This is great to avoid images "jumping" from zero height to their computed height, and is a hint to good web design.
+  This is great to avoid layout shifts when images size jumps from 0 to the view box height, and is a hint to good web design.
 </p>
 <p>
   Moreover, this library will automatically scale images down to the available width, even when the provided inline style width is greater than the container width.

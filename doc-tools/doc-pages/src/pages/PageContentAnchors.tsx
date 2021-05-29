@@ -6,6 +6,7 @@ import anchorsMinimalConfig from './cards/anchorsMinimalConfig';
 import anchorsBlockConfig from './cards/anchorsBlockConfig';
 import anchorsCustomConfig from './cards/anchorsCustomConfig';
 import anchorsRelativeConfig from './cards/anchorsRelativeConfig';
+import InternalRendererAdmonition from '../components/InternalRendererAdmonition';
 
 export default function PageContentAnchors() {
   const {
@@ -36,15 +37,7 @@ export default function PageContentAnchors() {
   return (
     <Page>
       <Header>
-        <Paragraph>
-          Anchors are rendered with an <Bold>internal renderer</Bold>. See{' '}
-          <RefDoc target="rendering" /> page. The <Bold>content model</Bold> of
-          anchors is <Bold>mixed</Bold>, see{' '}
-          <RefDoc target="transient-render-engine" fragment="element-models">
-            Element Models
-          </RefDoc>
-          .
-        </Paragraph>
+        <InternalRendererAdmonition name="Anchors" contentModel="mixed" />
       </Header>
       <Chapter title="Minimal Example">
         <RenderHtmlCard {...anchorsMinimalConfig} />
