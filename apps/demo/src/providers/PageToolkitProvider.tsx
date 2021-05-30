@@ -100,11 +100,14 @@ const SourceDisplay: UIToolkitConfig['SourceDisplay'] = ({
   </ScrollView>
 );
 
-const RefDoc: UIToolkitConfig['RefDoc'] = ({ target, children }) => {
+const RefDoc: UIToolkitConfig['RefDoc'] = ({ target, children, fragment }) => {
+  if (fragment !== undefined) {
+    console.info('target', fragment, children);
+  }
   const navigation = useNavigation();
   const onPress = useCallback(() => {
-    navigation.navigate(`${target.group}-${target.id}`);
-  }, [navigation, target.group, target.id]);
+    navigation.navigate(`${target.group}-${target.id}`, { fragment });
+  }, [navigation, target.group, target.id, fragment]);
   return (
     <UIHyperlinkAtom role="body" style={styles.underline} onPress={onPress}>
       {children || target.title}

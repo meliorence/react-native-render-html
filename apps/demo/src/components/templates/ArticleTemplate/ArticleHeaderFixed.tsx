@@ -8,6 +8,7 @@ import {
 import UIAppbarActionAtom from '../../UIAppbarActionAtom';
 import { useNavigation } from '@react-navigation/core';
 import HeaderColorRolesProvider from '../../croles/HeaderColorRolesProvider';
+import ArticleFooterFixed from './ArticleFooterFixed';
 
 export type ArticleHeaderFixedProps = {
   imageSource: ImageRequireSource;
@@ -36,7 +37,7 @@ export default function ArticleHeaderFixed({}: ArticleHeaderFixedProps) {
           left: 0,
           right: 0,
           position: 'absolute',
-          flexDirection: 'column',
+          flexDirection: 'row',
           justifyContent: 'space-between',
           flex: 0,
           marginBottom: useSpacing(4)
@@ -47,6 +48,7 @@ export default function ArticleHeaderFixed({}: ArticleHeaderFixedProps) {
           onPress={onMenuPress}
         />
       </SafeAreaView>
+      <ArticleFooterFixed />
     </HeaderColorRolesProvider>
   );
 }

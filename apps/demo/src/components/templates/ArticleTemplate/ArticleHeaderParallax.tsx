@@ -10,7 +10,6 @@ import {
   ViewStyle
 } from 'react-native';
 import TextRoleNucleon from '../../nucleons/TextRoleNucleon';
-import { useNuclearContentWidth } from '../../nucleons/useContentWidthContext';
 import { useAnimatedContext } from './AnimatedContextProvider';
 import HeaderColorRolesProvider from '../../croles/HeaderColorRolesProvider';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -21,6 +20,8 @@ export type ArticleHeaderParallaxProps = {
   imageSource: ImageRequireSource;
   title: string;
   groupLabel: string;
+  width: number;
+  height: number;
 };
 
 const Logo = svgAssetsIndex.logo as any;
@@ -28,10 +29,10 @@ const Logo = svgAssetsIndex.logo as any;
 export default function ArticleHeaderParallax({
   imageSource,
   groupLabel,
-  title
+  title,
+  width,
+  height
 }: ArticleHeaderParallaxProps) {
-  const width = useNuclearContentWidth();
-  const height = Math.max((9 / 16) * width, 300);
   const { top: safeTop } = useSafeAreaInsets();
   const { scrollAnim } = useAnimatedContext();
   const scaleTransforms = useDerivedValue(() => {
