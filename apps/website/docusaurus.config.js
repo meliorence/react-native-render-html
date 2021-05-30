@@ -88,8 +88,8 @@ module.exports = {
           label: 'API'
         },
         {
-          to: 'migration-guide',
-          position: 'left',
+          type: 'doc',
+          docId: 'migration-guide',
           label: 'Migration Guide',
           activeSidebarClassName: '__fun'
         },
