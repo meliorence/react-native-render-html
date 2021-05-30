@@ -53,8 +53,8 @@ export default function PageConceptRendering() {
       </Header>
       <Chapter title="Three-layers Rendering Architecture">
         <Paragraph>
-          When you consume the <InlineCode>RenderHTML</InlineCode> component,
-          you are actually using three distinct components. So this (
+          When you consume the <RefRenderHTMLExport name="RenderHTML" />{' '}
+          component, you are actually using three distinct components. So this (
           <Bold>implicit 3 layers</Bold>):
         </Paragraph>
         <SourceDisplay
