@@ -57,6 +57,9 @@ module.exports = {
       // Optional: Algolia search parameters
       searchParameters: {}
     },
+    prism: {
+      theme: require('prism-react-renderer/themes/dracula')
+    },
     colorMode: {
       defaultMode: 'dark',
       respectPrefersColorScheme: true
