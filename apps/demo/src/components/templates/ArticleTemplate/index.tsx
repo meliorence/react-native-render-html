@@ -16,8 +16,7 @@ import AnimatedContextProvider, {
   useAnimatedContext
 } from './AnimatedContextProvider';
 import Animated from 'react-native-reanimated';
-import ArticleHeaderParallax from './ArticleHeaderParallax';
-import ArticleHeaderFixed from './ArticleHeaderFixed';
+import ArticleHeader from './ArticleHeaderFixed';
 import { ImageRequireSource, useWindowDimensions, View } from 'react-native';
 import { useFocusEffect, useRoute } from '@react-navigation/core';
 import ScrollerProvider, { useScroller } from './ScrollerProvider';
@@ -87,13 +86,15 @@ function Article({
         onScroll={onScroll}
         ref={scrollRef}
         style={{ flexGrow: 1 }}
-        contentContainerStyle={useSurfaceBackgroundStyleNucleon()}>
-        <ArticleHeaderParallax width={width} height={headerHeight} {...props} />
+        contentContainerStyle={[
+          useSurfaceBackgroundStyleNucleon(),
+          { paddingTop: headerHeight }
+        ]}>
         <BoxNucleon marginTop={4} paddingBottom={BODY_PARAGRAPH_SPACING}>
           <Stack space={BODY_CHAPTER_SPACING}>{children}</Stack>
         </BoxNucleon>
       </Animated.ScrollView>
-      <ArticleHeaderFixed imageSource={props.imageSource} />
+      <ArticleHeader height={headerHeight} width={width} {...props} />
     </View>
   );
 }
