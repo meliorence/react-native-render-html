@@ -63,8 +63,8 @@ const roleDefs: Record<
   },
   //@ts-ignore
   bodyDListHeader: {
-    fontSize: BASE_FONT_SIZE * 1.3,
-    lineHeight: BASE_FONT_SIZE * 1.3
+    fontSize: BASE_FONT_SIZE * 1.15,
+    lineHeight: BASE_FONT_SIZE * 1.15
   },
   bodyHeader1: {
     fontSize: BASE_FONT_SIZE * 2.5,

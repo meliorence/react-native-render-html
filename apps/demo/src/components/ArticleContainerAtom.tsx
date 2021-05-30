@@ -3,12 +3,14 @@ import React, {
   FunctionComponentElement,
   PropsWithChildren
 } from 'react';
-import { Stack } from '@mobily/stacks';
+import { useSpacing } from '@mobily/stacks';
 import BodyChapterMolecule, {
   BodyChapterMoleculeProps
 } from './BodyChapterMolecule';
 import upperRoman from '@jsamr/counter-style/presets/upperRoman';
 import { BODY_CHAPTER_SPACING } from '../constants';
+import { useScroller } from './templates/ArticleTemplate/ScrollerProvider';
+import { View } from 'react-native';
 
 function isBodyChapterElement(
   candidate: unknown
@@ -25,17 +27,28 @@ export default function ArticleContainerAtom({
 }: PropsWithChildren<{}>) {
   const counter = upperRoman;
   let index = 1;
+  const scrollIndex = useScroller();
+  const chapterMarginBottom = useSpacing(BODY_CHAPTER_SPACING);
   return (
-    <Stack space={BODY_CHAPTER_SPACING}>
+    <View>
       {Children.map(children, (c) => {
         if (isBodyChapterElement(c)) {
-          return React.cloneElement(c, {
+          const chapterEl = React.cloneElement(c, {
             ...c.props,
             prefix: counter.renderMarker(index++)
           });
+          return (
+            <View
+              style={{ marginBottom: chapterMarginBottom }}
+              onLayout={(e) => {
+                scrollIndex.registerLayout(e, c.props.title!);
+              }}>
+              {chapterEl}
+            </View>
+          );
         }
         return c;
       })}
-    </Stack>
+    </View>
   );
 }

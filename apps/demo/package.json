@@ -43,6 +43,7 @@
     "expo-status-bar": "~1.0.4",
     "expo-web-browser": "~9.1.0",
     "lowlight": "^1.20.0",
+    "param-case": "^3.0.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-native": "^0.64.0",

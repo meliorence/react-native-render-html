@@ -28,7 +28,7 @@ export type BodySectionMoleculeProps = PropsWithChildren<
   PropsWithStyle<{ title: string; prefix?: string }>
 >;
 
-export default function BodyChapterMolecule({
+export default function BodySectionMolecule({
   title,
   style,
   prefix,

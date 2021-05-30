@@ -9578,6 +9578,7 @@ __metadata:
     ignore-loader: ^0.1.2
     jest-expo: ^41.0.0
     lowlight: ^1.20.0
+    param-case: ^3.0.4
     react: 17.0.2
     react-dom: 17.0.2
     react-native: ^0.64.0
@@ -17966,7 +17967,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"param-case@npm:^3.0.3":
+"param-case@npm:^3.0.3, param-case@npm:^3.0.4":
   version: 3.0.4
   resolution: "param-case@npm:3.0.4"
   dependencies:
