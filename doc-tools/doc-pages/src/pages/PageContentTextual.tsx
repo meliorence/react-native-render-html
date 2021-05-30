@@ -56,7 +56,7 @@ export default function PageContentTextual() {
           considered experimental because the <Acronym name="TRE" /> doesn't
           support <RefCssProperty name="display" /> CSS property yet. However,
           margin collapsing should not apply to flex layouts while this prop
-          will apply margin collapsing indiscriminitly.
+          will apply margin collapsing indiscriminately.
         </Admonition>
       </Chapter>
       <Chapter title="Whitespace Collapsing">
