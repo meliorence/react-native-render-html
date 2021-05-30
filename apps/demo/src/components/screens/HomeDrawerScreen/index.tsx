@@ -20,6 +20,7 @@ import imagesMap from '../../../imagesMap';
 
 interface ResourceRouteNav extends ResourceRouteDefinition {
   component: React.ComponentType<any>;
+  header?: DrawerNavigationOptions['header'];
 }
 
 const Drawer = createDrawerNavigator<Record<ResourceRoute, {}>>();
@@ -29,7 +30,7 @@ const initialRouteName: ResourceRoute = 'root-intro';
 interface GroupDefinition {
   groupLabel: string;
   group: string;
-  header: DrawerNavigationOptions['header'];
+  header?: DrawerNavigationOptions['header'];
   routes: Array<ResourceRouteNav>;
 }
 
@@ -43,11 +44,14 @@ const groups: Array<GroupDefinition> = Object.entries(specsByGroups).map(
     return {
       group: groupName,
       groupLabel: groupName,
-      header: (props) => <DrawerPlaygroundHeader {...props} />,
       routes: pages.map<ResourceRouteNav>((page) => ({
+        header: () => null,
         component: function Page() {
           return (
-            <ArticleTemplate imageSource={imagesMap[page.id]}>
+            <ArticleTemplate
+              title={page.title}
+              groupLabel={groupName}
+              imageSource={imagesMap[page.id]}>
               {React.createElement(page.component)}
             </ArticleTemplate>
           );
@@ -72,15 +76,20 @@ const playgroundsGroup: GroupDefinition = {
   ]
 };
 
-function mapGroup({ routes, group, groupLabel, header }: GroupDefinition) {
-  return routes.map(({ component, iconName, name, title }) => (
+function mapGroup({
+  routes,
+  group,
+  groupLabel,
+  header: groupHeader
+}: GroupDefinition) {
+  return routes.map(({ component, iconName, name, header, title }) => (
     <Drawer.Screen
       component={component}
       options={{
         //@ts-ignore
         group,
         groupLabel,
-        header,
+        header: header || groupHeader,
         title,
         headerShown: true,
         iconName
