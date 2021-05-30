@@ -1,5 +1,39 @@
 const { WEBSITE_ROOT, WEBSITE_BASE } = require('@doc/constants');
 const version = require('react-native-render-html/package.json').version;
+const { existsSync } = require('fs');
+
+const apisidebarPath = './apisidebar.json';
+let hasAPIsidebar = existsSync(apisidebarPath);
+
+const plugins = [
+  'docusaurus-plugin-sass',
+  // Only include this plugin when the apisidebar file has been generated.
+  hasAPIsidebar
+    ? [
+        '@docusaurus/plugin-content-docs',
+        {
+          id: 'api',
+          path: 'api',
+          routeBasePath: 'api',
+          sidebarPath: require.resolve(apisidebarPath),
+          disableVersioning: false
+        }
+      ]
+    : null,
+  [
+    'doc-docusaurus-typedoc-plugin',
+    {
+      version,
+      outDir: './api',
+      sidebarFile: './apisidebar.json',
+      typedoc: {
+        entryPoints: ['../../packages/render-html/src/index.ts'],
+        tsconfig: '../../packages/render-html/tsconfig.json',
+        excludePrivate: true
+      }
+    }
+  ]
+].filter((c) => c !== null);
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
@@ -13,32 +47,7 @@ module.exports = {
   favicon: 'img/favicon.ico?v=1.0.0',
   organizationName: 'meliorence',
   projectName: 'react-native-render-html',
-  plugins: [
-    'docusaurus-plugin-sass',
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'api',
-        path: 'api',
-        routeBasePath: 'api',
-        sidebarPath: require.resolve('./apisidebar.json'),
-        disableVersioning: false
-      }
-    ],
-    [
-      'doc-docusaurus-typedoc-plugin',
-      {
-        version,
-        outDir: './api',
-        sidebarFile: './apisidebar.json',
-        typedoc: {
-          entryPoints: ['../../packages/render-html/src/index.ts'],
-          tsconfig: '../../packages/render-html/tsconfig.json',
-          excludePrivate: true
-        }
-      }
-    ]
-  ],
+  plugins: plugins,
   themeConfig: {
     algolia: {
       apiKey: '4f9905bd301a15034820905263f47dda',
