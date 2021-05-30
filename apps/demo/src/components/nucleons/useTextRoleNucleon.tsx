@@ -3,6 +3,7 @@ import { useColorRoles } from '../../theme/colorSystem';
 
 export type TextRole =
   // UI roles
+  | 'headerTitleFull'
   | 'headerTitle'
   | 'headerSubtitle'
   | 'uiLabel'
@@ -38,20 +39,28 @@ const roleDefs: Record<
   TextRole,
   { fontSize: number; fontFamily: string } & TextStyle
 > = {
+  headerTitleFull: {
+    fontSize: BASE_FONT_SIZE * 3.5,
+    fontFamily: FONT_UI,
+    letterSpacing: 2
+  },
   headerTitle: {
     fontSize: BASE_FONT_SIZE * 1.5,
     fontFamily: FONT_UI,
     letterSpacing: 2
   },
-  headerSubtitle: { fontSize: 14, fontFamily: FONT_MONO },
+  headerSubtitle: { fontSize: BASE_FONT_SIZE * 0.8, fontFamily: FONT_BODY },
   body: {
     fontSize: BASE_FONT_SIZE,
     fontFamily: FONT_BODY,
     lineHeight: BASE_FONT_SIZE * 2
   },
   bodyBold: { fontFamily: FONT_BODY_BOLD, fontSize: 16 },
-  bodyTable: { fontSize: 14, fontFamily: FONT_BODY },
-  bodyTableHeader: { fontSize: 14, fontFamily: FONT_BODY_BOLD },
+  bodyTable: { fontSize: BASE_FONT_SIZE * 0.9, fontFamily: FONT_BODY },
+  bodyTableHeader: {
+    fontSize: BASE_FONT_SIZE * 0.9,
+    fontFamily: FONT_BODY_BOLD
+  },
   //@ts-ignore
   bodyDListHeader: {
     fontSize: BASE_FONT_SIZE * 1.3,

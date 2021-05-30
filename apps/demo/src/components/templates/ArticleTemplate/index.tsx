@@ -1,29 +1,50 @@
 import { Stack } from '@mobily/stacks';
 import React, { PropsWithChildren } from 'react';
-import { ScrollView } from 'react-native-gesture-handler';
 import BoxNucleon from '../../nucleons/BoxNucleon';
 import useSurfaceBackgroundStyleNucleon from '../../nucleons/useSurfaceBackgroundStyleNucleon';
 import {
   BODY_CHAPTER_SPACING,
   BODY_PARAGRAPH_SPACING
 } from '../../../constants';
-import { Image, ImageRequireSource } from 'react-native';
-import { useNuclearContentWidth } from '../../nucleons/useContentWidthContext';
+import AnimatedContextProvider, {
+  useAnimatedContext
+} from './AnimatedContextProvider';
+import Animated from 'react-native-reanimated';
+import ArticleHeaderParallax, {
+  ArticleHeaderParallaxProps
+} from './ArticleHeaderParallax';
+import ArticleHeaderFixed from './ArticleHeaderFixed';
+import { View } from 'react-native';
 
-export default function ArticleTemplate({
+export interface ArticleTemplateProps extends ArticleHeaderParallaxProps {}
+
+function Article({
   children,
-  imageSource
-}: PropsWithChildren<{ imageSource: ImageRequireSource }>) {
-  const width = useNuclearContentWidth();
-  const height = Math.min((9 / 16) * width, 300);
+  ...props
+}: PropsWithChildren<ArticleTemplateProps>) {
+  const { onScroll } = useAnimatedContext();
   return (
-    <ScrollView
-      style={{ flexGrow: 1 }}
-      contentContainerStyle={useSurfaceBackgroundStyleNucleon()}>
-      <Image style={{ width, height }} source={imageSource} />
-      <BoxNucleon paddingBottom={BODY_PARAGRAPH_SPACING}>
-        <Stack space={BODY_CHAPTER_SPACING}>{children}</Stack>
-      </BoxNucleon>
-    </ScrollView>
+    <View style={{ position: 'relative' }}>
+      <Animated.ScrollView
+        onScroll={onScroll}
+        style={{ flexGrow: 1 }}
+        contentContainerStyle={useSurfaceBackgroundStyleNucleon()}>
+        <ArticleHeaderParallax {...props} />
+        <BoxNucleon marginTop={4} paddingBottom={BODY_PARAGRAPH_SPACING}>
+          <Stack space={BODY_CHAPTER_SPACING}>{children}</Stack>
+        </BoxNucleon>
+      </Animated.ScrollView>
+      <ArticleHeaderFixed imageSource={props.imageSource} />
+    </View>
+  );
+}
+
+export default function ArticleTemplate(
+  props: PropsWithChildren<ArticleTemplateProps>
+) {
+  return (
+    <AnimatedContextProvider>
+      <Article {...props} />
+    </AnimatedContextProvider>
   );
 }
