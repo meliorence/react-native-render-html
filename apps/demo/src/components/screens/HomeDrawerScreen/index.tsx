@@ -51,6 +51,7 @@ const groups: Array<GroupDefinition> = Object.entries(specsByGroups).map(
             <ArticleTemplate
               title={page.title}
               groupLabel={groupName}
+              description={page.description}
               imageSource={imagesMap[page.id]}>
               {React.createElement(page.component)}
             </ArticleTemplate>

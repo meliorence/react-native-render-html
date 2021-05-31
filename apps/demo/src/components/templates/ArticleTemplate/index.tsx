@@ -16,7 +16,7 @@ import AnimatedContextProvider, {
   useAnimatedContext
 } from './AnimatedContextProvider';
 import Animated from 'react-native-reanimated';
-import ArticleHeader from './ArticleHeaderFixed';
+import ArticleHeader from './ArticleHeader';
 import { ImageRequireSource, useWindowDimensions, View } from 'react-native';
 import { useFocusEffect, useRoute } from '@react-navigation/core';
 import ScrollerProvider, { useScroller } from './ScrollerProvider';
@@ -27,6 +27,7 @@ export interface ArticleTemplateProps {
   imageSource: ImageRequireSource;
   title: string;
   groupLabel: string;
+  description: string;
 }
 
 interface ArticleProps extends ArticleTemplateProps {

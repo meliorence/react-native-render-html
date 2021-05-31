@@ -1,9 +1,12 @@
-import { useSpacing } from '@mobily/stacks';
-import React from 'react';
+import { Stack, useSpacing } from '@mobily/stacks';
+import React, { useEffect } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, {
   useAnimatedStyle,
-  useDerivedValue
+  useDerivedValue,
+  withSpring,
+  withRepeat,
+  useSharedValue
 } from 'react-native-reanimated';
 import { ImageBackground, ImageRequireSource, View } from 'react-native';
 import UIAppbarActionAtom from '../../UIAppbarActionAtom';
@@ -12,6 +15,8 @@ import TextRoleNucleon from '../../nucleons/TextRoleNucleon';
 import { useAnimatedContext } from './AnimatedContextProvider';
 import HeaderColorRolesProvider from '../../croles/HeaderColorRolesProvider';
 import svgAssetsIndex from '../../../svgAssetsIndex';
+import BoxNucleon from '../../nucleons/BoxNucleon';
+import IconNucleon from '../../nucleons/IconNucleon';
 
 const AnimatedImageBackground = Animated.createAnimatedComponent(
   ImageBackground
@@ -23,9 +28,39 @@ export type ArticleHeaderProps = {
   groupLabel: string;
   width: number;
   height: number;
+  description: string;
 };
 
 const Logo = svgAssetsIndex.logo as any;
+
+function useAnimatedChevron() {
+  const chevronScale = useSharedValue(1);
+  useEffect(() => {
+    chevronScale.value = 1.15;
+  });
+  return useAnimatedStyle(() => {
+    const scale = withRepeat(
+      withSpring(chevronScale.value, {
+        velocity: 1,
+        damping: 1000,
+        stiffness: 10,
+        restSpeedThreshold: 0.1
+      }),
+      -1,
+      true
+    );
+    return {
+      transform: [
+        {
+          scaleX: scale
+        },
+        {
+          scaleY: scale
+        }
+      ]
+    };
+  });
+}
 
 const HEADER_COLL_HEIGHT = 50;
 
@@ -34,7 +69,8 @@ export default function ArticleHeader({
   height,
   imageSource,
   title,
-  width
+  width,
+  description
 }: ArticleHeaderProps) {
   const navigation = useNavigation();
   const { top: safeTop } = useSafeAreaInsets();
@@ -42,12 +78,7 @@ export default function ArticleHeader({
   const progress = useDerivedValue(() => {
     return 1 - Math.max(0, height - scrollAnim.value) / height;
   }, [height, scrollAnim]);
-  const animatedTitleFull = useAnimatedStyle(() => {
-    return {
-      textAlign: 'center',
-      opacity: 1 - progress.value
-    };
-  }, [progress, safeTop]);
+  const animatedChevron = useAnimatedChevron();
   const animatedTitleCollapsed = useAnimatedStyle(() => {
     return {
       textAlign: 'center',
@@ -113,27 +144,51 @@ export default function ArticleHeader({
               }}>
               <View
                 style={{
+                  paddingHorizontal: useSpacing(1),
                   alignItems: 'center',
-                  justifyContent: 'center',
+                  justifyContent: 'space-between',
                   flex: 1
                 }}>
-                <Animated.View
-                  style={[{ marginBottom: useSpacing(2), opacity: 0.92 }]}>
-                  <Logo width={55} height={55} />
-                </Animated.View>
-                <TextRoleNucleon
-                  style={{ textTransform: 'uppercase' }}
-                  role="headerSubtitle">
-                  {groupLabel !== 'root' ? groupLabel : 'Getting Started'}
-                </TextRoleNucleon>
-                <Animated.Text style={animatedTitleFull}>
+                <Stack
+                  space={4}
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center'
+                  }}>
+                  <View
+                    style={{
+                      alignItems: 'center'
+                    }}>
+                    <Animated.View
+                      style={[{ marginBottom: useSpacing(2), opacity: 0.92 }]}>
+                      <Logo width={55} height={55} />
+                    </Animated.View>
+                  </View>
                   <TextRoleNucleon
+                    style={{ textAlign: 'center' }}
                     allowFontScaling={false}
+                    textBreakStrategy="highQuality"
                     role="headerTitleFull">
                     {title}
                   </TextRoleNucleon>
-                </Animated.Text>
+                  <TextRoleNucleon
+                    style={{ textTransform: 'uppercase', textAlign: 'center' }}
+                    role="headerSubtitle">
+                    {groupLabel !== 'root' ? groupLabel : 'Getting Started'}
+                  </TextRoleNucleon>
+                </Stack>
               </View>
+              <BoxNucleon alignX="center" paddingX={1}>
+                <TextRoleNucleon
+                  style={{ textAlign: 'center' }}
+                  role="headerSubtitle">
+                  {description}
+                </TextRoleNucleon>
+                <Animated.View
+                  style={[animatedChevron, { marginTop: useSpacing(2) }]}>
+                  <IconNucleon size={48} name="chevron-double-down" />
+                </Animated.View>
+              </BoxNucleon>
             </View>
           </AnimatedImageBackground>
         </View>
