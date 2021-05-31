@@ -33,11 +33,11 @@ const INLINE_SPACING = 2;
 function ConditionalTouchable({ children, onPress, ...other }: any) {
   const { pressable } = useColorRoles();
   return onPress ? (
-    <GestureHandlerAdapterNucleon onPress={onPress} {...other}>
-      <TouchableRipple
-        rippleColor={pressable.ripple}
-        onPress={onPress}
-        {...other}>
+    <GestureHandlerAdapterNucleon
+      underlayColor={pressable.ripple}
+      onPress={onPress}
+      {...other}>
+      <TouchableRipple rippleColor={pressable.ripple} {...other}>
         {children}
       </TouchableRipple>
     </GestureHandlerAdapterNucleon>

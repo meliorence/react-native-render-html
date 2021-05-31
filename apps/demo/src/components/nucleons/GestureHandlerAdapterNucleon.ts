@@ -1,5 +1,10 @@
-import React, { Fragment, PropsWithChildren, useContext } from 'react';
-import { TouchableWithoutFeedback } from '@gorhom/bottom-sheet';
+import React, {
+  Children,
+  Fragment,
+  PropsWithChildren,
+  useContext
+} from 'react';
+import { TouchableHighlight } from '@gorhom/bottom-sheet';
 import gestureHandlerContextNucleon from './gestureHandlerContextNucleon';
 import {
   AccessibilityProps,
@@ -7,8 +12,14 @@ import {
   TouchableWithoutFeedbackProps
 } from 'react-native';
 
-const Passthrough = ({ children }: PropsWithChildren<any>) =>
-  React.createElement(Fragment, {}, children);
+const Passthrough = ({ children, onPress }: PropsWithChildren<any>) =>
+  React.createElement(
+    Fragment,
+    {},
+    Children.map(children, (c) =>
+      React.cloneElement(c, { onPress, ...c.props })
+    )
+  );
 
 /**
  * This is an adapter for pressable children of
@@ -25,7 +36,7 @@ export default function GestureHandlerAdapterNucleon<
   const isInBottomSheet = useContext(gestureHandlerContextNucleon);
   const shouldWrap = isInBottomSheet && Platform.OS === 'android';
   const WrapperTouchComponent = shouldWrap
-    ? (TouchableWithoutFeedback as any)
+    ? (TouchableHighlight as any)
     : Passthrough;
 
   return React.createElement(WrapperTouchComponent, {

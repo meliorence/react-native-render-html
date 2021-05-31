@@ -21,9 +21,12 @@ export default function UISwitchTideMolecule({
   ...switchProps
 }: UISwitchTideMoleculeProps) {
   const right = () => <UISwitchControlAtom {...switchProps} />;
+  const onPress = () => {
+    switchProps.onValueChange?.(!switchProps.value);
+  };
   return (
     <UITideAtom
-      onPress={() => switchProps.onValueChange?.(!switchProps.value)}
+      onPress={onPress}
       style={style}
       leftIconName={leftIconName}
       title={label}
