@@ -1,5 +1,6 @@
+/* eslint-disable react-native/no-inline-styles */
 import { Stack, useSpacing } from '@mobily/stacks';
-import React, { useEffect } from 'react';
+import React, { PropsWithChildren, useEffect } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, {
   useAnimatedStyle,
@@ -14,13 +15,8 @@ import { useNavigation } from '@react-navigation/core';
 import TextRoleNucleon from '../../nucleons/TextRoleNucleon';
 import { useAnimatedContext } from './AnimatedContextProvider';
 import HeaderColorRolesProvider from '../../croles/HeaderColorRolesProvider';
-import svgAssetsIndex from '../../../svgAssetsIndex';
 import BoxNucleon from '../../nucleons/BoxNucleon';
 import IconNucleon from '../../nucleons/IconNucleon';
-
-const AnimatedImageBackground = Animated.createAnimatedComponent(
-  ImageBackground
-);
 
 export type ArticleHeaderProps = {
   imageSource: ImageRequireSource;
@@ -30,8 +26,6 @@ export type ArticleHeaderProps = {
   height: number;
   description: string;
 };
-
-const Logo = svgAssetsIndex.logo as any;
 
 function useAnimatedChevron() {
   const chevronScale = useSharedValue(1);
@@ -64,36 +58,18 @@ function useAnimatedChevron() {
 
 const HEADER_COLL_HEIGHT = 50;
 
-export default function ArticleHeader({
-  groupLabel,
+function AnimatedContainer({
   height,
-  imageSource,
-  title,
   width,
-  description
-}: ArticleHeaderProps) {
-  const navigation = useNavigation();
+  progress,
+  children
+}: PropsWithChildren<{
+  height: number;
+  width: number;
+  progress: Animated.SharedValue<number>;
+}>) {
   const { top: safeTop } = useSafeAreaInsets();
   const { scrollAnim } = useAnimatedContext();
-  const progress = useDerivedValue(() => {
-    return 1 - Math.max(0, height - scrollAnim.value) / height;
-  }, [height, scrollAnim]);
-  const animatedChevron = useAnimatedChevron();
-  const animatedTitleCollapsed = useAnimatedStyle(() => {
-    return {
-      textAlign: 'center',
-      opacity: progress.value,
-      flex: 1
-    };
-  }, [progress, safeTop]);
-  const animatedParallaxImage = useAnimatedStyle(() => {
-    return {
-      width,
-      height,
-      zIndex: 0,
-      transform: [{ translateY: -1 * progress.value * height * 0.65 }]
-    };
-  });
   const animatedHeader = useAnimatedStyle(() => {
     return {
       height: Math.max(
@@ -102,12 +78,32 @@ export default function ArticleHeader({
       ),
       top: 0,
       position: 'absolute',
-      backgroundColor: 'black',
+      backgroundColor: 'rgba(0,0,32,0.92)',
       width,
       overflow: 'hidden',
       opacity: Math.max(1 - progress.value, 0.2)
     };
-  }, [scrollAnim, progress, safeTop, width]);
+  }, [scrollAnim, progress, safeTop, width, height]);
+  return (
+    <Animated.View pointerEvents="none" style={animatedHeader}>
+      {children}
+    </Animated.View>
+  );
+}
+
+function AnimatedFixedHeader({
+  title,
+  progress
+}: {
+  title: string;
+  progress: Animated.SharedValue<number>;
+}) {
+  const navigation = useNavigation();
+  const { top: safeTop } = useSafeAreaInsets();
+  const onMenuPress = React.useCallback(
+    () => (navigation as any).openDrawer(),
+    [navigation]
+  );
   const animatedFixedHeader = useAnimatedStyle(
     () => ({
       left: 0,
@@ -123,88 +119,139 @@ export default function ArticleHeader({
     }),
     [safeTop]
   );
-  const onMenuPress = React.useCallback(
-    () => (navigation as any).openDrawer(),
-    [navigation]
-  );
+  const animatedTitleCollapsed = useAnimatedStyle(() => {
+    return {
+      textAlign: 'center',
+      opacity: progress.value,
+      flex: 1
+    };
+  }, [progress, safeTop]);
   return (
-    <HeaderColorRolesProvider>
-      <Animated.View pointerEvents="none" style={animatedHeader}>
-        <View style={{ overflow: 'hidden', zIndex: 1 }}>
-          <AnimatedImageBackground
-            source={imageSource}
-            style={animatedParallaxImage}>
-            <View
+    <Animated.View style={animatedFixedHeader}>
+      <UIAppbarActionAtom icon="menu" onPress={onMenuPress} />
+      <Animated.Text numberOfLines={1} style={animatedTitleCollapsed}>
+        <TextRoleNucleon allowFontScaling={false} role="headerTitle">
+          {title}
+        </TextRoleNucleon>
+      </Animated.Text>
+      <UIAppbarActionAtom
+        onPress={() => navigation.goBack()}
+        icon="chevron-left"
+      />
+    </Animated.View>
+  );
+}
+
+function ArticleHeaderFullBody({
+  width,
+  height,
+  progress,
+  title,
+  description,
+  groupLabel,
+  imageSource
+}: {
+  width: number;
+  height: number;
+  progress: Animated.SharedValue<number>;
+  title: string;
+  groupLabel: string;
+  description: string;
+  imageSource: ImageRequireSource;
+}) {
+  const animatedChevron = useAnimatedChevron();
+  const animatedParallaxImage = useAnimatedStyle(() => {
+    const translateY = -1 * progress.value * height * 0.65;
+    return {
+      width,
+      height,
+      transform: [{ translateY }]
+    };
+  }, [progress, height, width]);
+  return (
+    <Animated.View style={animatedParallaxImage}>
+      <ImageBackground
+        resizeMode="cover"
+        resizeMethod="scale"
+        source={imageSource}
+        style={{ width, height }}>
+        <View
+          style={{
+            backgroundColor: 'rgba(0,0,32,0.5)',
+            justifyContent: 'center',
+            flex: 1
+          }}>
+          <View
+            style={{
+              paddingHorizontal: useSpacing(1),
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flex: 1
+            }}>
+            <Stack
+              space={4}
               style={{
-                backgroundColor: 'rgba(0,0,0,0.55)',
-                width,
-                height,
-                flexGrow: 1,
+                flex: 1,
                 justifyContent: 'center'
               }}>
-              <View
-                style={{
-                  paddingHorizontal: useSpacing(1),
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  flex: 1
-                }}>
-                <Stack
-                  space={4}
-                  style={{
-                    flex: 1,
-                    justifyContent: 'center'
-                  }}>
-                  <View
-                    style={{
-                      alignItems: 'center'
-                    }}>
-                    <Animated.View
-                      style={[{ marginBottom: useSpacing(2), opacity: 0.92 }]}>
-                      <Logo width={55} height={55} />
-                    </Animated.View>
-                  </View>
-                  <TextRoleNucleon
-                    style={{ textAlign: 'center' }}
-                    allowFontScaling={false}
-                    textBreakStrategy="highQuality"
-                    role="headerTitleFull">
-                    {title}
-                  </TextRoleNucleon>
-                  <TextRoleNucleon
-                    style={{ textTransform: 'uppercase', textAlign: 'center' }}
-                    role="headerSubtitle">
-                    {groupLabel !== 'root' ? groupLabel : 'Getting Started'}
-                  </TextRoleNucleon>
-                </Stack>
-              </View>
-              <BoxNucleon alignX="center" paddingX={1}>
-                <TextRoleNucleon
-                  style={{ textAlign: 'center' }}
-                  role="headerSubtitle">
-                  {description}
-                </TextRoleNucleon>
-                <Animated.View
-                  style={[animatedChevron, { marginTop: useSpacing(2) }]}>
-                  <IconNucleon size={48} name="chevron-double-down" />
-                </Animated.View>
-              </BoxNucleon>
-            </View>
-          </AnimatedImageBackground>
+              <TextRoleNucleon
+                style={{ textAlign: 'center' }}
+                allowFontScaling={false}
+                textBreakStrategy="highQuality"
+                role="headerTitleFull">
+                {title}
+              </TextRoleNucleon>
+              <TextRoleNucleon
+                style={{ textTransform: 'uppercase', textAlign: 'center' }}
+                role="headerSubtitle">
+                {groupLabel !== 'root' ? groupLabel : 'Getting Started'}
+              </TextRoleNucleon>
+            </Stack>
+          </View>
+          <BoxNucleon alignX="center" paddingX={1}>
+            <TextRoleNucleon
+              style={{ textAlign: 'center' }}
+              role="headerSubtitle">
+              {description}
+            </TextRoleNucleon>
+            <Animated.View
+              style={[animatedChevron, { marginTop: useSpacing(2) }]}>
+              <IconNucleon size={48} name="chevron-double-down" />
+            </Animated.View>
+          </BoxNucleon>
         </View>
-      </Animated.View>
-      <Animated.View style={animatedFixedHeader}>
-        <UIAppbarActionAtom icon="menu" onPress={onMenuPress} />
-        <Animated.Text numberOfLines={1} style={animatedTitleCollapsed}>
-          <TextRoleNucleon allowFontScaling={false} role="headerTitle">
-            {title}
-          </TextRoleNucleon>
-        </Animated.Text>
-        <UIAppbarActionAtom
-          onPress={() => navigation.goBack()}
-          icon="chevron-left"
+      </ImageBackground>
+    </Animated.View>
+  );
+}
+
+export default function ArticleHeader({
+  groupLabel,
+  height,
+  imageSource,
+  title,
+  width,
+  description
+}: ArticleHeaderProps) {
+  const { scrollAnim } = useAnimatedContext();
+  const progress = useDerivedValue(() => {
+    return 1 - Math.max(0, height - scrollAnim.value) / height;
+  }, [height, scrollAnim]);
+
+  return (
+    <HeaderColorRolesProvider>
+      <AnimatedContainer height={height} progress={progress} width={width}>
+        <ArticleHeaderFullBody
+          description={description}
+          groupLabel={groupLabel}
+          height={height}
+          imageSource={imageSource}
+          progress={progress}
+          title={title}
+          width={width}
         />
-      </Animated.View>
+      </AnimatedContainer>
+      <AnimatedFixedHeader progress={progress} title={title} />
     </HeaderColorRolesProvider>
   );
 }

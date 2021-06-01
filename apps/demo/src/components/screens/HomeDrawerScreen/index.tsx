@@ -40,18 +40,28 @@ const specsByGroups = groupBy(
 );
 
 const groups: Array<GroupDefinition> = Object.entries(specsByGroups).map(
-  ([groupName, pages]) => {
+  ([groupName, pages], groupIndex, groupEntries) => {
+    const [_prevGroupName, prevGroupPages] = groupEntries[groupIndex - 1] || [];
+    const prevGroupLastPage = prevGroupPages
+      ? prevGroupPages?.[prevGroupPages?.length - 1]
+      : null;
+    const [_nextGroupName, nextGroupPages] = groupEntries[groupIndex + 1] || [];
+    const nextGroupFirstPage = nextGroupPages ? nextGroupPages?.[0] : null;
     return {
       group: groupName,
       groupLabel: groupName,
-      routes: pages.map<ResourceRouteNav>((page) => ({
+      routes: pages.map<ResourceRouteNav>((page, pageIndex) => ({
         header: () => null,
         component: function Page() {
+          const prevPage = pages[pageIndex - 1] || prevGroupLastPage || null;
+          const nextPage = pages[pageIndex + 1] || nextGroupFirstPage || null;
           return (
             <ArticleTemplate
               title={page.title}
               groupLabel={groupName}
               description={page.description}
+              prevPage={prevPage}
+              nextPage={nextPage}
               imageSource={imagesMap[page.id]}>
               {React.createElement(page.component)}
             </ArticleTemplate>

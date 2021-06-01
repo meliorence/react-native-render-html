@@ -14,9 +14,10 @@ import IconNucleon, {
 import GestureHandlerAdapterNucleon from './nucleons/GestureHandlerAdapterNucleon';
 import { useColorRoles } from '../theme/colorSystem';
 
-export interface TideAtomProps extends AccessibilityProps {
+export interface UITideAtomProps extends AccessibilityProps {
   style?: StyleProp<ViewStyle>;
   title: string;
+  align?: 'left' | 'right';
   leftIconName?: IconName;
   rightIconName?: IconName;
   active?: boolean;
@@ -62,13 +63,13 @@ function Right({
   right,
   rightIconName,
   ...nucProps
-}: Pick<TideAtomProps, 'right' | 'rightIconName'> & BoxNucleonProps) {
+}: Pick<UITideAtomProps, 'right' | 'rightIconName'> & BoxNucleonProps) {
   return (
     <BoxNucleon
       alignX="center"
       alignY="center"
       {...nucProps}
-      style={[{ width: RIGHT_WIDTH }, nucProps.style]}>
+      style={[{ width: right ? RIGHT_WIDTH : undefined }, nucProps.style]}>
       {typeof right === 'function'
         ? right({ width: RIGHT_WIDTH })
         : right ||
@@ -95,10 +96,10 @@ function CenterBottom({
   bottom
 }: {
   availableWidth: number;
-  bottom: TideAtomProps['bottom'];
+  bottom: UITideAtomProps['bottom'];
 }) {
   return (
-    <View style={{ width: availableWidth }}>
+    <View>
       <contentWidthContextNucleon.Provider value={availableWidth}>
         {typeof bottom === 'function' ? bottom() : bottom}
       </contentWidthContextNucleon.Provider>
@@ -115,8 +116,9 @@ const UITideAtom = memo(function UITideAtom({
   onPress,
   rightIconName,
   active,
+  align = 'left',
   ...accessibilityProps
-}: TideAtomProps) {
+}: UITideAtomProps) {
   const isSelectable = typeof active === 'boolean';
   const { pressable, selectable, softIconColor } = useColorRoles();
   const displayRight = !!(right || rightIconName);
@@ -146,10 +148,10 @@ const UITideAtom = memo(function UITideAtom({
   return (
     <View
       style={[
-        style,
         {
           backgroundColor
-        }
+        },
+        style
       ]}>
       <ConditionalTouchable onPress={onPress} {...accessibilityProps}>
         <View
@@ -167,19 +169,19 @@ const UITideAtom = memo(function UITideAtom({
               name={leftIconName!}
             />
           )}
-          <BoxNucleon
+          <Stack
+            space={1}
+            padding={1}
+            align={align}
             style={{
-              flexGrow: 1
-            }}
-            alignY="center"
-            wrap="nowrap">
-            <Stack style={{ flexGrow: 1, justifyContent: 'center' }} space={1}>
-              <Title color={contentColor} title={title} />
-              {displayBottom && (
-                <CenterBottom availableWidth={middleWidth} bottom={bottom} />
-              )}
-            </Stack>
-          </BoxNucleon>
+              flexGrow: 1,
+              flexShrink: 1
+            }}>
+            <Title color={contentColor} title={title} />
+            {displayBottom && (
+              <CenterBottom availableWidth={middleWidth} bottom={bottom} />
+            )}
+          </Stack>
           {displayRight && (
             <Right
               marginLeft={INLINE_SPACING}
