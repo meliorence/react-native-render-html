@@ -140,6 +140,7 @@ export type UIToolkitConfig = {
     props: RNRH.RenderHTMLProps;
     preferHtmlSrc: boolean;
     extraneousDeps: string[];
+    snapshot: string;
   }>;
   RefDoc: ComponentType<{ target: PageSpecs; fragment?: string }>;
   Acronym: ComponentType<AcronymDefinition>;
