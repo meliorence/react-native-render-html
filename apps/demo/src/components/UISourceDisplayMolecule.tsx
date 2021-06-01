@@ -1,8 +1,6 @@
 import { useSpacing } from '@mobily/stacks';
 import React, { useCallback } from 'react';
 import Highlighter, { HighlighterProps } from '../highlight/Highlighter';
-import { useColorScheme } from '../state/ColorSchemeProvider';
-import { useColorPrimitives } from '../theme/colorSystem';
 import useTextRoleNucleon, {
   TextRoleNucleonProps
 } from './nucleons/useTextRoleNucleon';
@@ -36,9 +34,7 @@ export default function UISourceDisplayMolecule({
   showLineNumbers = true,
   ...otherProps
 }: UISourceDisplayMoleculeProps) {
-  const { card } = useColorPrimitives();
   const spacing = useSpacing(2);
-  const colorScheme = useColorScheme();
   const { fontFamily, fontSize } = useTextRoleNucleon({
     role: textRole
   });
@@ -50,17 +46,11 @@ export default function UISourceDisplayMolecule({
   return (
     <Highlighter
       {...otherProps}
-      highlightJsStyle={
-        colorScheme === 'dark' ? 'solarizedDark' : 'solarizedLight'
-      }
+      highlightJsStyle={'atelierPlateauDark'}
       fontSize={fontSize}
       fontFamily={fontFamily}
       lineStyle={{
         paddingHorizontal: spacing
-      }}
-      lineNumberStyle={{
-        backgroundColor: card.color,
-        color: card.content
       }}
       paddingBottom={syntheticPaddingVertical}
       paddingTop={syntheticPaddingVertical}
