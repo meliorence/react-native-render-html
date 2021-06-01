@@ -14,6 +14,11 @@ import { ScrollView } from 'react-native-gesture-handler';
 import BoxNucleon from '../../nucleons/BoxNucleon';
 import UISwitchTideMolecule from '../../UISwitchTideMolecule';
 import CardColorRolesProvider from '../../croles/CardColorRolesProvider';
+import TextRoleNucleon from '../../nucleons/TextRoleNucleon';
+import svgAssetsIndex from '../../../svgAssetsIndex';
+import { useSpacing } from '@mobily/stacks';
+
+const Logo = svgAssetsIndex.logo as any;
 
 function Footer() {
   const { surface } = useColorRoles();
@@ -32,6 +37,25 @@ function Footer() {
   );
 }
 
+const LOGO_SIZE = 42;
+
+function Header() {
+  const { statusBarBackground } = useColorRoles();
+  return (
+    <BoxNucleon
+      direction="row"
+      alignY="center"
+      backgroundColor={statusBarBackground}
+      paddingBottom={2}
+      padding={1}>
+      <Logo height={LOGO_SIZE} width={LOGO_SIZE} />
+      <TextRoleNucleon style={{ marginLeft: useSpacing(2) }} role="bodyBold">
+        Discover RNRH
+      </TextRoleNucleon>
+    </BoxNucleon>
+  );
+}
+
 export default function CustomDrawerContent(
   props: DrawerContentComponentProps<any>
 ) {
@@ -46,6 +70,7 @@ export default function CustomDrawerContent(
           backgroundColor: statusBarBackground
         }}
       />
+      <Header />
       <ScrollView
         {...props}
         contentContainerStyle={{
