@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
 import {
   createDrawerNavigator,
@@ -103,7 +104,8 @@ function mapGroup({
         header: header || groupHeader,
         title,
         headerShown: true,
-        iconName
+        iconName,
+        unmountOnBlur: true
       }}
       key={name}
       name={name}
