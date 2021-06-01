@@ -1,7 +1,6 @@
 import React, { PropsWithChildren, Fragment } from 'react';
 import { HTMLSourceInline } from 'react-native-render-html';
 import { ToolkitProvider, UIToolkitConfig } from '@doc/pages';
-import { TRenderEngine } from '@native-html/transient-render-engine';
 import { WEBSITE_BASE } from '@doc/constants';
 
 const Chapter = ({ children, title }: PropsWithChildren<{ title: string }>) => (
@@ -48,7 +47,8 @@ export default function MdxToolkitProvider({
       title,
       props,
       preferHtmlSrc,
-      extraneousDeps
+      extraneousDeps,
+      snapshot
     }) => {
       const html = (props.source as HTMLSourceInline).html;
       return (
@@ -60,7 +60,7 @@ export default function MdxToolkitProvider({
           snippet={snippet}
           expoSource={expoSource}
           extraneousDeps={extraneousDeps}
-          snapshot={new TRenderEngine(props).buildTTree(html).snapshot()}
+          snapshot={snapshot}
         />
       );
     },

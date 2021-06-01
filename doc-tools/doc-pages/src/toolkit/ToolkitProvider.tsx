@@ -12,6 +12,8 @@ import {
 import toolkitContext from './toolkitContext';
 import makeSnippet from './makeSnippet';
 import defaultImports from './defaultImports';
+import { TRenderEngine } from '@native-html/transient-render-engine';
+import { HTMLSourceInline } from 'react-native-render-html';
 
 function buildRefs(Builder: UIToolkitConfig['RefBuilder']): UIToolkitRefs {
   return {
@@ -89,6 +91,9 @@ export default function ToolkitProvider({
             expoSource={makeSnippet(props, conf, true)}
             preferHtmlSrc={preferHtmlSrc}
             props={props}
+            snapshot={new TRenderEngine(props)
+              .buildTTree((props.source as HTMLSourceInline).html)
+              .snapshot()}
             extraneousDeps={conf.importStatements
               .map((v) => v.package)
               .filter((pck) => !(pck in defaultImports))}
