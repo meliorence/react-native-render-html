@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
-import UITideAtom, { TideAtomProps } from './UITideAtom';
+import UITideAtom, { UITideAtomProps } from './UITideAtom';
 import SliderControlAtom, {
   SliderControlAtomProps
 } from './UISliderControlAtom';
@@ -13,7 +13,7 @@ export type UISliderTideMoleculeProps = Omit<
   'width' | 'style'
 > & {
   style?: StyleProp<ViewStyle>;
-  leftIconName: TideAtomProps['leftIconName'];
+  leftIconName: UITideAtomProps['leftIconName'];
   label: string;
 };
 

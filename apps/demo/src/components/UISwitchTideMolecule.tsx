@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
-import UITideAtom, { TideAtomProps } from './UITideAtom';
+import UITideAtom, { UITideAtomProps } from './UITideAtom';
 import UISwitchControlAtom, {
   UISwitchControlAtomProps
 } from './UISwitchControlAtom';
@@ -10,7 +10,7 @@ export type UISwitchTideMoleculeProps = Omit<
   'style'
 > & {
   style?: StyleProp<ViewStyle>;
-  leftIconName: TideAtomProps['leftIconName'];
+  leftIconName: UITideAtomProps['leftIconName'];
   label: string;
 };
 

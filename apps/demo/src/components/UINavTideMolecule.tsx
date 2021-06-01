@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
-import UITideAtom, { TideAtomProps } from './UITideAtom';
+import UITideAtom, { UITideAtomProps } from './UITideAtom';
 import TextRoleNucleon from './nucleons/TextRoleNucleon';
 import { useNavigation } from '@react-navigation/core';
 import { useColorRoles } from '../theme/colorSystem';
 
 export type UINavTideMoleculeProps<R extends string> = Omit<
-  TideAtomProps,
+  UITideAtomProps,
   'rightIconName' | 'onPress' | 'title'
 > & {
   description?: string;

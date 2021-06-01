@@ -43,8 +43,6 @@ function UIIconButton({
   );
 }
 
-function RenderHTMLCardHeader({}) {}
-
 export default function RenderHtmlCardOrganism({
   props: renderHtmlProps,
   caption,
