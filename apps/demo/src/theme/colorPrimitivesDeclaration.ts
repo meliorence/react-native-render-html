@@ -1,15 +1,21 @@
 import Color from 'color';
+import { ColorPrimitive } from '../substratum';
 import alphaMixColor from './alphaMixColor';
 import { ColorPrimitivesDeclaration } from './colorSystem';
 import shiftColor from './shiftColor';
 
-const black = 'rgb(20, 20, 20)';
+const black = 'rgb(54, 54, 64)';
 const white = 'rgb(230, 230, 230)';
 
 export type CreateColorPrimitivesSpec = Omit<
   ColorPrimitivesDeclaration,
   'card' | 'placeholder' | 'primaryVariant' | 'accentVariant' | 'scrim'
 >;
+
+const heading: ColorPrimitive = {
+  color: white,
+  content: 'rgb(0,0,48)'
+};
 
 function createColorPrimitives({
   primary,
@@ -24,9 +30,10 @@ function createColorPrimitives({
       color: shiftColor(primary.color, 0.2),
       content: primary.content
     },
+    heading,
     accent,
     accentVariant: {
-      color: shiftColor(accent.color, 0.2),
+      color: shiftColor(accent.color, 0.5),
       content: primary.content
     },
     surface,
@@ -41,11 +48,12 @@ function createColorPrimitives({
 
 const dark: ColorPrimitivesDeclaration = createColorPrimitives({
   primary: {
-    color: '#29434e',
+    color: 'yellow',
     content: white
   },
+  heading,
   accent: {
-    color: '#26c6da',
+    color: 'rgb(0,64,128)',
     content: white
   },
   surface: {
@@ -56,11 +64,12 @@ const dark: ColorPrimitivesDeclaration = createColorPrimitives({
 
 const light: ColorPrimitivesDeclaration = createColorPrimitives({
   primary: {
-    color: '#546e7a',
+    color: 'yellow',
     content: white
   },
+  heading,
   accent: {
-    color: '#26c6da',
+    color: 'rgb(0,54,128)',
     content: white
   },
   surface: {

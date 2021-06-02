@@ -10,11 +10,11 @@ import generateColorRoles from '../../theme/generateColorRoles';
 function mapPrimitivesColorRoles(
   primitives: ColorPrimitivesDeclaration
 ): ColorRoles {
-  const { primary } = primitives;
+  const { heading } = primitives;
   return generateColorRoles({
     name: 'header',
-    surfaceColor: primary.color,
-    surfaceContent: primary.content,
+    surfaceColor: heading.content,
+    surfaceContent: heading.color,
     primitives
   });
 }

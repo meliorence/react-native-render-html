@@ -26,9 +26,9 @@ export type TextRole =
   | 'bodyAPIRef'
   | 'caption';
 
-const FONT_BODY = 'Raleway_400Regular';
+const FONT_BODY = 'Raleway_300Light';
 const FONT_BODY_BOLD = 'Raleway_600SemiBold';
-const FONT_BODY_ITALIC = 'Raleway_400Regular_Italic';
+const FONT_BODY_ITALIC = 'Raleway_300Light_Italic';
 const FONT_MONO = 'SourceCodePro_400Regular';
 const FONT_MONO_ITALIC = 'SourceCodePro_400Regular_Italic';
 const FONT_UI = 'Raleway_400Regular';

@@ -45,7 +45,7 @@ export default function generateColorRoles({
     },
     softDivider: softContent,
     softIconColor: secondaryContent,
-    statusBarBackground: Color(surfaceColor).darken(0.3).string(),
+    statusBarBackground: primitives.heading.content,
     selectable: {
       inactiveBackground,
       inactiveTint: surfaceContent,
