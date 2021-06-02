@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import { Stack, useSpacing } from '@mobily/stacks';
+import { useSpacing } from '@mobily/stacks';
 import React, {
   PropsWithChildren,
   RefObject,
@@ -8,7 +8,6 @@ import React, {
   useRef
 } from 'react';
 import BoxNucleon from '../../nucleons/BoxNucleon';
-import useSurfaceBackgroundStyleNucleon from '../../nucleons/useSurfaceBackgroundStyleNucleon';
 import AnimatedContextProvider, {
   useAnimatedContext
 } from './AnimatedContextProvider';
@@ -127,43 +126,38 @@ function Article({
         ref={scrollRef}
         style={{ width, height: headerHeight }}
         onLayout={() => scroller.setIsLoaded()}
-        contentContainerStyle={[
-          useSurfaceBackgroundStyleNucleon(),
-          { paddingTop: headerHeight }
-        ]}>
-        <BoxNucleon marginTop={4}>
-          <Stack space={0}>
-            {children}
-            <BoxNucleon alignY="stretch" direction="row">
-              {prevPage ? (
-                <SiblingPageTide
-                  style={{
-                    flexGrow: 1,
-                    flexShrink: 1,
-                    justifyContent: 'center',
-                    marginRight: nextPage ? gap : 0
-                  }}
-                  direction="prev"
-                  target={prevPage}
-                />
-              ) : (
-                <View style={{ flexGrow: 1, flexShrink: 0 }} />
-              )}
-              {nextPage ? (
-                <SiblingPageTide
-                  style={{
-                    flexGrow: 1,
-                    flexShrink: 1,
-                    justifyContent: 'center'
-                  }}
-                  direction="next"
-                  target={nextPage}
-                />
-              ) : (
-                <View style={{ flexGrow: 1, flexShrink: 0 }} />
-              )}
-            </BoxNucleon>
-          </Stack>
+        contentContainerStyle={[{ paddingTop: headerHeight }]}>
+        <BoxNucleon>
+          {children}
+          <BoxNucleon alignY="stretch" direction="row">
+            {prevPage ? (
+              <SiblingPageTide
+                style={{
+                  flexGrow: 1,
+                  flexShrink: 1,
+                  justifyContent: 'center',
+                  marginRight: nextPage ? gap : 0
+                }}
+                direction="prev"
+                target={prevPage}
+              />
+            ) : (
+              <View style={{ flexGrow: 1, flexShrink: 0 }} />
+            )}
+            {nextPage ? (
+              <SiblingPageTide
+                style={{
+                  flexGrow: 1,
+                  flexShrink: 1,
+                  justifyContent: 'center'
+                }}
+                direction="next"
+                target={nextPage}
+              />
+            ) : (
+              <View style={{ flexGrow: 1, flexShrink: 0 }} />
+            )}
+          </BoxNucleon>
         </BoxNucleon>
       </Animated.ScrollView>
       <ArticleHeader

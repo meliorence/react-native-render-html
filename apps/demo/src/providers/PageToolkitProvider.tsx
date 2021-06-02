@@ -1,5 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { Fragment, PropsWithChildren, useCallback } from 'react';
+import React, {
+  Children,
+  Fragment,
+  PropsWithChildren,
+  ReactElement,
+  useCallback
+} from 'react';
 import { ToolkitProvider, UIToolkitConfig, RefAPIProps } from '@doc/pages';
 import BodyChapterMolecule from '../components/BodyChapterMolecule';
 import BodySectionMolecule from '../components/BodySectionMolecule';
@@ -13,25 +19,37 @@ import BodyAdmonitionAtom from '../components/BodyAdmonitionAtom';
 import ArticleContainerAtom from '../components/ArticleContainerAtom';
 import ArticleHeaderAtom from '../components/ArticleHeader';
 import UIHyperlinkAtom from '../components/UIHyperlinkAtom';
-import useOnLinkPress from '../hooks/useOnLinkPress';
 import { useNavigation } from '@react-navigation/core';
 import TextRoleNucleon from '../components/nucleons/TextRoleNucleon';
 import svgAssetsIndex from '../svgAssetsIndex';
 import { useColorRoles } from '../theme/colorSystem';
-import { Stack, useSpacing } from '@mobily/stacks';
+import { useSpacing } from '@mobily/stacks';
 import CardColorRolesProvider from '../components/croles/CardColorRolesProvider';
-import { StyleSheet, View } from 'react-native';
+import { Linking, StyleSheet, View } from 'react-native';
 import BoxNucleon from '../components/nucleons/BoxNucleon';
 import { WEBSITE_URL } from '@doc/constants';
 import URI from 'urijs';
 import TNodeTransformDisplayOrganism from '../components/TNodeTransformDisplayOrganism';
+
+const genericOnLinkPress = (uri: string) => Linking.openURL(uri);
+
+//@ts-ignore
+function useOnLinkPress(uri: string): () => void;
+function useOnLinkPress(): (uri: string) => void;
+function useOnLinkPress(uri?: string) {
+  if (uri) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    return useCallback(() => genericOnLinkPress(uri), [uri]);
+  }
+  return genericOnLinkPress;
+}
 
 const styles = StyleSheet.create({
   underline: {
     textDecorationLine: 'underline'
   },
   apiref: {
-    // backgroundColor: '#1c1e20'
+    backgroundColor: '#1c1e2010'
   }
 });
 
@@ -101,9 +119,6 @@ const SourceDisplay: UIToolkitConfig['SourceDisplay'] = ({
 );
 
 const RefDoc: UIToolkitConfig['RefDoc'] = ({ target, children, fragment }) => {
-  if (fragment !== undefined) {
-    console.info('target', fragment, children);
-  }
   const navigation = useNavigation();
   const onPress = useCallback(() => {
     navigation.navigate(`${target.group}-${target.id}`, { fragment });
@@ -180,24 +195,32 @@ const toolkitConfig: UIToolkitConfig = {
   ),
   InlineCode: (props) => <TextRoleNucleon role="bodyInlineCode" {...props} />,
   DList: ({ children }) => (
-    <Stack
-      padding={2}
-      style={{ backgroundColor: 'rgba(125,125,125,0.2)' }}
-      space={2}>
-      {children}
-    </Stack>
+    <BoxNucleon padding={2}>
+      {Children.map(children as ReactElement[], (c: ReactElement, i) =>
+        React.cloneElement(c, { ...c.props, index: Math.floor(i / 2) })
+      )}
+    </BoxNucleon>
   ),
-  DListItem: ({ children }) => (
+  DListItem: ({ children, index }: any) => (
     <BoxNucleon
       style={{
-        marginBottom: useSpacing(4),
-        marginLeft: useSpacing(4)
+        paddingBottom: useSpacing(4),
+        paddingLeft: useSpacing(6),
+        backgroundColor:
+          index % 2 === 0 ? 'rgba(125,125,125,0.2)' : 'rgba(125,125,125,0.1)'
       }}>
       <BodyParagraphAtom style={{}}>{children}</BodyParagraphAtom>
     </BoxNucleon>
   ),
-  DListTitle: ({ children }) => (
-    <BoxNucleon padding={1} style={{ flex: 1 }}>
+  DListTitle: ({ children, index }: any) => (
+    <BoxNucleon
+      paddingTop={4}
+      padding={2}
+      style={{
+        flex: 1,
+        backgroundColor:
+          index % 2 === 0 ? 'rgba(125,125,125,0.2)' : 'rgba(125,125,125,0.1)'
+      }}>
       <TextRoleNucleon role="bodyDListHeader">{children}</TextRoleNucleon>
     </BoxNucleon>
   ),

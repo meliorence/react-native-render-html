@@ -4,6 +4,7 @@ import type { AdmonitionType } from '@doc/pages';
 export interface ColorPrimitivesDeclaration {
   primary: ColorPrimitive;
   primaryVariant: ColorPrimitive;
+  heading: ColorPrimitive;
   accent: ColorPrimitive;
   accentVariant: ColorPrimitive;
   /**

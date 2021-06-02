@@ -17,6 +17,7 @@ import { useAnimatedContext } from './AnimatedContextProvider';
 import HeaderColorRolesProvider from '../../croles/HeaderColorRolesProvider';
 import BoxNucleon from '../../nucleons/BoxNucleon';
 import IconNucleon from '../../nucleons/IconNucleon';
+import { HEADER_COLL_HEIGHT } from '../../../constants';
 
 export type ArticleHeaderProps = {
   imageSource: ImageRequireSource;
@@ -55,8 +56,6 @@ function useAnimatedChevron() {
     };
   });
 }
-
-const HEADER_COLL_HEIGHT = 50;
 
 function AnimatedContainer({
   height,

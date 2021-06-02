@@ -11,6 +11,8 @@ import {
 import {
   Raleway_400Regular,
   Raleway_400Regular_Italic,
+  Raleway_300Light,
+  Raleway_300Light_Italic,
   Raleway_600SemiBold
 } from '@expo-google-fonts/raleway';
 
@@ -30,6 +32,8 @@ export default function useCachedResources() {
           SourceCodePro_400Regular,
           SourceCodePro_400Regular_Italic,
           SourceCodePro_600SemiBold,
+          Raleway_300Light,
+          Raleway_300Light_Italic,
           Raleway_400Regular,
           Raleway_400Regular_Italic,
           Raleway_600SemiBold

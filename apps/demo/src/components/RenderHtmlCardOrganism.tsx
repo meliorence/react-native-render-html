@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import { Stack, useSpacing } from '@mobily/stacks';
 import React, { useState } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -13,7 +14,6 @@ import { RenderHTMLProps, HTMLSourceInline } from 'react-native-render-html';
 import { StyleSheet, TouchableWithoutFeedbackProps, View } from 'react-native';
 import GestureHandlerAdapterNucleon from './nucleons/GestureHandlerAdapterNucleon';
 import { TouchableRipple } from 'react-native-paper';
-import Color from 'color';
 
 function UIIconButton({
   onPress,
@@ -25,17 +25,17 @@ function UIIconButton({
   iconName: IconNucleonProps['name'];
   selected: boolean;
 }) {
-  const { pressable } = useColorRoles();
+  const { selectable } = useColorRoles();
   const space1 = useSpacing(1);
   return (
     <GestureHandlerAdapterNucleon onPress={onPress}>
       <TouchableRipple
         style={{ padding: space1 }}
-        rippleColor={pressable.ripple}
+        rippleColor={selectable.ripple}
         {...other}>
         <IconNucleon
           size={24}
-          color={selected ? 'white' : 'rgb(190,190,195)'}
+          color={selected ? selectable.activeTint : selectable.inactiveTint}
           name={iconName}
         />
       </TouchableRipple>
@@ -65,18 +65,18 @@ export default function RenderHtmlCardOrganism({
   const hzSpace = useSpacing(0);
   const vtSpace = useSpacing(0);
   const borderWidth = StyleSheet.hairlineWidth;
-  const { surface } = useColorRoles();
+  const { surface, sheetHandle, selectable } = useColorRoles();
   const contentWidth = useNuclearContentWidth();
   const sourceDisplayStyle = {
     minWidth: contentWidth
   };
-  const cardHeaderBg = '#5f76d4';
+  const cardBg = sheetHandle.background;
   return (
     <View>
       <BoxNucleon
         grow={false}
         style={{
-          backgroundColor: Color(cardHeaderBg).darken(0.04).string(),
+          backgroundColor: cardBg,
           alignSelf: 'flex-start'
         }}
         paddingX={2}
@@ -86,7 +86,7 @@ export default function RenderHtmlCardOrganism({
             flexGrow: 0
           }}
           role="body"
-          color="white">
+          color={selectable.inactiveTint}>
           {title}
         </TextRoleNucleon>
       </BoxNucleon>
@@ -96,11 +96,11 @@ export default function RenderHtmlCardOrganism({
           {
             marginHorizontal: hzSpace,
             paddingVertical: vtSpace,
-            backgroundColor: 'rgba(0,0,0,0.05)',
             borderLeftWidth: 4,
             borderRightWidth: 4,
             borderBottomWidth: 4,
-            borderColor: cardHeaderBg
+            borderColor: cardBg,
+            backgroundColor: cardBg
           },
           style
         ]}>
@@ -110,10 +110,10 @@ export default function RenderHtmlCardOrganism({
             justifyContent: 'center',
             alignItems: 'center'
           }}
-          backgroundColor={cardHeaderBg}
+          backgroundColor={sheetHandle.background}
           paddingY={2}>
           <BoxNucleon
-            backgroundColor={cardHeaderBg}
+            backgroundColor={cardBg}
             paddingX={2}
             style={{ flexDirection: 'row' }}>
             <UIIconButton

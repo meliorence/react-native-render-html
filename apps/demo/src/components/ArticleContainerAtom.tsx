@@ -8,7 +8,7 @@ import BodyChapterMolecule, {
   BodyChapterMoleculeProps
 } from './BodyChapterMolecule';
 import upperRoman from '@jsamr/counter-style/presets/upperRoman';
-import { BODY_CHAPTER_SPACING } from '../constants';
+import { BODY_CHAPTER_SPACING, BODY_VERTICAL_SPACING } from '../constants';
 import { useScroller } from './templates/ArticleTemplate/ScrollerProvider';
 import { View } from 'react-native';
 
@@ -29,9 +29,17 @@ export default function ArticleContainerAtom({
   let index = 1;
   const scrollIndex = useScroller();
   const chapterMarginBottom = useSpacing(BODY_CHAPTER_SPACING);
+  const flatChildren = Children.toArray(children);
   return (
-    <View>
-      {Children.map(children, (c) => {
+    <View
+      style={{
+        paddingVertical: useSpacing(BODY_VERTICAL_SPACING)
+      }}>
+      {flatChildren.map((c, i) => {
+        const styles =
+          i < flatChildren.length - 1
+            ? { marginBottom: chapterMarginBottom }
+            : undefined;
         if (isBodyChapterElement(c)) {
           const chapterEl = React.cloneElement(c, {
             ...c.props,
@@ -39,7 +47,8 @@ export default function ArticleContainerAtom({
           });
           return (
             <View
-              style={{ marginBottom: chapterMarginBottom }}
+              key={i}
+              style={styles}
               onLayout={(e) => {
                 scrollIndex.registerLayout(e, c.props.title!);
               }}>
@@ -47,7 +56,11 @@ export default function ArticleContainerAtom({
             </View>
           );
         }
-        return c;
+        return (
+          <View key={i} style={styles}>
+            {c}
+          </View>
+        );
       })}
     </View>
   );

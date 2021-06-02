@@ -58,10 +58,12 @@ export default function PageConceptTRE() {
   } = useToolkit();
   return (
     <Page>
-      <Paragraph>
-        This article is an introduction to the <Acronym name="TRE" />{' '}
-        architecture.
-      </Paragraph>
+      <Header>
+        <Paragraph>
+          This article is an introduction to the <Acronym name="TRE" />{' '}
+          architecture.
+        </Paragraph>
+      </Header>
       <Chapter title="Element Models">
         <Paragraph>
           <Bold>Element models</Bold> form the building block of the engine.

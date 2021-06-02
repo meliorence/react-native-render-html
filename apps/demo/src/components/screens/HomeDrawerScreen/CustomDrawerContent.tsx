@@ -17,6 +17,8 @@ import CardColorRolesProvider from '../../croles/CardColorRolesProvider';
 import TextRoleNucleon from '../../nucleons/TextRoleNucleon';
 import svgAssetsIndex from '../../../svgAssetsIndex';
 import { useSpacing } from '@mobily/stacks';
+import { HEADER_COLL_HEIGHT } from '../../../constants';
+import HeaderColorRolesProvider from '../../croles/HeaderColorRolesProvider';
 
 const Logo = svgAssetsIndex.logo as any;
 
@@ -40,12 +42,13 @@ function Footer() {
 const LOGO_SIZE = 42;
 
 function Header() {
-  const { statusBarBackground } = useColorRoles();
+  const { surface } = useColorRoles();
   return (
     <BoxNucleon
       direction="row"
       alignY="center"
-      backgroundColor={statusBarBackground}
+      backgroundColor={surface.background}
+      style={{ height: HEADER_COLL_HEIGHT }}
       paddingBottom={2}
       padding={1}>
       <Logo height={LOGO_SIZE} width={LOGO_SIZE} />
@@ -70,7 +73,9 @@ export default function CustomDrawerContent(
           backgroundColor: statusBarBackground
         }}
       />
-      <Header />
+      <HeaderColorRolesProvider>
+        <Header />
+      </HeaderColorRolesProvider>
       <ScrollView
         {...props}
         contentContainerStyle={{

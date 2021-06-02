@@ -31,16 +31,12 @@ export type BodySectionMoleculeProps = PropsWithChildren<
 export default function BodySectionMolecule({
   title,
   style,
-  prefix,
   children
 }: BodySectionMoleculeProps) {
   return (
     <MaxWidthContainerAtom style={style}>
       <Stack space={BODY_PARAGRAPH_SPACING}>
-        <BodyHeader>
-          {prefix}
-          {title}
-        </BodyHeader>
+        <BodyHeader>{title}</BodyHeader>
         {children}
       </Stack>
     </MaxWidthContainerAtom>
