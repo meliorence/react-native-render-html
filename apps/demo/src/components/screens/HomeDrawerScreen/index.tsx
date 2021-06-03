@@ -124,8 +124,8 @@ export default function HomeScreen({}: StackScreenProps<any>) {
         headerShown: true,
         headerTitleAllowFontScaling: true
       }}>
-      {groups.map(mapGroup)}
       {mapGroup(playgroundsGroup)}
+      {groups.map(mapGroup)}
     </Drawer.Navigator>
   );
 }
