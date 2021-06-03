@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react';
-import { LogBox } from 'react-native';
-import { TouchableOpacity } from '@gorhom/bottom-sheet';
+import { LogBox, View } from 'react-native';
 import {
-  HeaderBackButton,
+  StackHeaderProps,
   StackNavigationOptions,
   TransitionPresets
 } from '@react-navigation/stack';
@@ -15,6 +14,9 @@ import SheetRouteOlListType from './SheetRouteOlListType';
 import SheetRouteUlListType from './SheetRouteUlListType';
 import useSurfaceBackgroundStyleNucleon from '../../nucleons/useSurfaceBackgroundStyleNucleon';
 import SheetRouteColor from './SheetRouteColor';
+import UIAppbarActionAtom from '../../UIAppbarActionAtom';
+import { useColorRoles } from '../../../theme/colorSystem';
+import TextRoleNucleon from '../../nucleons/TextRoleNucleon';
 
 LogBox.ignoreLogs([
   "Accessing the 'state' property of the 'route' object is not supported."
@@ -25,6 +27,28 @@ const homeOptions = { header: () => null };
 const controlsOptions = { title: 'Play' };
 const sourceOptions = { title: 'HTML Source' };
 
+function PlaygroundSlimHeader({ navigation, ...otherProps }: StackHeaderProps) {
+  const { sheetHandle } = useColorRoles();
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: sheetHandle.background
+      }}>
+      <UIAppbarActionAtom
+        size={20}
+        icon="arrow-left"
+        onPress={navigation.goBack}
+      />
+      <TextRoleNucleon
+        role="headerSubtitle"
+        children={otherProps.scene.descriptor.options.title}
+      />
+    </View>
+  );
+}
+
 export default function SheetNavigator() {
   const contentStyle = useSurfaceBackgroundStyleNucleon();
   const screenOptions: StackNavigationOptions = useMemo(
@@ -32,11 +56,7 @@ export default function SheetNavigator() {
       ...TransitionPresets.SlideFromRightIOS,
       headerShown: true,
       safeAreaInsets: { top: 0 },
-      headerLeft: ({ onPress, ...props }) => (
-        <TouchableOpacity onPress={onPress}>
-          <HeaderBackButton {...props} />
-        </TouchableOpacity>
-      ),
+      header: (props) => <PlaygroundSlimHeader {...props} />,
       cardStyle: contentStyle
     }),
     [contentStyle]
