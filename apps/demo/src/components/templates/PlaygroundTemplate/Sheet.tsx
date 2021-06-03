@@ -11,6 +11,7 @@ import SheetDescriptionPortal from './SheetDescriptionPortal';
 import SheetNavigator from './SheetNavigator';
 import SheetNavigatorPortal from './SheetNavigatorPortal';
 import sheetSnapPoints from './sheetSnapPoints';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export type SheetProps = {
   ttree?: TNode;
@@ -24,13 +25,14 @@ export type SheetProps = {
 
 export default function Sheet({ ttree, children, style }: SheetProps) {
   const html = usePlaygroundSource().source;
+  const { bottom: safeBottom } = useSafeAreaInsets();
   return (
     <UIBottomSheetAtom
       enableContentPanningGesture={true}
       snapPoints={sheetSnapPoints}>
       <demoStateContext.Provider
         value={useMemo(() => ({ html, ttree }), [html, ttree])}>
-        <BoxNucleon grow style={style}>
+        <BoxNucleon grow style={[style, { paddingBottom: safeBottom }]}>
           <SheetChildrenRenderer tpChildren={children}>
             <SheetNavigator />
           </SheetChildrenRenderer>

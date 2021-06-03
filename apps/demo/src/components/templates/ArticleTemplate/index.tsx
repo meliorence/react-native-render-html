@@ -20,7 +20,6 @@ import {
   useRoute
 } from '@react-navigation/core';
 import ScrollerProvider, { useScroller } from './ScrollerProvider';
-import { useNuclearContentWidth } from '../../nucleons/useContentWidthContext';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PageSpecs } from '@doc/pages';
 import UITideAtom, { UITideAtomProps } from '../../UITideAtom';
@@ -85,7 +84,7 @@ function Article({
   ...props
 }: PropsWithChildren<ArticleProps>) {
   const { onScroll } = useAnimatedContext();
-  const { top: offsetTop } = useSafeAreaInsets();
+  const { top: offsetTop, bottom: offsetBottom } = useSafeAreaInsets();
   const scroller = useScroller();
   useEffect(
     function updateOffset() {
@@ -124,7 +123,10 @@ function Article({
         ref={scrollRef}
         style={{ width, height: headerHeight }}
         onLayout={() => scroller.setIsLoaded()}
-        contentContainerStyle={[{ paddingTop: headerHeight }]}>
+        scrollEventThrottle={16}
+        contentContainerStyle={[
+          { paddingTop: headerHeight, paddingBottom: offsetBottom }
+        ]}>
         <BoxNucleon>
           {children}
           <BoxNucleon padding={1} alignY="stretch" direction="row">
@@ -172,10 +174,7 @@ export default function ArticleTemplate(
   props: PropsWithChildren<ArticleTemplateProps>
 ) {
   const { params } = useRoute();
-  const width = useNuclearContentWidth();
-  const { height: windowHeight } = useWindowDimensions();
-  const { top: offsetTop } = useSafeAreaInsets();
-  const headerHeight = Math.max((9 / 16) * width, windowHeight + offsetTop);
+  const { height: windowHeight, width: windowWidth } = useWindowDimensions();
   const scrollRef = useRef<Animated.ScrollView>() as RefObject<Animated.ScrollView>;
   const fragment = (params as any)?.fragment;
   return (
@@ -183,8 +182,8 @@ export default function ArticleTemplate(
       <AnimatedContextProvider>
         <Article
           {...props}
-          width={width}
-          headerHeight={headerHeight}
+          width={windowWidth}
+          headerHeight={windowHeight}
           scrollRef={scrollRef}
           fragment={fragment}
         />

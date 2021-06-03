@@ -70,11 +70,12 @@ function AnimatedContainer({
   const { top: safeTop } = useSafeAreaInsets();
   const { scrollAnim } = useAnimatedContext();
   const animatedHeader = useAnimatedStyle(() => {
+    const dynamicHeight = Math.max(
+      height - Math.max(scrollAnim.value, 0),
+      HEADER_COLL_HEIGHT + safeTop
+    );
     return {
-      height: Math.max(
-        height - Math.max(scrollAnim.value, 0),
-        HEADER_COLL_HEIGHT + safeTop
-      ),
+      height: dynamicHeight,
       top: 0,
       position: 'absolute',
       backgroundColor: 'rgba(0,0,32,0.92)',
@@ -159,6 +160,7 @@ function ArticleHeaderFullBody({
   imageSource: ImageRequireSource;
 }) {
   const animatedChevron = useAnimatedChevron();
+  const { bottom: safeBottom } = useSafeAreaInsets();
   const animatedParallaxImage = useAnimatedStyle(() => {
     const translateY = -1 * progress.value * height * 0.65;
     return {
@@ -178,7 +180,8 @@ function ArticleHeaderFullBody({
           style={{
             backgroundColor: 'rgba(0,0,32,0.5)',
             justifyContent: 'center',
-            flex: 1
+            flex: 1,
+            paddingBottom: safeBottom
           }}>
           <View
             style={{

@@ -42,7 +42,10 @@ const UIRadioItemAtom = memo(function RadioItem<V extends string>({
     onSelectedValueChange
   ]);
   const selected = useContext(selectedRadioItemContextAtom) === value;
-  const { pressable } = useColorRoles();
+  const { pressable, selectable, surface } = useColorRoles();
+  const color = selected
+    ? selectable.activeBackground
+    : selectable.inactiveBackground;
   return (
     <GestureHandlerAdapterNucleon onPress={onPress}>
       <TouchableRipple
@@ -56,6 +59,12 @@ const UIRadioItemAtom = memo(function RadioItem<V extends string>({
           <RadioButton
             status={selected ? 'checked' : 'unchecked'}
             value={value}
+            color={color}
+            theme={{
+              colors: {
+                text: surface.content
+              }
+            }}
           />
         </View>
       </TouchableRipple>
