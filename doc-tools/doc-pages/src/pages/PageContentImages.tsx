@@ -91,7 +91,11 @@ export default function PageContentImages() {
           <Paragraph>
             The renderer will automatically scale images down to the available
             width, even when the provided inline style width is greater than the
-            container width.
+            container width. You need to activate{' '}
+            <InlineCode>enableExperimentalPercentWidth</InlineCode> for
+            percent-width support in images. See{' '}
+            <RefRenderHTMLExport name="RenderersProps" member="img" full /> for
+            reference.
           </Paragraph>
           <Admonition type="important">
             You are strongly advised to provide a{' '}
@@ -104,7 +108,10 @@ export default function PageContentImages() {
             caption={
               'This image dimensions are set with inline styles. Note that both the width/height couple and the style attributes are evaluated, but the style attribute takes precedence. The relative width (50%) is computed against contentWidth.'
             }
-            props={{ source: { html: inlineExample } }}
+            props={{
+              source: { html: inlineExample },
+              renderersProps: { img: { enableExperimentalPercentWidth: true } }
+            }}
             preferHtmlSrc
           />
         </Section>
@@ -122,7 +129,10 @@ export default function PageContentImages() {
             caption={
               'Object-fit "cover", "contain", "fill" and "scale-down" values are supported, and will be translated to React Native "resizeMode" style property.'
             }
-            props={{ source: { html: objectFitExample } }}
+            props={{
+              source: { html: objectFitExample },
+              renderersProps: { img: { enableExperimentalPercentWidth: true } }
+            }}
             preferHtmlSrc
           />
           <Admonition type="tip">
