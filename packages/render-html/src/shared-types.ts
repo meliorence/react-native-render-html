@@ -140,12 +140,16 @@ export interface RenderersProps extends Record<string, any> {
      * - The `href` argument has been normalized, see {@link useNormalizedUrl}.
      *
      * @defaultValue A function using React Native `Linking.onpenUrl`.
+     * @param event - The {@link GestureResponderEvent} event.
+     * @param href - The normalized href, see {@link useNormalizedUrl}.
+     * @param htmlAttribs - The attributes of the underlying {@link Element}.
+     * @param target - The normalized `target` for this hyperlink.
      */
     onPress?: (
       event: GestureResponderEvent,
       href: string,
       htmlAttribs: Record<string, string>,
-      target: TREDocumentContext['baseTarget']
+      target: '_blank' | '_self' | '_parent' | '_top'
     ) => void;
   };
   img: {
