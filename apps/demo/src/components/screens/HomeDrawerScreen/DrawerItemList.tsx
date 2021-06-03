@@ -76,13 +76,13 @@ export default function DrawerItemList({
     return (
       <BoxNucleon key={name}>
         <Stack space={1}>
-          {name !== 'root' && (
+          {
             <TextRoleNucleon
               color={surface.secondaryContent}
               role="sectionOutline">
-              {name}
+              {name === 'root' ? 'Getting Started' : name}
             </TextRoleNucleon>
-          )}
+          }
           {defs.map(renderItem)}
         </Stack>
       </BoxNucleon>
