@@ -1,5 +1,4 @@
 import React, { PropsWithChildren } from 'react';
-import TypescriptLogo from './TypescriptLogo';
 import styles from './styles.module.scss';
 import clsx from 'clsx';
 
@@ -11,6 +10,8 @@ export default function Badges({
 }>) {
   return (
     <div className={styles.badges}>
+      {children}
+      <div style={{ flex: 1 }} />
       {definitions
         .filter((d) => !!d)
         .map(({ label, title }: { label: string; title?: string }) => (
@@ -21,9 +22,6 @@ export default function Badges({
             {label}
           </div>
         ))}
-      {children}
-      <div style={{ flex: 1 }} />
-      <TypescriptLogo />
     </div>
   );
 }

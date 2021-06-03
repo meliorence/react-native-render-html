@@ -17,8 +17,11 @@
 
 }
 
-.buttonGetStarted:not(:hover) {
-  background-color: rgba(0, 0, 0, 0.6);
+.buttonGetStarted {
+  font-family: var(--ifm-font-family-base);
+  &:not(:hover) {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
 }
 
 .content {}

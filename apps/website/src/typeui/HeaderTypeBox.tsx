@@ -5,7 +5,6 @@ import renderReflection from './renderReflection';
 import Params from './Params';
 import useReflectionIndex from './useReflectionIndex';
 import Badges from './Badges';
-import { SourceReference } from 'typedoc/dist/lib/serialization/schema';
 
 const thirdPartiesMap: Record<string, string> = {
   '@native-html/transient-render-engine':
@@ -30,8 +29,7 @@ function extractLibName(fileName: string) {
   return '';
 }
 
-function ExternalSource({ source }: { source: SourceReference }) {
-  const libraryName = extractLibName(source.fileName);
+function ExternalSource({ libraryName }: { libraryName: string }) {
   if (!(libraryName in thirdPartiesMap)) {
     throw new Error(`${libraryName} is not registered as third party`);
   }
@@ -53,13 +51,14 @@ export default function HeaderTypeBox({
   const reflection = index[reflectionId];
   const isExternal = reflection.flags.isExternal;
   const source = reflection.sources?.[0];
+  const libraryName = extractLibName(source.fileName);
   return (
     <>
       <Badges
         definitions={[
           isExternal && {
             label: 'reexport',
-            title: 'This definition is reexported from a third party library.'
+            title: `This definition is reexported from ${libraryName} library.`
           },
           !isExternal && {
             label: 'export',
@@ -75,7 +74,7 @@ export default function HeaderTypeBox({
               .pop()}#L${source.line}`}</code>
           </a>
         )}
-        {isExternal && source && <ExternalSource source={source} />}
+        {isExternal && source && <ExternalSource libraryName={libraryName} />}
       </Badges>
       <div className={clsx(styles.container, 'margin-bottom--md')}>
         <div className={clsx('padding--sm', styles.typeContainer)}>

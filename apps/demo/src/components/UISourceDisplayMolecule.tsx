@@ -1,6 +1,7 @@
 import { useSpacing } from '@mobily/stacks';
 import React, { useCallback } from 'react';
 import Highlighter, { HighlighterProps } from '../highlight/Highlighter';
+import { useColorRoles } from '../theme/colorSystem';
 import useTextRoleNucleon, {
   TextRoleNucleonProps
 } from './nucleons/useTextRoleNucleon';
@@ -35,6 +36,7 @@ export default function UISourceDisplayMolecule({
   ...otherProps
 }: UISourceDisplayMoleculeProps) {
   const spacing = useSpacing(2);
+  const { codeBackground } = useColorRoles();
   const { fontFamily, fontSize } = useTextRoleNucleon({
     role: textRole
   });
@@ -46,6 +48,7 @@ export default function UISourceDisplayMolecule({
   return (
     <Highlighter
       {...otherProps}
+      style={{ backgroundColor: codeBackground }}
       highlightJsStyle={'atelierPlateauDark'}
       fontSize={fontSize}
       fontFamily={fontFamily}

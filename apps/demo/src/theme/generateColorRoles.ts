@@ -1,5 +1,4 @@
 import Color from 'color';
-import { Colors } from 'react-native-paper';
 import alphaMixColor from '../theme/alphaMixColor';
 import { ColorPrimitivesDeclaration, ColorRoles } from '../theme/colorSystem';
 import shiftColor from './shiftColor';
@@ -21,8 +20,8 @@ export default function generateColorRoles({
   // Use transparent because of a bug in the dropdown menu (react-native-paper)
   const inactiveBackground = 'transparent';
   const accentColor = primitives.accent.color;
+  const accentBg = primitives.accent.content;
   const secondaryContent = Color(surfaceContent).alpha(0.5).string();
-  const isDark = Color(surfaceColor).isDark();
   return {
     name,
     surface: {
@@ -31,13 +30,13 @@ export default function generateColorRoles({
       content: surfaceContent,
       scrim: primitives.scrim
     },
-    hyperlinkColor: isDark ? Colors.blue300 : Colors.blue700,
+    hyperlinkColor: accentColor,
     admonition: {
-      caution: isDark ? Colors.red300 : Colors.red700,
-      important: primitives.accent.color,
+      caution: accentColor,
+      important: surfaceContent,
       note: surfaceContent,
-      tip: isDark ? Colors.green200 : Colors.green700,
-      warning: isDark ? Colors.amber300 : Colors.amber700
+      tip: surfaceContent,
+      warning: accentColor
     },
     sheetHandle: {
       slot: shiftColor(surfaceColor, 1, 0.3),
@@ -49,8 +48,8 @@ export default function generateColorRoles({
     selectable: {
       inactiveBackground,
       inactiveTint: surfaceContent,
-      activeTint: primitives.accentVariant.color,
-      activeBackground: alphaMixColor(accentColor, 0.2, surfaceColor),
+      activeTint: accentBg,
+      activeBackground: accentColor,
       ripple: softContent
     },
     pressable: {
@@ -66,6 +65,7 @@ export default function generateColorRoles({
     trackColor: {
       on: alphaMixColor(accentColor, 0.7, surfaceColor),
       off: alphaMixColor(surfaceContent, 0.5, surfaceColor)
-    }
+    },
+    codeBackground: '#000044'
   };
 }

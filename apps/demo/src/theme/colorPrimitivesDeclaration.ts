@@ -4,43 +4,39 @@ import alphaMixColor from './alphaMixColor';
 import { ColorPrimitivesDeclaration } from './colorSystem';
 import shiftColor from './shiftColor';
 
-const black = 'rgb(54, 54, 64)';
+const black = 'rgb(25, 25, 48)';
 const white = 'rgb(230, 230, 230)';
 
 export type CreateColorPrimitivesSpec = Omit<
   ColorPrimitivesDeclaration,
-  'card' | 'placeholder' | 'primaryVariant' | 'accentVariant' | 'scrim'
+  'placeholder' | 'primaryVariant' | 'accentVariant' | 'scrim'
 >;
+
+const darkBlue = 'rgb(0,0,48)';
 
 const heading: ColorPrimitive = {
   color: white,
-  content: 'rgb(0,0,48)'
+  content: darkBlue
 };
 
 function createColorPrimitives({
   primary,
   accent,
-  surface
+  surface,
+  card,
+  apiRef
 }: CreateColorPrimitivesSpec): ColorPrimitivesDeclaration {
-  const cardBackground = shiftColor(surface.color, 2, 0.05);
-  const cardOnBackground = surface.content;
   return {
     primary,
-    primaryVariant: {
-      color: shiftColor(primary.color, 0.2),
-      content: primary.content
-    },
     heading,
     accent,
+    apiRef,
     accentVariant: {
       color: shiftColor(accent.color, 0.5),
       content: primary.content
     },
     surface,
-    card: {
-      color: cardBackground,
-      content: cardOnBackground
-    },
+    card,
     placeholder: 'gray',
     scrim: alphaMixColor(surface.content, 0.7, surface.color)
   };
@@ -48,33 +44,49 @@ function createColorPrimitives({
 
 const dark: ColorPrimitivesDeclaration = createColorPrimitives({
   primary: {
-    color: 'yellow',
+    color: darkBlue,
     content: white
   },
   heading,
   accent: {
-    color: 'rgb(0,64,128)',
-    content: white
+    color: '#8181ff',
+    content: black
   },
   surface: {
     color: black,
     content: white
+  },
+  card: {
+    color: darkBlue,
+    content: white
+  },
+  apiRef: {
+    color: '#bed4eb10',
+    content: '#4377e7'
   }
 });
 
 const light: ColorPrimitivesDeclaration = createColorPrimitives({
   primary: {
-    color: 'yellow',
+    color: darkBlue,
     content: white
   },
   heading,
   accent: {
-    color: 'rgb(0,54,128)',
+    color: '#8181ff',
     content: white
   },
   surface: {
     color: Color('#546e7a').lighten(1.4).string(),
     content: black
+  },
+  card: {
+    color: darkBlue,
+    content: white
+  },
+  apiRef: {
+    color: '#1c1e2010',
+    content: '#4377e7'
   }
 });
 

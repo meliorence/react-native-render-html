@@ -3,7 +3,6 @@ import type { AdmonitionType } from '@doc/pages';
 
 export interface ColorPrimitivesDeclaration {
   primary: ColorPrimitive;
-  primaryVariant: ColorPrimitive;
   heading: ColorPrimitive;
   accent: ColorPrimitive;
   accentVariant: ColorPrimitive;
@@ -12,6 +11,7 @@ export interface ColorPrimitivesDeclaration {
    */
   surface: ColorPrimitive;
   card: ColorPrimitive;
+  apiRef: ColorPrimitive;
   placeholder: string;
   scrim: string;
 }
@@ -84,6 +84,7 @@ export interface ColorRoles {
     on: string;
     off: string;
   };
+  codeBackground: string;
 }
 
 const {

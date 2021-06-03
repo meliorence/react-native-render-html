@@ -18,13 +18,9 @@ export default function TNodeTransformDisplay({
   return (
     <figure className={styles.figure}>
       {title && <div className={styles.figure__title}>{title}</div>}
-      <CodeBlock title="HTML" className={'html'}>
-        {normalHtml}
-      </CodeBlock>
+      <CodeBlock className={'html'}>{normalHtml}</CodeBlock>
       <div className={styles.arrow}>↓</div>
-      <CodeBlock title="TRT" className={'xml'}>
-        {normalSnapshot}
-      </CodeBlock>
+      <CodeBlock className={'xml'}>{normalSnapshot}</CodeBlock>
       {caption && (
         <figcaption className={styles.figure__caption}>{caption}</figcaption>
       )}

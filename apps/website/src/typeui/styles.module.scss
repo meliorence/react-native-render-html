@@ -1,7 +1,7 @@
 @import '../css/shared.scss';
 
 .container {
-  background-color: rgb(41, 45, 62);
+  background-color: var(--ifm-code-background);
   width: 100%;
   display: flex;
   align-items: flex-end;
@@ -21,7 +21,7 @@
   }
 }
 .token {
-  --reference-bg: rgba(19, 24, 54, 0.25);
+  --reference-bg: rgba(62, 71, 122, 0.25);
   --reference-bg-hover: var(--ifm-color-gray-100);
   --reference-color-hover: var(--ifm-color-gray-800);
   color: var(--token-color);
@@ -81,7 +81,7 @@
 }
 
 .flagBox--required {
-  background-color: var(--ifm-color-primary-darkest);
+  background-color: var(--theme-surface-bg);
   color: var(--ifm-color-white);
 }
 
@@ -117,23 +117,20 @@
 }
 
 .badges {
-  --decorator-size: 2rem;
+  --decorator-size: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--figure-header-bg);
   border-top-left-radius: var(--ifm-global-radius);
   border-top-right-radius: var(--ifm-global-radius);
   overflow: hidden;
-  margin-bottom: 0.1rem;
+  margin-bottom: 0.25rem;
 }
 
 .versionBox {
-  // text-align: right;
   code {
     font-style: normal;
     background-color: var(--ifm-color-primary);
-    color: white;
     padding: 0.25rem;
     font-size: small;
     display: inline block;
@@ -144,22 +141,15 @@
   text-overflow: ellipsis;
   overflow: hidden;
   flex-shrink: 0;
-  color: var(--ifm-color-white);
-  padding-left: 0.25rem;
+  line-height: 1;
   &:not(:hover) {
     text-decoration: none;
-  }
-  &:hover {
-    color: var(--ifm-color-white);
   }
   > code {
     font-style: normal;
     font-weight: 900;
     padding-left: 0.25rem;
+    font-size: small;
   }
 }
 
-.headerTypeBox {
-  // font-size: 150%;
-  background-color: rgb(41, 45, 62);
-}

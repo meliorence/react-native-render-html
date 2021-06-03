@@ -18,19 +18,17 @@ export type TextRole =
   | 'body'
   | 'bodyBold'
   | 'bodyDListHeader'
-  | 'bodyTable'
-  | 'bodyTableHeader'
   | 'bodyHeader1'
   | 'bodyHeader2'
   | 'bodyInlineCode'
+  | 'bodyFigureTitle'
   | 'bodyAPIRef'
   | 'caption';
 
 const FONT_BODY = 'Raleway_300Light';
-const FONT_BODY_BOLD = 'Raleway_600SemiBold';
+const FONT_BODY_BOLD = 'Raleway_400Regular';
 const FONT_BODY_ITALIC = 'Raleway_300Light_Italic';
 const FONT_MONO = 'SourceCodePro_400Regular';
-const FONT_MONO_ITALIC = 'SourceCodePro_400Regular_Italic';
 const FONT_UI = 'Raleway_400Regular';
 
 const BASE_FONT_SIZE = 16;
@@ -56,6 +54,11 @@ const roleDefs: Record<
     lineHeight: BASE_FONT_SIZE * 2
   },
   bodyBold: { fontFamily: FONT_BODY_BOLD, fontSize: 16 },
+  bodyFigureTitle: {
+    fontSize: BASE_FONT_SIZE * 0.9,
+    fontFamily: FONT_BODY_BOLD,
+    textTransform: 'uppercase'
+  },
   bodyTable: { fontSize: BASE_FONT_SIZE * 0.9, fontFamily: FONT_BODY },
   bodyTableHeader: {
     fontSize: BASE_FONT_SIZE * 0.9,
@@ -80,12 +83,12 @@ const roleDefs: Record<
   uiDescription: { fontSize: BASE_FONT_SIZE * 0.8, fontFamily: FONT_UI },
   uiLabel: { fontSize: BASE_FONT_SIZE * 0.9, fontFamily: FONT_UI },
   uiMono: { fontSize: BASE_FONT_SIZE * 0.9, fontFamily: FONT_MONO },
-  uiHyperlink: { fontSize: 5, fontFamily: FONT_MONO_ITALIC },
+  uiHyperlink: { fontSize: 5, fontFamily: FONT_MONO },
   footer: { fontSize: BASE_FONT_SIZE * 0.8, fontFamily: FONT_MONO },
   //@ts-expect-error
   html: { fontSize: BASE_FONT_SIZE * 0.9 },
   //@ts-expect-error
-  bodyInlineCode: { fontFamily: FONT_MONO_ITALIC },
+  bodyInlineCode: { fontFamily: FONT_MONO },
   //@ts-expect-error
   bodyAPIRef: { fontFamily: FONT_MONO },
   sectionOutline: {

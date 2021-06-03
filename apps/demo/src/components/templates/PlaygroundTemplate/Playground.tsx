@@ -18,11 +18,13 @@ export default function PlaygroundTemplate<Sk extends string>({
 }: PlaygroundTemplateProps<Sk>) {
   const [ttree, setTtree] = useState<TNode>();
   return (
-    <CardColorRolesProvider>
+    <>
       <PlaygroundStoreProvider {...storeInitParams}>
         <PlaygroundDisplay onTTreeChange={setTtree} />
-        <Sheet ttree={ttree}>{children}</Sheet>
+        <CardColorRolesProvider>
+          <Sheet ttree={ttree}>{children}</Sheet>
+        </CardColorRolesProvider>
       </PlaygroundStoreProvider>
-    </CardColorRolesProvider>
+    </>
   );
 }

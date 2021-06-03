@@ -12,7 +12,7 @@ function BodyHeader({
   style
 }: PropsWithStyle<PropsWithChildren<{}>>) {
   const { surface } = useColorRoles();
-  const color = surface.secondaryContent;
+  const color = surface.content;
   return (
     <Stack space={1}>
       <BoxNucleon paddingX={BODY_HZ_SPACING}>

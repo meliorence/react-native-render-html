@@ -126,8 +126,7 @@ export default function PageIntroduction() {
           </Admonition>
           <Admonition type="tip">
             Inspect the pre-render tree representation with the{' '}
-            <Bold>TRT Snapshot</Bold>
-            tab.
+            <Bold>TRT Snapshot</Bold> tab.
           </Admonition>
         </Conditional>
         <Paragraph>

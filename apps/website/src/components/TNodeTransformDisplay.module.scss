@@ -7,7 +7,7 @@
 }
 
 .figure {
-  @extend .figure;
+  @extend .figure, .figure--card;
 }
 
 .figure__caption {
