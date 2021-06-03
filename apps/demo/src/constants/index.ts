@@ -1,6 +1,20 @@
 import Constants from 'expo-constants';
 
-const SYSTEM_FONTS = [...Constants.systemFonts, 'space-mono'];
+import uniq from 'ramda/es/uniq';
+import pipe from 'ramda/es/pipe';
+import filter from 'ramda/es/filter';
+
+const normalizeFonts = pipe<string[], string[], string[]>(
+  uniq,
+  filter(
+    (c: string) =>
+      !c.match(
+        /bold|italic|semi|regular|extra|ultra|light|black|medium|thin|-/i
+      )
+  )
+);
+
+const SYSTEM_FONTS = normalizeFonts([...Constants.systemFonts, 'space-mono']);
 const BODY_CHAPTER_SPACING = 16;
 const BODY_VERTICAL_SPACING = 12;
 const BODY_HZ_SPACING = 2;
