@@ -20,9 +20,9 @@ export default function VersionDisplay() {
         padding: 10
       }}>
       <TextRoleNucleon role="footer" color={surface.secondaryContent}>
-        Foundry Playground {version.demo}
+        Discovery {version.demo}
         {'\n'}
-        react-native-render-html {version.lib}
+        rnrh {version.lib}
       </TextRoleNucleon>
     </View>
   );

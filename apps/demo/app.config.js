@@ -1,11 +1,12 @@
 const version = require('./version').demo;
 module.exports = {
   expo: {
-    name: 'Foundry Playground',
-    slug: 'react-native-render-html-foundry-demo',
+    name: 'RNRH Discovery',
+    slug: 'react-native-render-html-discovery',
     description:
-      'A playground for the (amazing) upcoming release of React Native Render HTML!',
+      'An App to discover React Native Render HTML features and API!',
     version: version,
+    primaryColor: '#61dafb',
     orientation: 'default',
     icon: './assets/images/icon.png',
     scheme: 'myapp',
