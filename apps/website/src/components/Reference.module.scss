@@ -23,25 +23,16 @@ a.ref {
       text-decoration: none;
     }
   }
-  &--html-attr {
-    //
-  }
-  &--html-el {
-    //
-  }
-  &--es-symbol {
-    //
-  }
-  &--css-prop {
-    //
-  }
-  &--rn-symbol {
-  }
+  &--html-attr {}
+  &--html-el {}
+  &--es-symbol {}
+  &--css-prop {}
+  &--rn-symbol {}
   &--library {
     color: var(--reference-color-lib);
   }
   &--doc {
-    text-decoration: dotted underline;
+    text-decoration: solid underline;
     color: var(--reference-color-doc);
     font-weight: bolder;
   }

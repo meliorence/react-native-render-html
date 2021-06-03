@@ -1,7 +1,7 @@
 @import '../css/shared.scss';
 
 .figure {
-  @extend .figure;
+  @extend .figure, .figure--card;
   margin: 0 0 var(--ifm-leading) 0 !important;
   padding: 0 !important;
 }

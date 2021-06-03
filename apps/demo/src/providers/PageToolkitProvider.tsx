@@ -22,7 +22,7 @@ import UIHyperlinkAtom from '../components/UIHyperlinkAtom';
 import { useNavigation } from '@react-navigation/core';
 import TextRoleNucleon from '../components/nucleons/TextRoleNucleon';
 import svgAssetsIndex from '../svgAssetsIndex';
-import { useColorRoles } from '../theme/colorSystem';
+import { useColorPrimitives, useColorRoles } from '../theme/colorSystem';
 import { useSpacing } from '@mobily/stacks';
 import CardColorRolesProvider from '../components/croles/CardColorRolesProvider';
 import { Linking, StyleSheet, View } from 'react-native';
@@ -30,6 +30,7 @@ import BoxNucleon from '../components/nucleons/BoxNucleon';
 import { WEBSITE_URL } from '@doc/constants';
 import URI from 'urijs';
 import TNodeTransformDisplayOrganism from '../components/TNodeTransformDisplayOrganism';
+import UICardContainer from '../components/UICardContainer';
 
 const genericOnLinkPress = (uri: string) => Linking.openURL(uri);
 
@@ -47,9 +48,6 @@ function useOnLinkPress(uri?: string) {
 const styles = StyleSheet.create({
   underline: {
     textDecorationLine: 'underline'
-  },
-  apiref: {
-    backgroundColor: '#1c1e2010'
   }
 });
 
@@ -81,6 +79,7 @@ function RefAPI({
   full,
   plural /* ,library */
 }: RefAPIProps) {
+  const { apiRef } = useColorPrimitives();
   const pluralMark = plural ? 's' : '';
   const fullName =
     (member && full ? `${name}.${member}` : member ? member : name) +
@@ -89,33 +88,42 @@ function RefAPI({
   return (
     <UIHyperlinkAtom
       role="bodyAPIRef"
-      style={styles.apiref}
-      color={'#4377e7'}
+      style={{ backgroundColor: apiRef.color }}
+      color={apiRef.content}
       onPress={useOnLinkPress(fullUrl)}>
       {fullName}
     </UIHyperlinkAtom>
   );
 }
 
-const SourceDisplay: UIToolkitConfig['SourceDisplay'] = ({
+const SourceDisplayInner: UIToolkitConfig['SourceDisplay'] = function SourceDisplayInner({
   content,
   lang,
-  showLineNumbers,
-  title
+  showLineNumbers
+}) {
+  return (
+    <ScrollView
+      horizontal
+      style={{ flexGrow: 0 }}
+      contentContainerStyle={{ flexGrow: 1 }}>
+      <UISourceDisplayMolecule
+        content={content}
+        language={lang as any}
+        showLineNumbers={showLineNumbers}
+        paddingVertical={2}
+        style={{ alignSelf: 'stretch' }}
+      />
+    </ScrollView>
+  );
+};
+
+const SourceDisplay: UIToolkitConfig['SourceDisplay'] = ({
+  title,
+  ...other
 }) => (
-  <ScrollView
-    horizontal
-    style={{ flexGrow: 0 }}
-    contentContainerStyle={{ minWidth: '100%', flexDirection: 'column' }}>
-    <UISourceDisplayMolecule
-      content={content}
-      language={lang as any}
-      showLineNumbers={showLineNumbers}
-      paddingVertical={2}
-      style={{ alignSelf: 'stretch' }}
-    />
-    {title && <BottomCaption caption={title} />}
-  </ScrollView>
+  <UICardContainer style={(other as any).style} title={title}>
+    <SourceDisplayInner {...other} />
+  </UICardContainer>
 );
 
 const RefDoc: UIToolkitConfig['RefDoc'] = ({ target, children, fragment }) => {

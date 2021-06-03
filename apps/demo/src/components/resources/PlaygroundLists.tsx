@@ -229,7 +229,7 @@ export default function PlaygroundLists() {
           <RefHtmlElement name="ol" /> elements react to varying style
           constraints. The renderer for both is the same. The style of the
           prefix (or marker in CSS terminology) is determined by{' '}
-          <RefCssProperty name="list-style-type" /> CSS rule .
+          <RefCssProperty name="list-style-type" /> CSS property.
         </TextRoleNucleon>
       </PlaygroundDescription>
     </PlaygroundTemplate>

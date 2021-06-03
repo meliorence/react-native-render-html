@@ -62,8 +62,10 @@ function LefIcon({
 function Right({
   right,
   rightIconName,
+  color,
   ...nucProps
-}: Pick<UITideAtomProps, 'right' | 'rightIconName'> & BoxNucleonProps) {
+}: Pick<UITideAtomProps, 'right' | 'rightIconName'> &
+  BoxNucleonProps & { color: string }) {
   return (
     <BoxNucleon
       alignX="center"
@@ -74,7 +76,7 @@ function Right({
         ? right({ width: RIGHT_WIDTH })
         : right ||
           (rightIconName ? (
-            <IconNucleon size={ICON_SIZE} name={rightIconName} />
+            <IconNucleon color={color} size={ICON_SIZE} name={rightIconName} />
           ) : null)}
     </BoxNucleon>
   );
@@ -153,7 +155,10 @@ const UITideAtom = memo(function UITideAtom({
         },
         style
       ]}>
-      <ConditionalTouchable onPress={onPress} {...accessibilityProps}>
+      <ConditionalTouchable
+        onPress={onPress}
+        style={{ flexGrow: 1 }}
+        {...accessibilityProps}>
         <View
           style={{
             flexGrow: 1,
@@ -187,6 +192,7 @@ const UITideAtom = memo(function UITideAtom({
               marginLeft={INLINE_SPACING}
               right={right}
               rightIconName={rightIconName}
+              color={iconColor}
             />
           )}
         </View>

@@ -9,52 +9,54 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,600;1,400;1,600&family=Source+Code+Pro:ital,wght@0,400;0,600;1,400;1,600&display=swap');
 @import './shared.scss';
 
+$theme-surface-bg: rgb(0, 0, 48);
+$code-bg: lighten($theme-surface-bg, 4%);
+
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #0f9ec5;
-  --ifm-color-primary-dark: #0d8eb1;
-  --ifm-color-primary-darker: #0d86a7;
-  --ifm-color-primary-darkest: #0a6f8a;
-  --ifm-color-primary-light: #10aed9;
-  --ifm-color-primary-lighter: #11b6e3;
-  --ifm-color-primary-lightest: #00c8ff;
+  --ifm-color-primary: #8181ff;
+  // --ifm-color-primary-dark: #0d8eb1;
+  // --ifm-color-primary-darker: #0d86a7;
+  // --ifm-color-primary-darkest: #0a6f8a;
+  // --ifm-color-primary-light: #10aed9;
+  // --ifm-color-primary-lighter: #11b6e3;
+  // --ifm-color-primary-lightest: #00c8ff;
 
-  --ifm-color-success: #7df17d;
-  --ifm-color-success-dark: #5ced5c;
-  --ifm-color-success-darker: #4bec4b;
-  --ifm-color-success-darkest: #1ae61a;
-  --ifm-color-success-light: #9ef59e;
-  --ifm-color-success-lighter: #aff6af;
-  --ifm-color-success-lightest: #d0fad0;
+  --ifm-color-success: var(--ifm-color-primary);
+  // --ifm-color-success-dark: #5ced5c;
+  // --ifm-color-success-darker: #4bec4b;
+  // --ifm-color-success-darkest: #1ae61a;
+  // --ifm-color-success-light: #9ef59e;
+  // --ifm-color-success-lighter: #aff6af;
+  // --ifm-color-success-lightest: #d0fad0;
 
-  --ifm-color-info: #7bcfeb;
-  --ifm-color-info-dark: #5cc4e6;
-  --ifm-color-info-darker: #4cbee4;
-  --ifm-color-info-darkest: #21abda;
-  --ifm-color-info-light: #9adaf0;
-  --ifm-color-info-lighter: #aae0f2;
-  --ifm-color-info-lightest: #c9ebf7;
+  --ifm-color-info: var(--ifm-color-primary);
+  // --ifm-color-info-dark: #5cc4e6;
+  // --ifm-color-info-darker: #4cbee4;
+  // --ifm-color-info-darkest: #21abda;
+  // --ifm-color-info-light: #9adaf0;
+  // --ifm-color-info-lighter: #aae0f2;
+  // --ifm-color-info-lightest: #c9ebf7;
 
-  --ifm-color-warning: #f8cf5d;
-  --ifm-color-warning-dark: #f7c53c;
-  --ifm-color-warning-darker: #f6c02c;
-  --ifm-color-warning-darkest: #e5ab0a;
-  --ifm-color-warning-light: #f9d97e;
-  --ifm-color-warning-lighter: #fade8e;
-  --ifm-color-warning-lightest: #fce7af;
+  --ifm-color-warning: var(--ifm-color-primary);
+  // --ifm-color-warning-dark: #f7c53c;
+  // --ifm-color-warning-darker: #f6c02c;
+  // --ifm-color-warning-darkest: #e5ab0a;
+  // --ifm-color-warning-light: #f9d97e;
+  // --ifm-color-warning-lighter: #fade8e;
+  // --ifm-color-warning-lightest: #fce7af;
 
-  --ifm-color-danger: #f76469;
-  --ifm-color-danger-dark: #f54349;
-  --ifm-color-danger-darker: #f43339;
-  --ifm-color-danger-darkest: #e70c13;
-  --ifm-color-danger-light: #f98589;
-  --ifm-color-danger-lighter: #fa9599;
-  --ifm-color-danger-lightest: #fbb6b9;
+  --ifm-color-danger: var(--ifm-color-primary);
+  // --ifm-color-danger-dark: #f54349;
+  // --ifm-color-danger-darker: #f43339;
+  // --ifm-color-danger-darkest: #e70c13;
+  // --ifm-color-danger-light: #f98589;
+  // --ifm-color-danger-lighter: #fa9599;
+  // --ifm-color-danger-lightest: #fbb6b9;
 
   --ifm-code-font-size: 95%;
   --ifm-code-padding-vertical: 0;
   --ifm-code-padding-horizontal: 0;
-  --ifm-code-background: transparent;
   --ifm-font-family-monospace: 'Source Code Pro', monospace;
   --ifm-font-family-base: 'Raleway', sans-serif;
 
@@ -69,20 +71,25 @@
   --syntax-color-type: rgb(67, 119, 231);
   --syntax-color-primitive: rgb(89, 187, 243);
 
-  --theme-surface-bg: rgb(0, 0, 48);
+  --theme-surface-bg: #{$theme-surface-bg};
 
-  --reference-color-doc: var(--ifm-color-highlight);
   --reference-color-lib: rgb(146, 24, 24);
 
   // Navbar
   --ifm-navbar-background-color: var(--theme-surface-bg);
   --ifm-navbar-link-color: var(--ifm-color-white);
+  --ifm-footer-background-color: rgb(0, 0, 64);
+  --ifm-code-background: #{$code-bg};
+  --ifm-link-color: var(--ifm-color-primary);
+  --reference-color-doc: var(--ifm-link-color);
 }
 
 html[data-theme='light'] {
+  --ifm-background-color: var(--ifm-color-white);
   // Docsearch
   --docsearch-text-color: var(--ifm-color-gray-800);
   --docsearch-container-background: rgba(0, 16, 64, 0.9);
+  --docsearch-searchbox-background: var(--ifm-background-color);
 
   // Fonts
   --ifm-font-color-secondary: rgb(123, 162, 201);
@@ -96,15 +103,25 @@ html[data-theme='light'] {
 }
 
 html[data-theme='dark'] {
-
+  --docsearch-searchbox-background: var(--ifm-background-color) !important;
+  --ifm-code-background: #{$code-bg};
+  --ifm-background-color: #1c1c2e;
   --ifm-font-color-base: var(--ifm-color-gray-500);
   --ifm-color-highlight: var(--ifm-color-gray-100);
   --ifm-font-color-secondary: rgb(131, 149, 167);
-  --reference-bg: #2021259c;
+  --reference-bg: #21232bde;
   --reference-bg-hover: #c0c1c5;
   --reference-color-hover: var(--ifm-color-gray-800);
   --figure-header-bg: #1c2444;
   --figure-header-color: var(--ifm-color-gray-100);
+}
+
+.codeBlockLines__-_-node_modules-\@docusaurus-theme-classic-lib-next-theme-CodeBlock- {
+  background-color: transparent !important;
+}
+
+.prism-code {
+  background-color: var(--ifm-code-background);
 }
 
 .DocSearch-Button {
@@ -129,11 +146,19 @@ html[data-theme='dark'] {
   height: 50px;
 }
 
-.menu__link.menu__link--sublist {
-  text-transform: uppercase;
-  cursor: unset;
-  font-size: 85%;
-  color: var(--ifm-font-color-secondary);
+.menu__link {
+  --ifm-menu-color-background-active: var(--ifm-color-primary);
+  --ifm-menu-color-active: var(--ifm-color-white);
+  border-radius: var(--ifm-global-radius);
+  &#{&}--sublist#{&}--active {
+    --ifm-menu-color-active: var(--ifm-color-primary);
+  }
+  &--sublist {
+    text-transform: uppercase;
+    cursor: unset;
+    font-size: 85%;
+    color: var(--ifm-font-color-secondary);
+  }
 }
 
 .menu__link.menu__link--sublist.menu__link--active {
@@ -153,10 +178,6 @@ code {
   background-color: transparent;
   border-width: 0;
   padding: 0;
-}
-
-.button {
-  font-family: var(--ifm-font-family-monospace);
 }
 
 .docusaurus-highlight-code-line {
@@ -203,6 +224,7 @@ code {
   }
   dl {
     @extend .figure;
+    background-color: transparent;
     padding: 0;
     overflow: hidden;
     > :nth-child(4n + 1),
@@ -239,34 +261,39 @@ code {
 
 // Admonitions
 
-.alert--success {
-  --ifm-alert-background-color: var(--ifm-color-success);
-}
-.alert--info {
-  --ifm-alert-background-color: var(--ifm-color-info);
-}
-.alert--warning {
-  --ifm-alert-background-color: var(--ifm-color-warning);
-}
-.alert--danger {
-  --ifm-alert-background-color: var(--ifm-color-danger);
-}
-.alert--secondary {
-  --ifm-alert-background-color: var(--ifm-color-info);
-}
-
-.alert svg {
-  fill: var(--ifm-alert-color);
+.admonition {
+  &-heading {
+    --ifm-alert-color: var(--ifm-alert-background-color);
+    --ifm-heading-color: var(--ifm-alert-background-color);
+  }
 }
 
 .alert {
+  &--success {
+    --ifm-alert-background-color: var(--ifm-color-success);
+  }
+  &--info {
+    --ifm-alert-background-color: var(--ifm-color-info);
+  }
+  &--warning {
+    --ifm-alert-background-color: var(--ifm-color-warning);
+  }
+  &--danger {
+    --ifm-alert-background-color: var(--ifm-color-danger);
+  }
+  &--secondary {
+    --ifm-alert-background-color: var(--ifm-color-info);
+  }
   --ifm-alert-color: var(--ifm-font-color-base);
   --ifm-code-color: var(--ifm-alert-color);
   --reference-color-doc: var(--ifm-alert-color);
   background-color: rgba(5, 5, 5, 0.075);
   border: none;
   border-radius: 0;
-  border-left: solid var(--ifm-alert-background-color) 1rem;
+  border-left: solid var(--ifm-alert-background-color) 0.5rem;
+  svg {
+    fill: var(--ifm-alert-color);
+  }
 }
 
 .header-github-link::before {

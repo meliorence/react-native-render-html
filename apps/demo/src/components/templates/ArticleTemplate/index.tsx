@@ -24,7 +24,6 @@ import { useNuclearContentWidth } from '../../nucleons/useContentWidthContext';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PageSpecs } from '@doc/pages';
 import UITideAtom, { UITideAtomProps } from '../../UITideAtom';
-import { useColorRoles } from '../../../theme/colorSystem';
 
 export interface ArticleTemplateProps {
   imageSource: ImageRequireSource;
@@ -53,17 +52,16 @@ function SiblingPageTide({
   direction: 'prev' | 'next';
 }) {
   const navigation = useNavigation();
-  const { selectable } = useColorRoles();
   return (
     <UITideAtom
       {...props}
       style={[
         {
-          backgroundColor: selectable.activeBackground,
           minHeight: 60
         },
         props.style
       ]}
+      active
       leftIconName={direction === 'prev' ? 'chevron-left' : undefined}
       rightIconName={direction === 'next' ? 'chevron-right' : undefined}
       title={target.title}
@@ -129,7 +127,7 @@ function Article({
         contentContainerStyle={[{ paddingTop: headerHeight }]}>
         <BoxNucleon>
           {children}
-          <BoxNucleon alignY="stretch" direction="row">
+          <BoxNucleon padding={1} alignY="stretch" direction="row">
             {prevPage ? (
               <SiblingPageTide
                 style={{
@@ -142,7 +140,7 @@ function Article({
                 target={prevPage}
               />
             ) : (
-              <View style={{ flexGrow: 1, flexShrink: 0 }} />
+              <View style={{ flexGrow: 1, flexShrink: 0, minWidth: '50%' }} />
             )}
             {nextPage ? (
               <SiblingPageTide
@@ -155,7 +153,7 @@ function Article({
                 target={nextPage}
               />
             ) : (
-              <View style={{ flexGrow: 1, flexShrink: 0 }} />
+              <View style={{ flexGrow: 1, flexShrink: 0, minWidth: '50%' }} />
             )}
           </BoxNucleon>
         </BoxNucleon>

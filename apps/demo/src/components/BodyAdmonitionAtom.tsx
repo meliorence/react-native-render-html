@@ -4,7 +4,6 @@ import React, { PropsWithChildren } from 'react';
 import { View } from 'react-native';
 import { useColorRoles } from '../theme/colorSystem';
 import BodyParagraphAtom from './BodyParagraphAtom';
-import BoxNucleon from './nucleons/BoxNucleon';
 import IconNucleon, { IconNucleonProps } from './nucleons/IconNucleon';
 import type { AdmonitionType } from '@doc/pages';
 import TextRoleNucleon from './nucleons/TextRoleNucleon';
@@ -43,47 +42,50 @@ export default function BodyAdmonitionAtom({
   const iconPadX = useSpacing(2);
   return (
     <View {...props}>
-      <Stack space={1}>
-        <BoxNucleon paddingX={BODY_HZ_SPACING}>
-          <Stack
-            horizontal
-            space={BODY_HZ_SPACING}
+      <Stack
+        style={{
+          borderLeftWidth: dividerWidth,
+          borderLeftColor: semanticColor
+        }}
+        marginX={BODY_HZ_SPACING}
+        space={2}>
+        <Stack
+          horizontal
+          space={BODY_HZ_SPACING}
+          style={{
+            paddingLeft: iconPadX,
+            flexDirection: 'row',
+            alignItems: 'center'
+          }}>
+          <IconNucleon
+            color={semanticColor}
+            name={admonitionIconMap[type]}
+            size={iconSize}
+          />
+          <TextRoleNucleon
+            style={{ textTransform: 'uppercase' }}
+            role="body"
+            color={semanticColor}>
+            {title}
+          </TextRoleNucleon>
+        </Stack>
+        <View
+          style={{
+            flexDirection: 'row',
+            flex: 0,
+            alignItems: 'center'
+          }}>
+          <BodyParagraphAtom
             style={{
-              paddingLeft: iconPadX,
-              flexDirection: 'row',
-              alignItems: 'center',
-              borderLeftWidth: dividerWidth,
-              borderLeftColor: semanticColor
-            }}>
-            <IconNucleon
-              color={semanticColor}
-              name={admonitionIconMap[type]}
-              size={iconSize}
-            />
-            <TextRoleNucleon role="body" color={semanticColor}>
-              {title}
-            </TextRoleNucleon>
-          </Stack>
-          <View
-            style={{
-              flexDirection: 'row',
-              flex: 0,
-              alignItems: 'center',
-              borderLeftWidth: dividerWidth,
-              borderLeftColor: semanticColor
-            }}>
-            <BodyParagraphAtom
-              style={{
-                flexGrow: 1,
-                flexShrink: 1,
-                alignSelf: 'stretch',
-                justifyContent: 'center'
-              }}
-              color={contentColor}>
-              {children}
-            </BodyParagraphAtom>
-          </View>
-        </BoxNucleon>
+              flexGrow: 1,
+              flexShrink: 1,
+              alignSelf: 'stretch',
+              justifyContent: 'center'
+            }}
+            color={contentColor}>
+            {children}
+          </BodyParagraphAtom>
+        </View>
       </Stack>
     </View>
   );

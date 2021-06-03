@@ -70,7 +70,8 @@ export default function PageContentAnchors() {
         <RenderHtmlCard {...anchorsRelativeConfig} />
         <Admonition type="tip">
           You can use the same URL normalization mechanism in your custom
-          renderers thanks to <InlineCode>useNormalizedUrl</InlineCode> hook.
+          renderers thanks to <RefRenderHTMLExport name="useNormalizedUrl" />{' '}
+          hook.
         </Admonition>
       </Chapter>
       <Chapter title="Configuring">

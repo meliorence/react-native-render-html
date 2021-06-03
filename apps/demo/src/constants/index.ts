@@ -2,9 +2,9 @@ import Constants from 'expo-constants';
 
 const SYSTEM_FONTS = [...Constants.systemFonts, 'space-mono'];
 const BODY_CHAPTER_SPACING = 16;
-const BODY_VERTICAL_SPACING = 8;
+const BODY_VERTICAL_SPACING = 12;
 const BODY_HZ_SPACING = 2;
-const BODY_PARAGRAPH_SPACING = 4;
+const BODY_PARAGRAPH_SPACING = 8;
 const HEADER_COLL_HEIGHT = 54;
 export {
   SYSTEM_FONTS,

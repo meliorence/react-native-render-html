@@ -162,7 +162,7 @@ export default function RenderHTMLCard({
       <div className={styles.expoBox}>
         <button
           onClick={() => setIsOpen(true)}
-          className={`${styles.expoBox__button} button button--outline button--primary`}
+          className={`${styles.expoBox__button} button button--primary`}
           role="button">
           <ExpoLogo color="var(--ifm-button-color)" size={40} />
           <span className={styles.expoBox__span}>
