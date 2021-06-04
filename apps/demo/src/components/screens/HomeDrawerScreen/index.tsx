@@ -26,8 +26,7 @@ interface ResourceRouteNav extends ResourceRouteDefinition {
 
 const Drawer = createDrawerNavigator<Record<ResourceRoute, {}>>();
 
-// const initialRouteName: ResourceRoute = 'root-intro';
-const initialRouteName: ResourceRoute = 'playground-lists';
+const initialRouteName: ResourceRoute = 'root-intro';
 
 interface GroupDefinition {
   groupLabel: string;
