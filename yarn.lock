@@ -9588,7 +9588,6 @@ __metadata:
     react-native-paper: ^4.8.1
     react-native-reanimated: ~2.1.0
     react-native-render-html: "workspace:*"
-    react-native-render-html-v5: "npm:react-native-render-html@^5.0.0"
     react-native-safe-area-context: 3.2.0
     react-native-screens: ~3.0.0
     react-native-svg: 12.1.0
@@ -9626,15 +9625,6 @@ __metadata:
     flat: ^5.0.2
     lodash: ^4.17.20
   checksum: 0f094af18e7f9e7c06d40c814d95b30960a93f6a9a886e6ca9d7d27f27897002cbdf7c302e3fd9e4a040b1e43efa0ae0ad14305b129244f03052bddc5ca1a5ac
-  languageName: node
-  linkType: hard
-
-"deprecated-prop-type@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "deprecated-prop-type@npm:1.0.0"
-  dependencies:
-    warning: 4.0.1
-  checksum: 7d1b89c2572e8a6df04a162efb35040874fc421e78fbe282ebd29af25c33da32c0b9a8fc1c4bc930def363237829d4f7964ce78639425f449493a2253ea3ec9f
   languageName: node
   linkType: hard
 
@@ -9880,15 +9870,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"domhandler@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "domhandler@npm:3.3.0"
-  dependencies:
-    domelementtype: ^2.0.1
-  checksum: dcc53af0ac02f1fc30abf3a794e31c13ad5e47dd00eeb06465211d854cba11c8db60eb65f4f11410fcd332a850eaca394cdd210805628b4f82d1cbcec78c8368
-  languageName: node
-  linkType: hard
-
 "domhandler@npm:^4.0.0, domhandler@npm:^4.2.0":
   version: 4.2.0
   resolution: "domhandler@npm:4.2.0"
@@ -9918,7 +9899,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"domutils@npm:^2.4.2, domutils@npm:^2.4.3, domutils@npm:^2.5.2":
+"domutils@npm:^2.4.3, domutils@npm:^2.5.2":
   version: 2.6.0
   resolution: "domutils@npm:2.6.0"
   dependencies:
@@ -12647,18 +12628,6 @@ fsevents@^1.2.7:
   peerDependencies:
     webpack: ^5.20.0
   checksum: 2d744cf3144686cc4b786dac8fbbce3733dd1825a99efea2f289b54e47201f8431df56114d72eb87cf4f78aa8dede6ea5ee09904313dbd72209dc3a43a804b51
-  languageName: node
-  linkType: hard
-
-"htmlparser2@npm:5.0.1":
-  version: 5.0.1
-  resolution: "htmlparser2@npm:5.0.1"
-  dependencies:
-    domelementtype: ^2.0.1
-    domhandler: ^3.3.0
-    domutils: ^2.4.2
-    entities: ^2.0.0
-  checksum: c3564b7d26b5e894ee9aae9132ddf23ce79c4d31881b75aef14224b5d89c2e17dc638fa77c0a576e0fcc4c73cc608890bc63b4452f79d7960d2b4af836247fc0
   languageName: node
   linkType: hard
 
@@ -19742,21 +19711,6 @@ fsevents@^1.2.7:
   languageName: unknown
   linkType: soft
 
-"react-native-render-html-v5@npm:react-native-render-html@^5.0.0":
-  version: 5.1.0
-  resolution: "react-native-render-html@npm:5.1.0"
-  dependencies:
-    deprecated-prop-type: ^1.0.0
-    htmlparser2: 5.0.1
-    prop-types: ^15.7.2
-    stringify-entities: ^3.1.0
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  checksum: 0207ef60d2fc5951abd95cb647bcb564246228da0b063872dc3bc8a23bbd75d571e7827d78304ba7c55d17caa0f35669b7e9f6a41f737c904dc7bf90ea2e851c
-  languageName: node
-  linkType: hard
-
 "react-native-render-html@workspace:*, react-native-render-html@workspace:packages/render-html":
   version: 0.0.0-use.local
   resolution: "react-native-render-html@workspace:packages/render-html"
@@ -23828,15 +23782,6 @@ resolve@~1.19.0:
   dependencies:
     makeerror: 1.0.x
   checksum: c014f264c473fc4464ba8f59eb9f7ffa1c0cf2c83b65353de28a6012d8dd29e974bf2b0fbd5c71231f56762a3ea0d970b635f7d6f6d670ff83f426741ce6a4da
-  languageName: node
-  linkType: hard
-
-"warning@npm:4.0.1":
-  version: 4.0.1
-  resolution: "warning@npm:4.0.1"
-  dependencies:
-    loose-envify: ^1.0.0
-  checksum: 9575a07a0e75e5b42baa9823b08314d06e8f4f46deddc4c4c349a8a436738f16fd04d21b60a98cc68b13894802c85a5bf412ac9ff3cc999935df04ee36f35603
   languageName: node
   linkType: hard
 

@@ -146,8 +146,6 @@ function RenderHTMLCardInner({
             <DefaultColorRolesProvider>
               <UIHtmlDisplayMolecule
                 renderHtmlProps={renderHtmlProps}
-                useLegacy={false}
-                supportsLegacy={false}
                 contentWidth={contentWidth - useSpacing(4)}
               />
             </DefaultColorRolesProvider>

@@ -1,55 +1,19 @@
 import React, { useCallback } from 'react';
-import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import { View, StyleProp, ViewStyle } from 'react-native';
 import RenderHTML, { RenderHTMLProps } from 'react-native-render-html';
-import LegacyHTML from 'react-native-render-html-v5';
 import UIDisplayLoadingAtom from './UIDisplayLoadingAtom';
 import useOnLinkPress from '../hooks/useOnLinkPress';
 import { useColorRoles } from '../theme/colorSystem';
 import { SYSTEM_FONTS } from '../constants';
-import TextRoleNucleon from './nucleons/TextRoleNucleon';
-
-function stripUnsupportedStylesInLegacy(style: Record<string, any>) {
-  return Object.keys(style)
-    .filter((k) => k != 'whiteSpace' && k != 'listStyleType')
-    .reduce((container, key) => ({ ...container, [key]: style[key] }), {});
-}
-
-function stripPropsFromStylesheet(
-  styleSheet?: Record<string, Record<string, any>>
-) {
-  if (!styleSheet) {
-    return undefined;
-  }
-  return Object.entries(styleSheet).reduce(
-    (prev, [key, value]) => ({
-      ...prev,
-      [key]: stripUnsupportedStylesInLegacy(value)
-    }),
-    {} as Record<string, any>
-  );
-}
-
-const styles = StyleSheet.create({
-  legacyWarningContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginHorizontal: 30,
-    flexGrow: 1
-  }
-});
 
 const UIHtmlDisplayMolecule = React.memo(
   ({
-    supportsLegacy,
     renderHtmlProps,
     contentWidth,
-    style,
-    useLegacy = false
+    style
   }: {
     contentWidth: number;
     renderHtmlProps: RenderHTMLProps;
-    supportsLegacy: boolean;
-    useLegacy: boolean;
     style?: StyleProp<ViewStyle>;
   }) => {
     const onSelectUri = useOnLinkPress();
@@ -92,26 +56,7 @@ const UIHtmlDisplayMolecule = React.memo(
       },
       html: {}
     };
-    if (!supportsLegacy && useLegacy) {
-      return (
-        <View style={styles.legacyWarningContainer}>
-          <TextRoleNucleon align="center" role="uiLabel">
-            Legacy HTML component is not available for this snippet.
-          </TextRoleNucleon>
-        </View>
-      );
-    }
-    const renderHtml = useLegacy ? (
-      <LegacyHTML
-        debug={false}
-        {...sharedProps}
-        html={sharedProps.html}
-        onLinkPress={onLinkPress}
-        baseFontStyle={stripUnsupportedStylesInLegacy(baseStyle)}
-        classesStyles={stripPropsFromStylesheet(sharedProps.classesStyles)}
-        tagsStyles={stripPropsFromStylesheet(mergedTagsStyles)}
-      />
-    ) : (
+    const renderHtml = (
       <RenderHTML
         debug={false}
         {...sharedProps}
