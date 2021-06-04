@@ -39,23 +39,23 @@ export default function BodyAdmonitionAtom({
   const dividerWidth = 6;
   const contentColor = useColorRoles().surface.secondaryContent;
   const iconSize = 22;
-  const iconPadX = useSpacing(2);
+  const space2 = useSpacing(2);
   return (
     <View {...props}>
-      <Stack
+      <View
         style={{
           borderLeftWidth: dividerWidth,
-          borderLeftColor: semanticColor
-        }}
-        marginX={BODY_HZ_SPACING}
-        space={2}>
+          borderLeftColor: semanticColor,
+          marginHorizontal: useSpacing(BODY_HZ_SPACING)
+        }}>
         <Stack
           horizontal
           space={BODY_HZ_SPACING}
           style={{
-            paddingLeft: iconPadX,
+            paddingLeft: space2,
             flexDirection: 'row',
-            alignItems: 'center'
+            alignItems: 'center',
+            marginBottom: space2
           }}>
           <IconNucleon
             color={semanticColor}
@@ -69,24 +69,17 @@ export default function BodyAdmonitionAtom({
             {title}
           </TextRoleNucleon>
         </Stack>
-        <View
+        <BodyParagraphAtom
           style={{
-            flexDirection: 'row',
-            flex: 0,
-            alignItems: 'center'
-          }}>
-          <BodyParagraphAtom
-            style={{
-              flexGrow: 1,
-              flexShrink: 1,
-              alignSelf: 'stretch',
-              justifyContent: 'center'
-            }}
-            color={contentColor}>
-            {children}
-          </BodyParagraphAtom>
-        </View>
-      </Stack>
+            flexGrow: 1,
+            flexShrink: 1,
+            alignSelf: 'stretch',
+            justifyContent: 'center'
+          }}
+          color={contentColor}>
+          {children}
+        </BodyParagraphAtom>
+      </View>
     </View>
   );
 }

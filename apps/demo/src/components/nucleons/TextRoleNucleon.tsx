@@ -15,7 +15,7 @@ export default function TextRoleNucleon({
   return (
     <NativeText
       {...props}
-      textBreakStrategy="highQuality"
+      textBreakStrategy="simple"
       style={[generatedStyle, style]}
     />
   );
