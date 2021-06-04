@@ -144,6 +144,10 @@ export type UIToolkitConfig = {
   }>;
   RefDoc: ComponentType<{ target: PageSpecs; fragment?: string }>;
   Acronym: ComponentType<AcronymDefinition>;
-  SvgFigure: ComponentType<{ asset: SvgAssetType; description: string }>;
+  SvgFigure: ComponentType<{
+    asset: SvgAssetType;
+    description: string;
+    title: string;
+  }>;
   RefAPI: ComponentType<RefAPIProps>;
 } & UIToolkitBase;

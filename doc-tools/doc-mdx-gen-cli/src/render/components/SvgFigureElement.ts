@@ -5,6 +5,7 @@ import NodeWithChildren from './NodeWithChildren';
 export type SvgFigureElementProps = {
   asset: SvgAssetType;
   description: string;
+  title: string;
 };
 
 export default class SvgFigureElement extends NodeWithChildren {

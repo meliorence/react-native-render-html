@@ -55,7 +55,8 @@ const roleDefs: Record<
   },
   bodyBold: { fontFamily: FONT_BODY_BOLD, fontSize: 16 },
   bodyFigureTitle: {
-    fontSize: BASE_FONT_SIZE * 0.9,
+    fontSize: BASE_FONT_SIZE * 0.85,
+    lineHeight: BASE_FONT_SIZE * 0.85 * 1.4,
     fontFamily: FONT_BODY_BOLD,
     textTransform: 'uppercase'
   },

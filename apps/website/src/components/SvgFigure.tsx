@@ -10,23 +10,30 @@ const svgAssetsIndex: Record<SvgAssetType, typeof DataFlowSvg> = {
 
 export default function SvgFigure({
   asset,
-  description
+  description,
+  title
 }: {
   asset: SvgAssetType;
   description: string;
+  title: string;
 }) {
   const SvgComponent = svgAssetsIndex[asset];
   return (
-    <figure className={styles.figure}>
-      <div className={styles.svgContainer}>
-        <SvgComponent
-          content="var(--ifm-font-color-base)"
-          secondaryContent="var(--ifm-font-color-secondary)"
-          codeBlockBg="transparent"
-          width="100%"
-        />
-      </div>
-      <figcaption className={styles.figure__caption}>{description}</figcaption>
-    </figure>
+    <>
+      {title && <div className={styles.figure__title}>{title}</div>}
+      <figure className={styles.figure}>
+        <div className={styles.svgContainer}>
+          <SvgComponent
+            content="var(--ifm-font-color-base)"
+            secondaryContent="var(--ifm-font-color-secondary)"
+            codeBlockBg="rgba(125,125,125,0.2)"
+            width="100%"
+          />
+        </div>
+        <figcaption className={styles.figure__caption}>
+          {description}
+        </figcaption>
+      </figure>
+    </>
   );
 }

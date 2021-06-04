@@ -94,8 +94,8 @@ export default function MdxToolkitProvider({
     Acronym: ({ fullName, name, definition }) => (
       <abbr about={definition} children={name} title={fullName} />
     ),
-    SvgFigure: ({ asset, description }) => (
-      <svgfigure asset={asset} description={description} />
+    SvgFigure: ({ asset, description, title }) => (
+      <svgfigure asset={asset} title={title} description={description} />
     ),
     InlineCode: ({ children }) => <code>{children}</code>,
     Hyperlink: ({ children, url }) => <a href={url}>{children}</a>,
