@@ -63,6 +63,12 @@ $code-bg: lighten($theme-surface-bg, 4%);
   --ifm-global-radius: 0;
   --ifm-line-height-base: 2;
 
+  --theme-collection-odd-bg: rgba(161, 161, 161, 0.103);
+  --theme-collection-even-bg: rgba(109, 109, 109, 0.281);
+
+  --ifm-table-background: var(--theme-collection-odd-bg);
+  --ifm-table-stripe-background: var(--theme-collection-even-bg);
+
   --syntax-color-punctuation: rgb(199, 146, 234);
   --syntax-color-attr-name: rgb(255, 203, 107);
   --syntax-color-plain: rgb(191, 199, 213);
@@ -216,11 +222,11 @@ code {
     overflow: hidden;
     > :nth-child(4n + 1),
     > :nth-child(4n + 2) {
-      background-color: rgba(161, 161, 161, 0.103);
+      background-color: var(--theme-collection-odd-bg);
     }
     > :nth-child(4n),
     > :nth-child(4n - 1) {
-      background-color: rgba(109, 109, 109, 0.281);
+      background-color: var(--theme-collection-even-bg);
     }
     dt,
     dd {
@@ -236,6 +242,20 @@ code {
   }
   table {
     table-layout: fixed;
+
+    > thead {
+      > tr {
+        background-color: var(--ifm-color-primary);
+        color: var(--theme-on-primary);
+      }
+      th {
+        text-align: left;
+      }
+    }
+    
+    th,td,tr {
+      border-width: 0;
+    }
 
     th,
     td {
