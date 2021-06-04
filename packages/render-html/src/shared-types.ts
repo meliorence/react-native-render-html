@@ -345,32 +345,42 @@ export interface TRenderEngineConfig {
    */
   enableCSSInlineProcessing?: boolean;
   /**
-   * Provide your styles for specific HTML tags.
+   * Provide mixed styles to target HTML tag names.
    *
-   * @remarks Do NOT use the StyleSheet API to create the styles
-   * you're going to feed to `tagsStyle and classesStyles`.
+   * @warning **Do NOT** use the `StyleSheet` API to create those styles.
+   * @remarks Any `fontFamily` used in those styles must be registered with
+   * {@link TRenderEngineConfig.systemFonts} prop.
    */
   tagsStyles?: MixedStyleRecord;
   /**
-   * Provide your styles for specific HTML classes.
+   * Provide mixed styles to target elements selected by CSS classes.
    *
-   * @remarks Do NOT use the StyleSheet API to create the styles
-   * you're going to feed to `tagsStyle and classesStyles`.
+   * @warning **Do NOT** use the `StyleSheet` API to create those styles.
+   * @remarks Any `fontFamily` used in those styles must be registered with
+   * {@link TRenderEngineConfig.systemFonts} prop.
    */
   classesStyles?: MixedStyleRecord;
   /**
-   * Provide your styles for specific element identifiers (id attribute).
+   * Provide mixed styles to target elements identified by the `id` attribute.
+   *
+   * @warning **Do NOT** use the `StyleSheet` API to create those styles.
+   * @remarks Any `fontFamily` used in those styles must be registered with
+   * {@link TRenderEngineConfig.systemFonts} prop.
    */
   idsStyles?: MixedStyleRecord;
   /**
    * The default style for the document (root). Inheritable styles will be
-   * transferred to children. That works also for Text styles.
+   * transferred to children. That works also for textual styles.
+   *
+   * @warning **Do NOT** use the `StyleSheet` API to create those styles.
+   * @remarks Any `fontFamily` used in those styles must be registered with
+   * {@link TRenderEngineConfig.systemFonts} prop.
    */
   baseStyle?: MixedStyleDeclaration;
   /**
    * Ignore specific DOM nodes.
    *
-   * **Warning**: when this function is invoked, the node has not yet been
+   * @warning When this function is invoked, the node has not yet been
    * attached to its parent or siblings. Use the second argument (`parent`)
    * if you need to perform logic based on parent.
    *
@@ -382,6 +392,9 @@ export interface TRenderEngineConfig {
    *
    * @returns `true` if this node should not be included in the DOM, anything
    * else otherwise.
+   *
+   * @param node - The node to check. Beware the parent node is not accessible. Use the second argument.
+   * @param parent - The parent node.
    */
   ignoreDomNode?: (
     node: Node,
@@ -399,7 +412,7 @@ export interface TRenderEngineConfig {
    */
   domVisitors?: DomVisitorCallbacks;
   /**
-   * A list of tags which should not be included in the DOM.
+   * A list of **lowercase tags** which should not be included in the DOM.
    *
    * @remark The filtering is happening during parsing, thus with very little
    * overhead.
@@ -418,17 +431,18 @@ export interface TRenderEngineConfig {
   /**
    * Whitelist specific inline CSS style properties and ignore the others.
    *
-   * @remarks Property names must be camelCased: for example,
-   * 'background-color' should be written 'backgroundColor'.
+   * @warning Property names must be camelCased: for example,
+   * `background-color` should be written `backgroundColor`.
    */
   allowedStyles?: CSSPropertyNameList;
   /**
    * Blacklist specific inline CSS style properties and allow the others.
    *
-   * @remarks Property names must be camelCased: for example,
-   * 'background-color' should be written 'backgroundColor'. Also note that if
-   * you don't want inline style processing at all, you should set
-   * `enableCSSInlineProcessing` prop to `false`.
+   * @warning Property names must be camelCased: for example,
+   * `background-color` should be written `backgroundColor`.
+   *
+   * @remarks Note that if you don't want inline style processing at all, you
+   * should set `enableCSSInlineProcessing` prop to `false`.
    */
   ignoredStyles?: CSSPropertyNameList;
   /**
@@ -455,7 +469,7 @@ export interface TRenderEngineConfig {
   /**
    * A record for specific CSS fonts.
    *
-   * **Suggestion**: Use Plaform.select({ ios: ..., android: ..., default: ...})
+   * @remarks Use `Plaform.select({ ios: ..., android: ..., default: ...})`.
    */
   fallbackFonts?: FallbackFontsDefinitions;
   /**
@@ -463,16 +477,16 @@ export interface TRenderEngineConfig {
    */
   customHTMLElementModels?: HTMLElementModelRecord;
   /**
-   * The default value in pixels for 1em
+   * The default value in pixels for 1em.
    */
   emSize?: number;
   /**
-   * Set custom markers from a TNode and all its descendants. Markers will be
+   * Set custom markers from a {@link TNode} and all its descendants. {@link Markers} will be
    * accessible in custom renderers via `tnode.markers` prop.
    *
    * @param targetMarkers - The markers to modify.
-   * @param parentMarkers - Markers from the parent TNode.
-   * @param tnode - The TNode to inspect
+   * @param parentMarkers - {@link Markers} from the parent {@link TNode}.
+   * @param tnode - The {@link TNode} to inspect.
    *
    * @remarks
    * Changes to this prop will cause a react tree update. Always memoize it.
