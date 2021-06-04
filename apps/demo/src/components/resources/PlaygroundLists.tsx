@@ -149,6 +149,20 @@ function BoldTide(props: any) {
   );
 }
 
+function DynamicMarkerBoxTide(props: any) {
+  const isDynamic = usePlaygroundStateSlice('dynamicMarkerBox');
+  const setIsDynamic = usePlaygroundSetter('dynamicMarkerBox');
+  return (
+    <UISwitchTideMolecule
+      leftIconName="arrow-expand-horizontal"
+      label="Dynamic Marker Box?"
+      value={isDynamic}
+      onValueChange={setIsDynamic}
+      {...props}
+    />
+  );
+}
+
 function ItalicTide(props: any) {
   const isItalic = usePlaygroundStateSlice('isItalic');
   const setIsItalic = usePlaygroundSetter('isItalic');
@@ -215,6 +229,7 @@ export default function PlaygroundLists() {
         <UITideListAtom>
           <FontSizeTide />
           <LineHeightTide />
+          <DynamicMarkerBoxTide />
           <BoldTide />
           <ItalicTide />
           <FontFamilyTide />

@@ -37,6 +37,7 @@ export default function PlaygroundDisplay({
     fontSize,
     isItalic,
     isBold,
+    dynamicMarkerBox,
     lineHeight,
     olListType,
     ulListType,
@@ -45,6 +46,14 @@ export default function PlaygroundDisplay({
   const fallbackColor = useColorRoles().surface.content;
   const renderHtmlProps: RenderHTMLProps = useMemo(
     () => ({
+      renderersProps: {
+        ol: {
+          enableDynamicMarkerBoxWidth: dynamicMarkerBox
+        },
+        ul: {
+          enableDynamicMarkerBoxWidth: dynamicMarkerBox
+        }
+      },
       baseStyle: {
         color: color ?? fallbackColor,
         fontSize,
@@ -72,6 +81,7 @@ export default function PlaygroundDisplay({
       fontFamily,
       isItalic,
       isBold,
+      dynamicMarkerBox,
       ulListType,
       olListType,
       html,

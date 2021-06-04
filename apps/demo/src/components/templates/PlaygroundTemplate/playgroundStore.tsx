@@ -40,6 +40,7 @@ export interface PlaygroundMutableState<Sk extends string> {
   ulListType: UlListType;
   isBold: boolean;
   isItalic: boolean;
+  dynamicMarkerBox: boolean;
   fontFamily: string;
   selectedSource: Sk;
 }
@@ -92,6 +93,7 @@ function getInitialState<Sk extends string>({
     }),
     isBold: false,
     isItalic: false,
+    dynamicMarkerBox: false,
     selectedSource: initialSource,
     sourceMap
   };
