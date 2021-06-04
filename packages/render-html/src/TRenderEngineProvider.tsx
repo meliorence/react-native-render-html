@@ -87,8 +87,8 @@ export function useAmbientTRenderEngine() {
 }
 
 /**
- * A react component to share a transient web engine instance across different
- * rendered contents via `RenderHTMLFragment`. This can significantly enhance
+ * A react component to share a {@link TRenderEngine} instance across different
+ * rendered contents via {@link RenderHTMLSource}. This can significantly enhance
  * performance in applications with potentially dozens or hundreds of distinct
  * rendered snippets such as chat apps.
  *
