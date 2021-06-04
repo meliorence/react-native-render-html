@@ -126,7 +126,7 @@ export function ul(htmlAttribs, children, convertedCSSStyles, passProps = {}) {
         convertedCSSStyles,
         {
           ...passProps,
-          index,
+          nodeIndex: index,
         },
       ];
 

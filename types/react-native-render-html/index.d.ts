@@ -1,4 +1,4 @@
-// Type definitions for react-native-render-html 4.2
+// Type definitions for react-native-render-html 5.1
 // Project: https://github.com/meliorence/react-native-render-html
 // Definitions by: Jules Randolph <https://github.com/jsamr>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
