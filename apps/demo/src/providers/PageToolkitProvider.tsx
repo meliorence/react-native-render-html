@@ -17,13 +17,12 @@ import UISourceDisplayMolecule from '../components/UISourceDisplayMolecule';
 import { ScrollView } from 'react-native-gesture-handler';
 import BodyAdmonitionAtom from '../components/BodyAdmonitionAtom';
 import ArticleContainerAtom from '../components/ArticleContainerAtom';
-import ArticleHeaderAtom from '../components/ArticleHeader';
 import UIHyperlinkAtom from '../components/UIHyperlinkAtom';
 import { useNavigation } from '@react-navigation/core';
 import TextRoleNucleon from '../components/nucleons/TextRoleNucleon';
 import svgAssetsIndex from '../svgAssetsIndex';
 import { useColorPrimitives, useColorRoles } from '../theme/colorSystem';
-import { useSpacing } from '@mobily/stacks';
+import { Stack, useSpacing } from '@mobily/stacks';
 import CardColorRolesProvider from '../components/croles/CardColorRolesProvider';
 import { Linking, StyleSheet } from 'react-native';
 import BoxNucleon from '../components/nucleons/BoxNucleon';
@@ -31,6 +30,8 @@ import { WEBSITE_URL } from '@doc/constants';
 import URI from 'urijs';
 import TNodeTransformDisplayOrganism from '../components/TNodeTransformDisplayOrganism';
 import UICardContainer from '../components/UICardContainer';
+import { BODY_PARAGRAPH_SPACING } from '../constants';
+import MaxWidthContainerAtom from '../components/MaxWidthContainerAtom';
 
 const genericOnLinkPress = (uri: string) => Linking.openURL(uri);
 
@@ -61,6 +62,14 @@ const RefBuilder: UIToolkitConfig['RefBuilder'] = ({ name, url, type }) => {
     </UIHyperlinkAtom>
   );
 };
+
+function Header({ children, ...other }: PropsWithChildren<{}>) {
+  return (
+    <MaxWidthContainerAtom {...other}>
+      <Stack space={BODY_PARAGRAPH_SPACING}>{children}</Stack>
+    </MaxWidthContainerAtom>
+  );
+}
 
 function RefAPI({
   name,
@@ -168,11 +177,11 @@ const toolkitConfig: UIToolkitConfig = {
   Container: ArticleContainerAtom,
   Chapter: BodyChapterMolecule,
   Section: BodySectionMolecule,
-  Header: ArticleHeaderAtom as any,
   List: BodyListAtom,
   ListItem: BodyListItemAtom,
   Paragraph: BodyParagraphAtom,
   Bold,
+  Header,
   RenderHtmlCard: RenderHtmlCardOrganism,
   TNodeTransformDisplay: TNodeTransformDisplayOrganism,
   SourceDisplay,

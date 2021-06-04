@@ -13,14 +13,17 @@ import AnimatedContextProvider, {
 } from './AnimatedContextProvider';
 import Animated from 'react-native-reanimated';
 import ArticleHeader from './ArticleHeader';
-import { ImageRequireSource, useWindowDimensions, View } from 'react-native';
+import { ImageRequireSource, View } from 'react-native';
 import {
   useFocusEffect,
   useNavigation,
   useRoute
 } from '@react-navigation/core';
 import ScrollerProvider, { useScroller } from './ScrollerProvider';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {
+  useSafeAreaInsets,
+  useSafeAreaFrame
+} from 'react-native-safe-area-context';
 import { PageSpecs } from '@doc/pages';
 import UITideAtom, { UITideAtomProps } from '../../UITideAtom';
 
@@ -174,7 +177,7 @@ export default function ArticleTemplate(
   props: PropsWithChildren<ArticleTemplateProps>
 ) {
   const { params } = useRoute();
-  const { height: windowHeight, width: windowWidth } = useWindowDimensions();
+  const { height: safeFrameHeight, width: safeFrameWidth } = useSafeAreaFrame();
   const scrollRef = useRef<Animated.ScrollView>() as RefObject<Animated.ScrollView>;
   const fragment = (params as any)?.fragment;
   return (
@@ -182,8 +185,8 @@ export default function ArticleTemplate(
       <AnimatedContextProvider>
         <Article
           {...props}
-          width={windowWidth}
-          headerHeight={windowHeight}
+          width={safeFrameWidth}
+          headerHeight={safeFrameHeight}
           scrollRef={scrollRef}
           fragment={fragment}
         />
