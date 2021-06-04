@@ -11,7 +11,7 @@
   background-blend-mode: multiply;
   height: min(600px, 100vh);
   --ifm-hero-text-color: var(--ifm-color-white);
-  font-family: var(--ifm-font-family-monospace);
+  letter-spacing: 2px;
   display: flex;
   justify-content: center;
 
@@ -27,7 +27,6 @@
 .content {}
 
 .subtitle {
-  font-weight: bold;
 }
 
 @media screen and (max-width: 966px) {

@@ -118,7 +118,13 @@ export default function ToolkitProvider({
       },
       SvgFigure({ asset }) {
         const assetSpecs = figuresIndex[asset];
-        return <SvgFigure asset={asset} description={assetSpecs.description} />;
+        return (
+          <SvgFigure
+            asset={asset}
+            title={assetSpecs.title}
+            description={assetSpecs.description}
+          />
+        );
       },
       RefRenderHtmlProp({ name }) {
         return (

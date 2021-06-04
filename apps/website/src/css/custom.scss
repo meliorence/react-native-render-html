@@ -85,6 +85,7 @@ $code-bg: lighten($theme-surface-bg, 4%);
 }
 
 html[data-theme='light'] {
+  --theme-on-primary: var(--ifm-color-white);
   --ifm-background-color: var(--ifm-color-white);
   // Docsearch
   --docsearch-text-color: var(--ifm-color-gray-800);
@@ -101,6 +102,7 @@ html[data-theme='light'] {
 }
 
 html[data-theme='dark'] {
+  --theme-on-primary: var(--ifm-color-black);
   --docsearch-searchbox-background: var(--ifm-background-color) !important;
   --ifm-code-background: #{$code-bg};
   --ifm-background-color: #1c1c2e;
@@ -152,7 +154,7 @@ html[data-theme='dark'] {
 
 .menu__link {
   --ifm-menu-color-background-active: var(--ifm-color-primary);
-  --ifm-menu-color-active: var(--ifm-color-white);
+  --ifm-menu-color-active: var(--theme-on-primary);
   border-radius: var(--ifm-global-radius);
   &#{&}--sublist#{&}--active {
     --ifm-menu-color-active: var(--ifm-color-primary);
@@ -278,6 +280,13 @@ code {
   border-left: solid var(--ifm-alert-background-color) 0.5rem;
   svg {
     fill: var(--ifm-alert-color);
+  }
+}
+
+.button {
+  &--primary:not(:hover):not(#{&}--outline) {
+    background-color: var(--ifm-color-primary);
+    color: var(--theme-on-primary);
   }
 }
 

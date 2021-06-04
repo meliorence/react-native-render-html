@@ -25,7 +25,7 @@ import svgAssetsIndex from '../svgAssetsIndex';
 import { useColorPrimitives, useColorRoles } from '../theme/colorSystem';
 import { useSpacing } from '@mobily/stacks';
 import CardColorRolesProvider from '../components/croles/CardColorRolesProvider';
-import { Linking, StyleSheet, View } from 'react-native';
+import { Linking, StyleSheet } from 'react-native';
 import BoxNucleon from '../components/nucleons/BoxNucleon';
 import { WEBSITE_URL } from '@doc/constants';
 import URI from 'urijs';
@@ -50,16 +50,6 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline'
   }
 });
-
-const BottomCaption = ({ caption }: { caption: string }) => (
-  <BoxNucleon paddingX={2} paddingTop={1}>
-    <TextRoleNucleon
-      color={useColorRoles().surface.secondaryContent}
-      role="caption">
-      {caption}
-    </TextRoleNucleon>
-  </BoxNucleon>
-);
 
 const RefBuilder: UIToolkitConfig['RefBuilder'] = ({ name, url, type }) => {
   const onLinkPress = useOnLinkPress(url);
@@ -146,16 +136,20 @@ const Bold: UIToolkitConfig['Bold'] = ({ children }) => (
   <TextRoleNucleon role="bodyBold" children={children} />
 );
 
-const SvgFigure: UIToolkitConfig['SvgFigure'] = ({ asset, description }) => {
+const SvgFigure: UIToolkitConfig['SvgFigure'] = ({
+  asset,
+  description,
+  title
+}) => {
   const Component = svgAssetsIndex[asset];
-  const { surface } = useColorRoles();
+  const { surface, codeBackground } = useColorRoles();
   const padding = useSpacing(2);
   return (
-    <View>
+    <UICardContainer title={title} caption={description}>
       <ScrollView
         horizontal
         contentContainerStyle={{
-          backgroundColor: surface.background,
+          backgroundColor: codeBackground,
           minWidth: '100%',
           justifyContent: 'center',
           padding
@@ -166,8 +160,7 @@ const SvgFigure: UIToolkitConfig['SvgFigure'] = ({ asset, description }) => {
           codeBlockBg={'rgba(125,125,125,0.2)'}
         />
       </ScrollView>
-      <BottomCaption caption={description} />
-    </View>
+    </UICardContainer>
   );
 };
 

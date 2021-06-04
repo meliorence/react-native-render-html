@@ -12,15 +12,19 @@
 .figure__caption {
   padding: var(--ifm-leading);
   font-style: italic;
-  text-align: center;
+  text-align: left;
+  line-height: 1.4;
+  color: var(--ifm-font-color-secondary);
 }
 
 .figure__title {
   text-transform: uppercase;
+  padding: 0.5rem;
   padding-left: 1rem;
+  font-size: 85%;
   font-weight: var(--ifm-font-weight-bold);
   background-color: var(--ifm-color-primary);
-  color: var(--ifm-color-gray-900);
+  color: var(--theme-on-primary);
 }
 
 .reference {
