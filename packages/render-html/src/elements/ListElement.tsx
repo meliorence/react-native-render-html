@@ -40,7 +40,6 @@ function createSymbolicMarkerRenderer(
     style,
     markerTextStyle,
     counterRenderer,
-    markerTextWidth,
     rtlMarkerReversed = false
   }: MarkerBoxProps) => {
     const prefix = counterRenderer.renderPrefix();
@@ -51,8 +50,7 @@ function createSymbolicMarkerRenderer(
           style,
           {
             flexDirection: rtlMarkerReversed ? 'row-reverse' : 'row',
-            justifyContent: 'flex-end',
-            width: markerTextWidth
+            justifyContent: 'flex-end'
           }
         ]}>
         {prefix !== '' && <Text style={markerTextStyle}>{prefix}</Text>}
@@ -86,6 +84,19 @@ function extractMarkerTextStyle(tnode: TNode) {
   );
 }
 
+function getMarkerBoxStyle(
+  markerWidth: number | false,
+  paddingValue: string | number | undefined
+) {
+  const markerBoxWidth =
+    typeof markerWidth === 'number'
+      ? typeof paddingValue === 'number'
+        ? Math.max(paddingValue, markerWidth)
+        : markerWidth
+      : paddingValue;
+  return { width: markerBoxWidth };
+}
+
 export default function ListElement({
   tnode,
   TDefaultRenderer,
@@ -95,6 +106,7 @@ export default function ListElement({
   enableExperimentalRtl = false,
   enableRemoveTopMarginIfNested = true,
   enableRemoveBottomMarginIfNested = true,
+  enableDynamicMarkerBoxWidth = false,
   listStyleSpecs,
   ...props
 }: ListElementProps<any>) {
@@ -147,31 +159,34 @@ export default function ListElement({
     rtlLineReversed: rtl,
     rtlMarkerReversed: rtl,
     length: tnode.children.length,
+    dynamicMarkerBoxWidth: enableDynamicMarkerBoxWidth,
     renderMarker:
       spec.type === 'unitary'
         ? createSymbolicMarkerRenderer(spec.Component)
         : undefined
   });
   const markerWidth = itemProps.markerTextWidth;
+  const fixedPaddingRule = rtl
+    ? ('paddingRight' as const)
+    : ('paddingLeft' as const);
+  // Fallback to padding-left value on RTL mode
+  const paddingValue = style[fixedPaddingRule] ?? style['paddingLeft'];
+  const markerBoxWidthStyle = getMarkerBoxStyle(markerWidth, paddingValue);
   const renderChild = ({ childElement, key, index }: TChildProps) => (
     <MarkedListItem
       key={key}
       index={index}
       {...itemProps}
-      style={[itemProps.style, { [rtl ? 'right' : 'left']: -markerWidth }]}>
+      markerBoxStyle={[itemProps.markerBoxStyle, markerBoxWidthStyle]}
+      markerTextStyle={itemProps.markerTextStyle}
+      style={itemProps.style}>
       <View style={styles.shrink}>{childElement}</View>
     </MarkedListItem>
   );
-  const fixedPaddingRule = rtl
-    ? ('paddingRight' as const)
-    : ('paddingLeft' as const);
-  const paddingValue = style[fixedPaddingRule];
+
   const dynamicPaddingStyle = {
     position: 'relative' as const,
-    [fixedPaddingRule]:
-      typeof paddingValue === 'number'
-        ? Math.max(paddingValue, markerWidth)
-        : markerWidth
+    [fixedPaddingRule]: 0
   };
   return (
     <TDefaultRenderer
