@@ -1,3 +1,10 @@
+# v5.1.1
+
+## Bugfixes
+
+- wrong `nodeIndex` for children of `ul` and `ol` tags
+- `alterChildren` function return type
+
 # v5.1.0
 
 ## Bugfixes
