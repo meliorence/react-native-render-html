@@ -36,46 +36,29 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 
 > :warning: **You are on the master branch which is home for the latest development.**
 > Check the table bellow to get documentation for your exact
-> version. Because the patch version is irrelevant regarding the features of one
-> version, we will point to the last patch release of a minor version. You can
-> read our full branching policy in the
-> [MAINTAINING.adoc](MAINTAINING.adoc#branching) file.
+> version.
 
-### Stable releases
+### Releases
 
 | Minor | Branch                                                                                    | Documentation                                                                                              | Test Status                                                                                               | Latest                                                                         |
 | ----- | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| next  | master                                                                                    | [Official Website](https://meliorence.github.io/react-native-render-html/)                                 | ![CI](https://github.com/meliorence/react-native-render-html/workflows/CI/badge.svg?branch=master)        | [![npm](https://img.shields.io/npm/v/react-native-render-html/next)](#)        |
 | 5.1   |  [release/5.1](https://github.com/meliorence/react-native-render-html/tree/release/5.1)   | [release/5.1/README.md](https://github.com/meliorence/react-native-render-html/blob/release/5.1/README.md) | ![CI](https://github.com/meliorence/react-native-render-html/workflows/CI/badge.svg?branch=release%2F5.1) | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/5.1)](#) |
 | 4.2   |  [release/4.2](https://github.com/meliorence/react-native-render-html/tree/release/4.2)   | [release/4.2/README.md](https://github.com/meliorence/react-native-render-html/blob/release/4.2/README.md) | ![CI](https://github.com/meliorence/react-native-render-html/workflows/CI/badge.svg?branch=release%2F4.2) | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/4.2)](#) |
 
 <a name="prereleases"></a>
 
-### Pre-releases
-
-| Tag     | Branch      | Test Status                                                                                                    | Latest                                                                  |
-| ------- | ----------- | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| next    | dev/5.x     | [![CI](https://github.com/meliorence/react-native-render-html/workflows/CI/badge.svg?branch=dev%2f5.x)](#)     | [![](https://img.shields.io/npm/v/react-native-render-html/next)](#)    |
-| foundry | dev/foundry | [![CI](https://github.com/meliorence/react-native-render-html/workflows/CI/badge.svg?branch=dev%2ffoundry)](#) | [![](https://img.shields.io/npm/v/react-native-render-html/foundry)](#) |
-
 ## Install
 
+Install the foundry (v6) release as such:
+
 ```bash
-npm install react-native-render-html
+npm install react-native-render-html@next
 ```
 
-> :city_sunrise: To try out pre-releases up-to-date with development, including many fixes, you are
-> encouraged to install the `next` tag versions. With our test-first
-> approach, the fixes and features in this branch will have been tested, so the
-> chances you encounter a bug is pretty low. If you encounter any issue on a
-> pre-release, you don't need to fill a full bug report. Just [comment our
-> latest release
-> thread](https://github.com/meliorence/react-native-render-html/issues?q=is%3Aissue+is%3Aopen+label%3Arelease).
-> To install the `next` version: <pre>npm install react-native-render-html@next</pre>
->
-> If you wish, you can also try directly the master branch:
->
-> <pre>npm install "github:meliorence/react-native-render-html#master"</pre>
+## Documentation
 
+Check out our [official website](https://meliorence.github.io/react-native-render-html/), or our amazing mobile-first Discovery App.
 
 <p align="center">
   <img src="./assets/discovery-expo-qr.png"/><br>
