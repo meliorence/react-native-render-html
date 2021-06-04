@@ -76,6 +76,18 @@ export interface GenericPressableProps extends AccessibilityProps {
  */
 export interface ListElementConfig {
   /**
+   * When `true`, the width of the marker box will be adapted depending on
+   * `fontSize` and the highest number of characters in the printed range.
+   *
+   * If this length is superior than the left (or right in ltr mode) padding,
+   * a supplemental space will be added before every list child.
+   *
+   * When `false`, the left (or right in ltr mode) padding will be invariable.
+   *
+   * @defaultValue false
+   */
+  enableDynamicMarkerBoxWidth?: boolean;
+  /**
    * Remove top margin if this element parent is an `li` element and it
    * is its first child.
    *
