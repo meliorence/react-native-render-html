@@ -84,8 +84,6 @@ export default function PlaygroundDisplay({
       <BoxNucleon padding={0}>
         <UIHtmlDisplayMolecule
           renderHtmlProps={renderHtmlProps}
-          useLegacy={false}
-          supportsLegacy={false}
           contentWidth={contentWidth}
         />
       </BoxNucleon>
