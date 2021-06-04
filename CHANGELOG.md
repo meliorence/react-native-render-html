@@ -1,3 +1,45 @@
+# [6.0.0-alpha.26](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.25...v6.0.0-alpha.26) (2021-06-04)
+
+
+### Code Refactoring
+
+* remove internalRenderers from exports ([cea10f9](https://github.com/meliorence/react-native-render-html/commit/cea10f9770649d27ed2ef4fcb274395d2b4d416d))
+* rename `RenderersPropsBase` to `RenderersProps` ([38de8f4](https://github.com/meliorence/react-native-render-html/commit/38de8f46fc6ee3502165c1faca87d2feb4134053))
+* rename `TransientRenderEngineConfig` to `TRenderEngineConfig` ([89dc252](https://github.com/meliorence/react-native-render-html/commit/89dc25208c8a539667be4d6c01b324e9c5d97aa1))
+* rename reexports from domhandler to their original names ([5488313](https://github.com/meliorence/react-native-render-html/commit/54883137983545173d42c6c4d5b33997cee007d8))
+* simplify types / suggest module augmentation for extensibility ([c6f5cc7](https://github.com/meliorence/react-native-render-html/commit/c6f5cc7299744f3a80c8e9add35bb4fb7e49aa81))
+
+
+### Features
+
+* new `renderersProps.(ol|ul).enableDynamicMarkerBoxWidth` prop ([0cde839](https://github.com/meliorence/react-native-render-html/commit/0cde839054a1c9d60afd3bb0b49d187223a57eef))
+* reexport CustomElementModel type from TRE ([9cc961b](https://github.com/meliorence/react-native-render-html/commit/9cc961b799cff9505b575f2ab68557fef2826626))
+* reexport HTMLModelRecord from TRE ([c74efad](https://github.com/meliorence/react-native-render-html/commit/c74efad6e4fd8440c6273852a5637b4cac5e7aaf))
+* reexport isDomNode and isDomText from TRE ([0292ac0](https://github.com/meliorence/react-native-render-html/commit/0292ac0bfce97b95b6d0841b8c24c68489bb4f47))
+* reexport SetMarkersForTNode from TRE ([38a787f](https://github.com/meliorence/react-native-render-html/commit/38a787f73e432cf21177ba553525b13b5948f6de))
+* reexport TNodeDescriptor from TRE ([1adfc1b](https://github.com/meliorence/react-native-render-html/commit/1adfc1bff150c9d191ecd500c9fe28d53fe1da1b))
+* reexport TNodePrintOptions type from TRE ([0a436a7](https://github.com/meliorence/react-native-render-html/commit/0a436a78e46528ada64c4d2e2894c0a8e01593f2))
+
+
+### BREAKING CHANGES
+
+* list padding will not adapt to markers width anymore.
+You need to explicitly enable this behavior via the new
+`enableDynamicMarkerBoxWidth` lists renderers prop.
+* (TypeScript users): `TransientRenderEngineConfig` was
+renamed to `TRenderEngineConfig` for naming consistency.
+* (TypeScript users): `RenderersPropsBase` has been
+renamed to `RenderersProps` for naming consistency.
+* DOMNode has been renamed to Node, DOMText to Text...
+etc.
+* `internalRenderers` has been removed from exports. If
+you need to reuse an internal renderer, check `useInternalRenderer`
+hook instead.
+* A few TypeScript types names have been changed and
+some type parameters have been removed for simplicity. Use module
+augmentation if you need to specify `RenderersProps` or
+`PropsFromParent`.
+
 # [6.0.0-alpha.25](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.24...v6.0.0-alpha.25) (2021-05-21)
 
 **This should be the last alpha. The most notable breaking change is for custom renderers: you should not attach a model to your renderer anymore. Instead, use `customHTMLElementModels` prop.** A guide will be available soon on the new documentation website.
