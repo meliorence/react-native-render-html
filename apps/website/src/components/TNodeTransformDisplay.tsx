@@ -16,14 +16,16 @@ export default function TNodeTransformDisplay({
   const normalHtml = decodeURIComponent(html);
   const normalSnapshot = decodeURIComponent(snapshot);
   return (
-    <figure className={styles.figure}>
+    <>
       {title && <div className={styles.figure__title}>{title}</div>}
-      <CodeBlock className={'html'}>{normalHtml}</CodeBlock>
-      <div className={styles.arrow}>↓</div>
-      <CodeBlock className={'xml'}>{normalSnapshot}</CodeBlock>
-      {caption && (
-        <figcaption className={styles.figure__caption}>{caption}</figcaption>
-      )}
-    </figure>
+      <figure className={styles.figure}>
+        <CodeBlock className={'html'}>{normalHtml}</CodeBlock>
+        <div className={styles.arrow}>↓</div>
+        <CodeBlock className={'xml'}>{normalSnapshot}</CodeBlock>
+        {caption && (
+          <figcaption className={styles.figure__caption}>{caption}</figcaption>
+        )}
+      </figure>
+    </>
   );
 }

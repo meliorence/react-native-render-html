@@ -1,0 +1,68 @@
+@import '../../css/shared.scss';
+
+  /**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+  .codeBlockContainer {
+  margin-bottom: var(--ifm-leading);
+  background-color: var(--ifm-code-background);
+}
+
+.codeBlockContent {
+  position: relative;
+  /*rtl:ignore*/
+  direction: ltr;
+}
+
+.codeBlockTitle {
+  @extend .figure__title;
+}
+
+.codeBlock {
+  overflow: auto;
+  border-radius: var(--ifm-global-radius);
+}
+
+.codeBlockWithTitle {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.copyButton {
+  background: rgba(0, 0, 0, 0.3);
+  border: none;
+  border-radius: var(--ifm-global-radius);
+  color: var(--ifm-color-white);
+  cursor: pointer;
+  opacity: 0;
+  user-select: none;
+  padding: 0.4rem 0.5rem;
+  position: absolute;
+  right: calc(var(--ifm-pre-padding) / 2);
+  top: calc(var(--ifm-pre-padding) / 2);
+  transition: opacity 200ms ease-in-out;
+}
+
+.codeBlockTitle:hover + .codeBlockContent .copyButton,
+.codeBlockContent:hover > .copyButton,
+.copyButton:focus {
+  opacity: 1;
+}
+
+.codeBlockLines {
+  font: var(--ifm-code-font-size) / var(--ifm-pre-line-height)
+    var(--ifm-font-family-monospace);
+  white-space: pre;
+  float: left;
+  min-width: 100%;
+  padding: var(--ifm-pre-padding);
+}
+
+@media print {
+  .codeBlockLines {
+    white-space: pre-wrap;
+  }
+}

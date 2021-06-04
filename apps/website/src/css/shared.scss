@@ -17,8 +17,10 @@
 
 .figure__title {
   text-transform: uppercase;
-  background-color: var(--ifm-background-color);
   padding-left: 1rem;
+  font-weight: var(--ifm-font-weight-bold);
+  background-color: var(--ifm-color-primary);
+  color: var(--ifm-color-gray-900);
 }
 
 .reference {

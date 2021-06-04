@@ -109,67 +109,69 @@ export default function RenderHTMLCard({
   const onModalClose = useCallback(() => setIsOpen(false), []);
 
   return (
-    <figure className={styles.figure}>
-      <div className={styles.sourceContainer}>
-        <div className={styles.sourceContainer__code}>
-          {title && <div className={styles.figure__title}>{title}</div>}
-          <div className={styles.sourceContainer__fixRadius}>
-            <Tabs
-              defaultValue={preferHtmlSrc ? 'html' : 'jsx'}
-              title={title}
-              values={tabs}>
-              <TabItem value="html">
-                <div className="codeblock--with-line-numbers">
-                  <CodeBlock className="html">{normalHtml}</CodeBlock>
-                </div>
-              </TabItem>
-              <TabItem value="jsx">
-                <div className="codeblock--with-line-numbers">
-                  <CodeBlock className="jsx">{normalSnippet}</CodeBlock>
-                </div>
-              </TabItem>
-              <TabItem value="snapshot">
-                <div className="codeblock--with-line-numbers">
-                  <CodeBlock className="xml">{normalSnapshot}</CodeBlock>
-                </div>
-              </TabItem>
-            </Tabs>
+    <>
+      {title && <div className={styles.figure__title}>{title}</div>}
+      <figure className={styles.figure}>
+        <div className={styles.sourceContainer}>
+          <div className={styles.sourceContainer__code}>
+            <div className={styles.sourceContainer__fixRadius}>
+              <Tabs
+                defaultValue={preferHtmlSrc ? 'html' : 'jsx'}
+                title={title}
+                values={tabs}>
+                <TabItem value="html">
+                  <div className="codeblock--with-line-numbers">
+                    <CodeBlock className="html">{normalHtml}</CodeBlock>
+                  </div>
+                </TabItem>
+                <TabItem value="jsx">
+                  <div className="codeblock--with-line-numbers">
+                    <CodeBlock className="jsx">{normalSnippet}</CodeBlock>
+                  </div>
+                </TabItem>
+                <TabItem value="snapshot">
+                  <div className="codeblock--with-line-numbers">
+                    <CodeBlock className="xml">{normalSnapshot}</CodeBlock>
+                  </div>
+                </TabItem>
+              </Tabs>
+            </div>
           </div>
-        </div>
-        <BrowserOnly>
-          {() => (
-            <ExpoModal
-              isOpen={isOpen}
-              onModalClose={onModalClose}
-              {...props}
-              expoSource={normalExpoSource}
-              title={title}
-              caption={caption}
-              preferHtmlSrc={preferHtmlSrc}
-            />
+          <BrowserOnly>
+            {() => (
+              <ExpoModal
+                isOpen={isOpen}
+                onModalClose={onModalClose}
+                {...props}
+                expoSource={normalExpoSource}
+                title={title}
+                caption={caption}
+                preferHtmlSrc={preferHtmlSrc}
+              />
+            )}
+          </BrowserOnly>
+          {caption && (
+            <figcaption className={styles.caption}>{caption}</figcaption>
           )}
-        </BrowserOnly>
-        {caption && (
-          <figcaption className={styles.caption}>{caption}</figcaption>
-        )}
-        <small
-          style={!!caption ? { paddingTop: 'var(--ifm-leading)' } : {}}
-          className={styles.notice}>
-          Press on the button below to show how this code renders on your
-          device.
-        </small>
-      </div>
-      <div className={styles.expoBox}>
-        <button
-          onClick={() => setIsOpen(true)}
-          className={`${styles.expoBox__button} button button--primary`}
-          role="button">
-          <ExpoLogo color="var(--ifm-button-color)" size={40} />
-          <span className={styles.expoBox__span}>
-            Run on Your Device with Expo
-          </span>
-        </button>
-      </div>
-    </figure>
+          <small
+            style={!!caption ? { paddingTop: 'var(--ifm-leading)' } : {}}
+            className={styles.notice}>
+            Press on the button below to show how this code renders on your
+            device.
+          </small>
+        </div>
+        <div className={styles.expoBox}>
+          <button
+            onClick={() => setIsOpen(true)}
+            className={`${styles.expoBox__button} button button--primary`}
+            role="button">
+            <ExpoLogo color="var(--ifm-button-color)" size={40} />
+            <span className={styles.expoBox__span}>
+              Run on Your Device with Expo
+            </span>
+          </button>
+        </div>
+      </figure>
+    </>
   );
 }
