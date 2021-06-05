@@ -110,7 +110,7 @@ function FontSizeTide(props: any) {
       label="Font size"
       minimumValue={10}
       maximumValue={40}
-      step={0.1}
+      step={1}
       value={fontSize}
       onValueChange={setFontSize}
       {...props}
