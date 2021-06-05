@@ -255,7 +255,7 @@ with 3 optional callbacks, `onElement`, `onDocument` and `onText` which you can 
 `RenderHTMLSharedProps` for consistency. In addition, changed signature
 of `useSharedProps` and `userRendererProps`. These hooks now take as
 first generic type arugment the shape of `renderersProps`.
-* `listPrefixRenderers` prop has been discontinuated. You
+* `listPrefixRenderers` prop has been discontinued. You
 should use a custom renderer for lists instead.
 
 # [6.0.0-alpha.15](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-alpha.14...v6.0.0-alpha.15) (2021-02-11)

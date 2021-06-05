@@ -1,0 +1,34 @@
+---
+title: Announcing the Beta Foundry Release
+author: Jules Sam. Randolph
+author_title: Developer of React Native Render HTML v6
+author_url: https://github.com/jsamr/
+author_image_url: https://avatars.githubusercontent.com/u/3646758?v=4
+tags: [foundry, announcement]
+description: An overview of exiting features in React Native Render HTML Foundry release.
+image: https://i.imgur.com/mErPwqL.png
+hide_table_of_contents: false
+---
+
+After seven months of alpha development on my free time, I am proud to announce
+the first beta release of React Native Render HTML.
+
+An overview of the new features:
+
+- Custom renderers as components;
+- White-space collapsing;
+- Awesome new list component including [access to 47 markers presets](https://github.com/jsamr/react-native-li/tree/master/packages/counter-style#readme) for custom [CSS Counter Styles](https://drafts.csswg.org/css-counter-styles-3/); support for `list-style-type` CSS property, `start` attribute and optional RTL mode;
+- A brand new CSS engine overcoming recurring bugs with mismatching between CSS and React Native styles;
+- A predictable, inspectable while hackable transient render tree structure and engine;
+- The ability to define custom **content models** for tags (say hello to inline images!);
+- A hackable image renderer which supports `object-fit`; you can reuse pieces of the renderer in your own custom image renderer!
+- A three-layer rendering architecture for best performance when rendering many HTML snippets at a time;
+- The ability to select the root of the document to render;
+- The ability to inspect the DOM object asynchronously before rendering;
+
+<!--truncate-->
+
+Along comes a brand new website, and the **Discovery App** which features all
+the docs of the website with embedded RNRH-rendered snippets. In addition, the
+Discovery App has a collection of "Playgrounds" to play with specific
+components and observe how they respond to style and props changes.
