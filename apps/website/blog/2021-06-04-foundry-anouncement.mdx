@@ -10,25 +10,180 @@ image: https://i.imgur.com/mErPwqL.png
 hide_table_of_contents: false
 ---
 
-After seven months of alpha development on my free time, I am proud to announce
-the first beta release of React Native Render HTML.
+import DiscoveryFrame from '@site/src/components/DiscoveryFrame';
+import Reference from '@site/src/components/Reference';
+import TNodeTransformDisplay from '@site/src/components/TNodeTransformDisplay';
+import ListsShowcase from '@site/src/components/ListsShowcase';
 
-An overview of the new features:
+After seven months of alpha development on my free time and testing by the
+community, I am proud to announce the first beta release of React Native Render
+HTML. This process has led the new API to mature, and the introduction of
+beta stage marks the end of its instability.
 
-- Custom renderers as components;
-- White-space collapsing;
-- Awesome new list component including [access to 47 markers presets](https://github.com/jsamr/react-native-li/tree/master/packages/counter-style#readme) for custom [CSS Counter Styles](https://drafts.csswg.org/css-counter-styles-3/); support for `list-style-type` CSS property, `start` attribute and optional RTL mode;
-- A brand new CSS engine overcoming recurring bugs with mismatching between CSS and React Native styles;
-- A predictable, inspectable while hackable transient render tree structure and engine;
-- The ability to define custom **content models** for tags (say hello to inline images!);
-- A hackable image renderer which supports `object-fit`; you can reuse pieces of the renderer in your own custom image renderer!
-- A three-layer rendering architecture for best performance when rendering many HTML snippets at a time;
-- The ability to select the root of the document to render;
-- The ability to inspect the DOM object asynchronously before rendering;
+During the beta stage, I expect the test coverage to rise above 90%, and to
+bring fixes to any issue reported by the community. I also plan to refine the
+**Discovery App** and website, including additional sections for best user
+experience. Now, let's get to the meat!
 
 <!--truncate-->
 
-Along comes a brand new website, and the **Discovery App** which features all
-the docs of the website with embedded RNRH-rendered snippets. In addition, the
-Discovery App has a collection of "Playgrounds" to play with specific
-components and observe how they respond to style and props changes.
+## The Discovery App
+
+Along with the release comes this new website and the **Discovery App** which
+features all the docs of the website with embedded RNRH-rendered snippets. For
+this very reason, the Discovery App is recommended for newcomers, or for those
+who want **a "live" feeling of the new engine capabilities**. The website is
+more suited during development when searching for specific information.
+
+<DiscoveryFrame />
+
+In addition, the Discovery App has a collection of "Playgrounds" to play with
+specific components and observe how they respond to style and props changes.
+[**Try out the Discovery App
+here**](https://expo.io/@jsamr/react-native-render-html-discovery). You will
+need to install the [**Expo Go**](https://expo.io/client) app on your device.
+
+## Overview of New Features
+
+### The Transient Render Engine
+
+The Transient Render engine (TRE) transforms DOM nodes into a ready-to-render
+data structure called the Transient Render Tree (TRT), which is made of
+`TNodes`. It allows features such as **whitespace collapsing**, **hoisting**,
+**CSS inheritance** and more.
+
+A legitimate concerns is whether it adds any overhead. The short answer is
+*no*, because the legacy engine had its own transient render structure; and
+this TRT construction process is benchmarked to safeguard its speed. In
+addition to the enumerated features, the new transient data structure offers
+obvious advantages for library consumers:
+
+- It is totally transparent and predictable; you can create snapshots of a
+`TNode` thanks to the <Reference type="api-def" name="TNodeShape" member="snaphot()"
+url="/react-native-render-html/api/tnodeshape#snapshot" /> method for an
+intuitive understanding of the engine internals. This feature is extremely
+handy for debugging and testing!
+- It's hackable by allowing to define custom **content models** for tags. Say
+hi to inline images!
+- It is shipped with a CSS processor which enforces strict translation rules
+from CSS to React Native styles. Say goodbye to native crashes caused by
+unsupported CSS properties! See the [**dedicated
+article**](/react-native-render-html/docs/flow/css-processing) for 
+reference.
+
+Below is an example of HTML transformation into a Transient Render Tree:
+
+<TNodeTransformDisplay title="Translation of HTML markup into a Transient Render Tree" caption="This figure shows how HTML markup translates to a transient render tree structure. The markup for the TRT is JSX and has been produced by the snapshot() method. Notice that whitespace have collapsed!" html="%3Ca%20href%3D%22https%3A%2F%2Fdomain.com%22%3E%0AThis%20is%0A%3Cspan%3Ephrasing%20content%3C%2Fspan%3E%0A%3Cimg%20src%3D%22https%3A%2F%2Fdomain.com%2Flogo.jpg%22%20%2F%3E%0A%20%20%20%20and%20this%20is%20%3Cstrong%3Etoo%3C%2Fstrong%3E.%0A%3C%2Fa%3E" snapshot="%3CTDocument%20tagName%3D%22html%22%3E%0A%20%20%3CTBlock%20tagName%3D%22body%22%3E%0A%20%20%20%20%3CTBlock%20tagName%3D%22a%22%20href%3D%22https%3A%2F%2Fdomain.com%22%3E%0A%20%20%20%20%20%20%3CTPhrasing%20anonymous%3E%0A%20%20%20%20%20%20%20%20%3CTText%20anonymous%20data%3D%22This%20is%20%22%20%2F%3E%0A%20%20%20%20%20%20%20%20%3CTText%20tagName%3D%22span%22%20data%3D%22phrasing%20content%22%20%2F%3E%0A%20%20%20%20%20%20%3C%2FTPhrasing%3E%0A%20%20%20%20%20%20%3CTBlock%20tagName%3D%22img%22%20src%3D%22https%3A%2F%2Fdomain.com%2Flogo.jpg%22%20%2F%3E%0A%20%20%20%20%20%20%3CTPhrasing%20anonymous%3E%0A%20%20%20%20%20%20%20%20%3CTText%20anonymous%20data%3D%22and%20this%20is%20%22%20%2F%3E%0A%20%20%20%20%20%20%20%20%3CTText%20tagName%3D%22strong%22%20data%3D%22too%22%20%2F%3E%0A%20%20%20%20%20%20%20%20%3CTText%20anonymous%20data%3D%22.%22%20%2F%3E%0A%20%20%20%20%20%20%3C%2FTPhrasing%3E%0A%20%20%20%20%3C%2FTBlock%3E%0A%20%20%3C%2FTBlock%3E%0A%3C%2FTDocument%3E" />
+
+A detailed review of the Transient Render Engine has its [**dedicated article**](/react-native-render-html/docs/flow/transient-render-engine).
+You can also learn more about the new data flow in the [**Architecture article**](/react-native-render-html/docs/architecture).
+
+### Custom Renderers
+
+The new rendering API is an order of magnitude more powerful than the previous
+one. Custom renderers are now plain React Component instead of functions, and
+you have now access to the underlying renderer for rich customization:
+
+```jsx title="Foundry Custom Renderer"
+import React from 'react';
+import { Alert } from 'react-native';
+
+function H1Renderer({
+  TDefaultRenderer,
+  ...props
+}) {
+  const onPress = () => Alert.alert('pressed!');
+  return (
+    <TDefaultRenderer
+      {...props}
+      onPress={onPress}
+    />
+  );
+}
+```
+Default renderers support `onPress` and many more interesting props! See 
+&ZeroWidthSpace;<Reference type="api-def" name="TDefaultRendererProps" url="/react-native-render-html/api/tdefaultrendererprops" />.
+Moreover, you can customize the rendering of children thanks to the <Reference
+type="api-def" name="TChildrenRenderer" url="/react-native-render-html/api/tchildrenrenderer" /> component!
+
+```jsx title="Foundry Custom Renderer with Children Tampering"
+import React from 'react';
+import { TChildrenRenderer } from 'react-native-render-html';
+import AdComponent from './AdComponent';
+
+function ArticleWithAds({
+  TDefaultRenderer,
+  tnode,
+  ...defaultRendererProps
+}) {
+  const firstChildrenChunk = tnode.children.slice(0, 2);
+  const secondChildrenChunk = tnode.children.slice(2, 4);
+  const thirdChildrenChunk = tnode.children.slice(4);
+  return (
+    <TDefaultRenderer tnode={tnode} {...defaultRendererProps}>
+      <TChildrenRenderer tchildren={firstChildrenChunk} />
+      {firstChildrenChunk.length === 2 ? <AdComponent /> : null}
+      <TChildrenRenderer tchildren={secondChildrenChunk} />
+      {secondChildrenChunk.length === 2 ? <AdComponent /> : null}
+      <TChildrenRenderer tchildren={thirdChildrenChunk} />
+    </TDefaultRenderer>
+  );
+}
+```
+This custom renderer will insert an `AdComponent` element after the second and
+fourth children of this <Reference type="api-def" name="TNode" url="/react-native-render-html/api/tnode" />.
+
+Last but not least, custom renderers can reuse internal renderers (those
+special renderers displaying lists, images and anchors). For this purpose,
+you can use the <Reference type="api-def" name="InternalRenderer" url="/react-native-render-html/api/customrendererprops#internalrenderer" /> prop or <Reference type="api-def" name="useInternalRenderer" url="/react-native-render-html/api/useinternalrenderer" /> hook.
+[**Check out our dedicated
+guide**](/react-native-render-html/docs/guides/custom-renderers).
+
+### A Revamped List Renderer
+
+The versatile new list component [gives access to 47 markers
+presets](https://github.com/jsamr/react-native-li/tree/master/packages/counter-style#readme)
+for custom [CSS Counter
+Styles](https://drafts.csswg.org/css-counter-styles-3/); supports 
+`list-style-type` CSS property and `start` attribute. There is also an experimental RTL feature!
+
+<ListsShowcase />
+
+Note that the **thai** and **arabic indic** counters have been rendered via
+[@jsamr/counter-style](https://github.com/jsamr/react-native-li/tree/master/packages/counter-style#readme)
+presets, and the **russian** counter has been rendered with a custom, 2
+lines-of-code counter renderer. Learn more about this fancy feature and examples [**in the dedicated
+article**](/react-native-render-html/docs/content/lists).
+
+### Extensible Internal Image Renderer
+
+The new internal image renderer is shipped with `object-fit` CSS property support.
+Moreover, its pieces and internal state are completely reusable for custom
+rendering! Learn more about this feature and examples [**in the dedicated
+article**](/react-native-render-html/docs/content/images).
+
+### Composite Rendering Architecture
+
+The three-layer rendering architecture is ideal when rendering many HTML
+snippets at a time. It basically means that you can put configuration in a
+context to avoid the cost of instantiating the TRE too many times.
+[**Check out the rendering article**](/react-native-render-html/docs/flow/rendering).
+
+It also offers the ability to select the root of the document to render, and to
+inspect the DOM object asynchronously before rendering. [**Check out our
+dedicated guide**](/react-native-render-html/docs/guides/dom-tampering).
+
+## Ready for Production
+
+The Foundry release is ready for production. Entering the beta stage means the
+API will not change anymore and can be considered stable. Test coverage for the
+CSS processor and TRE is **100%** (see [native-html/core
+repository](https://github.com/native-html/core)). The
+`react-native-render-html` package has a test coverage above **64%**, and will
+rise to above **90%** by the end of the beta stage.
+
+## Migrating from v4 and v5
+
+[**Check out our dedicated
+guide**](/react-native-render-html/docs/migration-guide), and please don't
+hesitate to ask for help in [**our discord channel**](https://discord.gg/dbEMMJM).

@@ -97,8 +97,8 @@ export default function PageGuideCustomRenderers() {
             <InlineCode>&lt;bluecircle&gt;</InlineCode> Web Component for our
             website and we need to register a custom renderer for this tag. If
             we don't, the <InlineCode>&lt;bluecircle&gt;</InlineCode> elements
-            will be translated to <InlineCode>TEmpty</InlineCode> and won't be
-            rendered.
+            will be translated to <RefRenderHTMLExport name="TEmpty" /> and
+            won't be rendered.
           </Paragraph>
           <Admonition type="important">
             We <Bold>must</Bold> register an <Bold>element model</Bold> for this

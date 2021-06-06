@@ -149,6 +149,14 @@ html[data-theme='dark'] {
   z-index: 0;
 }
 
+.table-of-contents {
+  line-height: 1.2;
+  li {
+    margin-bottom: 16px;
+    margin-top: 16px;
+  }
+}
+
 .navbar__title {
   font-family: var(--ifm-font-family-monospace);
 }
