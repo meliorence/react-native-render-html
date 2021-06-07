@@ -2,56 +2,56 @@
 $device-silver: #e2e3e4;
 $device-silver-dark: darken($device-silver, 10%);
 $device-silver-panel: #222;
-$scale-factor: 0.8;
-$device-height: 868px * $scale-factor;
-$device-width: 428px * $scale-factor;
-$frame-padding: 28px * $scale-factor;
-$video-height: $device-height - 2 * $frame-padding;
-$video-width: $device-width - 2 * $frame-padding;
 
 .device-iphone-x {
-  height: $device-height;
-  width: $device-width;
+  --scale-factor: 1;
+  --device-height: calc(868px * var(--scale-factor));
+  --device-width: calc(428px * var(--scale-factor));
+  --frame-padding: calc(28px * var(--scale-factor));
+  --video-height: calc(var(--device-height) - 2 * var(--frame-padding));
+  --video-width: calc(var(--device-width) - 2 * var(--frame-padding));
+  height: var(--device-height);
+  width: var(--device-width);
   position: relative;
   margin: auto;
   margin-bottom: var(--ifm-leading);
 
   .device-frame {
     background: $device-silver-panel;
-    border-radius: 68px * $scale-factor;
+    border-radius: calc(68px * var(--scale-factor));
     box-shadow: inset 0 0 2px 2px $device-silver-dark,
       inset 0 0 0 7px $device-silver;
-    height: $device-height;
-    padding: $frame-padding;
-    width: $device-width;
+    height: var(--device-height);
+    padding: var(--frame-padding);
+    width: var(--device-width);
   }
 
   // 2436-by-1125-pixel resolution
   .device-content {
-    border-radius: 40px * $scale-factor;
-    height: $video-height;
-    width: $video-width;
+    border-radius: calc(40px * var(--scale-factor));
+    height: var(--video-height);
+    width: var(--video-width);
     overflow: hidden;
   }
 
   .device-header {
     background: $device-silver-panel;
-    border-bottom-left-radius: 20px * $scale-factor;
-    border-bottom-right-radius: 20px * $scale-factor;
-    height: 30px * $scale-factor;
+    border-bottom-left-radius: calc(20px * var(--scale-factor));
+    border-bottom-right-radius: calc(20px * var(--scale-factor));
+    height: calc(30px * var(--scale-factor));
     left: 50%;
-    margin-left: -102px * $scale-factor;
+    margin-left: calc(-102px * var(--scale-factor));
     position: absolute;
-    top: 28px * $scale-factor;
-    width: 204px * $scale-factor;
+    top: calc(28px * var(--scale-factor));
+    width: calc(204px * var(--scale-factor));
 
     &::after,
     &::before {
       content: '';
-      height: 10px * $scale-factor;
+      height: calc(10px * var(--scale-factor));
       position: absolute;
       top: 0;
-      width: 10px * $scale-factor;
+      width: calc(10px * var(--scale-factor));
     }
     &::after {
       background: radial-gradient(
@@ -61,7 +61,7 @@ $video-width: $device-width - 2 * $frame-padding;
         $device-silver-panel 75%,
         $device-silver-panel 100%
       );
-      left: -10px * $scale-factor;
+      left: calc(-10px * var(--scale-factor));
     }
     &::before {
       background: radial-gradient(
@@ -71,7 +71,7 @@ $video-width: $device-width - 2 * $frame-padding;
         $device-silver-panel 75%,
         $device-silver-panel 100%
       );
-      right: -10px * $scale-factor;
+      right: calc(-10px * var(--scale-factor));
     }
   }
 
@@ -83,56 +83,56 @@ $video-width: $device-width - 2 * $frame-padding;
     }
     &::after {
       background: #444;
-      border-radius: 3px * $scale-factor;
-      height: 6px * $scale-factor;
+      border-radius: calc(3px * var(--scale-factor));
+      height: calc(6px * var(--scale-factor));
       left: 50%;
-      margin-left: -25px * $scale-factor;
-      top: 32px * $scale-factor;
-      width: 50px * $scale-factor;
+      margin-left: calc(-25px * var(--scale-factor));
+      top: calc(32px * var(--scale-factor));
+      width: calc(50px * var(--scale-factor));
     }
     &::before {
       background: #444;
       border-radius: 50%;
-      height: 14px * $scale-factor;
+      height: calc(14px * var(--scale-factor));
       left: 50%;
-      margin-left: 40px * $scale-factor;
-      top: 28px * $scale-factor;
-      width: 14px * $scale-factor;
+      margin-left: calc(40px * var(--scale-factor));
+      top: calc(28px * var(--scale-factor));
+      width: calc(14px * var(--scale-factor));
     }
   }
 
   .device-btns {
     background: $device-silver-dark;
-    height: 32px * $scale-factor;
-    left: -3px * $scale-factor;
+    height: calc(32px * var(--scale-factor));
+    left: calc(-3px * var(--scale-factor));
     position: absolute;
-    top: 115px * $scale-factor;
-    width: 3px * $scale-factor;
+    top: calc(115px * var(--scale-factor));
+    width: calc(3px * var(--scale-factor));
 
     &::after,
     &::before {
       background: $device-silver-dark;
       content: '';
-      height: 62px * $scale-factor;
+      height: calc(62px * var(--scale-factor));
       left: 0;
       position: absolute;
-      width: 3px * $scale-factor;
+      width: calc(3px * var(--scale-factor));
     }
 
     &::after {
-      top: 60px * $scale-factor;
+      top: calc(60px * var(--scale-factor));
     }
     &::before {
-      top: 140px * $scale-factor;
+      top: calc(140px * var(--scale-factor));
     }
   }
 
   .device-power {
     background: $device-silver-dark;
-    height: 100px * $scale-factor;
-    right: -3px * $scale-factor;
+    height: calc(100px * var(--scale-factor));
+    right: calc(-3px * var(--scale-factor));
     position: absolute;
-    top: 200px * $scale-factor;
-    width: 3px * $scale-factor;
+    top: calc(200px * var(--scale-factor));
+    width: calc(3px * var(--scale-factor));
   }
 }

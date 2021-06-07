@@ -1,8 +1,54 @@
 .annoucement {
   font-size: 24px;
-  font-weight: 700;
   margin: 0 auto;
-  padding: 48px;
+  padding: 2rem;
   text-align: center;
-  background-color: rgba(125,125,125,0.15);
+  background-color: rgba(125, 125, 125, 0.15);
+}
+
+.advertising {
+  padding: 2rem;
+  display: grid;
+  grid-gap: 4rem;
+  grid-template-areas: "left right";
+  justify-content: center;
+  &__label {
+    font-size: 20px;
+  }
+  &__left {
+    grid-area: left;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &__right {
+    grid-area: right;
+    > div {
+      margin-bottom: 0;
+    }
+  }
+  &__expo {
+    padding: 1rem;
+    background-color: rgba(125,125,125,0.15);
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+  @media screen and (max-width: 800px) {
+    grid-template-areas: "left";
+    &__right {
+      display: none;
+    }
+    &__left {
+      max-width: unset;
+    }
+    &__label {
+      text-align: center;
+    }
+    &__expo {
+      align-self: center;
+    }
+  }
 }

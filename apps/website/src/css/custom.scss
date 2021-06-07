@@ -260,8 +260,10 @@ code {
         text-align: left;
       }
     }
-    
-    th,td,tr {
+
+    th,
+    td,
+    tr {
       border-width: 0;
     }
 
@@ -329,4 +331,17 @@ code {
 
 .header-github-link:hover {
   opacity: 0.7;
+}
+
+@media screen and (max-width: 996px) {
+  .navbar__brand {
+    display: none;
+  }
+}
+
+.navbar-sidebar {
+  --ifm-menu-color: white;
+}
+.navbar__inner {
+  color: white;
 }

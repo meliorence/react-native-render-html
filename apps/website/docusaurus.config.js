@@ -44,7 +44,7 @@ module.exports = {
   baseUrl: WEBSITE_BASE,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
-  favicon: 'img/favicon.ico?v=1.0.0',
+  favicon: 'img/favicon.ico?v=2.0.0',
   organizationName: 'meliorence',
   projectName: 'react-native-render-html',
   plugins: plugins,
@@ -93,7 +93,7 @@ module.exports = {
         {
           type: 'doc',
           docId: 'migration-guide',
-          label: 'Migration Guide',
+          label: 'Migrating',
           activeSidebarClassName: '__fun'
         },
         { to: 'blog', label: 'Blog', position: 'left' },

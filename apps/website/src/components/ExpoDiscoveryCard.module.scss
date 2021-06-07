@@ -1,0 +1,21 @@
+.expoBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    line-height: 1.4;
+    &__logo {
+      margin-bottom: 0.5rem;
+    }
+    &__qr {
+      margin-top: 0.5rem;
+      align-self: center;
+      > img {
+        filter: opacity(85%);
+      }
+      html[data-theme='dark'] & > img {
+        filter: invert(1) opacity(80%);
+      }
+    }
+  }
+  

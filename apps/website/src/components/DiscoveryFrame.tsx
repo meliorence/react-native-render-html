@@ -3,9 +3,11 @@ import React from 'react';
 import discoveryVideoUrl from '@site/static/video/discovery.webm';
 import styles from './DiscoveryFrame.module.scss';
 
-function DeviceContainer({ children }) {
+function DeviceContainer({ children, scale = 1 }) {
   return (
-    <div className={styles['device-iphone-x']}>
+    <div
+      style={{ '--scale-factor': scale } as any}
+      className={styles['device-iphone-x']}>
       <div className={styles['device-frame']}>{children}</div>
       <div className={styles['device-header']} />
       <div className={styles['device-sensors']} />
@@ -15,9 +17,9 @@ function DeviceContainer({ children }) {
   );
 }
 
-export default function DiscoveryFrame({}) {
+export default function DiscoveryFrame({ scale }: { scale?: number }) {
   return (
-    <DeviceContainer>
+    <DeviceContainer scale={scale}>
       <video
         controls={false}
         loop

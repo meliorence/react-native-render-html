@@ -6,7 +6,6 @@ author_url: https://github.com/jsamr/
 author_image_url: https://avatars.githubusercontent.com/u/3646758?v=4
 tags: [foundry, announcement]
 description: An overview of exiting features in React Native Render HTML Foundry release.
-image: https://i.imgur.com/mErPwqL.png
 hide_table_of_contents: false
 ---
 
@@ -14,6 +13,7 @@ import DiscoveryFrame from '@site/src/components/DiscoveryFrame';
 import Reference from '@site/src/components/Reference';
 import TNodeTransformDisplay from '@site/src/components/TNodeTransformDisplay';
 import ListsShowcase from '@site/src/components/ListsShowcase';
+import ExpoDiscoveryCard from '@site/src/components/ExpoDiscoveryCard';
 
 After seven months of alpha development on my free time and testing by the
 community, I am proud to announce the first beta release of React Native Render
@@ -35,21 +35,19 @@ this very reason, the Discovery App is recommended for newcomers, or for those
 who want **a "live" feeling of the new engine capabilities**. The website is
 more suited during development when searching for specific information.
 
-<DiscoveryFrame />
+<DiscoveryFrame scale={0.95} />
 
 In addition, the Discovery App has a collection of "Playgrounds" to play with
 specific components and observe how they respond to style and props changes.
-[**Try out the Discovery App
-here**](https://expo.io/@jsamr/react-native-render-html-discovery). You will
-need to install the [**Expo Go**](https://expo.io/client) app on your device.
+
+<ExpoDiscoveryCard />
 
 ## Overview of New Features
 
 ### The Transient Render Engine
 
 The Transient Render engine (TRE) transforms DOM nodes into a ready-to-render
-data structure called the Transient Render Tree (TRT), which is made of
-`TNodes`. It allows features such as **whitespace collapsing**, **hoisting**,
+data structure called the Transient Render Tree (TRT), which is made of <Reference type="api-def" name="TNodes" url="/react-native-render-html/api/tnode" />. It allows features such as **whitespace collapsing**, **hoisting**,
 **CSS inheritance** and more.
 
 A legitimate concerns is whether it adds any overhead. The short answer is
@@ -59,7 +57,7 @@ addition to the enumerated features, the new transient data structure offers
 obvious advantages for library consumers:
 
 - It is totally transparent and predictable; you can create snapshots of a
-`TNode` thanks to the <Reference type="api-def" name="TNodeShape" member="snaphot()"
+<Reference type="api-def" name="TNode" url="/react-native-render-html/api/tnode" /> thanks to the <Reference type="api-def" name="TNodeShape" member="snaphot()"
 url="/react-native-render-html/api/tnodeshape#snapshot" /> method for an
 intuitive understanding of the engine internals. This feature is extremely
 handy for debugging and testing!
