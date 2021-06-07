@@ -14,7 +14,7 @@ $device-silver-panel: #222;
   width: var(--device-width);
   position: relative;
   margin: auto;
-  margin-bottom: var(--ifm-leading);
+  margin-bottom: 1rem;
 
   .device-frame {
     background: $device-silver-panel;
@@ -135,4 +135,17 @@ $device-silver-panel: #222;
     top: calc(200px * var(--scale-factor));
     width: calc(3px * var(--scale-factor));
   }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: var(--ifm-leading);
+}
+
+.button {
+  align-self: center;
+  display: flex;
+  justify-content: center;
 }

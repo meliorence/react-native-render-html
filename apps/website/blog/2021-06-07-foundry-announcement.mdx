@@ -20,9 +20,9 @@ community, I am proud to announce the first beta release of React Native Render
 HTML. This process has led the new API to mature, and the introduction of
 beta stage marks the end of its instability.
 
-During the beta stage, I expect the test coverage to rise above 90%, and to
-bring fixes to any issue reported by the community. I also plan to refine the
-**Discovery App** and website, including additional sections for best user
+During the beta stage, I will bring fixes to any issue reported by the
+community and expect the test coverage to rise above 90%. I also plan to refine
+the **Discovery App** and website, including additional sections for best user
 experience. Now, let's get to the meat!
 
 <!--truncate-->
@@ -51,10 +51,10 @@ data structure called the Transient Render Tree (TRT), which is made of <Referen
 **CSS inheritance** and more.
 
 A legitimate concerns is whether it adds any overhead. The short answer is
-*no*, because the legacy engine had its own transient render structure; and
-this TRT construction process is benchmarked to safeguard its speed. In
-addition to the enumerated features, the new transient data structure offers
-obvious advantages for library consumers:
+*no*, if we compare it to the legacy engine which had its own transient render
+structure. Moreover, this TRT construction process is benchmarked to safeguard
+its speed. In addition to the enumerated features, the new transient data
+structure offers obvious advantages for library consumers:
 
 - It is totally transparent and predictable; you can create snapshots of a
 <Reference type="api-def" name="TNode" url="/react-native-render-html/api/tnode" /> thanks to the <Reference type="api-def" name="TNodeShape" member="snaphot()"
@@ -68,6 +68,8 @@ from CSS to React Native styles. Say goodbye to native crashes caused by
 unsupported CSS properties! See the [**dedicated
 article**](/react-native-render-html/docs/flow/css-processing) for 
 reference.
+- It paves the way to server side (or build-time) pre-rendering in the future,
+and, why not, a react fiber and MDX builder.
 
 Below is an example of HTML transformation into a Transient Render Tree:
 
