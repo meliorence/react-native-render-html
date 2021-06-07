@@ -12,7 +12,7 @@
 
 <br>
 <p align="center">
-    <a href="#"><img width="124" height="124" src="assets/logo-100x100.svg"></a>
+    <a href="#"><img width="124" height="124" src="assets/logo.svg"></a>
 </p>
 <h1 align="center">react-native-render-html</h1>
 <p align="center">
@@ -22,7 +22,7 @@
 An iOS/Android pure javascript react-native component that renders your HTML into 100% native views.
 </p>
 <p align="center">
-    <a href="#"><img src="http://i.giphy.com/26tkmjBLvThP0TSak.gif"></a>
+    <a href="https://meliorence.github.io/react-native-render-html/"><img src="http://i.giphy.com/26tkmjBLvThP0TSak.gif"></a>
 </p>
 <p align="center">
   <img src="./assets/discovery-expo-qr.png"/><br>

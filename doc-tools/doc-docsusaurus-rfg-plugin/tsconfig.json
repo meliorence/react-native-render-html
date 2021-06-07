@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "outDir": "./lib",
+    "module": "CommonJS",
+    "target": "ES2015",
+    "noEmit": false,
+    "noImplicitAny": false,
+    "lib": ["ES2019"],
+    "types": ["node"],
+    "moduleResolution": "Node",
+    "isolatedModules": false,
+    "esModuleInterop": true
+  },
+  "include": ["src/"],
+  "exclude": ["node_modules", "**/__tests__", "lib", "types"]
+}

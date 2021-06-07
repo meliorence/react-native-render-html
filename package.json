@@ -17,7 +17,7 @@
     "start:website": "yarn workspace website start",
     "@doc/pages": "yarn workspace @doc/pages",
     "@doc/mdx-gen-cli": "yarn workspace @doc/mdx-gen-cli",
-    "build:tools": "yarn @doc/pages build && yarn @doc/mdx-gen-cli build",
+    "build:tools": "yarn @doc/pages build && yarn @doc/mdx-gen-cli build && yarn doc-docusaurus-rfg-plugin build",
     "build:docs": "yarn build:tools && yarn website build-docs",
     "process-svg-assets": "node scripts/processSvgAssets.js",
     "postinstall": "husky install",

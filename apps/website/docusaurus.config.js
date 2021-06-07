@@ -7,6 +7,16 @@ let hasAPIsidebar = existsSync(apisidebarPath);
 
 const plugins = [
   'docusaurus-plugin-sass',
+  [
+    'doc-docusaurus-rfg-plugin',
+    {
+      icon: '../../assets/favicon.svg',
+      apiKey: '5cfedd426015fefc5fb4a1612a13ebdb930aaf46',
+      name: 'Discover RNRH',
+      themeColor: '#8181ff',
+      backgroundColor: '#000040'
+    }
+  ],
   // Only include this plugin when the apisidebar file has been generated.
   hasAPIsidebar
     ? [
@@ -44,7 +54,10 @@ module.exports = {
   baseUrl: WEBSITE_BASE,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
-  favicon: 'img/favicon.ico?v=2.0.0',
+  // TODO remove when this issue is resolved
+  // https://github.com/facebook/docusaurus/issues/4923
+  // Also remove the swizzled LayoutHead
+  favicon: 'img/XXX',
   organizationName: 'meliorence',
   projectName: 'react-native-render-html',
   plugins: plugins,
@@ -74,7 +87,7 @@ module.exports = {
     },
     navbar: {
       logo: {
-        alt: 'React Native Render HTML Logo',
+        alt: 'RNRH',
         src: 'img/logo.svg'
       },
       items: [
