@@ -12,7 +12,7 @@
             <link>https://meliorence.github.io/react-native-render-html/blog/2021/06/07/foundry-announcement</link>
             <guid>Announcing the Beta Foundry Release</guid>
             <pubDate>Mon, 07 Jun 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[An overview of the exciting new features in React Native Render HTML Foundry release.]]></description>
+            <description><![CDATA[A major rewrite of the hackable, full-featured Open Source HTML rendering solution for React Native.]]></description>
         </item>
     </channel>
 </rss>
