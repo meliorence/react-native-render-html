@@ -2457,7 +2457,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/plugin-google-analytics@npm:2.0.0-beta.ff31de0ff":
+"@docusaurus/plugin-google-analytics@npm:2.0.0-beta.ff31de0ff, @docusaurus/plugin-google-analytics@npm:^2.0.0-beta.0":
   version: 2.0.0-beta.ff31de0ff
   resolution: "@docusaurus/plugin-google-analytics@npm:2.0.0-beta.ff31de0ff"
   dependencies:
@@ -23998,6 +23998,7 @@ resolve@~1.19.0:
     "@doc/svgr-conf": "workspace:*"
     "@docusaurus/core": 2.0.0-beta.ff31de0ff
     "@docusaurus/module-type-aliases": ^2.0.0-beta.ff31de0ff
+    "@docusaurus/plugin-google-analytics": ^2.0.0-beta.0
     "@docusaurus/preset-classic": 2.0.0-beta.ff31de0ff
     "@mdx-js/react": ^1.6.22
     "@tsconfig/docusaurus": ^1.0.2

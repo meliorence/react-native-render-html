@@ -7,6 +7,7 @@ let hasAPIsidebar = existsSync(apisidebarPath);
 
 const plugins = [
   'docusaurus-plugin-sass',
+  '@docusaurus/plugin-google-analytics',
   [
     'doc-docusaurus-rfg-plugin',
     {
@@ -69,6 +70,10 @@ module.exports = {
       contextualSearch: false,
       // Optional: Algolia search parameters
       searchParameters: {}
+    },
+    googleAnalytics: {
+      trackingID: 'G-CYR1XDV25N',
+      anonymizeIP: true
     },
     prism: {
       theme: require('prism-react-renderer/themes/dracula')
