@@ -34,7 +34,7 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 
 ## Versions
 
-**The Foundry release is finally stable, and is now-on the recommended
+**The Foundry (v6) release is finally stable, and is now-on the recommended
 version.** [Check out **the announcement blog post** in our brand new
 website](https://meliorence.github.io/react-native-render-html/blog/2021/06/07/foundry-announcement).
 We also have a [**migration
