@@ -16,31 +16,7 @@ An iOS/Android pure javascript react-native component that renders your HTML int
     <a href="#"><img src="http://i.giphy.com/26tkmjBLvThP0TSak.gif"></a>
 </p>
 
-> ## :city_sunrise:
-> To try out pre-releases up-to-date with master, including many fixes, you are encouraged to install the `next` tag versions.  With our (new) test-first approach, the fixes and features in this branch will have been tested, so the chances you encounter a bug is pretty low. If you encounter any issue on a pre-release, you don't need to fill a full bug report. Just [comment our latest release thread](https://github.com/archriss/react-native-render-html/issues?q=is%3Aissue+is%3Aopen+label%3Arelease). To install the `next` version: <pre>npm i --save react-native-render-html@next</pre>
-
-
-## Table of contents
-
-- [react-native-render-html](#react-native-render-html)
-  - [Table of contents](#table-of-contents)
-  - [Install](#install)
-  - [Basic usage](#basic-usage)
-  - [Props](#props)
-  - [Demo](#demo)
-  - [Creating custom renderers](#creating-custom-renderers)
-    - [Custom HTML tags](#custom-html-tags)
-    - [Making your custom component block or inline](#making-your-custom-component-block-or-inline)
-    - [Lists prefixes](#lists-prefixes)
-  - [Styling](#styling)
-  - [Images](#images)
-  - [Altering content](#altering-content)
-    - [alterData](#alterdata)
-    - [alterChildren](#alterchildren)
-    - [alterNode](#alternode)
-    - [onParsed](#onparsed)
-  - [Ignoring HTML content](#ignoring-html-content)
-  - [Useful functions](#useful-functions)
+> :warning: **You are on the release/4.2 branch which is a legacy version.**
 
 ## Install
 
