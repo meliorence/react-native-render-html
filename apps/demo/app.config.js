@@ -6,13 +6,13 @@ module.exports = {
     description:
       'An App to discover React Native Render HTML features and API!',
     version: version,
-    primaryColor: '#61dafb',
+    primaryColor: '#6767e2',
     orientation: 'default',
     icon: './assets/images/icon.png',
     scheme: 'myapp',
     userInterfaceStyle: 'automatic',
     splash: {
-      backgroundColor: '#ffffff'
+      backgroundColor: '#6767e2'
     },
     updates: {
       fallbackToCacheTimeout: 0
