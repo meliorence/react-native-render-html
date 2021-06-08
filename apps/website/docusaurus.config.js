@@ -7,7 +7,6 @@ let hasAPIsidebar = existsSync(apisidebarPath);
 
 const plugins = [
   'docusaurus-plugin-sass',
-  '@docusaurus/plugin-google-analytics',
   [
     'doc-docusaurus-rfg-plugin',
     {
