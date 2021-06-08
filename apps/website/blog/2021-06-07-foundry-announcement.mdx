@@ -15,11 +15,13 @@ import TNodeTransformDisplay from '@site/src/components/TNodeTransformDisplay';
 import ListsShowcase from '@site/src/components/ListsShowcase';
 import ExpoDiscoveryCard from '@site/src/components/ExpoDiscoveryCard';
 
-After seven months of alpha development on my free time and testing by the
-community, I am proud to announce the first beta release of React Native Render
-HTML. This process has led the new API to mature, and the introduction of
-beta stage marks the end of its instability.
+After seven months of a long and exciting journey in alpha development and
+testing with the community, I am proud to announce the first Foundry (v6) beta
+release of React Native Render HTML.
 
+This process has led the
+new API to mature, and the introduction of beta stage marks the end of its
+instability.
 During the beta stage, I will bring fixes to any issue reported by the
 community and expect the test coverage to rise above 90%. I also plan to refine
 the **Discovery App** and website, including additional sections for best user
@@ -57,7 +59,7 @@ its speed. In addition to the enumerated features, the new transient data
 structure offers obvious advantages for library consumers:
 
 - It is totally transparent and predictable; you can create snapshots of a
-<Reference type="api-def" name="TNode" url="/react-native-render-html/api/tnode" /> thanks to the <Reference type="api-def" name="TNodeShape" member="snaphot()"
+&ZeroWidthSpace;<Reference type="api-def" name="TNode" url="/react-native-render-html/api/tnode" /> thanks to the <Reference type="api-def" name="TNodeShape" member="snaphot()"
 url="/react-native-render-html/api/tnodeshape#snapshot" /> method for an
 intuitive understanding of the engine internals. This feature is extremely
 handy for debugging and testing!
@@ -75,14 +77,16 @@ Below is an example of HTML transformation into a Transient Render Tree:
 
 <TNodeTransformDisplay title="Translation of HTML markup into a Transient Render Tree" caption="This figure shows how HTML markup translates to a transient render tree structure. The markup for the TRT is JSX and has been produced by the snapshot() method. Notice that whitespace have collapsed!" html="%3Ca%20href%3D%22https%3A%2F%2Fdomain.com%22%3E%0AThis%20is%0A%3Cspan%3Ephrasing%20content%3C%2Fspan%3E%0A%3Cimg%20src%3D%22https%3A%2F%2Fdomain.com%2Flogo.jpg%22%20%2F%3E%0A%20%20%20%20and%20this%20is%20%3Cstrong%3Etoo%3C%2Fstrong%3E.%0A%3C%2Fa%3E" snapshot="%3CTDocument%20tagName%3D%22html%22%3E%0A%20%20%3CTBlock%20tagName%3D%22body%22%3E%0A%20%20%20%20%3CTBlock%20tagName%3D%22a%22%20href%3D%22https%3A%2F%2Fdomain.com%22%3E%0A%20%20%20%20%20%20%3CTPhrasing%20anonymous%3E%0A%20%20%20%20%20%20%20%20%3CTText%20anonymous%20data%3D%22This%20is%20%22%20%2F%3E%0A%20%20%20%20%20%20%20%20%3CTText%20tagName%3D%22span%22%20data%3D%22phrasing%20content%22%20%2F%3E%0A%20%20%20%20%20%20%3C%2FTPhrasing%3E%0A%20%20%20%20%20%20%3CTBlock%20tagName%3D%22img%22%20src%3D%22https%3A%2F%2Fdomain.com%2Flogo.jpg%22%20%2F%3E%0A%20%20%20%20%20%20%3CTPhrasing%20anonymous%3E%0A%20%20%20%20%20%20%20%20%3CTText%20anonymous%20data%3D%22and%20this%20is%20%22%20%2F%3E%0A%20%20%20%20%20%20%20%20%3CTText%20tagName%3D%22strong%22%20data%3D%22too%22%20%2F%3E%0A%20%20%20%20%20%20%20%20%3CTText%20anonymous%20data%3D%22.%22%20%2F%3E%0A%20%20%20%20%20%20%3C%2FTPhrasing%3E%0A%20%20%20%20%3C%2FTBlock%3E%0A%20%20%3C%2FTBlock%3E%0A%3C%2FTDocument%3E" />
 
+:::tip Learn More
 A detailed review of the Transient Render Engine has its [**dedicated article**](/react-native-render-html/docs/flow/transient-render-engine).
 You can also learn more about the new data flow in the [**Architecture article**](/react-native-render-html/docs/architecture).
+:::
 
 ### Custom Renderers
 
-The new rendering API is an order of magnitude more powerful than the previous
-one. Custom renderers are now plain React Component instead of functions, and
-you have now access to the underlying renderer for rich customization:
+The new rendering API is an order of magnitude more powerful than the legacy.
+Custom renderers are now plain React Component instead of functions, and you
+have now access to the underlying renderer for rich customization:
 
 ```jsx title="Foundry Custom Renderer"
 import React from 'react';
@@ -136,8 +140,24 @@ fourth children of this <Reference type="api-def" name="TNode" url="/react-nativ
 Last but not least, custom renderers can reuse internal renderers (those
 special renderers displaying lists, images and anchors). For this purpose,
 you can use the <Reference type="api-def" name="InternalRenderer" url="/react-native-render-html/api/customrendererprops#internalrenderer" /> prop or <Reference type="api-def" name="useInternalRenderer" url="/react-native-render-html/api/useinternalrenderer" /> hook.
-[**Check out our dedicated
-guide**](/react-native-render-html/docs/guides/custom-renderers).
+
+:::tip Learn More
+[**Check-out the Custom Rendering guide**](/react-native-render-html/docs/guides/custom-renderers).
+:::
+
+### Font Selection
+
+CSS `font-family` property allows a comma-separated list of fonts, while react
+Native `fontFamily` does not. Moreover, setting a font that is not available in
+the system will often lead to native crashes. To reconcile this inconsistency, the CSS
+Processor will try to match each font in a `font-family` property with a list
+of supported fonts available in the system by the library consumer. The prop to
+declare such fonts is <Reference type="api-def" name="systemFonts"
+url="/react-native-render-html/api/renderhtmlprops#systemfonts"/>.
+
+:::tip Learn More
+[**Check-out the Font Selection section from the Textual guide**](/react-native-render-html/docs/content/textual#font-selection).
+:::
 
 ### A Revamped List Renderer
 
@@ -158,32 +178,144 @@ article**](/react-native-render-html/docs/content/lists).
 ### Extensible Internal Image Renderer
 
 The new internal image renderer is shipped with `object-fit` CSS property support.
-Moreover, its pieces and internal state are completely reusable for custom
-rendering! Learn more about this feature and examples [**in the dedicated
-article**](/react-native-render-html/docs/content/images).
+Moreover, **its building blocks are completely reusable for custom
+rendering**:
+
+<dl>
+
+<dt>
+
+&ZeroWidthSpace;<Reference library="react-native-render-html" name="IMGElementContainer" url="/react-native-render-html/api/imgelementcontainer" member={undefined} full={false} type="api-def" plural={undefined} />
+
+</dt><dd>
+
+To render the container of the &ZeroWidthSpace;<Reference full={false} name="&lt;img&gt;" url="https://mdn.io/img" type="html-el" /> element.
+
+</dd><dt>
+
+&ZeroWidthSpace;<Reference library="react-native-render-html" name="IMGElementContentError" url="/react-native-render-html/api/imgelementcontenterror" member={undefined} full={false} type="api-def" plural={undefined} />
+
+</dt><dd>
+
+To render the fallback view on error state.
+
+</dd><dt>
+
+&ZeroWidthSpace;<Reference library="react-native-render-html" name="IMGElementContentLoading" url="/react-native-render-html/api/imgelementcontentloading" member={undefined} full={false} type="api-def" plural={undefined} />
+
+</dt><dd>
+
+To render the fallback view on loading state.
+
+</dd><dt>
+
+&ZeroWidthSpace;<Reference library="react-native-render-html" name="IMGElementContentSuccess" url="/react-native-render-html/api/imgelementcontentsuccess" member={undefined} full={false} type="api-def" plural={undefined} />
+
+</dt><dd>
+
+To render the image on success state..
+
+</dd><dt>
+
+&ZeroWidthSpace;<Reference library="react-native-render-html" name="useIMGElementState" url="/react-native-render-html/api/useimgelementstate" member={undefined} full={false} type="api-def" plural={undefined} />
+
+</dt><dd>
+
+To get the state of the image resource fetching.
+
+</dd>
+
+</dl>
+
+
+:::tip Learn More
+[**Check-out the Images article**](/react-native-render-html/docs/content/images).
+:::
 
 ### Composite Rendering Architecture
 
-The three-layer rendering architecture is ideal when rendering many HTML
+The three-layer rendering architecture shows its potential when rendering many HTML
 snippets at a time. It basically means that you can put configuration in a
-context to avoid the cost of instantiating the TRE too many times.
-[**Check out the rendering article**](/react-native-render-html/docs/flow/rendering).
+context to avoid the cost of instantiating the TRE too many times:
+
+```jsx 
+<RenderHTML source={{ html }} />
+```
+
+is equivalent to this (**explicit 3 layers**):
+
+```jsx 
+<TRenderEngineProvider>
+  <RenderHTMLConfigProvider>
+    <RenderHTMLSource source={{ html }} />
+  </RenderHTMLConfigProvider>
+</TRenderEngineProvider>
+```
+
+:::tip Learn More
+[**Check-out the rendering article**](/react-native-render-html/docs/flow/rendering).
+:::
 
 It also offers the ability to select the root of the document to render, and to
-inspect the DOM object asynchronously before rendering. [**Check out our
-dedicated guide**](/react-native-render-html/docs/guides/dom-tampering).
+inspect the DOM object asynchronously before rendering.
 
-## Ready for Production
+:::tip Learn More
+[**Check-out the DOM Tampering guide**](/react-native-render-html/docs/guides/dom-tampering)
+:::
 
-The Foundry release is ready for production. Entering the beta stage means the
-API will not change anymore and can be considered stable. Test coverage for the
-CSS processor and TRE is **100%** (see [native-html/core
-repository](https://github.com/native-html/core)). The
+## Massive dumps of bug fixes
+
+After merging the Foundry PR to master, **73% of open issues have been
+closed**. Most fixes stem from the efficiency and rigor of the new test-driven
+CSS processor and Transient Render Engine. Most notable areas of fixes:
+
+- **Unrecognized styles** crashing the the app. The new CSS processor is strict and
+deterministic and what is translatable to React Native styles and what is not.
+- **Missing inheritable styles**. Styles inheritance and specificity are
+implemented and battle-tested in the TRE.
+- **List prefixes styles** not inheriting from parent styles (color...). The
+new list internal renderer takes them all.
+- **Missing HTML tags support**. The TRE now has explicit support for all the
+tags specified in the [HTML5 WHATWG living
+standard](https://html.spec.whatwg.org/). However, not all tags will be
+rendered. Tags with a **content model** set to `none` will not be rendered (you
+can override this model though). Check-out the list of all tags and their
+models in the <Reference type="api-doc" name="defaultHTMLElementModels" url="/react-native-render-html/api/defaulthtmlelementmodels/" /> definition.
+
+:::tip Learn More
+[Check-out the release notes for more details](https://github.com/meliorence/react-native-render-html/releases/tag/v6.0.0-beta.0).
+:::
+
+## Ready for Production?
+
+### Quality and Stability Assessments
+
+With all the bug fixes, high test coverage and API stability, entering the
+beta stage means **the Foundry release is now ready for production**. Test coverage for
+the CSS processor and TRE is **100%** (see
+[native-html/core](https://github.com/native-html/core)) repository. The
 `react-native-render-html` package has a test coverage above **64%**, and will
 rise to above **90%** by the end of the beta stage.
 
-## Migrating from v4 and v5
+### Migrating from v4 and v5
 
-[**Check out our dedicated
+[**Check-out our dedicated
 guide**](/react-native-render-html/docs/migration-guide), and please don't
 hesitate to ask for help in [**our discord channel**](https://discord.gg/dbEMMJM).
+
+## Final Notes
+
+:::note Consulting
+I am available for consulting, to help you incorporate this
+library in your project or migrate from legacy versions. Contact me via
+[email](https://github.com/jsamr) or
+[LinkedIn](https://www.linkedin.com/in/js-randolph/).
+:::
+
+I want to thank [Maxime Bertonnier](https://github.com/Exilz), the original
+first contributor of `react-native-render-html` for letting me join the team
+and take over this awesome project. I want to also thank all those amazing
+alpha-testers from the community who have helped me refine the API over the
+last 7 months. And finally, kudos to [Expansify](https://use.expensify.com/),
+Inc. for hiring me to build the first iteration of the engine, which was
+originally motivated by the lack of whitespace collapsing support.
