@@ -137,19 +137,23 @@
   }
 }
 
-.sourceBox {
+.sourceBoxContainer {
+  --source-box-font-size: 14px;
+  margin-top: 0.25rem;
+  font-style: italic;
+  padding: 0.25rem;
+  padding-left: 0.5rem;
+  line-height: 1.4;
+  font-size: var(--source-box-font-size);
+  background-color: var(--ifm-code-background);
+  color: var(--ifm-color-white);
   text-overflow: ellipsis;
+  white-space: nowrap;
   overflow: hidden;
-  flex-shrink: 0;
-  line-height: 1;
-  &:not(:hover) {
-    text-decoration: none;
-  }
-  > code {
-    font-style: normal;
-    font-weight: 900;
-    padding-left: 0.25rem;
-    font-size: small;
-  }
+}
+
+.sourceBox {
+  text-decoration: underline;
+
 }
 

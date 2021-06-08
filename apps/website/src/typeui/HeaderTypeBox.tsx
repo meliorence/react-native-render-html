@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import styles from './styles.module.scss';
+import classes from './styles.module.scss';
 import renderReflection from './renderReflection';
 import Params from './Params';
 import useReflectionIndex from './useReflectionIndex';
@@ -34,7 +34,10 @@ function ExternalSource({ libraryName }: { libraryName: string }) {
     throw new Error(`${libraryName} is not registered as third party`);
   }
   return (
-    <a className={styles.sourceBox} href={thirdPartiesMap[libraryName]}>
+    <a
+      target="_blank"
+      className={classes.sourceBox}
+      href={thirdPartiesMap[libraryName]}>
       <code>{libraryName}</code>
     </a>
   );
@@ -64,22 +67,27 @@ export default function HeaderTypeBox({
             label: 'export',
             title: `This definition is an export from react-native-render-html v${version}.`
           }
-        ]}>
+        ]}
+      />
+      <div className={clsx(classes.container)}>
+        <div className={clsx('padding--sm', classes.typeContainer)}>
+          {renderReflection(reflection, new Params((id) => index[id]))}
+        </div>
+      </div>
+      <div className={clsx(classes.sourceBoxContainer, 'margin-bottom--md')}>
+        Defined in{' '}
         {!isExternal && source && (
           <a
-            className={styles.sourceBox}
+            target="_blank"
+            className={classes.sourceBox}
             href={`https://github.com/meliorence/react-native-render-html/tree/v${version}/${source.fileName}#L${source.line}`}>
-            <code>{`react-native-render-html/…/${source.fileName
+            {source.fileName}
+            {/* <code>{`react-native-render-html/…/${source.fileName
               .split('/')
-              .pop()}#L${source.line}`}</code>
+              .pop()}#L${source.line}`}</code> */}
           </a>
         )}
         {isExternal && source && <ExternalSource libraryName={libraryName} />}
-      </Badges>
-      <div className={clsx(styles.container, 'margin-bottom--md')}>
-        <div className={clsx('padding--sm', styles.typeContainer)}>
-          {renderReflection(reflection, new Params((id) => index[id]))}
-        </div>
       </div>
     </>
   );
