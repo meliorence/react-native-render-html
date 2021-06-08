@@ -24,54 +24,9 @@ An iOS/Android pure javascript react-native component that renders your HTML int
     <a href="#"><img src="http://i.giphy.com/26tkmjBLvThP0TSak.gif"></a>
 </p>
 
-## Table of contents
-
-- [react-native-render-html](#react-native-render-html)
-  - [Table of contents](#table-of-contents)
-  - [Versions](#versions)
-  - [Install](#install)
-  - [Basic usage](#basic-usage)
-  - [Props](#props)
-  - [Demo](#demo)
-  - [Creating custom renderers](#creating-custom-renderers)
-    - [Custom HTML tags](#custom-html-tags)
-    - [Making your custom component block or inline](#making-your-custom-component-block-or-inline)
-    - [Lists prefixes](#lists-prefixes)
-  - [Styling](#styling)
-  - [Images](#images)
-  - [Altering content](#altering-content)
-    - [alterData](#alterdata)
-    - [alterChildren](#alterchildren)
-    - [alterNode](#alternode)
-    - [onParsed](#onparsed)
-  - [Ignoring HTML content](#ignoring-html-content)
-  - [Utilities](#useful-functions)
-  - [Help](#help)
-
 ## Versions
 
-> :warning: **You are on the master branch which is home for the latest development.**
-> Check the table bellow to get documentation for your exact
-> version. Because the patch version is irrelevant regarding the features of one
-> version, we will point to the last patch release of a minor version. You can
-> read our full branching policy in the
-> [MAINTAINING.adoc](MAINTAINING.adoc#branching) file.
-
-### Stable releases
-
-| Minor | Branch                                                                                  | Documentation                                                                                            | Test Status                                                                                             | Latest                                                                         |
-| ----- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| 5.0   |  [release/5.0](https://github.com/meliorence/react-native-render-html/tree/release/5.0)   | [release/5.0/README.md](https://github.com/meliorence/react-native-render-html/blob/release/5.0/README.md) | ![CI](https://github.com/meliorence/react-native-render-html/workflows/CI/badge.svg?branch=release%2F5.0) | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/5.0)](#) |
-| 4.2   |  [release/4.2](https://github.com/meliorence/react-native-render-html/tree/release/4.2)   | [release/4.2/README.md](https://github.com/meliorence/react-native-render-html/blob/release/4.2/README.md) | ![CI](https://github.com/meliorence/react-native-render-html/workflows/CI/badge.svg?branch=release%2F4.2) | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/4.2)](#) |
-
-<a name="prereleases"></a>
-
-### Pre-releases
-
-| Tag     | Branch      | Test Status                                                                                                  | Latest                                                                  |
-| ------- | ----------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
-| next    | dev/5.x     | [![CI](https://github.com/meliorence/react-native-render-html/workflows/CI/badge.svg?branch=dev%2f5.x)](#)     | [![](https://img.shields.io/npm/v/react-native-render-html/next)](#)    |
-| foundry | dev/foundry | [![CI](https://github.com/meliorence/react-native-render-html/workflows/CI/badge.svg?branch=dev%2ffoundry)](#) | [![](https://img.shields.io/npm/v/react-native-render-html/foundry)](#) |
+> :warning: **You are on the dev/5.x branch.**
 
 ## Install
 
