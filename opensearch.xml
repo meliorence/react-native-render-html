@@ -4,7 +4,7 @@
   <ShortName>Discover React Native Render HTML</ShortName>
   <Description>Search Discover React Native Render HTML</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Image width="16" height="16" type="image/x-icon">https://meliorence.github.io/react-native-render-html/img/favicon.ico?v=1.0.0</Image>
+  <Image width="16" height="16" type="image/x-icon">https://meliorence.github.io/react-native-render-html/img/XXX</Image>
   <Url type="text/html" method="get" template="https://meliorence.github.io/react-native-render-html/search?q={searchTerms}"/>
   <Url type="application/opensearchdescription+xml" rel="self" template="https://meliorence.github.io/react-native-render-html/opensearch.xml" />
   <moz:SearchForm>https://meliorence.github.io/react-native-render-html/</moz:SearchForm>

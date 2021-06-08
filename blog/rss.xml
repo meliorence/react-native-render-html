@@ -4,14 +4,14 @@
         <title>Discover React Native Render HTML Blog</title>
         <link>https://meliorence.github.io/blog</link>
         <description>Discover React Native Render HTML Blog</description>
-        <lastBuildDate>Fri, 04 Jun 2021 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 07 Jun 2021 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <item>
             <title><![CDATA[Announcing the Beta Foundry Release]]></title>
-            <link>https://meliorence.github.io/react-native-render-html/blog/2021/06/04/foundry-anouncement</link>
+            <link>https://meliorence.github.io/react-native-render-html/blog/2021/06/07/foundry-announcement</link>
             <guid>Announcing the Beta Foundry Release</guid>
-            <pubDate>Fri, 04 Jun 2021 00:00:00 GMT</pubDate>
+            <pubDate>Mon, 07 Jun 2021 00:00:00 GMT</pubDate>
             <description><![CDATA[An overview of exiting features in React Native Render HTML Foundry release.]]></description>
         </item>
     </channel>

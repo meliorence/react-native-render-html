@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+    <msapplication>
+        <tile>
+            <square150x150logo src="/react-native-render-html/favicons/mstile-150x150.png"/>
+            <TileColor>#000040</TileColor>
+        </tile>
+    </msapplication>
+</browserconfig>
