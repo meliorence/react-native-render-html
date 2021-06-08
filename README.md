@@ -12,7 +12,7 @@
 
 <br>
 <p align="center">
-    <a href="#"><img width="124" height="124" src="assets/logo.svg"></a>
+    <a href="https://meliorence.github.io/react-native-render-html/"><img width="124" height="124" src="assets/logo.svg"></a>
 </p>
 <h1 align="center">react-native-render-html</h1>
 <p align="center">
