@@ -34,6 +34,13 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 
 ## Versions
 
+**The Foundry release is finally stable, and is now-on the recommended
+version.** [Check out **the announcement blog post** in our brand new
+website](https://meliorence.github.io/react-native-render-html/blog/2021/06/07/foundry-announcement).
+We also have a [**migration
+guide**](https://meliorence.github.io/react-native-render-html/docs/migration-guide)
+for those who are coming from v5 and below.
+
 > :warning: **You are on the master branch which is home for the latest development.**
 > Check the table bellow to get documentation for your exact
 > version.
@@ -58,12 +65,8 @@ npm install react-native-render-html@next
 
 ## Documentation
 
-Check out our [official website](https://meliorence.github.io/react-native-render-html/), or our amazing mobile-first Discovery App.
+Check out our [official website](https://meliorence.github.io/react-native-render-html/) and [our amazing Discovery App](https://expo.io/@jsamr/react-native-render-html-discovery).
 
-<p align="center">
-  <img src="./assets/discovery-expo-qr.png"/><br>
-  Scan the QR code, or press the link below from your device to open in <a href="https://expo.io/client">Expo Go</a>.<br>
-<a href="exp://exp.host/@jsamr/react-native-render-html-discovery">
-  <code>exp://exp.host/@jsamr/react-native-render-html-discovery</code>
-</a>
-</p>
+## Changelog
+
+The changelog is available here: [packages/render-html/CHANGELOG.md](./packages/render-html/CHANGELOG.md).
