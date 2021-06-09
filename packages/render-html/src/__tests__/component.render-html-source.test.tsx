@@ -69,5 +69,15 @@ describe('RenderHTMLSource', () => {
       });
       await findByTestId('loader-error');
     });
+    it('should render the error view when the fetch call throws', async () => {
+      global.fetch = jest.fn(() => {
+        return Promise.reject('Ooops!');
+      });
+      const { findByTestId } = renderSource({
+        source: { uri: 'https://motherfuckingwebsite.com/' },
+        contentWidth: 0
+      });
+      await findByTestId('loader-error');
+    });
   });
 });
