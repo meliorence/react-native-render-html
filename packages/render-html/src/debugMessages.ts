@@ -16,7 +16,7 @@ export type DebugType =
 let debugMessage: Record<DebugType, string>;
 
 export type DebugMessages = typeof debugMessage;
-
+/* istanbul ignore next */
 if (__DEV__) {
   debugMessage = {
     outdatedComputeImagesMaxWidth:
@@ -60,7 +60,7 @@ if (__DEV__) {
       'https://reactnative.dev/docs/usewindowdimensions'
   };
 } else {
-  debugMessage = {} as any;
+  debugMessage = null as any;
 }
 
 export default debugMessage;
