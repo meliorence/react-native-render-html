@@ -24,7 +24,7 @@ export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
     ...viewProps,
     style: viewProps?.style ? [viewProps.style, style] : style,
     key,
-    testID: tnode.tagName || undefined
+    testID: tnode.tagName
   };
   if (typeof onPress === 'function') {
     return React.createElement(

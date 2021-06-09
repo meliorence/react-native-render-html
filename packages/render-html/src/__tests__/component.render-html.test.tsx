@@ -266,24 +266,52 @@ describe('RenderHTML', () => {
       expect(em.props.propsFromParent.test).toBeUndefined();
     });
   });
-  describe('regarding TNodeRenderer onPress prop', () => {
-    it('should render a GenericPressable when onPress given to a TBlockRenderer', async () => {
-      const onPress = jest.fn();
-      const DivRenderer: CustomBlockRenderer = ({
-        TDefaultRenderer,
-        ...props
-      }) => <TDefaultRenderer {...props} onPress={onPress} />;
-      const { findByTestId } = render(
-        <RenderHTML
-          source={{
-            html: '<div></div>'
-          }}
-          debug={false}
-          contentWidth={0}
-          renderers={{ div: DivRenderer }}
-        />
-      );
-      await findByTestId('generic-pressable');
+  describe('regarding TNodeRenderer', () => {
+    describe('TBlockRenderer', () => {
+      it('should render a GenericPressable when provided onPress', async () => {
+        const onPress = jest.fn();
+        const DivRenderer: CustomBlockRenderer = ({
+          TDefaultRenderer,
+          ...props
+        }) => <TDefaultRenderer {...props} onPress={onPress} />;
+        const { findByTestId } = render(
+          <RenderHTML
+            source={{
+              html: '<div></div>'
+            }}
+            debug={false}
+            contentWidth={0}
+            renderers={{ div: DivRenderer }}
+          />
+        );
+        await findByTestId('generic-pressable');
+      });
+      it('should use viewProps.style', async () => {
+        const DivRenderer: CustomBlockRenderer = ({
+          TDefaultRenderer,
+          ...props
+        }) => (
+          <TDefaultRenderer
+            {...props}
+            viewProps={{ style: { marginBottom: 10 } }}
+          />
+        );
+        const { findByTestId } = render(
+          <RenderHTML
+            source={{
+              html: '<div style="paddingBottom: 10px;"></div>'
+            }}
+            debug={false}
+            contentWidth={0}
+            renderers={{ div: DivRenderer }}
+          />
+        );
+        const div = await findByTestId('div');
+        expect(StyleSheet.flatten(div.props.style)).toEqual({
+          marginBottom: 10,
+          paddingBottom: 10
+        });
+      });
     });
   });
   describe('regarding enableExperimentalMarginCollapsing prop', () => {
