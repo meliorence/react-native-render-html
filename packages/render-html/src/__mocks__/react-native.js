@@ -12,10 +12,14 @@ export class Image extends RNImage {
    * and invoke the callback with the extracted dimensions. If none can
    * be extracted, it will use 640x360.
    */
-  static getSizeWithHeaders(uri, headers, callback) {
+  static getSizeWithHeaders(uri, headers, success, failure) {
     setTimeout(() => {
       let dimensions = [0, 0];
       if (typeof uri === 'string') {
+        if (uri === 'error') {
+          failure?.apply(null, new Error('Could not fetch image dimensions'));
+          return;
+        }
         const match = /(\d+)x(\d+)/gi.exec(uri);
         if (!match) {
           dimensions = [640, 360];
@@ -23,11 +27,11 @@ export class Image extends RNImage {
           dimensions = [parseInt(match[1], 10), parseInt(match[2], 10)];
         }
       }
-      callback.apply(null, dimensions);
+      success.apply(null, dimensions);
     }, 50);
   }
 
-  static getSize(uri, callback) {
-    Image.getSizeWithHeaders(uri, undefined, callback);
+  static getSize(uri, callback, failure) {
+    Image.getSizeWithHeaders(uri, undefined, callback, failure);
   }
 }

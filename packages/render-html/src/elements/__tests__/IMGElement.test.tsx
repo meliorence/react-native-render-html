@@ -4,6 +4,19 @@ import { render, waitFor } from 'react-native-testing-library';
 import HTMLImgElement from '../IMGElement';
 
 describe('IMGElement', () => {
+  it('should render an error fallback component on error', async () => {
+    const source = { uri: 'error' };
+    const { findByTestId } = render(<HTMLImgElement source={source} />);
+    await findByTestId('image-error');
+  });
+  it('should render a GenericPressable when provided with onPress prop', async () => {
+    const onPress = jest.fn();
+    const source = { uri: 'http://via.placeholder.com/640x360' };
+    const { findByTestId } = render(
+      <HTMLImgElement onPress={onPress} source={source} />
+    );
+    await findByTestId('generic-pressable');
+  });
   describe('scaling logic', () => {
     it('should use width and height from styles', async () => {
       const source = { uri: 'http://via.placeholder.com/640x360' };
