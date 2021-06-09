@@ -312,6 +312,71 @@ describe('RenderHTML', () => {
           paddingBottom: 10
         });
       });
+      it('should merge viewProps.style with greater specificity than given styles', async () => {
+        const DivRenderer: CustomBlockRenderer = ({
+          TDefaultRenderer,
+          ...props
+        }) => (
+          <TDefaultRenderer
+            {...props}
+            viewProps={{ style: { marginBottom: 10 } }}
+          />
+        );
+        const { findByTestId } = render(
+          <RenderHTML
+            source={{
+              html: '<div style="margin-bottom: 5px;"></div>'
+            }}
+            debug={false}
+            contentWidth={0}
+            renderers={{ div: DivRenderer }}
+          />
+        );
+        const div = await findByTestId('div');
+        expect(StyleSheet.flatten(div.props.style)).toEqual({
+          marginBottom: 10
+        });
+      });
+      describe('TDefaultTextualRenderer', () => {
+        it('should merge textProps.style with greater specificity than given styles', async () => {
+          const SpanRenderer: CustomTextualRenderer = ({
+            TDefaultRenderer,
+            ...props
+          }) => (
+            <TDefaultRenderer
+              {...props}
+              textProps={{ style: { marginBottom: 10 } }}
+            />
+          );
+          const { findByTestId } = render(
+            <RenderHTML
+              source={{
+                html: '<span style="margin-bottom: 5px;"></span>'
+              }}
+              debug={false}
+              contentWidth={0}
+              renderers={{ span: SpanRenderer }}
+            />
+          );
+          const div = await findByTestId('span');
+          expect(StyleSheet.flatten(div.props.style)).toMatchObject({
+            marginBottom: 10
+          });
+        });
+      });
+      describe('TTextRenderer', () => {
+        it('should use internal text renderer for <WBR> tags', () => {
+          render(
+            <RenderHTML
+              source={{
+                html: '<wbr>'
+              }}
+              debug={false}
+              contentWidth={0}
+            />
+          );
+        });
+      });
     });
   });
   describe('regarding enableExperimentalMarginCollapsing prop', () => {
