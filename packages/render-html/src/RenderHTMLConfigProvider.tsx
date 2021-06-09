@@ -6,7 +6,10 @@ import TChildrenRenderersContext from './context/TChildrenRendererContext';
 import { RenderHTMLConfig } from './shared-types';
 import TNodeChildrenRenderer from './TNodeChildrenRenderer';
 import TChildrenRenderer from './TChildrenRenderer';
-import sourceLoaderContext from './context/sourceLoaderContext';
+import sourceLoaderContext, {
+  defaultRenderError,
+  defaultRenderLoading
+} from './context/sourceLoaderContext';
 import RenderRegistryProvider from './context/RenderRegistryProvider';
 import { useAmbientTRenderEngine } from './TRenderEngineProvider';
 
@@ -53,8 +56,8 @@ export default function RenderHTMLConfigProvider(
   const engine = useAmbientTRenderEngine();
   const sourceLoaderConfig = useMemo(
     () => ({
-      remoteErrorView,
-      remoteLoadingView
+      remoteErrorView: remoteErrorView || defaultRenderError,
+      remoteLoadingView: remoteLoadingView || defaultRenderLoading
     }),
     [remoteErrorView, remoteLoadingView]
   );
