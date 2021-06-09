@@ -3,16 +3,14 @@ import { render } from 'react-native-testing-library';
 import RenderHTML from '../RenderHTML';
 import ImgTag from '../elements/IMGElement';
 import TTextRenderer from '../TTextRenderer';
-import {
-  CustomBlockRenderer,
-  CustomTextualRenderer
-} from '../render/render-types';
+import { CustomTextualRenderer } from '../render/render-types';
 import {
   defaultHTMLElementModels,
   HTMLContentModel
 } from '@native-html/transient-render-engine';
 import { StyleSheet } from 'react-native';
 import { useRendererProps } from '../context/RenderersPropsProvider';
+import TNodeChildrenRenderer from '../TNodeChildrenRenderer';
 
 describe('RenderHTML', () => {
   it('should render without error when providing a source', () => {
@@ -270,7 +268,7 @@ describe('RenderHTML', () => {
     describe('TBlockRenderer', () => {
       it('should render a GenericPressable when provided onPress', async () => {
         const onPress = jest.fn();
-        const DivRenderer: CustomBlockRenderer = ({
+        const DivRenderer: CustomTextualRenderer = ({
           TDefaultRenderer,
           ...props
         }) => <TDefaultRenderer {...props} onPress={onPress} />;
@@ -287,7 +285,7 @@ describe('RenderHTML', () => {
         await findByTestId('generic-pressable');
       });
       it('should use viewProps.style', async () => {
-        const DivRenderer: CustomBlockRenderer = ({
+        const DivRenderer: CustomTextualRenderer = ({
           TDefaultRenderer,
           ...props
         }) => (
@@ -313,7 +311,7 @@ describe('RenderHTML', () => {
         });
       });
       it('should merge viewProps.style with greater specificity than given styles', async () => {
-        const DivRenderer: CustomBlockRenderer = ({
+        const DivRenderer: CustomTextualRenderer = ({
           TDefaultRenderer,
           ...props
         }) => (
@@ -380,12 +378,12 @@ describe('RenderHTML', () => {
     });
   });
   describe('regarding enableExperimentalMarginCollapsing prop', () => {
-    it('should collapse margins of sibling children when enabled', () => {
+    it('should collapse margins of sibling block children when enabled', () => {
       const { getByTestId } = render(
         <RenderHTML
           source={{
             html:
-              '<div style="margin-bottom: 10px;"></div><p style="margin-top: 10px;"></p>'
+              '<div style="margin-bottom: 10px;"></div><p style="margin-top: 10px;">text</p>'
           }}
           debug={false}
           contentWidth={100}
@@ -396,6 +394,23 @@ describe('RenderHTML', () => {
       const p = getByTestId('p');
       expect(StyleSheet.flatten(div.props.style).marginBottom).toBe(10);
       expect(StyleSheet.flatten(p.props.style).marginTop).toBe(0);
+    });
+    it('should not collapse margins of sibling phrasing children when enabled', () => {
+      const { getByTestId } = render(
+        <RenderHTML
+          source={{
+            html:
+              '<div style="margin-bottom: 10px;"></div><span style="margin-top: 10px;">text</span>'
+          }}
+          debug={false}
+          contentWidth={100}
+          enableExperimentalMarginCollapsing
+        />
+      );
+      const div = getByTestId('div');
+      const span = getByTestId('span');
+      expect(StyleSheet.flatten(div.props.style).marginBottom).toBe(10);
+      expect(StyleSheet.flatten(span.props.style).marginTop).toBe(10);
     });
 
     it('should not collapse margins of sibling children when disabled', () => {
@@ -417,26 +432,86 @@ describe('RenderHTML', () => {
     });
   });
   describe('regarding renderersProps prop', () => {
-    const DivRenderer = jest.fn(function DivRenderer() {
-      expect(useRendererProps('div')).toBeDefined();
-      return null;
+    it('should render custom renderers', () => {
+      const DivRenderer = jest.fn(function DivRenderer() {
+        expect(useRendererProps('div')).toBeDefined();
+        return null;
+      });
+      render(
+        <RenderHTML
+          source={{
+            html: '<div></div>'
+          }}
+          debug={false}
+          renderers={{
+            div: DivRenderer
+          }}
+          renderersProps={{
+            div: {}
+          }}
+          contentWidth={100}
+          enableExperimentalMarginCollapsing={false}
+        />
+      );
+      expect(DivRenderer).toHaveBeenCalledTimes(1);
     });
-    render(
-      <RenderHTML
-        source={{
-          html: '<div></div>'
-        }}
-        debug={false}
-        renderers={{
-          div: DivRenderer
-        }}
-        renderersProps={{
-          div: {}
-        }}
-        contentWidth={100}
-        enableExperimentalMarginCollapsing={false}
-      />
-    );
-    expect(DivRenderer).toHaveBeenCalledTimes(1);
+  });
+  describe('regarding renderers prop', () => {
+    it('should support TNodeChildrenRenderer', () => {
+      const renderChild = jest.fn(() => null);
+      const DivRenderer: CustomTextualRenderer = jest.fn(function DivRenderer({
+        TDefaultRenderer,
+        ...props
+      }) {
+        return (
+          <TDefaultRenderer {...props}>
+            <TNodeChildrenRenderer
+              renderChild={renderChild}
+              tnode={props.tnode}
+            />
+          </TDefaultRenderer>
+        );
+      });
+      render(
+        <RenderHTML
+          source={{
+            html: '<div><span>child</span></div>'
+          }}
+          debug={false}
+          renderers={{
+            div: DivRenderer
+          }}
+          contentWidth={100}
+          enableExperimentalMarginCollapsing={false}
+        />
+      );
+      expect(renderChild).toHaveBeenCalled();
+    });
+    it('should have TNodeChildrenRender support a text child', () => {
+      const SpanRenderer: CustomTextualRenderer = jest.fn(function DivRenderer({
+        TDefaultRenderer,
+        ...props
+      }) {
+        return (
+          <TDefaultRenderer {...props}>
+            <TNodeChildrenRenderer tnode={props.tnode} />
+          </TDefaultRenderer>
+        );
+      });
+      const { findByText } = render(
+        <RenderHTML
+          source={{
+            html: '<span>child</span>'
+          }}
+          debug={false}
+          renderers={{
+            span: SpanRenderer
+          }}
+          contentWidth={100}
+          enableExperimentalMarginCollapsing={false}
+        />
+      );
+      findByText('child');
+    });
   });
 });
