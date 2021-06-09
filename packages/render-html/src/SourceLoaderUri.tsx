@@ -5,14 +5,12 @@ import RenderTTree from './RenderTTree';
 import sourceLoaderContext from './context/sourceLoaderContext';
 
 interface LoaderInternalState {
-  loading: boolean;
   error: boolean;
   resolvedHTML: string | null;
 }
 
 const ERROR_STATE = {
   error: true,
-  loading: false,
   resolvedHTML: null
 };
 
@@ -29,8 +27,7 @@ async function loadHTMLResource(
     const html = await response.text();
     return {
       resolvedHTML: html,
-      error: false,
-      loading: false
+      error: false
     };
   }
   return ERROR_STATE;
@@ -43,7 +40,6 @@ export type UriSourceLoaderProps = {
 function useUriSourceLoader({ source, onHTMLLoaded }: UriSourceLoaderProps) {
   const [loadState, setState] = useState<LoaderInternalState>({
     error: false,
-    loading: false,
     resolvedHTML: null
   });
   const { error } = loadState;
@@ -52,7 +48,7 @@ function useUriSourceLoader({ source, onHTMLLoaded }: UriSourceLoaderProps) {
   useEffect(() => {
     let cancelled = false;
     if (!error) {
-      setState({ loading: true, error: false, resolvedHTML: null });
+      setState({ error: false, resolvedHTML: null });
       loadHTMLResource(source.uri, {
         body: source.body,
         headers: source.headers,
@@ -79,12 +75,12 @@ export default function SourceLoaderUri(props: UriSourceLoaderProps) {
   const { remoteErrorView, remoteLoadingView } = useContext(
     sourceLoaderContext
   );
-  const { resolvedHTML, error, loading } = useUriSourceLoader(props);
+  const { resolvedHTML, error } = useUriSourceLoader(props);
   if (error) {
-    return remoteErrorView!.call(null, props.source);
+    return remoteErrorView.call(null, props.source);
   }
-  if (loading) {
-    return remoteLoadingView!.call(null, props.source);
+  if (resolvedHTML === null) {
+    return remoteLoadingView.call(null, props.source);
   }
   return React.createElement(RenderTTree, {
     document: resolvedHTML!,
