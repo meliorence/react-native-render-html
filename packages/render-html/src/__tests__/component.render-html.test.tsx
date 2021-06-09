@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'react-native-testing-library';
+import { render, waitFor } from 'react-native-testing-library';
 import RenderHTML from '../RenderHTML';
 import ImgTag from '../elements/IMGElement';
 import TTextRenderer from '../TTextRenderer';
@@ -8,9 +8,11 @@ import {
   defaultHTMLElementModels,
   HTMLContentModel
 } from '@native-html/transient-render-engine';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { useRendererProps } from '../context/RenderersPropsProvider';
 import TNodeChildrenRenderer from '../TNodeChildrenRenderer';
+import OLElement from '../elements/OLElement';
+import ULElement from '../elements/ULElement';
 
 describe('RenderHTML', () => {
   it('should render without error when providing a source', () => {
@@ -24,25 +26,77 @@ describe('RenderHTML', () => {
     //@ts-expect-error
     expect(() => render(<RenderHTML debug={false} />)).not.toThrow();
   });
-  it('should update ImgTag contentWidth when contentWidth prop changes', () => {
-    const contentWidth = 300;
-    const nextContentWidth = 200;
-    const { UNSAFE_getByType, update } = render(
-      <RenderHTML
-        source={{ html: '<img src="https://img.com/1" />' }}
-        debug={false}
-        contentWidth={contentWidth}
-      />
-    );
-    expect(UNSAFE_getByType(ImgTag).props.contentWidth).toBe(contentWidth);
-    update(
-      <RenderHTML
-        source={{ html: '<img src="https://img.com/1" />' }}
-        debug={false}
-        contentWidth={nextContentWidth}
-      />
-    );
-    expect(UNSAFE_getByType(ImgTag).props.contentWidth).toBe(nextContentWidth);
+  describe('regarding internal renderers', () => {
+    it('should use internal renderer for <ol> elements', async () => {
+      const { UNSAFE_getByType } = render(
+        <RenderHTML
+          source={{
+            html: '<ol><li>One</li><li>Two</li><li>Three</li></ol>'
+          }}
+          debug={false}
+          contentWidth={0}
+        />
+      );
+      await waitFor(() => UNSAFE_getByType(OLElement));
+    });
+    it('should use internal renderer for <ul> elements', async () => {
+      const { UNSAFE_getByType } = render(
+        <RenderHTML
+          source={{
+            html: '<ul><li>One</li><li>Two</li><li>Three</li></ul>'
+          }}
+          debug={false}
+          contentWidth={0}
+        />
+      );
+      await waitFor(() => UNSAFE_getByType(ULElement));
+    });
+    it('should update ImgTag contentWidth when contentWidth prop changes', () => {
+      const contentWidth = 300;
+      const nextContentWidth = 200;
+      const { UNSAFE_getByType, update } = render(
+        <RenderHTML
+          source={{ html: '<img src="https://img.com/1" />' }}
+          debug={false}
+          contentWidth={contentWidth}
+        />
+      );
+      expect(UNSAFE_getByType(ImgTag).props.contentWidth).toBe(contentWidth);
+      update(
+        <RenderHTML
+          source={{ html: '<img src="https://img.com/1" />' }}
+          debug={false}
+          contentWidth={nextContentWidth}
+        />
+      );
+      expect(UNSAFE_getByType(ImgTag).props.contentWidth).toBe(
+        nextContentWidth
+      );
+    });
+    it('should use internal text renderer for <wbr> tags', async () => {
+      const { findByText } = render(
+        <RenderHTML
+          source={{
+            html: '<wbr>'
+          }}
+          debug={false}
+          contentWidth={0}
+        />
+      );
+      await findByText('\u200B');
+    });
+    it('should use internal text renderer for <br> tags', async () => {
+      const { findByText } = render(
+        <RenderHTML
+          source={{
+            html: '<br>'
+          }}
+          debug={false}
+          contentWidth={0}
+        />
+      );
+      await findByText('\n');
+    });
   });
   describe('regarding customHTMLElementsModels prop', () => {
     it('should support changing block content model to mixed', () => {
@@ -52,10 +106,10 @@ describe('RenderHTML', () => {
       );
       render(
         <RenderHTML
-          source={{ html: '<span><img src="https://img.com/1" /> Text</span>' }}
+          source={{ html: '<span><article></article>Text</span>' }}
           debug={false}
           customHTMLElementModels={{
-            img: defaultHTMLElementModels.img.extend({
+            article: defaultHTMLElementModels.article.extend({
               contentModel: HTMLContentModel.mixed
             })
           }}
@@ -362,19 +416,6 @@ describe('RenderHTML', () => {
           });
         });
       });
-      describe('TTextRenderer', () => {
-        it('should use internal text renderer for <WBR> tags', () => {
-          render(
-            <RenderHTML
-              source={{
-                html: '<wbr>'
-              }}
-              debug={false}
-              contentWidth={0}
-            />
-          );
-        });
-      });
     });
   });
   describe('regarding enableExperimentalMarginCollapsing prop', () => {
@@ -432,7 +473,7 @@ describe('RenderHTML', () => {
     });
   });
   describe('regarding renderersProps prop', () => {
-    it('should render custom renderers', () => {
+    it('should pass renderersProps to useRendererProps', () => {
       const DivRenderer = jest.fn(function DivRenderer() {
         expect(useRendererProps('div')).toBeDefined();
         return null;
@@ -487,21 +528,20 @@ describe('RenderHTML', () => {
       );
       expect(renderChild).toHaveBeenCalled();
     });
-    it('should have TNodeChildrenRender support a text child', () => {
-      const SpanRenderer: CustomTextualRenderer = jest.fn(function DivRenderer({
-        TDefaultRenderer,
-        ...props
-      }) {
-        return (
-          <TDefaultRenderer {...props}>
-            <TNodeChildrenRenderer tnode={props.tnode} />
-          </TDefaultRenderer>
-        );
-      });
-      const { findByText } = render(
+    it('should have TNodeChildrenRender support a text child', async () => {
+      const SpanRenderer: CustomTextualRenderer = jest.fn(
+        function SpanRenderer({ TDefaultRenderer, ...props }) {
+          return (
+            <TDefaultRenderer {...props}>
+              <TNodeChildrenRenderer tnode={props.tnode} />
+            </TDefaultRenderer>
+          );
+        }
+      );
+      const { UNSAFE_getByType } = render(
         <RenderHTML
           source={{
-            html: '<span>child</span>'
+            html: '<span>hello!</span>'
           }}
           debug={false}
           renderers={{
@@ -511,7 +551,7 @@ describe('RenderHTML', () => {
           enableExperimentalMarginCollapsing={false}
         />
       );
-      findByText('child');
+      await waitFor(() => UNSAFE_getByType(Text));
     });
   });
 });

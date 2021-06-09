@@ -5,7 +5,7 @@ exports[`RenderHTML regarding customHTMLElementsModels prop should support chang
   <TBlock tagName=\\"body\\">
     <TPhrasing anonymous>
       <TPhrasing tagName=\\"span\\">
-        <TText tagName=\\"img\\" data=\\"\\" src=\\"https://img.com/1\\" />
+        <TText tagName=\\"article\\" data=\\"\\" />
         <TText anonymous data=\\"Text\\" />
       </TPhrasing>
     </TPhrasing>
