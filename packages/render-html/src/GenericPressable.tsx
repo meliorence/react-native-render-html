@@ -35,7 +35,7 @@ export default function GenericPressable({
         )}
         style={style}
         {...(otherProps as any)}>
-        <View>{children}</View>
+        <View testID="generic-pressable">{children}</View>
       </TouchableNativeFeedback>
     );
   }
@@ -44,7 +44,7 @@ export default function GenericPressable({
       underlayColor={pressableHightlightColor}
       style={style}
       {...(otherProps as any)}>
-      <View>{children}</View>
+      <View testID="generic-pressable">{children}</View>
     </TouchableHighlight>
   );
 }

@@ -3,7 +3,10 @@ import { render } from 'react-native-testing-library';
 import RenderHTML from '../RenderHTML';
 import ImgTag from '../elements/IMGElement';
 import TTextRenderer from '../TTextRenderer';
-import { CustomTextualRenderer } from '../render/render-types';
+import {
+  CustomBlockRenderer,
+  CustomTextualRenderer
+} from '../render/render-types';
 import {
   defaultHTMLElementModels,
   HTMLContentModel
@@ -261,6 +264,26 @@ describe('RenderHTML', () => {
       );
       const em = UNSAFE_getByType(EmRenderer);
       expect(em.props.propsFromParent.test).toBeUndefined();
+    });
+  });
+  describe('regarding TNodeRenderer onPress prop', () => {
+    it('should render a GenericPressable when onPress given to a TBlockRenderer', async () => {
+      const onPress = jest.fn();
+      const DivRenderer: CustomBlockRenderer = ({
+        TDefaultRenderer,
+        ...props
+      }) => <TDefaultRenderer {...props} onPress={onPress} />;
+      const { findByTestId } = render(
+        <RenderHTML
+          source={{
+            html: '<div></div>'
+          }}
+          debug={false}
+          contentWidth={0}
+          renderers={{ div: DivRenderer }}
+        />
+      );
+      await findByTestId('generic-pressable');
     });
   });
   describe('regarding enableExperimentalMarginCollapsing prop', () => {
