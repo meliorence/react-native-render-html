@@ -1,8 +1,10 @@
+import { Element } from 'domhandler';
 import React from 'react';
-import { render } from 'react-native-testing-library';
+import { render, waitFor } from 'react-native-testing-library';
 import debugMessage from '../debugMessages';
 import RenderHTMLConfigProvider from '../RenderHTMLConfigProvider';
 import RenderHTMLSource from '../RenderHTMLSource';
+import RenderTTree from '../RenderTTree';
 import { RenderHTMLSourceProps } from '../shared-types';
 import TRenderEngineProvider from '../TRenderEngineProvider';
 
@@ -32,5 +34,40 @@ describe('RenderHTMLSource', () => {
     console.warn = jest.fn();
     renderSource({ source: { html: 'hello' } });
     expect(console.warn).toHaveBeenNthCalledWith(1, debugMessage.contentWidth);
+  });
+  it('should render html sources', () => {
+    renderSource({ source: { html: 'hello' }, contentWidth: 0 });
+  });
+  it('should render dom sources', () => {
+    renderSource({ source: { dom: new Element('div', {}) }, contentWidth: 0 });
+  });
+  describe('should render uri sources', () => {
+    it('should render content when remote resource is available', async () => {
+      global.fetch = jest.fn(() => {
+        return Promise.resolve({
+          ok: true,
+          text() {
+            return Promise.resolve('<div>Hello world!</div');
+          }
+        } as any);
+      });
+      const { UNSAFE_getByType } = renderSource({
+        source: { uri: 'https://motherfuckingwebsite.com/' },
+        contentWidth: 0
+      });
+      await waitFor(() => UNSAFE_getByType(RenderTTree));
+    });
+    it('should render the error view when remote resource is unavailable', async () => {
+      global.fetch = jest.fn(() => {
+        return Promise.resolve({
+          ok: false
+        } as any);
+      });
+      const { findByTestId } = renderSource({
+        source: { uri: 'https://motherfuckingwebsite.com/' },
+        contentWidth: 0
+      });
+      await findByTestId('loader-error');
+    });
   });
 });
