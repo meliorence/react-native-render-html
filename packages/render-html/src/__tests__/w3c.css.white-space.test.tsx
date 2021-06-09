@@ -3,7 +3,9 @@ import RenderHTML from '../RenderHTML';
 import renderer from 'react-test-renderer';
 import { extractTextFromInstance } from './utils';
 
-jest.useFakeTimers();
+beforeAll(() => {
+  jest.useFakeTimers();
+});
 
 function testCollapseRuleForCharacter(character: string, name: string) {
   const action =

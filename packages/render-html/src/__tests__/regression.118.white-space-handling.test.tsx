@@ -2,11 +2,15 @@ import React from 'react';
 import RenderHTML from '../RenderHTML';
 import renderer from 'react-test-renderer';
 import { extractTextFromInstance } from './utils';
+
+beforeAll(() => {
+  jest.useFakeTimers();
+});
+
 /**
  * https://github.com/meliorence/react-native-render-html/issues/118
  */
 describe('RenderHTML component', () => {
-  jest.useFakeTimers();
   it('should pass regression #118 regarding handling of CSS white-space', () => {
     const testRenderer = renderer.create(
       <RenderHTML

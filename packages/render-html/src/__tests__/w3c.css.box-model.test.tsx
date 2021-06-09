@@ -6,7 +6,9 @@ import { elementHasAncestorOfType } from './utils';
 import { TDefaultPhrasingRenderer } from '../TPhrasingRenderer';
 import { View } from 'react-native';
 
-jest.useFakeTimers();
+beforeAll(() => {
+  jest.useFakeTimers();
+});
 
 describe('RenderHTML component should honor formatting context of the DOM tree', () => {
   it('should wrap text elements into a box formed by a View component', () => {
