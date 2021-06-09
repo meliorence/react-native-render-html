@@ -14,9 +14,9 @@ const styles = StyleSheet.create({
   }
 });
 
-function defaultRenderError(source: HTMLSourceUri) {
+export function defaultRenderError(source: HTMLSourceUri) {
   return (
-    <View style={styles.alignCenter}>
+    <View testID="loader-error" style={styles.alignCenter}>
       <Text style={styles.errorText}>
         Failed to load HTML from {source.uri}
       </Text>
@@ -24,16 +24,16 @@ function defaultRenderError(source: HTMLSourceUri) {
   );
 }
 
-function defaultRenderLoading() {
+export function defaultRenderLoading() {
   return (
-    <View style={styles.alignCenter}>
+    <View testID="loader-loading" style={styles.alignCenter}>
       <ActivityIndicator />
     </View>
   );
 }
 
 const sourceLoaderContext = React.createContext<
-  Pick<RenderHTMLConfig, 'remoteErrorView' | 'remoteLoadingView'>
+  Pick<Required<RenderHTMLConfig>, 'remoteErrorView' | 'remoteLoadingView'>
 >({
   remoteErrorView: defaultRenderError,
   remoteLoadingView: defaultRenderLoading
