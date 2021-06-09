@@ -11,7 +11,7 @@ const TDefaultTextualRenderer: TDefaultRenderer<TPhrasing | TText> = ({
   textProps,
   onPress
 }) => {
-  const resolvedStyles = textProps?.style ? [textProps.style, style] : style;
+  const resolvedStyles = textProps?.style ? [style, textProps.style] : style;
   return React.createElement(
     Text,
     {

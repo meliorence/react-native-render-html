@@ -858,10 +858,18 @@ export interface RendererBaseProps<T extends TNode>
   onPress?: (e: GestureResponderEvent) => void;
   /**
    * Props for Text-based renderers.
+   *
+   * @remarks The `textProps.style` property will have a greater specificity than
+   * computed styles for this {@link TNode}. E.g. `style={[computedStyle,
+   * textProps.style]}`.
    */
   textProps: TextProps;
   /**
    * Props for View-based renderers.
+   *
+   * @remarks The `viewProps.style` property will have a greater specificity than
+   * computed styles for this {@link TNode}. E.g. `style={[computedStyle,
+   * viewProps.style]}`.
    */
   viewProps: ViewProps;
   /**

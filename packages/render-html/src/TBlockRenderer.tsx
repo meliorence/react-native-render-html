@@ -22,7 +22,7 @@ export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
   );
   const commonProps = {
     ...viewProps,
-    style: viewProps?.style ? [viewProps.style, style] : style,
+    style: viewProps?.style ? [style, viewProps.style] : style,
     key,
     testID: tnode.tagName
   };
