@@ -4771,15 +4771,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/react-hooks@npm:^5.1.2":
-  version: 5.1.2
-  resolution: "@testing-library/react-hooks@npm:5.1.2"
+"@testing-library/react-hooks@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "@testing-library/react-hooks@npm:7.0.0"
   dependencies:
     "@babel/runtime": ^7.12.5
     "@types/react": ">=16.9.0"
     "@types/react-dom": ">=16.9.0"
     "@types/react-test-renderer": ">=16.9.0"
-    filter-console: ^0.1.1
     react-error-boundary: ^3.1.0
   peerDependencies:
     react: ">=16.9.0"
@@ -4790,7 +4789,7 @@ __metadata:
       optional: true
     react-test-renderer:
       optional: true
-  checksum: d1a1cfeb1ca596747b53bda1124a95232f2f945a94eff275433e52825b3cc883ccd7b265d5c22d2edc2d48d7b5c5fcfa424e3ce50fc2d7d61b29a978b3bfcaf5
+  checksum: fc6b60fab0a464ab7137dc61ce0d092905dca56396e1716303ec72897d3de013d39d86ec9667508c6de603496c0719a953d34389a38cd445265d0f77483c9a5b
   languageName: node
   linkType: hard
 
@@ -4804,6 +4803,19 @@ __metadata:
     react-native: ">=0.59"
     react-test-renderer: ">=16.0.0"
   checksum: 9a171610ce70ef782cb4fd43618c811e9e3d37bcbf6e61c34b134547d33119c83a3a5f63c93964949842350999180fdf7bbf9c05b50668a25eed6ac1f3925986
+  languageName: node
+  linkType: hard
+
+"@testing-library/react-native@npm:next":
+  version: 8.0.0-rc.1
+  resolution: "@testing-library/react-native@npm:8.0.0-rc.1"
+  dependencies:
+    pretty-format: ^26.0.1
+  peerDependencies:
+    react: ">=16.0.0"
+    react-native: ">=0.59"
+    react-test-renderer: ">=16.0.0"
+  checksum: 4dfb08be29e8247bc3c1ad36621c524b982342237fca1d8c4ff690cf5d393faebe203d3ad4f86036b313827052770dca84a40b27ad6a82bc925ce5a065241acd
   languageName: node
   linkType: hard
 
@@ -11159,13 +11171,6 @@ __metadata:
   dependencies:
     to-regex-range: ^5.0.1
   checksum: efca43d59b487ad4bc0b2b1cb9e51617c75a7b0159db51fa190c75c3d634ea5fad1ff4750d7c14346add4cd065e3c46e8f99af333edf2b4ec2a424f87e491a85
-  languageName: node
-  linkType: hard
-
-"filter-console@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "filter-console@npm:0.1.1"
-  checksum: f9def51f7ece9c9c469f78e1551ce33dfde02fd32bd70a6fbe8da4a9377ebb65a2a4fc6196ebf8e6ea8668a5465bde7fe3459101d1042e73bb9e3e1eb3f22fb6
   languageName: node
   linkType: hard
 
@@ -19632,7 +19637,8 @@ fsevents@^1.2.7:
     "@microsoft/api-extractor": ^7.14.0
     "@native-html/transient-render-engine": ^9.0.3
     "@release-it/conventional-changelog": ^2.0.1
-    "@testing-library/react-hooks": ^5.1.2
+    "@testing-library/react-hooks": ^7.0.0
+    "@testing-library/react-native": next
     "@types/jest": ^26.0.23
     "@types/ramda": ^0.27.40
     "@types/react-native": ^0.64.4
