@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitFor } from 'react-native-testing-library';
+import { act, render, waitFor } from 'react-native-testing-library';
 import RenderHTML from '../RenderHTML';
 import ImgTag from '../elements/IMGElement';
 import TTextRenderer from '../TTextRenderer';
@@ -104,6 +104,26 @@ describe('RenderHTML', () => {
         />
       );
       await findByText('\n');
+    });
+    it('should invoke renderersProps.a.onPress on <a> press', async () => {
+      const onPress = jest.fn();
+      const { findByTestId } = render(
+        <RenderHTML
+          source={{
+            html: '<a href="https://domain.com">Hello world!</a>'
+          }}
+          renderersProps={{
+            a: {
+              onPress
+            }
+          }}
+          debug={false}
+          contentWidth={0}
+        />
+      );
+      const anchor = await findByTestId('a');
+      act(() => anchor.props.onPress?.({}));
+      expect(onPress).toHaveBeenCalled();
     });
   });
   describe('regarding customHTMLElementsModels prop', () => {

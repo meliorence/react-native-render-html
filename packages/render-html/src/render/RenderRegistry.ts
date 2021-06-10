@@ -66,6 +66,7 @@ export default class RenderRegistry {
   ): ComponentType<CustomRendererProps<T>> | null {
     if (tnode.tagName! in this.customRenderers) {
       const renderer = this.customRenderers[tnode.tagName!];
+      /* istanbul ignore next */
       if (__DEV__) {
         // In DEV, check for discrepancies.
         const elementModel = this.elementModels[tnode.tagName!];
