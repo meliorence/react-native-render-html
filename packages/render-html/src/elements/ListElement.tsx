@@ -102,7 +102,7 @@ export default function ListElement({
   TDefaultRenderer,
   listType,
   style,
-  getFallbackListStyleTypeFromNestLevel: getListStyleTypeFromNestLevel,
+  getFallbackListStyleTypeFromNestLevel,
   enableExperimentalRtl = false,
   enableRemoveTopMarginIfNested = true,
   enableRemoveBottomMarginIfNested = true,
@@ -129,7 +129,7 @@ export default function ListElement({
     tnode.nodeIndex === tnode.parent?.children.length - 1
       ? styles.zeroMarginBottom
       : null;
-  const selectedListType = getListStyleTypeFromNestLevel!(nestLevel);
+  const selectedListType = getFallbackListStyleTypeFromNestLevel!(nestLevel);
   const listStyleType =
     (tnode.styles.webTextFlow.listStyleType as DefaultSupportedListStyleType) ||
     selectedListType;
