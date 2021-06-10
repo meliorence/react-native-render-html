@@ -26,6 +26,14 @@ describe('RenderHTML', () => {
     //@ts-expect-error
     expect(() => render(<RenderHTML debug={false} />)).not.toThrow();
   });
+  it('should print a snapshot in debug mode when __DEV__ is true', () => {
+    console.info = jest.fn();
+    render(<RenderHTML source={{ html: '<p>Hello world</p>' }} debug={true} />);
+    expect(console.info).toHaveBeenNthCalledWith(
+      1,
+      expect.stringContaining('Transient Render Tree update')
+    );
+  });
   describe('regarding internal renderers', () => {
     it('should use internal renderer for <ol> elements', async () => {
       const { UNSAFE_getByType } = render(
