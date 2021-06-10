@@ -4,8 +4,8 @@ import type { UseIMGElementStateProps, IMGElementState } from './img-types';
 import useImageNaturalDimensions from './useImageNaturalDimensions';
 import useImageConcreteDimensions from './useImageConcreteDimensions';
 import defaultImageInitialDimensions from './defaultInitialImageDimensions';
-import extractImageStyleProps from './extractImageStyleProps';
 import { ImageDimensions } from '../shared-types';
+import { getIMGState } from './getIMGState';
 
 function getImageSizeAsync({
   uri,
@@ -68,7 +68,11 @@ function useFetchedNaturalDimensions(props: UseIMGElementStateProps) {
 
 /**
  * This hook will compute concrete dimensions from image natural dimensions and
- * constraints.
+ * constraints. It will fetch the image and get its dimensions.
+ *
+ * @remarks If you know the dimensions beforehand, use
+ * {@link useIMGElementStateWithCache} instead to save a network request and
+ * prevent a layout shift.
  */
 export default function useIMGElementState(
   props: UseIMGElementStateProps
@@ -96,33 +100,15 @@ export default function useIMGElementState(
     computeMaxWidth,
     contentWidth
   });
-  return error
-    ? {
-        type: 'error',
-        alt,
-        altColor,
-        source,
-        error,
-        containerStyle: flatStyle,
-        dimensions: concreteDimensions ?? initialDimensions
-      }
-    : concreteDimensions
-    ? {
-        type: 'success',
-        alt,
-        altColor,
-        source,
-        onError,
-        containerStyle: flatStyle,
-        imageStyle: extractImageStyleProps(flatStyle, objectFit),
-        dimensions: concreteDimensions
-      }
-    : {
-        type: 'loading',
-        alt,
-        altColor,
-        source,
-        containerStyle: flatStyle,
-        dimensions: initialDimensions
-      };
+  return getIMGState({
+    error,
+    alt,
+    altColor,
+    concreteDimensions,
+    containerStyle: flatStyle,
+    initialDimensions,
+    objectFit,
+    onError,
+    source
+  });
 }

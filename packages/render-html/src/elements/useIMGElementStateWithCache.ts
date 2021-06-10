@@ -1,5 +1,5 @@
 import defaultImageInitialDimensions from './defaultInitialImageDimensions';
-import extractImageStyleProps from './extractImageStyleProps';
+import { getIMGState } from './getIMGState';
 import type {
   UseIMGElementStateWithCacheProps,
   IMGElementStateError,
@@ -39,24 +39,15 @@ export default function useIMGElementStateWithCache(
     computeMaxWidth,
     contentWidth
   });
-  return error
-    ? {
-        type: 'error',
-        alt,
-        altColor,
-        error,
-        source,
-        containerStyle: flatStyle,
-        dimensions: concreteDimensions ?? initialDimensions
-      }
-    : {
-        type: 'success',
-        alt,
-        altColor,
-        containerStyle: flatStyle as any,
-        imageStyle: extractImageStyleProps(flatStyle, objectFit),
-        dimensions: concreteDimensions,
-        source,
-        onError
-      };
+  return getIMGState({
+    error,
+    concreteDimensions,
+    containerStyle: flatStyle,
+    initialDimensions,
+    objectFit,
+    onError,
+    source,
+    alt,
+    altColor
+  });
 }
