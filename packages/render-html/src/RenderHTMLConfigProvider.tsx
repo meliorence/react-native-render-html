@@ -48,7 +48,6 @@ export default function RenderHTMLConfigProvider(
     remoteErrorView,
     remoteLoadingView,
     renderersProps,
-    debug,
     children,
     renderers,
     ...sharedProps
