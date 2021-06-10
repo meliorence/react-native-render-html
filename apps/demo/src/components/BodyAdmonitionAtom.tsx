@@ -14,7 +14,7 @@ const admonitionDefaultTitles: Record<AdmonitionType, string> = {
   note: 'Note',
   tip: 'Tip',
   caution: 'Caution',
-  warning: 'Admonition'
+  warning: 'Warning'
 };
 
 const admonitionIconMap: Record<AdmonitionType, IconNucleonProps['name']> = {

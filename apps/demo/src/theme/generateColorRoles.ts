@@ -32,11 +32,11 @@ export default function generateColorRoles({
     },
     hyperlinkColor: accentColor,
     admonition: {
-      caution: accentColor,
-      important: surfaceContent,
-      note: surfaceContent,
-      tip: surfaceContent,
-      warning: accentColor
+      important: accentColor,
+      note: accentColor,
+      tip: accentColor,
+      caution: '#c59d30',
+      warning: '#f54349'
     },
     sheetHandle: {
       slot: shiftColor(surfaceColor, 1, 0.3),

@@ -93,7 +93,7 @@ ${parseLinks(remarks.text)}
  */
 function extractWarning(warnings) {
   return `
-:::caution Warning
+:::warning
 
 ${parseLinks(warnings.text)}
 

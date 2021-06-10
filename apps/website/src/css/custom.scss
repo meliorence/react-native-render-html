@@ -38,14 +38,6 @@ $code-bg: lighten($theme-surface-bg, 4%);
   // --ifm-color-info-lighter: #aae0f2;
   // --ifm-color-info-lightest: #c9ebf7;
 
-  --ifm-color-warning: var(--ifm-color-primary);
-  // --ifm-color-warning-dark: #f7c53c;
-  // --ifm-color-warning-darker: #f6c02c;
-  // --ifm-color-warning-darkest: #e5ab0a;
-  // --ifm-color-warning-light: #f9d97e;
-  // --ifm-color-warning-lighter: #fade8e;
-  // --ifm-color-warning-lightest: #fce7af;
-
   --ifm-color-danger: var(--ifm-color-primary);
   // --ifm-color-danger-dark: #f54349;
   // --ifm-color-danger-darker: #f43339;
@@ -88,6 +80,17 @@ $code-bg: lighten($theme-surface-bg, 4%);
   --ifm-code-background: #{$code-bg};
   --ifm-link-color: var(--ifm-color-primary);
   --reference-color-doc: var(--ifm-link-color);
+}
+
+html {
+  &[data-theme='light'] {
+    --ifm-color-warning: #c59d30;
+    --ifm-color-danger: #f54349;
+  }
+  &[data-theme='dark'] {
+    --ifm-color-warning: #f7c53c;
+    --ifm-color-danger: #f54349;
+  }
 }
 
 html[data-theme='light'] {
