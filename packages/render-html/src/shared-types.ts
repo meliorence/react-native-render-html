@@ -277,10 +277,10 @@ export interface RenderHTMLSharedProps {
    */
   defaultWebViewProps?: any;
   /**
-   * Log to the console meaningful information regarding dismissed CSS
-   * properties, ignored tags... etc.
+   * Log to the console a snapshot of the rendered {@link TDocument} after each
+   * transient render tree invalidation.
    *
-   * @defaultValue `__DEV__`
+   * @defaultValue `false`
    */
   debug?: boolean;
   /**
