@@ -25,4 +25,17 @@ describe('useIMGElementStateWithCache', () => {
       height: 150
     });
   });
+  it('should use default initial dimensions', () => {
+    const { result } = renderHook(() =>
+      useIMGElementStateWithCache({
+        ...props,
+        initialDimensions: undefined,
+        cachedNaturalDimensions: {
+          width: 600,
+          height: 300
+        }
+      })
+    );
+    expect(result.current.type).toEqual('success');
+  });
 });

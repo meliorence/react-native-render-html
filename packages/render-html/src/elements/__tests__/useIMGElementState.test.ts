@@ -18,6 +18,16 @@ describe('useIMGElementState', () => {
       expect(renderCount.current.TestComponent.value).toBeLessThan(2);
     });
   });
+  it('should use Image.getSizeWithHeaders when source has `headers`', async () => {
+    const { renderCount } = perf<{ TestComponent: unknown }>(React);
+    const source = { uri: 'http://via.placeholder.com/640x360', headers: {} };
+    const localProps = { ...props, source };
+    renderHook(() => useIMGElementState(localProps));
+    await wait(() => {
+      expect(renderCount.current.TestComponent.value).toBeLessThan(2);
+    });
+    expect(Image.getSizeWithHeaders).toHaveBeenCalled();
+  });
   it('should render once when width and height physical dimensions are provided, bypassing the fetching of physical dimensions', async () => {
     const { renderCount } = perf<{ TestComponent: unknown }>(React);
     renderHook(() =>
@@ -50,7 +60,7 @@ describe('useIMGElementState', () => {
       height: 150
     });
   });
-  it('should suport cachedNaturalDimensions prop', async () => {
+  it('should support cachedNaturalDimensions prop', async () => {
     Image.getSizeWithHeaders = jest.fn();
     const { result } = renderHook(() =>
       useIMGElementState({

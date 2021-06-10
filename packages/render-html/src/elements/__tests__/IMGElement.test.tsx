@@ -1,6 +1,14 @@
+import { WebBlockStyles } from '@native-html/transient-render-engine';
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { render, waitFor } from 'react-native-testing-library';
+import {
+  ImageErrorEventData,
+  ImageProps,
+  ImageStyle,
+  NativeSyntheticEvent,
+  StyleSheet
+} from 'react-native';
+import { act, render, waitFor } from 'react-native-testing-library';
+import IMGElement from '../IMGElement';
 import HTMLImgElement from '../IMGElement';
 
 describe('IMGElement', () => {
@@ -16,6 +24,58 @@ describe('IMGElement', () => {
       <HTMLImgElement onPress={onPress} source={source} />
     );
     await findByTestId('generic-pressable');
+  });
+  it('should call onError when encountering an error after success', async () => {
+    const source = { uri: 'http://via.placeholder.com/640x360' };
+    const { findByTestId } = render(<IMGElement source={source} />);
+    const imageSuccess = await findByTestId('image-success');
+    await act(() =>
+      (imageSuccess.props.onError as Required<ImageProps>['onError']).call(
+        null,
+        {
+          nativeEvent: { error: new Error() }
+        } as NativeSyntheticEvent<ImageErrorEventData>
+      )
+    );
+    await findByTestId('image-error', { timeout: 50 });
+  });
+  describe('object-fit support', () => {
+    const defaultRM = 'cover' as const;
+    const specs: Record<
+      Required<WebBlockStyles>['objectFit'],
+      ImageStyle['resizeMode'] | null
+    > = {
+      contain: 'contain',
+      cover: 'cover',
+      unset: defaultRM,
+      fill: 'stretch',
+      'scale-down': 'contain',
+      '-moz-initial': defaultRM,
+      inherit: defaultRM,
+      initial: defaultRM,
+      none: defaultRM,
+      revert: defaultRM
+    };
+    for (const [objectFit, resizeMode] of Object.entries(specs)) {
+      it(`should map object-fit "${objectFit}" to resizeMode "${resizeMode}"`, async () => {
+        const source = { uri: 'http://via.placeholder.com/640x360' };
+        const style = {
+          width: 320,
+          height: 180
+        };
+        const { findByTestId } = render(
+          <HTMLImgElement
+            objectFit={objectFit as any}
+            style={style}
+            source={source}
+          />
+        );
+        const image = await findByTestId('image-success');
+        expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+          resizeMode
+        });
+      });
+    }
   });
   describe('scaling logic', () => {
     it('should use width and height from styles', async () => {

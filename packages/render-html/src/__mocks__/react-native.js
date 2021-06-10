@@ -35,3 +35,6 @@ export class Image extends RNImage {
     Image.getSizeWithHeaders(uri, undefined, callback, failure);
   }
 }
+
+Image.getSizeWithHeaders = jest.fn(Image.getSizeWithHeaders);
+Image.getSize = jest.fn(Image.getSize);
