@@ -1,6 +1,12 @@
 import { Linking } from 'react-native';
 import { RenderersProps } from '../shared-types';
 
+export async function defaultAOnPress(_e: any, href: string): Promise<unknown> {
+  if (await Linking.canOpenURL(href)) {
+    return Linking.openURL(href);
+  }
+}
+
 const defaultRendererProps: Required<RenderersProps> = {
   img: {
     initialDimensions: {
@@ -10,7 +16,7 @@ const defaultRendererProps: Required<RenderersProps> = {
     enableExperimentalPercentWidth: false
   },
   a: {
-    onPress: (_e, href) => Linking.canOpenURL(href) && Linking.openURL(href)
+    onPress: defaultAOnPress
   },
   ol: {},
   ul: {}
