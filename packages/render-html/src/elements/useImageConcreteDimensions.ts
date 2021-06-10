@@ -14,7 +14,7 @@ function extractHorizontalSpace({
   leftMargin,
   rightMargin,
   margin
-}: any = {}) {
+}: any) {
   const realLeftMargin = leftMargin || marginHorizontal || margin || 0;
   const realRightMargin = rightMargin || marginHorizontal || margin || 0;
   return realLeftMargin + realRightMargin;

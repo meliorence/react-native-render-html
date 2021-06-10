@@ -8,17 +8,12 @@ interface IncompleteImageDimensions {
   height: number | null;
 }
 
-function attemptParseFloat(value: any) {
-  const result = parseFloat(value);
-  return Number.isNaN(result) ? null : result;
-}
-
 function normalizeSize(
   dimension: string | number | null | undefined,
   options: Partial<{
     containerDimension: number | null;
     enablePercentWidth: boolean;
-  }> = {}
+  }>
 ) {
   const containerDimension = options.containerDimension || null;
   const enablePercentWidth = options.enablePercentWidth || false;
@@ -32,20 +27,14 @@ function normalizeSize(
   if (typeof dimension === 'number') {
     return dimension;
   }
-  if (typeof dimension === 'string') {
-    if (
-      dimension.search('%') !== -1 &&
-      enablePercentWidth &&
-      typeof containerDimension === 'number'
-    ) {
-      const parsedFloat = attemptParseFloat(dimension);
-      if (parsedFloat === null || Number.isNaN(parsedFloat)) {
-        return null;
-      }
-      return (parsedFloat * containerDimension) / 100;
-    } else if (dimension.trim().match(/^[\d.]+$/)) {
-      return attemptParseFloat(dimension);
-    }
+  if (
+    dimension.search('%') !== -1 &&
+    enablePercentWidth &&
+    typeof containerDimension === 'number'
+  ) {
+    return (parseFloat(dimension) * containerDimension) / 100;
+  } else if (dimension.trim().match(/^[\d.]+$/)) {
+    return parseFloat(dimension);
   }
   return null;
 }
