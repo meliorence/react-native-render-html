@@ -15,7 +15,8 @@ import TRenderEngine, {
 export default function buildTREFromConfig(props: TRenderEngineConfig) {
   const {
     allowedStyles,
-    ignoredStyles,
+    // TODO fix upstream
+    ignoredStyles = [],
     ignoredDomTags,
     ignoreDomNode,
     domVisitors,
@@ -26,8 +27,8 @@ export default function buildTREFromConfig(props: TRenderEngineConfig) {
     idsStyles,
     enableCSSInlineProcessing,
     enableUserAgentStyles,
-    fallbackFonts,
-    systemFonts,
+    systemFonts = [],
+    fallbackFonts = {},
     customHTMLElementModels = {},
     emSize,
     setMarkersForTNode,
@@ -41,12 +42,12 @@ export default function buildTREFromConfig(props: TRenderEngineConfig) {
       }
     : undefined;
   const fontMap = {} as Record<string, true>;
-  systemFonts!.forEach((font) => {
+  systemFonts.forEach((font) => {
     fontMap[font] = true;
   });
   const isFontSupported = (fontFamily: string) => {
-    if (fallbackFonts![fontFamily as keyof typeof fallbackFonts]) {
-      return fallbackFonts![fontFamily as keyof typeof fallbackFonts];
+    if (fallbackFonts[fontFamily as keyof typeof fallbackFonts]) {
+      return fallbackFonts[fontFamily as keyof typeof fallbackFonts];
     }
     return fontMap[fontFamily] || false;
   };
