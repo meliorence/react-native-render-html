@@ -17,5 +17,5 @@ import normalizeResourceLocator from '../helpers/normalizeResourceLocator';
  */
 export default function useNormalizedUrl(initialUrl: string) {
   const { baseUrl } = useDocumentMetadata();
-  return baseUrl ? normalizeResourceLocator(initialUrl, baseUrl) : initialUrl;
+  return normalizeResourceLocator(initialUrl, baseUrl);
 }
