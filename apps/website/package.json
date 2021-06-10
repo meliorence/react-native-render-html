@@ -55,6 +55,6 @@
     "doc-docusaurus-typedoc-plugin": "workspace:*",
     "sass": "^1.32.13",
     "typedoc": "^0.20.36",
-    "typescript": "^4.3.2"
+    "typescript": "4.2"
   }
 }

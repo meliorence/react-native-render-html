@@ -9599,7 +9599,7 @@ __metadata:
     "@docusaurus/plugin-content-docs": ^2.0.0-beta.0
     "@docusaurus/types": ^2.0.0-beta.0
     typedoc: ^0.20.36
-    typescript: ^4.3.2
+    typescript: 4.2
   languageName: unknown
   linkType: soft
 
@@ -22993,6 +22993,16 @@ resolve@~1.19.0:
   languageName: node
   linkType: hard
 
+"typescript@4.2, typescript@~4.2.4":
+  version: 4.2.4
+  resolution: "typescript@npm:4.2.4"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: edaede2fa77f56b7fba80ee624a2368ab1216e75b0434d968ccb47ab0a5e2f6d94f848b3b111c1237dd71e988cd376af26370dcdad3b94355c76e759f0dd0a1e
+  languageName: node
+  linkType: hard
+
 "typescript@^4.3.2, typescript@~4.3.2":
   version: 4.3.2
   resolution: "typescript@npm:4.3.2"
@@ -23003,17 +23013,7 @@ resolve@~1.19.0:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.3.2#builtin<compat/typescript>, typescript@patch:typescript@~4.3.2#builtin<compat/typescript>":
-  version: 4.3.2
-  resolution: "typescript@patch:typescript@npm%3A4.3.2#builtin<compat/typescript>::version=4.3.2&hash=ddfc1b"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 68d48dc86dacfeab59a22414ff061c976c46b679a9717a3a710051ea7bab779fd23f4edb856434da8155e8e8646c90b3912e342cc0010dfd15ed321a42cb0578
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@~4.2.4#builtin<compat/typescript>":
+"typescript@patch:typescript@4.2#builtin<compat/typescript>, typescript@patch:typescript@~4.2.4#builtin<compat/typescript>":
   version: 4.2.4
   resolution: "typescript@patch:typescript@npm%3A4.2.4#builtin<compat/typescript>::version=4.2.4&hash=ddfc1b"
   bin:
@@ -23023,13 +23023,13 @@ resolve@~1.19.0:
   languageName: node
   linkType: hard
 
-typescript@~4.2.4:
-  version: 4.2.4
-  resolution: "typescript@npm:4.2.4"
+"typescript@patch:typescript@^4.3.2#builtin<compat/typescript>, typescript@patch:typescript@~4.3.2#builtin<compat/typescript>":
+  version: 4.3.2
+  resolution: "typescript@patch:typescript@npm%3A4.3.2#builtin<compat/typescript>::version=4.3.2&hash=ddfc1b"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: edaede2fa77f56b7fba80ee624a2368ab1216e75b0434d968ccb47ab0a5e2f6d94f848b3b111c1237dd71e988cd376af26370dcdad3b94355c76e759f0dd0a1e
+  checksum: 68d48dc86dacfeab59a22414ff061c976c46b679a9717a3a710051ea7bab779fd23f4edb856434da8155e8e8646c90b3912e342cc0010dfd15ed321a42cb0578
   languageName: node
   linkType: hard
 
@@ -24041,7 +24041,7 @@ typescript@~4.2.4:
     react-modal: ^3.13.1
     sass: ^1.32.13
     typedoc: ^0.20.36
-    typescript: ^4.3.2
+    typescript: 4.2
   languageName: unknown
   linkType: soft
 
