@@ -40,7 +40,8 @@ function createSymbolicMarkerRenderer(
     style,
     markerTextStyle,
     counterRenderer,
-    rtlMarkerReversed = false
+    counterIndex,
+    rtlMarkerReversed
   }: MarkerBoxProps) => {
     const prefix = counterRenderer.renderPrefix();
     const suffix = counterRenderer.renderSuffix();
@@ -53,38 +54,39 @@ function createSymbolicMarkerRenderer(
             justifyContent: 'flex-end'
           }
         ]}>
-        {prefix !== '' && <Text style={markerTextStyle}>{prefix}</Text>}
-        {React.createElement(component, markerTextStyle as any)}
-        {suffix !== '' && <Text style={markerTextStyle}>{suffix}</Text>}
+        {<Text style={markerTextStyle}>{prefix}</Text>}
+        {React.createElement(component, {
+          ...(markerTextStyle as any),
+          index: counterIndex
+        })}
+        {<Text style={markerTextStyle}>{suffix}</Text>}
       </View>
     );
   };
 }
 
+const pickMarkerTextStyles = pick([
+  'fontStyle',
+  'fontSize',
+  'fontWeight',
+  'fontFamily',
+  'fontVariant',
+  'color',
+  'lineHeight'
+]);
+
 function extractMarkerTextStyle(tnode: TNode) {
   return Object.assign(
-    {},
     {
       lineHeight: 14 * 1.3,
       fontSize: 14,
       color: DEFAULT_TEXT_COLOR
     },
-    pick(
-      [
-        'fontStyle',
-        'fontSize',
-        'fontWeight',
-        'fontFamily',
-        'fontVariant',
-        'color',
-        'lineHeight'
-      ],
-      tnode.styles.nativeTextFlow
-    )
+    pickMarkerTextStyles(tnode.styles.nativeTextFlow)
   );
 }
 
-function getMarkerBoxStyle(
+export function getMarkerBoxStyle(
   markerWidth: number | false,
   paddingValue: string | number | undefined
 ) {
@@ -96,6 +98,14 @@ function getMarkerBoxStyle(
       : paddingValue;
   return { width: markerBoxWidth };
 }
+
+const listStyleTypeFallbackRecord: Record<
+  'ol' | 'ul',
+  DefaultSupportedListStyleType
+> = {
+  ol: 'decimal',
+  ul: 'disc'
+};
 
 export default function ListElement({
   tnode,
@@ -109,7 +119,7 @@ export default function ListElement({
   enableDynamicMarkerBoxWidth = false,
   listStyleSpecs,
   ...props
-}: ListElementProps<any>) {
+}: ListElementProps<'ol' | 'ul'>) {
   const markers = tnode.markers;
   const nestLevel =
     listType === 'ol' ? markers.olNestLevel : markers.ulNestLevel;
@@ -129,10 +139,14 @@ export default function ListElement({
     tnode.nodeIndex === tnode.parent?.children.length - 1
       ? styles.zeroMarginBottom
       : null;
-  const selectedListType = getFallbackListStyleTypeFromNestLevel!(nestLevel);
-  const listStyleType =
-    (tnode.styles.webTextFlow.listStyleType as DefaultSupportedListStyleType) ||
-    selectedListType;
+  const ownListType = tnode.styles.webTextFlow.listStyleType as
+    | DefaultSupportedListStyleType
+    | undefined;
+  const selectedListType =
+    getFallbackListStyleTypeFromNestLevel!(nestLevel) ||
+    ownListType ||
+    listStyleTypeFallbackRecord[listType];
+  const listStyleType = ownListType || selectedListType;
   if (__DEV__ && !(listStyleType in listStyleSpecs)) {
     if (listStyleType.match(/^("|')/)) {
       console.warn(
