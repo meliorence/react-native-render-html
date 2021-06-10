@@ -117,6 +117,10 @@ export interface ListElementConfig {
   /**
    * Get default list-style-type given the number of nest level for this list.
    *
+   * @remarks This function will not be used when a list element has its own
+   * `list-style-type` CSS property, or has inherited this property from
+   * parents.
+   *
    * @param nestLevel - The number of parents elements with the same tag name.
    */
   getFallbackListStyleTypeFromNestLevel?: (
