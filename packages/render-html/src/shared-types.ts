@@ -341,12 +341,20 @@ export interface TRenderEngineConfig {
   /**
    * ParserOptions for {@link https://github.com/fb55/htmlparser2/wiki/Parser-options | htmlparser2}.
    *
+   * @warning This prop is cold by default! If you need a re-render when this
+   * prop changes, you must register its name in
+   * {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
+   *
    * @defaultValue  `{ decodeEntities: true }`
    */
   htmlParserOptions?: HtmlParserOptions;
   /**
    * Enable or disable fallback styles for each tag. For example, `pre` tags
    * will have `whiteSpace` set to 'pre' by default.
+   *
+   * @warning This prop is cold by default! If you need a re-render when this
+   * prop changes, you must register its name in
+   * {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
    *
    * @defaultValue true
    */
@@ -357,13 +365,22 @@ export interface TRenderEngineConfig {
    * @remarks If you want to allow or disallow specific properties, use
    * `allowedStyles` or `ignoredStyles` props.
    *
+   * @warning This prop is cold by default! If you need a re-render when this
+   * prop changes, you must register its name in
+   * {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
+   *
    * @defaultValue true
    */
   enableCSSInlineProcessing?: boolean;
   /**
    * Provide mixed styles to target HTML tag names.
    *
-   * @warning **Do NOT** use the `StyleSheet` API to create those styles.
+   * @warning
+   * - **Do NOT** use the `StyleSheet` API to create those styles.
+   * - This prop is cold by default! If you need a re-render when this prop
+   *   changes, you must register its name in
+   *   {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
+   *
    * @remarks Any `fontFamily` used in those styles must be registered with
    * {@link TRenderEngineConfig.systemFonts} prop.
    */
@@ -371,7 +388,12 @@ export interface TRenderEngineConfig {
   /**
    * Provide mixed styles to target elements selected by CSS classes.
    *
-   * @warning **Do NOT** use the `StyleSheet` API to create those styles.
+   * @warning
+   * - **Do NOT** use the `StyleSheet` API to create those styles.
+   * - This prop is cold by default! If you need a re-render when this prop
+   *   changes, you must register its name in
+   *   {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
+   *
    * @remarks Any `fontFamily` used in those styles must be registered with
    * {@link TRenderEngineConfig.systemFonts} prop.
    */
@@ -379,7 +401,12 @@ export interface TRenderEngineConfig {
   /**
    * Provide mixed styles to target elements identified by the `id` attribute.
    *
-   * @warning **Do NOT** use the `StyleSheet` API to create those styles.
+   * @warning
+   * - **Do NOT** use the `StyleSheet` API to create those styles.
+   * - This prop is cold by default! If you need a re-render when this prop
+   *   changes, you must register its name in
+   *   {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
+   *
    * @remarks Any `fontFamily` used in those styles must be registered with
    * {@link TRenderEngineConfig.systemFonts} prop.
    */
@@ -388,7 +415,12 @@ export interface TRenderEngineConfig {
    * The default style for the document (root). Inheritable styles will be
    * transferred to children. That works also for textual styles.
    *
-   * @warning **Do NOT** use the `StyleSheet` API to create those styles.
+   * @warning
+   * - **Do NOT** use the `StyleSheet` API to create those styles.
+   * - This prop is cold by default! If you need a re-render when this prop
+   *   changes, you must register its name in
+   *   {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
+   *
    * @remarks Any `fontFamily` used in those styles must be registered with
    * {@link TRenderEngineConfig.systemFonts} prop.
    */
@@ -396,15 +428,19 @@ export interface TRenderEngineConfig {
   /**
    * Ignore specific DOM nodes.
    *
-   * @warning When this function is invoked, the node has not yet been
-   * attached to its parent or siblings. Use the second argument (`parent`)
-   * if you need to perform logic based on parent.
+   * @warning
+   * - When this function is invoked, the node has not yet been attached to its
+   *   parent or siblings. Use the second argument (`parent`) if you need to
+   *   perform logic based on parent.
+   * - This prop is cold by default! If you need a re-render when this prop
+   *   changes, you must register its name in
+   *   {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
    *
    * @remarks
-   * - Use `ignoredDomTags` if you just need to target specific tag names.
    * - The function is applied during DOM parsing, thus with very little
    *   overhead. However, it means that one node next siblings won't be
    *   available since it has not yet been parsed.
+   * - Use `ignoredDomTags` if you just need to target specific tag names.
    *
    * @returns `true` if this node should not be included in the DOM, anything
    * else otherwise.
@@ -421,6 +457,10 @@ export interface TRenderEngineConfig {
    * has been parsed and its children attached. This is great to tamper the dom,
    * remove children, insert nodes, change text nodes data... etc.
    *
+   * @warning This prop is cold by default! If you need a re-render when this
+   * prop changes, you must register its name in
+   * {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
+   *
    * @remark Each callback is applied during DOM parsing, thus with very little
    * overhead. However, it means that one node next siblings won't be available
    * since it has not yet been parsed. If you need some siblings logic, apply
@@ -429,6 +469,10 @@ export interface TRenderEngineConfig {
   domVisitors?: DomVisitorCallbacks;
   /**
    * A list of **lowercase tags** which should not be included in the DOM.
+   *
+   * @warning This prop is cold by default! If you need a re-render when this
+   * prop changes, you must register its name in
+   * {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
    *
    * @remark The filtering is happening during parsing, thus with very little
    * overhead.
@@ -439,6 +483,10 @@ export interface TRenderEngineConfig {
    * iterate over children until you reach an article element and return this
    * element.
    *
+   * @warning This prop is cold by default! If you need a re-render when this
+   * prop changes, you must register its name in
+   * {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
+   *
    * @remarks Applied after DOM parsing, before normalization and TTree
    * construction. Before normalization implies that a body will be added in
    * the tree **after** selecting root.
@@ -447,15 +495,23 @@ export interface TRenderEngineConfig {
   /**
    * Whitelist specific inline CSS style properties and ignore the others.
    *
-   * @warning Property names must be camelCased: for example,
-   * `background-color` should be written `backgroundColor`.
+   * @warning
+   * - This prop is cold by default! If you need a re-render when this prop
+   *   changes, you must register its name in
+   *   {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
+   * - Property names must be camelCased: for example, `background-color`
+   *   should be written `backgroundColor`.
    */
   allowedStyles?: CSSPropertyNameList;
   /**
    * Blacklist specific inline CSS style properties and allow the others.
    *
-   * @warning Property names must be camelCased: for example,
-   * `background-color` should be written `backgroundColor`.
+   * @warning
+   * - This prop is cold by default! If you need a re-render when this prop
+   *   changes, you must register its name in
+   *   {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
+   * - Property names must be camelCased: for example, `background-color`
+   *   should be written `backgroundColor`.
    *
    * @remarks Note that if you don't want inline style processing at all, you
    * should set `enableCSSInlineProcessing` prop to `false`.
@@ -472,6 +528,10 @@ export interface TRenderEngineConfig {
    *   here, otherwise those styles will be ignored.
    * - If you are using expo, you should use or extend `Constants.systemFonts`.
    *
+   * @warning This prop is cold by default! If you need a re-render when this
+   * prop changes, you must register its name in
+   * {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
+   *
    * @example
    * ```tsx
    * import RenderHTML, {defaultSystemFonts} from 'react-native-render-html'
@@ -486,14 +546,26 @@ export interface TRenderEngineConfig {
    * A record for specific CSS fonts.
    *
    * @remarks Use `Plaform.select({ ios: ..., android: ..., default: ...})`.
+   *
+   * @warning This prop is cold by default! If you need a re-render when this
+   * prop changes, you must register its name in
+   * {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
    */
   fallbackFonts?: FallbackFontsDefinitions;
   /**
    * Customize element models for target tags.
+   *
+   * @warning This prop is cold by default! If you need a re-render when this
+   * prop changes, you must register its name in
+   * {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
    */
   customHTMLElementModels?: HTMLElementModelRecord;
   /**
    * The default value in pixels for 1em.
+   *
+   * @warning This prop is cold by default! If you need a re-render when this
+   * prop changes, you must register its name in
+   * {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
    */
   emSize?: number;
   /**
@@ -504,8 +576,9 @@ export interface TRenderEngineConfig {
    * @param parentMarkers - {@link Markers} from the parent {@link TNode}.
    * @param tnode - The {@link TNode} to inspect.
    *
-   * @remarks
-   * Changes to this prop will cause a react tree update. Always memoize it.
+   * @warning This prop is cold by default! If you need a re-render when this
+   * prop changes, you must register its name in
+   * {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
    *
    * @defaultValue `() => null`
    */
@@ -516,6 +589,10 @@ export interface TRenderEngineConfig {
    * Disable hoisting. Especially useful for rendering with react-native-web.
    * Note that your layout might break in native!
    *
+   * @warning This prop is cold by default! If you need a re-render when this
+   * prop changes, you must register its name in
+   * {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
+   *
    * @defaultValue false
    */
   dangerouslyDisableHoisting?: boolean;
@@ -524,6 +601,10 @@ export interface TRenderEngineConfig {
    *
    * Disable whitespace collapsing. Especially useful if your html is
    * being pre-processed server-side with a minifier.
+   *
+   * @warning This prop is cold by default! If you need a re-render when this
+   * prop changes, you must register its name in
+   * {@link TRenderEngineConfig.triggerTREInvalidationPropNames}.
    *
    * @defaultValue false
    */
