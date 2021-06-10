@@ -8,6 +8,9 @@ import {
 import { ImageDimensions } from '../shared-types';
 import { WebBlockStyles } from '@native-html/transient-render-engine';
 
+/**
+ * Props for {@link useIMGElementStateWithCache} hook.
+ */
 export type UseIMGElementStateWithCacheProps = UseIMGElementStateProps &
   Required<Pick<UseIMGElementStateProps, 'cachedNaturalDimensions'>>;
 
