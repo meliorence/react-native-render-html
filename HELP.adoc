@@ -79,7 +79,7 @@ doesn't.
 .__Recommendations__
 --
 1. Make sure your issue isn't covered
-https://github.com/meliorence/react-native-render-html/blob/master/README.md[by
+https://meliorence.github.io/react-native-render-html/docs/intro[by
 the docs].
 2. Read the <<common-issues>> section bellow.
 3. Take a look at
@@ -103,7 +103,7 @@ report anyway.
 .__Recommendations__
 --
 1. Make sure the feature isn't covered
-https://github.com/meliorence/react-native-render-html/blob/master/README.md[by
+https://meliorence.github.io/react-native-render-html/docs/intro[by
 the docs].
 2. Read the <<common-issues>> section bellow.
 3. Take a look at
@@ -127,7 +127,7 @@ C. Going to https://discord.gg/dbEMMJM[our Discord #support channel].
 .__Recommendations__
 --
 1. Carefully
-https://github.com/meliorence/react-native-render-html/blob/master/README.md[read
+https://meliorence.github.io/react-native-render-html/docs/intro[read
 the docs].
 2. Read the <<common-issues>> section bellow.
 3. If you still find difficult to use this feature, then we are lacking good
