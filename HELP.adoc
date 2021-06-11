@@ -37,7 +37,7 @@ I am using `react-native-render-html` and I am witnessing a failure such as:
 [sidebar]
 .__Recommendations__
 --
-1. Read the <<common-issues>> section bellow.
+1. Read the https://meliorence.github.io/react-native-render-html/docs/faq[FAQ].
 2. Take a look at
 https://stackoverflow.com/questions/tagged/react-native-render-html for similar
 questions.
@@ -81,7 +81,7 @@ doesn't.
 1. Make sure your issue isn't covered
 https://meliorence.github.io/react-native-render-html/docs/intro[by
 the docs].
-2. Read the <<common-issues>> section bellow.
+2. Read the https://meliorence.github.io/react-native-render-html/docs/faq[FAQ].
 3. Take a look at
 https://stackoverflow.com/questions/tagged/react-native-render-html for similar
 questions.
@@ -105,7 +105,7 @@ report anyway.
 1. Make sure the feature isn't covered
 https://meliorence.github.io/react-native-render-html/docs/intro[by
 the docs].
-2. Read the <<common-issues>> section bellow.
+2. Read the https://meliorence.github.io/react-native-render-html/docs/faq[FAQ].
 3. Take a look at
 https://stackoverflow.com/questions/tagged/react-native-render-html for similar
 questions.
@@ -129,39 +129,8 @@ C. Going to https://discord.gg/dbEMMJM[our Discord #support channel].
 1. Carefully
 https://meliorence.github.io/react-native-render-html/docs/intro[read
 the docs].
-2. Read the <<common-issues>> section bellow.
+2. Read the https://meliorence.github.io/react-native-render-html/docs/faq[FAQ].
 3. If you still find difficult to use this feature, then we are lacking good
 documentation and we should fix it. Go to https://discord.gg/dbEMMJM[our
 Discord #support channel] and we will help you out.
 --
-
-[[common-issues]]
-== Common Issues
-
-[cols=2*,options=header,frame=topbot]
-|===
-|Issue
-|Solution
-
-|Unable to resolve XXX from node_modules/YYY
-|https://stackoverflow.com/a/63111913/2779871
-
-|The application crashes while using `react-native-screens`
-|https://stackoverflow.com/q/63171131/2779871
-
-|How to render iframes?
-|https://github.com/native-html/plugins/tree/master/packages/iframe-plugin#readme
-
-|How to render tables?
-|https://github.com/native-html/plugins/tree/master/packages/table-plugin#readme
-
-|How to open the browser when a link is pressed?
-|https://stackoverflow.com/q/63114501/2779871
-
-|How to access the raw HTML from a custom renderer?
-|https://stackoverflow.com/q/63979897/2779871
-
-|How to set images max width when img element already has a width attribute?
-|https://stackoverflow.com/a/64077140/2779871
-
-|===
