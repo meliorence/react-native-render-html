@@ -70,7 +70,7 @@ module.exports = {
       // Optional: Algolia search parameters
       searchParameters: {}
     },
-    googleAnalytics: {
+    gtag: {
       trackingID: 'G-CYR1XDV25N',
       anonymizeIP: true
     },
@@ -113,19 +113,13 @@ module.exports = {
           label: 'Migrating',
           activeSidebarClassName: '__fun'
         },
+        {
+          type: 'doc',
+          docId: 'faq',
+          label: 'FAQ',
+          activeSidebarClassName: '__fun'
+        },
         { to: 'blog', label: 'Blog', position: 'left' },
-        {
-          to:
-            'https://github.com/meliorence/react-native-render-html/blob/master/HELP.adoc',
-          label: 'Help',
-          position: 'left'
-        },
-        {
-          to:
-            'https://github.com/meliorence/react-native-render-html/blob/master/CONTRIBUTING.adoc',
-          label: 'Contributing',
-          position: 'left'
-        },
         {
           to: `https://github.com/meliorence/react-native-render-html/releases/tag/v${version}`,
           label: `v${version}`,
@@ -143,7 +137,7 @@ module.exports = {
       style: 'dark',
       links: [
         {
-          title: 'Overview',
+          title: 'Essentials',
           items: [
             {
               label: 'Introduction',
@@ -152,6 +146,10 @@ module.exports = {
             {
               label: 'Architecture',
               to: '/docs/architecture'
+            },
+            {
+              to: '/docs/faq',
+              label: 'FAQ'
             }
           ]
         },
@@ -196,6 +194,18 @@ module.exports = {
         {
           title: 'Community',
           items: [
+            {
+              to:
+                'https://github.com/meliorence/react-native-render-html/blob/master/HELP.adoc',
+              label: 'Help',
+              position: 'left'
+            },
+            {
+              to:
+                'https://github.com/meliorence/react-native-render-html/blob/master/CONTRIBUTING.adoc',
+              label: 'Contributing',
+              position: 'left'
+            },
             {
               label: 'Stack Overflow',
               href:

@@ -47,7 +47,7 @@ export default function ArticleContainerAtom({
           });
           return (
             <View
-              key={i}
+              key={c.props.title!}
               style={styles}
               onLayout={(e) => {
                 scrollIndex.registerLayout(e, c.props.title!);

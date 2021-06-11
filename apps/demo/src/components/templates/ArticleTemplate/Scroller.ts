@@ -2,6 +2,7 @@ import { LayoutChangeEvent, ScrollView } from 'react-native';
 import { paramCase } from 'param-case';
 import { RefObject } from 'react';
 import Animated from 'react-native-reanimated';
+import { HEADER_COLL_HEIGHT } from '../../../constants';
 
 export default class Scroller {
   private layoutRegistry: Record<string, number> = {};
@@ -19,7 +20,7 @@ export default class Scroller {
   }
 
   registerLayout(e: LayoutChangeEvent, title: string) {
-    const offsetY = e.nativeEvent.layout.y;
+    const offsetY = e.nativeEvent.layout.y - HEADER_COLL_HEIGHT;
     this.layoutRegistry[paramCase(title)] = offsetY;
   }
 

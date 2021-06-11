@@ -12,6 +12,7 @@ import PageContentAnchors from './pages/PageContentAnchors';
 import PageConceptTRE from './pages/PageConceptTRE';
 import PageConceptRendering from './pages/PageConceptRendering';
 import PageConceptCSS from './pages/PageConceptCSS';
+import PageFAQ from './pages/PageFAQ';
 
 const pagesIndex: Record<PageId, PageSpecs> = {
   intro: {
@@ -136,6 +137,15 @@ const pagesIndex: Record<PageId, PageSpecs> = {
     id: 'anchors',
     position: 4,
     title: 'Anchors'
+  },
+  faq: {
+    component: PageFAQ,
+    description: 'Frequently Asked Questions',
+    group: 'root',
+    iconName: 'comment-question',
+    id: 'faq',
+    position: 7,
+    title: 'FAQ'
   }
 };
 

@@ -6,6 +6,7 @@ export type PageId =
   | 'intro'
   | 'reinvent-the-wheel'
   | 'architecture'
+  | 'faq'
   // flow
   | 'css-processing'
   | 'transient-render-engine'

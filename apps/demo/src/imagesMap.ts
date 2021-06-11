@@ -13,7 +13,8 @@ const imagesMap: Record<PageId, number> = {
   'transient-render-engine': require('../assets/images/ryan-baker-tre.jpg'),
   'dom-tampering': require('../assets/images/diana-polekhina-tampering.jpg'),
   'css-processing': require('../assets/images/maik-jonietz-css.jpg'),
-  intro: require('../assets/images/pankaj-patel-html.jpg')
+  intro: require('../assets/images/pankaj-patel-html.jpg'),
+  faq: require('../assets/images/simone-secci-question.jpg')
 };
 
 export default imagesMap;
