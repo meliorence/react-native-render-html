@@ -1,3 +1,19 @@
+# [6.0.0-beta.1](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.0...v6.0.0-beta.1) (2021-06-11)
+
+**The Foundry release is finally stable, and is now-on the recommended version.** [Check out **the announcement blog post** in our brand new website](https://meliorence.github.io/react-native-render-html/blog/2021/06/07/foundry-announcement). We also have a [**migration guide**](https://meliorence.github.io/react-native-render-html/docs/migration-guide) for those who're coming from v5 and below.
+
+**This new beta brings a lot of tests and a branch test coverage above 99%. Many bugs have been identified and fixed thanks tot this endeavor.** (*Please note that the value reported by CodeCov is erroneous, [the bug is being tracked here](https://community.codecov.com/t/false-partials-in-code-coverage-javascript-typescript/2957).*)
+
+### Bug Fixes
+
+* `debug` mode not activated despite prop set to `true` ([ca3fbca](https://github.com/meliorence/react-native-render-html/commit/ca3fbcab68817c95f41aef2c965d2bbad5471302))
+* `viewProps.style` and `textProps.style` should have greater specificity over computed styles ([38bf934](https://github.com/meliorence/react-native-render-html/commit/38bf93490ff87c2cae05dbcc823d073c23e36a23))
+* allow an empty object as param of `buildTREFromConfig` ([a71854f](https://github.com/meliorence/react-native-render-html/commit/a71854ff088e295d736435a0fab961d2ec1c7490))
+* default anchor `onPress` should await on `Linking.canOpenURL` ([d9e8eb5](https://github.com/meliorence/react-native-render-html/commit/d9e8eb56da59341f2cc92eba6f03a04f770552b3))
+* inconsistent loading state in `SourceLoaderUri` ([a530c5c](https://github.com/meliorence/react-native-render-html/commit/a530c5c861c56d2bf5bcd4aaf7b1835d7c108a67))
+* uri source loading failure caused by missing defaults renderers ([4bc3f38](https://github.com/meliorence/react-native-render-html/commit/4bc3f38ddc4cdf26b8b352fcf9200573f23524de))
+* use default list style type when `getFallbackListStyleTypeFromNestLevel` returns undefined ([c0eee3d](https://github.com/meliorence/react-native-render-html/commit/c0eee3d24f1cdb8eaba79884b42b5aa80e9c3767))
+
 # [6.0.0-beta.0](https://github.com/meliorence/react-native-render-html/compare/v5.1.1...v6.0.0-beta.0) (2021-06-08)
 
 **The Foundry release is finally stable, and is now-on the recommended version.** [Check out **the announcement blog post** in our brand new website](https://meliorence.github.io/react-native-render-html/blog/2021/06/07/foundry-announcement). We also have a [**migration guide**](https://meliorence.github.io/react-native-render-html/docs/migration-guide) for those who're coming from v5 and below.
