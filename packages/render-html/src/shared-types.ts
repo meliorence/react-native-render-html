@@ -249,6 +249,7 @@ export interface RenderHTMLSharedProps {
    * - If one of the margins height is in percent, no collapsing will occur.
    * - Will apply indiscriminately to all `display` properties (including
    *   flex), which is not standard.
+   * - Might not work well with {@link TPhrasing} nodes having only one child.
    *
    * @defaultValue false
    */
