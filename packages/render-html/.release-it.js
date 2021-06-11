@@ -15,5 +15,8 @@ module.exports = {
       preset: 'angular',
       infile: './CHANGELOG.md'
     }
+  },
+  hooks: {
+    'after:release': './scripts/post-release.sh ${name} ${version}'
   }
 };
