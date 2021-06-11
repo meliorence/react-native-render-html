@@ -617,10 +617,11 @@ export interface TRenderEngineConfig {
    * @remarks For performance sake, this component will not recreate an
    * instance of the engine on each prop change. If you need some props to
    * trigger a new instantiation, such as `tagsStyles`, pass a list of their
-   * names in this array.
+   * names in this array. Please note that only props involved in the building
+   * of the transient render tree are concerned by this mechanism.
    *
-   * Please note that only props involved in the building of the transient render
-   * tree are concerned by this mechanism.
+   * @warning This array should **never** change in size or content. It's best
+   * to declare it outside of the render method or functional component.
    *
    * @example
    * ```ts

@@ -20,9 +20,6 @@ function renderOpeningTag(tag: string, attributes: Record<string, string>) {
  * @param reporter - An optional function which will receive every
  * parsed node as 1st argument, the depth as 2d argument and the converted html
  * as 3d argument.
- *
- * @remarks To have access to a DOM node from a custom renderer, the element
- * model of the rendered tag must have `isOpaque` field set to `true`.
  */
 export default function domNodeToHTMLString(
   root: Node | null,
