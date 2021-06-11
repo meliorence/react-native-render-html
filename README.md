@@ -70,3 +70,11 @@ Check out our [official website](https://meliorence.github.io/react-native-rende
 ## Changelog
 
 The changelog is available here: [packages/render-html/CHANGELOG.md](./packages/render-html/CHANGELOG.md).
+
+## Help
+
+Please refer to [our dedicated document](./HELP.adoc).
+
+## Community
+
+You're always welcome to join our [discord channel](https://discord.gg/dbEMMJM) :-).
