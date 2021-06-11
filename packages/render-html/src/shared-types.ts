@@ -815,22 +815,11 @@ export interface FallbackFontsDefinitions {
  * Props passed from parents to children.
  *
  *
- * @remarks
- * - Anonymous nodes will pass those props from their parents to
- *   children.
- * - **Typescript users**: If you need to customize this type, you should use
- *   {@link https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation | module augmentation}:
- *
- * ```ts
- * declare module 'react-native-render-html' {
- *   interface PropsFromParent {
- *     customProp?: boolean;
- *   }
- * }
- * ```
+ * @remarks Anonymous nodes will pass those props from their parents to
+ * children.
  *
  */
-export interface PropsFromParent {
+export interface PropsFromParent extends Record<string, any> {
   collapsedMarginTop: number | null;
 }
 
