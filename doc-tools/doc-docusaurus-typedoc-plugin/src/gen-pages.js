@@ -114,18 +114,29 @@ function extractExample(example, isHeader) {
 /**
  *
  * @param {import('typedoc').JSONOutput.Comment} comment
+ */
+function extractComment(comment) {
+  if (!comment) {
+    return '';
+  }
+  return `\n${parseLinks(comment.shortText ?? '')}\n\n${parseLinks(
+    comment.text ?? ''
+  )}\n\n`;
+}
+
+/**
+ *
+ * @param {import('typedoc').JSONOutput.Comment} comment
  * @param {boolean} isHeader
  */
-function extractComment(comment, isHeader) {
+function extractAdmonitions(comment, isHeader) {
   if (!comment) {
     return '';
   }
   const remarks = comment.tags && comment.tags.find((t) => t.tag === 'remarks');
   const warning = comment.tags && comment.tags.find((t) => t.tag === 'warning');
   const example = comment.tags && comment.tags.find((t) => t.tag === 'example');
-  return `\n${parseLinks(comment.shortText ?? '')}\n\n${parseLinks(
-    comment.text ?? ''
-  )}\n\n${remarks ? extractRemarks(remarks) : ''}${
+  return `\n${remarks ? extractRemarks(remarks) : ''}${
     warning ? extractWarning(warning) : ''
   }${example ? extractExample(example, isHeader) : ''}\n\n`;
 }
@@ -136,7 +147,7 @@ function extractComment(comment, isHeader) {
  */
 function extractSignatureComment(signatures) {
   if (signatures) {
-    return extractComment(signatures[0].comment);
+    return extractDefinitionBody(signatures[0]);
   }
   return '';
 }
@@ -157,7 +168,7 @@ function extractSignatureParams(signatures) {
         if (p.comment) {
           return `<dt><code>${p.name}</code></dt><dd>
 
-${extractComment(p.comment)}
+${extractDefinitionBody(p)}
         
 </dd>`;
         }
@@ -187,13 +198,52 @@ function extractDeclarationBox(reflection) {
  *
  * @param {import('typedoc').JSONOutput.DeclarationReflection} reflection
  */
+function extractDefaultValue(reflection) {
+  const defaultValueTagText = reflection.comment?.tags
+    ?.find((t) => t.tag.match(/^defaultvalue$/i))
+    ?.text.replace(/`/g, '');
+  const defaultValue = reflection.defaultValue || defaultValueTagText;
+  return defaultValue ? `**Default**: \`${defaultValue}\`\n` : '';
+}
+
+/**
+ *
+ * @param {import('typedoc').JSONOutput.DeclarationReflection} reflection
+ */
+function extractReturnValue(reflection) {
+  const returnsTagText = reflection.comment?.tags?.find((t) =>
+    t.tag.match(/^returns$/i)
+  );
+  return returnsTagText
+    ? `**Returns**: ${parseLinks(returnsTagText.text)}`
+    : '';
+}
+
+/**
+ *
+ * @param {import('typedoc').JSONOutput.DeclarationReflection} reflection
+ * @param {boolean} isHeader
+ */
+function extractDefinitionBody(reflection, isHeader = false) {
+  return `${extractComment(reflection.comment)}${extractDefaultValue(
+    reflection
+  )}\n${extractReturnValue(reflection)}\n${extractAdmonitions(
+    reflection.comment,
+    isHeader
+  )}\n`;
+}
+
+/**
+ *
+ * @param {import('typedoc').JSONOutput.DeclarationReflection} reflection
+ */
 function extractMemberBox(reflection) {
   if (reflection.name === '__namedParameters') {
     reflection.name = 'props';
   }
   return `### \`${reflection.name}\`\n${extractDeclarationBox(
     reflection
-  )}\n${extractComment(reflection.comment, false)}${extractSignatureComment(
+  )}\n${extractDefinitionBody(reflection)}${extractSignatureComment(
     reflection.signatures
   )}${extractSignatureParams(reflection.signatures)}\n`;
 }
@@ -314,7 +364,7 @@ function extractTypeParameter(reflection) {
   }
   return `## Type Parameters\n\n${parameters
     .map((t) => {
-      return `### \`${t.name}\`\n\n${extractComment(t.comment, false)}`;
+      return `### \`${t.name}\`\n\n${extractDefinitionBody(t)}`;
     })
     .join('\n\n')}`;
 }
@@ -336,7 +386,7 @@ function extractHeader(reflection, version) {
 function serialize(reflection, version) {
   return `${extractFrontmatter(reflection)}
   ${extractHeader(reflection, version)}
-  ${extractComment(reflection.comment, true)}
+  ${extractDefinitionBody(reflection, true)}
   ${extractSignatureComment(reflection.signatures)}
 ${extractTypeParameter(reflection)}\n\n${extractBody(reflection)}`;
 }
