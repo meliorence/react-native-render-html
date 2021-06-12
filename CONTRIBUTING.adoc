@@ -8,7 +8,7 @@ ifdef::env-github[]
 endif::[]
 :toc:
 
-:rnrh-test-folder: https://github.com/meliorence/react-native-render-html/tree/master/src/__tests__
+:rnrh-test-folder: https://github.com/meliorence/react-native-render-html/tree/master/packages/render-html/src/__tests__
 
 = A Contributors' Guide
 
@@ -131,8 +131,7 @@ contribution, you can also ping us in our our https://discord.gg/MwrZmBb[Discord
 If your PR fixes a bug, you are required to implement a regression test to
 prove your fix is effective, but *don't worry, we will help you*. The simplest
 way is to look at {rnrh-test-folder}[our test folder] and copy/paste an existing __regression
-test__ to get inspiration. You must name your file test after the pattern
-described in this folder README. If you know what the test should do, but don't
+test__ to get inspiration. If you know what the test should do, but don't
 know how to implement the test, you can add a "Testing Plan" section in the
 body of your PR.
 
@@ -142,8 +141,7 @@ body of your PR.
 
 When you submit a bug ticket, the fastest path for us to resolve the issue is
 by providing a bug reproduction. Take a glance at {rnrh-test-folder}[our test folder] and get
-inspiration by looking at __regression tests__. You must name your file-test
-after the pattern described in this folder README. The PR is ready __when the
+inspiration by looking at __regression tests__. The PR is ready __when the
 test fails__.
 
 === Features
