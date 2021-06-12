@@ -22,7 +22,7 @@
     "build:docs": "yarn build:tools && yarn website build-docs",
     "process-svg-assets": "node scripts/processSvgAssets.js",
     "postinstall": "husky install",
-    "publish:website": "yarn build:docs && GIT_USER=$USER USE_SSH=true CURRENT_BRANCH=dev/foundry yarn workspace website deploy",
+    "publish:website": "yarn build:docs && GIT_USER=$USER USE_SSH=true yarn workspace website deploy",
     "publish:discovery": "yarn workspace demo publish"
   },
   "devDependencies": {

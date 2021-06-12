@@ -1,0 +1,51 @@
+:hide-uri-scheme:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+:toc:
+
+= Participating in RNRH development
+
+== Initializing the project
+
+Clone the project:
+```
+git clone git@github.com:meliorence/react-native-render-html.git
+```
+Then yarn-install:
+```
+cd react-native-render-html
+yarn install
+```
+
+== Package sources
+
+Package sources are located in `packages/render-html`.
+
+== Build libraries
+
+```
+yarn build:tools
+yarn render-html build
+```
+
+From now-on, you should be able to try-out the demo app with
+```
+yarn demo start
+```
+
+== Run tests
+
+```
+yarn render-html test:jest --watch
+```
+
+== Documentation
+
+All the doc pages are React components available in
+`doc-tools/doc-pages/src/pages` and are built for both the Discovery expo app
+and website.

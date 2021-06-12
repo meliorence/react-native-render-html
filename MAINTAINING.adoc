@@ -164,26 +164,40 @@ with the version in `package.json`.
 
 ==== Steps
 
-1. Consider the appropriate npm `tag` for this version with the table above.
-2. Run the following command--replace `<tag>` with your tag:
+We use https://github.com/release-it/release-it[release-it] utility to release
+new versions. You will need to provide a GIHUB_TOKEN environment variable to
+publish the release on Github.
+
+1. Run
 +
 ```
-npm publish --tag <tag>
+yarn render-html release-it --preRelease=beta --npm.tag=next 
 ```
-3. Publish your changes to origin
++
+for a beta or
 +
 ```
-git push
+yarn render-html release-it --preRelease=alpha --npm.tag=unstable
 ```
-4. Publish the new git tag to origin
++
+for an alpha release. Eventually, edit manually the CHANGELOG.md file to
+add extra information.
+2. If this is the first pre-release, create a new issue on Github to be pinned,
+asking for feedback for this pre-release. This issue must have the `release`
+label.
+3. Release the new documentation website with
 +
 ```
-git push --tags
+yarn publish:website
 ```
-5. Create a new issue on Github to be pinned, asking for feedback for this
-pre-release. This issue must have the `release` label.
-6. Create a new pre-release on github, and copy and paste the content of the
-CHANGELOG. Also, link the issue previously created to ask for feedback.
++
+You will need to pass a USER environment variable to this command if your github user has a different name than your logged system user.
+4. Release the new discovery app with
++
+```
+yarn publish:discovery
+```
+
 
 === Releases
 
@@ -199,28 +213,30 @@ with the version in `package.json`.
 
 ==== Steps
 
-1. Publish to npm:
+We use https://github.com/release-it/release-it[release-it] utility to release
+new versions. You will need to provide a GIHUB_TOKEN environment variable to
+publish the release on Github.
+
+1. Run
 +
 ```
-npm publish
+yarn render-html release-it
 ```
-2. Update the `release/MAJOR.MINOR` npm tag (this tag is important for documentation)
++
+Eventually, edit manually the CHANGELOG.md file to
+add extra information.
+2. Release the new documentation website with
 +
 ```
-npm dist-tag add react-native-render-html@MAJOR.MINOR.VERSION release/MAJOR.MINOR 
+yarn publish:website
 ```
-3. Publish your changes to origin
++
+You will need to pass a USER environment variable to this command if your github user has a different name than your logged system user.
+3. Release the new discovery app with
 +
 ```
-git push
+yarn publish:discovery
 ```
-4. Publish the new git tag to origin
-+
-```
-git push --tags
-```
-5. Create a new release on github, and copy and paste the content of the
-approriate section in the CHANGELOG.
 
 
 *If this publication was a backport (from a `dev/MINOR.x` branch), you must
