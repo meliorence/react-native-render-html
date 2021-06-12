@@ -78,3 +78,7 @@ Please refer to [our dedicated document](./HELP.adoc).
 ## Community
 
 You're always welcome to join our [discord channel](https://discord.gg/dbEMMJM) :-).
+
+## Contributing
+
+Check-out our [contributing guide](./CONTRIBUTING.adoc).
