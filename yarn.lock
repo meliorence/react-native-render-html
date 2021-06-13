@@ -2494,7 +2494,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/core@npm:2.0.0-beta.ff31de0ff, @docusaurus/core@npm:^2.0.0-beta.0":
+"@docusaurus/core@npm:2.0.0-beta.ff31de0ff, @docusaurus/core@npm:^2.0.0-beta.ff31de0ff":
   version: 2.0.0-beta.ff31de0ff
   resolution: "@docusaurus/core@npm:2.0.0-beta.ff31de0ff"
   dependencies:
@@ -2655,7 +2655,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/plugin-content-docs@npm:2.0.0-beta.ff31de0ff, @docusaurus/plugin-content-docs@npm:^2.0.0-beta.0":
+"@docusaurus/plugin-content-docs@npm:2.0.0-beta.ff31de0ff, @docusaurus/plugin-content-docs@npm:^2.0.0-beta.ff31de0ff":
   version: 2.0.0-beta.ff31de0ff
   resolution: "@docusaurus/plugin-content-docs@npm:2.0.0-beta.ff31de0ff"
   dependencies:
@@ -2724,7 +2724,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/plugin-google-analytics@npm:2.0.0-beta.ff31de0ff, @docusaurus/plugin-google-analytics@npm:^2.0.0-beta.0":
+"@docusaurus/plugin-google-analytics@npm:2.0.0-beta.ff31de0ff, @docusaurus/plugin-google-analytics@npm:^2.0.0-beta.ff31de0ff":
   version: 2.0.0-beta.ff31de0ff
   resolution: "@docusaurus/plugin-google-analytics@npm:2.0.0-beta.ff31de0ff"
   dependencies:
@@ -2872,7 +2872,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/types@npm:2.0.0-beta.ff31de0ff, @docusaurus/types@npm:^2.0.0-beta.0":
+"@docusaurus/types@npm:2.0.0-beta.ff31de0ff, @docusaurus/types@npm:^2.0.0-beta.ff31de0ff":
   version: 2.0.0-beta.ff31de0ff
   resolution: "@docusaurus/types@npm:2.0.0-beta.ff31de0ff"
   dependencies:
@@ -5451,9 +5451,9 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:^15.0.1":
-  version: 15.12.1
-  resolution: "@types/node@npm:15.12.1"
-  checksum: 8a111dc99281e07b1a6408437a09eafb081760aa8bd73d481793345b302a565772c45f2be7fdd7386a8a7ce589a999ccfb513dba15a0b3320dba03c94308253f
+  version: 15.12.2
+  resolution: "@types/node@npm:15.12.2"
+  checksum: 26b9170eb825656751955e919dcea7963d1be4d1eba361c67e41b51a55436c51d69d63f49ee98aaf4fe2e0e5eb3c0038408a8f542316b7583e9badf4fdd10024
   languageName: node
   linkType: hard
 
@@ -9900,9 +9900,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "doc-docusaurus-rfg-plugin@workspace:doc-tools/doc-docsusaurus-rfg-plugin"
   dependencies:
-    "@docusaurus/core": ^2.0.0-beta.0
-    "@docusaurus/plugin-content-docs": ^2.0.0-beta.0
-    "@docusaurus/types": ^2.0.0-beta.0
+    "@docusaurus/core": ^2.0.0-beta.ff31de0ff
+    "@docusaurus/plugin-content-docs": ^2.0.0-beta.ff31de0ff
+    "@docusaurus/types": ^2.0.0-beta.ff31de0ff
     htmlparser2: ^6.1.0
     rfg-api: ^0.5.2
     typescript: ^4.3.2
@@ -9913,9 +9913,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "doc-docusaurus-typedoc-plugin@workspace:doc-tools/doc-docusaurus-typedoc-plugin"
   dependencies:
-    "@docusaurus/core": ^2.0.0-beta.0
-    "@docusaurus/plugin-content-docs": ^2.0.0-beta.0
-    "@docusaurus/types": ^2.0.0-beta.0
+    "@docusaurus/core": ^2.0.0-beta.ff31de0ff
+    "@docusaurus/plugin-content-docs": ^2.0.0-beta.ff31de0ff
+    "@docusaurus/types": ^2.0.0-beta.ff31de0ff
     typedoc: ^0.20.36
     typescript: 4.2
   languageName: unknown
@@ -24444,7 +24444,7 @@ resolve@~1.19.0:
     "@doc/svgr-conf": "workspace:*"
     "@docusaurus/core": 2.0.0-beta.ff31de0ff
     "@docusaurus/module-type-aliases": ^2.0.0-beta.ff31de0ff
-    "@docusaurus/plugin-google-analytics": ^2.0.0-beta.0
+    "@docusaurus/plugin-google-analytics": ^2.0.0-beta.ff31de0ff
     "@docusaurus/preset-classic": 2.0.0-beta.ff31de0ff
     "@mdx-js/react": ^1.6.22
     "@tsconfig/docusaurus": ^1.0.2
