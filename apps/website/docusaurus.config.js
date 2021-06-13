@@ -57,7 +57,7 @@ module.exports = {
   // TODO remove when this issue is resolved
   // https://github.com/facebook/docusaurus/issues/4923
   // Also remove the swizzled LayoutHead
-  favicon: 'img/XXX',
+  favicon: 'favicons/favicon-32x32.png',
   organizationName: 'meliorence',
   projectName: 'react-native-render-html',
   plugins: plugins,
@@ -250,9 +250,12 @@ module.exports = {
           disableVersioning: false
         },
         blog: {
-          showReadingTime: true
-          // Please change this to your repo.
-          // editUrl: null
+          showReadingTime: true,
+          feedOptions: {
+            type: 'all',
+            title: 'React Native Render HTML Official Blog',
+            copyright: `Copyright © ${new Date().getFullYear()} Meliorence, Inc. and Jules Sam. Randolph`
+          }
         },
         theme: {
           customCss: require.resolve('./src/css/custom.scss')
