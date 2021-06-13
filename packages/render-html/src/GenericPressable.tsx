@@ -26,17 +26,20 @@ export default function GenericPressable({
     );
   }
   if (Platform.OS === 'android') {
+    // TouchableNativeFeedback does not support a
+    // style prop. So we must wrap it inside a View.
     return (
-      <TouchableNativeFeedback
-        useForeground
-        background={TouchableNativeFeedback.Ripple(
-          pressableHightlightColor,
-          borderless
-        )}
-        style={style}
-        {...(otherProps as any)}>
-        <View testID="generic-pressable">{children}</View>
-      </TouchableNativeFeedback>
+      <View style={style}>
+        <TouchableNativeFeedback
+          useForeground
+          background={TouchableNativeFeedback.Ripple(
+            pressableHightlightColor,
+            borderless
+          )}
+          {...(otherProps as any)}>
+          <View testID="generic-pressable">{children}</View>
+        </TouchableNativeFeedback>
+      </View>
     );
   }
   return (
