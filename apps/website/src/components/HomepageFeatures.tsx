@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './HomepageFeatures.module.scss';
 
-const FeatureList = [
+const features = [
   {
     title: 'Easy to Use',
     Svg: require('../../static/img/undraw_relaxation.svg').default,
@@ -81,7 +81,7 @@ function Feature({ Svg, title, description }) {
         <Svg className={styles.featureSvg} alt={title} />
       </div>
       <div className="text--center padding-horiz--md">
-        <h3>{title}</h3>
+        <h2>{title}</h2>
         <p>{description}</p>
       </div>
     </div>
@@ -91,9 +91,10 @@ function Feature({ Svg, title, description }) {
 export default function HomepageFeatures() {
   return (
     <section className={styles.features}>
+      <h1 style={{ display: 'none' }}>Overview of features</h1>
       <div className="container">
         <div className="row">
-          {FeatureList.map((props, idx) => (
+          {features.map((props, idx) => (
             <Feature key={idx} {...props} />
           ))}
         </div>

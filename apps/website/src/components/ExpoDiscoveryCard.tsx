@@ -29,11 +29,15 @@ export default function ExpoDiscoveryCard({
       </div>
       <a
         target="_blank"
+        rel="noopener"
         href={'https://expo.io/@jsamr/react-native-render-html-discovery'}>
         <strong>Try Out The Discovery App on Expo!</strong>
       </a>
       <div className={classes['expoBox__qr']}>
-        <img src="/react-native-render-html/img/discovery-expo-qr.png" />
+        <img
+          alt="QR code to scan the Discovery App in Expo Go"
+          src="/react-native-render-html/img/discovery-expo-qr.png"
+        />
       </div>
     </div>
   );

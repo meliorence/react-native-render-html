@@ -43,6 +43,7 @@ export default function DiscoveryFrame({ scale }: { scale?: number }) {
         </video>
       </DeviceContainer>
       <button
+        aria-label="Play/pause"
         onClick={playPause}
         className={clsx('button', 'button--primary', styles.button)}>
         <svg width="32" height="32" viewBox="0 0 24 24">

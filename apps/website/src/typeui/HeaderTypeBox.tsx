@@ -36,6 +36,7 @@ function ExternalSource({ libraryName }: { libraryName: string }) {
   return (
     <a
       target="_blank"
+      rel="noopener"
       className={classes.sourceBox}
       href={thirdPartiesMap[libraryName]}>
       <code>{libraryName}</code>
@@ -79,6 +80,7 @@ export default function HeaderTypeBox({
         {!isExternal && source && (
           <a
             target="_blank"
+            rel="noopener"
             className={classes.sourceBox}
             href={`https://github.com/meliorence/react-native-render-html/tree/v${version}/${source.fileName}#L${source.line}`}>
             {source.fileName}
