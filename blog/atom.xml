@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://meliorence.github.io/blog</id>
-    <title>Discover React Native Render HTML Blog</title>
+    <title>React Native Render HTML Official Blog</title>
     <updated>2021-06-07T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://meliorence.github.io/blog"/>
     <subtitle>Discover React Native Render HTML Blog</subtitle>
-    <icon>https://meliorence.github.io/img/XXX</icon>
+    <icon>https://meliorence.github.io/favicons/favicon-32x32.png</icon>
+    <rights>Copyright © 2021 Meliorence, Inc. and Jules Sam. Randolph</rights>
     <entry>
         <title type="html"><![CDATA[Announcing the Beta Foundry Release]]></title>
         <id>Announcing the Beta Foundry Release</id>

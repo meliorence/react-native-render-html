@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0">
     <channel>
-        <title>Discover React Native Render HTML Blog</title>
+        <title>React Native Render HTML Official Blog</title>
         <link>https://meliorence.github.io/blog</link>
         <description>Discover React Native Render HTML Blog</description>
         <lastBuildDate>Mon, 07 Jun 2021 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <copyright>Copyright © 2021 Meliorence, Inc. and Jules Sam. Randolph</copyright>
         <item>
             <title><![CDATA[Announcing the Beta Foundry Release]]></title>
             <link>https://meliorence.github.io/react-native-render-html/blog/2021/06/07/foundry-announcement</link>
