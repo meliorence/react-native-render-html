@@ -1,0 +1,242 @@
+---
+title: 'Create A WebView-free Blog App with React Native Render HTML, Part I'
+author: Jules Sam. Randolph
+author_title: Developer of React Native Render HTML v6
+author_url: https://github.com/jsamr/
+author_image_url: https://avatars.githubusercontent.com/u/3646758?v=4
+tags: [foundry, Blog, Article]
+description: A step-by-step guide to render a Blog Article with table of content and scroll-to-section feature in React Native.
+hide_table_of_contents: false
+draft: true
+---
+
+import Screenshot from '@site/src/components/Screenshot';
+import APIReference from '@site/src/components/APIReference';
+import ExpoBlogCard from '@site/src/components/ExpoBlogCard';
+
+<Screenshot
+  style={{ float: 'right', marginLeft: 10 }}
+  url="/img/article-body-dark.png"
+  scale={0.75}
+/>
+
+The [Foundry Release beta is out](./2021-06-07-foundry-announcement.mdx), and I wanted to show you its powerful
+capabilities with a very common use-case: rendering an article from a Blog. For
+this case study, we will use the official React Native blog, which is build on
+[Docusaurus](https://docusaurus.io/). The App will feature:
+
+- A list of articles fetched from an RSS Feed;
+- An aside table of content displayed in a drawer layout;
+- A scroll-to-section feature when pressing a TOC entry.
+
+This study will be a good opportunity to learn or revisit important techniques
+to master this library. Also note that the implementation, especially targeted
+CSS classes are inherently tied to how the website is structured. Since the
+React Native blog is built on Docusaurus, the implementation should be very
+easy to transpose in other docusaurus-based blogs.
+
+Now, let's get to the heart of it ❤️
+
+<div style={{ clear: 'right' }} />
+
+:::tip
+The source code of this case study is available in the `main` branch of this
+repo: [`jsamr/rnrh-blog`](https://github.com/jsamr/rnrh-blog). The `enhanced`
+branch contains a few more features beyond this tutorial, such as a refined UI,
+dark mode, caching with [react-queries](https://react-query.tanstack.com/)...
+etc. You can try out the **enhanced** version right now with expo, see [the
+project page](https://expo.io/@jsamr/react-native-blog) for instructions.
+:::
+
+<!--truncate-->
+
+## Introduction
+
+
+I propose starting with the end-result, and then explain how we got there. The App has two screens:
+
+1. The Home screen, displaying a list of articles fetched from a RSS feed.
+2. The Article screen, displaying the body of the article and a side-menu to navigate into sections.
+
+The navigation is handled by [React Navigation](https://reactnavigation.org/) library, and most of the
+components come from [React Native Paper](https://reactnativepaper.com/).
+
+:::important
+The steps laid out in this tutorial won't cover the **enhanced** implementation such as
+seen in below gallery. We will focus on simplicity and won't spend much time on
+theming. But you can always check out the enhanced implementation here:
+[`jsamr/rnrh-blog` (enhanced branch)](https://github.com/jsamr/rnrh-blog/tree/enhanced)
+:::
+
+### Gallery
+
+<div style={{display: 'flex', gap: 20, justifyContent: 'center' }}>
+
+<Screenshot url="/img/home-dark.png" scale={0.5} />
+<Screenshot url="/img/article-body-dark.png" scale={0.5} />
+<Screenshot url="/img/article-side-dark.png" scale={0.5} />
+
+</div>
+
+<div style={{display: 'flex', gap: 20, justifyContent: 'center' }}>
+
+<Screenshot url="/img/home-light.png" scale={0.5} />
+<Screenshot url="/img/article-body-light.png" scale={0.5} />
+<Screenshot url="/img/article-side-light.png" scale={0.5} />
+
+</div>
+
+<ExpoBlogCard />
+
+## Getting Started
+
+We will use Expo cli to initiate the project. If you don't have it installed yet, install the cli globally:
+
+```bash
+npm install -g expo-cli
+```
+
+After which, create the project. We will use TypeScript and yarn, but of course
+you're free to set a plain JavaScript project instead.
+
+```bash
+expo init rnrh-blog -t expo-template-blank-typescript --name Blog --yarn
+```
+
+Then we need to install dependencies required for this project:
+
+```bash
+cd rnrh-blog
+expo install @react-navigation/native@^5 @react-navigation/stack@^5 \
+     react-native-screens react-native-safe-area-context \
+     react-native-rss-parser@^1 react-native-render-html@next \
+     react-native-paper@^4 react-native-gesture-handler events
+```
+
+Now, run
+
+```bash
+yarn android
+```
+
+to launch the App in an android emulator.
+
+## Setting Up Navigation
+
+### Declare the Routes in TypeScript
+
+Create a new `shared-types.ts` file in the root of your project with the following definitions:
+
+```ts title="shared-types.ts"
+export type RootStackParamList = {
+  Home: undefined;
+  Article: ArticleParams;
+};
+
+export interface ArticleParams {
+  url: string;
+  title: string;
+}
+```
+
+These types define the names of the routes supported by our stack navigator,
+and the types of their params. Notice that the `Article` route takes a `url`
+and `title` for display.
+
+### Create the Routes Components
+
+Add two files, `screens/HomeScreen.tsx` and `screens/ArticleScreen.tsx`:
+
+```tsx title="screens/HomeScreen.tsx"
+import React from 'react';
+import { Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+export default function HomeScreen() {
+  return (
+    <SafeAreaView>
+      <Text>Welcome to the React Native Blog!</Text>
+    </SafeAreaView>
+  );
+}
+```
+
+```tsx title="screens/ArticleScreen.tsx"
+import React, { useEffect } from 'react';
+import { StackScreenProps } from '@react-navigation/stack';
+import { RootStackParamList } from '../shared-types';
+
+type ArticleScreenProps = StackScreenProps<RootStackParamList, 'Article'>;
+
+function useSetTitleEffect({ route, navigation }: ArticleScreenProps) {
+  useEffect(
+    function setTitle() {
+      navigation.setOptions({ title: route.params.title });
+    },
+    [route.params.title, navigation]
+  );
+}
+
+export default function ArticleScreen(props: ArticleScreenProps) {
+  useSetTitleEffect(props);
+  return null;
+}
+```
+
+:::note Remarks
+In the `ArticleScreen` component, we define an effect to set the screen title
+displayed in the header based on a route parameter. The logic is internal
+to the [React Navigation](https://reactnavigation.org/) library.
+:::
+
+### Create the Root Navigator
+
+Replace the current `App.tsx` with the following:
+
+```tsx title="App.tsx"
+import { createStackNavigator } from '@react-navigation/stack';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { RootStackParamList } from './shared-types';
+import HomeScreen from './screens/HomeScreen';
+import ArticleScreen from './screens/ArticleScreen';
+
+const Stack = createStackNavigator<RootStackParamList>();
+
+export default function App() {
+  return (
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false
+          }}>
+          <Stack.Screen
+            name="Home"
+            options={{ title: 'Blog' }}
+            component={HomeScreen}
+          />
+          <Stack.Screen
+            name="Article"
+            options={{ headerShown: true }}
+            component={ArticleScreen}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
+  );
+}
+```
+
+You should finally see a screen displaying "Welcome to the React Native Blog"!
+Great, the structure is ready: from now on, we can implement each of those
+screens.
+
+:::tip
+If you are not familiar with React Navigation, you could benefit from reading
+its [Stack Navigator
+documentation](https://reactnavigation.org/docs/stack-navigator) before going further.
+:::
+
+**Now, we're ready to implement the RSS feed list. Let's jump to [Part II](./2021-06-17-create-blog-app-rnrh-II.mdx)**.

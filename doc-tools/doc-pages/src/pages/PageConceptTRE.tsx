@@ -69,7 +69,7 @@ export default function PageConceptTRE() {
           <Bold>Element models</Bold> form the building block of the engine.
           These models specify how a DOM element of a peculiar tag should be
           translated. You can tamper with those models and add you own models,
-          making this library extremly customizable.
+          making this library extremely customizable.
         </Paragraph>
         <Section title="HTMLElementModel">
           <Paragraph>

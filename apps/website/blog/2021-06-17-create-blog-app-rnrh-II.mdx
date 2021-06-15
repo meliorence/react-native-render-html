@@ -1,0 +1,791 @@
+---
+title: 'Create A WebView-free Blog App with React Native Render HTML, Part II'
+author: Jules Sam. Randolph
+author_title: Developer of React Native Render HTML v6
+author_url: https://github.com/jsamr/
+author_image_url: https://avatars.githubusercontent.com/u/3646758?v=4
+tags: [foundry, Blog, Article]
+description: A step-by-step guide to render a Blog Article with table of content and scroll-to-section feature in React Native.
+hide_table_of_contents: false
+draft: true
+---
+
+import Screenshot from '@site/src/components/Screenshot';
+import APIReference from '@site/src/components/APIReference';
+import ExpoBlogCard from '@site/src/components/ExpoBlogCard';
+
+This article is the part II of the *Create A  WebView-freeBlog App with React Native Render HTML* serie.
+See also [Part I](./2021-06-16-create-blog-app-rnrh-I.mdx) and [Part III](./2021-06-18-create-blog-app-rnrh-III.mdx).
+
+<!--truncate-->
+
+:::tip
+The source code of this case study is available in the `main` branch of this
+repo: [`jsamr/rnrh-blog`](https://github.com/jsamr/rnrh-blog). The `enhanced`
+branch contains a few more features beyond this tutorial, such as a refined UI,
+dark mode, caching with [react-queries](https://react-query.tanstack.com/)...
+etc. You can try out the **enhanced** version right now with expo, see [the
+project page](https://expo.io/@jsamr/react-native-blog) for instructions.
+:::
+
+
+<ExpoBlogCard />
+
+## The Home Screen
+
+Let's get back to our `HomeScreen.tsx` file. Below are the steps to get to a functional component:
+
+1. Fetch the RSS feed items. We'll do this in the `useRssFeed` hook.
+2. Render a `FlatList` filled with the fetched items.
+3. Render individual items in a `FeedItemDisplay` component.
+
+### The `useRssFeed` Hook
+
+First of all, we'll define the `FeedItem` TypeScript interface in
+`shared-types.ts`. This is the shape of items parsed by the RSS parser.
+
+```tsx title="shared-types.ts"
+// ... previous exports
+
+export interface FeedItem {
+  title: string;
+  links: [{ url: string }];
+  description: string;
+  published: string;
+}
+```
+
+Then, let's define the hook in the `hooks/useRssFeed.ts` file.
+
+```tsx title="hooks/useRssFeed.ts"
+import { useState, useEffect, useCallback } from 'react';
+import * as rssParser from 'react-native-rss-parser';
+import { FeedItem } from '../shared-types';
+
+export default function useRssFeed(feed: string) {
+  const [{ isRefreshing, refreshId, items }, setRssState] = useState({
+    items: null as null | FeedItem[],
+    isRefreshing: true,
+    refreshId: 0
+  });
+  const refresh = useCallback(() => {
+    setRssState((s) => ({
+      ...s,
+      isRefreshing: true,
+      refreshId: s.refreshId + 1
+    }));
+  }, []);
+  useEffect(
+    function loadFeed() {
+      let cancelled = false;
+      (async function () {
+        const response = await fetch(feed);
+        if (response.ok) {
+          const data = await response.text();
+          const feed = await rssParser.parse(data);
+          !cancelled &&
+            setRssState((s) => ({
+              ...s,
+              items: (feed.items as unknown) as FeedItem[],
+              isRefreshing: false
+            }));
+        } else {
+          !cancelled &&
+            setRssState((s) => ({
+              ...s,
+              isRefreshing: false
+            }));
+        }
+      })();
+      return () => {
+        cancelled = true;
+      };
+    },
+    [refreshId, feed]
+  );
+  return { refresh, isRefreshing, items };
+}
+```
+
+This hook uses an effect to load the feed, and store the retrieved items in a
+local state (`items`). A few remarks:
+
+1. We provide a `refresh` function to trigger a new fetch along with a `isRefreshing`
+   state.
+2. The effect callback returns a cleanup function to avoid setting state on
+   unmounted components. Not doing this is considered an antipattern, see [this
+   guide](https://dev.to/pallymore/clean-up-async-requests-in-useeffect-hooks-90h) for a deep dive.
+
+Last but not least, if you are using TypeScript, you will need to add module
+definitions for rss-parser. Put this file in the `hooks` folder:
+
+```ts title="hooks/react-native-rss-parser.d.ts"
+declare module 'react-native-rss-parser';
+```
+
+### The `FeedItemDisplay` Component
+
+We are going to define this component in the `components` directory, like so:
+
+```tsx title="components/FeedItemDisplay.tsx"
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import React, { useCallback } from 'react';
+import { Card, Text } from 'react-native-paper';
+import { FeedItem, RootStackParamList } from '../shared-types';
+
+export default function FeedItemDisplay({ item }: { item: FeedItem }) {
+  const date = new Date(Date.parse(item.published));
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const url = item.links[0].url;
+  const onPress = useCallback(() => {
+    navigation.navigate('Article', { url: url, title: item.title });
+  }, [url]);
+  return (
+    <Card
+      style={{
+        marginHorizontal: 10,
+        paddingRight: 10
+      }}
+      onPress={onPress}>
+      <Card.Title
+        titleNumberOfLines={2}
+        title={item.title}
+        titleStyle={{ lineHeight: 26 }}
+        subtitle={date.toLocaleDateString()}
+      />
+      <Card.Content>
+        <Text numberOfLines={3}>{item.description}</Text>
+      </Card.Content>
+    </Card>
+  );
+}
+```
+
+This component barely displays a `FeedItem` in a `Card` component from
+`react-native-paper`. Besides, it allows navigation to the "Article" route when
+pressed.
+
+### The List Component
+
+Since we have the data consumable with a hook, and individual items, let's
+rewrite the default export of `screens/HomeScreen.tsx`:
+
+```tsx
+import React from 'react';
+import { FlatList, ListRenderItem, View } from 'react-native';
+// ... other imports
+import FeedItemDisplay from '../components/FeedItemDisplay';
+import useRssFeed from '../hooks/useRssFeed';
+
+function Separator() {
+  return <View style={{ height: 10 }} />;
+}
+
+const renderItem: ListRenderItem<FeedItem> = function renderItem({ item }) {
+  return <FeedItemDisplay item={item} />;
+};
+
+export default function HomeScreen() {
+  const { items, refresh, isRefreshing } = useRssFeed(
+    'https://reactnative.dev/blog/rss.xml'
+  );
+  return (
+    <SafeAreaView style={{ flexGrow: 1 }}>
+      <FlatList
+        onRefresh={refresh}
+        refreshing={isRefreshing}
+        data={items}
+        renderItem={renderItem}
+        ListFooterComponent={Separator}
+        ItemSeparatorComponent={Separator}
+        ListHeaderComponent={Separator}
+      />
+    </SafeAreaView>
+  );
+}
+```
+
+<Screenshot
+  style={{ float: 'right', marginLeft: 10 }}
+  url="/img/blog-article-home.png"
+  scale={0.5}
+/>
+
+Great! Thus you should be able to see the list on your app. Press a card and
+you'll see an empty Article screen showing up. Note that we are using a
+`Separator` component for consistent spacing above, below and between items.
+
+:::tip
+If you are unfamiliar with the `FlatList` component, [check out the official guide](https://reactnative.dev/docs/using-a-listview).
+:::
+
+:::note
+You can drag-to-refresh the list to fetch the RSS feed again. This is thanks to
+`onRefresh` and `refreshing` props of the `FlatList` component.
+:::
+
+Now it's time to refine the Article screen!
+
+<div style={{ clear: 'right' }} />
+
+## The Article Screen
+
+To render the article, we'll need to follow the below steps:
+
+1. Fetch the HTML from the given URL;
+2. Parse the HTML to build a DOM;
+3. Extract headings from the DOM;
+4. Render the headings in a Drawer and the DOM in a `ScrollView` with <APIReference name="RenderHTMLSource" />.
+
+One important note is that we must use the [explicit composite rendering
+architecture](/react-native-render-html/docs/flow/rendering#composite-rendering-architecture)
+because we want access to the DOM object from the controlling component to
+easily extract headings, which is more tedious when using the
+implicit composite architecture (e.g., with the <APIReference name="RenderHTML"
+/> component).
+
+### Setting up the Composite Rendering Architecture
+
+Explicit composite rendering implies that we will replace <APIReference name="RenderHTML" /> with <APIReference name="RenderHTMLSource"
+/>, which will have two ascendants in the render tree: a <APIReference name="TRenderEngineProvider" />
+and a <APIReference name="RenderHTMLConfigProvider" />. Those
+parents will respectively share an engine instance and configuration with any
+&ZeroWidthSpace;<APIReference name="RenderHTMLSource" /> descendant.
+
+A good place to put those providers is the very root of the application. For that end, we will
+create a `components/WebEngine.tsx` and load it from `App.tsx`:
+
+```tsx title="components/WebEngine.tsx"
+import * as React from 'react';
+import {
+  RenderHTMLConfigProvider,
+  TRenderEngineProvider,
+  TRenderEngineConfig,
+} from 'react-native-render-html';
+import { findOne } from 'domutils';
+
+const selectDomRoot: TRenderEngineConfig["selectDomRoot"] = (node) =>
+  findOne((e) => e.name === "article", node.children, true);
+
+const ignoredDomTags = ["button"];
+
+export default function WebEngine({ children }: React.PropsWithChildren<{}>) {
+  // Every prop is defined outside of the function component.
+  // This is important to prevent extraneous rebuilts of the engine.
+  return (
+    <TRenderEngineProvider
+      ignoredDomTags={['button']}
+      selectDomRoot={selectDomRoot}>
+      <RenderHTMLConfigProvider enableExperimentalMarginCollapsing>
+        {children}
+      </RenderHTMLConfigProvider>
+    </TRenderEngineProvider>
+  );
+}
+```
+
+A few remarks on different props used here:
+
+- <APIReference name="TRenderEngineConfig" member="ignoreDomTags" full /> prop to
+  ignore irrelevant tags;
+- <APIReference name="TRenderEngineConfig" member="selectDomRoot" full /> prop to
+  select the first DOM element to render;
+- <APIReference
+    name="RenderHTMLConfig"
+    member="enableExperimentalMarginCollapsing"
+    full
+  /> prop to collapse vertical margins.
+
+We will go back to this component later to refine the appearance. For the time
+being, we'll focus on features.
+A final step is to import the `WebEngine` from the root component:
+
+```tsx {2,8,28} title="App.tsx"
+// ... other imports
+import WebEngine from './components/WebEngine';
+
+const Stack = createStackNavigator<RootStackParamList>();
+
+export default function App() {
+  return (
+    <WebEngine>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false
+            }}>
+            <Stack.Screen
+              name="Home"
+              options={{ title: 'Blog' }}
+              component={HomeScreen}
+            />
+            <Stack.Screen
+              name="Article"
+              options={{ headerShown: true }}
+              component={ArticleScreen}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </WebEngine>
+  );
+}
+```
+
+### Rendering the Article
+
+#### The `ArticleBody` Component
+
+Let's implement an `ArticleBody` component which sole purpose is to display
+the rendered DOM when it's ready, and a loading indicator when it's not:
+
+```tsx title="components/ArticleBody.tsx"
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { useWindowDimensions } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { RenderHTMLSource, Document } from 'react-native-render-html';
+import { ActivityIndicator } from 'react-native-paper';
+
+function LoadingDisplay() {
+  return (
+    <View style={styles.loading}>
+      <ActivityIndicator color="#61dafb" size="large" />
+    </View>
+  );
+}
+
+const HZ_MARGIN = 10;
+
+export default function ArticleBody({ dom }: { dom: Document | null }) {
+  const { width } = useWindowDimensions();
+  const availableWidth = Math.min(width, 500);
+  return (
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={[
+        styles.content,
+        { width: availableWidth }
+      ]}>
+      {dom ? (
+        <RenderHTMLSource
+          contentWidth={availableWidth - 2 * HZ_MARGIN}
+          source={{
+            dom
+          }}
+        />
+      ) : (
+        <LoadingDisplay />
+      )}
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+  },
+  content: {
+    flexGrow: 1,
+    alignSelf: "center",
+    paddingHorizontal: HZ_MARGIN,
+    // leave some space for the FAB
+    paddingBottom: 65
+  },
+  loading: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  loading: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
+```
+
+Note that the <APIReference name="RenderHTMLSourceProps" member="source" full/>
+prop can take a `dom`, `uri` or `html` field. Just as a reminder, we need to
+use the `dom` source variant because we will have to query
+headings displayed in a Drawer menu.
+
+#### Back to the `ArticleScreen`
+
+We need to produce a `dom` object to feed the `ArticleBody` component we have
+just defined. We propose two hooks to produce this object:
+
+- `useFetchHtml(url: string)` to fetch the HTML;
+- `useArticleDom(url: string)` to create a DOM.
+
+Add this new file in `hooks/useArticleDom.ts`:
+
+```tsx title="hooks/useArticleDom.ts"
+import { useEffect, useState, useMemo } from 'react';
+import { useAmbientTRenderEngine } from 'react-native-render-html';
+
+function useFetchHtml(url: string) {
+  const [fetechState, setState] = useState({
+    html: null as string | null,
+    error: null as string | null
+  });
+  useEffect(
+    function fetchArticle() {
+      let cancelled = false;
+      (async function () {
+        const response = await fetch(url);
+        if (response.ok) {
+          const html = await response.text();
+          !cancelled && setState({ html, error: null });
+        } else {
+          !cancelled &&
+            setState({
+              html: null,
+              error: `Could not load HTML. Received status ${response.status}`
+            });
+        }
+      })();
+      return () => {
+        cancelled = true;
+      };
+    },
+    [url]
+  );
+  return fetechState;
+}
+
+export default function useArticleDom(url: string) {
+  const engine = useAmbientTRenderEngine();
+  const { html } = useFetchHtml(url);
+  const dom = useMemo(() => {
+    if (typeof html === 'string') {
+      return engine.parseDocument(html);
+    }
+    return null;
+  }, [html, engine]);
+  return {
+    dom
+  };
+}
+```
+
+The important stuff is happening in the `useArticleDom` hook. We're using
+&ZeroWidthSpace;<APIReference name="useAmbientTRenderEngine" /> hook to get the
+instance of the Transient Render Engine provided by <APIReference name="TRenderEngineProvider" />,
+which in turns offers the <APIReference name="TRenderEngine" member="parseDocument" /> method to
+transform an HTML string into a DOM. Moreover, note that because we passed <APIReference name="TRenderEngineConfig" member="selectDomRoot" />
+prop to select the first `<article>` met, the returned `dom` object will be an
+`<article>` element. Everything else such as `<header>`, `<footer>` and other
+elements will be ignored.
+
+Finally, let's consume this hook from the `ArticleScreen` component and render an `ArticleBody`:
+
+```tsx title="screens/ArticleScreen"
+// ... other imports
+import ArticleBody from '../components/ArticleBody';
+import useArticleDom from '../hooks/useArticleDom';
+
+// ... other definitions
+
+export default function ArticleScreen(props: ArticleScreenProps) {
+  useSetTitleEffect(props);
+  const { dom } = useArticleDom(props.route.params.url);
+  return <ArticleBody dom={dom} />;
+}
+```
+
+Fantastic! It's now rendering the whole article. **It's very ugly though, and
+significantly divergent from the webpage layout, but we'll address that later**:
+
+<Screenshot scale={0.85} url="/img/blog-article-body-unstyled.png" />
+
+### The Drawer Layout
+
+We want to display a menu on the right. For this purpose, we will use the
+[`DrawerLayout`](https://docs.swmansion.com/react-native-gesture-handler/docs/api/components/drawer-layout/)
+component from `react-native-gesture-handler`.
+
+Let's include this component in the `ArticleScreen` component:
+
+```tsx title="screens/ArticleScreen"
+import React, { useCallback, useEffect, useRef } from 'react';
+// ... other imports
+import { StyleSheet } from 'react-native';
+import { DrawerLayout } from 'react-native-gesture-handler';
+import { FAB } from 'react-native-paper';
+
+// ... other definitions
+
+function useDrawer() {
+  const drawerRef = useRef<DrawerLayout>(null);
+  const openDrawer = useCallback(() => {
+    drawerRef.current?.openDrawer();
+  }, []);
+  const closeDrawer = useCallback(() => {
+    drawerRef.current?.closeDrawer();
+  }, []);
+  return {
+    drawerRef,
+    openDrawer,
+    closeDrawer
+  };
+}
+
+export default function ArticleScreen(props: ArticleScreenProps) {
+  useSetTitleEffect(props);
+  const { dom } = useArticleDom(props.route.params.url);
+  const { drawerRef, openDrawer } = useDrawer();
+  const renderToc = useCallback(function renderSceneContent() {
+    return null;
+  }, []);
+  return (
+    <DrawerLayout
+      drawerPosition="right"
+      drawerWidth={300}
+      renderNavigationView={renderToc}
+      ref={drawerRef}>
+      <ArticleBody dom={dom} />
+      <FAB
+        style={styles.fab}
+        color="#61dafb"
+        icon="format-list-bulleted-square"
+        onPress={openDrawer}
+      />
+    </DrawerLayout>
+  );
+}
+
+const styles = StyleSheet.create({
+  fab: {
+    position: 'absolute',
+    bottom: 15,
+    right: 15,
+    backgroundColor: 'white'
+  }
+});
+```
+
+### Extracting headings
+
+Now, let's get back to `useArticleDom` hook and use an effect to extract headings from the DOM:
+
+```ts {1,3-4,10,18-33,36} title="hooks/useArticleDom.ts"
+import { useEffect, useState, useMemo } from 'react';
+// ... other imports
+import { findAll } from 'domutils';
+import { Element } from 'domhandler';
+
+// useFetchHtml
+
+export default function useArticleDom(url: string) {
+  const engine = useAmbientTRenderEngine();
+  const [headings, setHeadings] = useState<Element[]>([]);
+  const { html } = useFetchHtml(url);
+  const dom = useMemo(() => {
+    if (typeof html === 'string') {
+      return engine.parseDocument(html);
+    }
+    return null;
+  }, [html, engine]);
+  useEffect(
+    function extractHeadings() {
+      if (dom != null) {
+        // We know the DOM hierarchy is going to be document → body → article
+        // because the engine will always ensure that a root document
+        // and a body are present. This process is called normalization.
+        const article = (dom.children[0] as Element)?.children[0] as Element;
+        const headers = findAll(
+          (elm) => elm.tagName === 'h2' || elm.tagName === 'h3',
+          article.children
+        );
+        setHeadings(headers);
+      }
+    },
+    [dom]
+  );
+  return {
+    dom,
+    headings
+  };
+}
+```
+
+The effect is pretty straightforwards. It uses `findAll` from `domutils` to
+extract all `h2` and `h3` tags, and finally update the `headings` state.
+We are now ready to define a new `TOC` component to render those headings in the drawer.
+
+### The `TOC` Component
+
+Let's start by defining a `TOCEntry` component in `components/TOCEntry.tsx`:
+
+```tsx title="components/TOCEntry.tsx"
+import React from 'react';
+import { Pressable, StyleSheet, Text } from 'react-native';
+
+export default function TOCEntry({
+  headerName,
+  tagName,
+  active,
+  onPress
+}: {
+  headerName: string;
+  tagName: string;
+  active: boolean;
+  onPress: () => void;
+}) {
+  return (
+    <Pressable
+      style={[styles.container, active && styles['container--active']]}
+      onPress={onPress}
+      android_ripple={{ color: '#baebf3' }}>
+      <Text
+        style={[
+          styles.label,
+          styles[`label--${tagName as 'h2' | 'h3'}` as const]
+        ]}>
+        {headerName}
+      </Text>
+    </Pressable>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 10,
+    paddingRight: 20,
+    marginLeft: 10,
+    borderRadius: 10,
+    paddingVertical: 10
+  },
+  'container--active': {
+    backgroundColor: "rgba(186, 235, 243, 0.5)"
+  },
+  label: {
+    textAlign: 'right',
+    fontSize: 14,
+    color: 'rgb(28, 30, 33)'
+  },
+  'label--h2': {
+    fontSize: 18
+  },
+  'label--h3': {}
+});
+```
+
+The `TOCEntry` renders a `Pressable` which label is styled depending of the
+`tagName` (h2 or h3) and whether it's active (e.g. selected).
+Now we're ready to define the `TOC` component in `components/TOC.tsx`:
+
+```tsx title="components/TOC.tsx"
+import React, { useState } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { textContent } from 'domutils';
+import { Element } from 'domhandler';
+import TOCEntry from './TOCEntry';
+
+export default function TOC({
+  headings,
+  onPressEntry
+}: {
+  headings: Element[];
+  onPressEntry?: (name: string) => void;
+}) {
+  const [activeEntry, setActiveEntry] = useState(
+    headings.length ? textContent(headings[0]) : ''
+  );
+  return (
+    <ScrollView
+      contentContainerStyle={styles.scrollContent}
+      style={styles.scrollView}>
+      <View style={styles.scrollBackground} />
+      {headings.map((header) => {
+        const headerName = textContent(header);
+        const onPress = () => {
+          setActiveEntry(headerName);
+          onPressEntry?.(headerName);
+        };
+        return (
+          <TOCEntry
+            active={headerName === activeEntry}
+            key={headerName}
+            onPress={onPress}
+            tagName={header.tagName}
+            headerName={headerName}
+          />
+        );
+      })}
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+    backgroundColor: 'white',
+    opacity: 0.92,
+    paddingRight: 10
+  },
+  scrollContent: {
+    flex: 1,
+    paddingVertical: 20,
+    position: 'relative'
+  },
+  scrollBackground: {
+    ...StyleSheet.absoluteFillObject,
+    flex: 1,
+    borderRightWidth: 1,
+    marginRight: 10,
+    borderColor: 'rgba(125,125,125,0.3)'
+  }
+});
+```
+
+Finally, we must render the `TOC` component in the `ArticleScreen`:
+
+```tsx {2,10-18} title="screens/ArticleScreen.tsx"
+// other imports
+import TOC from '../components/TOC';
+
+// ...
+
+export default function ArticleScreen(props: ArticleScreenProps) {
+  useSetTitleEffect(props);
+  const { dom, headings } = useArticleDom(props.route.params.url);
+  const { drawerRef, openDrawer } = useDrawer();
+  const onPressEntry = useCallback((entry: string) => {
+    // We'll handle that later
+  }, []);
+  const renderToc = useCallback(
+    function renderToc() {
+      return <TOC headings={headings} onPressEntry={onPressEntry} />;
+    },
+    [headings]
+  );
+  return (
+    <DrawerLayout
+      drawerPosition="right"
+      drawerWidth={300}
+      renderNavigationView={renderToc}
+      ref={drawerRef}>
+      <ArticleBody dom={dom} />
+      <FAB
+        style={styles.fab}
+        color="#61dafb"
+        icon="format-list-bulleted-square"
+        onPress={openDrawer}
+      />
+    </DrawerLayout>
+  );
+}
+
+// styles
+```
+
+Now, you should have a drawable TOC!
+
+<Screenshot scale={0.85} url="/img/blog-article-side.png" />
+
+However, pressing an entry won't do anything. **It is hence time to tackle the
+implementation of the tap-to-scroll feature! Let's jump to [Part
+III](./2021-06-18-create-blog-app-rnrh-III.mdx)**.

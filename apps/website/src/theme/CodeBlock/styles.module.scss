@@ -19,6 +19,8 @@
 
 .codeBlockTitle {
   @extend .figure__title;
+  text-transform: none;
+  font-family: var(--ifm-font-family-monospace);
 }
 
 .codeBlock {

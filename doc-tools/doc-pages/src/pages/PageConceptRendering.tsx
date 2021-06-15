@@ -3,13 +3,13 @@ import React from 'react';
 import Page from '../Page';
 import useToolkit from '../toolkit/useToolkit';
 
-const threeLayersSrc = `<TRenderEngineProvider>
+const compositeSrc = `<TRenderEngineProvider>
   <RenderHTMLConfigProvider>
     <RenderHTMLSource source={{ html }} />
   </RenderHTMLConfigProvider>
 </TRenderEngineProvider>`;
 
-const threeLayersImportStmt = `import {
+const compositeImportStmt = `import {
   TRenderEngineProvider,
   RenderHTMLConfigProvider,
   RenderHTMLSource
@@ -46,16 +46,11 @@ export default function PageConceptRendering() {
   } = useToolkit();
   return (
     <Page>
-      <Header>
-        <Paragraph>
-          How <Acronym name="TRT" /> is rendered?
-        </Paragraph>
-      </Header>
-      <Chapter title="Three-layers Rendering Architecture">
+      <Chapter title="Composite Rendering Architecture">
         <Paragraph>
           When you consume the <RefRenderHTMLExport name="RenderHTML" />{' '}
           component, you are actually using three distinct components. So this (
-          <Bold>implicit 3 layers</Bold>):
+          <Bold>implicit composite</Bold>):
         </Paragraph>
         <SourceDisplay
           content="<RenderHTML source={{ html }} />"
@@ -63,24 +58,24 @@ export default function PageConceptRendering() {
           showLineNumbers={false}
         />
         <Paragraph>
-          is equivalent to this (<Bold>explicit 3 layers</Bold>):
+          is equivalent to this (<Bold>explicit composite</Bold>):
         </Paragraph>
         <SourceDisplay
-          content={threeLayersSrc}
+          content={compositeSrc}
           lang="jsx"
           showLineNumbers={false}
         />
         <Paragraph>
-          You can actually use the <Bold>explicit</Bold> three-layer
-          architecture by importing those components:
+          You can actually use the <Bold>explicit</Bold> composite architecture
+          by importing those components:
         </Paragraph>
         <SourceDisplay
           lang="js"
           showLineNumbers={false}
-          content={threeLayersImportStmt}
+          content={compositeImportStmt}
         />
         <Admonition type="tip">
-          The great benefit of using <Bold>explicitly</Bold> this three-layers
+          The great benefit of using <Bold>explicitly</Bold> this composite
           rendering architecture is that the engine and configuration can be put
           near the top of your App to factor the cost of instantiating the
           engine. This is <Bold>especially usefull</Bold> for apps which will

@@ -1,0 +1,797 @@
+---
+title: 'Create A WebView-free Blog App with React Native Render HTML, Part III'
+author: Jules Sam. Randolph
+author_title: Developer of React Native Render HTML v6
+author_url: https://github.com/jsamr/
+author_image_url: https://avatars.githubusercontent.com/u/3646758?v=4
+tags: [foundry, Blog, Article]
+description: A step-by-step guide to render a Blog Article with table of content and scroll-to-section feature in React Native.
+hide_table_of_contents: false
+draft: true
+---
+
+import Screenshot from '@site/src/components/Screenshot';
+import APIReference from '@site/src/components/APIReference';
+import ExpoBlogCard from '@site/src/components/ExpoBlogCard';
+
+This article is the part III of the *Create A  WebView-freeBlog App with React Native Render HTML* serie.
+See also [Part I](./2021-06-16-create-blog-app-rnrh-I.mdx) and [Part II](./2021-06-17-create-blog-app-rnrh-II.mdx).
+
+<!--truncate-->
+
+:::tip
+The source code of this case study is available in the `main` branch of this
+repo: [`jsamr/rnrh-blog`](https://github.com/jsamr/rnrh-blog). The `enhanced`
+branch contains a few more features beyond this tutorial, such as a refined UI,
+dark mode, caching with [react-queries](https://react-query.tanstack.com/)...
+etc. You can try out the **enhanced** version right now with expo, see [the
+project page](https://expo.io/@jsamr/react-native-blog) for instructions.
+:::
+
+
+<ExpoBlogCard />
+
+## Tap To Scroll Feature
+
+### The `Scroller` Class
+
+We'll put all the scrolling logic in a `Scroller` class that we'll later use with hooks.
+Create this new file: `utils/Scroller.ts`:
+
+```ts title="utils/Scroller.ts"
+import { MutableRefObject } from "react";
+import { LayoutChangeEvent, Platform, ScrollViewProps } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import { EventEmitter } from "events";
+
+// This is the min distance from the top edge of the scroll view
+// to select a heading
+const MIN_DIST_FROM_TOP_EDG = 15;
+
+export default class Scroller {
+  private ref: MutableRefObject<ScrollView | null>;
+  private entriesMap: Record<string, number> = {};
+  private entriesCoordinates: Array<[string, number]> = [];
+  private eventEmitter = new EventEmitter();
+  private lastEntryName = "";
+  private offset = 0;
+
+  constructor(ref: MutableRefObject<ScrollView | null>) {
+    this.ref = ref;
+  }
+
+  handlers: ScrollViewProps = {
+    onContentSizeChange: () => {
+      this.entriesCoordinates = Object.entries(this.entriesMap).sort(
+        (a, b) => a[1] - b[1]
+      );
+    },
+    onScroll: ({ nativeEvent }) => {
+      const offsetY =
+        nativeEvent.contentOffset.y - this.offset + MIN_DIST_FROM_TOP_EDG;
+      const layoutHeight = nativeEvent.layoutMeasurement.height;
+      // We use a conditional to avoid overheading the JS thread on Android.
+      // On iOS, scrollEventThrottle will do the work.
+      if (Platform.OS !== "android" || Math.abs(nativeEvent.velocity!.y) < 1) {
+        for (let i = 0; i < this.entriesCoordinates.length; i++) {
+          const [entryName, lowerBound] = this.entriesCoordinates[i];
+          const upperBound =
+            i < this.entriesCoordinates.length - 1
+              ? this.entriesCoordinates[i + 1][1]
+              : lowerBound + layoutHeight;
+          if (offsetY >= lowerBound && offsetY < upperBound) {
+            if (entryName !== this.lastEntryName) {
+              this.eventEmitter.emit("select-entry", entryName);
+              this.lastEntryName = entryName;
+            }
+            break;
+          }
+        }
+      }
+    },
+  };
+
+  setOffset(offset: number) {
+    this.offset = offset;
+  }
+
+  addSelectedEntryListener(listener: (entryName: string) => void) {
+    this.eventEmitter.addListener("select-entry", listener);
+  }
+
+  removeSelectedEntryListener(listener: (entryName: string) => void) {
+    this.eventEmitter.removeListener("select-entry", listener);
+  }
+
+  registerScrollEntry(name: string, layout: LayoutChangeEvent) {
+    this.entriesMap[name] = layout.nativeEvent.layout.y;
+  }
+
+  scrollToEntry(entryName: string) {
+    if (entryName in this.entriesMap) {
+      this.ref.current?.scrollTo({
+        y: this.entriesMap[entryName] + this.offset - MIN_DIST_FROM_TOP_EDG,
+        animated: true,
+      });
+    }
+  }
+}
+```
+
+Below is a summary of each member in this class.
+
+<dl>
+  <dt>
+
+  `constructor`
+
+  </dt>
+  <dd>
+
+  The constructor takes a `ScrollView` ref to enable the `scrollToEntry` method.
+
+  </dd>
+  <dt>
+
+  `addSelectedEntryListener`
+
+  </dt>
+  <dd>
+
+  A method to listen to selected entry changes. This will be useful
+  in the table of content drawer to update the active entry on scroll.
+
+  </dd>
+  <dt>
+
+  `removeSelectedEntryListener`
+
+  </dt>
+  <dd>
+
+  A method to free a listener to selected entry changes.
+
+  </dd>
+  <dt>
+
+  `registerScrollEntry`
+
+  </dt>
+  <dd>
+
+  A method to be used with `onLayout` in order to store the coordinates
+  of each entry in the body of the article.
+
+  </dd>
+  <dt>
+
+  `handlers`
+
+  </dt>
+  <dd>
+
+  Event handlers to be passed to a `ScrollView` component. The `onScroll` handler
+  will be used to update the selected entry in the table of content drawer.
+
+  </dd>
+  <dt>
+
+  `setOffset`
+
+  </dt>
+  <dd>
+
+  A method to set the offset of the `headings` container. Because of the DOM
+  structure offered by Docusaurus wich looks like:
+
+
+  ```html
+  <article>
+    <header>...</header>
+    <div class="markdown">
+      <h2>...</h2>
+      <h3>...</h3>
+    </div>
+  </article>
+  ```
+
+  the computed headings tags coordinates will be relative to the `<div>` rather
+  then relative to the `ScrollView` content, and we need to adjust to that.
+
+  </dd>
+  <dt>
+
+  `scrollToEntry`
+
+  </dt>
+  <dd>
+
+  A method to imperatively scroll to the given entry name.
+
+  </dd>
+</dl>
+
+### Sharing the `Scroller` in a React Context
+
+Let's start by creating a scroller context and export the relevant hook and
+provider:
+
+```ts title="utils/scroller.tsx"
+import React, { createContext, PropsWithChildren, useContext } from "react";
+import Scroller from './Scroller';
+
+const scrollerContext = createContext<Scroller>(null as any);
+
+export function useScroller(): Scroller {
+  return useContext(scrollerContext);
+}
+
+export function ScrollerProvider({
+  children,
+  scroller
+}: PropsWithChildren<{ scroller: Scroller }>) {
+  return (
+    <scrollerContext.Provider value={scroller}>
+      {children}
+    </scrollerContext.Provider>
+  );
+}
+```
+
+Then we can provide a `scroller` instance from the `ArticleScreen` component,
+and scroll to the targeted entry on menu entry press.
+
+```tsx {1,3-4,8-15,22-26,34,41,49} title="screens/ArticleScreen.tsx"
+import React, { useCallback, useEffect, useRef, useMemo } from "react";
+// ... other imports
+import Scroller from "../utils/Scroller";
+import { ScrollerProvider } from "../utils/scroller";
+
+// other hooks
+
+function useScrollFeature(scrollerDep: any) {
+  const scrollViewRef = useRef<null | ScrollView>(null);
+  const scroller = useMemo(() => new Scroller(scrollViewRef), [scrollerDep]);
+  return {
+    scroller,
+    scrollViewRef,
+  };
+}
+
+export default function ArticleScreen(props: ArticleScreenProps) {
+  useSetTitleEffect(props);
+  const url = props.route.params.url;
+  const { dom, headings } = useArticleDom(url);
+  const { drawerRef, openDrawer, closeDrawer } = useDrawer();
+  const { scrollViewRef, scroller } = useScrollFeature(url);
+  const onPressEntry = useCallback((entry: string) => {
+    closeDrawer();
+    scroller.scrollToEntry(entry);
+  }, [scroller]);
+  const renderToc = useCallback(
+    function renderToc() {
+      return <TOC headings={headings} onPressEntry={onPressEntry} />;
+    },
+    [headings]
+  );
+  return (
+    <ScrollerProvider scroller={scroller}>
+      <DrawerLayout
+        drawerPosition="right"
+        drawerWidth={300}
+        renderNavigationView={renderToc}
+        ref={drawerRef}
+      >
+        <ArticleBody scrollViewRef={scrollViewRef} dom={dom} />
+        <FAB
+          style={styles.fab}
+          color="#61dafb"
+          icon="format-list-bulleted-square"
+          onPress={openDrawer}
+        />
+      </DrawerLayout>
+    </ScrollerProvider>
+  );
+}
+
+// styles
+```
+
+Finally, we must consume the `scrollViewRef` in the `ArticleBody` component,
+and pass the `Scroller.handlers` event handlers to the `ScrollView` component:
+
+```tsx {3,9,12,16,19} title="components/ArticleBody.tsx"
+import React, { useCallback } from "react";
+// ... other imports
+import { useScroller } from "../utils/scroller";
+
+// other definitions
+
+export default function ArticleBody({
+  dom,
+  scrollViewRef
+}: {
+  dom: Document | null;
+  scrollViewRef: any;
+}) {
+  const { width } = useWindowDimensions();
+  const availableWidth = Math.min(width, 500);
+  const scroller = useScroller();
+  return (
+    <ScrollView
+      {...scroller.handlers}
+      style={styles.container}
+      ref={scrollViewRef}
+      scrollEventThrottle={100}
+      // other props
+    >
+      {/* ... */}
+    </ScrollView>
+  );
+}
+```
+
+Great! Nevertheless we have yet two unaddressed issues:
+
+- Update selected entry on scroll in the `TOC`;
+- Register headings layouts. We will use a custom renderer for that purpose.
+
+### Listening to Entry Changes in `TOC`
+
+First of all, I propose to factor the logic of adding a listener to
+selected entry changes in a separate hook (`hooks/useOnEntryChangeEffect.ts`):
+
+```ts title="hooks/useOnEntryChangeEffect.ts"
+import { useEffect } from "react";
+import { useScroller } from "../utils/scroller";
+
+export default function useOnEntryChangeEffect(
+  onEntryChange: (entryName: string) => void
+) {
+  const scroller = useScroller();
+  useEffect(
+    function updateActiveTargetOnScroll() {
+      scroller.addSelectedEntryListener(onEntryChange);
+      return () => scroller.removeSelectedEntryListener(onEntryChange);
+    },
+    [scroller, onEntryChange]
+  );
+}
+```
+
+Then, we just need to consume this hook from the `TOC` component:
+
+```ts {2,14} title="components/TOC.tsx"
+// ...other imports
+import useOnEntryChangeEffect from "../hooks/useOnEntryChangeEffect";
+
+export default function TOC({
+  headings,
+  onPressEntry,
+}: {
+  headings: Element[];
+  onPressEntry?: (name: string) => void;
+}) {
+  const [activeEntry, setActiveEntry] = useState(
+    headings.length ? textContent(headings[0]) : ""
+  );
+  useOnEntryChangeEffect(setActiveEntry);
+  // ...
+}
+```
+
+### Register Headings Layouts
+
+The `Scroller` is still missing the coordinates of each heading to be able to
+properly `scrollToEntry`. For this purpose, we are going to create a [custom
+renderer](/react-native-render-html/docs/guides/custom-renderers#component-based-custom-rendering)
+for `<h2>` and `<h3>` tags. We will also need to register a `<header>` renderer
+to store the header height. If you remember well, the DOM has a structure like
+below:
+
+```html
+<article>
+  <!-- We need to account for the header height -->
+  <header>...</header>
+  <div class="markdown">
+    <h2>...</h2>
+    <h3>...</h3>
+  </div>
+</article>
+```
+
+
+Let's get back to `components/WebEngine.tsx` and register both renderers here:
+
+```tsx {1,3-4,9,10,11,13-45,50,61} title="components/WebEngine.tsx"
+import React, { useCallback } from "react";
+import {
+  CustomBlockRenderer,
+  CustomTagRendererRecord,
+  RenderHTMLConfigProvider,
+  TRenderEngineProvider,
+  TRenderEngineConfig,
+} from "react-native-render-html";
+import { findOne, textContent } from "domutils";
+import { useScroller } from "../utils/scroller";
+import { LayoutChangeEvent } from "react-native";
+
+const HeadingRenderer: CustomBlockRenderer = function HeaderRenderer({
+  TDefaultRenderer,
+  ...props
+}) {
+  const scroller = useScroller();
+  const onLayout = useCallback(
+    (e: LayoutChangeEvent) => {
+      scroller.registerScrollEntry(textContent(props.tnode.domNode!), e);
+    },
+    [scroller]
+  );
+  return <TDefaultRenderer {...props} viewProps={{ onLayout }} />;
+};
+
+const HeaderRenderer: CustomBlockRenderer = function HeaderRenderer({
+  TDefaultRenderer,
+  ...props
+}) {
+  const scroller = useScroller();
+  const onLayout = useCallback(
+    (e: LayoutChangeEvent) => {
+      scroller.setOffset(e.nativeEvent.layout.y + e.nativeEvent.layout.height);
+    },
+    [scroller]
+  );
+  return <TDefaultRenderer {...props} viewProps={{ onLayout }} />;
+};
+
+const renderers: CustomTagRendererRecord = {
+  h2: HeadingRenderer,
+  h3: HeadingRenderer,
+  header: HeaderRenderer,
+};
+
+const selectDomRoot: TRenderEngineConfig["selectDomRoot"] = (node) =>
+  findOne((e) => e.name === "article", node.children, true);
+
+const ignoredDomTags = ["button", "footer"];
+
+export default function WebEngine({ children }: React.PropsWithChildren<{}>) {
+  // Every prop is defined outside of the function component.
+  // This is important to prevent extraneous rebuilts of the engine.
+  return (
+    <TRenderEngineProvider
+      ignoredDomTags={ignoredDomTags}
+      selectDomRoot={selectDomRoot}
+    >
+      <RenderHTMLConfigProvider
+        renderers={renderers}
+        enableExperimentalMarginCollapsing
+      >
+        {children}
+      </RenderHTMLConfigProvider>
+    </TRenderEngineProvider>
+  );
+}
+```
+
+Because the `<h2>`, `<h3>` and `<header>` tags have a content model set to
+**block**, they will be rendered in a `View`, so we can pass `onLayout` in
+&ZeroWidthSpace;<APIReference name="TDefaultRendererProps" member="viewProps" /> prop.
+
+Hence we're done with the tap-to-scroll feature! But the `ArticleBody` is still
+pretty ugly, so we'll use some styles and fixes to prettify it!
+
+## Styling Refinements
+
+### Fixing the Avatar
+
+The avatar should be 50x50 and its container displayed in row. We are going to fix it in two steps:
+
+1. By targeting the container class with styles to display in row;
+2. By setting a custom `<img>` renderer to fix the size.
+
+So let's edit the `components/WebEngine` to apply those fixes:
+
+```tsx {5,9,15-21,26,31-63,70} title="components/WebEngine"
+import React, { useCallback } from "react";
+import {
+  CustomBlockRenderer,
+  CustomTagRendererRecord,
+  MixedStyleRecord,
+  RenderHTMLConfigProvider,
+  TRenderEngineProvider,
+  TRenderEngineConfig,
+  useInternalRenderer,
+} from "react-native-render-html";
+// ... other imports
+
+// HeaderRenderer
+
+const ImageRenderer: CustomBlockRenderer = function ImageRenderer(props) {
+  const { Renderer, rendererProps } = useInternalRenderer("img", props);
+  if ((props.tnode.parent?.classes.indexOf("avatar__photo") || -1) > -1) {
+    return <Renderer {...rendererProps} width={50} height={50} />;
+  }
+  return <Renderer {...rendererProps} />;
+};
+
+const renderers: CustomTagRendererRecord = {
+  h2: HeadingRenderer,
+  h3: HeadingRenderer,
+  img: ImageRenderer
+};
+
+// ... other definitions
+
+const classesStyles: MixedStyleRecord = {
+  avatar: {
+    marginTop: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    flexWrap: "nowrap",
+  },
+  avatar__photo: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    overflow: "hidden",
+  },
+  avatar__intro: {
+    flexShrink: 1,
+    alignItems: "flex-start",
+  },
+  avatar__name: {
+    fontWeight: "bold",
+    flexGrow: 0,
+    marginBottom: 10,
+  },
+  avatar__subtitle: {
+    color: "rgb(118, 118, 118)",
+    fontWeight: "bold",
+    lineHeight: 16,
+  },
+  "avatar__photo-link": {
+    borderRadius: 25,
+    marginRight: 10,
+    overflow: "hidden",
+  },
+}
+
+export default function WebEngine({ children }: React.PropsWithChildren<{}>) {
+  return (
+    <TRenderEngineProvider
+      ignoredDomTags={ignoredDomTags}
+      selectDomRoot={selectDomRoot}
+      classesStyles={classesStyles}
+      // other props
+    >
+    {/*...*/}
+    </TRenderEngineProvider>
+  );
+}
+```
+
+### Fixing Paragraphs in `<li>` Elements
+
+Paragraphs nested in `<li>` elements have top and bottom margins, which is undesirable.
+To fix the issue, we're going to add a custom `<p>` renderer like so:
+
+```tsx title="components/WebEngine.tsx"
+// renderers and imports
+
+const ParagraphRenderer: CustomBlockRenderer = function ParagraphRenderer({
+  TDefaultRenderer,
+  tnode,
+  ...props
+}) {
+  const marginsFix =
+    tnode.markers.olNestLevel > -1 || tnode.markers.ulNestLevel > -1
+      ? { marginTop: 0, marginBottom: 0 }
+      : null;
+  return (
+    <TDefaultRenderer
+      {...props}
+      tnode={tnode}
+      style={[props.style, marginsFix]}
+    />
+  );
+};
+
+const renderers: CustomTagRendererRecord = {
+  // ... other renderers
+  p: ParagraphRenderer
+};
+```
+
+:::note
+We are using `markers` which contain the current nest level of `ol` and `ul`
+elements to assess if we are rendering inside a list. See <APIReference name="Markers" />.
+:::
+
+### Discard `#` anchors appended to Headings by Docusaurus
+
+These elements have a `"hash-link"` class, so we can use `ignoreDomNode` to discard them:
+
+```tsx {5,15-16,25} title="components/WebEngine.tsx"
+import React, { useCallback } from "react";
+import {
+  CustomBlockRenderer,
+  CustomTagRendererRecord,
+  isDomElement,
+  MixedStyleRecord,
+  RenderHTMLConfigProvider,
+  TRenderEngineProvider,
+  TRenderEngineConfig,
+  useInternalRenderer,
+} from "react-native-render-html";
+
+// ...
+
+const ignoreDomNode: TRenderEngineConfig["ignoreDomNode"] = (node) =>
+  isDomElement(node) && !!node.attribs.class?.match(/hash-link/);
+
+export default function WebEngine({ children }: React.PropsWithChildren<{}>) {
+  // Every prop is defined outside of the function component.
+  // This is important to prevent extraneous rebuilts of the engine.
+  return (
+    <TRenderEngineProvider
+      ignoredDomTags={ignoredDomTags}
+      selectDomRoot={selectDomRoot}
+      ignoreDomNode={ignoreDomNode}
+      // ...
+    >
+      {/*...*/}
+    </TRenderEngineProvider>
+  );
+}
+```
+
+Great! Now the `#` characters have been removed:
+
+<Screenshot url="/img/blog-article-body-code-issue.png" scale={0.85} />
+
+However, code samples look pretty ugly:
+
+- They're missing padding;
+- They should be horizontally scrollable and lines should not wrap;
+- A monospace font should be used;
+- Whitespaces should be preserved.
+
+So, let's fix it!
+
+### Fixing Code Samples
+
+Code samples are rendered by Docusaurus in a `<div class="prism-code">` tag. I propose we define a custom renderer
+for div tags, which renders inside a `ScrollView` when matching the `"prism-code"` class. Furthermore, we can
+define styles for this class to fix the aforementioned issues:
+
+
+```tsx title="components/WebEngine.tsx"
+// ...other imports
+import { ScrollView } from 'react-native-gesture-handler';
+
+// ...
+
+const DivRenderer: CustomBlockRenderer = function DivRenderer({
+  TDefaultRenderer,
+  ...props
+}) {
+  if (props.tnode.classes.indexOf("prism-code") > -1) {
+    return (
+      <ScrollView horizontal style={props.style}>
+        <TDefaultRenderer
+          {...props}
+          style={[{ flexGrow: 1, flexShrink: 1, padding: 10 }]}
+        />
+      </ScrollView>
+    );
+  }
+
+  return <TDefaultRenderer {...props} />;
+};
+
+const renderers: CustomTagRendererRecord = {
+  // ... other renderers
+  div: DivRenderer,
+};
+
+const classesStyles: MixedStyleRecord = {
+  // ... other classes styles
+  "token-line": {
+    whiteSpace: "pre",
+    lineHeight: 12 * 1.4,
+  },
+  "prism-code": {
+    backgroundColor: "#282c34",
+    fontFamily: "monospace",
+    borderRadius: 10,
+    fontSize: 12,
+    flexShrink: 0,
+  },
+};
+```
+
+<Screenshot url="/img/blog-article-body-code-fixed.png" scale={0.85} />
+
+That's looking much better. We're almost done!
+
+### Final Touch
+
+We could add a few more styles to match the React Native blog styles:
+
+```tsx title="components/WebEngine.tsx"
+import {
+  // ...
+  MixedStyleDeclaration,
+  // ...
+} from "react-native-render-html";
+
+// other imports and declarations
+
+const tagsStyles: MixedStyleRecord = {
+  a: {
+    color: "#1c1e21",
+    backgroundColor: "rgba(187, 239, 253, 0.3)",
+  },
+  li: {
+    marginBottom: 10,
+  },
+  img: {
+    alignSelf: "center",
+  },
+  h4: {
+    marginBottom: 0,
+    marginTop: 0,
+  },
+  code: {
+    backgroundColor: "rgba(0, 0, 0, 0.06)",
+    fontSize: 14,
+  },
+  blockquote: {
+    marginLeft: 0,
+    marginRight: 0,
+    paddingLeft: 20,
+    paddingRight: 20,
+    backgroundColor: "#fff8d8",
+    borderLeftWidth: 10,
+    borderLeftColor: "#ffe564",
+  },
+};
+
+const baseStyle: MixedStyleDeclaration = {
+  color: "#1c1e21",
+  fontSize: 16,
+  lineHeight: 16 * 1.8,
+};
+
+export default function WebEngine({ children }: React.PropsWithChildren<{}>) {
+  return (
+    <TRenderEngineProvider
+      // ...
+      tagsStyles={tagsStyles}
+      baseStyle={baseStyle}>
+      {/*...*/}
+    </TRenderEngineProvider>
+  );
+}
+```
+
+<Screenshot url="/img/blog-article-body-refined.png" scale={0.85} />
+
+## React Native Text Limitations
+
+As a final note, I'd like to mention a few frustrating limitations in React
+Native that prevented me from replicating more accurately the official blog styles:
+
+1. `backgroundColor` spans to the full line-box of text elements, whereas in
+CSS, it only spans to the text content-area. Below is a diagram explaining the difference:
+![](https://iamvdo.me/content/01-blog/30-css-avance-metriques-des-fontes-line-height-et-vertical-align/line-height.png) See a complete explanation [in this excellent article on CSS text styling](https://iamvdo.me/en/blog/css-font-metrics-line-height-and-vertical-align).
+2. `padding` and `border` are ignored in nested text elements.
+
+All these features are required to get the official blog appealing anchors styles: 
+
+![](/img/react-native-blog-anchors.png)
+
+Instead we have backgrounds overlapping each other, which becomes weird when there is a high density of anchors:
+
+![](/img/appaling-react-native-text-bg.png)

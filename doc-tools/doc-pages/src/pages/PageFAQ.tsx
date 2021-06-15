@@ -2,13 +2,6 @@
 import React from 'react';
 import Page from '../Page';
 import useToolkit from '../toolkit/useToolkit';
-import paragraphsConfig from './cards/paragraphsConfig';
-import whiteSpaceNormalConfig from './cards/whiteSpaceNormalConfig';
-import whiteSpacePreConfig from './cards/whiteSpacePreConfig';
-import preformattedConfig from './cards/preformattedConfig';
-import fontSelectionArial from './cards/fontSelectionArial';
-import fontSelectionCourierNewConfig from './cards/fontSelectionCourierNewConfig';
-import fontSelectionSpaceMonoConfig from './cards/fontSelectionSpaceMonoConfig';
 
 export default function PageFAQ() {
   const {
@@ -136,7 +129,7 @@ export default function PageFAQ() {
             .
           </Paragraph>
         </Section>
-        <Section title="Long image can not show in full screen on Android">
+        <Section title="Long image cannot show in full screen on Android">
           <Paragraph>
             This is a limitation of FaceBook's fresco library and React Native{' '}
             <RefRNSymbol name="Image" /> component. You need to downsize the

@@ -1,22 +1,9 @@
 import React, { useRef, useCallback } from 'react';
 //@ts-ignore
 import discoveryVideoUrl from '@site/static/video/discovery.webm';
-import styles from './DiscoveryFrame.module.scss';
+import classes from './DiscoveryFrame.module.scss';
 import clsx from 'clsx';
-
-function DeviceContainer({ children, scale = 1 }) {
-  return (
-    <div
-      style={{ '--scale-factor': scale } as any}
-      className={styles['device-iphone-x']}>
-      <div className={styles['device-frame']}>{children}</div>
-      <div className={styles['device-header']} />
-      <div className={styles['device-sensors']} />
-      <div className={styles['device-btns']} />
-      <div className={styles['device-power']} />
-    </div>
-  );
-}
+import IPhoneFrame from './IPhoneFrame';
 
 export default function DiscoveryFrame({ scale }: { scale?: number }) {
   const videoRef = useRef<HTMLVideoElement>();
@@ -28,8 +15,8 @@ export default function DiscoveryFrame({ scale }: { scale?: number }) {
     }
   }, []);
   return (
-    <div className={styles['container']}>
-      <DeviceContainer scale={scale}>
+    <div className={classes['container']}>
+      <IPhoneFrame scale={scale}>
         <video
           ref={videoRef}
           controls={false}
@@ -37,15 +24,14 @@ export default function DiscoveryFrame({ scale }: { scale?: number }) {
           autoPlay
           muted
           preload="lazy"
-          onClick={playPause}
-          className={styles['device-content']}>
+          onClick={playPause}>
           <source src={discoveryVideoUrl} type="video/webm" />
         </video>
-      </DeviceContainer>
+      </IPhoneFrame>
       <button
         aria-label="Play/pause"
         onClick={playPause}
-        className={clsx('button', 'button--primary', styles.button)}>
+        className={clsx('button', 'button--primary', classes.button)}>
         <svg width="32" height="32" viewBox="0 0 24 24">
           <path
             fill="var(--ifm-button-color)"
