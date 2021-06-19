@@ -129,7 +129,7 @@ export interface ListElementConfig {
 }
 
 /**
- * Props for custom renderers. The convention is to declare a field per renderer.
+ * Props for custom renderers. The convention is to declare a field per tag name.
  * In doing so, you can benefit from `useRendererProps('tagname')` in custom renderers.
  *
  * @remarks **Typescript users**: If you need to add fields to the {@link RenderersProps} interface,
@@ -150,10 +150,7 @@ export interface RenderersProps extends Record<string, any> {
     /**
      * A callback to handle anchors presses.
      *
-     * @remarks
-     * - Changes to this prop will cause a react tree update. Always memoize
-     *   it.
-     * - The `href` argument has been normalized, see {@link useNormalizedUrl}.
+     * @remarks The `href` argument has been normalized, see {@link useNormalizedUrl}.
      *
      * @defaultValue A function using React Native `Linking.onpenUrl`.
      * @param event - The {@link GestureResponderEvent} event.
@@ -196,9 +193,6 @@ export interface RenderHTMLPassedProps {
   /**
    * Props to use in custom renderers with `useRendererProps`.
    *
-   * @warning
-   * Changes to this prop will cause a react tree update. Always memoize it.
-   *
    * @remarks
    * - When you use the hook, you'll get this object deep-merged with default renderers props.
    * - **Typescript users**: If you need to add fields to the {@link RenderersProps} interface,
@@ -218,7 +212,9 @@ export interface RenderHTMLPassedProps {
 }
 
 /**
- * Shared props changes will cause all the React tree to invalidate. You should
+ * Props shared across renderers.
+ *
+ * @warning Shared props changes will cause all the React tree to invalidate. You should
  * always memoize these.
  *
  * @public
@@ -257,24 +253,17 @@ export interface RenderHTMLSharedProps {
   /**
    * Default props for Text elements in the render tree.
    *
-   * @remarks
-   * - "style" will be merged into the tnode own styles.
-   * - Changes to this prop will cause a react tree update. Always memoize it.
+   * @remarks "style" will be merged into the tnode own styles.
    */
   defaultTextProps?: TextProps;
   /**
    * Default props for View elements in the render tree.
    *
-   * @remarks
-   * - "style" will be merged into the tnode own styles.
-   * - Changes to this prop will cause a react tree update. Always memoize it.
+   * @remarks "style" will be merged into the tnode own styles.
    */
   defaultViewProps?: ViewProps;
   /**
    * Default props for WebView elements in the render tree used by plugins.
-   *
-   * @remarks
-   * Changes to this prop will cause a react tree update. Always memoize it.
    */
   defaultWebViewProps?: any;
   /**
@@ -295,9 +284,6 @@ export interface RenderHTMLSharedProps {
    * A component used to wrap pressable elements (e.g. when provided `onPress`).
    * Note that textual elements will not be wrapped; `TextProps.onPress` will
    * be used instead.
-   *
-   * @remarks
-   * Changes to this prop will cause a react tree update. Always memoize it.
    *
    * @defaultValue A `TouchableNativeFeedback` based component on Android, `TouchableHighlight` based component on other platforms.
    */
@@ -335,6 +321,10 @@ export interface RenderHTMLSharedProps {
 
 /**
  * Configuration for the {@link TRenderEngineProvider} component.
+ *
+ * @warning When one of these props changes, it will cause the
+ * {@link TRenderEngine} to be rebuilt, and all transient trees to be
+ * re-assembled. Beware!
  *
  * @public
  */
@@ -609,6 +599,7 @@ export type HTMLSource = HTMLSourceInline | HTMLSourceDom | HTMLSourceUri;
 
 /**
  *
+ * Props for the {@link RenderHTMLConfigProvider} component.
  *
  * @public
  */
@@ -692,7 +683,7 @@ export interface RenderHTMLSourceProps {
 }
 
 /**
- * Props for the `RenderHTML` component.
+ * Props for the {@link RenderHTML} component.
  *
  * @public
  */
