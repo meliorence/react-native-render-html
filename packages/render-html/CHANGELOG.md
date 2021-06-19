@@ -1,3 +1,24 @@
+# [6.0.0-beta.3](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.2...v6.0.0-beta.3) (2021-06-19)
+
+
+### Features
+
+* new dev profiler to get feedback on short updates ([98fd749](https://github.com/meliorence/react-native-render-html/commit/98fd74941c1e00c8666591328a5547f01824628d))
+
+
+### BREAKING CHANGES
+
+* The `triggerTREInvalidationPropNames` has been
+discontinued. The idea for this prop originated in the premise that
+many beginners would disregard the issue of passing literal props triggering
+many re-renders. But I realized it mostly frustrated expectations of
+newcomers that this library honors React components contract. So I have
+finally decided to discard the prop, and instead add a lightweight
+profiler (in dev mode only, of course), which warns the consumer of
+re-renders happening in a short period of time. You are now responsible
+for the invalidation of the TRenderEngine, so make sure you memoize the
+props if the controlling components is expected to re-render often.
+
 # [6.0.0-beta.2](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.1...v6.0.0-beta.2) (2021-06-13)
 
 
