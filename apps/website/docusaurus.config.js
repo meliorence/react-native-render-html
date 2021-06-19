@@ -229,6 +229,10 @@ module.exports = {
               href: 'https://github.com/meliorence/react-native-render-html'
             },
             {
+              label: 'Twitter',
+              href: 'https://twitter.com/jsamrn?ref_src=twsrc%5Etfw'
+            },
+            {
               label: 'Rate this library',
               href:
                 'https://openbase.com/js/react-native-render-html?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge'

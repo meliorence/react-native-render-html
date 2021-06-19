@@ -9,12 +9,12 @@
   background-position: center;
   background-color: rgb(20, 36, 83);
   background-blend-mode: multiply;
-  height: min(600px, 100vh);
+  min-height: min(600px, 100vh);
   --ifm-hero-text-color: var(--ifm-color-white);
   letter-spacing: 2px;
   display: flex;
-  justify-content: center;
-
+  align-items: center;
+  flex-direction: column;
 }
 
 .buttonGetStarted {
@@ -24,7 +24,8 @@
   }
 }
 
-.content {}
+.content {
+}
 
 .subtitle {
 }
@@ -35,15 +36,30 @@
   }
 }
 
+.badge {
+  height: 20px;
+  overflow: hidden;
+  > img {
+    display: block;
+  }
+}
+
 .buttons,
 .stats {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
 }
 
 .stats {
   position: absolute;
   bottom: 1rem;
   width: 100%;
+  @media screen and (max-width: 450px) {
+    & {
+      position: relative;
+      flex-direction: column;
+    }
+  }
 }
