@@ -18,6 +18,7 @@ import {
   resourceRoutesIndex
 } from '../../../nav-model';
 import imagesMap from '../../../imagesMap';
+import { memo } from 'react';
 
 interface ResourceRouteNav extends ResourceRouteDefinition {
   component: React.ComponentType<any>;
@@ -51,27 +52,30 @@ const groups: Array<GroupDefinition> = Object.entries(specsByGroups).map(
     return {
       group: groupName,
       groupLabel: groupName,
-      routes: pages.map<ResourceRouteNav>((page, pageIndex) => ({
-        header: () => null,
-        component: function Page() {
-          const prevPage = pages[pageIndex - 1] || prevGroupLastPage || null;
-          const nextPage = pages[pageIndex + 1] || nextGroupFirstPage || null;
-          return (
-            <ArticleTemplate
-              title={page.title}
-              groupLabel={groupName}
-              description={page.description}
-              prevPage={prevPage}
-              nextPage={nextPage}
-              imageSource={imagesMap[page.id]}>
-              {React.createElement(page.component)}
-            </ArticleTemplate>
-          );
-        },
-        iconName: page.iconName as any,
-        name: `${groupName as PageGroup}-${page.id}` as const,
-        title: page.title
-      }))
+      routes: pages.map<ResourceRouteNav>((page, pageIndex) => {
+        return {
+          header: () => null,
+          component: function Page() {
+            const Content = memo(page.component);
+            const prevPage = pages[pageIndex - 1] || prevGroupLastPage || null;
+            const nextPage = pages[pageIndex + 1] || nextGroupFirstPage || null;
+            return (
+              <ArticleTemplate
+                title={page.title}
+                groupLabel={groupName}
+                description={page.description}
+                prevPage={prevPage}
+                nextPage={nextPage}
+                imageSource={imagesMap[page.id]}>
+                {React.createElement(Content)}
+              </ArticleTemplate>
+            );
+          },
+          iconName: page.iconName as any,
+          name: `${groupName as PageGroup}-${page.id}` as const,
+          title: page.title
+        };
+      })
     };
   }
 );

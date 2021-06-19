@@ -184,7 +184,7 @@ export default function ListElement({
     ? ('paddingRight' as const)
     : ('paddingLeft' as const);
   // Fallback to padding-left value on RTL mode
-  const paddingValue = style[fixedPaddingRule] ?? style['paddingLeft'];
+  const paddingValue = style[fixedPaddingRule] ?? style.paddingLeft;
   const markerBoxWidthStyle = getMarkerBoxStyle(markerWidth, paddingValue);
   const renderChild = ({ childElement, key, index }: TChildProps) => (
     <MarkedListItem

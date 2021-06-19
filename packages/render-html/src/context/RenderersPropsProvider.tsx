@@ -3,6 +3,7 @@ import mergeDeepRight from 'ramda/src/mergeDeepRight';
 
 import { RenderersProps, RenderHTMLPassedProps } from '../shared-types';
 import defaultRendererProps from './defaultRendererProps';
+import useProfiler from '../hooks/useProfiler';
 
 const RenderersPropsContext = React.createContext<Required<RenderersProps>>(
   defaultRendererProps
@@ -31,10 +32,11 @@ export function useRendererProps<
 export default function RenderersPropsProvider(
   props: PropsWithChildren<RenderHTMLPassedProps>
 ) {
-  const mergedRenderersProps = useMemo(
-    () => mergeDeepRight(defaultRendererProps, props.renderersProps || {}),
-    [props.renderersProps]
-  );
+  const profile = useProfiler({ prop: 'renderersProps' });
+  const mergedRenderersProps = useMemo(() => {
+    __DEV__ && profile();
+    return mergeDeepRight(defaultRendererProps, props.renderersProps || {});
+  }, [props.renderersProps, profile]);
   return React.createElement(
     RenderersPropsContext.Provider,
     { value: mergedRenderersProps },

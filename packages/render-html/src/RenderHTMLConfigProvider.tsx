@@ -12,6 +12,7 @@ import sourceLoaderContext, {
 } from './context/sourceLoaderContext';
 import RenderRegistryProvider from './context/RenderRegistryProvider';
 import { useAmbientTRenderEngine } from './TRenderEngineProvider';
+import useProfiler from './hooks/useProfiler';
 
 const childrenRendererContext = {
   TChildrenRenderer,
@@ -53,13 +54,14 @@ export default function RenderHTMLConfigProvider(
     ...sharedProps
   } = props;
   const engine = useAmbientTRenderEngine();
-  const sourceLoaderConfig = useMemo(
-    () => ({
+  const profile = useProfiler({ prop: 'remoteErrorView or remoteLoadingView' });
+  const sourceLoaderConfig = useMemo(() => {
+    __DEV__ && profile();
+    return {
       remoteErrorView: remoteErrorView || defaultRenderError,
       remoteLoadingView: remoteLoadingView || defaultRenderLoading
-    }),
-    [remoteErrorView, remoteLoadingView]
-  );
+    };
+  }, [remoteErrorView, remoteLoadingView, profile]);
   return (
     <RenderRegistryProvider
       renderers={renderers}

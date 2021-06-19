@@ -18,6 +18,7 @@ import SourceLoaderDom from './SourceLoaderDom';
 import debugMessage from './debugMessages';
 import contentWidthContext from './context/contentWidthContext';
 import isDomSource from './helpers/isDomSource';
+import useProfiler from './hooks/useProfiler';
 
 export type RenderHTMLSourcePropTypes = Record<
   keyof RenderHTMLSourceProps,
@@ -61,6 +62,7 @@ function RawSourceLoader({
   ...props
 }: SourceLoaderProps): ReactElement | null {
   if (isEmptySource(source)) {
+    /* istanbul ignore next */
     if (__DEV__) {
       console.warn(debugMessage.noSource);
     }
@@ -92,13 +94,16 @@ const RenderHTMLSource = memo(
     contentWidth,
     ...props
   }: RenderHTMLSourceProps) {
-    const ttreeEvents: TTreeEvents = useMemo(
-      () => ({
+    const profile = useProfiler({
+      prop: 'onDocumentMetadataLoaded or onTTreeChange'
+    });
+    const ttreeEvents: TTreeEvents = useMemo(() => {
+      __DEV__ && profile();
+      return {
         onDocumentMetadataLoaded,
         onTTreeChange
-      }),
-      [onDocumentMetadataLoaded, onTTreeChange]
-    );
+      };
+    }, [onDocumentMetadataLoaded, onTTreeChange, profile]);
     if (__DEV__) {
       if (!(typeof contentWidth === 'number')) {
         console.warn(debugMessage.contentWidth);

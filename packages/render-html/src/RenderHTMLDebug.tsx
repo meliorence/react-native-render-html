@@ -42,6 +42,9 @@ const RenderHTMLDebug = function RenderHTMLDebug(
     if ('computeImagesMaxWidth' in props) {
       console.warn(debugMessage.outdatedComputeImagesMaxWidth);
     }
+    if ('triggerTREInvalidationPropNames' in props) {
+      console.warn(debugMessage.outdatedTriggerTREInvalidation);
+    }
     if (Array.isArray(props.allowedStyles)) {
       props.allowedStyles.forEach((s) => {
         if (s.indexOf('-') > -1) {

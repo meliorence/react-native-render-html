@@ -11,7 +11,8 @@ export type DebugType =
   | 'outdatedAlterNode'
   | 'outdatedAlterChildren'
   | 'outdatedAlterData'
-  | 'outdatedComputeImagesMaxWidth';
+  | 'outdatedComputeImagesMaxWidth'
+  | 'outdatedTriggerTREInvalidation';
 
 let debugMessage: Record<DebugType, string>;
 
@@ -50,6 +51,9 @@ if (__DEV__) {
     outdatedEnableExperimentalPercentWidth:
       "You're attempting to use an outdated prop, 'enableExperimentalPercentWidth'. This prop has been discontinued in version 6. " +
       "Use 'renderersProps={{ img: { enableExperimentalPercentWidth } }}' instead.",
+    outdatedTriggerTREInvalidation:
+      "You're attempting to use an outdated prop, 'triggerTREInvalidationPropsNames'. This prop has been discontinued in v6.0.0-beta.3. " +
+      'From now-on, every prop sent to the TRenderEngineProvider is hot by default.',
     noSource: 'No source prop was provided. Nothing will be rendered',
     contentWidth:
       'You should always pass contentWidth prop to properly handle screen rotations ' +

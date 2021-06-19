@@ -2,14 +2,13 @@ import { DEFAULT_PRESSABLE_RIPPLE_COLOR } from '../constants';
 import { RenderHTMLSharedProps } from '../shared-types';
 
 function WebViewPlaceholder() {
-  /* istanbul ignore next */
+  /* istanbul ignore else */
   if (__DEV__) {
     console.warn(
       'One of your renderers is attempting to use WebView component, which has not been ' +
         "provided as a prop to the RenderHtml component. As a consequence, the element won't be rendered."
     );
   }
-  /* istanbul ignore next */
   return null;
 }
 

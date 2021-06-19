@@ -25,7 +25,6 @@ describe('HTML component', () => {
         debug={false}
         source={{ html: '<p class="highlight">hello world</p>' }}
         classesStyles={tagsStylesInstance1}
-        triggerTREInvalidationPropNames={['classesStyles']}
       />
     );
     update(
@@ -33,7 +32,6 @@ describe('HTML component', () => {
         debug={false}
         source={{ html: '<p class="highlight">hello world</p>' }}
         classesStyles={tagsStylesInstance2}
-        triggerTREInvalidationPropNames={['classesStyles']}
       />
     );
     const text = getByText('hello world');

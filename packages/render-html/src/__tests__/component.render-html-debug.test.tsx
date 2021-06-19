@@ -55,13 +55,18 @@ describe('RenderHTMLDebug', () => {
     () => {},
     'outdatedComputeImagesMaxWidth'
   );
+  createOutdatedPropTest(
+    'triggerTREInvalidationPropNames',
+    () => {},
+    'outdatedTriggerTREInvalidation'
+  );
   it('should warn of allowedStyles items with hyphens', () => {
     console.warn = jest.fn();
     render(
       //@ts-ignore
       React.createElement(RenderHTMLDebug, {
         //@ts-expect-error
-        allowedStyles: ['hello-world'],
+        allowedStyles: ['hello-world', 'color'],
         debug: false,
         contentWidth: 10
       })
@@ -75,7 +80,7 @@ describe('RenderHTMLDebug', () => {
       //@ts-ignore
       React.createElement(RenderHTMLDebug, {
         //@ts-expect-error
-        ignoredStyles: ['hello-world'],
+        ignoredStyles: ['hello-world', 'color'],
         debug: false,
         contentWidth: 10
       })

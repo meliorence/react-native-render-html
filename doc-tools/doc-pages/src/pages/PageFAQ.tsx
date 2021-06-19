@@ -104,15 +104,6 @@ export default function PageFAQ() {
         </Section>
       </Chapter>
       <Chapter title="Troubleshooting">
-        <Section title="Some props such as styling props don't cause a re-render, what's wrong?">
-          <Paragraph>
-            Props for the <RefRenderHTMLExport name="TRenderEngineConfig" />{' '}
-            component such as styling props are "cold", because a rebuild of the
-            engine is costly. To circumvent the issue, you can whitelist props
-            which should be reactive via{' '}
-            <RefRenderHtmlProp name="triggerTREInvalidationPropNames" /> prop.
-          </Paragraph>
-        </Section>
         <Section title="Custom font families don't work, what's happening?">
           <Paragraph>
             You must register fonts available in your app with{' '}

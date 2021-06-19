@@ -39,8 +39,7 @@ export const tRenderEngineProviderPropTypes: Record<
   setMarkersForTNode: PropTypes.func,
   dangerouslyDisableHoisting: PropTypes.bool,
   dangerouslyDisableWhitespaceCollapsing: PropTypes.bool,
-  selectDomRoot: PropTypes.func,
-  triggerTREInvalidationPropNames: PropTypes.arrayOf(PropTypes.string)
+  selectDomRoot: PropTypes.func
 };
 
 /**
@@ -67,8 +66,7 @@ export const defaultTRenderEngineProviderProps: TRenderEngineConfig = {
   enableCSSInlineProcessing: true,
   customHTMLElementModels: {},
   fallbackFonts: defaultFallbackFonts,
-  systemFonts: defaultSystemFonts,
-  triggerTREInvalidationPropNames: []
+  systemFonts: defaultSystemFonts
 };
 
 /**

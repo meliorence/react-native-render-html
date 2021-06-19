@@ -1,5 +1,6 @@
 import { TNode, TText } from '@native-html/transient-render-engine';
 import React, { PropsWithChildren, useMemo } from 'react';
+import useProfiler from '../hooks/useProfiler';
 import { CustomTagRendererRecord } from '../render/render-types';
 import RenderRegistry from '../render/RenderRegistry';
 import { HTMLElementModelRecord } from '../shared-types';
@@ -28,10 +29,11 @@ export default function RenderRegistryProvider({
   renderers?: CustomTagRendererRecord;
   elementModels: HTMLElementModelRecord;
 }>) {
-  const registry = useMemo(() => new RenderRegistry(renderers, elementModels), [
-    renderers,
-    elementModels
-  ]);
+  const profile = useProfiler({ prop: 'renderers' });
+  const registry = useMemo(() => {
+    __DEV__ && profile();
+    return new RenderRegistry(renderers, elementModels);
+  }, [renderers, elementModels, profile]);
   return (
     <RenderRegistryContext.Provider value={registry}>
       {children}

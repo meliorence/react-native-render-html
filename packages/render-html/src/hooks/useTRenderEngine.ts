@@ -1,20 +1,79 @@
 import { useMemo } from 'react';
 import { TRenderEngineConfig } from '../shared-types';
 import buildTREFromConfig from '../helpers/buildTREFromConfig';
+import useProfiler from './useProfiler';
 
 /**
  * @internal
  */
 export default function useTRenderEngine({
-  triggerTREInvalidationPropNames,
-  ...props
+  allowedStyles,
+  baseStyle,
+  classesStyles,
+  customHTMLElementModels,
+  dangerouslyDisableHoisting,
+  dangerouslyDisableWhitespaceCollapsing,
+  domVisitors,
+  emSize,
+  enableCSSInlineProcessing,
+  enableUserAgentStyles,
+  fallbackFonts,
+  htmlParserOptions,
+  idsStyles,
+  ignoreDomNode,
+  ignoredDomTags,
+  ignoredStyles,
+  selectDomRoot,
+  setMarkersForTNode,
+  systemFonts,
+  tagsStyles
 }: TRenderEngineConfig) {
-  const tbuilderDeps = (triggerTREInvalidationPropNames || []).map(
-    (key) => props[key]
-  );
-  return useMemo(
-    () => buildTREFromConfig(props),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    tbuilderDeps
-  );
+  const profile = useProfiler({ name: 'TRenderEngineProvider' });
+  return useMemo(() => {
+    __DEV__ && profile();
+    return buildTREFromConfig({
+      allowedStyles,
+      baseStyle,
+      classesStyles,
+      customHTMLElementModels,
+      dangerouslyDisableHoisting,
+      dangerouslyDisableWhitespaceCollapsing,
+      domVisitors,
+      emSize,
+      enableCSSInlineProcessing,
+      enableUserAgentStyles,
+      fallbackFonts,
+      htmlParserOptions,
+      idsStyles,
+      ignoreDomNode,
+      ignoredDomTags,
+      ignoredStyles,
+      selectDomRoot,
+      setMarkersForTNode,
+      systemFonts,
+      tagsStyles
+    });
+  }, [
+    profile,
+    allowedStyles,
+    baseStyle,
+    classesStyles,
+    customHTMLElementModels,
+    dangerouslyDisableHoisting,
+    dangerouslyDisableWhitespaceCollapsing,
+    domVisitors,
+    emSize,
+    enableCSSInlineProcessing,
+    enableUserAgentStyles,
+    fallbackFonts,
+    htmlParserOptions,
+    idsStyles,
+    ignoreDomNode,
+    ignoredDomTags,
+    ignoredStyles,
+    selectDomRoot,
+    setMarkersForTNode,
+    systemFonts,
+    tagsStyles
+  ]);
 }

@@ -19,13 +19,12 @@ describe('RenderHTML component', () => {
   const tagsStylesInstance2 = {
     a: letterSpacing3
   };
-  it('should pass regression #343 regarding tagsStyles prop (requires triggerTREInvalidationPropNames)', () => {
+  it('should pass regression #343 regarding tagsStyles prop', () => {
     const { getByText, update } = render(
       <RenderHTML
         debug={false}
         source={{ html: '<a>hello world</a>' }}
         tagsStyles={tagsStylesInstance1}
-        triggerTREInvalidationPropNames={['tagsStyles']}
       />
     );
     update(
@@ -33,7 +32,6 @@ describe('RenderHTML component', () => {
         debug={false}
         source={{ html: '<a>hello world</a>' }}
         tagsStyles={tagsStylesInstance2}
-        triggerTREInvalidationPropNames={['tagsStyles']}
       />
     );
     const text = getByText('hello world');

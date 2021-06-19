@@ -26,12 +26,12 @@ export default function RenderHTML(props: RenderHTMLProps): ReactElement {
     onTTreeChange,
     onDocumentMetadataLoaded,
     contentWidth,
-    ...config
+    ...otherProps
   } = props;
   return (
     <RenderHTMLDebug {...props}>
-      <TRenderEngineProvider {...props}>
-        <RenderHTMLConfigProvider {...config}>
+      <TRenderEngineProvider {...otherProps}>
+        <RenderHTMLConfigProvider {...otherProps}>
           {React.createElement(RenderHTMLSource, {
             source,
             onHTMLLoaded,

@@ -5,6 +5,15 @@ import UIDisplayLoadingAtom from './UIDisplayLoadingAtom';
 import useOnLinkPress from '../hooks/useOnLinkPress';
 import { useColorRoles } from '../theme/colorSystem';
 import { SYSTEM_FONTS } from '../constants';
+import { useMemo } from 'react';
+
+function renderRemoteLoadingView() {
+  return <UIDisplayLoadingAtom />;
+}
+
+const defaultTextProps = {
+  selectable: true
+};
 
 const UIHtmlDisplayMolecule = React.memo(
   ({
@@ -21,51 +30,57 @@ const UIHtmlDisplayMolecule = React.memo(
       onSelectUri
     ]);
     const { surface, softDivider } = useColorRoles();
-    const baseStyle = {
-      color: surface.content,
-      backgroundColor: surface.background,
-      //@ts-ignore
-      ...renderHtmlProps.baseStyle
-    };
+    const baseStyle = useMemo(
+      () => ({
+        color: surface.content,
+        backgroundColor: surface.background,
+        ...renderHtmlProps.baseStyle
+      }),
+      [renderHtmlProps.baseStyle, surface.background, surface.content]
+    );
     const sharedProps = {
       contentWidth,
       ...(renderHtmlProps as any),
-      renderersProps: {
-        ...renderHtmlProps.renderersProps,
-        a: {
-          onPress: onLinkPress,
-          ...renderHtmlProps.renderersProps?.a
+      renderersProps: useMemo(
+        () => ({
+          ...renderHtmlProps.renderersProps,
+          a: {
+            onPress: onLinkPress,
+            ...renderHtmlProps.renderersProps?.a
+          },
+          img: {
+            enableExperimentalPercentWidth: true,
+            ...renderHtmlProps.renderersProps?.img
+          }
+        }),
+        [onLinkPress, renderHtmlProps.renderersProps]
+      ),
+      defaultTextProps
+    };
+    const mergedTagsStyles = useMemo(
+      () => ({
+        ...sharedProps.tagsStyles,
+        hr: {
+          marginTop: 16,
+          marginBottom: 16,
+          ...sharedProps.tagsStyles?.hr,
+          height: 1,
+          backgroundColor: softDivider
         },
-        img: {
-          enableExperimentalPercentWidth: true,
-          ...renderHtmlProps.renderersProps?.img
-        }
-      },
-      defaultTextProps: {
-        selectable: true
-      }
-    };
-    const mergedTagsStyles = {
-      ...sharedProps.tagsStyles,
-      hr: {
-        marginTop: 16,
-        marginBottom: 16,
-        ...sharedProps.tagsStyles?.hr,
-        height: 1,
-        backgroundColor: softDivider
-      },
-      html: {}
-    };
+        html: {}
+      }),
+      [sharedProps.tagsStyles, softDivider]
+    );
     const renderHtml = (
       <RenderHTML
         debug={false}
         {...sharedProps}
         tagsStyles={mergedTagsStyles}
         baseStyle={baseStyle}
+        source={sharedProps.source}
         enableUserAgentStyles
         systemFonts={SYSTEM_FONTS}
-        remoteLoadingView={() => <UIDisplayLoadingAtom />}
-        triggerTREInvalidationPropNames={['baseStyle', 'tagsStyles']}
+        remoteLoadingView={renderRemoteLoadingView}
       />
     );
     return <View style={style}>{renderHtml}</View>;

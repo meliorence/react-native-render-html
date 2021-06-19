@@ -3,7 +3,10 @@ import { act, render, waitFor } from 'react-native-testing-library';
 import RenderHTML from '../RenderHTML';
 import ImgTag from '../elements/IMGElement';
 import TTextRenderer from '../TTextRenderer';
-import { CustomTextualRenderer } from '../render/render-types';
+import {
+  CustomBlockRenderer,
+  CustomTextualRenderer
+} from '../render/render-types';
 import {
   defaultHTMLElementModels,
   HTMLContentModel
@@ -580,6 +583,28 @@ describe('RenderHTML', () => {
         />
       );
       await waitFor(() => UNSAFE_getByType(Text));
+    });
+    it('should warn when using the default WebView component', () => {
+      const ImageRenderer: CustomBlockRenderer = jest.fn(function SpanRenderer({
+        sharedProps: { WebView }
+      }) {
+        return <WebView />;
+      });
+      console.warn = jest.fn();
+      render(
+        <RenderHTML
+          source={{
+            html: '<img />'
+          }}
+          debug={false}
+          renderers={{
+            img: ImageRenderer
+          }}
+          contentWidth={100}
+          enableExperimentalMarginCollapsing={false}
+        />
+      );
+      expect(console.warn).toHaveBeenCalled();
     });
   });
 });
