@@ -25,7 +25,6 @@ export default function HomepageHeader() {
               'button button--outline button--primary button--lg',
               classes.buttonGetStarted
             )}
-            target="_blank"
             to="/docs/intro">
             Get Started!
           </Link>
