@@ -1,0 +1,59 @@
+
+$icon-size: 16px;
+
+%button {
+  color: var(--button-color);
+  border-color: var(--button-color);
+  display: inline flex;
+  align-items: center;
+  &:hover {
+    --button-color: var(--ifm-font-color-base);
+  }
+}
+
+.socialLinks {
+  width: 100%;
+  margin: auto;
+  background-color: rgba(5, 5, 5, 0.05);
+  padding: 1rem;
+  margin-top: 4rem;
+  html[data-theme="dark"] & {
+    background-color: rgba(5, 5, 5, 0.2);
+  }
+  .icon {
+    width: min(50px, 33%);
+    flex-shrink: 0;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .text {
+    margin-left: 1rem;
+    font-size: larger;
+    line-height: 2;
+  }
+
+  .twitter {
+    --button-color: #1b95e0;
+    @extend %button;
+  }
+
+  .reddit {
+    --button-color: #ff4500;
+    @extend %button;
+  }
+
+  .ic {
+    position: relative;
+    width: $icon-size;
+    height: $icon-size;
+    margin-left: 1rem;
+    white-space: pre;
+  }
+}

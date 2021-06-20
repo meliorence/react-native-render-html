@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="b353ec75-bcce-4419-97dd-3622db29ecf5"
+   data-name="Layer 1"
+   width="300"
+   height="163"
+   viewBox="0 0 300 163.00001"
+   version="1.1"
+   sodipodi:docname="undraw_online_discussion.svg"
+   inkscape:version="1.1 (c4e8f9ed74, 2021-05-24)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs121" />
+  <sodipodi:namedview
+     id="namedview119"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="0.77564357"
+     inkscape:cx="146.3301"
+     inkscape:cy="119.90043"
+     inkscape:window-width="1914"
+     inkscape:window-height="935"
+     inkscape:window-x="0"
+     inkscape:window-y="142"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g330"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <title
+     id="title2">online discussion</title>
+  <metadata
+     id="metadata123">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>online discussion</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="g330"
+     transform="matrix(1.0638298,0,0,1,-51.560809,-52.51028)"
+     style="stroke-width:0.969536">
+    <g
+       id="g325"
+       style="stroke-width:0.969536">
+      <polygon
+         points="330.597,379.24 333.357,350.24 321.597,350.24 321.597,260.24 485.597,260.24 485.597,350.24 354.767,350.24 "
+         fill="#8181ff"
+         id="polygon108"
+         transform="translate(-273.12984,-207.72972)"
+         style="stroke-width:0.94" />
+    </g>
+    <polygon
+       points="603.597,394.24 591.835,394.24 594.597,423.24 570.43,394.24 439.597,394.24 439.597,304.24 603.597,304.24 "
+       fill="#8181ff"
+       id="polygon112"
+       transform="translate(-273.12984,-207.72972)"
+       style="fill:#6464ff;fill-opacity:1;stroke-width:0.94" />
+  </g>
+</svg>
