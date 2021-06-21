@@ -1,0 +1,32 @@
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "name": "benchmarking",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject"
+  },
+  "dependencies": {
+    "expo": "~41.0.1",
+    "expo-keep-awake": "~9.1.2",
+    "expo-status-bar": "~1.0.4",
+    "ramda": "^0.27.1",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
+    "react-native-render-html": "workspace:*",
+    "react-native-render-html-v5": "npm:react-native-render-html@^5.0.0",
+    "react-native-safe-area-context": "3.2.0",
+    "react-native-web": "~0.13.12",
+    "react-states": "^5.4.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0"
+  },
+  "private": true,
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  }
+}

@@ -335,6 +335,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/core@npm:7.14.6, @babel/core@npm:^7.9.0":
+  version: 7.14.6
+  resolution: "@babel/core@npm:7.14.6"
+  dependencies:
+    "@babel/code-frame": ^7.14.5
+    "@babel/generator": ^7.14.5
+    "@babel/helper-compilation-targets": ^7.14.5
+    "@babel/helper-module-transforms": ^7.14.5
+    "@babel/helpers": ^7.14.6
+    "@babel/parser": ^7.14.6
+    "@babel/template": ^7.14.5
+    "@babel/traverse": ^7.14.5
+    "@babel/types": ^7.14.5
+    convert-source-map: ^1.7.0
+    debug: ^4.1.0
+    gensync: ^1.0.0-beta.2
+    json5: ^2.1.2
+    semver: ^6.3.0
+    source-map: ^0.5.0
+  checksum: 239c4892d54f1d6e3a9a3972a7579138da6ff5308b9c08e4c80c9cd09282b6a921f58338851675fdb80b1cf9dd14f4176674917b97aa430bf1d50c0052bbb13a
+  languageName: node
+  linkType: hard
+
 "@babel/core@npm:7.9.0":
   version: 7.9.0
   resolution: "@babel/core@npm:7.9.0"
@@ -791,6 +814,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helpers@npm:^7.14.6":
+  version: 7.14.6
+  resolution: "@babel/helpers@npm:7.14.6"
+  dependencies:
+    "@babel/template": ^7.14.5
+    "@babel/traverse": ^7.14.5
+    "@babel/types": ^7.14.5
+  checksum: c5c3bd0f9618cdb8895d89171fe0b89c0b119bf8c9f96aff869d95b9208628172a882a132f8f76a218e0e68d8c3316f65b60af9b3a3a778d9b9adce004ca52c7
+  languageName: node
+  linkType: hard
+
 "@babel/highlight@npm:^7.10.4, @babel/highlight@npm:^7.12.13":
   version: 7.14.0
   resolution: "@babel/highlight@npm:7.14.0"
@@ -828,6 +862,15 @@ __metadata:
   bin:
     parser: ./bin/babel-parser.js
   checksum: 55c14793888cb7d54275811e7f13136875df1ee4fc368f3f10cff46ebdf95b6a072e706a0486be0ac5686a597cbfb82f33b5f66aa6ba80ff50b73bca945035c6
+  languageName: node
+  linkType: hard
+
+"@babel/parser@npm:^7.14.6":
+  version: 7.14.6
+  resolution: "@babel/parser@npm:7.14.6"
+  bin:
+    parser: ./bin/babel-parser.js
+  checksum: 447ca2627e356e4507cf8c89adcf0865217d4c7ee69daeaea1a93207c68923e01d27a492df0809a2d9a51d82b2b0cc70375a2dc2cb3262c46eb0ca911c360fd2
   languageName: node
   linkType: hard
 
@@ -7244,6 +7287,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"benchmarking@workspace:apps/benchmarking":
+  version: 0.0.0-use.local
+  resolution: "benchmarking@workspace:apps/benchmarking"
+  dependencies:
+    "@babel/core": ^7.9.0
+    expo: ~41.0.1
+    expo-keep-awake: ~9.1.2
+    expo-status-bar: ~1.0.4
+    ramda: ^0.27.1
+    react: 16.13.1
+    react-dom: 16.13.1
+    react-native: "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz"
+    react-native-render-html: "workspace:*"
+    react-native-render-html-v5: "npm:react-native-render-html@^5.0.0"
+    react-native-safe-area-context: 3.2.0
+    react-native-web: ~0.13.12
+    react-states: ^5.4.0
+  languageName: unknown
+  linkType: soft
+
 "big-integer@npm:^1.6.44":
   version: 1.6.48
   resolution: "big-integer@npm:1.6.48"
@@ -9777,6 +9840,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"deprecated-prop-type@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "deprecated-prop-type@npm:1.0.0"
+  dependencies:
+    warning: 4.0.1
+  checksum: 7d1b89c2572e8a6df04a162efb35040874fc421e78fbe282ebd29af25c33da32c0b9a8fc1c4bc930def363237829d4f7964ce78639425f449493a2253ea3ec9f
+  languageName: node
+  linkType: hard
+
 "deprecation@npm:^2.0.0, deprecation@npm:^2.3.1":
   version: 2.3.1
   resolution: "deprecation@npm:2.3.1"
@@ -10039,6 +10111,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"domhandler@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "domhandler@npm:3.3.0"
+  dependencies:
+    domelementtype: ^2.0.1
+  checksum: dcc53af0ac02f1fc30abf3a794e31c13ad5e47dd00eeb06465211d854cba11c8db60eb65f4f11410fcd332a850eaca394cdd210805628b4f82d1cbcec78c8368
+  languageName: node
+  linkType: hard
+
 "domhandler@npm:^4.0.0, domhandler@npm:^4.2.0":
   version: 4.2.0
   resolution: "domhandler@npm:4.2.0"
@@ -10065,6 +10146,17 @@ __metadata:
     dom-serializer: 0
     domelementtype: 1
   checksum: a5b2f01fb3ff626073e3c3b43fedcff34073fb059b1235ee31cd0b5690d826304f41bc3fd117f95d754a1666ac3a57d224b408d83dd4f1c4525fd5b636d8df6f
+  languageName: node
+  linkType: hard
+
+"domutils@npm:^2.4.2":
+  version: 2.7.0
+  resolution: "domutils@npm:2.7.0"
+  dependencies:
+    dom-serializer: ^1.0.1
+    domelementtype: ^2.2.0
+    domhandler: ^4.2.0
+  checksum: b7c6cbd4854611447785cdc10f989728cc213652c89211b7d0956c37e565b8a2881683a0162b9a77aa39f52de1eff10f439fe77315d3e828beda3b81a43c1dea
   languageName: node
   linkType: hard
 
@@ -11058,7 +11150,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo@npm:^41.0.1":
+"expo@npm:^41.0.1, expo@npm:~41.0.1":
   version: 41.0.1
   resolution: "expo@npm:41.0.1"
   dependencies:
@@ -12813,6 +12905,18 @@ fsevents@^1.2.7:
   peerDependencies:
     webpack: ^5.20.0
   checksum: 2d744cf3144686cc4b786dac8fbbce3733dd1825a99efea2f289b54e47201f8431df56114d72eb87cf4f78aa8dede6ea5ee09904313dbd72209dc3a43a804b51
+  languageName: node
+  linkType: hard
+
+"htmlparser2@npm:5.0.1":
+  version: 5.0.1
+  resolution: "htmlparser2@npm:5.0.1"
+  dependencies:
+    domelementtype: ^2.0.1
+    domhandler: ^3.3.0
+    domutils: ^2.4.2
+    entities: ^2.0.0
+  checksum: c3564b7d26b5e894ee9aae9132ddf23ce79c4d31881b75aef14224b5d89c2e17dc638fa77c0a576e0fcc4c73cc608890bc63b4452f79d7960d2b4af836247fc0
   languageName: node
   linkType: hard
 
@@ -20026,6 +20130,21 @@ fsevents@^1.2.7:
   languageName: unknown
   linkType: soft
 
+"react-native-render-html-v5@npm:react-native-render-html@^5.0.0":
+  version: 5.1.1
+  resolution: "react-native-render-html@npm:5.1.1"
+  dependencies:
+    deprecated-prop-type: ^1.0.0
+    htmlparser2: 5.0.1
+    prop-types: ^15.7.2
+    stringify-entities: ^3.1.0
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: a56a31e21b5a1fe717b6bcbf5abde793066870795095ff6ebc9baed9b443a58b2eddaa92f61da9a111e1b6b563434ed83e86ef20bb5ad5eba49475e31af2cf2d
+  languageName: node
+  linkType: hard
+
 "react-native-render-html@workspace:*, react-native-render-html@workspace:packages/render-html":
   version: 0.0.0-use.local
   resolution: "react-native-render-html@workspace:packages/render-html"
@@ -20176,7 +20295,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-native-web@npm:~0.13.18":
+"react-native-web@npm:~0.13.12, react-native-web@npm:~0.13.18":
   version: 0.13.18
   resolution: "react-native-web@npm:0.13.18"
   dependencies:
@@ -20347,6 +20466,16 @@ fsevents@^1.2.7:
   peerDependencies:
     react: ^16.3.0 || ^17.0.0
   checksum: 5896f7c126b9e7147e3ea6cc967dab8e3a2f6c395bd5327d16483adb91177866eec47770500a92fece866ea551f395484f6e6e078796002293bc1b53b7e65b26
+  languageName: node
+  linkType: hard
+
+"react-states@npm:^5.4.0":
+  version: 5.4.0
+  resolution: "react-states@npm:5.4.0"
+  peerDependencies:
+    "@testing-library/react": "*"
+    react: "*"
+  checksum: 2bdd81ea7517453b8825238f56083098b8a6cf6d41d7f091b63932d7bd37467ff289b7f917908a6cf5d4cd2715e26a8f82da976589b35152dc3880cd47f06052
   languageName: node
   linkType: hard
 
@@ -24189,6 +24318,15 @@ resolve@~1.19.0:
   dependencies:
     makeerror: 1.0.x
   checksum: c014f264c473fc4464ba8f59eb9f7ffa1c0cf2c83b65353de28a6012d8dd29e974bf2b0fbd5c71231f56762a3ea0d970b635f7d6f6d670ff83f426741ce6a4da
+  languageName: node
+  linkType: hard
+
+"warning@npm:4.0.1":
+  version: 4.0.1
+  resolution: "warning@npm:4.0.1"
+  dependencies:
+    loose-envify: ^1.0.0
+  checksum: 9575a07a0e75e5b42baa9823b08314d06e8f4f46deddc4c4c349a8a436738f16fd04d21b60a98cc68b13894802c85a5bf412ac9ff3cc999935df04ee36f35603
   languageName: node
   linkType: hard
 
