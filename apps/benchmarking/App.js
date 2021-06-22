@@ -12,8 +12,12 @@ import Benchmark from './Benchmark';
 const uri = 'https://reactnative.dev/docs/next/image';
 
 const config = {
-  samples: 5,
-  ignoredTags: ['svg', 'button', 'input', 'form', 'img', 'ol', 'ul', 'table']
+  samples: 10,
+  ignoredTags: ['svg', 'button', 'input', 'form', 'img', 'ol', 'table']
+};
+
+const props = {
+  renderers: {}
 };
 
 export default function App() {
@@ -29,7 +33,7 @@ export default function App() {
   return (
     <SafeAreaView style={{ flexGrow: 1 }}>
       <TRenderEngineProvider ignoredDomTags={config.ignoredTags}>
-        <RenderHTMLConfigProvider>
+        <RenderHTMLConfigProvider {...props}>
           {(html && <Benchmark html={html} {...config} />) || (
             <ActivityIndicator color="black" />
           )}

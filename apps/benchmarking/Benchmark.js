@@ -20,6 +20,19 @@ export default function Benchmark({ samples, html, ignoredTags }) {
   const { onLayout, launch, ...state } = useBenchmark({
     runs: samples
   });
+  const renderHtml = React.useCallback(
+    ({ runId, profile }) => (
+      <View key={runId} onLayout={onLayout}>
+        <profile.component
+          ignoredTags={ignoredTags}
+          running={true}
+          html={html}
+          {...profile.props}
+        />
+      </View>
+    ),
+    [html, ignoredTags, onLayout]
+  );
   return (
     <View>
       <Button
@@ -27,9 +40,7 @@ export default function Benchmark({ samples, html, ignoredTags }) {
         onPress={launch}
         disabled={state.state !== 'WAIT_BENCH'}
       />
-      <ScrollView
-        onContentSizeChange={onLayout}
-        contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         {match(state, {
           WAIT_BENCH: ({ benchmarks }) =>
             benchmarks ? (
@@ -37,17 +48,8 @@ export default function Benchmark({ samples, html, ignoredTags }) {
             ) : (
               <Text>Waiting for benchmark to launch</Text>
             ),
-          WAIT_RUN: () => {
-            return null;
-          },
-          RUNNING: ({ runId, profile }) => (
-            <profile.component
-              ignoredTags={ignoredTags}
-              running={true}
-              key={runId}
-              html={html}
-            />
-          )
+          WAIT_RUN: renderHtml,
+          RUNNING: renderHtml
         })}
       </ScrollView>
     </View>

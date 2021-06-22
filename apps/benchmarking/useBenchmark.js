@@ -1,29 +1,11 @@
 import { transitions, exec } from 'react-states';
 import { useEffect, useReducer, useCallback } from 'react';
-
-import ProfileSimple from './profiles/ProfileSimple';
-import ProfileV5 from './profiles/ProfileV5';
-import ProfileV6Source from './profiles/ProfileV6Source';
+import profiles from './profiles';
 
 function now() {
   // eslint-disable-next-line no-undef
   return performance.now();
 }
-
-const profiles = [
-  {
-    name: 'Simple implementation',
-    component: ProfileSimple
-  },
-  {
-    name: 'V5',
-    component: ProfileV5
-  },
-  {
-    name: 'V6',
-    component: ProfileV6Source
-  }
-];
 
 const reducer = transitions({
   WAIT_BENCH: {
@@ -86,7 +68,7 @@ export default function useBenchmark({ runs = 10 }) {
     () =>
       exec(state, {
         WAIT_RUN: () => {
-          dispatch({ type: 'NEXT_RUN' });
+          requestAnimationFrame(() => dispatch({ type: 'NEXT_RUN' }));
         }
       }),
     [state, runs]
