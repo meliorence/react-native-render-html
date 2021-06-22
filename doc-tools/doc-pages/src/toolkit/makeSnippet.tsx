@@ -200,7 +200,10 @@ export default function makeSnippet(
   const innerExpr: JSXElementExp = {
     name: 'RenderHtml',
     children: [],
-    inlineProps: inlineProps(declaredProps, primitiveProps)
+    inlineProps: [
+      'contentWidth={width}',
+      ...inlineProps(declaredProps, primitiveProps)
+    ]
   };
   const wrapperExpr: JSXElementExp = config.wrapperComponent
     ? {
