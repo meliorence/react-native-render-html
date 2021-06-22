@@ -13,6 +13,7 @@ import sourceLoaderContext, {
 import RenderRegistryProvider from './context/RenderRegistryProvider';
 import { useAmbientTRenderEngine } from './TRenderEngineProvider';
 import useProfiler from './hooks/useProfiler';
+import ListStyleSpecsProvider from './context/ListStyleSepcsProvider';
 
 const childrenRendererContext = {
   TChildrenRenderer,
@@ -67,13 +68,15 @@ export default function RenderHTMLConfigProvider(
       renderers={renderers}
       elementModels={engine.getHTMLElementsModels()}>
       <SharedPropsProvider {...sharedProps}>
-        <RenderersPropsProvider renderersProps={renderersProps}>
-          <TChildrenRenderersContext.Provider value={childrenRendererContext}>
-            <sourceLoaderContext.Provider value={sourceLoaderConfig}>
-              {children}
-            </sourceLoaderContext.Provider>
-          </TChildrenRenderersContext.Provider>
-        </RenderersPropsProvider>
+        <ListStyleSpecsProvider>
+          <RenderersPropsProvider renderersProps={renderersProps}>
+            <TChildrenRenderersContext.Provider value={childrenRendererContext}>
+              <sourceLoaderContext.Provider value={sourceLoaderConfig}>
+                {children}
+              </sourceLoaderContext.Provider>
+            </TChildrenRenderersContext.Provider>
+          </RenderersPropsProvider>
+        </ListStyleSpecsProvider>
       </SharedPropsProvider>
     </RenderRegistryProvider>
   );

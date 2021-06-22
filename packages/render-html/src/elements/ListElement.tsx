@@ -1,29 +1,23 @@
 /* eslint-disable react-native/no-inline-styles */
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { TBlock, TNode } from '@native-html/transient-render-engine';
-import {
-  MarkedListItem,
-  useMarkedList,
-  MarkerBoxProps
-} from '@jsamr/react-native-li';
+import { MarkedListItem, useMarkedList } from '@jsamr/react-native-li';
 import type {
   DefaultSupportedListStyleType,
   InternalRendererProps,
   ListElementConfig,
-  ListStyleSpec,
-  TChildProps,
-  UnitaryListStyleSpec
+  TChildProps
 } from '../shared-types';
 import { useTChildrenRenderer } from '../context/TChildrenRendererContext';
 import { DEFAULT_TEXT_COLOR } from '../constants';
 import pick from 'ramda/src/pick';
+import { useListStyleSpecs } from '../context/ListStyleSepcsProvider';
 
 export interface ListElementProps<T extends 'ol' | 'ul'>
   extends InternalRendererProps<TBlock>,
     ListElementConfig {
   listType: T;
-  listStyleSpecs: Record<string, ListStyleSpec>;
 }
 
 function getStartIndex(tnode: TNode) {
@@ -31,38 +25,6 @@ function getStartIndex(tnode: TNode) {
     ? Number(tnode.attributes.start)
     : Number.NaN;
   return Number.isNaN(parsedIndex) ? 1 : parsedIndex;
-}
-
-function createSymbolicMarkerRenderer(
-  component: UnitaryListStyleSpec['Component']
-) {
-  return ({
-    style,
-    markerTextStyle,
-    counterRenderer,
-    counterIndex,
-    rtlMarkerReversed
-  }: MarkerBoxProps) => {
-    const prefix = counterRenderer.renderPrefix();
-    const suffix = counterRenderer.renderSuffix();
-    return (
-      <View
-        style={[
-          style,
-          {
-            flexDirection: rtlMarkerReversed ? 'row-reverse' : 'row',
-            justifyContent: 'flex-end'
-          }
-        ]}>
-        {<Text style={markerTextStyle}>{prefix}</Text>}
-        {React.createElement(component, {
-          ...(markerTextStyle as any),
-          index: counterIndex
-        })}
-        {<Text style={markerTextStyle}>{suffix}</Text>}
-      </View>
-    );
-  };
 }
 
 const pickMarkerTextStyles = pick([
@@ -117,9 +79,9 @@ export default function ListElement({
   enableRemoveTopMarginIfNested = true,
   enableRemoveBottomMarginIfNested = true,
   enableDynamicMarkerBoxWidth = false,
-  listStyleSpecs,
   ...props
 }: ListElementProps<'ol' | 'ul'>) {
+  const listStyleSpecs = useListStyleSpecs();
   const markers = tnode.markers;
   const nestLevel =
     listType === 'ol' ? markers.olNestLevel : markers.ulNestLevel;
@@ -174,10 +136,7 @@ export default function ListElement({
     rtlMarkerReversed: rtl,
     length: tnode.children.length,
     dynamicMarkerBoxWidth: enableDynamicMarkerBoxWidth,
-    renderMarker:
-      spec.type === 'unitary'
-        ? createSymbolicMarkerRenderer(spec.Component)
-        : undefined
+    renderMarker: spec.renderMarker
   });
   const markerWidth = itemProps.markerTextWidth;
   const fixedPaddingRule = rtl
