@@ -1,3 +1,15 @@
+# [6.0.0-beta.4](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.3...v6.0.0-beta.4) (2021-06-23)
+
+
+### Features
+
+* support `renderersProps.(ol|ul).markerBoxStyle` prop ([c929643](https://github.com/meliorence/react-native-render-html/commit/c929643bd396ebcc69c8c59260cf2c73380c4907))
+
+
+### Performance Improvements
+
+* use context to make unitary list style renderers ([26bdd72](https://github.com/meliorence/react-native-render-html/commit/26bdd725ef07d83ac0e7312bf25ef90aa218ab79))
+
 # [6.0.0-beta.3](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.2...v6.0.0-beta.3) (2021-06-19)
 
 
