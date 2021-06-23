@@ -28,11 +28,9 @@ function getFallbackListStyleTypeFromNestLevel(
 export function useOLElementProps(
   props: InternalRendererProps<TBlock>
 ): OLElementProps {
-  const listStyleSpecs = props.sharedProps.customListStyleSpecs;
   const config = useRendererProps('ol');
   return {
     ...props,
-    listStyleSpecs,
     getFallbackListStyleTypeFromNestLevel,
     ...config
   };

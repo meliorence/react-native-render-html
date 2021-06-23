@@ -25,7 +25,7 @@ const defaultSharedProps: Required<RenderHTMLSharedProps> = {
   WebView: WebViewPlaceholder,
   defaultWebViewProps: {},
   pressableHightlightColor: DEFAULT_PRESSABLE_RIPPLE_COLOR,
-  customListStyleSpecs: {}
+  customListStyleSpecs: undefined as any
 };
 
 export default defaultSharedProps;
