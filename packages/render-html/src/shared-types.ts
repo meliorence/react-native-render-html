@@ -126,6 +126,17 @@ export interface ListElementConfig {
   getFallbackListStyleTypeFromNestLevel?: (
     nestLevel: number
   ) => DefaultSupportedListStyleType;
+  /**
+   * Customize the marker box appearance (the `View` containing the marker,
+   * e.g. the symbol prefixing list elements).
+   *
+   * @remarks This is useful to set some right padding or a different background for example.
+   *
+   * @warning **Do not**:
+   * - Use margin (since the width will match the `<ol>` / `<ul>` padding left)
+   * - Set width constraints (since the width will match the `<ol>` / `<ul>` padding left)
+   */
+  markerBoxStyle?: StyleProp<ViewStyle>;
 }
 
 /**

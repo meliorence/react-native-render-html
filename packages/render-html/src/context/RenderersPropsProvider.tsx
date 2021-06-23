@@ -39,7 +39,7 @@ export default function RenderersPropsProvider(
   }, [props.renderersProps, profile]);
   return React.createElement(
     RenderersPropsContext.Provider,
-    { value: mergedRenderersProps },
+    { value: mergedRenderersProps as Required<RenderersProps> },
     props.children
   );
 }

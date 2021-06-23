@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { TBlock, TNode } from '@native-html/transient-render-engine';
@@ -75,6 +74,7 @@ export default function ListElement({
   listType,
   style,
   getFallbackListStyleTypeFromNestLevel,
+  markerBoxStyle,
   enableExperimentalRtl = false,
   enableRemoveTopMarginIfNested = true,
   enableRemoveBottomMarginIfNested = true,
@@ -132,6 +132,7 @@ export default function ListElement({
     counterRenderer,
     startIndex,
     markerTextStyle,
+    markerBoxStyle,
     rtlLineReversed: rtl,
     rtlMarkerReversed: rtl,
     length: tnode.children.length,
