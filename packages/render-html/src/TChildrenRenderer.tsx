@@ -9,6 +9,54 @@ function isCollapsible(tnode: TNode) {
 }
 
 /**
+ * Compute top collapsed margin for the nth {@link TNode}-child of a list of
+ * TNodes.
+ *
+ * @param n - The index for which the top margin should be collapsed.
+ * @param tchildren - The list of {@link TNode} children.
+ * @returns `null` when no margin collapsing should apply, a number otherwise.
+ * @public
+ */
+export function collapseTopMarginForChild(
+  n: number,
+  tchildren: readonly TNode[]
+): number | null {
+  const childTnode = tchildren[n];
+  if (isCollapsible(childTnode) && n > 0 && isCollapsible(tchildren[n - 1])) {
+    return getCollapsedMarginTop(tchildren[n - 1], childTnode);
+  }
+  return null;
+}
+
+const mapCollapsibleChildren = (
+  propsForChildren: TChildrenRendererProps['propsForChildren'],
+  renderChild: TChildrenRendererProps['renderChild'],
+  disableMarginCollapsing: boolean | undefined,
+  childTnode: TNode,
+  n: number,
+  tchildren: readonly TNode[]
+) => {
+  const collapsedMarginTop = disableMarginCollapsing
+    ? null
+    : collapseTopMarginForChild(n, tchildren);
+  const propsFromParent = { ...propsForChildren, collapsedMarginTop };
+  const childElement = React.createElement(TNodeRenderer, {
+    propsFromParent,
+    tnode: childTnode,
+    key: n
+  });
+  return typeof renderChild === 'function'
+    ? renderChild({
+        key: n,
+        childElement,
+        index: n,
+        childTnode,
+        propsFromParent
+      })
+    : childElement;
+};
+
+/**
  * A component to render collections of tnodes.
  * Especially useful when used with {@link useTNodeChildrenProps}.
  */
@@ -18,32 +66,14 @@ function TChildrenRenderer({
   disableMarginCollapsing,
   renderChild
 }: TChildrenRendererProps): ReactElement {
-  let collapsedMarginTop: number | null = null;
-  const elements = tchildren.map((childTnode, i) => {
-    if (
-      !disableMarginCollapsing &&
-      isCollapsible(childTnode) &&
-      i > 0 &&
-      isCollapsible(tchildren[i - 1])
-    ) {
-      collapsedMarginTop = getCollapsedMarginTop(tchildren[i - 1], childTnode);
-    }
-    const propsFromParent = { ...propsForChildren, collapsedMarginTop };
-    const childElement = React.createElement(TNodeRenderer, {
-      propsFromParent,
-      tnode: childTnode,
-      key: i
-    });
-    return typeof renderChild === 'function'
-      ? renderChild({
-          key: i,
-          childElement,
-          index: i,
-          childTnode,
-          propsFromParent
-        })
-      : childElement;
-  });
+  const elements = tchildren.map(
+    mapCollapsibleChildren.bind(
+      null,
+      propsForChildren,
+      renderChild,
+      disableMarginCollapsing
+    )
+  );
   return <>{elements}</>;
 }
 
