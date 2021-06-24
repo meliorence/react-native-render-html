@@ -1,1 +1,0 @@
-(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[2527],{6353:function(e){"use strict";e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Announcing the Beta Foundry Release","permalink":"/react-native-render-html/blog/2021/06/07/foundry-announcement"}]}')}}]);
