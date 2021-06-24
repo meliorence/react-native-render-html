@@ -42,8 +42,7 @@ describe('RenderHTML component should honor formatting context of the DOM tree',
       <RenderHTML
         debug={false}
         source={{
-          html:
-            '<span><b>hello world</b><img src="https://img.com/1"/>foo bar</span>'
+          html: '<span><b>hello world</b><img src="https://img.com/1"/>foo bar</span>'
         }}
       />
     );

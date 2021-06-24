@@ -19,8 +19,7 @@ describe('HTMLImageElement component should pass regression test #172', () => {
       <RenderHTML
         debug={false}
         source={{
-          html:
-            '<img width="100" height="100" src="http://via.placeholder.com/100x100" />'
+          html: '<img width="100" height="100" src="http://via.placeholder.com/100x100" />'
         }}
         tagsStyles={tagsStyles as any}
       />

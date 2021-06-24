@@ -454,8 +454,7 @@ describe('RenderHTML', () => {
       const { getByTestId } = render(
         <RenderHTML
           source={{
-            html:
-              '<div style="margin-bottom: 10px;"></div><p style="margin-top: 10px;">text</p>'
+            html: '<div style="margin-bottom: 10px;"></div><p style="margin-top: 10px;">text</p>'
           }}
           debug={false}
           contentWidth={100}
@@ -471,8 +470,7 @@ describe('RenderHTML', () => {
       const { getByTestId } = render(
         <RenderHTML
           source={{
-            html:
-              '<div style="margin-bottom: 10px;"></div><span style="margin-top: 10px;">text</span>'
+            html: '<div style="margin-bottom: 10px;"></div><span style="margin-top: 10px;">text</span>'
           }}
           debug={false}
           contentWidth={100}
@@ -489,8 +487,7 @@ describe('RenderHTML', () => {
       const { getByTestId } = render(
         <RenderHTML
           source={{
-            html:
-              '<div style="margin-bottom: 10px;"></div><p style="margin-top: 10px;"></p>'
+            html: '<div style="margin-bottom: 10px;"></div><p style="margin-top: 10px;"></p>'
           }}
           debug={false}
           contentWidth={100}

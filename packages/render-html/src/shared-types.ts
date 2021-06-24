@@ -931,7 +931,7 @@ export interface CustomRendererProps<T extends TNode>
  * @typeParam T - The concrete type of {@link TNode}.
  * @public
  */
-export type TDefaultRenderer<T extends TNode> = React.ComponentType<
+export type TDefaultRenderer<T extends TNode> = ComponentType<
   TDefaultRendererProps<T>
 >;
 
@@ -945,7 +945,7 @@ export type TDefaultRenderer<T extends TNode> = React.ComponentType<
  *
  * @typeParam T - The concrete type of {@link TNode}.
  */
-export type InternalRenderer<T extends TNode> = React.ComponentType<
+export type InternalRenderer<T extends TNode> = ComponentType<
   InternalRendererProps<T>
 >;
 
@@ -955,7 +955,7 @@ export type InternalRenderer<T extends TNode> = React.ComponentType<
  * @typeParam T - The concrete type of {@link TNode}.
  * @public
  */
-export type CustomRenderer<T extends TNode> = React.ComponentType<
+export type CustomRenderer<T extends TNode> = ComponentType<
   CustomRendererProps<T>
 >;
 

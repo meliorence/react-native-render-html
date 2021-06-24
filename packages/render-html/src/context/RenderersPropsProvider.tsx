@@ -5,9 +5,8 @@ import { RenderersProps, RenderHTMLPassedProps } from '../shared-types';
 import defaultRendererProps from './defaultRendererProps';
 import useProfiler from '../hooks/useProfiler';
 
-const RenderersPropsContext = React.createContext<Required<RenderersProps>>(
-  defaultRendererProps
-);
+const RenderersPropsContext =
+  React.createContext<Required<RenderersProps>>(defaultRendererProps);
 
 /**
  * Consume props from {@link RenderHTMLProps.renderersProps}.

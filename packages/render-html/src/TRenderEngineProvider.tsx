@@ -8,9 +8,8 @@ import defaultSystemFonts from './defaultSystemFonts';
 
 const defaultTRenderEngine = {} as any;
 
-const TRenderEngineContext = React.createContext<TRenderEngine>(
-  defaultTRenderEngine
-);
+const TRenderEngineContext =
+  React.createContext<TRenderEngine>(defaultTRenderEngine);
 
 export const tRenderEngineProviderPropTypes: Record<
   keyof TRenderEngineConfig,

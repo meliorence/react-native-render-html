@@ -18,10 +18,8 @@ export function useIMGElementProps(
 ): IMGElementProps {
   const { style, tnode, onPress, key } = props;
   const contentWidth = useContentWidth();
-  const {
-    initialDimensions,
-    enableExperimentalPercentWidth
-  } = useRendererProps('img');
+  const { initialDimensions, enableExperimentalPercentWidth } =
+    useRendererProps('img');
   const computeImagesMaxWidth = useComputeMaxWidthForTag('img');
   const src = tnode.attributes.src || '';
   return {

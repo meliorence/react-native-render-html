@@ -4,9 +4,8 @@ import selectSharedProps from '../helpers/selectSharedProps';
 import { RenderHTMLSharedProps, RendererBaseProps } from '../shared-types';
 import defaultSharedProps from './defaultSharedProps';
 
-const SharedPropsContext = React.createContext<Required<RenderHTMLSharedProps>>(
-  defaultSharedProps
-);
+const SharedPropsContext =
+  React.createContext<Required<RenderHTMLSharedProps>>(defaultSharedProps);
 
 /**
  * Use shared props. See {@link RenderHTMLSharedProps}.

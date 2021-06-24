@@ -42,13 +42,12 @@ function TNodeRenderer(props: TNodeRendererProps<any>): ReactElement | null {
   return null;
 }
 
-const defaultProps: Required<
-  Pick<TNodeRendererProps<any>, 'propsFromParent'>
-> = {
-  propsFromParent: {
-    collapsedMarginTop: null
-  }
-};
+const defaultProps: Required<Pick<TNodeRendererProps<any>, 'propsFromParent'>> =
+  {
+    propsFromParent: {
+      collapsedMarginTop: null
+    }
+  };
 
 /**
  * @ignore

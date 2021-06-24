@@ -72,9 +72,8 @@ function useUriSourceLoader({ source, onHTMLLoaded }: UriSourceLoaderProps) {
 }
 
 export default function SourceLoaderUri(props: UriSourceLoaderProps) {
-  const { remoteErrorView, remoteLoadingView } = useContext(
-    sourceLoaderContext
-  );
+  const { remoteErrorView, remoteLoadingView } =
+    useContext(sourceLoaderContext);
   const { resolvedHTML, error } = useUriSourceLoader(props);
   if (error) {
     return remoteErrorView.call(null, props.source);

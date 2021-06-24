@@ -15,15 +15,8 @@ const TDocumentRenderer = memo(
     onDocumentMetadataLoaded?: RenderHTMLSourceProps['onDocumentMetadataLoaded'];
   }) => {
     const metadata: DocumentMetadata = useMemo(() => {
-      const {
-        baseHref,
-        baseTarget,
-        lang,
-        links,
-        meta,
-        title,
-        dir
-      } = tdoc.context;
+      const { baseHref, baseTarget, lang, links, meta, title, dir } =
+        tdoc.context;
       return {
         baseTarget,
         baseUrl: baseUrl ?? baseHref,

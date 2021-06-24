@@ -13,7 +13,7 @@ import sourceLoaderContext, {
 import RenderRegistryProvider from './context/RenderRegistryProvider';
 import { useAmbientTRenderEngine } from './TRenderEngineProvider';
 import useProfiler from './hooks/useProfiler';
-import ListStyleSpecsProvider from './context/ListStyleSepcsProvider';
+import ListStyleSpecsProvider from './context/ListStyleSpecsProvider';
 
 const childrenRendererContext = {
   TChildrenRenderer,

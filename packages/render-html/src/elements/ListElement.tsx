@@ -11,7 +11,7 @@ import type {
 import { useTChildrenRenderer } from '../context/TChildrenRendererContext';
 import { DEFAULT_TEXT_COLOR } from '../constants';
 import pick from 'ramda/src/pick';
-import { useListStyleSpecs } from '../context/ListStyleSepcsProvider';
+import { useListStyleSpecs } from '../context/ListStyleSpecsProvider';
 
 export interface ListElementProps<T extends 'ol' | 'ul'>
   extends InternalRendererProps<TBlock>,

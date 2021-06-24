@@ -72,7 +72,7 @@ function TNodeChildrenRenderer(
 ): ReactElement {
   if (props.tnode.type === 'text') {
     // see https://github.com/DefinitelyTyped/DefinitelyTyped/issues/20544
-    return (props.tnode.data as unknown) as ReactElement;
+    return props.tnode.data as unknown as ReactElement;
   }
   return React.createElement(TNodeWithChildrenRenderer, props);
 }

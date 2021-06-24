@@ -14,10 +14,8 @@ export default function GenericPressable({
   borderless = false,
   ...otherProps
 }: PropsWithChildren<GenericPressableProps>) {
-  const {
-    pressableHightlightColor,
-    GenericPressable: UserProvidedPressable
-  } = useSharedProps();
+  const { pressableHightlightColor, GenericPressable: UserProvidedPressable } =
+    useSharedProps();
   if (UserProvidedPressable) {
     return (
       <UserProvidedPressable style={style} {...(otherProps as any)}>

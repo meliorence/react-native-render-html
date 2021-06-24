@@ -86,13 +86,8 @@ export default function useIMGElementState(
     objectFit,
     initialDimensions = defaultImageInitialDimensions
   } = props;
-  const {
-    naturalDimensions,
-    specifiedDimensions,
-    flatStyle,
-    onError,
-    error
-  } = useFetchedNaturalDimensions(props);
+  const { naturalDimensions, specifiedDimensions, flatStyle, onError, error } =
+    useFetchedNaturalDimensions(props);
   const concreteDimensions = useImageConcreteDimensions({
     flatStyle,
     naturalDimensions,
