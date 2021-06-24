@@ -233,13 +233,6 @@ export default function PageGuideCustomRenderers() {
               element returned by this component.
             </DListItem>
             <DListTitle>
-              <RefRenderHTMLExport name="CustomRendererProps" member="key" />
-            </DListTitle>
-            <DListItem>
-              React <InlineCode>key</InlineCode> which shall be passed to the
-              root element returned by this component.
-            </DListItem>
-            <DListTitle>
               <RefRenderHTMLExport
                 name="CustomRendererProps"
                 member="textProps"
