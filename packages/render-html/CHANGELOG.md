@@ -1,3 +1,17 @@
+# [6.0.0-beta.5](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.4...v6.0.0-beta.5) (2021-06-24)
+
+
+### Features
+
+* export `collapseTopMarginForChild` utility ([199be12](https://github.com/meliorence/react-native-render-html/commit/199be1230d964b34b631851ba4831d4415c15203))
+* export `TNodeRenderer` ([dbabe1d](https://github.com/meliorence/react-native-render-html/commit/dbabe1da9906757375a1a4cb81765000a1364413))
+* new `hasClass` method in `TNodes` ([4cf6ede](https://github.com/meliorence/react-native-render-html/commit/4cf6edee693d9fb8f98482421a0208a5e1153455))
+
+
+### Performance Improvements
+
+* memoize `TNodeRenderer` ([164f205](https://github.com/meliorence/react-native-render-html/commit/164f2051a663aeac4147c0e30f30f0da06021567))
+
 # [6.0.0-beta.4](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.3...v6.0.0-beta.4) (2021-06-23)
 
 
