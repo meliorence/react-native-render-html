@@ -7,6 +7,9 @@ import { useSharedProps } from './context/SharedPropsProvider';
 
 export type { TNodeRendererProps } from './shared-types';
 
+/**
+ * A component to render any {@link TNode}.
+ */
 function TNodeRenderer(props: TNodeRendererProps<any>): ReactElement | null {
   const { tnode } = props;
   const sharedProps = useSharedProps();
