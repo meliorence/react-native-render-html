@@ -29,7 +29,7 @@
     "@types/react": "^17.0.4",
     "@types/react-test-renderer": "^17.0.1",
     "babel-jest": "^27.0.2",
-    "eslint": "^7.25.0",
+    "eslint": "^7.29.0",
     "jest": "^27.0.4",
     "metro-react-native-babel-preset": "^0.66.0",
     "metro-react-native-babel-transformer": "^0.66.0",
