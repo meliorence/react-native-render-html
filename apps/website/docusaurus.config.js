@@ -47,7 +47,7 @@ const plugins = [
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'Discover React Native Render HTML',
+  title: 'React Native Render HTML',
   tagline:
     'The hackable, full-featured Open Source HTML rendering solution for React Native.',
   url: WEBSITE_ROOT,

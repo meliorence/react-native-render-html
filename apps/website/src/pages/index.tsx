@@ -11,7 +11,7 @@ import ExpoDiscoveryCard from '../components/ExpoDiscoveryCard';
 export default function Home() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <Layout title={siteConfig.title} description={siteConfig.tagline}>
+    <Layout title="Discover" description={siteConfig.tagline}>
       <HomepageHeader />
       <div className={classes.annoucement}>
         Coming from v4 or v5 ? Check out our{' '}
