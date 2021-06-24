@@ -13,8 +13,7 @@ export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
   style,
   onPress,
   viewProps,
-  propsForChildren,
-  key
+  propsForChildren
 }) => {
   const TNodeChildrenRenderer = useTNodeChildrenRenderer();
   const children = overridingChildren ?? (
@@ -23,7 +22,6 @@ export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
   const commonProps = {
     ...viewProps,
     style: viewProps?.style ? [style, viewProps.style] : style,
-    key,
     testID: tnode.tagName
   };
   if (typeof onPress === 'function') {

@@ -16,15 +16,13 @@ import useContentWidth from '../hooks/useContentWidth';
 export function useIMGElementProps(
   props: InternalRendererProps<TBlock>
 ): IMGElementProps {
-  const { style, tnode, onPress, key } = props;
+  const { style, tnode, onPress } = props;
   const contentWidth = useContentWidth();
   const { initialDimensions, enableExperimentalPercentWidth } =
     useRendererProps('img');
   const computeImagesMaxWidth = useComputeMaxWidthForTag('img');
   const src = tnode.attributes.src || '';
   return {
-    //@ts-ignore
-    key,
     contentWidth,
     computeMaxWidth: computeImagesMaxWidth,
     enableExperimentalPercentWidth,

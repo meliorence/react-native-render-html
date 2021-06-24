@@ -2,8 +2,10 @@ import React from 'react';
 import { Text } from 'react-native';
 import { InternalTextContentRenderer } from '../render/render-types';
 
-const BRRenderer: InternalTextContentRenderer = function BRRenderer({ key }) {
-  return <Text key={key}>{'\n'}</Text>;
+const emptyProps = {};
+
+const BRRenderer: InternalTextContentRenderer = function BRRenderer() {
+  return React.createElement(Text, emptyProps, '\n');
 };
 
 BRRenderer.isNativeInternalTextRenderer = true;

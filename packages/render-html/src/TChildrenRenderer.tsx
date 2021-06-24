@@ -40,14 +40,15 @@ const mapCollapsibleChildren = (
     ? null
     : collapseTopMarginForChild(n, tchildren);
   const propsFromParent = { ...propsForChildren, collapsedMarginTop };
+  const key = childTnode.nodeIndex;
   const childElement = React.createElement(TNodeRenderer, {
     propsFromParent,
     tnode: childTnode,
-    key: n
+    key
   });
   return typeof renderChild === 'function'
     ? renderChild({
-        key: n,
+        key,
         childElement,
         index: n,
         childTnode,

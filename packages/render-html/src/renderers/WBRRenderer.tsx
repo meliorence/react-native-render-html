@@ -2,10 +2,10 @@ import React from 'react';
 import { Text } from 'react-native';
 import { InternalTextContentRenderer } from '../render/render-types';
 
-const WBRRenderer: InternalTextContentRenderer = function WordBreakRenderer({
-  key
-}) {
-  return <Text key={key}>{'\u200b'}</Text>;
+const emptyProps = {};
+
+const WBRRenderer: InternalTextContentRenderer = function WordBreakRenderer() {
+  return React.createElement(Text, emptyProps, '\u200b');
 };
 
 WBRRenderer.isNativeInternalTextRenderer = true;

@@ -5,7 +5,6 @@ import { TDefaultRenderer } from './shared-types';
 
 const TDefaultTextualRenderer: TDefaultRenderer<TPhrasing | TText> = ({
   tnode,
-  key,
   style,
   children,
   textProps,
@@ -15,7 +14,6 @@ const TDefaultTextualRenderer: TDefaultRenderer<TPhrasing | TText> = ({
   return React.createElement(
     Text,
     {
-      key,
       ...textProps,
       onPress,
       style: resolvedStyles,

@@ -14,7 +14,7 @@ import { useDefaultContainerProps } from '../context/SharedPropsProvider';
  * @internal
  */
 export default function useAssembledCommonProps<T extends TNode>(
-  { tnode, key, propsFromParent, sharedProps }: TNodeSubRendererProps<T>,
+  { tnode, propsFromParent, sharedProps }: TNodeSubRendererProps<T>,
   TDefault: TDefaultRenderer<T>
 ): {
   assembledProps: CustomRendererProps<T> & TDefaultRendererProps<T>;
@@ -23,7 +23,6 @@ export default function useAssembledCommonProps<T extends TNode>(
   const { Default, Custom } = useRendererConfig(tnode);
   const containerProps = useDefaultContainerProps();
   const assembledProps: CustomRendererProps<T> & TDefaultRendererProps<T> = {
-    key,
     tnode,
     propsFromParent,
     sharedProps,

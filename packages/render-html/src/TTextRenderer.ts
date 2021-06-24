@@ -29,7 +29,7 @@ function TStandardTextRenderer(props: TNodeSubRendererProps<TText>) {
 export default function TTextRenderer(props: TNodeSubRendererProps<TText>) {
   const InternalTextRenderer = useInternalTextRenderer(props.tnode);
   if (InternalTextRenderer) {
-    return React.createElement(InternalTextRenderer, { key: props.key });
+    return React.createElement(InternalTextRenderer);
   }
   return React.createElement(TStandardTextRenderer, props);
 }

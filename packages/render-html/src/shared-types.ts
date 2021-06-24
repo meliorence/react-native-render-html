@@ -813,10 +813,6 @@ export interface TNodeRendererProps<T extends TNode> {
    */
   tnode: T;
   /**
-   * The key that must be passed to the root of the returned element.
-   */
-  key?: string | number;
-  /**
    * Props passed by direct parents.
    */
   propsFromParent?: PropsFromParent;
