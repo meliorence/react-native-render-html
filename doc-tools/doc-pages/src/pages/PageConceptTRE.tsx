@@ -394,6 +394,12 @@ export default function PageConceptTRE() {
             explaination in below section.
           </DListItem>
           <DListTitle>
+            <RefTRE name="TNodeShape" member="hasClass" />
+          </DListTitle>
+          <DListItem>
+            A utility function to check if this node has the provided CSS class.
+          </DListItem>
+          <DListTitle>
             <RefTRE name="TNodeShape" member="snapshot" />
           </DListTitle>
           <DListItem>
