@@ -819,7 +819,7 @@ export interface TNodeRendererProps<T extends TNode> {
   /**
    * Props passed by direct parents.
    */
-  propsFromParent: PropsFromParent;
+  propsFromParent?: PropsFromParent;
 }
 
 /**

@@ -29,7 +29,7 @@ export default function useAssembledCommonProps<T extends TNode>(
     sharedProps,
     TDefaultRenderer: TDefault,
     style: mergeCollapsedMargins(
-      propsFromParent.collapsedMarginTop,
+      propsFromParent?.collapsedMarginTop!,
       tnode.getNativeStyles()
     ) as any,
     type: tnode.type === 'text' || tnode.type === 'phrasing' ? 'text' : 'block',

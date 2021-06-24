@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { memo, ReactElement } from 'react';
 import TBlockRenderer from './TBlockRenderer';
 import TPhrasingRenderer from './TPhrasingRenderer';
 import TTextRenderer from './TTextRenderer';
@@ -10,7 +10,9 @@ export type { TNodeRendererProps } from './shared-types';
 /**
  * A component to render any {@link TNode}.
  */
-function TNodeRenderer(props: TNodeRendererProps<any>): ReactElement | null {
+const TNodeRenderer = memo(function MemoizedTNodeRenderer(
+  props: TNodeRendererProps<any>
+): ReactElement | null {
   const { tnode } = props;
   const sharedProps = useSharedProps();
   const tnodeProps = {
@@ -40,7 +42,7 @@ function TNodeRenderer(props: TNodeRendererProps<any>): ReactElement | null {
     }
   }
   return null;
-}
+});
 
 const defaultProps: Required<Pick<TNodeRendererProps<any>, 'propsFromParent'>> =
   {
@@ -49,9 +51,7 @@ const defaultProps: Required<Pick<TNodeRendererProps<any>, 'propsFromParent'>> =
     }
   };
 
-/**
- * @ignore
- */
+/* @ts-ignore*/
 TNodeRenderer.defaultProps = defaultProps;
 
 export default TNodeRenderer;
