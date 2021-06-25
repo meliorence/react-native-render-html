@@ -77,6 +77,19 @@ function RawSourceLoader({
   return React.createElement(SourceLoaderInline, { source, ...props });
 }
 
+// check if for each key of two objects, the values are equal
+function shallowEqual(prop1: any, prop2: any) {
+  if (!equals(Object.keys(prop1), Object.keys(prop2))) {
+    return false;
+  }
+  for (const key in prop1) {
+    if (prop1[key] !== prop2[key]) {
+      return false;
+    }
+  }
+  return true;
+}
+
 /**
  * A React component to render HTML snippets.
  *
@@ -118,8 +131,9 @@ const RenderHTMLSource = memo(
       </ttreeEventsContext.Provider>
     );
   },
-  ({ source: prevSource, ...prev }, { source: currSource, ...curr }) =>
-    equals(prevSource, currSource) && equals(prev, curr)
+  ({ source: prevSource, ...prev }, { source: currSource, ...curr }) => {
+    return shallowEqual(prevSource, currSource) && shallowEqual(prev, curr);
+  }
 );
 
 /**
