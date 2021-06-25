@@ -1,7 +1,7 @@
 
 $icon-size: 16px;
 
-%button {
+.socialButton {
   color: var(--button-color);
   border-color: var(--button-color);
   display: inline flex;
@@ -41,12 +41,12 @@ $icon-size: 16px;
 
   .twitter {
     --button-color: #1b95e0;
-    @extend %button;
+    @extend .socialButton;
   }
 
   .reddit {
     --button-color: #ff4500;
-    @extend %button;
+    @extend .socialButton;
   }
 
   .ic {
