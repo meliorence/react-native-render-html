@@ -1,3 +1,10 @@
+# [6.0.0-beta.6](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.5...v6.0.0-beta.6) (2021-06-25)
+
+
+### Bug Fixes
+
+* in `RenderHTMLSource` component, use shallow-equality in memo function ([0fd1f81](https://github.com/meliorence/react-native-render-html/commit/0fd1f81bde56630e4af3c3903fbf09e9f5ff920c))
+
 # [6.0.0-beta.5](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.4...v6.0.0-beta.5) (2021-06-24)
 
 
