@@ -604,4 +604,46 @@ describe('RenderHTML', () => {
       expect(console.warn).toHaveBeenCalled();
     });
   });
+  describe('regarding TRenderEngineConfig props', () => {
+    it('should update props when they change', async () => {
+      const initialTagsStyles = {
+        img: {
+          borderBottomWidth: 2
+        }
+      };
+      const nextTagsStyles = {
+        img: {
+          borderBottomWidth: 4
+        }
+      };
+      const { update, findByTestId } = render(
+        <RenderHTML
+          key={0}
+          source={{
+            html: '<img />'
+          }}
+          tagsStyles={initialTagsStyles}
+          debug={false}
+          contentWidth={100}
+          enableExperimentalMarginCollapsing={false}
+        />
+      );
+      update(
+        <RenderHTML
+          key={0}
+          source={{
+            html: '<img />'
+          }}
+          tagsStyles={nextTagsStyles}
+          debug={false}
+          contentWidth={100}
+          enableExperimentalMarginCollapsing={false}
+        />
+      );
+      const img = await findByTestId('img');
+      expect(StyleSheet.flatten(img.props.style)).toMatchObject({
+        borderBottomWidth: 4
+      });
+    });
+  });
 });
