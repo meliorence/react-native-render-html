@@ -61,6 +61,7 @@ module.exports = {
   organizationName: 'meliorence',
   projectName: 'react-native-render-html',
   plugins: plugins,
+  trailingSlash: false,
   themeConfig: {
     algolia: {
       apiKey: '4f9905bd301a15034820905263f47dda',
@@ -195,21 +196,18 @@ module.exports = {
           title: 'Community',
           items: [
             {
-              to:
-                'https://github.com/meliorence/react-native-render-html/blob/master/HELP.adoc',
+              to: 'https://github.com/meliorence/react-native-render-html/blob/master/HELP.adoc',
               label: 'Help',
               position: 'left'
             },
             {
-              to:
-                'https://github.com/meliorence/react-native-render-html/blob/master/CONTRIBUTING.adoc',
+              to: 'https://github.com/meliorence/react-native-render-html/blob/master/CONTRIBUTING.adoc',
               label: 'Contributing',
               position: 'left'
             },
             {
               label: 'Stack Overflow',
-              href:
-                'https://stackoverflow.com/questions/tagged/react-native-render-html'
+              href: 'https://stackoverflow.com/questions/tagged/react-native-render-html'
             },
             {
               label: 'Discord',
@@ -234,8 +232,7 @@ module.exports = {
             },
             {
               label: 'Rate this library',
-              href:
-                'https://openbase.com/js/react-native-render-html?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge'
+              href: 'https://openbase.com/js/react-native-render-html?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge'
             }
           ]
         }
