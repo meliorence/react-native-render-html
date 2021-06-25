@@ -10,9 +10,9 @@
     "rfg-api": "^0.5.2"
   },
   "devDependencies": {
-    "@docusaurus/core": "2.0.0-beta.2",
-    "@docusaurus/plugin-content-docs": "2.0.0-beta.2",
-    "@docusaurus/types": "2.0.0-beta.2",
+    "@docusaurus/core": "2.0.0-beta.4d93c894f",
+    "@docusaurus/plugin-content-docs": "2.0.0-beta.4d93c894f",
+    "@docusaurus/types": "2.0.0-beta.4d93c894f",
     "typescript": "^4.3.2"
   }
 }
