@@ -94,9 +94,9 @@ export default function PageGuideCustomRenderers() {
         <Section title="Example: Registering a New Tag">
           <Paragraph>
             Let's say we have defined an advanced, powerful{' '}
-            <InlineCode>&lt;bluecircle&gt;</InlineCode> Web Component for our
+            <InlineCode>&lt;blue-circle&gt;</InlineCode> Web Component for our
             website and we need to register a custom renderer for this tag. If
-            we don't, the <InlineCode>&lt;bluecircle&gt;</InlineCode> elements
+            we don't, the <InlineCode>&lt;blue-circle&gt;</InlineCode> elements
             will be translated to <RefRenderHTMLExport name="TEmpty" /> and
             won't be rendered.
           </Paragraph>

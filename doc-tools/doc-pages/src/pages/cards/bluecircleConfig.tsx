@@ -1,7 +1,7 @@
 import { HTMLContentModel, HTMLElementModel } from 'react-native-render-html';
 import { UIRenderHtmlCardProps } from '../../toolkit/toolkit-types';
 
-const html = '<bluecircle></bluecircle>';
+const html = '<blue-circle></blue-circle>';
 
 const bluecircleConfig: UIRenderHtmlCardProps = {
   title: 'A Custom Tag Example',
@@ -10,8 +10,8 @@ const bluecircleConfig: UIRenderHtmlCardProps = {
   props: {
     source: { html },
     customHTMLElementModels: {
-      bluecircle: HTMLElementModel.fromCustomModel({
-        tagName: 'bluecircle',
+      'blue-circle': HTMLElementModel.fromCustomModel({
+        tagName: 'blue-circle',
         mixedUAStyles: {
           width: 50,
           height: 50,
@@ -32,8 +32,8 @@ const bluecircleConfig: UIRenderHtmlCardProps = {
     ],
     exprSrcMap: {
       customHTMLElementModels: `{
-    bluecircle: HTMLElementModel.fromCustomModel({
-      tagName: 'bluecircle',
+    'blue-circle': HTMLElementModel.fromCustomModel({
+      tagName: 'blue-circle',
       mixedUAStyles: {
         width: 50,
         height: 50,
