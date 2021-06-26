@@ -9677,6 +9677,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"doc-docusaurus-ghpages-plugin@workspace:*, doc-docusaurus-ghpages-plugin@workspace:doc-tools/doc-docusaurus-ghpages-plugin":
+  version: 0.0.0-use.local
+  resolution: "doc-docusaurus-ghpages-plugin@workspace:doc-tools/doc-docusaurus-ghpages-plugin"
+  dependencies:
+    "@docusaurus/core": 2.0.0-beta.4d93c894f
+    "@docusaurus/plugin-content-docs": 2.0.0-beta.4d93c894f
+    "@docusaurus/types": 2.0.0-beta.4d93c894f
+  languageName: unknown
+  linkType: soft
+
 "doc-docusaurus-rfg-plugin@workspace:*, doc-docusaurus-rfg-plugin@workspace:doc-tools/doc-docsusaurus-rfg-plugin":
   version: 0.0.0-use.local
   resolution: "doc-docusaurus-rfg-plugin@workspace:doc-tools/doc-docsusaurus-rfg-plugin"
@@ -24243,6 +24253,7 @@ typescript@4.2:
     "@types/react-modal": ^3.12.0
     "@types/react-router-dom": ^5.1.7
     clsx: ^1.1.1
+    doc-docusaurus-ghpages-plugin: "workspace:*"
     doc-docusaurus-rfg-plugin: "workspace:*"
     doc-docusaurus-typedoc-plugin: "workspace:*"
     docusaurus-plugin-sass: "frilox042/docusaurus-plugin-sass#fix-css-module-identName-dev"
