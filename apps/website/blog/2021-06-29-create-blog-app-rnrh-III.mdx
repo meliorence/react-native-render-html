@@ -6,8 +6,8 @@ author_url: https://github.com/jsamr/
 author_image_url: https://avatars.githubusercontent.com/u/3646758?v=4
 tags: [foundry, Blog, Article]
 description: A step-by-step guide to render a Blog Article with table of content and scroll-to-section feature in React Native.
+image: img/article-create-webviewfree-blog-app.png
 hide_table_of_contents: false
-draft: true
 ---
 
 import Screenshot from '@site/src/components/Screenshot';
@@ -15,7 +15,7 @@ import APIReference from '@site/src/components/APIReference';
 import ExpoBlogCard from '@site/src/components/ExpoBlogCard';
 
 This article is the part III of the *Create a  WebView-free Blog App with React Native Render HTML* serie.
-See also [Part I](./2021-06-16-create-blog-app-rnrh-I.mdx) and [Part II](./2021-06-17-create-blog-app-rnrh-II.mdx).
+See also [Part I](./2021-06-27-create-blog-app-rnrh-I.mdx) and [Part II](./2021-06-28-create-blog-app-rnrh-II.mdx).
 
 <!--truncate-->
 
@@ -28,6 +28,9 @@ etc. You can try out the **enhanced** version right now with expo, see [the
 project page](https://expo.io/@jsamr/react-native-blog) for instructions.
 :::
 
+:::tip
+If you have any question or remarks regarding this tutorial, [you're welcome in our Discord channel](https://discord.gg/dbEMMJM).
+:::
 
 <ExpoBlogCard />
 
@@ -778,7 +781,9 @@ export default function WebEngine({ children }: React.PropsWithChildren<{}>) {
 
 <Screenshot url="/img/blog-article-body-refined.png" scale={0.85} />
 
-## React Native Text Limitations
+## Epilogue
+
+### Frustrating React Native Text Limitations
 
 As a final note, I'd like to mention a few frustrating limitations in React
 Native that prevented me from replicating more accurately the official blog styles:
@@ -795,3 +800,20 @@ All these features are required to get the official blog appealing anchors style
 Instead we have backgrounds overlapping each other, which becomes weird when there is a high density of anchors:
 
 ![](/img/appaling-react-native-text-bg.png)
+
+This is because, as stated before, the `backgroundColor` spans to the entire
+height of the line box, instead of spanning to the content area.
+
+### Going Further
+
+You can take a look at the [`enhanced` branch of the project](https://github.com/jsamr/rnrh-blog/tree/enhanced) and see how the
+below features have been implemented:
+
+- Cached queries with `react-queries`;
+- Dark mode (follows system mode);
+- Progressive rendering for fast time to first contentful paint via `FlatList`;
+- Collapsible header with `react-native-reanimated` (v2);
+- Video support with `expo-av`.
+
+That's all for this tutorial! Don't forget to [give us a star](https://github.com/meliorence/react-native-render-html) if you enjoy this library.
+You can also [follow me on Twitter](https://twitter.com/jsamrn), and [rate this library on Open Base](https://openbase.com/js/react-native-render-html?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge).
