@@ -277,7 +277,7 @@ export default function WebEngine({ children }: React.PropsWithChildren<{}>) {
   // This is important to prevent extraneous rebuilts of the engine.
   return (
     <TRenderEngineProvider
-      ignoredDomTags={['button']}
+      ignoredDomTags={ignoredDomTags}
       selectDomRoot={selectDomRoot}>
       <RenderHTMLConfigProvider enableExperimentalMarginCollapsing>
         {children}
