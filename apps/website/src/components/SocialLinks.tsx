@@ -44,7 +44,7 @@ export default function SocialLinks({
           className={classes.icon}
           src={useBaseUrl('/img/undraw_online_discussion.svg')}
         />
-        <div className={classes.text}>comment in those threads</div>
+        <div className={classes.text}>Give us feedback in those threads</div>
       </div>
       <div className={clsx(classes.row, 'margin-top--md')}>
         <a
