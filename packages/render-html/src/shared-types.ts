@@ -32,10 +32,6 @@ import type {
 } from '@native-html/transient-render-engine';
 import type { CounterStyleRenderer } from '@jsamr/counter-style';
 import type { ComponentType, ReactElement, ReactNode } from 'react';
-import type {
-  CSSPropertyNameList,
-  MixedStyleDeclaration
-} from '@native-html/css-processor';
 import type { CustomTagRendererRecord } from './render/render-types';
 import type { ParserOptions as HtmlParserOptions } from 'htmlparser2';
 
@@ -398,7 +394,7 @@ export interface TRenderEngineConfig {
    * @remarks Any `fontFamily` used in those styles must be registered with
    * {@link TRenderEngineConfig.systemFonts} prop.
    */
-  baseStyle?: MixedStyleDeclaration;
+  baseStyle?: TRenderEngineOptions['stylesConfig']['baseStyle'];
   /**
    * Ignore specific DOM nodes.
    *
@@ -456,7 +452,7 @@ export interface TRenderEngineConfig {
    * @warning Property names must be camelCased: for example, `background-color`
    * should be written `backgroundColor`.
    */
-  allowedStyles?: CSSPropertyNameList;
+  allowedStyles?: TRenderEngineOptions['cssProcessorConfig']['inlinePropertiesWhitelist'];
   /**
    * Blacklist specific inline CSS style properties and allow the others.
    *
@@ -466,7 +462,7 @@ export interface TRenderEngineConfig {
    * @remarks Note that if you don't want inline style processing at all, you
    * should set `enableCSSInlineProcessing` prop to `false`.
    */
-  ignoredStyles?: CSSPropertyNameList;
+  ignoredStyles?: TRenderEngineOptions['cssProcessorConfig']['inlinePropertiesBlacklist'];
   /**
    * A list of fonts available in the current platform. These fonts will be used
    * to select the first match in CSS `fontFamily` property, which supports a
@@ -1015,7 +1011,7 @@ export type UnitaryCounterRendererProps = {
   lineHeight: number;
   index: number;
 } & Pick<
-  MixedStyleDeclaration,
+  TRenderEngineOptions['stylesConfig']['baseStyle'],
   'fontFamily' | 'fontStyle' | 'fontWeight' | 'fontVariant'
 >;
 
