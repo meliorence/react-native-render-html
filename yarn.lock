@@ -19834,7 +19834,7 @@ fsevents@^1.2.7:
     react-native-testing-library: ^6.0.0
     react-performance-testing: ^1.2.3
     react-test-renderer: ^17.0.2
-    release-it: ^14.2.1
+    release-it: 14.11.0-next.1
     stringify-entities: ^3.1.0
     typescript: ~4.3.2
     urijs: ^1.19.6
@@ -20517,9 +20517,9 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"release-it@npm:^14.2.1":
-  version: 14.10.0
-  resolution: "release-it@npm:14.10.0"
+"release-it@npm:14.11.0-next.1":
+  version: 14.11.0-next.1
+  resolution: "release-it@npm:14.11.0-next.1"
   dependencies:
     "@iarna/toml": 2.2.5
     "@octokit/rest": 18.6.0
@@ -20551,7 +20551,7 @@ fsevents@^1.2.7:
     yargs-parser: 20.2.7
   bin:
     release-it: bin/release-it.js
-  checksum: b4bfe25c133e5e42b8e0c2820838e43f9199d66487315f77eed2054c6ab325231874df503d82410a1c3f8580f6c6ce6edd9141b480c1aad40e20fbc644331249
+  checksum: b0cbadc2e62ae89dc9a0c1cf12ee1c26570394cb220a85cc9a9c632fc8ec009cb830a9d62393db1d91c8580f5a634ff1acee3d42d5595e1ff0c824f34b1442d7
   languageName: node
   linkType: hard
 
