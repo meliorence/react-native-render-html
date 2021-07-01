@@ -4088,24 +4088,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@native-html/css-processor@npm:1.9.0":
-  version: 1.9.0
-  resolution: "@native-html/css-processor@npm:1.9.0"
+"@native-html/css-processor@npm:1.10.0":
+  version: 1.10.0
+  resolution: "@native-html/css-processor@npm:1.10.0"
   dependencies:
     css-to-react-native: ^3.0.0
   peerDependencies:
     "@types/react": "*"
     "@types/react-native": "*"
     csstype: ^3.0.8
-  checksum: 912edb8283ed20fb1340401403c0f6209d92e225431075423af6344df5f31fb0eff8cdbc8c19b769eefd9d100a59b8c77b7270986f6a9fe253d9e363f849a06e
+  checksum: 066e015ac2fe9f0c3749380dcee0afeba542827cb0133b0d407f62fab1fa54f3c0dd12741ba22c566af1dfb11533c46e56ce50ac3c511482749089d29500b356
   languageName: node
   linkType: hard
 
-"@native-html/transient-render-engine@npm:^9.1.0":
-  version: 9.1.0
-  resolution: "@native-html/transient-render-engine@npm:9.1.0"
+"@native-html/transient-render-engine@npm:^9.2.0":
+  version: 9.2.0
+  resolution: "@native-html/transient-render-engine@npm:9.2.0"
   dependencies:
-    "@native-html/css-processor": 1.9.0
+    "@native-html/css-processor": 1.10.0
     "@types/ramda": ^0.27.40
     csstype: ^3.0.8
     domelementtype: ^2.2.0
@@ -4115,7 +4115,7 @@ __metadata:
   peerDependencies:
     "@types/react-native": "*"
     react-native: ^0.63.0
-  checksum: 1c3715bfa48ee57d98a3401ad546d1beaeaecf0485a5a5a581a6ddb37d77ac30991032c449724621f1dba375618075cf39a18dd80386ea81e2b8a5420b11c8bf
+  checksum: 8aa7de6058913522ba5122537592add28546f6813f63a7fe7355e9622b7444c64233d4eb859e2ff4553cbe82b9669bdb06102378c8818b55322e01c013147ff4
   languageName: node
   linkType: hard
 
@@ -19811,7 +19811,7 @@ fsevents@^1.2.7:
     "@jsamr/counter-style": ^2.0.1
     "@jsamr/react-native-li": ^2.2.1
     "@microsoft/api-extractor": ^7.14.0
-    "@native-html/transient-render-engine": ^9.1.0
+    "@native-html/transient-render-engine": ^9.2.0
     "@release-it/conventional-changelog": ^2.0.1
     "@testing-library/react-hooks": ^7.0.0
     "@testing-library/react-native": next

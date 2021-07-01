@@ -9,33 +9,29 @@ import type {
   ViewStyle
 } from 'react-native';
 import type {
-  MixedStyleRecord,
-  Node,
-  TNode,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  TNodeType,
-  TText,
-  TPhrasing,
-  DocumentContext as TREDocumentContext,
-  TDocument,
-  DomVisitorCallbacks,
-  SetMarkersForTNode,
-  HTMLContentModel,
+  CSSPropertyNameList,
   CustomElementModel,
-  HTMLElementModel,
-  TRenderEngineOptions,
-  NodeWithChildren,
-  Element,
   Document,
+  DocumentContext as TREDocumentContext,
+  DomVisitorCallbacks,
+  Element,
+  HTMLContentModel,
+  HTMLElementModel,
+  MixedStyleDeclaration,
+  MixedStyleRecord,
+  NativeBlockStyles,
   NativeTextStyles,
-  NativeBlockStyles
+  Node,
+  NodeWithChildren,
+  SetMarkersForTNode,
+  TDocument,
+  TNode,
+  TPhrasing,
+  TRenderEngineOptions,
+  TText
 } from '@native-html/transient-render-engine';
 import type { CounterStyleRenderer } from '@jsamr/counter-style';
 import type { ComponentType, ReactElement, ReactNode } from 'react';
-import type {
-  CSSPropertyNameList,
-  MixedStyleDeclaration
-} from '@native-html/css-processor';
 import type { CustomTagRendererRecord } from './render/render-types';
 import type { ParserOptions as HtmlParserOptions } from 'htmlparser2';
 
