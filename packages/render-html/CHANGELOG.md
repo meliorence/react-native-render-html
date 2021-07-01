@@ -1,9 +1,11 @@
 # [6.0.0-beta.7](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.6...v6.0.0-beta.7) (2021-07-01)
 
+### Bug Fixes
+
+* loading image component doesn't display alt and borders anymore ([1351ee5](https://github.com/meliorence/react-native-render-html/commit/1351ee598fa5f0c82e2cb8b54ba4f7c4701d8192))
 
 ### Features
 
-* loading image component doesn't display alt and borders anymore ([1351ee5](https://github.com/meliorence/react-native-render-html/commit/1351ee598fa5f0c82e2cb8b54ba4f7c4701d8192))
 * new `renderersProps.(ol|ul).markerTextStyle` prop ([6ca54e9](https://github.com/meliorence/react-native-render-html/commit/6ca54e925272fe350e550457b5313af47311b6eb))
 * re-export definitions from css-processor ([966f01a](https://github.com/meliorence/react-native-render-html/commit/966f01a2c881c730403d1b0e2982b3674ea58f83)), closes [#503](https://github.com/meliorence/react-native-render-html/issues/503)
 * use aspectRatio style to infer one dimension of images sizes ([e018b30](https://github.com/meliorence/react-native-render-html/commit/e018b30a7d914042cd544930ce02582869be0ba2))
