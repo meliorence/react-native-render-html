@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { ImageDimensions } from '../shared-types';
+import getDimensionsWithAspectRatio from './getDimensionsWithAspectRatio';
 import { UseIMGElementStateProps } from './img-types';
 
 interface IncompleteImageDimensions {
@@ -63,10 +64,11 @@ function deriveSpecifiedDimensionsFromProps({
   const heightProp = normalizeSize(height, normalizeOptionsHeight);
   const styleWidth = normalizeSize(flatStyle.width, normalizeOptionsWidth);
   const styleHeight = normalizeSize(flatStyle.height, normalizeOptionsHeight);
-  return {
-    width: styleWidth ?? widthProp,
-    height: styleHeight ?? heightProp
-  };
+  return getDimensionsWithAspectRatio(
+    styleWidth ?? widthProp,
+    styleHeight ?? heightProp,
+    flatStyle.aspectRatio
+  );
 }
 
 export default function useImageNaturalDimensions<

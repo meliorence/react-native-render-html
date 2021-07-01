@@ -104,6 +104,44 @@ describe('IMGElement', () => {
       expect(image).toBeTruthy();
       expect(StyleSheet.flatten(image.props.style)).toMatchObject(style);
     });
+    it('should combine width with aspectRatio', async () => {
+      const source = { uri: 'http://via.placeholder.com/640' };
+      const dimensions = {
+        width: 320
+      };
+      const { findByTestId } = render(
+        <HTMLImgElement
+          {...dimensions}
+          style={{ aspectRatio: 2 }}
+          source={source}
+        />
+      );
+      const image = await findByTestId('image-success');
+      expect(image).toBeTruthy();
+      expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+        width: 320,
+        height: 160
+      });
+    });
+    it('should combine height with aspectRatio', async () => {
+      const source = { uri: 'http://via.placeholder.com/640' };
+      const dimensions = {
+        height: 160
+      };
+      const { findByTestId } = render(
+        <HTMLImgElement
+          {...dimensions}
+          style={{ aspectRatio: 2 }}
+          source={source}
+        />
+      );
+      const image = await findByTestId('image-success');
+      expect(image).toBeTruthy();
+      expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+        width: 320,
+        height: 160
+      });
+    });
     it('should scale down required dimensions to contentWidth prop when appropriate', async () => {
       const source = { uri: 'http://via.placeholder.com/640x360' };
       const style = {
