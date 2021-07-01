@@ -75,6 +75,7 @@ export default function ListElement({
   style,
   getFallbackListStyleTypeFromNestLevel,
   markerBoxStyle,
+  markerTextStyle: providedMarkerTextStyle,
   enableExperimentalRtl = false,
   enableRemoveTopMarginIfNested = true,
   enableRemoveBottomMarginIfNested = true,
@@ -127,7 +128,10 @@ export default function ListElement({
       : listStyleSpecs[selectedListType];
   const counterRenderer = spec.counterStyleRenderer;
   const startIndex = getStartIndex(tnode);
-  const markerTextStyle = extractMarkerTextStyle(tnode);
+  const markerTextStyle =
+    typeof providedMarkerTextStyle === 'object' && providedMarkerTextStyle
+      ? { ...extractMarkerTextStyle(tnode), ...providedMarkerTextStyle }
+      : extractMarkerTextStyle(tnode);
   const itemProps = useMarkedList({
     counterRenderer,
     startIndex,

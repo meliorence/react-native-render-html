@@ -133,6 +133,16 @@ export interface ListElementConfig {
    * - Set width constraints (since the width will match the `<ol>` / `<ul>` padding left)
    */
   markerBoxStyle?: StyleProp<ViewStyle>;
+  /**
+   * Customize the marker text appearance (the `Text` component in which the marker,
+   * e.g. the symbol prefixing list elements).
+   *
+   * @remarks Useful to set the color, fontFamily, fontSize of the marker.
+   * Avoid using padding here, take advantage of `markerBoxStyle` instead.
+   *
+   * @warning This style must be a style object! Arrays, and `Stylesheet` styles will not work.
+   */
+  markerTextStyle?: TextStyle;
 }
 
 /**
