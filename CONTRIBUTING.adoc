@@ -131,7 +131,7 @@ contribution, you can also ping us in our our https://discord.gg/MwrZmBb[Discord
 If your PR fixes a bug, you are required to implement a regression test to
 prove your fix is effective, but *don't worry, we will help you*. The simplest
 way is to look at {rnrh-test-folder}[our test folder] and copy/paste an existing __regression
-test__ to get inspiration. You are also advised to read our <<DEVELOPING.adoc, developing guide>>. If you know what the test should do, but don't
+test__ to get inspiration. You are also advised to read our <<DEVELOPING.adoc#, developing guide>>. If you know what the test should do, but don't
 know how to implement the test, you can add a "Testing Plan" section in the
 body of your PR.
 
@@ -141,7 +141,7 @@ body of your PR.
 
 When you submit a bug ticket, the fastest path for us to resolve the issue is
 by providing a bug reproduction. Take a glance at {rnrh-test-folder}[our test folder] and get
-inspiration by looking at __regression tests__. You are also advised to read our <<DEVELOPING.adoc, developing guide>>. The PR is ready __when the
+inspiration by looking at __regression tests__. You are also advised to read our <<DEVELOPING.adoc#, developing guide>>. The PR is ready __when the
 test fails__.
 
 === Features
@@ -153,7 +153,7 @@ when you start a Feature PR!
 
 If you PR provides new features, it means that the API of this library will
 likely change. You will be required to test the new
-feature.  Take a look at {rnrh-test-folder}[our test folder]. You are also advised to read our <<DEVELOPING.adoc, developing guide>>. If you're lost, we will be glad to help you, either on
+feature.  Take a look at {rnrh-test-folder}[our test folder]. You are also advised to read our <<DEVELOPING.adoc#, developing guide>>. If you're lost, we will be glad to help you, either on
 discord or within the PR on Github.
 
 
