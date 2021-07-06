@@ -79,7 +79,7 @@ An iOS/Android pure javascript react-native component that renders your HTML int
 </p>
 <p align="center">
   <img src="./assets/discovery-expo-qr.png"/><br>
-  Scan the QR code, or press the link below from your device to open the Discovery App in <a href="https://expo.io/client">Expo Go</a>.<br>
+  Scan the QR code to open the Discovery App in <a href="https://expo.io/client">Expo Go</a>.<br>
 <a href="https://expo.io/@jsamr/react-native-render-html-discovery">
   Or go to the App page to open from your device.
 </a>
