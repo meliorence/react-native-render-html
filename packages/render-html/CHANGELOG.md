@@ -1,3 +1,10 @@
+# [6.0.0-beta.8](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.7...v6.0.0-beta.8) (2021-07-07)
+
+
+### Bug Fixes
+
+* allow spaces between params in color CSS functions such as rgb(...) ([5e755bb](https://github.com/meliorence/react-native-render-html/commit/5e755bb2835815fb48141962c3e06a4c92573004))
+
 # [6.0.0-beta.7](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.6...v6.0.0-beta.7) (2021-07-01)
 
 ### Bug Fixes
