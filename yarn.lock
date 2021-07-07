@@ -4088,24 +4088,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@native-html/css-processor@npm:1.10.0":
-  version: 1.10.0
-  resolution: "@native-html/css-processor@npm:1.10.0"
+"@native-html/css-processor@npm:1.10.1":
+  version: 1.10.1
+  resolution: "@native-html/css-processor@npm:1.10.1"
   dependencies:
     css-to-react-native: ^3.0.0
   peerDependencies:
     "@types/react": "*"
     "@types/react-native": "*"
     csstype: ^3.0.8
-  checksum: 066e015ac2fe9f0c3749380dcee0afeba542827cb0133b0d407f62fab1fa54f3c0dd12741ba22c566af1dfb11533c46e56ce50ac3c511482749089d29500b356
+  checksum: c7bec2b0103036e87483aa82777499aef56fd67e6070ed45cc0c86f12a5dc5b9408251aa0224317780271683899c8b689c347395f644bb5289f02eb0c47c6d0b
   languageName: node
   linkType: hard
 
-"@native-html/transient-render-engine@npm:^9.2.0":
-  version: 9.2.0
-  resolution: "@native-html/transient-render-engine@npm:9.2.0"
+"@native-html/transient-render-engine@npm:^9.2.1":
+  version: 9.2.1
+  resolution: "@native-html/transient-render-engine@npm:9.2.1"
   dependencies:
-    "@native-html/css-processor": 1.10.0
+    "@native-html/css-processor": 1.10.1
     "@types/ramda": ^0.27.40
     csstype: ^3.0.8
     domelementtype: ^2.2.0
@@ -4115,7 +4115,7 @@ __metadata:
   peerDependencies:
     "@types/react-native": "*"
     react-native: ^0.63.0
-  checksum: 8aa7de6058913522ba5122537592add28546f6813f63a7fe7355e9622b7444c64233d4eb859e2ff4553cbe82b9669bdb06102378c8818b55322e01c013147ff4
+  checksum: d3fb6bc84dd49d6cb7ffca3a356a9687b921b68fbd5480c75a5070299556bb904926c6ed0d0930bfaf7eecedf454859be41e485b7aa96e99b4411f4eeefb1cad
   languageName: node
   linkType: hard
 
@@ -19811,7 +19811,7 @@ fsevents@^1.2.7:
     "@jsamr/counter-style": ^2.0.1
     "@jsamr/react-native-li": ^2.2.1
     "@microsoft/api-extractor": ^7.14.0
-    "@native-html/transient-render-engine": ^9.2.0
+    "@native-html/transient-render-engine": ^9.2.1
     "@release-it/conventional-changelog": ^2.0.1
     "@testing-library/react-hooks": ^7.0.0
     "@testing-library/react-native": next
