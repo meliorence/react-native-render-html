@@ -64,9 +64,6 @@
   </div>
 </p>
 <br/>
-<p align="center">
-    <a href="https://meliorence.github.io/react-native-render-html/"><img width="124" height="124" src="assets/logo.svg"></a>
-</p>
 <h1 align="center">react-native-render-html</h1>
 <p align="center">
   <sup>Based on the original work of <a href="https://github.com/Thomas101">Thomas Beverley</a>, props to him.</sup>
@@ -75,14 +72,7 @@
 An iOS/Android pure javascript react-native component that renders your HTML into 100% native views.
 </p>
 <p align="center">
-    <a href="https://meliorence.github.io/react-native-render-html/"><img src="http://i.giphy.com/26tkmjBLvThP0TSak.gif"></a>
-</p>
-<p align="center">
-  <img src="./assets/discovery-expo-qr.png"/><br>
-  Scan the QR code to open the Discovery App in <a href="https://expo.io/client">Expo Go</a>.<br>
-<a href="https://expo.io/@jsamr/react-native-render-html-discovery">
-  Or go to the App page to open from your device.
-</a>
+    <a href="https://meliorence.github.io/react-native-render-html/blog/2021/06/27/create-blog-app-rnrh-I"><img src="./assets/demo.gif"></a>
 </p>
 
 ### 🗃️ Releases
@@ -121,7 +111,7 @@ See our [official website](https://meliorence.github.io/react-native-render-html
 
 ## :iphone: Example
 
-You like to learn by example? Check out this tutorial: [A WebView-free Blog App with React Native Render HTML](https://meliorence.github.io/react-native-render-html/blog/2021/06/27/create-blog-app-rnrh-I).
+You like to learn by example? We have a tutorial from which the demo Gif has been extracted: [A WebView-free Blog App with React Native Render HTML](https://meliorence.github.io/react-native-render-html/blog/2021/06/27/create-blog-app-rnrh-I).
 
 ## :notebook: Changelog
 
