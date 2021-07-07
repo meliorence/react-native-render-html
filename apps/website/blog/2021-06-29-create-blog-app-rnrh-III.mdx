@@ -512,7 +512,7 @@ import {
 
 const ImageRenderer: CustomBlockRenderer = function ImageRenderer(props) {
   const { Renderer, rendererProps } = useInternalRenderer("img", props);
-  if ((props.tnode.parent?.classes.indexOf("avatar__photo") || -1) > -1) {
+  if (props.tnode.parent?.hasClass("avatar__photo")) {
     return <Renderer {...rendererProps} width={50} height={50} />;
   }
   return <Renderer {...rendererProps} />;
@@ -664,51 +664,78 @@ So, let's fix it!
 
 ### Fixing Code Samples
 
-Code samples are rendered by Docusaurus in a `<div class="prism-code">` tag. I propose we define a custom renderer
-for div tags, which renders inside a `ScrollView` when matching the `"prism-code"` class. Furthermore, we can
-define styles for this class to fix the aforementioned issues:
+Code samples are rendered by Docusaurus in a `<pre class="prism-code">` tag. We need to fix two issues:
+  
+- Define a custom renderer for `pre` tags, which renders inside a `ScrollView` when matching the `"prism-code"` class.
+- Define a custom renderer for `span` tags. We need to do that because the
+whole code block is rendered inside a `code` element with a `display: flex;
+flex-direction: column`. However, `code` is translated to a React Native `Text`
+since his element model is **textual**. To work around this issue, we can
+inject line returns after each `span` element with a CSS `token-line` class
+which content does not end with a new line.
 
 
 ```tsx title="components/WebEngine.tsx"
 // ...other imports
+import { TChildrenRenderer } from 'react-native-render-html';
 import { ScrollView } from 'react-native-gesture-handler';
 
 // ...
 
-const DivRenderer: CustomBlockRenderer = function DivRenderer({
+const PreRenderer: CustomBlockRenderer = function PreRenderer({
   TDefaultRenderer,
   ...props
 }) {
-  if (props.tnode.classes.indexOf("prism-code") > -1) {
+  if (props.tnode.hasClass("prism-code")) {
     return (
       <ScrollView horizontal style={props.style}>
         <TDefaultRenderer
           {...props}
-          style={[{ flexGrow: 1, flexShrink: 1, padding: 10 }]}
+          style={{ flexGrow: 1, flexShrink: 1, padding: 10 }}
         />
       </ScrollView>
     );
   }
+  return <TDefaultRenderer {...props} />;
+};
 
+function tnodeEndsWithNewLine(tnode: TNode): boolean {
+  if (tnode.type === "text") {
+    return tnode.data.endsWith("\n");
+  }
+  const lastChild = tnode.children[tnode.children.length - 1];
+  return lastChild ? tnodeEndsWithNewLine(lastChild) : false;
+}
+
+const SpanRenderer: CustomTextualRenderer = function SpanRenderer({
+  TDefaultRenderer,
+  ...props
+}) {
+  if (props.tnode.hasClass("token-line") && !tnodeEndsWithNewLine(props.tnode)) {
+    return (
+      <TDefaultRenderer {...props}>
+        <TChildrenRenderer tchildren={props.tnode.children} />
+        {"\n"}
+      </TDefaultRenderer>
+    );
+  }
   return <TDefaultRenderer {...props} />;
 };
 
 const renderers: CustomTagRendererRecord = {
   // ... other renderers
-  div: DivRenderer,
+  span: SpanRenderer,
+  pre: PreRenderer,
 };
 
 const classesStyles: MixedStyleRecord = {
   // ... other classes styles
-  "token-line": {
-    whiteSpace: "pre",
-    lineHeight: 12 * 1.4,
-  },
   "prism-code": {
     backgroundColor: "#282c34",
     fontFamily: "monospace",
     borderRadius: 10,
-    fontSize: 12,
+    fontSize: 14,
+    lineHeight: 14 * 1.6,
     flexShrink: 0,
   },
 };
