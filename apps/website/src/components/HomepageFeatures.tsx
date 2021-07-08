@@ -22,7 +22,7 @@ const features = [
         The internal data structure to render elements is{' '}
         <strong>entirely transparent</strong>. You can easily{' '}
         <strong>inspect</strong> the transient tree structure and have an
-        immediate glimpse of the engine belly.
+        immediate idea of the engine belly.
       </>
     )
   },

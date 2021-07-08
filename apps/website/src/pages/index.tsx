@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <Layout title="Discover" description={siteConfig.tagline}>
       <HomepageHeader />
-      <div className={classes.annoucement}>
+      <div id="more" className={classes.annoucement}>
         Coming from v4 or v5 ? Check out our{' '}
         <Link to="/docs/migration-guide">
           <strong>migration guide</strong>

@@ -83,6 +83,7 @@ module.exports = {
       respectPrefersColorScheme: true
     },
     navbar: {
+      hideOnScroll: true,
       logo: {
         alt: 'RNRH',
         src: 'img/logo.svg'
@@ -113,6 +114,11 @@ module.exports = {
           activeSidebarClassName: '__fun'
         },
         { to: 'blog', label: 'Blog', position: 'left' },
+        {
+          to: 'https://github.com/sponsors/jsamr',
+          label: 'Sponsorship',
+          position: 'left'
+        },
         {
           to: `https://github.com/meliorence/react-native-render-html/releases/tag/v${version}`,
           label: `v${version}`,

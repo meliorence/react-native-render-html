@@ -5,7 +5,7 @@
   background-position: center;
   background-color: rgb(20, 36, 83);
   background-blend-mode: multiply;
-  min-height: calc(100vh - 70px);
+  min-height: calc(100vh - 60px);
   --ifm-text-color: var(--ifm-color-white);
   color: var(--ifm-color-white);
 }
@@ -17,27 +17,23 @@
   background-color: transparent;
   display: flex;
   flex-direction: column;
+  overflow: visible;
   --ifm-hero-text-color: var(--ifm-color-white);
 }
 
 .title {
   background-color: rgba(108, 108, 233, 0.25);
-  padding: 1rem;
+  padding: 4rem;
   display: block;
   width: 100%;
   text-align: center;
+  overflow: visible;
 }
 
 .main {
   display: flex;
   gap: 8rem;
-}
-
-.buttonGetStarted {
-  font-family: var(--ifm-font-family-base);
-  &:not(:hover) {
-    background-color: rgba(0, 0, 0, 0.6);
-  }
+  overflow: visible;
 }
 
 .content {
@@ -46,6 +42,7 @@
   letter-spacing: 2px;
   justify-content: center;
   display: flex;
+  gap: 4rem;
   flex-direction: column;
   @media screen and (max-width: 1024px) {
     & {
@@ -72,8 +69,11 @@
 }
 
 .screenshot {
-  max-height: calc(100vh - 270px);
+  --offset-top: 4rem;
+  margin-top: calc(-1 * var(--offset-top));
+  max-height: calc(100vh - 350px + var(--offset-top));
   overflow: hidden;
+  z-index: 10;
 }
 
 .screenshotContainer {
@@ -92,4 +92,18 @@
   left: 0;
   position: absolute;
   background: linear-gradient(rgba(0, 0, 0, 0) 80%, #010306);
+}
+
+.button {
+  font-family: var(--ifm-font-family-base);
+  &:not(:hover) {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.buttonsGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
 }

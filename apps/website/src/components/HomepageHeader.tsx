@@ -10,6 +10,13 @@ function Feature({ children }) {
   return <li>{children}</li>;
 }
 
+function onPressReadMore() {
+  const target = document.getElementById('more');
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
 export default function HomepageHeader() {
   return (
     <header className={classes.root}>
@@ -23,25 +30,27 @@ export default function HomepageHeader() {
         <div className={classes.main}>
           <div className={clsx(classes.content)}>
             <ul className={clsx(classes.features)}>
-              <Feature>Render HTML into 100% native views</Feature>
-              <Feature>Register custom renderers easily</Feature>
-              <Feature>Define styles in a breeze</Feature>
-              <Feature>...</Feature>
+              <Feature>📱 Render HTML into 100% native views</Feature>
+              <Feature>⚙️ Write custom tag renderers</Feature>
+              <Feature>🖌️ Style tags and classes</Feature>
             </ul>
-            <div
-              className={clsx(
-                classes.buttons,
-                'margin-top--xl',
-                'margin-bottom--xl'
-              )}>
+            <div className={clsx(classes.buttonsGroup)}>
               <Link
                 className={clsx(
                   'button button--outline button--primary button--lg',
-                  classes.buttonGetStarted
+                  classes.button
                 )}
                 to="/docs/intro">
                 Get Started!
               </Link>
+            </div>
+            <div className={clsx(classes.buttonsGroup, 'margin-bottom--md')}>
+              <button
+                className={clsx('button button--outline button--primary button--lg')}
+                style={{ borderWidth: 0 }}
+                onClick={onPressReadMore}>
+               ⬇ Read More
+              </button>
             </div>
           </div>
           <div className={classes.screenshotContainer}>
