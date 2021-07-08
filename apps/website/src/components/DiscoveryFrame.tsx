@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useRef, useCallback } from 'react';
 //@ts-ignore
 import discoveryVideoUrl from '@site/static/video/discovery.webm';

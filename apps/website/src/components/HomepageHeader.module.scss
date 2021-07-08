@@ -1,20 +1,36 @@
-.heroBanner {
-  padding: 4rem 1rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+.root {
   background-image: url('/img/banner.svg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-color: rgb(20, 36, 83);
   background-blend-mode: multiply;
-  min-height: min(600px, 100vh);
-  --ifm-hero-text-color: var(--ifm-color-white);
-  letter-spacing: 2px;
+  min-height: calc(100vh - 70px);
+  --ifm-text-color: var(--ifm-color-white);
+  color: var(--ifm-color-white);
+}
+
+.heroBanner {
+  padding: 1rem 1rem 0 1rem;
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
   display: flex;
-  align-items: center;
   flex-direction: column;
+  --ifm-hero-text-color: var(--ifm-color-white);
+}
+
+.title {
+  background-color: rgba(108, 108, 233, 0.25);
+  padding: 1rem;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.main {
+  display: flex;
+  gap: 8rem;
 }
 
 .buttonGetStarted {
@@ -25,9 +41,28 @@
 }
 
 .content {
+  text-align: right;
+  max-width: 800px;
+  letter-spacing: 2px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  @media screen and (max-width: 1024px) {
+    & {
+      text-align: center;
+    }
+  }
 }
 
 .subtitle {
+  line-height: 1.4;
+}
+
+.features {
+  padding-right: 0;
+  list-style-type: none;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 966px) {
@@ -36,30 +71,25 @@
   }
 }
 
-.badge {
-  height: 20px;
+.screenshot {
+  max-height: calc(100vh - 270px);
   overflow: hidden;
-  > img {
-    display: block;
-  }
 }
 
-.buttons,
-.stats {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.stats {
-  position: absolute;
-  bottom: 1rem;
-  width: 100%;
-  @media screen and (max-width: 450px) {
+.screenshotContainer {
+  position: relative;
+  @media screen and (max-width: 1024px) {
     & {
-      position: relative;
-      flex-direction: column;
+      display: none;
     }
   }
+}
+
+.screenshotOverlay {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  background: linear-gradient(rgba(0, 0, 0, 0) 80%, #010306);
 }

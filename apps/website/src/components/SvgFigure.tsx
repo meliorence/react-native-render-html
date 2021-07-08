@@ -26,7 +26,7 @@ export default function SvgFigure({
           <SvgComponent
             content="var(--ifm-font-color-base)"
             secondaryContent="var(--ifm-font-color-secondary)"
-            codeBlockBg="rgba(125,125,125,0.2)"
+            codeBlockBg="var(--ifm-code-background)"
             width="100%"
           />
         </div>

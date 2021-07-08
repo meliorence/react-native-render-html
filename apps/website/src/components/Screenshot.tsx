@@ -5,15 +5,19 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 export default function Screenshot({
   scale,
   url,
-  style
+  style,
+  frameStyle,
+  className
 }: {
   scale?: number;
   style?: any;
+  className?: any;
+  frameStyle?: any;
   url: string;
 }) {
   return (
-    <div style={style}>
-      <IPhoneFrame scale={scale}>
+    <div className={className} style={style}>
+      <IPhoneFrame style={frameStyle} scale={scale}>
         <img src={useBaseUrl(url)} />
       </IPhoneFrame>
     </div>

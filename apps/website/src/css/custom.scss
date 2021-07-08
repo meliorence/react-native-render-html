@@ -10,7 +10,8 @@
 @import './shared.scss';
 
 $theme-surface-bg: rgb(0, 0, 48);
-$code-bg: lighten($theme-surface-bg, 4%);
+// $code-bg: lighten($theme-surface-bg, 4%);
+$code-bg: rgba(108, 108, 233, 0.25);
 
 /* You can override the default Infima variables here. */
 :root {
@@ -102,7 +103,7 @@ html[data-theme='light'] {
   --docsearch-searchbox-background: var(--ifm-background-color);
 
   // Fonts
-  --ifm-font-color-secondary: rgb(123, 162, 201);
+  --ifm-font-color-secondary: var(--ifm-color-gray-700);
   --ifm-font-color-base: var(--ifm-color-gray-800);
   --ifm-color-highlight: var(--ifm-color-gray-900);
   --reference-bg: #cececebe;
@@ -115,9 +116,9 @@ html[data-theme='dark'] {
   --docsearch-searchbox-background: var(--ifm-background-color) !important;
   --ifm-code-background: #{$code-bg};
   --ifm-background-color: #1c1c2e;
-  --ifm-font-color-base: var(--ifm-color-gray-500);
+  --ifm-font-color-base: var(--ifm-color-gray-200);
   --ifm-color-highlight: var(--ifm-color-gray-100);
-  --ifm-font-color-secondary: rgb(131, 149, 167);
+  --ifm-font-color-secondary: var(--ifm-color-gray-400);
   --reference-bg: #21232bde;
   --reference-bg-hover: #c0c1c5;
   --reference-color-hover: var(--ifm-color-gray-800);

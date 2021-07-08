@@ -1,0 +1,24 @@
+.badge {
+  height: 20px;
+  overflow: hidden;
+  > img {
+    display: block;
+  }
+}
+
+.stats {
+  display: flex;
+  display: none;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.stats {
+  @media screen and (max-width: 450px) {
+    & {
+      position: relative;
+      flex-direction: column;
+    }
+  }
+}

@@ -22,16 +22,24 @@ export default function TryOnExpoCard({
   className,
   projectUrl,
   name,
-  imagePath
+  imagePath,
+  themed,
+  white
 }: {
   className?: string;
   projectUrl: string;
   name: string;
   imagePath: string;
+  themed?: boolean;
+  white?: boolean;
 }) {
   const src = useBaseUrl(imagePath);
   return (
-    <div className={clsx(classes.expoBox, className)}>
+    <div
+      className={clsx(classes.expoBox, className, {
+        [classes['expoBox--themed']]: themed,
+        [classes['expoBox--white']]: white
+      })}>
       <div className={classes['expoBox__logo']}>
         <ExpoLogo size={48} />
       </div>

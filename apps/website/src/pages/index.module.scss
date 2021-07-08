@@ -7,10 +7,13 @@
 }
 
 .advertising {
+  --ifm-font-color-base: var(--ifm-color-gray-100);
+  color: var(--ifm-font-color-base);
   padding: 2rem;
   display: grid;
   grid-gap: 4rem;
   grid-template-areas: "left right";
+  background-color: var(--ifm-color-primary);
   justify-content: center;
   &__label {
     font-size: 20px;

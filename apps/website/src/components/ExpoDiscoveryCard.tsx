@@ -8,6 +8,7 @@ export default function ExpoDiscoveryCard({
 }) {
   return (
     <TryOnExpoCard
+      white
       className={className}
       name="Discovery"
       projectUrl={'https://expo.io/@jsamr/react-native-render-html-discovery'}

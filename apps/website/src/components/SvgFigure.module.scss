@@ -2,6 +2,8 @@
 
 .figure {
   @extend .figure;
+  margin: 0 0 var(--ifm-leading) 0;
+  padding: 0;
 }
 
 .figure__title {
@@ -10,6 +12,7 @@
 
 .figure__caption {
   @extend .figure__caption;
+  background-color: var(--theme-surface-bg);
 }
 
 .svgContainer {

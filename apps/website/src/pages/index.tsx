@@ -5,7 +5,6 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import classes from './index.module.scss';
 import HomepageHeader from '../components/HomepageHeader';
 import HomepageFeatures from '../components/HomepageFeatures';
-import DiscoveryFrame from '../components/DiscoveryFrame';
 import ExpoDiscoveryCard from '../components/ExpoDiscoveryCard';
 
 export default function Home() {
@@ -27,15 +26,10 @@ export default function Home() {
               Try out our <strong>Discovery App</strong> for an immersive mobile
               experience and glimpse of this library capabilities.
             </p>
-            <p>
-              Explore the documentation with HTML snippets rendered with this
-              library, and playgrounds to highlight features.
-            </p>
           </div>
-          <ExpoDiscoveryCard className={classes['advertising__expo']} />
         </div>
         <div className={classes['advertising__right']}>
-          <DiscoveryFrame scale={0.85} />
+          <ExpoDiscoveryCard className={classes['advertising__expo']} />
         </div>
       </div>
       <main>
