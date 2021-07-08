@@ -132,6 +132,13 @@ You're always welcome to join our [discord channel](https://discord.gg/dbEMMJM) 
 
 Check-out our [contributing guide](./CONTRIBUTING.adoc).
 
+- You can report bugs in [our Issue Tracker](https://github.com/meliorence/react-native-render-html/issues);
+- We handle Feature Requests [in our Canny board](https://native-html.canny.io/features).
+
+## :blue_heart: Sponsorship
+
+Want to support this project or pay consultancy fees for a feature? [Check out this page](https://github.com/sponsors/jsamr).
+
 ## :balance_scale: License
 
 The source code is licensed under BSD 2-Clause "Simplified" License.

@@ -105,17 +105,13 @@ npm install "github:meliorence/react-native-render-html#master"
 [[features]]
 === Proposing a Feature or Enhancement
 
-We're not having big requirements on those kind of submissions, apart from
-following the associated template. The more you elaborate though, the better
-the chances are your proposition will be implemented in the future. You can, *in
-addition*, consider <<rfc,writing a RFC>> and offering it as a PR.
+* Feature requests and enhancements **must** be submitted https://native-html.canny.io/features[in our Canny feature tracker].
+* You can, *in addition*, consider <<rfc,writing a RFC>> and offering it as a PR.
+
+[TIP]
+You or your company need a feature? Consider https://github.com/sponsors/jsamr[sponsorship or consultancy] and it will be delivered ASAP.
 
 == Pull Requests
-
-[CAUTION]
-You should never start a Pull Request prior to having the bug, feature or
-enhancement described in a separate issue. It is also highly advised that you
-deliberate about your intention to provide a PR in the aforementioned issue.
 
 [NOTE]
 We require some criterion to accept a pull request. But don't worry, we're also

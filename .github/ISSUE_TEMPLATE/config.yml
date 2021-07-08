@@ -1,5 +1,8 @@
 blank_issues_enabled: true
 contact_links:
+  - name: Feature Requests and Enhancements
+    url: https://native-html.canny.io/features
+    about: A page where all feature requests are handled.
   - name: Getting Help
     url: https://github.com/meliorence/react-native-render-html/blob/master/HELP.adoc
     about: A resource which describes all the steps you should go through when you're facing an issue with this library.

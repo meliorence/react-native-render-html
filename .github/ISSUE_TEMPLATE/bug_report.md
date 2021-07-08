@@ -15,7 +15,7 @@ labels: bug
 I swear that I have completed these tasks before submitting:
 
 - [ ] I have read the contribution guidelines here: https://git.io/JJ0Pg
-- [ ] I have read the documentation here: https://git.io/JJcAl 
+- [ ] I have read the documentation here: https://meliorence.github.io/react-native-render-html/
 - [ ] I have confirmed that this bug has not been reported yet
 
 ### Decision table
@@ -26,7 +26,7 @@ I swear that I have completed these tasks before submitting:
   full template.
 
   IF YOU LEAVE AT LEAST ONE BOX UNCHECKED, YOU SHOULD INSTEAD OPEN A FEATURE
-  REQUEST HERE: https://git.io/JJCeo
+  REQUEST HERE: https://native-html.canny.io/features
 -->
 
 - [ ] My issue does not look like “The HTML attribute 'xxx' is ignored” (unless
@@ -63,15 +63,13 @@ I swear that I have completed these tasks before submitting:
 
   You can also skip if you are planning to provide a regression test.
 -->
-##### Libraries
+##### RNRH
 
 <!--
-  Print the versions of each library. You are expected to always test the
-  latest version of react-native-render-html.
+  Print the version of react-native-render-html.
 -->
 
 - react-native-render-html:
-- react-native-webview:
 
 <!--
   REMARK: you can skip and delete the Devices section if your issue meets at
