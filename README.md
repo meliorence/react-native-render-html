@@ -75,7 +75,7 @@
 An iOS/Android pure javascript react-native component that renders your HTML into 100% native views.
 </p>
 <p align="center">
-    <a href="https://meliorence.github.io/react-native-render-html/blog/2021/06/27/create-blog-app-rnrh-I"><img src="./assets/demo.gif"></a>
+    <a href="https://meliorence.github.io/react-native-render-html/blog/2021/06/27/create-blog-app-rnrh-I"><img width="320" height="744" src="./assets/demo.gif"></a>
 </p>
 
 ### 🗃️ Releases
