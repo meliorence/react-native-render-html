@@ -109,6 +109,14 @@ export default function PageFAQ() {
             .
           </Paragraph>
         </Section>
+        <Section title="Sub and sup tags are not vertically shifted">
+          <Paragraph>
+            This is caused by a known limitation in React Native.{' '}
+            <Hyperlink url="https://github.com/meliorence/react-native-render-html/issues/76#issuecomment-660702309">
+              The issue is being tracked on Github.
+            </Hyperlink>
+          </Paragraph>
+        </Section>
         <Section title="The application crashes on Android with react-native-screens">
           <Paragraph>
             Likely a bug between <InlineCode>react-native-webview</InlineCode>{' '}
