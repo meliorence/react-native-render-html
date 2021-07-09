@@ -20,6 +20,7 @@ function onPressReadMore() {
 export default function HomepageHeader() {
   return (
     <header className={classes.root}>
+      <div className={classes.rootOverlay} />
       <div className={clsx(classes.title, 'margin-bottom--md')}>
         <h1 className={clsx('hero__title')}>React Native Render HTML</h1>
         <p className={clsx('hero__subtitle', classes.subtitle)}>
