@@ -195,13 +195,15 @@ module.exports = {
           items: [
             {
               to: 'https://github.com/meliorence/react-native-render-html/blob/master/HELP.adoc',
-              label: 'Help',
-              position: 'left'
+              label: 'Help'
             },
             {
               to: 'https://github.com/meliorence/react-native-render-html/blob/master/CONTRIBUTING.adoc',
-              label: 'Contributing',
-              position: 'left'
+              label: 'Contributing'
+            },
+            {
+              to: 'https://native-html.canny.io/features',
+              label: 'Request features'
             },
             {
               label: 'Stack Overflow',
