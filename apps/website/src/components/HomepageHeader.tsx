@@ -46,10 +46,12 @@ export default function HomepageHeader() {
             </div>
             <div className={clsx(classes.buttonsGroup, 'margin-bottom--md')}>
               <button
-                className={clsx('button button--outline button--primary button--lg')}
+                className={clsx(
+                  'button button--outline button--primary button--lg'
+                )}
                 style={{ borderWidth: 0 }}
                 onClick={onPressReadMore}>
-               ⬇ Read More
+                ⬇ Read More
               </button>
             </div>
           </div>

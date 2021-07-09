@@ -28,6 +28,9 @@
   width: 100%;
   text-align: center;
   overflow: visible;
+  > h1 {
+    letter-spacing: 2px;
+  }
 }
 
 .main {
@@ -39,7 +42,6 @@
 .content {
   text-align: right;
   max-width: 800px;
-  letter-spacing: 2px;
   justify-content: center;
   display: flex;
   gap: 4rem;
@@ -106,4 +108,9 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 1rem;
+  @media screen and (max-width: 1024px) {
+    & {
+      align-items: center;
+    }
+  }
 }
