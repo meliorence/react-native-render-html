@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react';
 import IPhoneFrame from './IPhoneFrame';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -5,6 +6,8 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 export default function Screenshot({
   scale,
   url,
+  webpUrl,
+  alt,
   style,
   frameStyle,
   className
@@ -14,11 +17,16 @@ export default function Screenshot({
   className?: any;
   frameStyle?: any;
   url: string;
+  webpUrl?: string;
+  alt?: string;
 }) {
   return (
     <div className={className} style={style}>
       <IPhoneFrame style={frameStyle} scale={scale}>
-        <img src={useBaseUrl(url)} />
+        <picture>
+          {webpUrl && <source type="image/webp" srcSet={useBaseUrl(webpUrl)} />}
+          <img loading="lazy" alt={alt} src={useBaseUrl(url)} />
+        </picture>
       </IPhoneFrame>
     </div>
   );

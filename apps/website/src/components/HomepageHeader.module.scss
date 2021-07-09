@@ -5,8 +5,8 @@
   }
   &::before {
     content: '';
-    background-image: url('/img/banner.svg');
-    background-size: cover;
+    background-image: url('/img/banner.webp');
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     position: absolute;

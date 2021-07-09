@@ -1,19 +1,22 @@
+import clsx from 'clsx';
 import React from 'react';
 import classes from './IPhoneFrame.module.scss';
 
-export default function IphoneFrame({
+export default function IPhoneFrame({
   children,
   scale = 1,
-  style
+  style,
+  className
 }: {
   children: any;
   style?: React.CSSProperties;
   scale?: number;
+  className?: string;
 }) {
   return (
     <div
       style={{ '--scale-factor': scale, ...style } as any}
-      className={classes['device-iphone-x']}>
+      className={clsx(classes['device-iphone-x'], className)}>
       <div className={classes['device-frame']}>
         {React.cloneElement(children, {
           ...children.props,

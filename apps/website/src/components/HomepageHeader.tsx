@@ -4,7 +4,9 @@ import Link from '@docusaurus/Link';
 import classes from './HomepageHeader.module.scss';
 import Screenshot from './Screenshot';
 //@ts-ignore
-import showcaseImg from '@site/static/img/discover-screenshot.png';
+import showcaseImgWebp from '@site/static/img/discover-screenshot.webp';
+//@ts-ignore
+import showcaseImgJpeg from '@site/static/img/discover-screenshot.jpeg';
 
 function Feature({ children }) {
   return <li>{children}</li>;
@@ -57,12 +59,15 @@ export default function HomepageHeader() {
             </div>
           </div>
           <div className={classes.screenshotContainer}>
-            <Screenshot
-              className={classes.screenshot}
-              scale={1}
-              url={showcaseImg}
-            />
-            <div className={classes.screenshotOverlay} />
+            <div className={classes.screenshot}>
+              <Screenshot
+                url={showcaseImgJpeg}
+                webpUrl={showcaseImgWebp}
+                alt="Showcase of a component rendered with React Native Render HTML."
+                scale={1}
+              />
+              <div className={classes.screenshotOverlay} />
+            </div>
           </div>
         </div>
       </div>
