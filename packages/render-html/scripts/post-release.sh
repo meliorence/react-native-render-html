@@ -8,7 +8,7 @@ declare -rx version=$2
 declare -rx isDry=$3
 declare -rx canonicalVersion=${version%-*}
 declare -rx minorVersion=${canonicalVersion%.*}
-declare -x preReleaseTag=${version#[0-9]*.[0-9]*.[0-9]}
+declare -x preReleaseTag=$(echo "${version}" | cut -d "-" -sf2)
 declare dryRun
 preReleaseTag=${preReleaseTag:1}
 
@@ -43,6 +43,43 @@ execGit() {
     $dryRun git "$@"
 }
 
+# echo 0 if $1 == $2, 1 if $1 > $2, -1 if $1 < $2
+versionsAreEqual() {
+    declare -r firstCanonical=${1%-*}
+    declare -r firstPrerelease=$(echo "${1}" | cut -d "-" -sf2)
+    declare -r secondCanonical=${2%-*}
+    declare -r secondPrerelease=$(echo "${2}" | cut -d "-" -sf2)
+    if [[ "$firstCanonical" > "$secondCanonical" ]]; then
+        echo 1;
+        return;
+    fi
+    if [[ "$firstCanonical" < "$secondCanonical" ]]; then
+        echo -1;
+        return;
+    fi
+    if [[ -z "$firstPrerelease" && -n "$secondPrerelease" ]]; then
+        echo 1;
+        return;
+    fi
+    if [[ -n "$firstPrerelease" && -z "$secondPrerelease" ]]; then
+        echo -1;
+        return;
+    fi
+    if [[ "$firstPrerelease" > "$secondPrerelease" ]]; then
+        echo 1;
+        return;
+    fi
+    if [[ "$firstPrerelease" < "$secondPrerelease" ]]; then
+        echo -1;
+        return;
+    fi
+    echo 0;
+}
+
+getLastNext() {
+    npm dist-tag ls react-native-render-html | grep -e "^next:" | awk '{for(i=1;i<=NF;i++)if($i=="next:")print $(i+1)}'
+}
+
 if [ -z "$preReleaseTag" ]; then
     declare tag="release/$minorVersion"
     declare currentBranch
@@ -57,6 +94,14 @@ if [ -z "$preReleaseTag" ]; then
     fi
     execGit push -u origin "$tag"
     execGit checkout "$currentBranch"
+    declare -r lastNextVersion=$(getLastNext)
+    declare -r compareLastNext=$(versionsAreEqual "$version" "$lastNextVersion")
+    # If version@next is lower than current, tag current with next
+    if ((compareLastNext == 1)); then
+        execTagLatest "next"
+    fi
+else
+    execTagLatest "next"
 fi
 
 execTagLatest foundry
