@@ -35,7 +35,8 @@
     "test:lint": "eslint --ext ts,tsx src/",
     "build": "bob build",
     "build:defs": "api-extractor run --local --verbose",
-    "prepack": "yarn run build"
+    "prepack": "yarn run prepack:readme && yarn run build",
+    "prepack:readme": "./scripts/prepack.sh"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.16",
