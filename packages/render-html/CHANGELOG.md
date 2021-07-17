@@ -1,3 +1,7 @@
+## [6.0.1](https://github.com/meliorence/react-native-render-html/compare/v6.0.0...v6.0.1) (2021-07-17)
+
+*No changes visible to consumers of this library.*
+
 # [6.0.0](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.8...v6.0.0) (2021-07-17)
 
 **The Foundry release is finally stable, and is now-on the recommended version.** [Check out **the announcement blog post** in our brand new website](https://meliorence.github.io/react-native-render-html/blog/2021/06/07/foundry-announcement). We also have a [**migration guide**](https://meliorence.github.io/react-native-render-html/docs/migration-guide) for those who're coming from v5 and below.
