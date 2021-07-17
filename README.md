@@ -91,21 +91,23 @@ for those who are coming from v5 and below.
 > Check the table bellow to get documentation for your exact
 > version.
 
-
-| Minor | Branch                                                                                    | Documentation                                                                                              | Latest                                                                         |
-| ----- | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| next  | master                                                                                    | [Official Website](https://meliorence.github.io/react-native-render-html/)                                 | [![npm](https://img.shields.io/npm/v/react-native-render-html/next)](#)        |
-| 5.1   |  [release/5.1](https://github.com/meliorence/react-native-render-html/tree/release/5.1)   | [release/5.1/README.md](https://github.com/meliorence/react-native-render-html/blob/release/5.1/README.md) | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/5.1)](#) |
-| 4.2   |  [release/4.2](https://github.com/meliorence/react-native-render-html/tree/release/4.2)   | [release/4.2/README.md](https://github.com/meliorence/react-native-render-html/blob/release/4.2/README.md) | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/4.2)](#) |
+| Minor | Branch                                                                                   | Documentation                                                                                              | Latest                                                                         |
+| ----- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| next  | master                                                                                   | -                                                                                                          | [![npm](https://img.shields.io/npm/v/react-native-render-html/next)](#)        |
+| 6.0   | [release/6.0](https://github.com/meliorence/react-native-render-html/tree/release/6.0)   | [Official Website](https://meliorence.github.io/react-native-render-html/)                                 | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/6.0)](#) |
+| 5.1   | [release/5.1](https://github.com/meliorence/react-native-render-html/tree/release/5.1)   | [release/5.1/README.md](https://github.com/meliorence/react-native-render-html/blob/release/5.1/README.md) | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/5.1)](#) |
+| 4.2   | [release/4.2](https://github.com/meliorence/react-native-render-html/tree/release/4.2)   | [release/4.2/README.md](https://github.com/meliorence/react-native-render-html/blob/release/4.2/README.md) | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/4.2)](#) |
 
 <a name="prereleases"></a>
 
 ## :computer: Install
 
-Install the foundry (v6) release as such:
+```bash
+npm install react-native-render-html
+```
 
 ```bash
-npm install react-native-render-html@next
+yarn add react-native-render-html
 ```
 
 ## :blue_book: Documentation

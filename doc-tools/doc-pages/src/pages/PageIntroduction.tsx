@@ -101,7 +101,7 @@ export default function PageIntroduction() {
         </Paragraph>
         <SourceDisplay
           lang="bash"
-          content="npm install --save-dev react-native-render-html@next"
+          content="npm install --save-prod react-native-render-html"
           showLineNumbers={false}
         />
       </Chapter>
