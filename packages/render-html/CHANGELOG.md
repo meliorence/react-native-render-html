@@ -1,113 +1,8 @@
-# [6.0.0-beta.8](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.7...v6.0.0-beta.8) (2021-07-07)
-
-
-### Bug Fixes
-
-* allow spaces between params in color CSS functions such as rgb(...) ([5e755bb](https://github.com/meliorence/react-native-render-html/commit/5e755bb2835815fb48141962c3e06a4c92573004))
-
-# [6.0.0-beta.7](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.6...v6.0.0-beta.7) (2021-07-01)
-
-### Bug Fixes
-
-* loading image component doesn't display alt and borders anymore ([1351ee5](https://github.com/meliorence/react-native-render-html/commit/1351ee598fa5f0c82e2cb8b54ba4f7c4701d8192))
-
-### Features
-
-* new `renderersProps.(ol|ul).markerTextStyle` prop ([6ca54e9](https://github.com/meliorence/react-native-render-html/commit/6ca54e925272fe350e550457b5313af47311b6eb))
-* re-export definitions from css-processor ([966f01a](https://github.com/meliorence/react-native-render-html/commit/966f01a2c881c730403d1b0e2982b3674ea58f83)), closes [#503](https://github.com/meliorence/react-native-render-html/issues/503)
-* use aspectRatio style to infer one dimension of images sizes ([e018b30](https://github.com/meliorence/react-native-render-html/commit/e018b30a7d914042cd544930ce02582869be0ba2))
-
-# [6.0.0-beta.6](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.5...v6.0.0-beta.6) (2021-06-25)
-
-
-### Bug Fixes
-
-* in `RenderHTMLSource` component, use shallow-equality in memo function ([0fd1f81](https://github.com/meliorence/react-native-render-html/commit/0fd1f81bde56630e4af3c3903fbf09e9f5ff920c))
-
-# [6.0.0-beta.5](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.4...v6.0.0-beta.5) (2021-06-24)
-
-
-### Features
-
-* export `collapseTopMarginForChild` utility ([199be12](https://github.com/meliorence/react-native-render-html/commit/199be1230d964b34b631851ba4831d4415c15203))
-* export `TNodeRenderer` ([dbabe1d](https://github.com/meliorence/react-native-render-html/commit/dbabe1da9906757375a1a4cb81765000a1364413))
-* new `hasClass` method in `TNodes` ([4cf6ede](https://github.com/meliorence/react-native-render-html/commit/4cf6edee693d9fb8f98482421a0208a5e1153455))
-
-
-### Performance Improvements
-
-* memoize `TNodeRenderer` ([164f205](https://github.com/meliorence/react-native-render-html/commit/164f2051a663aeac4147c0e30f30f0da06021567))
-
-# [6.0.0-beta.4](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.3...v6.0.0-beta.4) (2021-06-23)
-
-
-### Features
-
-* support `renderersProps.(ol|ul).markerBoxStyle` prop ([c929643](https://github.com/meliorence/react-native-render-html/commit/c929643bd396ebcc69c8c59260cf2c73380c4907))
-
-
-### Performance Improvements
-
-* use context to make unitary list style renderers ([26bdd72](https://github.com/meliorence/react-native-render-html/commit/26bdd725ef07d83ac0e7312bf25ef90aa218ab79))
-
-# [6.0.0-beta.3](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.2...v6.0.0-beta.3) (2021-06-19)
-
-
-### Features
-
-* new dev profiler to get feedback on short updates ([98fd749](https://github.com/meliorence/react-native-render-html/commit/98fd74941c1e00c8666591328a5547f01824628d))
-
-
-### BREAKING CHANGES
-
-* The `triggerTREInvalidationPropNames` has been
-discontinued. The idea for this prop originated in the premise that
-many beginners would disregard the issue of passing literal props triggering
-many re-renders. But I realized it mostly frustrated expectations of
-newcomers that this library honors React components contract. So I have
-finally decided to discard the prop, and instead add a lightweight
-profiler (in dev mode only, of course), which warns the consumer of
-re-renders happening in a short period of time. You are now responsible
-for the invalidation of the TRenderEngine, so make sure you memoize the
-props if the controlling components is expected to re-render often.
-
-# [6.0.0-beta.2](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.1...v6.0.0-beta.2) (2021-06-13)
-
-
-### Bug Fixes
-
-* style prop ignored in GenericPressable on Android ([cea6fe8](https://github.com/meliorence/react-native-render-html/commit/cea6fe82d1ff139b668a4675c554be75fa8743a9))
-
-# [6.0.0-beta.1](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.0...v6.0.0-beta.1) (2021-06-11)
+# [6.0.0](https://github.com/meliorence/react-native-render-html/compare/v6.0.0-beta.8...v6.0.0) (2021-07-17)
 
 **The Foundry release is finally stable, and is now-on the recommended version.** [Check out **the announcement blog post** in our brand new website](https://meliorence.github.io/react-native-render-html/blog/2021/06/07/foundry-announcement). We also have a [**migration guide**](https://meliorence.github.io/react-native-render-html/docs/migration-guide) for those who're coming from v5 and below.
 
-**This new beta brings a lot of tests and a branch test coverage above 99%. Many bugs have been identified and fixed thanks tot this endeavor.** (*Please note that the value reported by CodeCov is erroneous, [the bug is being tracked here](https://community.codecov.com/t/false-partials-in-code-coverage-javascript-typescript/2957).*)
-
-### Bug Fixes
-
-* `debug` mode not activated despite prop set to `true` ([ca3fbca](https://github.com/meliorence/react-native-render-html/commit/ca3fbcab68817c95f41aef2c965d2bbad5471302))
-* `viewProps.style` and `textProps.style` should have greater specificity over computed styles ([38bf934](https://github.com/meliorence/react-native-render-html/commit/38bf93490ff87c2cae05dbcc823d073c23e36a23))
-* allow an empty object as param of `buildTREFromConfig` ([a71854f](https://github.com/meliorence/react-native-render-html/commit/a71854ff088e295d736435a0fab961d2ec1c7490))
-* default anchor `onPress` should await on `Linking.canOpenURL` ([d9e8eb5](https://github.com/meliorence/react-native-render-html/commit/d9e8eb56da59341f2cc92eba6f03a04f770552b3))
-* inconsistent loading state in `SourceLoaderUri` ([a530c5c](https://github.com/meliorence/react-native-render-html/commit/a530c5c861c56d2bf5bcd4aaf7b1835d7c108a67))
-* uri source loading failure caused by missing defaults renderers ([4bc3f38](https://github.com/meliorence/react-native-render-html/commit/4bc3f38ddc4cdf26b8b352fcf9200573f23524de))
-* use default list style type when `getFallbackListStyleTypeFromNestLevel` returns undefined ([c0eee3d](https://github.com/meliorence/react-native-render-html/commit/c0eee3d24f1cdb8eaba79884b42b5aa80e9c3767))
-
-# [6.0.0-beta.0](https://github.com/meliorence/react-native-render-html/compare/v5.1.1...v6.0.0-beta.0) (2021-06-08)
-
-**The Foundry release is finally stable, and is now-on the recommended version.** [Check out **the announcement blog post** in our brand new website](https://meliorence.github.io/react-native-render-html/blog/2021/06/07/foundry-announcement). We also have a [**migration guide**](https://meliorence.github.io/react-native-render-html/docs/migration-guide) for those who're coming from v5 and below.
-
-### Bug Fixes
-
-* discard unsupported CSS inline methods (calc, var) ([a2e7578](https://github.com/meliorence/react-native-render-html/commit/a2e757840fea64c2ea81aacb9bb82510959e13a1))
-* images honor styles and physical size in "alt" (error) mode ([059e5d6](https://github.com/meliorence/react-native-render-html/commit/059e5d60908c5a4f328038eb4632426686eba1ca))
-* in `<img>` tags, style dimensions should prevail over attributes ([de3b473](https://github.com/meliorence/react-native-render-html/commit/de3b47345007b65ef582bc9689cb4131bd883fad))
-* list style prefixes now inherit from font*(weight,style,family) ([191c45c](https://github.com/meliorence/react-native-render-html/commit/191c45c14f9ba7ce63591049edb24a1b6e536516))
-* don't peer-depend on prop-types, instead depend directly ([27e843e](https://github.com/meliorence/react-native-render-html/commit/27e843e27141daecaa91e3fee6d0b9970bee07ee))
-
-And all these unlisted in commits: [#94](https://github.com/meliorence/react-native-render-html/issues/94), [#118](https://github.com/meliorence/react-native-render-html/issues/118), [#144](https://github.com/meliorence/react-native-render-html/issues/144), [#150](https://github.com/meliorence/react-native-render-html/issues/150), [#151](https://github.com/meliorence/react-native-render-html/issues/151), [#156](https://github.com/meliorence/react-native-render-html/issues/156), [#165](https://github.com/meliorence/react-native-render-html/issues/165), [#227](https://github.com/meliorence/react-native-render-html/issues/227), [#228](https://github.com/meliorence/react-native-render-html/issues/228), [#243](https://github.com/meliorence/react-native-render-html/issues/243), [#263](https://github.com/meliorence/react-native-render-html/issues/263), [#286](https://github.com/meliorence/react-native-render-html/issues/286), [#312](https://github.com/meliorence/react-native-render-html/issues/312), [#336](https://github.com/meliorence/react-native-render-html/issues/336), [#344](https://github.com/meliorence/react-native-render-html/issues/344), [#360](https://github.com/meliorence/react-native-render-html/issues/360), [#369](https://github.com/meliorence/react-native-render-html/issues/369), [#371](https://github.com/meliorence/react-native-render-html/issues/371) [#414](https://github.com/meliorence/react-native-render-html/issues/414), [#418](https://github.com/meliorence/react-native-render-html/issues/418), [#419](https://github.com/meliorence/react-native-render-html/issues/419), [#420](https://github.com/meliorence/react-native-render-html/issues/420), [#424](https://github.com/meliorence/react-native-render-html/issues/424), [#429](https://github.com/meliorence/react-native-render-html/issues/429), [#432](https://github.com/meliorence/react-native-render-html/issues/432), [#470](https://github.com/meliorence/react-native-render-html/issues/470), [#481](https://github.com/meliorence/react-native-render-html/issues/481), [#482](https://github.com/meliorence/react-native-render-html/issues/482), [#484](https://github.com/meliorence/react-native-render-html/issues/484)
-
+*This changelog highlights changes from **v5**. There are no changes since version 6.0.0-beta.8*
 ### Features
 
 * `GenericPressable` prop to customize the component wrapping interactive views ([707374a](https://github.com/meliorence/react-native-render-html/commit/707374af4d1bed7d2ca0ea521b21df8ef99d12f0)), closes [#472](https://github.com/meliorence/react-native-render-html/issues/472)
@@ -183,7 +78,11 @@ And all these unlisted in commits: [#94](https://github.com/meliorence/react-nat
 * `triggerTREInvalidationPropNames` prop ([89ee25c](https://github.com/meliorence/react-native-render-html/commit/89ee25ced763d95c1d43128853ba0f2902c71b33))
 * `useRendererProps` hook ([87982c4](https://github.com/meliorence/react-native-render-html/commit/87982c4ceecac39dbc72afac7006d2031ffa11d9))
 * warn user of API misusage even when `debug` is set to false ([cb5b42b](https://github.com/meliorence/react-native-render-html/commit/cb5b42b313145f94e565f55754816ef0b3dde591))
-
+* new `renderersProps.(ol|ul).markerTextStyle` prop ([6ca54e9](https://github.com/meliorence/react-native-render-html/commit/6ca54e925272fe350e550457b5313af47311b6eb))
+* support `renderersProps.(ol|ul).markerBoxStyle` prop ([c929643](https://github.com/meliorence/react-native-render-html/commit/c929643bd396ebcc69c8c59260cf2c73380c4907))
+* new dev profiler to get feedback on short updates ([98fd749](https://github.com/meliorence/react-native-render-html/commit/98fd74941c1e00c8666591328a5547f01824628d))
+* use aspectRatio style to infer one dimension of images sizes ([e018b30](https://github.com/meliorence/react-native-render-html/commit/e018b30a7d914042cd544930ce02582869be0ba2))
+* export `collapseTopMarginForChild` utility ([199be12](https://github.com/meliorence/react-native-render-html/commit/199be1230d964b34b631851ba4831d4415c15203))
 
 ### Performance Improvements
 
@@ -196,7 +95,20 @@ And all these unlisted in commits: [#94](https://github.com/meliorence/react-nat
 * replace `ignoreDOMNode` with `ignoreDomNode` ([9ec6403](https://github.com/meliorence/react-native-render-html/commit/9ec6403d3bc5e4b8a34099824682257951503a5a))
 * replace `ignoredTags` with `ignoredDomTags` ([b60d6eb](https://github.com/meliorence/react-native-render-html/commit/b60d6eb143d76a0fcb8bbf1c8c66363c2dcbdaa8))
 
+### Bug Fixes
+
+* loading image component doesn't display alt and borders anymore ([1351ee5](https://github.com/meliorence/react-native-render-html/commit/1351ee598fa5f0c82e2cb8b54ba4f7c4701d8192))
+* discard unsupported CSS inline methods (calc, var) ([a2e7578](https://github.com/meliorence/react-native-render-html/commit/a2e757840fea64c2ea81aacb9bb82510959e13a1))
+* images honor styles and physical size in "alt" (error) mode ([059e5d6](https://github.com/meliorence/react-native-render-html/commit/059e5d60908c5a4f328038eb4632426686eba1ca))
+* in `<img>` tags, style dimensions should prevail over attributes ([de3b473](https://github.com/meliorence/react-native-render-html/commit/de3b47345007b65ef582bc9689cb4131bd883fad))
+* list style prefixes now inherit from font*(weight,style,family) ([191c45c](https://github.com/meliorence/react-native-render-html/commit/191c45c14f9ba7ce63591049edb24a1b6e536516))
+* don't peer-depend on prop-types, instead depend directly ([27e843e](https://github.com/meliorence/react-native-render-html/commit/27e843e27141daecaa91e3fee6d0b9970bee07ee))
+
+And all these unlisted in commits: [#94](https://github.com/meliorence/react-native-render-html/issues/94), [#118](https://github.com/meliorence/react-native-render-html/issues/118), [#144](https://github.com/meliorence/react-native-render-html/issues/144), [#150](https://github.com/meliorence/react-native-render-html/issues/150), [#151](https://github.com/meliorence/react-native-render-html/issues/151), [#156](https://github.com/meliorence/react-native-render-html/issues/156), [#165](https://github.com/meliorence/react-native-render-html/issues/165), [#227](https://github.com/meliorence/react-native-render-html/issues/227), [#228](https://github.com/meliorence/react-native-render-html/issues/228), [#243](https://github.com/meliorence/react-native-render-html/issues/243), [#263](https://github.com/meliorence/react-native-render-html/issues/263), [#286](https://github.com/meliorence/react-native-render-html/issues/286), [#312](https://github.com/meliorence/react-native-render-html/issues/312), [#336](https://github.com/meliorence/react-native-render-html/issues/336), [#344](https://github.com/meliorence/react-native-render-html/issues/344), [#360](https://github.com/meliorence/react-native-render-html/issues/360), [#369](https://github.com/meliorence/react-native-render-html/issues/369), [#371](https://github.com/meliorence/react-native-render-html/issues/371) [#414](https://github.com/meliorence/react-native-render-html/issues/414), [#418](https://github.com/meliorence/react-native-render-html/issues/418), [#419](https://github.com/meliorence/react-native-render-html/issues/419), [#420](https://github.com/meliorence/react-native-render-html/issues/420), [#424](https://github.com/meliorence/react-native-render-html/issues/424), [#429](https://github.com/meliorence/react-native-render-html/issues/429), [#432](https://github.com/meliorence/react-native-render-html/issues/432), [#470](https://github.com/meliorence/react-native-render-html/issues/470), [#481](https://github.com/meliorence/react-native-render-html/issues/481), [#482](https://github.com/meliorence/react-native-render-html/issues/482), [#484](https://github.com/meliorence/react-native-render-html/issues/484)
+
 ### BREAKING CHANGES
+
+*Those are breaking changes from **v5**. Consumers of the beta will not encounter breaking changes.*
 
 * `ignoredTags` has been replaced with `ignoredDomTags` for naming consistency.
 * `alterNode`, `alterData` and `alterChildren` have been dropped in favor of `domVisitors`. The latter is an object with 3 optional callbacks, `onElement`, `onDocument` and `onText` which you can use to intercept and tamper nodes during parsing. Take advantage of [domutils](https://github.com/fb55/domutils) library to delete, insert and manipulate those nodes.
@@ -210,8 +122,7 @@ And all these unlisted in commits: [#94](https://github.com/meliorence/react-nat
 * drop `textSelectable` and `allowFontScaling`. Use `defaultTextProps.selectable` and `defaultTextProps.allowFontScaling` instead.
 * `uri` and `html` props have been dropped. Replace `uri` with `source={{ uri: 'http://...' }}` and `html` with `source={{ html: '<div> ...' }}`. The former now allows `body`, `headers` and `method` fields.
 * `decodeEntities` prop has been dropped. Pass this option to `htmlParserOptions` prop instead.
-* `computeImagesMaxWidth` has been replaced with `computeEmbeddedMaxWidth`. The two props are very similar, but the latest takes an extra argument, "tagName", which is the tag for which a width
-constrain should be enforced. It is planned to work with the @native-html/iframe-plugin extension.
+* `computeImagesMaxWidth` has been replaced with `computeEmbeddedMaxWidth`. The two props are very similar, but the latest takes an extra argument, "tagName", which is the tag for which a width constrain should be enforced. It is planned to work with the @native-html/iframe-plugin extension.
 
 # v5.1.1
 
