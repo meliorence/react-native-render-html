@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Fail early
+set -e
+
 declare -rx name=$1
 declare -rx version=$2
 declare -rx isDry=$3
@@ -32,6 +35,7 @@ dryrun() {
 }
 
 execTagLatest() {
+    echo "Tagging $name@$version with tag $1"
     $dryRun yarn npm tag add "$name@$version" "$1"
 }
 
@@ -40,9 +44,8 @@ execGit() {
 }
 
 if [ -z "$preReleaseTag" ]; then
-    declare tag="version/$minorVersion"
+    declare tag="release/$minorVersion"
     declare currentBranch
-    $dryRun echo "Tagging $name with version $tag"
     # If this is not a pre-release, we should set a release/minor dist-tag
     execTagLatest "$tag"
     currentBranch="$(git rev-parse --abbrev-ref HEAD)"
@@ -56,5 +59,4 @@ if [ -z "$preReleaseTag" ]; then
     execGit checkout "$currentBranch"
 fi
 
-$dryRun echo "Tagging $name with version foundry"
 execTagLatest foundry
