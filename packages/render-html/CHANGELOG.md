@@ -1,3 +1,10 @@
+## [6.0.3](https://github.com/meliorence/react-native-render-html/compare/v6.0.2...v6.0.3) (2021-07-19)
+
+
+### Bug Fixes
+
+* peer-dependency failure wih npm@7 ([002f555](https://github.com/meliorence/react-native-render-html/commit/002f5550e59679facc65b5236198807c99500d52)), closes [#508](https://github.com/meliorence/react-native-render-html/issues/508)
+
 ## [6.0.2](https://github.com/meliorence/react-native-render-html/compare/v6.0.1...v6.0.2) (2021-07-18)
 
 *No changes visible to consumers of this library.*
