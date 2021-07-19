@@ -43,6 +43,15 @@ execGit() {
     $dryRun git "$@"
 }
 
+runGithubActions() {
+    curl \
+        -X POST \
+        -H "Accept: application/vnd.github.v3+json" \
+        -H "authorization: Bearer $GITHUB_TOKEN" \
+        https://api.github.com/repos/meliorence/react-native-render-html/dispatches \
+        -d '{"event_type":"workflow_dispatch","inputs":{"version":"'"${version}"'},"workflow":".github/workflows/npm.yml"}'
+}
+
 # echo 0 if $1 == $2, 1 if $1 > $2, -1 if $1 < $2
 versionsAreEqual() {
     declare -r firstCanonical=${1%-*}
@@ -50,30 +59,30 @@ versionsAreEqual() {
     declare -r secondCanonical=${2%-*}
     declare -r secondPrerelease=$(echo "${2}" | cut -d "-" -sf2)
     if [[ "$firstCanonical" > "$secondCanonical" ]]; then
-        echo 1;
-        return;
+        echo 1
+        return
     fi
     if [[ "$firstCanonical" < "$secondCanonical" ]]; then
-        echo -1;
-        return;
+        echo -1
+        return
     fi
     if [[ -z "$firstPrerelease" && -n "$secondPrerelease" ]]; then
-        echo 1;
-        return;
+        echo 1
+        return
     fi
     if [[ -n "$firstPrerelease" && -z "$secondPrerelease" ]]; then
-        echo -1;
-        return;
+        echo -1
+        return
     fi
     if [[ "$firstPrerelease" > "$secondPrerelease" ]]; then
-        echo 1;
-        return;
+        echo 1
+        return
     fi
     if [[ "$firstPrerelease" < "$secondPrerelease" ]]; then
-        echo -1;
-        return;
+        echo -1
+        return
     fi
-    echo 0;
+    echo 0
 }
 
 getLastNext() {
@@ -105,3 +114,4 @@ else
 fi
 
 execTagLatest foundry
+runGithubActions

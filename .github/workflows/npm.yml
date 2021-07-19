@@ -1,6 +1,10 @@
 name: Npm
 on:
-  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'NPM exact version'
+        required: true
   schedule:
     - cron:  '0 0 * * *'
 
@@ -23,4 +27,4 @@ jobs:
       - name: Init new project
         run: react-native init --npm test; cd test
       - name: Install @next
-        run: npm install react-native-render-html@next
+        run: "npm install react-native-render-html@${{ github.event.inputs.version }}"
