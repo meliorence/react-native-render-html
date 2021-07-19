@@ -23,7 +23,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           check-latest: true
-          cache: 'npm'
       - name: Update NPM to latest
         run: npm --version;npm install -g npm;npm --version
       - name: Install React Native CLI
