@@ -1,3 +1,10 @@
+## [6.0.4](https://github.com/meliorence/react-native-render-html/compare/v6.0.3...v6.0.4) (2021-07-19)
+
+
+### Bug Fixes
+
+* npm v7 peer dependencies on @native-html/* ([3d50b0e](https://github.com/meliorence/react-native-render-html/commit/3d50b0e79b2869deeebc67fcac7719f50d351e9d))
+
 ## [6.0.3](https://github.com/meliorence/react-native-render-html/compare/v6.0.2...v6.0.3) (2021-07-19)
 
 
