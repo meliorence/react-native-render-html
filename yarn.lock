@@ -4088,24 +4088,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@native-html/css-processor@npm:1.10.1":
-  version: 1.10.1
-  resolution: "@native-html/css-processor@npm:1.10.1"
+"@native-html/css-processor@npm:1.10.2":
+  version: 1.10.2
+  resolution: "@native-html/css-processor@npm:1.10.2"
   dependencies:
     css-to-react-native: ^3.0.0
+    csstype: ^3.0.8
   peerDependencies:
     "@types/react": "*"
     "@types/react-native": "*"
-    csstype: ^3.0.8
-  checksum: c7bec2b0103036e87483aa82777499aef56fd67e6070ed45cc0c86f12a5dc5b9408251aa0224317780271683899c8b689c347395f644bb5289f02eb0c47c6d0b
+  checksum: 3c1790cafcbf606a20866aeb2992cd53d53cd6e21a858108bcfd4cd5fd623b029d571f7f4a467393fdb46504f7c0ad99c35041214db00d731038cf1cb04ec8e7
   languageName: node
   linkType: hard
 
-"@native-html/transient-render-engine@npm:^9.2.1":
-  version: 9.2.1
-  resolution: "@native-html/transient-render-engine@npm:9.2.1"
+"@native-html/transient-render-engine@npm:^9.2.2":
+  version: 9.2.2
+  resolution: "@native-html/transient-render-engine@npm:9.2.2"
   dependencies:
-    "@native-html/css-processor": 1.10.1
+    "@native-html/css-processor": 1.10.2
     "@types/ramda": ^0.27.40
     csstype: ^3.0.8
     domelementtype: ^2.2.0
@@ -4114,8 +4114,8 @@ __metadata:
     ramda: ^0.27.1
   peerDependencies:
     "@types/react-native": "*"
-    react-native: ^0.63.0
-  checksum: d3fb6bc84dd49d6cb7ffca3a356a9687b921b68fbd5480c75a5070299556bb904926c6ed0d0930bfaf7eecedf454859be41e485b7aa96e99b4411f4eeefb1cad
+    react-native: ^*
+  checksum: 5a873cb75e6ad7c132d4bcb2c6e65285ad231e619c6ec08e3c112383b13c9ee0ce2f30390c82d7097c9be2580047bbfd1d3ef8ca4c97e5a4163a10023d865ba8
   languageName: node
   linkType: hard
 
@@ -19811,7 +19811,7 @@ fsevents@^1.2.7:
     "@jsamr/counter-style": ^2.0.1
     "@jsamr/react-native-li": ^2.2.1
     "@microsoft/api-extractor": ^7.14.0
-    "@native-html/transient-render-engine": ^9.2.1
+    "@native-html/transient-render-engine": ^9.2.2
     "@release-it/conventional-changelog": ^2.0.1
     "@testing-library/react-hooks": ^7.0.0
     "@testing-library/react-native": next
