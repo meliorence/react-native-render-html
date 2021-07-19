@@ -15,13 +15,17 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 15.x]
+        node-version: [14, 15, 16]
     
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+          check-latest: true
+          cache: 'npm'
+      - name: Update NPM to latest
+        run: npm --version;npm install -g npm;npm --version
       - name: Install React Native CLI
         run: npm install -g @react-native-community/cli
       - name: Init new project
