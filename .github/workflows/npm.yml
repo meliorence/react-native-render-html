@@ -1,6 +1,6 @@
 name: Npm
 on:
-  repository_dispatch:
+  workflow_dispatch:
     inputs:
       version:
         description: 'NPM exact version'
