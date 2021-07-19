@@ -26,5 +26,5 @@ jobs:
         run: npm install -g @react-native-community/cli
       - name: Init new project
         run: react-native init --npm test; cd test
-      - name: Install @next
+      - name: "Install version ${{ github.event.inputs.version }}"
         run: "npm install react-native-render-html@${{ github.event.inputs.version }}"

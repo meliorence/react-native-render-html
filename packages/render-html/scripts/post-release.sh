@@ -44,12 +44,13 @@ execGit() {
 }
 
 runGithubActions() {
+    # https://docs.github.com/en/rest/reference/actions#create-a-workflow-dispatch-event
     curl \
         -X POST \
         -H "Accept: application/vnd.github.v3+json" \
         -H "authorization: Bearer $GITHUB_TOKEN" \
-        https://api.github.com/repos/meliorence/react-native-render-html/dispatches \
-        -d '{"event_type":"workflow_dispatch","inputs":{"version":"'"${version}"'},"workflow":".github/workflows/npm.yml"}'
+        https://api.github.com/repos/meliorence/react-native-render-html/actions/workflows/npm.yml/dispatches \
+        -d '{"ref":"master","inputs":{"version":"'"${version}"'"}}'
 }
 
 # echo 0 if $1 == $2, 1 if $1 > $2, -1 if $1 < $2
