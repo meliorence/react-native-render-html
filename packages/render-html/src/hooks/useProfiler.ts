@@ -3,7 +3,7 @@ import identity from 'ramda/src/identity';
 
 declare const performance: { now: () => number };
 
-const useProfiler = __DEV__
+const useProfiler = __DEV__ && window['performance']
   ? function useProfiler({ name, prop }: { name?: string; prop?: string }) {
       const lastUpdate = useRef(0);
       const profile = useCallback(
