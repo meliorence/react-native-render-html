@@ -1,3 +1,10 @@
+## [6.0.5](https://github.com/meliorence/react-native-render-html/compare/v6.0.4...v6.0.5) (2021-07-31)
+
+
+### Bug Fixes
+
+* test presence of "performance" global variable in useProfiler ([7379c9b](https://github.com/meliorence/react-native-render-html/commit/7379c9b9c533a03754e417b21aaa546f566c5436)), closes [#510](https://github.com/meliorence/react-native-render-html/issues/510)
+
 ## [6.0.4](https://github.com/meliorence/react-native-render-html/compare/v6.0.3...v6.0.4) (2021-07-19)
 
 
