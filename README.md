@@ -139,7 +139,7 @@ Check-out our [contributing guide](./CONTRIBUTING.adoc).
 
 ## :blue_heart: Sponsorship
 
-Want to support this project or pay consultancy fees for a feature? [Check out this page](https://github.com/sponsors/jsamr).
+Want to support this project or hire us to implement a feature? [Check out this page](https://github.com/sponsors/jsamr).
 
 ## :balance_scale: License
 
