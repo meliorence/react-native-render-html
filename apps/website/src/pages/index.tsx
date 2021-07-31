@@ -26,6 +26,14 @@ export default function Home() {
               Try out our <strong>Discovery App</strong> for an immersive mobile
               experience and glimpse of this library capabilities.
             </p>
+            <p>
+              Scan the QR code or{' '}
+              <Link to="https://expo.dev/@jsamr/react-native-render-html-discovery">
+                open the demo from the project page.
+              </Link>
+              . You need <Link to="https://expo.dev/client">Expo Go App</Link>{' '}
+              to test it.
+            </p>
           </div>
         </div>
         <div className={classes['advertising__right']}>

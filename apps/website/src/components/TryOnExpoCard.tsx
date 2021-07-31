@@ -2,6 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import classes from './TryOnExpoCard.module.scss';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import Link from '@docusaurus/Link';
 
 const ExpoLogo = ({ size }) => (
   <svg
@@ -40,9 +41,9 @@ export default function TryOnExpoCard({
         [classes['expoBox--themed']]: themed,
         [classes['expoBox--white']]: white
       })}>
-      <div className={classes['expoBox__logo']}>
+      <Link to="https://expo.dev/client" className={classes['expoBox__logo']}>
         <ExpoLogo size={48} />
-      </div>
+      </Link>
       <a target="_blank" rel="noopener" href={projectUrl}>
         <strong>Try Out The {name} App on Expo!</strong>
       </a>
