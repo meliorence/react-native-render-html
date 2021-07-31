@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, render, waitFor } from 'react-native-testing-library';
+import { act, render, waitFor } from '@testing-library/react-native';
 import RenderHTML from '../RenderHTML';
 import ImgTag from '../elements/IMGElement';
 import TTextRenderer from '../TTextRenderer';

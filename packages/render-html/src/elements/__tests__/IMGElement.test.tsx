@@ -7,7 +7,7 @@ import {
   NativeSyntheticEvent,
   StyleSheet
 } from 'react-native';
-import { act, render, waitFor } from 'react-native-testing-library';
+import { act, render, waitFor } from '@testing-library/react-native';
 import IMGElement from '../IMGElement';
 import HTMLImgElement from '../IMGElement';
 

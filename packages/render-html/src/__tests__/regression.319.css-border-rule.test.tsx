@@ -1,4 +1,4 @@
-import { render } from 'react-native-testing-library';
+import { render } from '@testing-library/react-native';
 import { expectTranslatedInlineCSSRuleTo } from './utils';
 
 /**

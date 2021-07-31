@@ -1,5 +1,5 @@
 import React from 'react';
-import { render as renderTestingLib } from 'react-native-testing-library';
+import { render as renderTestingLib } from '@testing-library/react-native';
 import { Text, StyleSheet } from 'react-native';
 import type { ReactTestInstance } from 'react-test-renderer';
 import RenderHTML from '../RenderHTML';

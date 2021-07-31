@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import RenderHTML from '../RenderHTML';
-import { render } from 'react-native-testing-library';
+import { render } from '@testing-library/react-native';
 import { CustomBlockRenderer } from '../render/render-types';
 import {
   HTMLContentModel,

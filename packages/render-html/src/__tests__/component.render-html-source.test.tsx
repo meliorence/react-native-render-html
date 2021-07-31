@@ -1,6 +1,6 @@
 import { Element } from 'domhandler';
 import React from 'react';
-import { render, waitFor } from 'react-native-testing-library';
+import { render, waitFor } from '@testing-library/react-native';
 import debugMessage from '../debugMessages';
 import RenderHTMLConfigProvider from '../RenderHTMLConfigProvider';
 import RenderHTMLSource from '../RenderHTMLSource';

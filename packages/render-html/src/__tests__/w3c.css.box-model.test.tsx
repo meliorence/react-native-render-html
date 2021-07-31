@@ -1,7 +1,7 @@
 import React from 'react';
 import RenderHTML from '../RenderHTML';
 import IMGElement from '../elements/IMGElement';
-import { render } from 'react-native-testing-library';
+import { render } from '@testing-library/react-native';
 import { elementHasAncestorOfType } from './utils';
 import { TDefaultPhrasingRenderer } from '../TPhrasingRenderer';
 import { View } from 'react-native';

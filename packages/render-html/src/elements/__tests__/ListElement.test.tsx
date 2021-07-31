@@ -2,7 +2,7 @@ import { MarkedListItem } from '@jsamr/react-native-li';
 import { TBlock } from '@native-html/transient-render-engine';
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { render, waitFor } from 'react-native-testing-library';
+import { render, waitFor } from '@testing-library/react-native';
 import { perf, wait } from 'react-performance-testing';
 import buildTREFromConfig from '../../helpers/buildTREFromConfig';
 import RenderHTMLConfigProvider from '../../RenderHTMLConfigProvider';

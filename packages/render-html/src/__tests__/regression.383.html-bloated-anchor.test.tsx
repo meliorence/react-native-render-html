@@ -1,6 +1,6 @@
 import React from 'react';
 import RenderHTML from '../RenderHTML';
-import { render } from 'react-native-testing-library';
+import { render } from '@testing-library/react-native';
 
 /**
  * https://github.com/meliorence/react-native-render-html/issues/383
