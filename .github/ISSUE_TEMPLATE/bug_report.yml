@@ -1,0 +1,80 @@
+name: 🐞 Bug Report
+description: If you have found a bug, you should chose this template.
+labels: bug
+body:
+- type: checkboxes
+  attributes:
+    label: "Decision Table"
+    description: |
+      A good amount of bug reports are actually feature requests. To help you with that, read and check all the boxes to make sure you really need to fill the full template. If you can't check those two boxes, this is a feature request, not a bug. Fill a feature request here: https://native-html.canny.io/features
+    options:
+      - label: "My issue does not look like “The HTML attribute 'xxx' is ignored” (unless
+    we claim support for it)"
+        required: true
+      - label: "My issue does not look like “The HTML element `<yyy>` is not rendered”"
+        required: true
+  validations:
+    required: true
+- type: checkboxes
+  attributes:
+    label: "Good Faith Declaration"
+    description: "We're happy to help, but our time is valuable and we'd like you to make sure you haven't been able to find an answer publicly available."
+    options:
+      - label: "I have read the HELP document here: https://git.io/JBi6R"
+        required: true
+      - label: "I have read the CONTRIBUTING document here: https://git.io/JJ0Pg"
+        required: true
+      - label: "I have confirmed that this bug has not been reported yet"
+        required: true
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: "Description"
+    placeholder: "Describe the bug. Please provide reproduction steps, screnshots and screencasts when appropriate."
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: React Native Information
+    render: sh
+    placeholder: "The result of running `react-native info` or `expo diagnostics`. If you are ready to provide a snack, just type \"confer snack\"."
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: "RNRH Version"
+    placeholder: "Type which version of react-native-render-html you are using."
+  validations:  
+    required: true
+- type: checkboxes
+  attributes:
+    label: Tested Platforms
+    description: Platforms on which you have tested the bug
+    options:
+      - label: Android
+      - label: iOS
+      - label: Web
+      - label: MacOS
+      - label: Windows
+  validations:
+    required: true
+- type: checkboxes
+  attributes:
+    label: Reproduction Platforms
+    description: Platforms on which you have reproduced the bug
+    options:
+      - label: Android
+      - label: iOS
+      - label: Web
+      - label: MacOS
+      - label: Windows
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: Reproductible Demo
+    description: |
+      Either a link to an expo snack, git repository or a code block. The reproduction **must be self-contained**, and **HTML inlined** unless strictly necessary (e.g., a bug with remote HTML). If and only if your issue is related to operations such as dependency resolution or testing, you can type "N/A" (not applicable) instead.
+  validations:
+    required: true

@@ -78,17 +78,23 @@ doesn't.
 [sidebar]
 .__Recommendations__
 --
-1. Make sure your issue isn't covered
+1. Make sure your HTML snippet is compliant with the HTML5 spec.
++
+A. Go to https://validator.w3.org/nu/.
+B. Select "Check by text input"
+C. Paste your snippet in the body of the document.
+D. Press "Check"
+2. Make sure your issue isn't covered
 https://meliorence.github.io/react-native-render-html/docs/intro[by
 the docs].
-2. Read the https://meliorence.github.io/react-native-render-html/docs/faq[FAQ].
-3. Take a look at
+3. Read the https://meliorence.github.io/react-native-render-html/docs/faq[FAQ].
+4. Take a look at
 https://stackoverflow.com/questions/tagged/react-native-render-html for similar
 questions.
-4. Take a look at
+5. Take a look at
 https://github.com/meliorence/react-native-render-html/issues[our issue tracker]
 for similar questions.
-5. If you still don't have a solution, you can choose one or more:
+6. If you still don't have a solution, you can choose one or more:
 +
 A. Submitting a <<CONTRIBUTING.adoc#tickets,Bug Report>>.
 B. Going to https://discord.gg/dbEMMJM[our Discord #support channel]. Please
