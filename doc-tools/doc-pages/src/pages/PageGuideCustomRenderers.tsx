@@ -104,6 +104,11 @@ export default function PageGuideCustomRenderers() {
             We <Bold>must</Bold> register an <Bold>element model</Bold> for this
             tag because it is non-standard.
           </Admonition>
+          <Admonition type="important">
+            Custom tags in HTML markup <Bold>must never be self-closing</Bold>.
+            The HTML parser will not recognize non-void self-closing tags by
+            default which will lead to unexpected outcomes.
+          </Admonition>
           <Admonition type="tip">
             We <Bold>may</Bold> register a custom component renderer, but this
             is not mandatory (see next chapter).

@@ -109,6 +109,34 @@ export default function PageFAQ() {
             .
           </Paragraph>
         </Section>
+        <Section title="Content after custom tags is not displayed or displayed inside instead of below?">
+          <Paragraph>
+            That would often happen in the HTML markup when your custom tags is
+            self-closing such as in <InlineCode>{'<customtag />'}</InlineCode>.
+            The HTML5 standard strictly prohibits non-void elements to be
+            self-closing, and the required behavior for a parser is to ignore
+            the <InlineCode>{'/'}</InlineCode> character in that case. Abding by
+            this standard, the HTML parser will end up considering{' '}
+            <InlineCode>{'<customtag />'}</InlineCode> as equivlent to{' '}
+            <InlineCode>{'<customtag >'}</InlineCode>. Therefore, any content
+            below it will be considered as children of{' '}
+            <InlineCode>{'<customtag>'}</InlineCode>. Because it is forgiving,
+            the parser will close this tag when it reaches the end of the
+            stream. To overcome this issue, <Bold>you have two options</Bold>:
+          </Paragraph>
+          <List type="decimal">
+            <ListItem>
+              Replace <InlineCode>{'<customtag />'}</InlineCode> with{' '}
+              <InlineCode>{'<customtag></customtag>'}</InlineCode> in your HTML
+              markup.
+            </ListItem>
+            <ListItem>
+              Set <InlineCode>recognizeSelfClosing</InlineCode> option to{' '}
+              <InlineCode>true</InlineCode> in{' '}
+              <RefRenderHtmlProp name="htmlParserOptions" /> prop.
+            </ListItem>
+          </List>
+        </Section>
         <Section title="Sub and sup tags are not vertically shifted">
           <Paragraph>
             This is caused by a known limitation in React Native.{' '}
