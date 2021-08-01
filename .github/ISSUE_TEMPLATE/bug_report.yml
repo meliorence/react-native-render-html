@@ -75,6 +75,15 @@ body:
   attributes:
     label: Reproductible Demo
     description: |
-      Either a link to an expo snack, git repository or a code block. The reproduction **must be self-contained**, and **HTML inlined** unless strictly necessary (e.g., a bug with remote HTML). If and only if your issue is related to operations such as dependency resolution or testing, you can type "N/A" (not applicable) instead.
+      Either a link to an expo snack, git repository, or a code block. You can fork [**our Snack template**](https://snack.expo.dev/@jsamr/rnrhtml-template) to gain time (follow instructions from the README in this snack)! The reproduction **must be self-contained**, and **HTML inlined** unless strictly necessary (e.g., a bug with remote HTML). Also note:
+      - If and only if your issue is related to operations such as dependency resolution or testing, you can type "N/A" (not applicable) instead. 
+      - If and only if you provide a regression test in lieu of a reproduction, you can reference the related PR instead.
+    placeholder: "https://snack.expo.dev/@jsamr/rnrhtml-template"
   validations:
     required: true
+- type: textarea
+  attributes:
+    label: Additional Notes
+    description: "Any extra information that can help with the resolution."
+  validations:
+    required: false
