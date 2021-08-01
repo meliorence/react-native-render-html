@@ -73,17 +73,17 @@ body:
     required: true
 - type: textarea
   attributes:
-    label: Reproducible Demo
+    label: Minimal, Reproducible Example
     description: |
-      Either a link to an expo snack, git repository, or a code block. You can fork [**our Snack template**](https://snack.expo.dev/@jsamr/rnrhtml-template) to gain time (follow instructions from the README in this snack)! The reproduction **must be self-contained**, and **HTML inlined** unless strictly necessary (e.g., a bug with remote HTML). Also note:
-      - If and only if your issue is related to operations such as dependency resolution or testing, you can type "N/A" (not applicable) instead. 
-      - If and only if you provide a regression test in lieu of a reproduction, you can reference the related PR instead.
+      [*What is a Minimal, Reproducible Example (MRE)?*](https://stackoverflow.com/help/minimal-reproducible-example). Provide either a link to an expo snack, git repository, or a code block. You can fork [**our Snack template**](https://snack.expo.dev/@jsamr/rnrhtml-template) to gain time (follow instructions from the README in this snack)! The reproduction **must be self-contained**, and **HTML inlined** unless strictly necessary (e.g., a bug with remote HTML). Also note:
+      - If your issue is related to operations such as dependency resolution or testing, **you must** provide a MRE in the form of a git repository or tarball. 
+      - If and only if you provide a regression test in lieu of a MRE, you can reference the related PR instead.
     placeholder: "https://snack.expo.dev/@jsamr/rnrhtml-template"
   validations:
     required: true
 - type: textarea
   attributes:
     label: Additional Notes
-    description: "Any extra information that can help with the resolution. If other libraries are involved in the reproduction, note their versions here."
+    description: "Any extra information that can help with the resolution. If other libraries are involved in the MRE, note their versions here."
   validations:
     required: false
