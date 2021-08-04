@@ -102,10 +102,9 @@ module.exports = {
           label: 'API'
         },
         {
-          type: 'doc',
-          docId: 'migration-guide',
-          label: 'Migrating',
-          activeSidebarClassName: '__fun'
+          to: 'api/renderhtmlprops',
+          position: 'left',
+          label: 'Props'
         },
         {
           type: 'doc',
@@ -149,6 +148,10 @@ module.exports = {
             {
               to: '/docs/faq',
               label: 'FAQ'
+            },
+            {
+              to: '/api/renderhtmlprops',
+              label: 'Props'
             }
           ]
         },
