@@ -259,7 +259,7 @@ export default function PageGuideCustomRenderers() {
               />
             </DListTitle>
             <DListItem>
-              To use when you render a <RefRNSymbol name="Text" />
+              To use when you render a <RefRNSymbol name="View" />
               -based element (e.g. the{' '}
               <RefRenderHTMLExport
                 name="CustomRendererProps"
@@ -272,8 +272,8 @@ export default function PageGuideCustomRenderers() {
             </DListTitle>
             <DListItem>
               To check whether a <RefRNSymbol name="Text" /> (
-              <InlineCode>"block"</InlineCode>) or <RefRNSymbol name="View" /> (
-              <InlineCode>"text"</InlineCode>) is expected as the root element
+              <InlineCode>"text"</InlineCode>) or <RefRNSymbol name="View" /> (
+              <InlineCode>"block"</InlineCode>) is expected as the root element
               returned by this component.
             </DListItem>
             <DListTitle>
