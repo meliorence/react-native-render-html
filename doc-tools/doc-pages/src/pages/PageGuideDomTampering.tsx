@@ -197,8 +197,11 @@ export default function PageGuideDomTampering() {
         </List>
       </Chapter>
       <Paragraph>
-        To do so, we will take advantage of the decoupled{' '}
-        <RefDoc target="rendering" /> architecture and the dom source feature:
+        To do so, we will take advantage of the{' '}
+        <RefDoc target="rendering" fragment="composite-rendering-architecture">
+          composite rendering architecture
+        </RefDoc>{' '}
+        and the dom source feature:
       </Paragraph>
       <SourceDisplay
         showLineNumbers={true}
