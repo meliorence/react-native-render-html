@@ -2,6 +2,7 @@
 import React from 'react';
 import Page from '../Page';
 import useToolkit from '../toolkit/useToolkit';
+import selectableTextConfig from './cards/selectableTextConfig';
 
 export default function PageFAQ() {
   const {
@@ -93,6 +94,19 @@ export default function PageFAQ() {
               @native-html/heuristic-table-plugin
             </Hyperlink>
             .
+          </Paragraph>
+        </Section>
+        <Section title="How can I make textual content selectable?">
+          <Paragraph>
+            You can take advantage of{' '}
+            <RefRenderHtmlProp name="defaultTextProps" /> prop to set{' '}
+            <InlineCode>selectable</InlineCode> to all{' '}
+            <RefRNSymbol name="Text" /> instances.
+          </Paragraph>
+          <RenderHtmlCard {...selectableTextConfig} />
+          <Paragraph>
+            However, the end-user won't be able to select across multiple
+            blocks: this is a limitation of React Native.
           </Paragraph>
         </Section>
       </Chapter>
