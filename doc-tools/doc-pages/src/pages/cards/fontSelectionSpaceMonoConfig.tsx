@@ -45,7 +45,7 @@ const fontSelectionSpaceMonoConfig: UIRenderHtmlCardProps = {
       FontLoader: fontLoaderSrc
     },
     exprSrcMap: {
-      systemFonts: '["\'space-mono\'", ...defaultSystemFonts]'
+      systemFonts: '["space-mono", ...defaultSystemFonts]'
     },
     wrapperComponent: 'FontLoader'
   },
