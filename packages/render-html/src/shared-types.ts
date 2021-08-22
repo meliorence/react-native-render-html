@@ -245,6 +245,7 @@ export interface RenderHTMLSharedProps {
    * @defaultValue A `TouchableNativeFeedback` based component on Android, `TouchableHighlight` based component on other platforms.
    */
   GenericPressable?: ComponentType<GenericPressableProps>;
+
   /**
    * The WebView component used by plugins (iframe, table)...
    * See {@link https://github.com/native-html/plugins | @native-html/plugins}.
@@ -252,6 +253,49 @@ export interface RenderHTMLSharedProps {
    * @defaultValue `() => null`
    */
   WebView?: ComponentType<any>;
+
+  /**
+   * When `true` (default), anonymous {@link TPhrasing} nodes parents of a
+   * lonely {@link TText} node are not translated as React Native `Text`
+   * elements. Instead, their child is directly rendered, e.g. with no `Text`
+   * wrapper.
+   *
+   * @example **With `true`:**
+   *
+   * ```xml
+   * <TPhrasing>
+   *   <TText>Hello</TText>
+   * </TPhrasing>
+   * ```
+   *
+   * is translated to
+   *
+   * ```xml
+   * <Text>Hello</Text>
+   * ```
+   *
+   * **With `false`:**
+   *
+   * ```xml
+   * <TPhrasing>
+   *   <TText>Hello</TText>
+   * </TPhrasing>
+   * ```
+   *
+   * is translated to
+   *
+   * ```xml
+   * <Text><Text>Hello</Text></Text>
+   * ```
+   *
+   * @warning Unless strictly necessary, this should be left to `true` because
+   * some styles don't apply to nested React Native `Text` elements
+   * (`borderRadius`, `padding`...).
+   *
+   * @defaultValue true
+   */
+  bypassAnonymousTPhrasingNodes?: boolean;
+
   /**
    * A function which takes contentWidth and tagName as arguments and returns a
    * new width. Can return Infinity to denote unconstrained widths.
@@ -268,6 +312,7 @@ export interface RenderHTMLSharedProps {
    * @defaultValue `(c) => c`
    */
   computeEmbeddedMaxWidth?: (contentWidth: number, tagName: string) => number;
+
   /**
    * Provide support for list style types which are not supported by this
    * library.
@@ -290,6 +335,7 @@ export interface RenderHTMLSharedProps {
    * ```
    */
   customListStyleSpecs?: Record<string, ListStyleSpec>;
+
   /**
    * Log to the console a snapshot of the rendered {@link TDocument} after each
    * transient render tree invalidation.
@@ -297,22 +343,26 @@ export interface RenderHTMLSharedProps {
    * @defaultValue `false`
    */
   debug?: boolean;
+
   /**
    * Default props for Text elements in the render tree.
    *
    * @remarks "style" will be merged into the tnode own styles.
    */
   defaultTextProps?: TextProps;
+
   /**
    * Default props for View elements in the render tree.
    *
    * @remarks "style" will be merged into the tnode own styles.
    */
   defaultViewProps?: ViewProps;
+
   /**
    * Default props for WebView elements in the render tree used by plugins.
    */
   defaultWebViewProps?: any;
+
   /**
    * Enable or disable margin collapsing CSS behavior (experimental!).
    * See {@link https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing | MDN docs}.

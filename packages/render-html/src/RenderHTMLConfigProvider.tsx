@@ -23,6 +23,7 @@ const childrenRendererContext = {
 export type RenderHTMLConfigPropTypes = Record<keyof RenderHTMLConfig, any>;
 
 export const renderHTMLConfigPropTypes: RenderHTMLConfigPropTypes = {
+  bypassAnonymousTPhrasingNodes: PropTypes.bool,
   defaultTextProps: PropTypes.object,
   defaultViewProps: PropTypes.object,
   enableExperimentalMarginCollapsing: PropTypes.bool,

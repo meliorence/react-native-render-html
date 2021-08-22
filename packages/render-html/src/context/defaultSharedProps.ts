@@ -13,6 +13,7 @@ function WebViewPlaceholder() {
 }
 
 const defaultSharedProps: Required<RenderHTMLSharedProps> = {
+  bypassAnonymousTPhrasingNodes: true,
   debug: false,
   defaultTextProps: {
     selectable: false,

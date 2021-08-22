@@ -35,7 +35,11 @@ export default function TPhrasingRenderer(
   const TNodeChildrenRenderer = useTNodeChildrenRenderer();
   // When a TPhrasing node is anonymous and has only one child, its
   // rendering amounts to rendering its only child.
-  if (props.tnode.tagName == null && props.tnode.children.length <= 1) {
+  if (
+    props.sharedProps.bypassAnonymousTPhrasingNodes &&
+    props.tnode.tagName == null &&
+    props.tnode.children.length <= 1
+  ) {
     return React.createElement(TNodeChildrenRenderer, {
       tnode: props.tnode
     });
