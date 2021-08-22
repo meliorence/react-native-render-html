@@ -26,7 +26,7 @@ describe('RenderHTML', () => {
     ).not.toThrow();
   });
   it('should render without error when missing a source', () => {
-    //@ts-expect-error
+    //@ts-expect-error missing source
     expect(() => render(<RenderHTML debug={false} />)).not.toThrow();
   });
   it('should print a snapshot in debug mode when __DEV__ is true', () => {
@@ -288,7 +288,7 @@ describe('RenderHTML', () => {
           debug={false}
           setMarkersForTNode={(targetMarkers, __parent, tnode) => {
             if (tnode.tagName === 'em') {
-              //@ts-expect-error
+              //@ts-expect-error undefined marker
               targetMarkers.em = true;
             }
           }}

@@ -30,6 +30,7 @@
     "@commitlint/config-conventional": "^12.1.1",
     "@react-native-community/eslint-config": "^3.0.0",
     "@tsconfig/react-native": "^1.0.3",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
     "commitlint": "^12.1.1",
     "conditional-type-checks": "^1.0.5",
     "eslint": "^7.29.0",

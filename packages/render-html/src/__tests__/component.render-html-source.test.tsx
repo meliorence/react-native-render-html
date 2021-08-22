@@ -9,7 +9,7 @@ import { RenderHTMLSourceProps } from '../shared-types';
 import TRenderEngineProvider from '../TRenderEngineProvider';
 
 beforeAll(function () {
-  //@ts-expect-error
+  //@ts-expect-error __DEV__ defined by RN env
   global.__DEV__ = true;
 });
 
@@ -26,7 +26,7 @@ function renderSource(props: RenderHTMLSourceProps) {
 describe('RenderHTMLSource', () => {
   it('should warn when source has not been provided', () => {
     console.warn = jest.fn();
-    //@ts-expect-error
+    //@ts-expect-error missing source
     renderSource({ contentWidth: 10 });
     expect(console.warn).toHaveBeenNthCalledWith(1, debugMessage.noSource);
   });

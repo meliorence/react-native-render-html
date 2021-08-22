@@ -23,12 +23,12 @@ describe('TNodeRenderer', () => {
     expect(console.warn).not.toHaveBeenCalled();
   });
   it('should not warn when __DEV__ is false', () => {
-    //@ts-ignore
+    //@ts-expect-error __DEV__ is defined by RN
     global.__DEV__ = false;
     global.console.warn = jest.fn();
     render(<RenderHTML contentWidth={0} source={{ html: '<bluecircle/>' }} />);
     expect(console.warn).not.toHaveBeenCalled();
-    //@ts-ignore
+    //@ts-expect-error __DEV__ is defined by RN
     global.__DEV__ = true;
   });
 });

@@ -11,7 +11,7 @@ function createOutdatedPropTest(
   it(`should warn when outdated ${propName} prop has been provided`, () => {
     console.warn = jest.fn();
     render(
-      //@ts-ignore
+      // @ts-expect-error test condition
       React.createElement(RenderHTMLDebug, {
         [propName]: propValue,
         debug: false,
@@ -63,9 +63,8 @@ describe('RenderHTMLDebug', () => {
   it('should warn of allowedStyles items with hyphens', () => {
     console.warn = jest.fn();
     render(
-      //@ts-ignore
       React.createElement(RenderHTMLDebug, {
-        //@ts-expect-error
+        //@ts-expect-error invalid key
         allowedStyles: ['hello-world', 'color'],
         debug: false,
         contentWidth: 10
@@ -77,9 +76,8 @@ describe('RenderHTMLDebug', () => {
   it('should warn of ignoredStyles items with hyphens', () => {
     console.warn = jest.fn();
     render(
-      //@ts-ignore
       React.createElement(RenderHTMLDebug, {
-        //@ts-expect-error
+        //@ts-expect-error invalid key
         ignoredStyles: ['hello-world', 'color'],
         debug: false,
         contentWidth: 10

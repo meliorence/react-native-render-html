@@ -51,7 +51,7 @@ const defaultProps: Required<Pick<TNodeRendererProps<any>, 'propsFromParent'>> =
     }
   };
 
-/* @ts-ignore*/
+// @ts-expect-error default props must be defined
 TNodeRenderer.defaultProps = defaultProps;
 
 export default TNodeRenderer;

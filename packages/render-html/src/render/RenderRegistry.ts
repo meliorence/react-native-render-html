@@ -55,7 +55,7 @@ export default class RenderRegistry {
     tnode: T
   ): InternalRenderer<T> | null {
     if (tnode.tagName! in internalRenderers) {
-      //@ts-ignore
+      //@ts-expect-error we know that the tagName is in the map
       return internalRenderers[tnode.tagName!];
     }
     return null;
