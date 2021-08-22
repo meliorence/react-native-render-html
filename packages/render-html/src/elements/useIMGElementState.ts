@@ -11,8 +11,8 @@ function getImageSizeAsync({
   uri,
   headers
 }: {
-  uri: string;
   headers: any;
+  uri: string;
 }): Promise<ImageDimensions> {
   return new Promise<ImageDimensions>((onsuccess, onerror) => {
     const onImageDimensionsSuccess = (width: number, height: number) =>

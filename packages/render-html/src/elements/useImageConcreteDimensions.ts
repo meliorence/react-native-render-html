@@ -61,7 +61,7 @@ function scaleDown(
 }
 
 function scale(
-  { minBox, maxBox }: { minBox: ImageDimensions; maxBox: ImageDimensions },
+  { minBox, maxBox }: { maxBox: ImageDimensions; minBox: ImageDimensions },
   originalBox: ImageDimensions
 ) {
   return scaleDown(maxBox, scaleUp(minBox, originalBox));

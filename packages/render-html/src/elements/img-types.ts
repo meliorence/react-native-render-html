@@ -27,25 +27,11 @@ export interface UseIMGElementStateProps {
    */
   altColor?: string;
   /**
-   * The source to paint.
+   * When the natural ("physical") dimensions for this image are accessible *a
+   * priori*, these should be passed. It will save some API calls and filesytem
+   * access via React Native Image.getSize.
    */
-  source: ImageURISource;
-  /**
-   * The value of the `height` attribute.
-   */
-  height?: string | number;
-  /**
-   * The value of the `width` attribute.
-   */
-  width?: string | number;
-  /**
-   * The style for this image.
-   */
-  style?: StyleProp<ImageStyle>;
-  /**
-   * The value of the `object-fit` CSS property.
-   */
-  objectFit?: WebBlockStyles['objectFit'];
+  cachedNaturalDimensions?: ImageDimensions;
   /**
    * When provided, the print image will have a max width depending on the
    * `contentWidth` prop.
@@ -61,26 +47,40 @@ export interface UseIMGElementStateProps {
    */
   enableExperimentalPercentWidth?: boolean;
   /**
+   * The value of the `height` attribute.
+   */
+  height?: string | number;
+  /**
    * Rendered dimensions prior to retrieving natural dimensions of the image.
    */
   initialDimensions?: ImageDimensions;
   /**
-   * When the natural ("physical") dimensions for this image are accessible *a
-   * priori*, these should be passed. It will save some API calls and filesytem
-   * access via React Native Image.getSize.
+   * The value of the `object-fit` CSS property.
    */
-  cachedNaturalDimensions?: ImageDimensions;
+  objectFit?: WebBlockStyles['objectFit'];
+  /**
+   * The source to paint.
+   */
+  source: ImageURISource;
+  /**
+   * The style for this image.
+   */
+  style?: StyleProp<ImageStyle>;
+  /**
+   * The value of the `width` attribute.
+   */
+  width?: string | number;
 }
 
 /**
  * Props for the {@link IMGElement} component.
  */
 export interface IMGElementProps extends UseIMGElementStateProps {
-  testID?: string;
   /**
    * A callback triggered on press.
    */
   onPress?: PressableProps['onPress'];
+  testID?: string;
 }
 
 /**
@@ -96,6 +96,14 @@ export type IMGElementState =
  */
 export interface IMGElementStateBase {
   /**
+   * Alt text extract from `alt` attribute.
+   */
+  alt?: string;
+  /**
+   * Alt color, defaults to `color` for this {@link TNode}.
+   */
+  altColor?: string;
+  /**
    * Styles of the container.
    */
   containerStyle: ViewStyle;
@@ -107,21 +115,12 @@ export interface IMGElementStateBase {
    * The source to paint.
    */
   source: ImageURISource;
-  /**
-   * Alt text extract from `alt` attribute.
-   */
-  alt?: string;
-  /**
-   * Alt color, defaults to `color` for this {@link TNode}.
-   */
-  altColor?: string;
 }
 
 /**
  * State when the image has been successfully loaded.
  */
 export interface IMGElementStateSuccess extends IMGElementStateBase {
-  type: 'success';
   /**
    * Image-only style extracted from `IMGElement.style` prop.
    */
@@ -136,6 +135,7 @@ export interface IMGElementStateSuccess extends IMGElementStateBase {
    * state s1 be "error".
    */
   onError: (error: Error) => void;
+  type: 'success';
 }
 
 /**
@@ -149,6 +149,6 @@ export interface IMGElementStateLoading extends IMGElementStateBase {
  * State when the image could not be loaded.
  */
 export interface IMGElementStateError extends IMGElementStateBase {
-  type: 'error';
   error: Error;
+  type: 'error';
 }

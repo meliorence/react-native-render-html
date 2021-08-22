@@ -50,8 +50,8 @@ export type HTMLElementModelRecord = Record<
  * @public
  */
 export interface ImageDimensions {
-  width: number;
   height: number;
+  width: number;
 }
 
 /**
@@ -60,9 +60,9 @@ export interface ImageDimensions {
  * @public
  */
 export interface GenericPressableProps extends AccessibilityProps {
-  style?: StyleProp<ViewStyle>;
   borderless?: boolean;
   onPress?: TouchableHighlightProps['onPress'];
+  style?: StyleProp<ViewStyle>;
 }
 
 /**
@@ -84,20 +84,6 @@ export interface ListElementConfig {
    */
   enableDynamicMarkerBoxWidth?: boolean;
   /**
-   * Remove top margin if this element parent is an `li` element and it
-   * is its first child.
-   *
-   * @defaultValue true
-   */
-  enableRemoveTopMarginIfNested?: boolean;
-  /**
-   * Remove bottom margin if this element parent is an `li` element and it
-   * is its last child.
-   *
-   * @defaultValue true
-   */
-  enableRemoveBottomMarginIfNested?: boolean;
-  /**
    * If `true` and the direction is set to `'rtl'` (either via `dir` attribute
    * or `direction` CSS property):
    *
@@ -110,6 +96,20 @@ export interface ListElementConfig {
    * @defaultValue false
    */
   enableExperimentalRtl?: boolean;
+  /**
+   * Remove bottom margin if this element parent is an `li` element and it
+   * is its last child.
+   *
+   * @defaultValue true
+   */
+  enableRemoveBottomMarginIfNested?: boolean;
+  /**
+   * Remove top margin if this element parent is an `li` element and it
+   * is its first child.
+   *
+   * @defaultValue true
+   */
+  enableRemoveTopMarginIfNested?: boolean;
   /**
    * Get default list-style-type given the number of nest level for this list.
    *
@@ -184,21 +184,21 @@ export interface RenderersProps extends Record<string, any> {
   };
   img: {
     /**
+     * Support for relative percent-widths.
+     *
+     * @defaultValue false
+     */
+    enableExperimentalPercentWidth?: boolean;
+    /**
      * Default width and height to display while image's dimensions are being retrieved.
      *
      * @remarks Changes to this prop will cause a react tree update. Always
      * memoize it.
      */
     initialDimensions?: ImageDimensions;
-    /**
-     * Support for relative percent-widths.
-     *
-     * @defaultValue false
-     */
-    enableExperimentalPercentWidth?: boolean;
   };
-  ul: ListElementConfig;
   ol: ListElementConfig;
+  ul: ListElementConfig;
 }
 
 /**
@@ -238,6 +238,21 @@ export interface RenderHTMLPassedProps {
  */
 export interface RenderHTMLSharedProps {
   /**
+   * A component used to wrap pressable elements (e.g. when provided `onPress`).
+   * Note that textual elements will not be wrapped; `TextProps.onPress` will
+   * be used instead.
+   *
+   * @defaultValue A `TouchableNativeFeedback` based component on Android, `TouchableHighlight` based component on other platforms.
+   */
+  GenericPressable?: ComponentType<GenericPressableProps>;
+  /**
+   * The WebView component used by plugins (iframe, table)...
+   * See {@link https://github.com/native-html/plugins | @native-html/plugins}.
+   *
+   * @defaultValue `() => null`
+   */
+  WebView?: ComponentType<any>;
+  /**
    * A function which takes contentWidth and tagName as arguments and returns a
    * new width. Can return Infinity to denote unconstrained widths.
    *
@@ -253,65 +268,6 @@ export interface RenderHTMLSharedProps {
    * @defaultValue `(c) => c`
    */
   computeEmbeddedMaxWidth?: (contentWidth: number, tagName: string) => number;
-  /**
-   * Enable or disable margin collapsing CSS behavior (experimental!).
-   * See {@link https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing | MDN docs}.
-   *
-   * @remarks Limitations:
-   * - Only adjacent siblings collapsing is implemented.
-   * - If one of the margins height is in percent, no collapsing will occur.
-   * - Will apply indiscriminately to all `display` properties (including
-   *   flex), which is not standard.
-   * - Might not work well with {@link TPhrasing} nodes having only one child.
-   *
-   * @defaultValue false
-   */
-  enableExperimentalMarginCollapsing?: boolean;
-  /**
-   * Default props for Text elements in the render tree.
-   *
-   * @remarks "style" will be merged into the tnode own styles.
-   */
-  defaultTextProps?: TextProps;
-  /**
-   * Default props for View elements in the render tree.
-   *
-   * @remarks "style" will be merged into the tnode own styles.
-   */
-  defaultViewProps?: ViewProps;
-  /**
-   * Default props for WebView elements in the render tree used by plugins.
-   */
-  defaultWebViewProps?: any;
-  /**
-   * Log to the console a snapshot of the rendered {@link TDocument} after each
-   * transient render tree invalidation.
-   *
-   * @defaultValue `false`
-   */
-  debug?: boolean;
-  /**
-   * The WebView component used by plugins (iframe, table)...
-   * See {@link https://github.com/native-html/plugins | @native-html/plugins}.
-   *
-   * @defaultValue `() => null`
-   */
-  WebView?: ComponentType<any>;
-  /**
-   * A component used to wrap pressable elements (e.g. when provided `onPress`).
-   * Note that textual elements will not be wrapped; `TextProps.onPress` will
-   * be used instead.
-   *
-   * @defaultValue A `TouchableNativeFeedback` based component on Android, `TouchableHighlight` based component on other platforms.
-   */
-  GenericPressable?: ComponentType<GenericPressableProps>;
-  /**
-   * Color used for pressable items, either for the ripple effect (Android), or
-   * highlight (other platforms).
-   *
-   * @defaultValue rgba(38, 132, 240, 0.2)
-   */
-  pressableHightlightColor?: string;
   /**
    * Provide support for list style types which are not supported by this
    * library.
@@ -334,6 +290,51 @@ export interface RenderHTMLSharedProps {
    * ```
    */
   customListStyleSpecs?: Record<string, ListStyleSpec>;
+  /**
+   * Log to the console a snapshot of the rendered {@link TDocument} after each
+   * transient render tree invalidation.
+   *
+   * @defaultValue `false`
+   */
+  debug?: boolean;
+  /**
+   * Default props for Text elements in the render tree.
+   *
+   * @remarks "style" will be merged into the tnode own styles.
+   */
+  defaultTextProps?: TextProps;
+  /**
+   * Default props for View elements in the render tree.
+   *
+   * @remarks "style" will be merged into the tnode own styles.
+   */
+  defaultViewProps?: ViewProps;
+  /**
+   * Default props for WebView elements in the render tree used by plugins.
+   */
+  defaultWebViewProps?: any;
+  /**
+   * Enable or disable margin collapsing CSS behavior (experimental!).
+   * See {@link https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing | MDN docs}.
+   *
+   * @remarks Limitations:
+   * - Only adjacent siblings collapsing is implemented.
+   * - If one of the margins height is in percent, no collapsing will occur.
+   * - Will apply indiscriminately to all `display` properties (including
+   *   flex), which is not standard.
+   * - Might not work well with {@link TPhrasing} nodes having only one child.
+   *
+   * @defaultValue false
+   */
+  enableExperimentalMarginCollapsing?: boolean;
+
+  /**
+   * Color used for pressable items, either for the ripple effect (Android), or
+   * highlight (other platforms).
+   *
+   * @defaultValue rgba(38, 132, 240, 0.2)
+   */
+  pressableHightlightColor?: string;
 }
 
 /**
@@ -347,54 +348,13 @@ export interface RenderHTMLSharedProps {
  */
 export interface TRenderEngineConfig {
   /**
-   * ParserOptions for {@link https://github.com/fb55/htmlparser2/wiki/Parser-options | htmlparser2}.
+   * Whitelist specific inline CSS style properties and ignore the others.
    *
-   * @defaultValue  `{ decodeEntities: true }`
+   * @warning Property names must be camelCased: for example, `background-color`
+   * should be written `backgroundColor`.
    */
-  htmlParserOptions?: HtmlParserOptions;
-  /**
-   * Enable or disable fallback styles for each tag. For example, `pre` tags
-   * will have `whiteSpace` set to 'pre' by default.
-   *
-   * @defaultValue true
-   */
-  enableUserAgentStyles?: boolean;
-  /**
-   * Enable or disable inline CSS processing of inline styles.
-   *
-   * @remarks If you want to allow or disallow specific properties, use
-   * `allowedStyles` or `ignoredStyles` props.
-   *
-   * @defaultValue true
-   */
-  enableCSSInlineProcessing?: boolean;
-  /**
-   * Provide mixed styles to target HTML tag names.
-   *
-   * @warning **Do NOT** use the `StyleSheet` API to create those styles.
-   *
-   * @remarks Any `fontFamily` used in those styles must be registered with
-   * {@link TRenderEngineConfig.systemFonts} prop.
-   */
-  tagsStyles?: MixedStyleRecord;
-  /**
-   * Provide mixed styles to target elements selected by CSS classes.
-   *
-   * @warning **Do NOT** use the `StyleSheet` API to create those styles.
-   *
-   * @remarks Any `fontFamily` used in those styles must be registered with
-   * {@link TRenderEngineConfig.systemFonts} prop.
-   */
-  classesStyles?: MixedStyleRecord;
-  /**
-   * Provide mixed styles to target elements identified by the `id` attribute.
-   *
-   * @warning **Do NOT** use the `StyleSheet` API to create those styles.
-   *
-   * @remarks Any `fontFamily` used in those styles must be registered with
-   * {@link TRenderEngineConfig.systemFonts} prop.
-   */
-  idsStyles?: MixedStyleRecord;
+  allowedStyles?: CSSPropertyNameList;
+
   /**
    * The default style for the document (root). Inheritable styles will be
    * transferred to children. That works also for textual styles.
@@ -405,6 +365,100 @@ export interface TRenderEngineConfig {
    * {@link TRenderEngineConfig.systemFonts} prop.
    */
   baseStyle?: MixedStyleDeclaration;
+
+  /**
+   * Provide mixed styles to target elements selected by CSS classes.
+   *
+   * @warning **Do NOT** use the `StyleSheet` API to create those styles.
+   *
+   * @remarks Any `fontFamily` used in those styles must be registered with
+   * {@link TRenderEngineConfig.systemFonts} prop.
+   */
+  classesStyles?: MixedStyleRecord;
+
+  /**
+   * Customize element models for target tags.
+   */
+  customHTMLElementModels?: HTMLElementModelRecord;
+
+  /**
+   * **Experimental**
+   *
+   * Disable hoisting. Especially useful for rendering with react-native-web.
+   * Note that your layout might break in native!
+   *
+   * @defaultValue false
+   */
+  dangerouslyDisableHoisting?: boolean;
+
+  /**
+   * **Experimental**
+   *
+   * Disable whitespace collapsing. Especially useful if your html is
+   * being pre-processed server-side with a minifier.
+   *
+   * @defaultValue false
+   */
+  dangerouslyDisableWhitespaceCollapsing?: boolean;
+
+  /**
+   * An object which callbacks will be invoked when a DOM element or text node
+   * has been parsed and its children attached. This is great to tamper the dom,
+   * remove children, insert nodes, change text nodes data... etc.
+   *
+   * @remark Each callback is applied during DOM parsing, thus with very little
+   * overhead. However, it means that one node next siblings won't be available
+   * since it has not yet been parsed. If you need some siblings logic, apply
+   * this logic to the children of this node.
+   */
+  domVisitors?: DomVisitorCallbacks;
+
+  /**
+   * The default value in pixels for 1em.
+   */
+  emSize?: number;
+
+  /**
+   * Enable or disable inline CSS processing of inline styles.
+   *
+   * @remarks If you want to allow or disallow specific properties, use
+   * `allowedStyles` or `ignoredStyles` props.
+   *
+   * @defaultValue true
+   */
+  enableCSSInlineProcessing?: boolean;
+
+  /**
+   * Enable or disable fallback styles for each tag. For example, `pre` tags
+   * will have `whiteSpace` set to 'pre' by default.
+   *
+   * @defaultValue true
+   */
+  enableUserAgentStyles?: boolean;
+
+  /**
+   * A record for specific CSS fonts.
+   *
+   * @remarks Use `Plaform.select({ ios: ..., android: ..., default: ...})`.
+   */
+  fallbackFonts?: FallbackFontsDefinitions;
+
+  /**
+   * ParserOptions for {@link https://github.com/fb55/htmlparser2/wiki/Parser-options | htmlparser2}.
+   *
+   * @defaultValue  `{ decodeEntities: true }`
+   */
+  htmlParserOptions?: HtmlParserOptions;
+  /**
+   * Provide mixed styles to target elements identified by the `id` attribute.
+   *
+   * @warning **Do NOT** use the `StyleSheet` API to create those styles.
+   *
+   * @remarks Any `fontFamily` used in those styles must be registered with
+   * {@link TRenderEngineConfig.systemFonts} prop.
+   */
+  idsStyles?: MixedStyleRecord;
+
   /**
    * Ignore specific DOM nodes.
    *
@@ -428,17 +482,7 @@ export interface TRenderEngineConfig {
     node: Node,
     parent: NodeWithChildren
   ) => boolean | void | unknown;
-  /**
-   * An object which callbacks will be invoked when a DOM element or text node
-   * has been parsed and its children attached. This is great to tamper the dom,
-   * remove children, insert nodes, change text nodes data... etc.
-   *
-   * @remark Each callback is applied during DOM parsing, thus with very little
-   * overhead. However, it means that one node next siblings won't be available
-   * since it has not yet been parsed. If you need some siblings logic, apply
-   * this logic to the children of this node.
-   */
-  domVisitors?: DomVisitorCallbacks;
+
   /**
    * A list of **lowercase tags** which should not be included in the DOM.
    *
@@ -446,23 +490,7 @@ export interface TRenderEngineConfig {
    * overhead.
    */
   ignoredDomTags?: string[];
-  /**
-   * Select the DOM root before TTree generation. For example, you could
-   * iterate over children until you reach an article element and return this
-   * element.
-   *
-   * @remarks Applied after DOM parsing, before normalization and TTree
-   * construction. Before normalization implies that a body will be added in
-   * the tree **after** selecting root.
-   */
-  selectDomRoot?: TRenderEngineOptions['selectDomRoot'];
-  /**
-   * Whitelist specific inline CSS style properties and ignore the others.
-   *
-   * @warning Property names must be camelCased: for example, `background-color`
-   * should be written `backgroundColor`.
-   */
-  allowedStyles?: CSSPropertyNameList;
+
   /**
    * Blacklist specific inline CSS style properties and allow the others.
    *
@@ -473,6 +501,30 @@ export interface TRenderEngineConfig {
    * should set `enableCSSInlineProcessing` prop to `false`.
    */
   ignoredStyles?: CSSPropertyNameList;
+
+  /**
+   * Select the DOM root before TTree generation. For example, you could
+   * iterate over children until you reach an article element and return this
+   * element.
+   *
+   * @remarks Applied after DOM parsing, before normalization and TTree
+   * construction. Before normalization implies that a body will be added in
+   * the tree **after** selecting root.
+   */
+  selectDomRoot?: TRenderEngineOptions['selectDomRoot'];
+
+  /**
+   * Set custom markers from a {@link TNode} and all its descendants. {@link Markers} will be
+   * accessible in custom renderers via `tnode.markers` prop.
+   *
+   * @param targetMarkers - The markers to modify.
+   * @param parentMarkers - {@link Markers} from the parent {@link TNode}.
+   * @param tnode - The {@link TNode} to inspect.
+   *
+   * @defaultValue `() => null`
+   */
+  setMarkersForTNode?: SetMarkersForTNode;
+
   /**
    * A list of fonts available in the current platform. These fonts will be used
    * to select the first match in CSS `fontFamily` property, which supports a
@@ -494,49 +546,16 @@ export interface TRenderEngineConfig {
    * ```
    */
   systemFonts?: string[];
+
   /**
-   * A record for specific CSS fonts.
+   * Provide mixed styles to target HTML tag names.
    *
-   * @remarks Use `Plaform.select({ ios: ..., android: ..., default: ...})`.
+   * @warning **Do NOT** use the `StyleSheet` API to create those styles.
+   *
+   * @remarks Any `fontFamily` used in those styles must be registered with
+   * {@link TRenderEngineConfig.systemFonts} prop.
    */
-  fallbackFonts?: FallbackFontsDefinitions;
-  /**
-   * Customize element models for target tags.
-   */
-  customHTMLElementModels?: HTMLElementModelRecord;
-  /**
-   * The default value in pixels for 1em.
-   */
-  emSize?: number;
-  /**
-   * Set custom markers from a {@link TNode} and all its descendants. {@link Markers} will be
-   * accessible in custom renderers via `tnode.markers` prop.
-   *
-   * @param targetMarkers - The markers to modify.
-   * @param parentMarkers - {@link Markers} from the parent {@link TNode}.
-   * @param tnode - The {@link TNode} to inspect.
-   *
-   * @defaultValue `() => null`
-   */
-  setMarkersForTNode?: SetMarkersForTNode;
-  /**
-   * **Experimental**
-   *
-   * Disable hoisting. Especially useful for rendering with react-native-web.
-   * Note that your layout might break in native!
-   *
-   * @defaultValue false
-   */
-  dangerouslyDisableHoisting?: boolean;
-  /**
-   * **Experimental**
-   *
-   * Disable whitespace collapsing. Especially useful if your html is
-   * being pre-processed server-side with a minifier.
-   *
-   * @defaultValue false
-   */
-  dangerouslyDisableWhitespaceCollapsing?: boolean;
+  tagsStyles?: MixedStyleRecord;
 }
 
 /**
@@ -546,23 +565,26 @@ export interface TRenderEngineConfig {
  */
 export interface HTMLSourceUri {
   /**
-   * The URI to load in the `HTML` component. Can be a local or remote file.
-   */
-  uri: string;
-  /**
-   * The HTTP Method to use. Defaults to GET if not specified.
-   */
-  method?: string;
-  /**
-   * Additional HTTP headers to send with the request.
-   */
-  headers?: Record<string, string>;
-  /**
    * The HTTP body to send with the request. This must be a valid
    * UTF-8 string, and will be sent exactly as specified, with no
    * additional encoding (e.g. URL-escaping or base64) applied.
    */
   body?: string;
+
+  /**
+   * Additional HTTP headers to send with the request.
+   */
+  headers?: Record<string, string>;
+
+  /**
+   * The HTTP Method to use. Defaults to GET if not specified.
+   */
+  method?: string;
+
+  /**
+   * The URI to load in the `HTML` component. Can be a local or remote file.
+   */
+  uri: string;
 }
 
 /**
@@ -572,14 +594,15 @@ export interface HTMLSourceUri {
  */
 export interface HTMLSourceInline {
   /**
-   * A static HTML page to display in the HTML component.
-   */
-  html: string;
-  /**
    * The base URL to resolve relative URLs in the HTML code.
    * See {@link useNormalizedUrl}.
    */
   baseUrl?: string;
+
+  /**
+   * A static HTML page to display in the HTML component.
+   */
+  html: string;
 }
 
 /**
@@ -596,15 +619,16 @@ export interface HTMLSourceInline {
  */
 export interface HTMLSourceDom {
   /**
-   * A DOM object. This object **must** have been created with
-   * the transient render engine `parseDocument` method.
-   */
-  dom: Element | Document;
-  /**
    * The base URL to resolve relative URLs in the HTML code.
    * See {@link useNormalizedUrl}.
    */
   baseUrl?: string;
+
+  /**
+   * A DOM object. This object **must** have been created with
+   * the transient render engine `parseDocument` method.
+   */
+  dom: Element | Document;
 }
 
 /**
@@ -623,6 +647,16 @@ export type HTMLSource = HTMLSourceInline | HTMLSourceDom | HTMLSourceUri;
 export interface RenderHTMLConfig
   extends RenderHTMLSharedProps,
     RenderHTMLPassedProps {
+  /**
+   * Replace the default error if a remote website's content could not be fetched.
+   */
+  remoteErrorView?: (source: HTMLSourceUri) => ReactElement;
+
+  /**
+   * Replace the default loader while fetching a remote website's content.
+   */
+  remoteLoadingView?: (source: HTMLSourceUri) => ReactElement;
+
   /**
    * Your custom renderers.
    *
@@ -657,14 +691,6 @@ export interface RenderHTMLConfig
    * ```
    */
   renderers?: CustomTagRendererRecord;
-  /**
-   * Replace the default loader while fetching a remote website's content.
-   */
-  remoteLoadingView?: (source: HTMLSourceUri) => ReactElement;
-  /**
-   * Replace the default error if a remote website's content could not be fetched.
-   */
-  remoteErrorView?: (source: HTMLSourceUri) => ReactElement;
 }
 
 /**
@@ -674,29 +700,33 @@ export interface RenderHTMLConfig
  */
 export interface RenderHTMLSourceProps {
   /**
-   * The object source to render (either `{ uri }`, `{ html }` or `{ dom }`).
-   */
-  source: HTMLSource;
-  /**
    * The width of the HTML content to display. The recommended practice is to pass
    * `useWindowDimensions().width` minus any padding or margins.
    *
    * @defaultValue `Dimensions.get('window').width`
    */
   contentWidth?: number;
-  /**
-   * Triggered when the transient render tree changes. Useful for debugging.
-   */
-  onTTreeChange?: (ttree: TDocument) => void;
-  /**
-   * Triggered when HTML is available to the RenderHTML component.
-   */
-  onHTMLLoaded?: (html: string) => void;
+
   /**
    * Handler invoked when the document metadata is available. It will
    * re-trigger on HTML content changes.
    */
   onDocumentMetadataLoaded?: (documentMetadata: DocumentMetadata) => void;
+
+  /**
+   * Triggered when HTML is available to the RenderHTML component.
+   */
+  onHTMLLoaded?: (html: string) => void;
+
+  /**
+   * Triggered when the transient render tree changes. Useful for debugging.
+   */
+  onTTreeChange?: (ttree: TDocument) => void;
+
+  /**
+   * The object source to render (either `{ uri }`, `{ html }` or `{ dom }`).
+   */
+  source: HTMLSource;
 }
 
 /**
@@ -715,9 +745,9 @@ export interface RenderHTMLProps
  * @public
  */
 export interface FallbackFontsDefinitions {
-  serif: string;
-  'sans-serif': string;
   monospace: string;
+  'sans-serif': string;
+  serif: string;
 }
 
 /**
@@ -739,21 +769,25 @@ export interface PropsFromParent extends Record<string, any> {
  */
 export interface TChildProps {
   /**
-   * The React `key`.
-   */
-  key: string | number;
-  /**
    * The child element.
    */
   childElement: ReactElement;
-  /**
-   * The position relative to parent.
-   */
-  index: number;
+
   /**
    * The child associated {@link TNode}.
    */
   childTnode: TNode;
+
+  /**
+   * The position relative to parent.
+   */
+  index: number;
+
+  /**
+   * The React `key`.
+   */
+  key: string | number;
+
   /**
    * Props that have been set via
    * {@link TChildrenRendererProps.propsForChildren}.
@@ -773,15 +807,17 @@ export interface TChildrenBaseProps {
    * rendering children.
    */
   disableMarginCollapsing?: boolean;
-  /**
-   * A React render function to render and wrap individual children.
-   */
-  renderChild?: (props: TChildProps) => ReactNode;
+
   /**
    * Props that will be passed to children renderers via
    * {@link CustomRendererProps.propsFromParent}.
    */
   propsForChildren?: Partial<PropsFromParent>;
+
+  /**
+   * A React render function to render and wrap individual children.
+   */
+  renderChild?: (props: TChildProps) => ReactNode;
 }
 
 /**
@@ -815,13 +851,14 @@ export interface TNodeChildrenRendererProps extends TChildrenBaseProps {
  */
 export interface TNodeRendererProps<T extends TNode> {
   /**
-   * The {@link TNode} to render.
-   */
-  tnode: T;
-  /**
    * Props passed by direct parents.
    */
   propsFromParent?: PropsFromParent;
+
+  /**
+   * The {@link TNode} to render.
+   */
+  tnode: T;
 }
 
 /**
@@ -835,6 +872,7 @@ export interface RendererBaseProps<T extends TNode>
    * Any default renderer should be able to handle press.
    */
   onPress?: (e: GestureResponderEvent) => void;
+
   /**
    * Props for Text-based renderers.
    *
@@ -843,6 +881,12 @@ export interface RendererBaseProps<T extends TNode>
    * textProps.style]}`.
    */
   textProps: TextProps;
+
+  /**
+   * Is is a text-based or view-based renderer?
+   */
+  type: 'text' | 'block';
+
   /**
    * Props for View-based renderers.
    *
@@ -851,10 +895,6 @@ export interface RendererBaseProps<T extends TNode>
    * viewProps.style]}`.
    */
   viewProps: ViewProps;
-  /**
-   * Is is a text-based or view-based renderer?
-   */
-  type: 'text' | 'block';
 }
 
 /**
@@ -869,6 +909,13 @@ export interface TDefaultRendererProps<T extends TNode>
    * When children is present, renderChildren will not be invoked.
    */
   children?: ReactNode;
+
+  /**
+   * Props passed to children nodes. Those props are accessible from children
+   * renderers as `propsFromParent`
+   */
+  propsForChildren?: Partial<PropsFromParent>;
+
   /**
    * The style for this renderer will depend on the type of {@link TNode}.
    * You can check if a node is textual with `props.type === 'text'`.
@@ -876,11 +923,6 @@ export interface TDefaultRendererProps<T extends TNode>
   style: T extends TText | TPhrasing
     ? StyleProp<TextStyle>
     : StyleProp<ViewStyle>;
-  /**
-   * Props passed to children nodes. Those props are accessible from children
-   * renderers as `propsFromParent`
-   */
-  propsForChildren?: Partial<PropsFromParent>;
 }
 
 /**
@@ -892,17 +934,19 @@ export interface TDefaultRendererProps<T extends TNode>
 export interface InternalRendererProps<T extends TNode>
   extends RendererBaseProps<T> {
   /**
-   * Styles extracted with {@link TNode.getNativeStyles}.
+   * Default renderer for this {@link TNode}.
    */
-  style: T extends TText | TPhrasing ? NativeTextStyles : NativeBlockStyles;
+  TDefaultRenderer: TDefaultRenderer<T>;
+
   /**
    * Props shared across the whole render tree.
    */
   sharedProps: Required<RenderHTMLSharedProps>;
+
   /**
-   * Default renderer for this {@link TNode}.
+   * Styles extracted with {@link TNode.getNativeStyles}.
    */
-  TDefaultRenderer: TDefaultRenderer<T>;
+  style: T extends TText | TPhrasing ? NativeTextStyles : NativeBlockStyles;
 }
 
 /**
@@ -969,6 +1013,15 @@ export type CustomRenderer<T extends TNode> = ComponentType<
  */
 export interface DocumentMetadata {
   /**
+   * How anchors should be actioned on press?
+   *
+   * @remarks By default, `renderersProps.a.onPress` will always open the
+   * system browser, equivalent to `_blank` target. However, you can customize
+   * the behavior by providing your own implementation.
+   */
+  baseTarget: TREDocumentContext['baseTarget'];
+
+  /**
    * The base URL of this resource. It will influence how relative URLs are
    * resolved such as `href` and `src` element properties. By order of
    * precedence:
@@ -978,36 +1031,33 @@ export interface DocumentMetadata {
    * 3. `baseUrl` as origin of `source.uri` prop.
    */
   baseUrl: string;
-  /**
-   * The language of this document, extracted from the `lang` attribute of the
-   * `<html/>` element;
-   */
-  lang: string;
+
   /**
    * The writing direction of this document, extracted from the `dir` attribute
    * of `<html/>` element.
    */
   dir: 'ltr' | 'rtl';
+
   /**
-   * The content of the &lt;title&gt; element.
+   * The language of this document, extracted from the `lang` attribute of the
+   * `<html/>` element;
    */
-  title: string;
-  /**
-   * How anchors should be actioned on press?
-   *
-   * @remarks By default, `renderersProps.a.onPress` will always open the
-   * system browser, equivalent to `_blank` target. However, you can customize
-   * the behavior by providing your own implementation.
-   */
-  baseTarget: TREDocumentContext['baseTarget'];
+  lang: string;
+
   /**
    * A data array comprised of attributes from &lt;link&gt; elements.
    */
   links: TREDocumentContext['links'];
+
   /**
    * A data array comprised of attributes from &lt;meta&gt; elements.
    */
   meta: TREDocumentContext['meta'];
+
+  /**
+   * The content of the &lt;title&gt; element.
+   */
+  title: string;
 }
 
 /**
@@ -1018,8 +1068,8 @@ export interface DocumentMetadata {
 export type UnitaryCounterRendererProps = {
   color: string;
   fontSize: number;
-  lineHeight: number;
   index: number;
+  lineHeight: number;
 } & Pick<
   MixedStyleDeclaration,
   'fontFamily' | 'fontStyle' | 'fontWeight' | 'fontVariant'
@@ -1056,8 +1106,8 @@ export type DefaultSupportedListStyleType =
  * @public
  */
 export interface TextualListStyleSpec {
-  type: 'textual';
   counterStyleRenderer: CounterStyleRenderer;
+  type: 'textual';
 }
 
 /**
@@ -1069,9 +1119,9 @@ export interface TextualListStyleSpec {
  * @public
  */
 export interface UnitaryListStyleSpec {
+  Component: ComponentType<UnitaryCounterRendererProps>;
   counterStyleRenderer: CounterStyleRenderer;
   type: 'unitary';
-  Component: ComponentType<UnitaryCounterRendererProps>;
 }
 
 /**

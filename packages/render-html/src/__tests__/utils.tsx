@@ -23,9 +23,9 @@ export function expectTranslatedInlineCSSRuleTo({
   extraProps
 }: {
   cssInlineRules: string;
-  test: (v: any) => void;
-  render: typeof renderTestingLib;
   extraProps?: Partial<RenderHTMLProps>;
+  render: typeof renderTestingLib;
+  test: (v: any) => void;
 }) {
   const { getByText } = render(
     <RenderHTML
@@ -66,10 +66,10 @@ export function expectTranslatedInlineCSSValueToEqual({
   extraProps
 }: {
   cssInlineRules: string;
+  extraProps?: Partial<RenderHTMLProps>;
   reactNativePropStyleName: string;
   render: typeof renderTestingLib;
   value: any;
-  extraProps?: Partial<RenderHTMLProps>;
 }) {
   expectTranslatedInlineCSSRuleTo({
     cssInlineRules,

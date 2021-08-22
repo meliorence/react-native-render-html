@@ -10,8 +10,8 @@ import extractImageStyleProps from './extractImageStyleProps';
 import { ImageDimensions } from '../shared-types';
 
 interface GetStateProps<C> extends Omit<IMGElementStateBase, 'dimensions'> {
-  error: Error | null;
   concreteDimensions: C;
+  error: Error | null;
   initialDimensions: ImageDimensions;
   objectFit: UseIMGElementStateProps['objectFit'];
   onError: (e: Error) => void;

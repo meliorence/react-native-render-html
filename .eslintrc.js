@@ -26,6 +26,14 @@ module.exports = {
           '{}': false
         }
       }
+    ],
+    '@typescript-eslint/member-ordering': [
+      'error',
+      {
+        default: {
+          order: 'alphabetically'
+        }
+      }
     ]
   }
 };

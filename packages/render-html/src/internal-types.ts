@@ -12,8 +12,8 @@ export type SourceLoaderProps = Pick<
 >;
 
 export interface RenderTTreeProps {
-  document: string | Document | Element;
   baseUrl?: string;
+  document: string | Document | Element;
 }
 
 export type TTreeEvents = Pick<

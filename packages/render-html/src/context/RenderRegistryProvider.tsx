@@ -26,8 +26,8 @@ export default function RenderRegistryProvider({
   elementModels,
   renderers
 }: PropsWithChildren<{
-  renderers?: CustomTagRendererRecord;
   elementModels: HTMLElementModelRecord;
+  renderers?: CustomTagRendererRecord;
 }>) {
   const profile = useProfiler({ prop: 'renderers' });
   const registry = useMemo(() => {

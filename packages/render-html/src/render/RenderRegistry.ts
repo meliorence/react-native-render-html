@@ -21,14 +21,11 @@ const internalTextRenderers: Record<string, InternalTextContentRenderer> = {
 };
 
 export interface RendererConfig<T extends TNode> {
-  Default: InternalRenderer<T> | null;
   Custom: CustomRenderer<T> | null;
+  Default: InternalRenderer<T> | null;
 }
 
 export default class RenderRegistry {
-  private readonly customRenderers: CustomTagRendererRecord = {};
-  private readonly elementModels: HTMLElementModelRecord;
-
   constructor(
     customRenderers: CustomTagRendererRecord = {},
     elementModels: HTMLElementModelRecord
@@ -37,29 +34,8 @@ export default class RenderRegistry {
     this.elementModels = elementModels;
   }
 
-  getInternalTextRenderer(tagName: string | null) {
-    if (lookupRecord(internalTextRenderers, tagName)) {
-      return internalTextRenderers[tagName];
-    }
-    return null;
-  }
-
-  getRendererConfigForTNode<T extends TNode>(tnode: T): RendererConfig<T> {
-    return {
-      Custom: this.getCustomRendererForTNode(tnode),
-      Default: this.getDefaultRendererForTNode(tnode)
-    };
-  }
-
-  private getDefaultRendererForTNode<T extends TNode>(
-    tnode: T
-  ): InternalRenderer<T> | null {
-    if (tnode.tagName! in internalRenderers) {
-      //@ts-expect-error we know that the tagName is in the map
-      return internalRenderers[tnode.tagName!];
-    }
-    return null;
-  }
+  private readonly customRenderers: CustomTagRendererRecord = {};
+  private readonly elementModels: HTMLElementModelRecord;
 
   private getCustomRendererForTNode<T extends TNode>(
     tnode: T
@@ -83,5 +59,29 @@ export default class RenderRegistry {
       return renderer as any;
     }
     return null;
+  }
+
+  private getDefaultRendererForTNode<T extends TNode>(
+    tnode: T
+  ): InternalRenderer<T> | null {
+    if (tnode.tagName! in internalRenderers) {
+      //@ts-expect-error we know that the tagName is in the map
+      return internalRenderers[tnode.tagName!];
+    }
+    return null;
+  }
+
+  getInternalTextRenderer(tagName: string | null) {
+    if (lookupRecord(internalTextRenderers, tagName)) {
+      return internalTextRenderers[tagName];
+    }
+    return null;
+  }
+
+  getRendererConfigForTNode<T extends TNode>(tnode: T): RendererConfig<T> {
+    return {
+      Custom: this.getCustomRendererForTNode(tnode),
+      Default: this.getDefaultRendererForTNode(tnode)
+    };
   }
 }

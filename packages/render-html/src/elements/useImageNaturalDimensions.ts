@@ -5,8 +5,8 @@ import getDimensionsWithAspectRatio from './getDimensionsWithAspectRatio';
 import { UseIMGElementStateProps } from './img-types';
 
 interface IncompleteImageDimensions {
-  width: number | null;
   height: number | null;
+  width: number | null;
 }
 
 function normalizeSize(
