@@ -26,6 +26,9 @@ if [ -z "$version" ]; then
     exit 1
 fi
 
+# A time buffer to make sure npm will allow the tagging
+sleep 2
+
 dryrun() {
     if [[ ! -t 0 ]]; then
         cat
