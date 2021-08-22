@@ -142,7 +142,7 @@ export default function PageContentTextual() {
         </Section>
         <Admonition type="caution">
           Fonts registered in <RefRenderHtmlProp name="systemFonts" /> should
-          not be surrounded with quotes; however you <Bold>must</Bold> surround
+          not be surrounded with quotes; however you <Bold>can</Bold> surround
           the font name with quotes in inline and mixed styles, as per CSS
           standard.
         </Admonition>
