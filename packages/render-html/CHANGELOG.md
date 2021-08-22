@@ -1,3 +1,10 @@
+# [6.1.0-alpha.0](https://github.com/meliorence/react-native-render-html/compare/v6.0.5...v6.1.0-alpha.0) (2021-08-22)
+
+
+### Features
+
+* new `bypassAnonymousTPhrasingNodes` prop ([90b8a3d](https://github.com/meliorence/react-native-render-html/commit/90b8a3d16729d77c073585118ef795aa28d13bd6)), closes [#514](https://github.com/meliorence/react-native-render-html/issues/514)
+
 ## [6.0.5](https://github.com/meliorence/react-native-render-html/compare/v6.0.4...v6.0.5) (2021-07-31)
 
 
