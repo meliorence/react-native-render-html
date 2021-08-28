@@ -111,6 +111,16 @@ export default function PageFAQ() {
         </Section>
       </Chapter>
       <Chapter title="Troubleshooting">
+        <Section title="Warning: You seem to update the X prop of the Y component in short periods of time...">
+          <Paragraph>
+            There is a detailed explaination for this warning here:
+            <Hyperlink url="">
+              Stack Overflow | react-native-render-html, "You seem to update
+              ..."
+            </Hyperlink>
+            .
+          </Paragraph>
+        </Section>
         <Section title="Custom font families don't work, what's happening?">
           <Paragraph>
             You must register fonts available in your app with{' '}
