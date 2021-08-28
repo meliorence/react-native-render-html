@@ -364,6 +364,27 @@ export interface RenderHTMLSharedProps {
   defaultWebViewProps?: any;
 
   /**
+   * Follow closely the HTML standard and ignore `<br>` tags closing an
+   * inline formatting context.
+   *
+   * @example
+   *
+   * ```html
+   * <p>
+   *  Hello<br />
+   * </p>
+   * ```
+   *
+   * When this flag is set to `true`, one line is printed instead of two on
+   * native platforms, which is the HTML-compliant behavior.
+   *
+   * @defaultValue false
+   *
+   * @remarks Recommended value is `true` on non-web platforms.
+   */
+  enableExperimentalBRCollapsing?: boolean;
+
+  /**
    * React Native doesn't handle lines like we would expect on a web browser.
    * For example:
    * ```jsx

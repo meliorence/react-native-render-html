@@ -96,17 +96,29 @@ describe('RenderHTML', () => {
       );
       await findByText('\u200B');
     });
-    it('should use internal text renderer for <br> tags', async () => {
-      const { findByText } = render(
+    it('should render <br> tags to line returns when followed by text', () => {
+      const { queryByText } = render(
         <RenderHTML
           source={{
-            html: '<br>'
+            html: '<br><span>Two</span>'
           }}
           debug={false}
           contentWidth={0}
         />
       );
-      await findByText('\n');
+      expect(queryByText('\n')).toBeDefined();
+    });
+    it('should render <br> tags to line returns when the tag closes an inline formatting context', () => {
+      const { queryByText } = render(
+        <RenderHTML
+          source={{
+            html: 'Two<br><div></div>'
+          }}
+          debug={false}
+          contentWidth={0}
+        />
+      );
+      expect(queryByText('\n')).toBeDefined();
     });
     it('should invoke renderersProps.a.onPress on <a> press', async () => {
       const onPress = jest.fn();
@@ -668,6 +680,34 @@ describe('RenderHTML', () => {
       await findByTestId('image-success');
       const image = UNSAFE_getByType(Image);
       expect(image.props.source.headers).toBe(headers);
+    });
+  });
+  describe('regarding enableExperimentalBRCollapsing', () => {
+    it('should render <br> tags to line returns when followed by text', () => {
+      const { queryByText } = render(
+        <RenderHTML
+          source={{
+            html: '<br><span>Two</span>'
+          }}
+          debug={false}
+          contentWidth={0}
+          enableExperimentalBRCollapsing
+        />
+      );
+      expect(queryByText('\n')).toBeDefined();
+    });
+    it('should render <br> tags to empty text when the tag closes an inline formatting context', () => {
+      const { queryByText } = render(
+        <RenderHTML
+          source={{
+            html: 'Two<br><div></div>'
+          }}
+          debug={false}
+          contentWidth={0}
+          enableExperimentalBRCollapsing
+        />
+      );
+      expect(queryByText('\n')).toBeNull();
     });
   });
 });

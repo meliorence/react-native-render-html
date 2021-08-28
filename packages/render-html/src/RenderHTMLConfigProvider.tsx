@@ -26,6 +26,7 @@ export const renderHTMLConfigPropTypes: RenderHTMLConfigPropTypes = {
   bypassAnonymousTPhrasingNodes: PropTypes.bool,
   defaultTextProps: PropTypes.object,
   defaultViewProps: PropTypes.object,
+  enableExperimentalBRCollapsing: PropTypes.bool,
   enableExperimentalGhostLinesPrevention: PropTypes.bool,
   enableExperimentalMarginCollapsing: PropTypes.bool,
   remoteErrorView: PropTypes.func,
