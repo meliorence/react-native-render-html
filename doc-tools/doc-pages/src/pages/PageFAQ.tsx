@@ -114,7 +114,7 @@ export default function PageFAQ() {
         <Section title="Warning: You seem to update the X prop of the Y component in short periods of time...">
           <Paragraph>
             There is a detailed explaination for this warning here:
-            <Hyperlink url="">
+            <Hyperlink url="https://stackoverflow.com/q/68966120/2779871">
               Stack Overflow | react-native-render-html, "You seem to update
               ..."
             </Hyperlink>
