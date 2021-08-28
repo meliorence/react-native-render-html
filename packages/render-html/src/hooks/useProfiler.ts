@@ -19,7 +19,7 @@ const useProfiler =
                   name ? name : 'RenderHTML'
                 }" component in short periods of time, causing costly tree rerenders (last update was ${diff.toFixed(
                   2
-                )}ms ago). Make sure you use memoization and other techniques to prevent re-rendering. You can use React profiler to help you out, see: https://reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html`
+                )}ms ago). See https://stackoverflow.com/q/68966120/2779871`
               );
             }
             lastUpdate.current = now;
