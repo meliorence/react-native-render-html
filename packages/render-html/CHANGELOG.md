@@ -1,3 +1,13 @@
+# [6.1.0-alpha.1](https://github.com/meliorence/react-native-render-html/compare/v6.1.0-alpha.0...v6.1.0-alpha.1) (2021-08-28)
+
+
+### Features
+
+* add new `renderIndex` and `renderLength` props to `TDefaultRendererProps` ([4f032d3](https://github.com/meliorence/react-native-render-html/commit/4f032d3594e184926847f9c7c20060280f436390))
+* new `enableExperimentalBRCollapsing` prop to prevent extraneous spaces ([e019a5a](https://github.com/meliorence/react-native-render-html/commit/e019a5ab046bab01bb307970d4aac2d9a1c59db9)), closes [#516](https://github.com/meliorence/react-native-render-html/issues/516)
+* new `enableExperimentalGhostLinesPrevention` to circumvent RN bug ([3645211](https://github.com/meliorence/react-native-render-html/commit/3645211ca6b6bd8cb43d7298ffbb33a851d34326)), closes [#516](https://github.com/meliorence/react-native-render-html/issues/516)
+* new `provideEmbeddedHeaders` prop to pass headers to img, iframes ([2ea1ca6](https://github.com/meliorence/react-native-render-html/commit/2ea1ca6a0fc58aca59ff4fbc080dfeb7f739ff88))
+
 # [6.1.0-alpha.0](https://github.com/meliorence/react-native-render-html/compare/v6.0.5...v6.1.0-alpha.0) (2021-08-22)
 
 
