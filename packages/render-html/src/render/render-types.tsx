@@ -1,13 +1,14 @@
 import { TBlock, TPhrasing, TText } from '@native-html/transient-render-engine';
 import { ComponentType } from 'react';
+import { TNodeSubRendererProps } from '../internal-types';
 import { CustomRenderer, InternalRenderer } from '../shared-types';
 
 /**
  * Special internal renderers for non-printable text (wbr, br).
  */
-export type InternalTextContentRenderer = ComponentType<{
-  key?: string | number;
-}> & {
+export type InternalTextContentRenderer = ComponentType<
+  TNodeSubRendererProps<TText>
+> & {
   isNativeInternalTextRenderer: true;
 };
 

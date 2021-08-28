@@ -364,6 +364,26 @@ export interface RenderHTMLSharedProps {
   defaultWebViewProps?: any;
 
   /**
+   * React Native doesn't handle lines like we would expect on a web browser.
+   * For example:
+   * ```jsx
+   * <View>
+   *  <Text></Text>
+   * </View>
+   * ```
+   * will span 20 dpi in height. Setting this prop to `true` will make
+   * the renderer take those React Native oddities into account.
+   * See also this ticket: https://git.io/JErwX
+   *
+   * @remarks It might not work when `bypassAnonymousTPhrasingNodes` is set to
+   * `false`. Also note that this is an experimental feature, thus subject to
+   * behavioral instability.
+   *
+   * @defaultValue false
+   */
+  enableExperimentalGhostLinesPrevention?: boolean;
+
+  /**
    * Enable or disable margin collapsing CSS behavior (experimental!).
    * See {@link https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing | MDN docs}.
    *
@@ -373,6 +393,8 @@ export interface RenderHTMLSharedProps {
    * - Will apply indiscriminately to all `display` properties (including
    *   flex), which is not standard.
    * - Might not work well with {@link TPhrasing} nodes having only one child.
+   *
+   * This is an experimental feature, thus subject to behavioral instability.
    *
    * @defaultValue false
    */

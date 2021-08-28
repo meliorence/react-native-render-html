@@ -29,7 +29,16 @@ function TStandardTextRenderer(props: TNodeSubRendererProps<TText>) {
 export default function TTextRenderer(props: TNodeSubRendererProps<TText>) {
   const InternalTextRenderer = useInternalTextRenderer(props.tnode);
   if (InternalTextRenderer) {
-    return React.createElement(InternalTextRenderer);
+    return React.createElement(InternalTextRenderer, props);
+  }
+  // If ghost line prevention is enabled and the text data is empty, render
+  // nothing to avoid React Native painting a 20px height line.
+  // See also https://git.io/JErwX
+  if (
+    props.tnode.data === '' &&
+    props.sharedProps.enableExperimentalGhostLinesPrevention
+  ) {
+    return null;
   }
   return React.createElement(TStandardTextRenderer, props);
 }

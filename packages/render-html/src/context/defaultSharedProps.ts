@@ -20,6 +20,7 @@ const defaultSharedProps: Required<RenderHTMLSharedProps> = {
     allowFontScaling: true
   },
   defaultViewProps: {},
+  enableExperimentalGhostLinesPrevention: false,
   enableExperimentalMarginCollapsing: false,
   computeEmbeddedMaxWidth: (contentWidth) => contentWidth,
   provideEmbeddedHeaders: () => null,
