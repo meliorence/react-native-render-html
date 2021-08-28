@@ -22,6 +22,7 @@ const defaultSharedProps: Required<RenderHTMLSharedProps> = {
   defaultViewProps: {},
   enableExperimentalMarginCollapsing: false,
   computeEmbeddedMaxWidth: (contentWidth) => contentWidth,
+  provideEmbeddedHeaders: () => null,
   GenericPressable: undefined as any,
   WebView: WebViewPlaceholder,
   defaultWebViewProps: {},

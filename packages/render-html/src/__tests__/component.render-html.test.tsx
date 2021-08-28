@@ -11,7 +11,7 @@ import {
   defaultHTMLElementModels,
   HTMLContentModel
 } from '@native-html/transient-render-engine';
-import { StyleSheet, Text } from 'react-native';
+import { Image, StyleSheet, Text } from 'react-native';
 import { useRendererProps } from '../context/RenderersPropsProvider';
 import TNodeChildrenRenderer from '../TNodeChildrenRenderer';
 import OLElement from '../elements/OLElement';
@@ -644,6 +644,30 @@ describe('RenderHTML', () => {
       expect(StyleSheet.flatten(img.props.style)).toMatchObject({
         borderBottomWidth: 4
       });
+    });
+  });
+  describe('regarding provideEmbeddedHeaders prop', () => {
+    it('should apply returned headers to IMG tags', async () => {
+      const headers = {
+        Authorization: 'Bearer XXX'
+      };
+      function provideEmbeddedHeaders(uri: string, tag: string) {
+        expect(tag).toBe('img');
+        return headers;
+      }
+      const { UNSAFE_getByType, findByTestId } = render(
+        <RenderHTML
+          source={{
+            html: '<img src="https://custom.domain/" />'
+          }}
+          debug={false}
+          contentWidth={100}
+          provideEmbeddedHeaders={provideEmbeddedHeaders}
+        />
+      );
+      await findByTestId('image-success');
+      const image = UNSAFE_getByType(Image);
+      expect(image.props.source.headers).toBe(headers);
     });
   });
 });

@@ -385,6 +385,29 @@ export interface RenderHTMLSharedProps {
    * @defaultValue rgba(38, 132, 240, 0.2)
    */
   pressableHightlightColor?: string;
+
+  /**
+   * Provide headers for specific embedded elements, such as images, iframes...
+   *
+   * @example
+   *
+   * ```tsx
+   * function provideEmbeddedHeaders(uri: string, tagName: string) {
+   *    if (tagName === "img" && uri.startsWith("https://example.com")) {
+   *     return {
+   *      Authorization: "Bearer daem6QuaeloopheiD7Oh"
+   *    }
+   * }
+   *
+   * // ...
+   *
+   * <RenderHTML provideEmbeddedHeaders={provideEmbeddedHeaders} />
+   * ```
+   */
+  provideEmbeddedHeaders?: (
+    embeddedUri: string,
+    tagName: string
+  ) => Record<string, string> | null | void;
 }
 
 /**

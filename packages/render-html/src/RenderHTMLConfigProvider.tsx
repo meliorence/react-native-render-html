@@ -37,7 +37,8 @@ export const renderHTMLConfigPropTypes: RenderHTMLConfigPropTypes = {
   defaultWebViewProps: PropTypes.object,
   pressableHightlightColor: PropTypes.string,
   customListStyleSpecs: PropTypes.object,
-  renderers: PropTypes.object
+  renderers: PropTypes.object,
+  provideEmbeddedHeaders: PropTypes.func
 };
 
 /**
