@@ -14,7 +14,13 @@ import { useDefaultContainerProps } from '../context/SharedPropsProvider';
  * @internal
  */
 export default function useAssembledCommonProps<T extends TNode>(
-  { tnode, propsFromParent, sharedProps }: TNodeSubRendererProps<T>,
+  {
+    tnode,
+    propsFromParent,
+    sharedProps,
+    renderIndex,
+    renderLength
+  }: TNodeSubRendererProps<T>,
   TDefault: TDefaultRenderer<T>
 ): {
   Renderer: CustomRenderer<T>;
@@ -34,6 +40,8 @@ export default function useAssembledCommonProps<T extends TNode>(
     type: tnode.type === 'text' || tnode.type === 'phrasing' ? 'text' : 'block',
     propsForChildren: tnode.tagName ? {} : propsFromParent,
     InternalRenderer: Default || (TDefault as any),
+    renderIndex,
+    renderLength,
     ...containerProps
   };
   return {

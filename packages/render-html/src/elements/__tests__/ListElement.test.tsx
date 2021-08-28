@@ -40,7 +40,9 @@ function makeListElementProps<T extends 'ol' | 'ul'>(
     textProps: {},
     viewProps: {},
     ...extraProps,
-    listStyleSpecs: defaultListStyleSpecs
+    listStyleSpecs: defaultListStyleSpecs,
+    renderIndex: 0,
+    renderLength: 1
   });
 }
 

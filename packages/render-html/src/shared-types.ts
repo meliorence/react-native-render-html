@@ -929,6 +929,22 @@ export interface TNodeRendererProps<T extends TNode> {
   propsFromParent?: PropsFromParent;
 
   /**
+   * The position of this React element relative to the parent React element,
+   * starting at 0.
+   *
+   * @remarks Not to be confused with {@link TNodeShape.index}, which is
+   * the position of the *TNode* before hoisting. The latter is much closer
+   * to an intuitive understanding of the position of a DOM node in the DOM
+   * tree.
+   */
+  renderIndex: number;
+
+  /**
+   * The total number of elements children of this React element parent.
+   */
+  renderLength: number;
+
+  /**
    * The {@link TNode} to render.
    */
   tnode: T;

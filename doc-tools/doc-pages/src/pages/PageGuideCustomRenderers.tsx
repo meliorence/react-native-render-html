@@ -291,6 +291,29 @@ export default function PageGuideCustomRenderers() {
               />{' '}
               prop.
             </DListItem>
+            <DListTitle>
+              <RefRenderHTMLExport
+                name="CustomRendererProps"
+                member="renderIndex"
+              />
+            </DListTitle>
+            <DListItem>
+              The position relative to the parent React element, starting at 0.
+              Not to be confused with{' '}
+              <RefRenderHTMLExport name="TNodeShape" member="index" full /> the
+              position of the <RefRenderHTMLExport name="TNode" /> before
+              hoisting, which is much closer to the position in the DOM.
+            </DListItem>
+            <DListTitle>
+              <RefRenderHTMLExport
+                name="CustomRendererProps"
+                member="renderLength"
+              />
+            </DListTitle>
+            <DListItem>
+              The total number of children of this React element parent. e.g.
+              number of React element siblings + 1.
+            </DListItem>
           </DList>
           <Paragraph>
             See <RefRenderHTMLExport name="CustomRendererProps" /> for a

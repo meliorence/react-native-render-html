@@ -44,7 +44,9 @@ const mapCollapsibleChildren = (
   const childElement = React.createElement(TNodeRenderer, {
     propsFromParent,
     tnode: childTnode,
-    key
+    key,
+    renderIndex: n,
+    renderLength: tchildren.length
   });
   return typeof renderChild === 'function'
     ? renderChild({

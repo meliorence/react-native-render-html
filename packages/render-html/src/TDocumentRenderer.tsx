@@ -32,7 +32,7 @@ const TDocumentRenderer = memo(
     }, [onDocumentMetadataLoaded, metadata]);
     return (
       <DocumentMetadataProvider value={metadata}>
-        <TNodeRenderer tnode={tdoc} />
+        <TNodeRenderer renderIndex={0} renderLength={1} tnode={tdoc} />
       </DocumentMetadataProvider>
     );
   }
