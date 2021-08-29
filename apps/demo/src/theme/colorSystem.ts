@@ -87,11 +87,8 @@ export interface ColorRoles {
   codeBackground: string;
 }
 
-const {
-  ColorPrimitivesProvider,
-  createColorRoles,
-  useColorPrimitives
-} = createColorSystem<ColorPrimitivesDeclaration>();
+const { ColorPrimitivesProvider, createColorRoles, useColorPrimitives } =
+  createColorSystem<ColorPrimitivesDeclaration>();
 
 const { ColorRolesProvider, useColorRoles } = createColorRoles<ColorRoles>();
 

@@ -178,7 +178,8 @@ export default function ArticleTemplate(
 ) {
   const { params } = useRoute();
   const { height: safeFrameHeight, width: safeFrameWidth } = useSafeAreaFrame();
-  const scrollRef = useRef<Animated.ScrollView>() as RefObject<Animated.ScrollView>;
+  const scrollRef =
+    useRef<Animated.ScrollView>() as RefObject<Animated.ScrollView>;
   const fragment = (params as any)?.fragment;
   return (
     <ScrollerProvider scrollRef={scrollRef}>

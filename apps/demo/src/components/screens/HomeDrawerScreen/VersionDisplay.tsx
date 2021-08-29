@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import version from '../../../../version';
 import TextRoleNucleon from '../../nucleons/TextRoleNucleon';

@@ -8,7 +8,7 @@ export type HighlighterStylesheets = ReturnType<typeof createStylesheets>;
 
 export default function createStylesheets(hljsStylesheet: HljsStylsheet) {
   const normalizedStyles = normalizeStylesheet(hljsStylesheet);
-  const { backgroundColor, color } = normalizedStyles['hljs'];
+  const { backgroundColor, color } = normalizedStyles.hljs;
   const containerStylesheet = StyleSheet.create({
     container: { backgroundColor: backgroundColor as string },
     text: { color }

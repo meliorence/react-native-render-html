@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {
   createContext,
   PropsWithChildren,
@@ -50,6 +51,7 @@ export default function createColorSystem<CPD>() {
     return useContext(colorPrimitivesContext);
   }
   const ColorPrimitivesProvider = colorPrimitivesContext.Provider;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
   ColorPrimitivesProvider.displayName = ColorPrimitivesProvider;
   function createColorRoles<CR>() {

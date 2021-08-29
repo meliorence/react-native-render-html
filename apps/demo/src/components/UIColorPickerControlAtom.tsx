@@ -3,6 +3,7 @@ import Color from 'color';
 import React, { ComponentType, useCallback, useEffect, useState } from 'react';
 import { Dimensions, View } from 'react-native';
 import { NativeViewGestureHandler } from 'react-native-gesture-handler';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const HsvColorPicker = require('react-native-hsv-color-picker')
   .default as HsvColorPicker;
 import { SelectorProps, PropsWithStyle } from './nucleons/types';

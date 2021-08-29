@@ -33,10 +33,10 @@ export default function UINavTideMolecule<R extends string>({
     <UITideAtom
       {...listProps}
       title={label}
-      onPress={useCallback(() => navigation.navigate(route), [
-        navigation,
-        route
-      ])}
+      onPress={useCallback(
+        () => navigation.navigate(route),
+        [navigation, route]
+      )}
       bottom={bottom}
       leftIconName={leftIconName}
       rightIconName="arrow-right"

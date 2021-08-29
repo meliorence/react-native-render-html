@@ -6,11 +6,11 @@ import { useNuclearContentWidth } from './nucleons/useContentWidthContext';
 import { useColorRoles } from '../theme/colorSystem';
 
 const GestureSlider = Platform.select({
-  android: (createNativeWrapper(Slider, {
+  android: createNativeWrapper(Slider, {
     disallowInterruption: true,
     shouldActivateOnStart: true,
     shouldCancelWhenOutside: false
-  }) as unknown) as typeof Slider,
+  }) as unknown as typeof Slider,
   default: Slider
 });
 

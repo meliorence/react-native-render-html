@@ -37,10 +37,10 @@ const UIRadioItemAtom = memo(function RadioItem<V extends string>({
   labelStyle?: StyleProp<TextStyle>;
   style?: StyleProp<ViewStyle>;
 }) {
-  const onPress = useCallback(() => onSelectedValueChange(value), [
-    value,
-    onSelectedValueChange
-  ]);
+  const onPress = useCallback(
+    () => onSelectedValueChange(value),
+    [value, onSelectedValueChange]
+  );
   const selected = useContext(selectedRadioItemContextAtom) === value;
   const { pressable, selectable, surface } = useColorRoles();
   const color = selected
