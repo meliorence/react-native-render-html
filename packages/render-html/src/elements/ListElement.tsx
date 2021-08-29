@@ -157,6 +157,7 @@ export default function ListElement({
       {...itemProps}
       markerBoxStyle={[itemProps.markerBoxStyle, markerBoxWidthStyle]}
       markerTextStyle={itemProps.markerTextStyle}
+      enableMarkerClipping
       style={itemProps.style}>
       <View style={styles.shrink}>{childElement}</View>
     </MarkedListItem>
