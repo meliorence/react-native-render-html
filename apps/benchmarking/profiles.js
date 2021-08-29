@@ -1,12 +1,13 @@
-import ProfileSimple from './profiles/ProfileSimple';
+// import ProfileSimple from './profiles/ProfileSimple';
 import ProfileV5 from './profiles/ProfileV5';
 import ProfileV6Source from './profiles/ProfileV6Source';
 
 const profiles = [
-  {
-    name: 'Simple implementation',
-    component: ProfileSimple
-  },
+  // Disabled because of htmlparser resolution
+  // {
+  //   name: 'Simple implementation',
+  //   component: ProfileSimple
+  // },
   {
     name: 'V5',
     component: ProfileV5

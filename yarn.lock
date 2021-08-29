@@ -9958,7 +9958,7 @@ __metadata:
     "@docusaurus/core": 2.0.0-beta.759298296
     "@docusaurus/plugin-content-docs": 2.0.0-beta.759298296
     "@docusaurus/types": 2.0.0-beta.759298296
-    htmlparser2: ^6.1.0
+    htmlparser2: ^7.1.1
     rfg-api: ^0.5.2
     typescript: ^4.3.2
   languageName: unknown
@@ -12939,6 +12939,18 @@ fsevents@^1.2.7:
     domutils: ^2.8.0
     entities: ^3.0.1
   checksum: 8b2d32a55d3e604b06f4b0134691ba75ed7ee4beda82b097a7b01255639be11748f1fb641c49928da292cf15df79f56917882c8401068a2309987a7b12c87e9b
+  languageName: node
+  linkType: hard
+
+"htmlparser2@npm:^7.1.1":
+  version: 7.1.1
+  resolution: "htmlparser2@npm:7.1.1"
+  dependencies:
+    domelementtype: ^2.0.1
+    domhandler: ^4.0.0
+    domutils: ^2.8.0
+    entities: ^3.0.1
+  checksum: f0033544fd359615ad7433cacd5c3ed409590c47142fdd740e7256fa7978f6800662c4519ef9ced47cea13f4eb8df3eeea6c9c2793638a52e5faeaeb54b018c8
   languageName: node
   linkType: hard
 
@@ -19976,7 +19988,7 @@ fsevents@^1.2.7:
     "@types/urijs": ^1.19.15
     babel-jest: ^27.0.2
     eslint: ^7.29.0
-    htmlparser2: ^6.1.0
+    htmlparser2: ^7.1.1
     jest: ^27.0.4
     metro-react-native-babel-preset: ^0.66.0
     prettier: ^2.3.1
