@@ -229,6 +229,39 @@ export interface RenderHTMLPassedProps {
 }
 
 /**
+ * A map which defines the type of parameters passed as third argument
+ * of {@link EmbeddedHeadersProvider}.
+ */
+export interface EmbeddedWithHeadersParamsMap {
+  img: {
+    /**
+     * The print height of the image in DPI, if it can be determined beforehand
+     * (for example, with a _height_ attribute set or an inline style).
+     */
+    printHeight?: number;
+    /**
+     * The print width of the image in DPI, if it can be determined beforehand
+     * (for example, with a _width_ attribute set or an inline style).
+     */
+    printWidth?: number;
+  };
+}
+
+/**
+ * Tag names eligible for headers providing.
+ */
+export type EmbeddedWithHeadersTagName = keyof EmbeddedWithHeadersParamsMap;
+
+/**
+ * A function to provide headers to a peculiar embedded element.
+ */
+export type EmbeddedHeadersProvider = <T extends EmbeddedWithHeadersTagName>(
+  uri: string,
+  tagName: T,
+  params: EmbeddedWithHeadersParamsMap[T]
+) => Record<string, string> | null | void;
+
+/**
  * Props shared across renderers.
  *
  * @warning Shared props changes will cause all the React tree to invalidate. You should
@@ -434,9 +467,10 @@ export interface RenderHTMLSharedProps {
    *
    * @example
    *
-   * ```tsx
-   * function provideEmbeddedHeaders(uri: string, tagName: string) {
-   *    if (tagName === "img" && uri.startsWith("https://example.com")) {
+   * ```js
+   * function provideEmbeddedHeaders(uri, tagName, params) {
+   *    if (tagName === "img" &&
+   *        uri.startsWith("https://example.com")) {
    *     return {
    *      Authorization: "Bearer daem6QuaeloopheiD7Oh"
    *    }
@@ -447,11 +481,22 @@ export interface RenderHTMLSharedProps {
    * <RenderHTML provideEmbeddedHeaders={provideEmbeddedHeaders} />
    * ```
    */
-  provideEmbeddedHeaders?: (
-    embeddedUri: string,
-    tagName: string
-  ) => Record<string, string> | null | void;
+  provideEmbeddedHeaders?: EmbeddedHeadersProvider;
 }
+
+type SharedPropsWithoutFallback = Exclude<
+  keyof RenderHTMLSharedProps,
+  'provideEmbeddedHeaders' | 'GenericPressable' | 'customListStyleSpecs'
+>;
+
+/**
+ * Shared props available with {@link useSharedProps} hook or `sharedProp`
+ * custom renderers prop.
+ */
+export type RenderHTMLAmbiantSharedProps = Required<
+  Pick<RenderHTMLSharedProps, SharedPropsWithoutFallback>
+> &
+  Omit<RenderHTMLSharedProps, SharedPropsWithoutFallback>;
 
 /**
  * Configuration for the {@link TRenderEngineProvider} component.
@@ -1073,7 +1118,7 @@ export interface InternalRendererProps<T extends TNode>
   /**
    * Props shared across the whole render tree.
    */
-  sharedProps: Required<RenderHTMLSharedProps>;
+  sharedProps: RenderHTMLAmbiantSharedProps;
 
   /**
    * Styles extracted with {@link TNode.getNativeStyles}.

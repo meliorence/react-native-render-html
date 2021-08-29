@@ -4,6 +4,7 @@ import Page from '../Page';
 import useToolkit from '../toolkit/useToolkit';
 import customImageRendererConfig from './cards/customImageRendererConfig';
 import internalImageRendererConfig from './cards/internalImageRendererConfig';
+import imagesWithHeadersConfig from './cards/imagesWithHeadersConfig';
 import InternalRendererAdmonition from '../components/InternalRendererAdmonition';
 
 const inlineExample = `<img
@@ -248,13 +249,32 @@ export default function PageContentImages() {
         </Section>
       </Chapter>
       <Chapter title="Configuring">
-        <Paragraph>
-          We can take advantage of the{' '}
-          <RefRenderHtmlProp name="renderersProps" /> to customize images
-          behavior (see{' '}
-          <RefRenderHTMLExport name="RenderersProps" member="img" full />
-          ).
-        </Paragraph>
+        <Section title="Providing headers">
+          <Paragraph>
+            You can take advantage of the{' '}
+            <RefRenderHtmlProp name="provideEmbeddedHeaders" />
+            prop to pass headers to the image fetching conditionnaly. For
+            example:
+          </Paragraph>
+          <RenderHtmlCard {...imagesWithHeadersConfig} />
+          <Admonition type="tip">
+            In this example, we are using a Bearer token to access a restricted
+            resource. We could also use headers to take advantage of the new{' '}
+            <Hyperlink url="https://wicg.github.io/responsive-image-client-hints/">
+              Responsive Image Client Hints
+            </Hyperlink>{' '}
+            standard.
+          </Admonition>
+        </Section>
+        <Section title="Advanced configuration">
+          <Paragraph>
+            We can take advantage of the{' '}
+            <RefRenderHtmlProp name="renderersProps" /> to customize images
+            behavior (see{' '}
+            <RefRenderHTMLExport name="RenderersProps" member="img" full />
+            ).
+          </Paragraph>
+        </Section>
       </Chapter>
     </Page>
   );

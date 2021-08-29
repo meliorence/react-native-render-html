@@ -7,6 +7,7 @@ import type {
 } from './img-types';
 import useImageConcreteDimensions from './useImageConcreteDimensions';
 import useImageNaturalDimensions from './useImageNaturalDimensions';
+import useIMGNormalizedSource from './useIMGNormalizedSource';
 
 /**
  * This hook is useful when one has access to image natural dimensions prior to
@@ -34,6 +35,10 @@ export default function useIMGElementStateWithCache(
     computeMaxWidth,
     contentWidth
   });
+  const nomalizedSource = useIMGNormalizedSource({
+    concreteDimensions,
+    source
+  });
   return getIMGState({
     error,
     concreteDimensions,
@@ -41,7 +46,7 @@ export default function useIMGElementStateWithCache(
     initialDimensions,
     objectFit,
     onError,
-    source,
+    source: nomalizedSource,
     alt,
     altColor
   });

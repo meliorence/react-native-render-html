@@ -3,7 +3,7 @@ import { Document, Element } from '@native-html/transient-render-engine';
 import {
   RenderHTMLProps,
   TNodeRendererProps,
-  RenderHTMLSharedProps
+  RenderHTMLAmbiantSharedProps
 } from './shared-types';
 
 export type SourceLoaderProps = Pick<
@@ -26,5 +26,5 @@ export interface TNodeSubRendererProps<T extends TNode>
   /**
    * Props shared across the whole render tree.
    */
-  sharedProps: Required<RenderHTMLSharedProps>;
+  sharedProps: RenderHTMLAmbiantSharedProps;
 }

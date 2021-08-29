@@ -1,5 +1,5 @@
 import { DEFAULT_PRESSABLE_RIPPLE_COLOR } from '../constants';
-import { RenderHTMLSharedProps } from '../shared-types';
+import { RenderHTMLAmbiantSharedProps } from '../shared-types';
 
 function WebViewPlaceholder() {
   /* istanbul ignore else */
@@ -12,7 +12,7 @@ function WebViewPlaceholder() {
   return null;
 }
 
-const defaultSharedProps: Required<RenderHTMLSharedProps> = {
+const defaultSharedProps: RenderHTMLAmbiantSharedProps = {
   bypassAnonymousTPhrasingNodes: true,
   debug: false,
   defaultTextProps: {
@@ -24,12 +24,12 @@ const defaultSharedProps: Required<RenderHTMLSharedProps> = {
   enableExperimentalGhostLinesPrevention: false,
   enableExperimentalMarginCollapsing: false,
   computeEmbeddedMaxWidth: (contentWidth) => contentWidth,
-  provideEmbeddedHeaders: () => null,
-  GenericPressable: undefined as any,
   WebView: WebViewPlaceholder,
   defaultWebViewProps: {},
   pressableHightlightColor: DEFAULT_PRESSABLE_RIPPLE_COLOR,
-  customListStyleSpecs: undefined as any
+  provideEmbeddedHeaders: undefined,
+  GenericPressable: undefined,
+  customListStyleSpecs: undefined
 };
 
 export default defaultSharedProps;
