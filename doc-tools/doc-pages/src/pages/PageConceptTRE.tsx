@@ -321,7 +321,7 @@ export default function PageConceptTRE() {
           <TNodeTransformDisplay
             html={source}
             snaphost={collapsingEngine.buildTTree(source).snapshot()}
-            caption="Notice when comparing with the previous example, the line returns and extraneous spaces have been removed."
+            caption="Notice when comparing with the previous example, the line breaks and extraneous spaces have been removed."
           />
         </Section>
       </Chapter>
