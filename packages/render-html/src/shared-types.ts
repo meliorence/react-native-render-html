@@ -380,7 +380,8 @@ export interface RenderHTMLSharedProps {
    *
    * @defaultValue false
    *
-   * @remarks Recommended value is `true` on non-web platforms.
+   * @remarks Recommended value is `true` on non-web platforms. Also note that
+   * this is an experimental feature, thus subject to behavioral instability.
    */
   enableExperimentalBRCollapsing?: boolean;
 
