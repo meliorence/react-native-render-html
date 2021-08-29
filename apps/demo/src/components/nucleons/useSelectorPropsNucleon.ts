@@ -8,7 +8,10 @@ export default function useSelectorItemsNucleon<V extends string | number>(
     () =>
       (items || []).map((item: SelectorItem<V> | V) =>
         typeof item !== 'string' && typeof item !== 'number'
-          ? { value: item.value, label: String(item.label || item.value) }
+          ? {
+              value: (item as any).value,
+              label: String((item as any).label || (item as any).value)
+            }
           : { value: item as V, label: String(item) }
       ),
     [items]
