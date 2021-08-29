@@ -22,8 +22,8 @@ function UIIconButton({
   selected,
   ...other
 }: {
-  onPress?: TouchableWithoutFeedbackProps['onPress'];
   iconName: IconNucleonProps['name'];
+  onPress?: TouchableWithoutFeedbackProps['onPress'];
   selected: boolean;
 }) {
   const { selectable } = useColorRoles();
@@ -50,12 +50,12 @@ function UIIconButton({
 }
 
 interface RenderHtmlCardOrganismProps {
-  props: RenderHTMLProps;
-  title: string;
-  snippet: string;
-  snapshot: string;
   caption?: string;
   preferHtmlSrc: boolean;
+  props: RenderHTMLProps;
+  snapshot: string;
+  snippet: string;
+  title: string;
 }
 
 function RenderHTMLCardInner({

@@ -42,7 +42,8 @@ const fontSelectionSpaceMonoConfig: UIRenderHtmlCardProps = {
       }
     ],
     fnSrcMap: {
-      FontLoader: fontLoaderSrc
+      FontLoader: fontLoaderSrc,
+      onTTreeChange: ''
     },
     exprSrcMap: {
       systemFonts: '["space-mono", ...defaultSystemFonts]'
