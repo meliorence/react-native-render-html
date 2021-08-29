@@ -54,7 +54,7 @@
     "@types/react-test-renderer": "^17.0.1",
     "babel-jest": "^27.0.2",
     "eslint": "^7.29.0",
-    "htmlparser2": "^6.1.0",
+    "htmlparser2": "^7.1.1",
     "jest": "^27.0.4",
     "metro-react-native-babel-preset": "^0.66.0",
     "prettier": "^2.3.1",

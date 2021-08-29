@@ -1,18 +1,23 @@
-import {Text, View, Image} from 'react-native';
-import {parseDocument, ElementType} from 'htmlparser2';
-import React, {PureComponent} from 'react';
+import { Text, View, Image } from 'react-native';
+import { parseDocument, ElementType } from 'htmlparser2';
+import React, { PureComponent } from 'react';
 
 export default class RenderHtmlSimple extends PureComponent {
-  ignoredTags = ['head'];
-  textTags = ['span', 'strong', 'em'];
-
   constructor(props) {
     super(props);
     this.ignoredTags = props.ignoredTags || this.ignoredTags;
   }
 
-  renderTextNode(textNode, index) {
-    return <Text key={index}>{textNode.data}</Text>;
+  ignoredTags = ['head'];
+
+  render() {
+    const { html, ...viewProps } = this.props;
+    const document = parseDocument(html);
+    return (
+      <View {...viewProps}>
+        {document.children.map((c, i) => this.renderNode(c, i))}
+      </View>
+    );
   }
 
   renderElement(element, index) {
@@ -20,7 +25,7 @@ export default class RenderHtmlSimple extends PureComponent {
       return null;
     }
     if (element.name === 'img') {
-      return <Image key={index} source={{uri: element.attribs.src}} />;
+      return <Image key={index} source={{ uri: element.attribs.src }} />;
     }
     const Wrapper = this.textTags.indexOf(element.name) > -1 ? Text : View;
     return (
@@ -40,13 +45,9 @@ export default class RenderHtmlSimple extends PureComponent {
     return null;
   }
 
-  render() {
-    const {html, ...viewProps} = this.props;
-    const document = parseDocument(html);
-    return (
-      <View {...viewProps}>
-        {document.children.map((c, i) => this.renderNode(c, i))}
-      </View>
-    );
+  renderTextNode(textNode, index) {
+    return <Text key={index}>{textNode.data}</Text>;
   }
+
+  textTags = ['span', 'strong', 'em'];
 }
