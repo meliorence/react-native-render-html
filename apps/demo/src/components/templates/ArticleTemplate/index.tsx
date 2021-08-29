@@ -97,7 +97,7 @@ function Article({
   );
   const scrollToFragment = useCallback(
     function scrollToFragment() {
-      let timeout: null | NodeJS.Timeout = null;
+      let timeout: any = null;
       function scrollTo() {
         if (fragment) {
           if (scroller.isLoaded) {

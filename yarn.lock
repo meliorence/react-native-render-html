@@ -2274,7 +2274,7 @@ __metadata:
     react-native-web: ^0.16.3
     react-reconciler: ^0.26.2
     react-test-renderer: 17.0.2
-    typescript: ~4.3.2
+    typescript: ^4.4.2
   bin:
     doc-mdx-gen-cli: bin/bundle.js
   languageName: unknown
@@ -2301,7 +2301,7 @@ __metadata:
     metro-react-native-babel-transformer: ^0.66.0
     react: 17.0.2
     react-test-renderer: 17.0.2
-    typescript: ~4.3.2
+    typescript: ^4.4.2
   peerDependencies:
     react: "*"
   languageName: unknown
@@ -9799,7 +9799,7 @@ __metadata:
     react-native-webview: 11.6.2
     react-syntax-highlighter: ^15.4.3
     scheduler: ^0.20.2
-    typescript: ~4.0.0
+    typescript: ^4.4.2
     urijs: "*"
     use-context-selector: ^1.3.7
     zustand: ^3.4.2
@@ -9960,7 +9960,7 @@ __metadata:
     "@docusaurus/types": 2.0.0-beta.759298296
     htmlparser2: ^7.1.1
     rfg-api: ^0.5.2
-    typescript: ^4.3.2
+    typescript: ^4.4.2
   languageName: unknown
   linkType: soft
 
@@ -9972,7 +9972,7 @@ __metadata:
     "@docusaurus/plugin-content-docs": 2.0.0-beta.759298296
     "@docusaurus/types": 2.0.0-beta.759298296
     typedoc: ^0.20.36
-    typescript: 4.2
+    typescript: ^4.4.2
   languageName: unknown
   linkType: soft
 
@@ -19989,7 +19989,7 @@ fsevents@^1.2.7:
     react-test-renderer: ^17.0.2
     release-it: 14.11.0-next.1
     stringify-entities: ^3.1.0
-    typescript: ~4.3.2
+    typescript: ^4.4.2
     urijs: ^1.19.6
   peerDependencies:
     react: "*"
@@ -23201,37 +23201,27 @@ resolve@~1.19.0:
   languageName: node
   linkType: hard
 
-typescript@4.2:
-  version: 4.2.4
-  resolution: "typescript@npm:4.2.4"
+typescript@^4.4.2:
+  version: 4.4.2
+  resolution: "typescript@npm:4.4.2"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 89c397df192f239359ad798b96d8e8d552e12c0c189ac5676cec4c20c410d6eec636b8e59a88f2aef0a56d961a9678d99c400099be9b7cae2f7b062eb4b7b171
+  checksum: 194e08e9d1971d667d6fd1a0554616b7022312a2319d70e81a64e502a265992061ee7817ed9a69b52bbabe7a9b85e7938cb8c11c433e40a516b277f8c4dacd51
   languageName: node
   linkType: hard
 
-"typescript@^4.3.2, typescript@~4.3.2":
-  version: 4.3.4
-  resolution: "typescript@npm:4.3.4"
+"typescript@patch:typescript@^4.4.2#~builtin<compat/typescript>":
+  version: 4.4.2
+  resolution: "typescript@patch:typescript@npm%3A4.4.2#~builtin<compat/typescript>::version=4.4.2&hash=d8b4e7"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 75e1f2769c7ff38c718523d05eaf1c2611dbf92c0ab0f85f603ead9bb23416af2009a5dac46e76ef6a207a8508fa53f51b43a41f2a91b1241b53cd744c16128c
+  checksum: 11d6ab6e868117908c388401e2ac06d503c5c8709115ab80ee69a1a6352c1f98471d1e595636bfe6a2d6b20b03a44df6bb2d3d198cea97c0c328968cd18d2b70
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@4.2#~builtin<compat/typescript>":
-  version: 4.2.4
-  resolution: "typescript@patch:typescript@npm%3A4.2.4#~builtin<compat/typescript>::version=4.2.4&hash=d8b4e7"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 3d8ac56cd91f6f60e69aff212cb3601c8affd8dd7b3fac115b836b7d59ab8c7b21778635f07971cbcb6035019df1abefe3047c1d46f3d42d087ceb0552af0206
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@^4.3.2#~builtin<compat/typescript>, typescript@patch:typescript@~4.3.2#~builtin<compat/typescript>":
+"typescript@patch:typescript@~4.3.2#~builtin<compat/typescript>":
   version: 4.3.4
   resolution: "typescript@patch:typescript@npm%3A4.3.4#~builtin<compat/typescript>::version=4.3.4&hash=d8b4e7"
   bin:
@@ -23241,23 +23231,13 @@ typescript@4.2:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@~4.0.0#~builtin<compat/typescript>":
-  version: 4.0.8
-  resolution: "typescript@patch:typescript@npm%3A4.0.8#~builtin<compat/typescript>::version=4.0.8&hash=d8b4e7"
+typescript@~4.3.2:
+  version: 4.3.4
+  resolution: "typescript@npm:4.3.4"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 5b2c2a14427961314dff8b1c2287b820cd7f622c3ce49322763f6db48ec747cc90820b7e2a2e505e8b7dc136b1a87d885ba0b2562d930f28dee7186e989fa6ef
-  languageName: node
-  linkType: hard
-
-typescript@~4.0.0:
-  version: 4.0.8
-  resolution: "typescript@npm:4.0.8"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: ed3869f1001a1d3609bddaea3e53147dafc5ad5dc70dd836ae74a8a954e5000a7245448eb98923077be0d3953677d413303f7cdc52ccca9589c664d4060c00a7
+  checksum: 75e1f2769c7ff38c718523d05eaf1c2611dbf92c0ab0f85f603ead9bb23416af2009a5dac46e76ef6a207a8508fa53f51b43a41f2a91b1241b53cd744c16128c
   languageName: node
   linkType: hard
 
@@ -24255,7 +24235,7 @@ typescript@~4.0.0:
     react-modal: ^3.13.1
     sass: ^1.32.13
     typedoc: ^0.20.36
-    typescript: 4.2
+    typescript: ^4.4.2
   languageName: unknown
   linkType: soft
 
