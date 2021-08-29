@@ -151,7 +151,7 @@ export default function PageContentTextual() {
           standard.
         </Admonition>
       </Chapter>
-      <Chapter title="Troubleshooting">
+      <Chapter title="Caveats">
         <Section title="Line Breaks">
           <Paragraph>
             Line breaks work seemlessly with the <RefHtmlElement name="br" />{' '}
