@@ -671,7 +671,7 @@ Code samples are rendered by Docusaurus in a `<pre class="prism-code">` tag. We 
 whole code block is rendered inside a `code` element with a `display: flex;
 flex-direction: column`. However, `code` is translated to a React Native `Text`
 since his element model is **textual**. To work around this issue, we can
-inject line returns after each `span` element with a CSS `token-line` class
+inject line breaks after each `span` element with a CSS `token-line` class
 which content does not end with a new line.
 
 

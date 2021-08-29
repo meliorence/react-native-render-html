@@ -96,7 +96,7 @@ describe('RenderHTML', () => {
       );
       await findByText('\u200B');
     });
-    it('should render <br> tags to line returns when followed by text', () => {
+    it('should render <br> tags to line breaks when followed by text', () => {
       const { queryByText } = render(
         <RenderHTML
           source={{
@@ -108,7 +108,7 @@ describe('RenderHTML', () => {
       );
       expect(queryByText('\n')).toBeDefined();
     });
-    it('should render <br> tags to line returns when the tag closes an inline formatting context', () => {
+    it('should render <br> tags to line breaks when the tag closes an inline formatting context', () => {
       const { queryByText } = render(
         <RenderHTML
           source={{
@@ -683,7 +683,7 @@ describe('RenderHTML', () => {
     });
   });
   describe('regarding enableExperimentalBRCollapsing', () => {
-    it('should render <br> tags to line returns when followed by text', () => {
+    it('should render <br> tags to line breaks when followed by text', () => {
       const { queryByText } = render(
         <RenderHTML
           source={{
