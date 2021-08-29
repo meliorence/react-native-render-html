@@ -102,6 +102,7 @@ function mapGroup({
     <Drawer.Screen
       component={component}
       options={{
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore
         group,
         groupLabel,

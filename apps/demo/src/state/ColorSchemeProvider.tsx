@@ -24,9 +24,8 @@ export default function ColorSchemeProvider({
 }: PropsWithChildren<{
   initialColorScheme: ColorSchemeState['colorScheme'];
 }>) {
-  const [colorScheme, setColorScheme] = useState<
-    ColorSchemeState['colorScheme']
-  >(initialColorScheme);
+  const [colorScheme, setColorScheme] =
+    useState<ColorSchemeState['colorScheme']>(initialColorScheme);
   return (
     <ColorSchemeContext.Provider value={{ colorScheme, setColorScheme }}>
       {children}

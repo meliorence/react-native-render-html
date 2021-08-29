@@ -35,6 +35,7 @@ import MaxWidthContainerAtom from '../components/MaxWidthContainerAtom';
 
 const genericOnLinkPress = (uri: string) => Linking.openURL(uri);
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
 function useOnLinkPress(uri: string): () => void;
 function useOnLinkPress(): (uri: string) => void;
@@ -95,26 +96,23 @@ function RefAPI({
   );
 }
 
-const SourceDisplayInner: UIToolkitConfig['SourceDisplay'] = function SourceDisplayInner({
-  content,
-  lang,
-  showLineNumbers
-}) {
-  return (
-    <ScrollView
-      horizontal
-      style={{ flexGrow: 0 }}
-      contentContainerStyle={{ flexGrow: 1 }}>
-      <UISourceDisplayMolecule
-        content={content}
-        language={lang as any}
-        showLineNumbers={showLineNumbers}
-        paddingVertical={2}
-        style={{ alignSelf: 'stretch' }}
-      />
-    </ScrollView>
-  );
-};
+const SourceDisplayInner: UIToolkitConfig['SourceDisplay'] =
+  function SourceDisplayInner({ content, lang, showLineNumbers }) {
+    return (
+      <ScrollView
+        horizontal
+        style={{ flexGrow: 0 }}
+        contentContainerStyle={{ flexGrow: 1 }}>
+        <UISourceDisplayMolecule
+          content={content}
+          language={lang as any}
+          showLineNumbers={showLineNumbers}
+          paddingVertical={2}
+          style={{ alignSelf: 'stretch' }}
+        />
+      </ScrollView>
+    );
+  };
 
 const SourceDisplay: UIToolkitConfig['SourceDisplay'] = ({
   title,

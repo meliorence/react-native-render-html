@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { TextStyle } from 'react-native';
 import { useColorRoles } from '../../theme/colorSystem';
 
@@ -86,11 +87,11 @@ const roleDefs: Record<
   uiMono: { fontSize: BASE_FONT_SIZE * 0.9, fontFamily: FONT_MONO },
   uiHyperlink: { fontSize: 5, fontFamily: FONT_MONO },
   footer: { fontSize: BASE_FONT_SIZE * 0.8, fontFamily: FONT_MONO },
-  //@ts-expect-error
+  //@ts-ignore
   html: { fontSize: BASE_FONT_SIZE * 0.9 },
-  //@ts-expect-error
+  //@ts-ignore
   bodyInlineCode: { fontFamily: FONT_MONO },
-  //@ts-expect-error
+  //@ts-ignore
   bodyAPIRef: { fontFamily: FONT_MONO },
   sectionOutline: {
     fontSize: BASE_FONT_SIZE * 0.8,

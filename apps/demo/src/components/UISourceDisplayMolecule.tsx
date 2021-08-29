@@ -41,10 +41,11 @@ export default function UISourceDisplayMolecule({
     role: textRole
   });
   const syntheticPaddingVertical = useSpacing(paddingVertical ?? 0);
-  const lineNumberDisplayWidthComputer: HighlighterProps['lineNumberDisplayWidthComputer'] = useCallback(
-    (fs, maxLineNumberCharLength) => spacing + fs * maxLineNumberCharLength,
-    [spacing]
-  );
+  const lineNumberDisplayWidthComputer: HighlighterProps['lineNumberDisplayWidthComputer'] =
+    useCallback(
+      (fs, maxLineNumberCharLength) => spacing + fs * maxLineNumberCharLength,
+      [spacing]
+    );
   return (
     <Highlighter
       {...otherProps}

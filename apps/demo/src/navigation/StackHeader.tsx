@@ -11,9 +11,10 @@ export default function StackHeader(props: StackHeaderProps) {
   const {
     descriptor: { options, navigation }
   } = scene;
-  const onMenuPress = React.useCallback(() => navigation.goBack(), [
-    navigation
-  ]);
+  const onMenuPress = React.useCallback(
+    () => navigation.goBack(),
+    [navigation]
+  );
   return (
     <UIHeaderAtom>
       <UIAppbarActionAtom icon="arrow-left" onPress={onMenuPress} />

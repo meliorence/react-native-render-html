@@ -14,13 +14,11 @@ export interface ResourceRouteDefinition {
   iconName: IconName;
 }
 
-const pagesIndex: Record<
-  PageRoute,
-  ResourceRouteDefinition
-> = Object.fromEntries(
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  Object.entries(pagesSpecs).map(([_k, s]) => [`${s.group}-${s.id}`, s])
-) as any;
+const pagesIndex: Record<PageRoute, ResourceRouteDefinition> =
+  Object.fromEntries(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    Object.entries(pagesSpecs).map(([_k, s]) => [`${s.group}-${s.id}`, s])
+  ) as any;
 
 const resourceRoutesIndex: Record<ResourceRoute, ResourceRouteDefinition> = {
   ...pagesIndex,

@@ -8,7 +8,8 @@
     "eject": "expo eject",
     "publish": "expo publish",
     "test": "jest --watchAll",
-    "test:ts": "tsc --noEmit"
+    "test:ts": "tsc --noEmit",
+    "test:lint": "eslint --ext ts,tsx src/"
   },
   "jest": {
     "preset": "jest-expo"

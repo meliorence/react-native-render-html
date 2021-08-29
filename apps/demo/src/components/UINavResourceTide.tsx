@@ -22,10 +22,10 @@ export default function UINavResourceTideMolecule<R extends ResourceRoute>({
       leftIconName={definition.iconName}
       title={definition.title}
       style={useSurfaceBackgroundStyleNucleon()}
-      onPress={useCallback(() => navigation.navigate(route), [
-        navigation,
-        route
-      ])}
+      onPress={useCallback(
+        () => navigation.navigate(route),
+        [navigation, route]
+      )}
     />
   );
 }
