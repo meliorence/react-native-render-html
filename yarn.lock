@@ -4380,21 +4380,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@native-html/transient-render-engine@npm:^9.2.3":
-  version: 9.2.3
-  resolution: "@native-html/transient-render-engine@npm:9.2.3"
+"@native-html/transient-render-engine@npm:^9.2.4":
+  version: 9.2.4
+  resolution: "@native-html/transient-render-engine@npm:9.2.4"
   dependencies:
     "@native-html/css-processor": 1.10.2
     "@types/ramda": ^0.27.44
     csstype: ^3.0.8
     domelementtype: ^2.2.0
     domhandler: ^4.2.0
-    htmlparser2: ^7.1.0
+    htmlparser2: ^7.1.1
     ramda: ^0.27.1
   peerDependencies:
     "@types/react-native": "*"
     react-native: ^*
-  checksum: 7e42e1ec73d6b434958feef7e14bcd98144de4ebe70d91177ad204e3ca725a8bb669e915fe5ec83e1986cbdfc825624082ccba771bb224c98fc35074249179f9
+  checksum: 898c92000bc2b185e59649a479e341318021856aef4bfcc25c2434d1a136ea4116fa450d6ca9c1c81436792a9a5ccc8edfb2bd6d2d1afa8547a8aaf56a6f6795
   languageName: node
   linkType: hard
 
@@ -12930,18 +12930,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"htmlparser2@npm:^7.1.0":
-  version: 7.1.0
-  resolution: "htmlparser2@npm:7.1.0"
-  dependencies:
-    domelementtype: ^2.0.1
-    domhandler: ^4.0.0
-    domutils: ^2.8.0
-    entities: ^3.0.1
-  checksum: fe5eb1beb0323189c548c8401cf82fb0fe8c12384dd69038511c079dda8e7e0c7f26c8ab60d598ccd2e8f028e81edc416019d7c51c6134cf72c39eaa5b471ad0
-  languageName: node
-  linkType: hard
-
 "htmlparser2@npm:^7.1.1":
   version: 7.1.1
   resolution: "htmlparser2@npm:7.1.1"
@@ -19977,7 +19965,7 @@ fsevents@^1.2.7:
     "@jsamr/counter-style": ^2.0.1
     "@jsamr/react-native-li": ^2.3.0
     "@microsoft/api-extractor": ^7.14.0
-    "@native-html/transient-render-engine": ^9.2.3
+    "@native-html/transient-render-engine": ^9.2.4
     "@release-it/conventional-changelog": ^2.0.1
     "@testing-library/react-hooks": ^7.0.0
     "@testing-library/react-native": ^7.2.0
