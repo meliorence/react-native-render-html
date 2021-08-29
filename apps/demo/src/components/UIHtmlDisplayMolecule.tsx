@@ -26,9 +26,10 @@ const UIHtmlDisplayMolecule = React.memo(
     style?: StyleProp<ViewStyle>;
   }) => {
     const onSelectUri = useOnLinkPress();
-    const onLinkPress = useCallback((e, uri) => onSelectUri(uri), [
-      onSelectUri
-    ]);
+    const onLinkPress = useCallback(
+      (e, uri) => onSelectUri(uri),
+      [onSelectUri]
+    );
     const { surface, softDivider } = useColorRoles();
     const baseStyle = useMemo(
       () => ({
@@ -74,12 +75,12 @@ const UIHtmlDisplayMolecule = React.memo(
     const renderHtml = (
       <RenderHTML
         debug={false}
+        systemFonts={SYSTEM_FONTS}
         {...sharedProps}
         tagsStyles={mergedTagsStyles}
         baseStyle={baseStyle}
         source={sharedProps.source}
         enableUserAgentStyles
-        systemFonts={SYSTEM_FONTS}
         remoteLoadingView={renderRemoteLoadingView}
       />
     );
