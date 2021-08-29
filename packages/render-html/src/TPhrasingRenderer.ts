@@ -1,5 +1,5 @@
 import React from 'react';
-import { TPhrasing } from '@native-html/transient-render-engine';
+import { TNode, TPhrasing } from '@native-html/transient-render-engine';
 import { useTNodeChildrenRenderer } from './context/TChildrenRendererContext';
 import { TDefaultRenderer } from './shared-types';
 import { TNodeSubRendererProps } from './internal-types';
@@ -29,6 +29,13 @@ function InnerTPhrasingRenderer(props: TNodeSubRendererProps<TPhrasing>) {
   return React.createElement(Renderer, assembledProps);
 }
 
+function isGhostTNode(tnode: TNode) {
+  return (
+    (tnode.type === 'text' && (tnode.data === '' || tnode.data === ' ')) ||
+    tnode.type === 'empty'
+  );
+}
+
 export default function TPhrasingRenderer(
   props: TNodeSubRendererProps<TPhrasing>
 ) {
@@ -43,6 +50,13 @@ export default function TPhrasingRenderer(
     return React.createElement(TNodeChildrenRenderer, {
       tnode: props.tnode
     });
+  }
+  if (
+    props.sharedProps.enableExperimentalGhostLinesPrevention &&
+    props.tnode.tagName == null &&
+    props.tnode.children.every(isGhostTNode)
+  ) {
+    return null;
   }
   return React.createElement(InnerTPhrasingRenderer, props);
 }

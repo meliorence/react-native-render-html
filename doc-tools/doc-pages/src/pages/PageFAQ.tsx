@@ -133,6 +133,28 @@ export default function PageFAQ() {
             .
           </Paragraph>
         </Section>
+        <Section title="Line breaks (<br>) seem to take up too much vertical space">
+          <Paragraph>
+            This is a known bug, but hopefully we have the{' '}
+            <RefRenderHtmlProp name="enableExperimentalBRCollapsing" /> prop to
+            fix it. See{' '}
+            <RefDoc target="textual" fragment="troubleshooting">
+              Textual | Troubleshooting | Line Breaks
+            </RefDoc>
+            .
+          </Paragraph>
+        </Section>
+        <Section title="Isolated empty textual tags take up vertical space">
+          <Paragraph>
+            This is another known bug, but hopefully we have the{' '}
+            <RefRenderHtmlProp name="enableExperimentalGhostLinesPrevention" />{' '}
+            prop to fix it. See{' '}
+            <RefDoc target="textual" fragment="troubleshooting">
+              Textual | Troubleshooting | Empty Tags
+            </RefDoc>
+            .
+          </Paragraph>
+        </Section>
         <Section title="Content after custom tags is not displayed or displayed inside instead of below?">
           <Paragraph>
             That would often happen in the HTML markup when your custom tags is
