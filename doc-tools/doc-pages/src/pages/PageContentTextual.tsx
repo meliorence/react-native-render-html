@@ -9,6 +9,10 @@ import preformattedConfig from './cards/preformattedConfig';
 import fontSelectionArial from './cards/fontSelectionArial';
 import fontSelectionCourierNewConfig from './cards/fontSelectionCourierNewConfig';
 import fontSelectionSpaceMonoConfig from './cards/fontSelectionSpaceMonoConfig';
+import lineBreakBugConfig from './cards/lineBreakBugConfig';
+import lineBreakFixConfig from './cards/lineBreakFixConfig';
+import ghostLineOddityConfig from './cards/ghostLineOddityConfig';
+import ghostLineFixConfig from './cards/ghostLineFixConfig';
 
 export default function PageContentTextual() {
   const {
@@ -146,6 +150,43 @@ export default function PageContentTextual() {
           the font name with quotes in inline and mixed styles, as per CSS
           standard.
         </Admonition>
+      </Chapter>
+      <Chapter title="Troubleshooting">
+        <Section title="Line Breaks">
+          <Paragraph>
+            Line breaks work seemlessly with the <RefHtmlElement name="br" />{' '}
+            element. There is a known bug though in the Foundry release, where
+            line breaks closing an inline formatting context will be printed
+            while they should be ignored. Below is an example for illustration
+            purposes:
+          </Paragraph>
+          <RenderHtmlCard {...lineBreakBugConfig} />
+          <Paragraph>
+            Hopefully, the bug has been identified and since version 6.1.1 there
+            is a workaround. You just need to pass{' '}
+            <RefRenderHtmlProp name="enableExperimentalBRCollapsing" /> prop:
+          </Paragraph>
+          <RenderHtmlCard {...lineBreakFixConfig} />
+        </Section>
+        <Section title="Empty Tags">
+          <Paragraph>
+            React Native has a weird behavior whereby empty{' '}
+            <RefRNSymbol name="Text" /> elements span vertically on iOS and
+            Android.{' '}
+            <Hyperlink url="https://github.com/facebook/react-native/issues/32062">
+              I called this "ghost lines"
+            </Hyperlink>
+            . For example:
+          </Paragraph>
+          <RenderHtmlCard {...ghostLineOddityConfig} />
+          <Paragraph>
+            Since version 6.1.1, a new prop,{' '}
+            <RefRenderHtmlProp name="enableExperimentalGhostLinesPrevention" />,
+            prevent this behavior from happening. It will also handle multiple
+            ghost elements:
+          </Paragraph>
+          <RenderHtmlCard {...ghostLineFixConfig} />
+        </Section>
       </Chapter>
     </Page>
   );

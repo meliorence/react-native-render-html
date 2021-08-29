@@ -397,9 +397,8 @@ export interface RenderHTMLSharedProps {
    * the renderer take those React Native oddities into account.
    * See also this ticket: https://git.io/JErwX
    *
-   * @remarks It might not work when `bypassAnonymousTPhrasingNodes` is set to
-   * `false`. Also note that this is an experimental feature, thus subject to
-   * behavioral instability.
+   * @remarks This is an experimental feature, thus subject to behavioral
+   * instability.
    *
    * @defaultValue false
    */
