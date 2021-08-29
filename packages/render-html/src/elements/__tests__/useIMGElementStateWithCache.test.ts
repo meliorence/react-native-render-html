@@ -5,7 +5,8 @@ const props = {
   contentWidth: 300,
   source: { uri: 'https://foo.bar/600x300' },
   initialDimensions: { width: 30, height: 30 },
-  computeMaxWidth: (contentWidth: number) => contentWidth
+  computeMaxWidth: (contentWidth: number) => contentWidth,
+  tnode: {} as any
 };
 
 describe('useIMGElementStateWithCache', () => {

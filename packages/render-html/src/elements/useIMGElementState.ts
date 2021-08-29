@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { Image } from 'react-native';
 import type { UseIMGElementStateProps, IMGElementState } from './img-types';
 import useImageNaturalDimensions from './useImageNaturalDimensions';
@@ -6,7 +6,7 @@ import useImageConcreteDimensions from './useImageConcreteDimensions';
 import defaultImageInitialDimensions from './defaultInitialImageDimensions';
 import { ImageDimensions } from '../shared-types';
 import { getIMGState } from './getIMGState';
-import { useSharedProps } from '../context/SharedPropsProvider';
+import useIMGNormalizedSource from './useIMGNormalizedSource';
 
 function getImageSizeAsync({
   uri,
@@ -89,25 +89,16 @@ export default function useIMGElementState(
   } = props;
   const { naturalDimensions, specifiedDimensions, flatStyle, onError, error } =
     useFetchedNaturalDimensions(props);
-  const { provideEmbeddedHeaders } = useSharedProps();
-  const nomalizedSource = useMemo(() => {
-    if (source.uri) {
-      const headers = provideEmbeddedHeaders(source.uri, 'img');
-      if (headers) {
-        return {
-          headers,
-          ...source
-        };
-      }
-    }
-    return source;
-  }, [provideEmbeddedHeaders, source]);
   const concreteDimensions = useImageConcreteDimensions({
     flatStyle,
     naturalDimensions,
     specifiedDimensions,
     computeMaxWidth,
     contentWidth
+  });
+  const nomalizedSource = useIMGNormalizedSource({
+    concreteDimensions,
+    source
   });
   return getIMGState({
     error,
