@@ -2,7 +2,7 @@ module.exports = {
   git: {
     commitMessage: 'chore: release v${version}',
     // to release a changelog diff from a specific tag, uncoment
-    // changelog: 'git log --pretty=format:"* %s (%h)" v5.1.1...${to}'
+    changelog: 'git log --pretty=format:"* %s (%h)" v6.0.5...${to}'
   },
   npm: {
     publish: true
