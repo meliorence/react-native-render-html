@@ -138,8 +138,8 @@ export default function PageFAQ() {
             This is a known bug, but hopefully we have the{' '}
             <RefRenderHtmlProp name="enableExperimentalBRCollapsing" /> prop to
             fix it. See{' '}
-            <RefDoc target="textual" fragment="troubleshooting">
-              Textual | Troubleshooting | Line Breaks
+            <RefDoc target="textual" fragment="caveats">
+              Textual | Caveats | Line Breaks
             </RefDoc>
             .
           </Paragraph>
@@ -149,8 +149,8 @@ export default function PageFAQ() {
             This is another known bug, but hopefully we have the{' '}
             <RefRenderHtmlProp name="enableExperimentalGhostLinesPrevention" />{' '}
             prop to fix it. See{' '}
-            <RefDoc target="textual" fragment="troubleshooting">
-              Textual | Troubleshooting | Empty Tags
+            <RefDoc target="textual" fragment="caveats">
+              Textual | Caveats | Empty Tags
             </RefDoc>
             .
           </Paragraph>
