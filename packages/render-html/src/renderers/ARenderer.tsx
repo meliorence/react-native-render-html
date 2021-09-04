@@ -2,8 +2,7 @@ import React from 'react';
 import { InternalMixedRenderer } from '../render/render-types';
 import { TNode, DocumentContext } from '@native-html/transient-render-engine';
 import { InternalRendererProps, RenderersProps } from '../shared-types';
-import { AccessibilityProps, GestureResponderEvent } from 'react-native';
-import AElement from '../elements/AElement';
+import { GestureResponderEvent } from 'react-native';
 import useNormalizedUrl from '../hooks/useNormalizedUrl';
 import { useDocumentMetadata } from '../context/DocumentMetadataProvider';
 import { useRendererProps } from '../context/RenderersPropsProvider';
@@ -40,20 +39,14 @@ export function useAElementProps<T extends TNode>(
   if (typeof syntheticAnchorOnLinkPress !== 'function') {
     return props;
   }
-  const accessibilityProps: AccessibilityProps = {
-    accessible: true,
-    accessibilityRole: 'link'
-  };
   return {
     ...props,
-    onPress: syntheticAnchorOnLinkPress,
-    textProps: accessibilityProps,
-    viewProps: accessibilityProps
+    onPress: syntheticAnchorOnLinkPress
   };
 }
 
 const ARenderer: InternalMixedRenderer = (props) => {
-  return React.createElement(AElement, useAElementProps(props));
+  return React.createElement(props.TDefaultRenderer, useAElementProps(props));
 };
 
 export default ARenderer;
