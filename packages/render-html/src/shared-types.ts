@@ -15,6 +15,7 @@ import type {
   DocumentContext as TREDocumentContext,
   DomVisitorCallbacks,
   Element,
+  EmbeddedTagNames,
   HTMLContentModel,
   HTMLElementModel,
   MixedStyleDeclaration,
@@ -24,6 +25,7 @@ import type {
   Node,
   NodeWithChildren,
   SetMarkersForTNode,
+  StylessReactNativeProps,
   TDocument,
   TNode,
   TPhrasing,
@@ -232,7 +234,8 @@ export interface RenderHTMLPassedProps {
  * A map which defines the type of parameters passed as third argument
  * of {@link EmbeddedHeadersProvider}.
  */
-export interface EmbeddedWithHeadersParamsMap {
+export interface EmbeddedWithHeadersParamsMap
+  extends Record<EmbeddedWithHeadersTagName, Record<string, unknown>> {
   img: {
     /**
      * The print height of the image in DPI, if it can be determined beforehand
@@ -248,16 +251,19 @@ export interface EmbeddedWithHeadersParamsMap {
 }
 
 /**
- * Tag names eligible for headers providing.
+ * Tag names eligible for headers provision.
  */
-export type EmbeddedWithHeadersTagName = keyof EmbeddedWithHeadersParamsMap;
+export type EmbeddedWithHeadersTagName = Exclude<
+  EmbeddedTagNames,
+  'svg' | 'canvas' | 'math'
+>;
 
 /**
  * A function to provide headers to a peculiar embedded element.
  */
 export type EmbeddedHeadersProvider = <T extends EmbeddedWithHeadersTagName>(
   uri: string,
-  tagName: T,
+  tagName: string,
   params: EmbeddedWithHeadersParamsMap[T]
 ) => Record<string, string> | null | void;
 
@@ -1046,30 +1052,46 @@ export interface TNodeRendererProps<T extends TNode> {
 export interface RendererBaseProps<T extends TNode>
   extends TNodeRendererProps<T> {
   /**
+   * Props passed to the underlying React Native element, either `Text` or
+   * `View`. See also {@link RendererBaseProps.textProps} and
+   * {@link RendererBaseProps.viewProps}.
+   *
+   * @remarks The `prop.style` property will have a greater specificity
+   * than computed styles for this {@link TNode}. E.g. `style={[computedStyle,
+   * nativeProps.style, viewProps.style]}`.
+   *
+   */
+
+  nativeProps?: StylessReactNativeProps & { style?: StyleProp<ViewStyle> };
+  /**
    * Any default renderer should be able to handle press.
    */
   onPress?: (e: GestureResponderEvent) => void;
 
   /**
-   * Props for Text-based renderers.
+   * Props passed to the underlying `Text` element (`type` must be 'text'). See
+   * also {@link RendererBaseProps.nativeProps} and
+   * {@link RendererBaseProps.viewProps}.
    *
    * @remarks The `textProps.style` property will have a greater specificity than
    * computed styles for this {@link TNode}. E.g. `style={[computedStyle,
-   * textProps.style]}`.
+   * nativeProps.style, textProps.style]}`.
    */
   textProps: TextProps;
 
   /**
-   * Is is a text-based or view-based renderer?
+   * Is the underlying component `Text` or `View`?
    */
   type: 'text' | 'block';
 
   /**
-   * Props for View-based renderers.
+   * Props passed to the underlying `View` element (`type` must be 'view'). See
+   * also {@link RendererBaseProps.nativeProps} and
+   * {@link RendererBaseProps.textProps}.
    *
    * @remarks The `viewProps.style` property will have a greater specificity than
    * computed styles for this {@link TNode}. E.g. `style={[computedStyle,
-   * viewProps.style]}`.
+   * nativeProps.style, viewProps.style]}`.
    */
   viewProps: ViewProps;
 }

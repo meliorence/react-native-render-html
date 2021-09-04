@@ -8,12 +8,15 @@ const TDefaultTextualRenderer: TDefaultRenderer<TPhrasing | TText> = ({
   style,
   children,
   textProps,
+  nativeProps,
   onPress
 }) => {
-  const resolvedStyles = textProps?.style ? [style, textProps.style] : style;
+  const resolvedStyles = [style, nativeProps?.style, textProps.style];
   return React.createElement(
     Text,
     {
+      ...tnode.getReactNativeProps()?.text,
+      ...nativeProps,
       ...textProps,
       onPress,
       style: resolvedStyles,

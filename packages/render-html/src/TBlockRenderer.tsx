@@ -13,6 +13,7 @@ export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
   style,
   onPress,
   viewProps,
+  nativeProps,
   propsForChildren
 }) => {
   const TNodeChildrenRenderer = useTNodeChildrenRenderer();
@@ -20,8 +21,10 @@ export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
     <TNodeChildrenRenderer tnode={tnode} propsForChildren={propsForChildren} />
   );
   const commonProps = {
+    ...tnode.getReactNativeProps()?.view,
+    ...nativeProps,
     ...viewProps,
-    style: viewProps?.style ? [style, viewProps.style] : style,
+    style: [style, nativeProps?.style, viewProps.style],
     testID: tnode.tagName
   };
   if (typeof onPress === 'function') {

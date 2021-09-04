@@ -16,6 +16,7 @@ import { useRendererProps } from '../context/RenderersPropsProvider';
 import TNodeChildrenRenderer from '../TNodeChildrenRenderer';
 import OLElement from '../elements/OLElement';
 import ULElement from '../elements/ULElement';
+import { HTMLElementModelRecord } from '../shared-types';
 
 describe('RenderHTML', () => {
   it('should render without error when providing a source', () => {
@@ -179,7 +180,7 @@ describe('RenderHTML', () => {
       />
     );
     const span = getByTestId('span');
-    expect(span.props.style).toMatchObject(tagsStyles.span);
+    expect(StyleSheet.flatten(span.props.style)).toMatchObject(tagsStyles.span);
   });
   describe('regarding onTTreeChange prop', () => {
     const onTTreeChange = jest.fn();
@@ -359,6 +360,162 @@ describe('RenderHTML', () => {
       );
       const em = UNSAFE_getByType(EmRenderer);
       expect(em.props.propsFromParent.test).toBeUndefined();
+    });
+    it('should apply `viewProps` to TBlock renderers', () => {
+      const DivRenderer: CustomTextualRenderer = ({
+        TDefaultRenderer,
+        ...props
+      }) => <TDefaultRenderer {...props} viewProps={{ collapsable: false }} />;
+      const { getByTestId } = render(
+        <RenderHTML
+          source={{
+            html: '<div>test</div>'
+          }}
+          renderers={{ div: DivRenderer }}
+          debug={false}
+          contentWidth={100}
+        />
+      );
+      const div = getByTestId('div');
+      expect(div.props.collapsable).toBe(false);
+    });
+    it('should apply `textProps` to TPhrasing renderers', () => {
+      const SpanRenderer: CustomTextualRenderer = ({
+        TDefaultRenderer,
+        ...props
+      }) => (
+        <TDefaultRenderer
+          {...props}
+          textProps={{ adjustsFontSizeToFit: true }}
+        />
+      );
+      const { getByTestId } = render(
+        <RenderHTML
+          source={{
+            html: '<span>foo<b>bar</b></span>'
+          }}
+          renderers={{ span: SpanRenderer }}
+          debug={false}
+          contentWidth={100}
+        />
+      );
+      const span = getByTestId('span');
+      expect(span.props.adjustsFontSizeToFit).toBe(true);
+    });
+    it('should apply `textProps` to TText renderers', () => {
+      const SpanRenderer: CustomTextualRenderer = ({
+        TDefaultRenderer,
+        ...props
+      }) => (
+        <TDefaultRenderer
+          {...props}
+          textProps={{ adjustsFontSizeToFit: true }}
+        />
+      );
+      const { getByTestId } = render(
+        <RenderHTML
+          source={{
+            html: '<span>foo</span>'
+          }}
+          renderers={{ span: SpanRenderer }}
+          debug={false}
+          contentWidth={100}
+        />
+      );
+      const span = getByTestId('span');
+      expect(span.props.adjustsFontSizeToFit).toBe(true);
+    });
+    it('should apply `props`', () => {
+      const SpanRenderer: CustomTextualRenderer = ({
+        TDefaultRenderer,
+        ...props
+      }) => (
+        <TDefaultRenderer
+          {...props}
+          nativeProps={{ accessibilityRole: 'adjustable' }}
+        />
+      );
+      const { getByTestId } = render(
+        <RenderHTML
+          source={{
+            html: '<span>foo</span>'
+          }}
+          renderers={{ span: SpanRenderer }}
+          debug={false}
+          contentWidth={100}
+        />
+      );
+      const span = getByTestId('span');
+      expect(span.props.accessibilityRole).toBe('adjustable');
+    });
+    it('should apply `tnode.getReactNativeProps()` to TPhrasing renderers', () => {
+      const customHTMLElementModels: HTMLElementModelRecord = {
+        span: defaultHTMLElementModels.span.extend({
+          reactNativeProps: {
+            native: {
+              accessibilityRole: 'adjustable'
+            }
+          }
+        })
+      };
+      const { getByTestId } = render(
+        <RenderHTML
+          source={{
+            html: '<span>foo<b>bar</br></span>'
+          }}
+          customHTMLElementModels={customHTMLElementModels}
+          debug={false}
+          contentWidth={100}
+        />
+      );
+      const span = getByTestId('span');
+      expect(span.props.accessibilityRole).toBe('adjustable');
+    });
+    it('should apply `tnode.getReactNativeProps()` to TText renderers', () => {
+      const customHTMLElementModels: HTMLElementModelRecord = {
+        span: defaultHTMLElementModels.span.extend({
+          reactNativeProps: {
+            native: {
+              accessibilityRole: 'adjustable'
+            }
+          }
+        })
+      };
+      const { getByTestId } = render(
+        <RenderHTML
+          source={{
+            html: '<span>foo</span>'
+          }}
+          customHTMLElementModels={customHTMLElementModels}
+          debug={false}
+          contentWidth={100}
+        />
+      );
+      const span = getByTestId('span');
+      expect(span.props.accessibilityRole).toBe('adjustable');
+    });
+    it('should apply `tnode.getReactNativeProps()` to TBlock renderers', () => {
+      const customHTMLElementModels: HTMLElementModelRecord = {
+        div: defaultHTMLElementModels.span.extend({
+          reactNativeProps: {
+            native: {
+              accessibilityRole: 'adjustable'
+            }
+          }
+        })
+      };
+      const { getByTestId } = render(
+        <RenderHTML
+          source={{
+            html: '<div>test</div>'
+          }}
+          customHTMLElementModels={customHTMLElementModels}
+          debug={false}
+          contentWidth={100}
+        />
+      );
+      const div = getByTestId('div');
+      expect(div.props.accessibilityRole).toBe('adjustable');
     });
   });
   describe('regarding TNodeRenderer', () => {
