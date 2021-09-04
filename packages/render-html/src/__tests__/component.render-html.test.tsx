@@ -141,6 +141,20 @@ describe('RenderHTML', () => {
       act(() => anchor.props.onPress?.({}));
       expect(onPress).toHaveBeenCalled();
     });
+    it("should add accessibility role 'header' to headings", () => {
+      for (const header of ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']) {
+        const { getByTestId } = render(
+          <RenderHTML
+            source={{
+              html: `<${header}>test</${header}>`
+            }}
+            debug={false}
+            contentWidth={0}
+          />
+        );
+        expect(getByTestId(header).props.accessibilityRole).toBe('header');
+      }
+    });
   });
   describe('regarding customHTMLElementsModels prop', () => {
     it('should support changing block content model to mixed', () => {
