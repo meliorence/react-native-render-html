@@ -1,6 +1,5 @@
 import { TagName } from '@native-html/transient-render-engine';
 import { ComponentType } from 'react';
-import AElement from '../elements/AElement';
 import IMGElement from '../elements/IMGElement';
 import OLElement from '../elements/OLElement';
 import ULElement from '../elements/ULElement';
@@ -25,7 +24,7 @@ const specialRenderersConfig = {
   },
   a: {
     hook: useAElementProps,
-    Element: AElement
+    Element: undefined
   }
 };
 
@@ -64,7 +63,7 @@ export default function useInternalRenderer<T extends TagName>(
   const { TDefaultRenderer, ...rendererProps } = props;
   if (hasSpecialInternalRenderer(tagName)) {
     return {
-      Renderer: specialRenderersConfig[tagName].Element,
+      Renderer: specialRenderersConfig[tagName].Element || TDefaultRenderer,
       rendererProps: specialRenderersConfig[tagName].hook(props as any)
     } as any;
   }

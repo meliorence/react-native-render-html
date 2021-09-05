@@ -4,7 +4,7 @@ import { useTNodeChildrenRenderer } from './context/TChildrenRendererContext';
 import { TDefaultRenderer } from './shared-types';
 import { TNodeSubRendererProps } from './internal-types';
 import useAssembledCommonProps from './hooks/useAssembledCommonProps';
-import TDefaultTextualRenderer from './TDefaultTextualRenderer';
+import renderTextualContent from './renderTextualContent';
 
 export const TDefaultPhrasingRenderer: TDefaultRenderer<TPhrasing> = ({
   children,
@@ -18,7 +18,7 @@ export const TDefaultPhrasingRenderer: TDefaultRenderer<TPhrasing> = ({
       tnode,
       propsForChildren
     });
-  return React.createElement(TDefaultTextualRenderer, props, resolvedChildren);
+  return renderTextualContent(props, resolvedChildren);
 };
 
 function InnerTPhrasingRenderer(props: TNodeSubRendererProps<TPhrasing>) {

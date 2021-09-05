@@ -4,18 +4,14 @@ import { TDefaultRenderer, TDefaultRendererProps } from './shared-types';
 import { TNodeSubRendererProps } from './internal-types';
 import { useInternalTextRenderer } from './context/RenderRegistryProvider';
 import useAssembledCommonProps from './hooks/useAssembledCommonProps';
-import TDefaultTextualRenderer from './TDefaultTextualRenderer';
+import renderTextualContent from './renderTextualContent';
 
 export const TDefaultTextRenderer: TDefaultRenderer<TText> = ({
   children,
   ...props
 }: TDefaultRendererProps<TText>) => {
   const { tnode } = props;
-  return React.createElement(
-    TDefaultTextualRenderer,
-    props,
-    children ?? tnode.data
-  );
+  return renderTextualContent(props, children ?? tnode.data);
 };
 
 function TStandardTextRenderer(props: TNodeSubRendererProps<TText>) {

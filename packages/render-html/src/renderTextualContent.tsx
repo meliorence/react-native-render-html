@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Text } from 'react-native';
 import { TPhrasing, TText } from '@native-html/transient-render-engine';
-import { TDefaultRenderer } from './shared-types';
+import { TDefaultRendererProps } from './shared-types';
 
-const TDefaultTextualRenderer: TDefaultRenderer<TPhrasing | TText> = ({
-  tnode,
-  style,
-  children,
-  textProps,
-  nativeProps,
-  onPress
-}) => {
+const renderTextualContent = (
+  {
+    tnode,
+    style,
+    textProps,
+    nativeProps,
+    onPress
+  }: TDefaultRendererProps<TPhrasing | TText>,
+  children: ReactNode
+) => {
   const resolvedStyles = [style, nativeProps?.style, textProps.style];
   return React.createElement(
     Text,
@@ -26,4 +28,4 @@ const TDefaultTextualRenderer: TDefaultRenderer<TPhrasing | TText> = ({
   );
 };
 
-export default TDefaultTextualRenderer;
+export default renderTextualContent;
