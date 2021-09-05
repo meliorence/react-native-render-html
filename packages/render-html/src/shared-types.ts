@@ -263,7 +263,7 @@ export type EmbeddedWithHeadersTagName = Exclude<
  */
 export type EmbeddedHeadersProvider = <T extends EmbeddedWithHeadersTagName>(
   uri: string,
-  tagName: string,
+  tagName: T,
   params: EmbeddedWithHeadersParamsMap[T]
 ) => Record<string, string> | null | void;
 
