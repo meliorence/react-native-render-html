@@ -1,3 +1,20 @@
+# [6.2.0-alpha.0](https://github.com/meliorence/react-native-render-html/compare/v6.1.0...v6.2.0-alpha.0) (2021-09-05)
+
+This release is focused on accessibility! Moreover, it empowers [model-based custom rendering](https://meliorence.github.io/react-native-render-html/docs/guides/custom-renderers#model-based-custom-rendering) which can now define props passed to `Text` and `View` elements of renderers.
+
+### Bug Fixes
+
+* **a11y:** anchors are not accessible anymore when `href` is empty or absent ([4e1f2f4](https://github.com/meliorence/react-native-render-html/commit/4e1f2f4b6b46186b564a7ccbf53fecf0877795e0))
+
+### Features
+
+* **a11y:** support `aria-label` and `aria-role` HTML attributes ([2b27f00](https://github.com/meliorence/react-native-render-html/commit/2b27f00c118eae76dec21f0f9cc2af20c9cd6747))
+* **a11y:** whatwg-compliant accessibility for images ([7fc2907](https://github.com/meliorence/react-native-render-html/commit/7fc2907e38b37398314eadc9ec0200092c4a2304))
+* **css:** support `user-select` CSS property ([8442b2f](https://github.com/meliorence/react-native-render-html/commit/8442b2fa655a1332035beca99a7fbbdc1d483ec4))
+* **a11y:** add accessibilityRole="header" to headings elements (h1...h6) ([1c79bc3](https://github.com/meliorence/react-native-render-html/commit/1c79bc35146f311468d9a69165e813151e2603e1))
+* new `reactNativeProps` and `getDynamicReactNativeProps` in `HTMLElementModel`, this little change gives model-based custom rendering considerably more leverage. ([4ee1646](https://github.com/meliorence/react-native-render-html/commit/4ee1646b26f8c9e3ea1cd45527f7228dd4a9892b))
+* deprecate `getUADerivedStyleFromAttributes` in favor of `getUADynamicMixedStyles` in `HTMLElementModel`, which allows access to the underlying `TNode` and again empowers model-based custom rendering.
+
 # [6.1.0](https://github.com/meliorence/react-native-render-html/compare/v6.0.5...v6.1.0) (2021-08-29)
 
 ### Features
