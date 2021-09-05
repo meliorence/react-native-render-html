@@ -13,7 +13,6 @@ const defaultImageStyle: ImageStyle = { resizeMode: 'cover' };
  * Default success "image" view for the {@link IMGElement} component.
  */
 export default function IMGElementContentSuccess({
-  alt,
   source,
   imageStyle,
   dimensions,
@@ -26,8 +25,6 @@ export default function IMGElementContentSuccess({
   );
   return (
     <Image
-      accessibilityRole="image"
-      accessibilityLabel={alt}
       source={source}
       onError={onImageError}
       style={[defaultImageStyle, dimensions, imageStyle]}

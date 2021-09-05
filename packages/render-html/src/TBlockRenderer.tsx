@@ -6,27 +6,21 @@ import { TDefaultRenderer } from './shared-types';
 import { TNodeSubRendererProps } from './internal-types';
 import GenericPressable from './GenericPressable';
 import useAssembledCommonProps from './hooks/useAssembledCommonProps';
+import getNativePropsForTNode from './helpers/getNativePropsForTNode';
 
 export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
-  tnode,
   children: overridingChildren,
-  style,
   onPress,
-  viewProps,
-  nativeProps,
-  propsForChildren
+  ...props
 }) => {
   const TNodeChildrenRenderer = useTNodeChildrenRenderer();
   const children = overridingChildren ?? (
-    <TNodeChildrenRenderer tnode={tnode} propsForChildren={propsForChildren} />
+    <TNodeChildrenRenderer
+      tnode={props.tnode}
+      propsForChildren={props.propsForChildren}
+    />
   );
-  const commonProps = {
-    ...tnode.getReactNativeProps()?.view,
-    ...nativeProps,
-    ...viewProps,
-    style: [style, nativeProps?.style, viewProps.style],
-    testID: tnode.tagName
-  };
+  const commonProps = getNativePropsForTNode(props);
   if (typeof onPress === 'function') {
     return React.createElement(
       GenericPressable,

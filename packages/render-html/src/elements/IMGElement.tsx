@@ -23,13 +23,9 @@ function identity(arg: any) {
  * {@link IMGElementContentSuccess}, {@link IMGElementContentLoading}
  * and {@link IMGElementContentError} for customization.
  */
-function IMGElement({
-  onPress,
-  testID,
-  ...props
-}: IMGElementProps): ReactElement {
+function IMGElement(props: IMGElementProps): ReactElement {
   const state = useIMGElementState(props);
-  let content: ReactNode = false;
+  let content: ReactNode;
   if (state.type === 'success') {
     content = React.createElement(IMGElementContentSuccess, state);
   } else if (state.type === 'loading') {
@@ -39,8 +35,9 @@ function IMGElement({
   }
   return (
     <IMGElementContainer
-      testID={testID}
-      onPress={onPress}
+      testID={props.testID}
+      {...props.containerProps}
+      onPress={props.onPress}
       style={state.containerStyle}>
       {content}
     </IMGElementContainer>
@@ -66,7 +63,8 @@ const propTypes: Record<keyof IMGElementProps, any> = {
   onPress: PropTypes.func,
   testID: PropTypes.string,
   objectFit: PropTypes.string,
-  cachedNaturalDimensions: imgDimensionsType
+  cachedNaturalDimensions: imgDimensionsType,
+  containerProps: PropTypes.object
 };
 
 /**

@@ -7,15 +7,10 @@ import { IMGElementStateLoading } from './img-types';
  */
 export default function IMGElementContentLoading({
   dimensions,
-  alt,
   children
 }: PropsWithChildren<IMGElementStateLoading>): ReactElement {
   return (
-    <View
-      style={dimensions}
-      accessibilityRole="image"
-      accessibilityLabel={alt}
-      testID="image-loading">
+    <View style={dimensions} testID="image-loading">
       {children}
     </View>
   );

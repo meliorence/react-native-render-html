@@ -63,7 +63,7 @@ describe('RenderHTML', () => {
       );
       await waitFor(() => UNSAFE_getByType(ULElement));
     });
-    it('should update ImgTag contentWidth when contentWidth prop changes', () => {
+    it('should update <img> contentWidth when contentWidth prop changes', () => {
       const contentWidth = 300;
       const nextContentWidth = 200;
       const { UNSAFE_getByType, update } = render(
@@ -84,6 +84,40 @@ describe('RenderHTML', () => {
       expect(UNSAFE_getByType(ImgTag).props.contentWidth).toBe(
         nextContentWidth
       );
+    });
+    it('should provide accessibility properties to <img> renderer', () => {
+      const { getByA11yRole } = render(
+        <RenderHTML
+          source={{
+            html: '<img alt="An image" src="https://img.com/1" />'
+          }}
+          debug={false}
+          contentWidth={200}
+        />
+      );
+      const imgProps = getByA11yRole('image').props;
+      expect(imgProps.accessibilityRole).toBe('image');
+      expect(imgProps.accessibilityLabel).toBe('An image');
+    });
+    it('should merge `viewStyle` to <img> renderer', () => {
+      const { getByA11yRole } = render(
+        <RenderHTML
+          source={{
+            html: '<img alt="An image" src="https://img.com/1" />'
+          }}
+          debug={false}
+          defaultViewProps={{
+            style: {
+              backgroundColor: 'red'
+            }
+          }}
+          contentWidth={200}
+        />
+      );
+      const imgProps = getByA11yRole('image').props;
+      expect(StyleSheet.flatten(imgProps.style)).toMatchObject({
+        backgroundColor: 'red'
+      });
     });
     it('should use internal text renderer for <wbr> tags', async () => {
       const { findByText } = render(

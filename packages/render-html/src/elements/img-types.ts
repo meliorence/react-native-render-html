@@ -3,6 +3,7 @@ import {
   ImageURISource,
   PressableProps,
   StyleProp,
+  ViewProps,
   ViewStyle
 } from 'react-native';
 import { ImageDimensions } from '../shared-types';
@@ -76,6 +77,7 @@ export interface UseIMGElementStateProps {
  * Props for the {@link IMGElement} component.
  */
 export interface IMGElementProps extends UseIMGElementStateProps {
+  containerProps?: Omit<ViewProps, 'style'>;
   /**
    * A callback triggered on press.
    */

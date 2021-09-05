@@ -4,7 +4,7 @@ import React, {
   ReactElement,
   useMemo
 } from 'react';
-import { View, StyleSheet, ViewStyle } from 'react-native';
+import { View, StyleSheet, ViewStyle, ViewProps } from 'react-native';
 import GenericPressable from '../GenericPressable';
 import { IMGElementProps } from './img-types';
 
@@ -23,9 +23,11 @@ export default function IMGElementContainer({
   style,
   onPress,
   testID,
-  children
+  children,
+  ...otherProps
 }: PropsWithChildren<
-  Pick<IMGElementProps, 'onPress' | 'testID'> & { style: ViewStyle }
+  Pick<IMGElementProps, 'onPress' | 'testID'> &
+    Omit<ViewProps, 'style'> & { style: ViewStyle }
 >): ReactElement {
   const containerStyle = useMemo(() => {
     const { width, height, ...remainingStyle } = style;
@@ -35,7 +37,7 @@ export default function IMGElementContainer({
     typeof onPress === 'function' ? GenericPressable : View;
   return React.createElement(
     Container,
-    { style: containerStyle, onPress, testID },
+    { ...otherProps, style: containerStyle, onPress, testID },
     children
   );
 }
