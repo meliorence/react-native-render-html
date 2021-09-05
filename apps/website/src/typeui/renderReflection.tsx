@@ -20,6 +20,9 @@ function renderArrowSignatures(
   signatures: JSONOutput.SignatureReflection[],
   params: Params
 ) {
+  if (!signatures) {
+    return 'unknown';
+  }
   return <>{signatures.map((s) => renderArrowSignature(s, params))}</>;
 }
 
@@ -226,12 +229,12 @@ export default function renderReflection(
         params
       );
     case ReflectionKind.TypeLiteral:
-      if (reflection.signatures) {
-        return renderArrowSignatures(reflection.signatures, params);
-      }
-      if (!reflection.groups) {
+      if (!reflection.groups && !reflection.signatures) {
         console.warn('Unhandled Type Literal with no group', reflection);
         return <TokenKeyword>any</TokenKeyword>;
+      }
+      if (reflection.signatures) {
+        return renderArrowSignatures(reflection.signatures, params);
       }
       let ret: any = null;
       for (const group of reflection.groups!) {
