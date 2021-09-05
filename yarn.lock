@@ -4367,24 +4367,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@native-html/css-processor@npm:1.10.2":
-  version: 1.10.2
-  resolution: "@native-html/css-processor@npm:1.10.2"
+"@native-html/css-processor@npm:1.11.0":
+  version: 1.11.0
+  resolution: "@native-html/css-processor@npm:1.11.0"
   dependencies:
     css-to-react-native: ^3.0.0
     csstype: ^3.0.8
   peerDependencies:
     "@types/react": "*"
     "@types/react-native": "*"
-  checksum: 419c5b4eb42329d2f7321a21da2d5ade61a1ea9de307c0f4882665a98431c319f09c15d1ea0df417a2972d1db6b7aab00a1194fea8cfca4e2b375cb07843ede9
+  checksum: 741ff04c6bfb7f004670ed03c230f417266002c59bd0314e066df28044f5d6ce76ff62db85ff801b9e14dee5a048a87b77d2213bc6f869de31f4d93802c54fd0
   languageName: node
   linkType: hard
 
-"@native-html/transient-render-engine@npm:10.0.2":
-  version: 10.0.2
-  resolution: "@native-html/transient-render-engine@npm:10.0.2"
+"@native-html/transient-render-engine@npm:10.1.0":
+  version: 10.1.0
+  resolution: "@native-html/transient-render-engine@npm:10.1.0"
   dependencies:
-    "@native-html/css-processor": 1.10.2
+    "@native-html/css-processor": 1.11.0
     "@types/ramda": ^0.27.44
     csstype: ^3.0.8
     domelementtype: ^2.2.0
@@ -4394,7 +4394,7 @@ __metadata:
   peerDependencies:
     "@types/react-native": "*"
     react-native: ^*
-  checksum: 3d5854625d30ed5b1c451c093ea6130cfd925e8f12d77d5c896895c7d236a4c322a3e9080eb02e5bd104e7e03123837f20a76b7fbe1f309eb3b5d5947f8b5150
+  checksum: f12f69d35845d8f508f4439f88b5b50447af02651a6e30bbbb4fdff9df7eb0df5252b36172330a068151b58ea25a8cd1fe0d3f9a8de89f873b3e4624e43f18ee
   languageName: node
   linkType: hard
 
@@ -19965,7 +19965,7 @@ fsevents@^1.2.7:
     "@jsamr/counter-style": ^2.0.1
     "@jsamr/react-native-li": ^2.3.0
     "@microsoft/api-extractor": ^7.14.0
-    "@native-html/transient-render-engine": 10.0.2
+    "@native-html/transient-render-engine": 10.1.0
     "@release-it/conventional-changelog": ^2.0.1
     "@testing-library/react-hooks": ^7.0.0
     "@testing-library/react-native": ^7.2.0
