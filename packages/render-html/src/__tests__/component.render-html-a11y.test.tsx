@@ -1,7 +1,13 @@
+import {
+  defaultHTMLElementModels,
+  HTMLContentModel,
+  TBlock
+} from '@native-html/transient-render-engine';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 import AccessibilityEngine from 'react-native-accessibility-engine';
 import RenderHTML from '../RenderHTML';
+import { CustomRendererProps } from '../shared-types';
 
 describe('RenderHTML a11y', () => {
   describe('regarding anchors', () => {
@@ -79,6 +85,64 @@ describe('RenderHTML a11y', () => {
       const imgProps = getByA11yRole('image').props;
       expect(imgProps.accessibilityRole).toBe('image');
       expect(imgProps.accessibilityLabel).toBe('An image');
+      expect(() => AccessibilityEngine.check(element)).not.toThrow();
+    });
+  });
+  describe('regarding pressable custom renderers', () => {
+    it('should add a button role if onPress is defined for custom renderers with a block content model', () => {
+      const element = (
+        <RenderHTML
+          source={{
+            html: '<button aria-label="Click me!"></button>'
+          }}
+          customHTMLElementModels={{
+            ...defaultHTMLElementModels,
+            button: defaultHTMLElementModels.button.extend({
+              contentModel: HTMLContentModel.block
+            })
+          }}
+          renderers={{
+            button: ({
+              TDefaultRenderer,
+              ...props
+            }: CustomRendererProps<TBlock>) => (
+              <TDefaultRenderer onPress={() => {}} {...props} />
+            )
+          }}
+          debug={false}
+          contentWidth={200}
+        />
+      );
+      const { getByA11yRole } = render(element);
+      const buttonProps = getByA11yRole('button').props;
+      expect(buttonProps.accessibilityRole).toBe('button');
+      expect(() => AccessibilityEngine.check(element)).not.toThrow();
+    });
+    it('should add a button role if onPress is defined for custom renderers with a textual content model', () => {
+      const element = (
+        <RenderHTML
+          source={{
+            html: '<span><customlink aria-label="Click me!"></customlink></span>'
+          }}
+          customHTMLElementModels={{
+            ...defaultHTMLElementModels,
+            customlink: defaultHTMLElementModels.span
+          }}
+          renderers={{
+            customlink: ({
+              TDefaultRenderer,
+              ...props
+            }: CustomRendererProps<any>) => (
+              <TDefaultRenderer onPress={() => {}} {...props} />
+            )
+          }}
+          debug={false}
+          contentWidth={200}
+        />
+      );
+      const { getByA11yRole } = render(element);
+      const buttonProps = getByA11yRole('link').props;
+      expect(buttonProps.accessibilityRole).toBe('link');
       expect(() => AccessibilityEngine.check(element)).not.toThrow();
     });
   });

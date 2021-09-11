@@ -1,4 +1,5 @@
 import { TBlock, TPhrasing, TText } from '@native-html/transient-render-engine';
+import { TextProps, ViewProps } from 'react-native';
 import { TDefaultRendererProps } from '../shared-types';
 
 /**
@@ -8,10 +9,13 @@ import { TDefaultRendererProps } from '../shared-types';
  */
 export default function getNativePropsForTNode(
   props: TDefaultRendererProps<TPhrasing | TText | TBlock>
-) {
+): TextProps | ViewProps {
   const { tnode, style, type, nativeProps, onPress } = props;
   const switchProp = type === 'block' ? props.viewProps : props.textProps;
   return {
+    ...(typeof onPress === 'function'
+      ? ({ accessibilityRole: type === 'block' ? 'button' : 'link' } as const)
+      : null),
     ...tnode.getReactNativeProps()?.[type === 'block' ? 'view' : 'text'],
     ...nativeProps,
     ...switchProp,
