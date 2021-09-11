@@ -6,13 +6,15 @@ import { TDefaultRendererProps } from '../shared-types';
  * Extract React Native props for a given {@link TNode}. Native props target
  * either `Text` or `View` elements, with an optional `onPress` prop for
  * interactive elements.
+ *
+ * @public
  */
-export default function getNativePropsForTNode(
-  props: TDefaultRendererProps<TPhrasing | TText | TBlock>
-): TextProps | ViewProps {
+export default function getNativePropsForTNode<
+  T extends TPhrasing | TText | TBlock
+>(props: TDefaultRendererProps<T>): T extends TBlock ? ViewProps : TextProps {
   const { tnode, style, type, nativeProps, onPress } = props;
   const switchProp = type === 'block' ? props.viewProps : props.textProps;
-  return {
+  const nextProps: TextProps | ViewProps = {
     ...(typeof onPress === 'function'
       ? ({ accessibilityRole: type === 'block' ? 'button' : 'link' } as const)
       : null),
@@ -23,4 +25,5 @@ export default function getNativePropsForTNode(
     style: [style, nativeProps?.style, switchProp.style],
     testID: tnode.tagName || undefined
   };
+  return nextProps as any;
 }
