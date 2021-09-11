@@ -85,20 +85,7 @@ describe('RenderHTML', () => {
         nextContentWidth
       );
     });
-    it('should provide accessibility properties to <img> renderer', () => {
-      const { getByA11yRole } = render(
-        <RenderHTML
-          source={{
-            html: '<img alt="An image" src="https://img.com/1" />'
-          }}
-          debug={false}
-          contentWidth={200}
-        />
-      );
-      const imgProps = getByA11yRole('image').props;
-      expect(imgProps.accessibilityRole).toBe('image');
-      expect(imgProps.accessibilityLabel).toBe('An image');
-    });
+
     it('should merge `viewStyle` to <img> renderer', () => {
       const { getByA11yRole } = render(
         <RenderHTML
@@ -174,46 +161,6 @@ describe('RenderHTML', () => {
       const anchor = await findByTestId('a');
       act(() => anchor.props.onPress?.({}));
       expect(onPress).toHaveBeenCalled();
-    });
-    it('should add accessibility features to anchors when href is non-empty', () => {
-      const { getByTestId } = render(
-        <RenderHTML
-          source={{
-            html: `<a href="https://domain.com">test</a>`
-          }}
-          debug={false}
-          contentWidth={0}
-        />
-      );
-      expect(getByTestId('a').props.accessibilityRole).toBe('link');
-      expect(getByTestId('a').props.accessible).toBe(true);
-    });
-    it('should not add accessibility features to anchors when href is empty', () => {
-      const { getByTestId } = render(
-        <RenderHTML
-          source={{
-            html: `<a href="">test</a>`
-          }}
-          debug={false}
-          contentWidth={0}
-        />
-      );
-      expect(getByTestId('a').props.accessibilityRole).not.toBeDefined();
-      expect(getByTestId('a').props.accessible).not.toBeDefined();
-    });
-    it("should add accessibility role 'header' to headings", () => {
-      for (const header of ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']) {
-        const { getByTestId } = render(
-          <RenderHTML
-            source={{
-              html: `<${header}>test</${header}>`
-            }}
-            debug={false}
-            contentWidth={0}
-          />
-        );
-        expect(getByTestId(header).props.accessibilityRole).toBe('header');
-      }
     });
   });
   describe('regarding customHTMLElementsModels prop', () => {

@@ -15992,6 +15992,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"lodash.groupby@npm:^4.6.0":
+  version: 4.6.0
+  resolution: "lodash.groupby@npm:4.6.0"
+  checksum: e2d4d13d12790a1cacab3f5f120b7c072a792224e83b2f403218866d18efde76024b2579996dfebb230a61ce06469332e16639103669a35a605287e19ced6b9b
+  languageName: node
+  linkType: hard
+
 "lodash.isequal@npm:^4.0.0, lodash.isequal@npm:^4.5.0":
   version: 4.5.0
   resolution: "lodash.isequal@npm:4.5.0"
@@ -19790,6 +19797,19 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-native-accessibility-engine@npm:^0.4.1":
+  version: 0.4.1
+  resolution: "react-native-accessibility-engine@npm:0.4.1"
+  dependencies:
+    lodash.groupby: ^4.6.0
+    react-test-renderer: ^17.0.1
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: e827ab46af2c10a005974cfcda807e9812a03a712345555b20d15cfeae9daafa0280bef91f0234e69f6222b82ad2268738fd46591c5518804ab7799f45e56c96
+  languageName: node
+  linkType: hard
+
 "react-native-builder-bob@npm:^0.18.1":
   version: 0.18.1
   resolution: "react-native-builder-bob@npm:0.18.1"
@@ -19984,6 +20004,7 @@ fsevents@^1.2.7:
     ramda: ^0.27.1
     react: 17.0.2
     react-native: ^0.64.0
+    react-native-accessibility-engine: ^0.4.1
     react-native-builder-bob: ^0.18.1
     react-performance-testing: ^1.2.3
     react-test-renderer: ^17.0.2
@@ -20275,7 +20296,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-test-renderer@npm:17.0.2, react-test-renderer@npm:^17.0.2":
+"react-test-renderer@npm:17.0.2, react-test-renderer@npm:^17.0.1, react-test-renderer@npm:^17.0.2":
   version: 17.0.2
   resolution: "react-test-renderer@npm:17.0.2"
   dependencies:
