@@ -1,3 +1,18 @@
+# [6.2.0-alpha.1](https://github.com/meliorence/react-native-render-html/compare/v6.2.0-alpha.0...v6.2.0-alpha.1) (2021-09-11)
+
+
+### Bug Fixes
+
+* **a11y:** anchors should not be set with a11y role "link" when empty href ([dd988fc](https://github.com/meliorence/react-native-render-html/commit/dd988fcc9c9f03aecb1bc20f904cf19e0c5f6ff6))
+* **a11y:** set accessibilityLabel for headings (h1..h6) to bypass RN limitation ([bc37d88](https://github.com/meliorence/react-native-render-html/commit/bc37d888144ebf0e9206a85c70dfb94551670a75))
+
+
+### Features
+
+* new `getNativePropsForTnode` util method ([d983d0d](https://github.com/meliorence/react-native-render-html/commit/d983d0d768580307f41d38b70bda06e70122b970))
+* **a11y:** custom renderers passed `onPress` prop now have a11y roles ([11723f0](https://github.com/meliorence/react-native-render-html/commit/11723f0b841fa72a739e75b2c7576231e6ad7662))
+* **a11y:** support aria-role="search" and aria-role="presentation" attributes ([c552fe4](https://github.com/meliorence/react-native-render-html/commit/c552fe46667c06ff65312f2c273c0b94f930916d))
+
 # [6.2.0-alpha.0](https://github.com/meliorence/react-native-render-html/compare/v6.1.0...v6.2.0-alpha.0) (2021-09-05)
 
 This release is focused on accessibility! Moreover, it empowers [model-based custom rendering](https://meliorence.github.io/react-native-render-html/docs/guides/custom-renderers#model-based-custom-rendering) which can now define props passed to `Text` and `View` elements of renderers.
