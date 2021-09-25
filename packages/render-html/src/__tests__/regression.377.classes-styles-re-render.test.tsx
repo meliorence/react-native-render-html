@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import HTML from '../RenderHTML';
 import { render } from '@testing-library/react-native';
 

@@ -73,7 +73,7 @@ describe('RenderHTML a11y', () => {
     });
   });
   describe('regarding images', () => {
-    it('should provide accessibility properties to <img> renderer', async () => {
+    it('should provide accessibility properties to <img> renderer when alt attribute is defined', async () => {
       const element = (
         <RenderHTML
           source={{
@@ -88,6 +88,29 @@ describe('RenderHTML a11y', () => {
       const image = getByA11yRole('image');
       expect(image).toHaveProp('accessibilityRole', 'image');
       expect(image).toHaveProp('accessibilityLabel', 'An image');
+
+      // Waiting for AccessibilityEngine to support async udpates
+      // see https://github.com/aryella-lacerda/react-native-accessibility-engine/issues/97
+      // await waitFor(() =>
+      //   expect(() => AccessibilityEngine.check(element)).not.toThrow()
+      // );
+    });
+    it('<img> should not be accessible when alt attribute is missing', async () => {
+      const element = (
+        <RenderHTML
+          source={{
+            html: '<img src="https://img.com/1x1" />'
+          }}
+          debug={false}
+          contentWidth={200}
+        />
+      );
+      const { getByTestId, findByTestId } = render(element);
+      await findByTestId('image-success');
+      const image = getByTestId('img');
+      expect(image).toHaveProp('accessibilityRole', 'none');
+      expect(image).not.toHaveProp('accessibilityLabel');
+
       // Waiting for AccessibilityEngine to support async udpates
       // see https://github.com/aryella-lacerda/react-native-accessibility-engine/issues/97
       // await waitFor(() =>
