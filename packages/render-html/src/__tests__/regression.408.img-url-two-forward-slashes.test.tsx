@@ -19,7 +19,7 @@ describe('RenderHTML component', () => {
         />
       );
       const image = UNSAFE_getByType(IMGElement);
-      expect(image.props.source).toMatchObject({ uri: 'https://domain.com/' });
+      expect(image).toHaveProp('source', { uri: 'https://domain.com/' });
     });
   });
 });

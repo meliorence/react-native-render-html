@@ -11,7 +11,7 @@ import {
   defaultHTMLElementModels,
   HTMLContentModel
 } from '@native-html/transient-render-engine';
-import { Image, StyleSheet, Text } from 'react-native';
+import { Image, Text } from 'react-native';
 import { useRendererProps } from '../context/RenderersPropsProvider';
 import TNodeChildrenRenderer from '../TNodeChildrenRenderer';
 import OLElement from '../elements/OLElement';
@@ -73,7 +73,7 @@ describe('RenderHTML', () => {
           contentWidth={contentWidth}
         />
       );
-      expect(UNSAFE_getByType(ImgTag).props.contentWidth).toBe(contentWidth);
+      expect(UNSAFE_getByType(ImgTag)).toHaveProp('contentWidth', contentWidth);
       update(
         <RenderHTML
           source={{ html: '<img src="https://img.com/1" />' }}
@@ -81,7 +81,8 @@ describe('RenderHTML', () => {
           contentWidth={nextContentWidth}
         />
       );
-      expect(UNSAFE_getByType(ImgTag).props.contentWidth).toBe(
+      expect(UNSAFE_getByType(ImgTag)).toHaveProp(
+        'contentWidth',
         nextContentWidth
       );
     });
@@ -101,8 +102,7 @@ describe('RenderHTML', () => {
           contentWidth={200}
         />
       );
-      const imgProps = getByA11yRole('image').props;
-      expect(StyleSheet.flatten(imgProps.style)).toMatchObject({
+      expect(getByA11yRole('image')).toHaveStyle({
         backgroundColor: 'red'
       });
     });
@@ -201,7 +201,7 @@ describe('RenderHTML', () => {
       />
     );
     const span = getByTestId('span');
-    expect(StyleSheet.flatten(span.props.style)).toMatchObject(tagsStyles.span);
+    expect(span).toHaveStyle(tagsStyles.span);
   });
   describe('regarding onTTreeChange prop', () => {
     const onTTreeChange = jest.fn();
@@ -398,7 +398,7 @@ describe('RenderHTML', () => {
         />
       );
       const div = getByTestId('div');
-      expect(div.props.collapsable).toBe(false);
+      expect(div).toHaveProp('collapsable', false);
     });
     it('should apply `textProps` to TPhrasing renderers', () => {
       const SpanRenderer: CustomTextualRenderer = ({
@@ -421,7 +421,7 @@ describe('RenderHTML', () => {
         />
       );
       const span = getByTestId('span');
-      expect(span.props.adjustsFontSizeToFit).toBe(true);
+      expect(span).toHaveProp('adjustsFontSizeToFit', true);
     });
     it('should apply `textProps` to TText renderers', () => {
       const SpanRenderer: CustomTextualRenderer = ({
@@ -444,7 +444,7 @@ describe('RenderHTML', () => {
         />
       );
       const span = getByTestId('span');
-      expect(span.props.adjustsFontSizeToFit).toBe(true);
+      expect(span).toHaveProp('adjustsFontSizeToFit', true);
     });
     it('should apply `props`', () => {
       const SpanRenderer: CustomTextualRenderer = ({
@@ -467,7 +467,7 @@ describe('RenderHTML', () => {
         />
       );
       const span = getByTestId('span');
-      expect(span.props.accessibilityRole).toBe('adjustable');
+      expect(span).toHaveProp('accessibilityRole', 'adjustable');
     });
     it('should apply `tnode.getReactNativeProps()` to TPhrasing renderers', () => {
       const customHTMLElementModels: HTMLElementModelRecord = {
@@ -490,7 +490,7 @@ describe('RenderHTML', () => {
         />
       );
       const span = getByTestId('span');
-      expect(span.props.accessibilityRole).toBe('adjustable');
+      expect(span).toHaveProp('accessibilityRole', 'adjustable');
     });
     it('should apply `tnode.getReactNativeProps()` to TText renderers', () => {
       const customHTMLElementModels: HTMLElementModelRecord = {
@@ -513,7 +513,7 @@ describe('RenderHTML', () => {
         />
       );
       const span = getByTestId('span');
-      expect(span.props.accessibilityRole).toBe('adjustable');
+      expect(span).toHaveProp('accessibilityRole', 'adjustable');
     });
     it('should apply `tnode.getReactNativeProps()` to TBlock renderers', () => {
       const customHTMLElementModels: HTMLElementModelRecord = {
@@ -536,7 +536,7 @@ describe('RenderHTML', () => {
         />
       );
       const div = getByTestId('div');
-      expect(div.props.accessibilityRole).toBe('adjustable');
+      expect(div).toHaveProp('accessibilityRole', 'adjustable');
     });
   });
   describe('regarding TNodeRenderer', () => {
@@ -580,7 +580,7 @@ describe('RenderHTML', () => {
           />
         );
         const div = await findByTestId('div');
-        expect(StyleSheet.flatten(div.props.style)).toEqual({
+        expect(div).toHaveStyle({
           marginBottom: 10,
           paddingBottom: 10
         });
@@ -606,7 +606,7 @@ describe('RenderHTML', () => {
           />
         );
         const div = await findByTestId('div');
-        expect(StyleSheet.flatten(div.props.style)).toEqual({
+        expect(div).toHaveStyle({
           marginBottom: 10
         });
       });
@@ -632,7 +632,7 @@ describe('RenderHTML', () => {
             />
           );
           const div = await findByTestId('span');
-          expect(StyleSheet.flatten(div.props.style)).toMatchObject({
+          expect(div).toHaveStyle({
             marginBottom: 10
           });
         });
@@ -651,10 +651,10 @@ describe('RenderHTML', () => {
           enableExperimentalMarginCollapsing
         />
       );
-      const div = getByTestId('div');
-      const p = getByTestId('p');
-      expect(StyleSheet.flatten(div.props.style).marginBottom).toBe(10);
-      expect(StyleSheet.flatten(p.props.style).marginTop).toBe(0);
+      expect(getByTestId('div')).toHaveStyle({
+        marginBottom: 10
+      });
+      expect(getByTestId('p')).toHaveStyle({ marginTop: 0 });
     });
     it('should not collapse margins of sibling phrasing children when enabled', () => {
       const { getByTestId } = render(
@@ -667,10 +667,8 @@ describe('RenderHTML', () => {
           enableExperimentalMarginCollapsing
         />
       );
-      const div = getByTestId('div');
-      const span = getByTestId('span');
-      expect(StyleSheet.flatten(div.props.style).marginBottom).toBe(10);
-      expect(StyleSheet.flatten(span.props.style).marginTop).toBe(10);
+      expect(getByTestId('div')).toHaveStyle({ marginBottom: 10 });
+      expect(getByTestId('span')).toHaveStyle({ marginTop: 10 });
     });
 
     it('should not collapse margins of sibling children when disabled', () => {
@@ -684,10 +682,8 @@ describe('RenderHTML', () => {
           enableExperimentalMarginCollapsing={false}
         />
       );
-      const div = getByTestId('div');
-      const p = getByTestId('p');
-      expect(StyleSheet.flatten(div.props.style).marginBottom).toBe(10);
-      expect(StyleSheet.flatten(p.props.style).marginTop).toBe(10);
+      expect(getByTestId('div')).toHaveStyle({ marginBottom: 10 });
+      expect(getByTestId('p')).toHaveStyle({ marginTop: 10 });
     });
   });
   describe('regarding renderersProps prop', () => {
@@ -831,7 +827,7 @@ describe('RenderHTML', () => {
         />
       );
       const img = await findByTestId('img');
-      expect(StyleSheet.flatten(img.props.style)).toMatchObject({
+      expect(img).toHaveStyle({
         borderBottomWidth: 4
       });
     });

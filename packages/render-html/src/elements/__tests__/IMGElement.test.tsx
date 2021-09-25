@@ -4,8 +4,7 @@ import {
   ImageErrorEventData,
   ImageProps,
   ImageStyle,
-  NativeSyntheticEvent,
-  StyleSheet
+  NativeSyntheticEvent
 } from 'react-native';
 import { act, render } from '@testing-library/react-native';
 import IMGElement from '../IMGElement';
@@ -71,7 +70,7 @@ describe('IMGElement', () => {
           />
         );
         const image = await findByTestId('image-success');
-        expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+        expect(image).toHaveStyle({
           resizeMode
         });
       });
@@ -89,7 +88,7 @@ describe('IMGElement', () => {
       );
       const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
-      expect(StyleSheet.flatten(image.props.style)).toMatchObject(style);
+      expect(image).toHaveStyle(style);
     });
     it('should use width and height from props', async () => {
       const source = { uri: 'http://via.placeholder.com/640x360' };
@@ -102,7 +101,7 @@ describe('IMGElement', () => {
       );
       const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
-      expect(StyleSheet.flatten(image.props.style)).toMatchObject(style);
+      expect(image).toHaveStyle(style);
     });
     it('should combine width with aspectRatio', async () => {
       const source = { uri: 'http://via.placeholder.com/640' };
@@ -118,7 +117,7 @@ describe('IMGElement', () => {
       );
       const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
-      expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+      expect(image).toHaveStyle({
         width: 320,
         height: 160
       });
@@ -137,7 +136,7 @@ describe('IMGElement', () => {
       );
       const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
-      expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+      expect(image).toHaveStyle({
         width: 320,
         height: 160
       });
@@ -158,7 +157,7 @@ describe('IMGElement', () => {
       );
       const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
-      expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+      expect(image).toHaveStyle({
         width: contentWidth,
         height: contentWidth / (style.width / style.height)
       });
@@ -178,7 +177,7 @@ describe('IMGElement', () => {
       );
       const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
-      expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+      expect(image).toHaveStyle({
         width: contentWidth,
         height: contentWidth / (640 / 360)
       });
@@ -193,7 +192,7 @@ describe('IMGElement', () => {
       );
       const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
-      expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+      expect(image).toHaveStyle({
         width: 320,
         height: 180
       });
@@ -205,7 +204,7 @@ describe('IMGElement', () => {
       );
       const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
-      expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+      expect(image).toHaveStyle({
         width: 640,
         height: 360
       });
@@ -221,7 +220,7 @@ describe('IMGElement', () => {
       );
       const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
-      expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+      expect(image).toHaveStyle({
         width: 0,
         height: 0
       });
@@ -236,7 +235,7 @@ describe('IMGElement', () => {
       );
       const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
-      expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+      expect(image).toHaveStyle({
         width: 0,
         height: 0
       });
@@ -251,7 +250,7 @@ describe('IMGElement', () => {
       );
       const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
-      expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+      expect(image).toHaveStyle({
         width: 320,
         height: 180
       });
@@ -266,7 +265,7 @@ describe('IMGElement', () => {
       );
       const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
-      expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+      expect(image).toHaveStyle({
         width: 320,
         height: 180
       });
@@ -281,7 +280,7 @@ describe('IMGElement', () => {
       );
       const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
-      expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+      expect(image).toHaveStyle({
         width: 30,
         height: 36
       });
@@ -296,7 +295,7 @@ describe('IMGElement', () => {
       );
       const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
-      expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+      expect(image).toHaveStyle({
         width: 30,
         height: 36
       });
@@ -313,7 +312,7 @@ describe('IMGElement', () => {
       );
       const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
-      expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+      expect(image).toHaveStyle({
         width: 640
       });
     });
@@ -327,7 +326,7 @@ describe('IMGElement', () => {
       );
       const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
-      expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+      expect(image).toHaveStyle({
         width: 50
       });
     });
@@ -348,7 +347,7 @@ describe('IMGElement', () => {
         );
         const image = await findByTestId('image-success');
         expect(image).toBeTruthy();
-        expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+        expect(image).toHaveStyle({
           width: contentWidth * 0.5
         });
       });
@@ -369,7 +368,7 @@ describe('IMGElement', () => {
         );
         const image = await findByTestId('image-success');
         expect(image).toBeTruthy();
-        expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+        expect(image).toHaveStyle({
           width: contentWidth * 0.7
         });
       });
@@ -389,7 +388,7 @@ describe('IMGElement', () => {
         );
         const image = await findByTestId('image-success');
         expect(image).toBeTruthy();
-        expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+        expect(image).toHaveStyle({
           width: contentWidth,
           height: (360 / 640) * contentWidth
         });
@@ -408,7 +407,7 @@ describe('IMGElement', () => {
       );
       const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
-      expect(StyleSheet.flatten(image.props.style)).toMatchObject({
+      expect(image).toHaveStyle({
         width: 200 - 30 * 2
       });
     });
@@ -430,7 +429,7 @@ describe('IMGElement', () => {
       update(<HTMLImgElement {...nextStyle} source={source} />);
       const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
-      expect(StyleSheet.flatten(image.props.style)).toMatchObject(nextStyle);
+      expect(image).toHaveStyle(nextStyle);
     });
     it('should update uri and fetch new dimensions when source changes', async () => {
       const initialSource = { uri: 'http://via.placeholder.com/640x360' };
@@ -440,7 +439,7 @@ describe('IMGElement', () => {
       );
       const image1 = await findByTestId('image-success');
       expect(image1).toBeTruthy();
-      expect(StyleSheet.flatten(image1.props.style)).toMatchObject({
+      expect(image1).toHaveStyle({
         width: 640,
         height: 360
       });
@@ -448,7 +447,7 @@ describe('IMGElement', () => {
       await findByTestId('image-loading');
       const image2 = await findByTestId('image-success');
       expect(image2).toBeTruthy();
-      expect(StyleSheet.flatten(image2.props.style)).toMatchObject({
+      expect(image2).toHaveStyle({
         width: 1920,
         height: 1080
       });
@@ -469,7 +468,7 @@ describe('IMGElement', () => {
       );
       const image2 = await findByTestId('image-success');
       expect(image2).toBeTruthy();
-      expect(StyleSheet.flatten(image2.props.style)).toMatchObject({
+      expect(image2).toHaveStyle({
         width: 250,
         height: 100
       });

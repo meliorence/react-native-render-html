@@ -35,6 +35,6 @@ describe('RenderHTML component', () => {
       />
     );
     const text = getByText('hello world');
-    expect(StyleSheet.flatten(text.props.style)).toMatchObject(letterSpacing3);
+    expect(StyleSheet.flatten(text)).toHaveStyle(letterSpacing3);
   });
 });

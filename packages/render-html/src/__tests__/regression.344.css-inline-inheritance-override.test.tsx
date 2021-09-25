@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import RenderHTML from '../RenderHTML';
 import { render } from '@testing-library/react-native';
 
@@ -24,7 +23,7 @@ describe('RenderHTML component should pass regression #344', () => {
       />
     );
     const text = getByTestId('a');
-    expect(StyleSheet.flatten(text.props.style)).toMatchObject({
+    expect(text).toHaveStyle({
       color: 'green'
     });
   });

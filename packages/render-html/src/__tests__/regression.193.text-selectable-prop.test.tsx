@@ -14,7 +14,7 @@ function expectFirstTextToHaveSelectable(html: string, matchingString: string) {
   const text = getByText(matchingString);
   const ancestorText = getLastAncestorOfType(text);
   expect(ancestorText).toBe(null);
-  expect(text.props.selectable).toBe(true);
+  expect(text).toHaveProp('selectable', true);
 }
 
 /**

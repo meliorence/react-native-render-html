@@ -12,7 +12,7 @@ describe('RenderHTML component', () => {
         <RenderHTML debug={false} source={{ html: '<a>bar</a>' }} />
       );
       const anchor = getByText('bar');
-      expect(anchor.props.renderers).toBeUndefined();
+      expect(anchor).not.toHaveProp('renderers');
     });
   });
 });

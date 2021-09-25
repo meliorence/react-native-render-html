@@ -35,6 +35,6 @@ describe('HTML component', () => {
       />
     );
     const text = getByText('hello world');
-    expect(StyleSheet.flatten(text.props.style)).toMatchObject(colorGreen);
+    expect(text).toHaveStyle(colorGreen);
   });
 });

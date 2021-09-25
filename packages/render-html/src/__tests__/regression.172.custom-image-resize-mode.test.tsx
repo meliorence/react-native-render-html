@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
-import { StyleSheet } from 'react-native';
 import RenderHTML from '../RenderHTML';
 
 /**
@@ -24,9 +23,7 @@ describe('HTMLImageElement component should pass regression test #172', () => {
         tagsStyles={tagsStyles as any}
       />
     );
-    const imageLayout = getByTestId('image-success');
-    expect(StyleSheet.flatten(imageLayout.props.style)).toMatchObject(
-      tagsStyles.img
-    );
+    const image = getByTestId('image-success');
+    expect(image).toHaveStyle(tagsStyles.img);
   });
 });

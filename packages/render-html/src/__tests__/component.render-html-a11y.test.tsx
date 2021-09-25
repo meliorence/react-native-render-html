@@ -30,8 +30,9 @@ describe('RenderHTML a11y', () => {
             />
           );
           const { getByTestId } = render(element);
-          expect(getByTestId('a').props.accessibilityRole).toBe('link');
-          expect(getByTestId('a').props.accessible).toBe(true);
+          const anchor = getByTestId('a');
+          expect(anchor).toHaveProp('accessibilityRole', 'link');
+          expect(anchor).toHaveProp('accessible', true);
           expect(() => AccessibilityEngine.check(element)).not.toThrow();
         });
       }
@@ -47,8 +48,9 @@ describe('RenderHTML a11y', () => {
         />
       );
       const { getByTestId } = render(element);
-      expect(getByTestId('a').props.accessibilityRole).not.toBeDefined();
-      expect(getByTestId('a').props.accessible).not.toBeDefined();
+      const anchor = getByTestId('a');
+      expect(anchor).not.toHaveProp('accessibilityRole');
+      expect(anchor).not.toHaveProp('accessible');
       expect(() => AccessibilityEngine.check(element)).not.toThrow();
     });
   });
@@ -65,7 +67,7 @@ describe('RenderHTML a11y', () => {
           />
         );
         const { getByTestId } = render(element);
-        expect(getByTestId(header).props.accessibilityRole).toBe('header');
+        expect(getByTestId(header)).toHaveProp('accessibilityRole', 'header');
         expect(() => AccessibilityEngine.check(element)).not.toThrow();
       }
     });
@@ -83,9 +85,9 @@ describe('RenderHTML a11y', () => {
       );
       const { getByA11yRole, findByTestId } = render(element);
       await findByTestId('image-success');
-      const imgProps = getByA11yRole('image').props;
-      expect(imgProps.accessibilityRole).toBe('image');
-      expect(imgProps.accessibilityLabel).toBe('An image');
+      const image = getByA11yRole('image');
+      expect(image).toHaveProp('accessibilityRole', 'image');
+      expect(image).toHaveProp('accessibilityLabel', 'An image');
       // Waiting for AccessibilityEngine to support async udpates
       // see https://github.com/aryella-lacerda/react-native-accessibility-engine/issues/97
       // await waitFor(() =>
@@ -119,8 +121,8 @@ describe('RenderHTML a11y', () => {
         />
       );
       const { getByA11yRole } = render(element);
-      const buttonProps = getByA11yRole('button').props;
-      expect(buttonProps.accessibilityRole).toBe('button');
+      const button = getByA11yRole('button');
+      expect(button).toHaveProp('accessibilityRole', 'button');
       expect(() => AccessibilityEngine.check(element)).not.toThrow();
     });
     it('should add a button role if onPress is defined for custom renderers with a textual content model', () => {
@@ -146,8 +148,8 @@ describe('RenderHTML a11y', () => {
         />
       );
       const { getByA11yRole } = render(element);
-      const buttonProps = getByA11yRole('link').props;
-      expect(buttonProps.accessibilityRole).toBe('link');
+      const button = getByA11yRole('link');
+      expect(button).toHaveProp('accessibilityRole', 'link');
       expect(() => AccessibilityEngine.check(element)).not.toThrow();
     });
   });
