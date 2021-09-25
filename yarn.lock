@@ -20169,6 +20169,45 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-native@patch:react-native@https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz#patches/react-native.patch::locator=react-native-render-html-project%40workspace%3A.":
+  version: 0.63.2
+  resolution: "react-native@patch:react-native@https%3A//github.com/expo/react-native/archive/sdk-42.0.0.tar.gz#patches/react-native.patch::version=0.63.2&hash=c19955&locator=react-native-render-html-project%40workspace%3A."
+  dependencies:
+    "@babel/runtime": ^7.0.0
+    "@react-native-community/cli": ^4.14.0
+    "@react-native-community/cli-platform-android": ^4.13.0
+    "@react-native-community/cli-platform-ios": ^4.13.0
+    abort-controller: ^3.0.0
+    anser: ^1.4.9
+    base64-js: ^1.1.2
+    event-target-shim: ^5.0.1
+    fbjs: ^1.0.0
+    fbjs-scripts: ^1.1.0
+    hermes-engine: ~0.5.0
+    invariant: ^2.2.4
+    jsc-android: ^245459.0.0
+    metro-babel-register: 0.59.0
+    metro-react-native-babel-transformer: 0.59.0
+    metro-source-map: 0.59.0
+    nullthrows: ^1.1.1
+    pretty-format: ^24.9.0
+    promise: ^8.0.3
+    prop-types: ^15.7.2
+    react-devtools-core: ^4.6.0
+    react-refresh: ^0.4.0
+    regenerator-runtime: ^0.13.2
+    scheduler: 0.19.1
+    stacktrace-parser: ^0.1.3
+    use-subscription: ^1.0.0
+    whatwg-fetch: ^3.0.0
+  peerDependencies:
+    react: 16.13.1
+  bin:
+    react-native: ./cli.js
+  checksum: 29fcfbf19cc58bc8492e228ecc5133a84fb6bc2519eda2ab7ccce7eb6831c737c137c2d4a272440d59e3f4793746e62342c3c999b64baa67cdcfe0ac76e99567
+  languageName: node
+  linkType: hard
+
 "react-performance-testing@npm:^1.2.3":
   version: 1.2.3
   resolution: "react-performance-testing@npm:1.2.3"

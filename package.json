@@ -47,7 +47,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "@mdx-js/react": "2.0.0-next.9",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native": "patch:react-native@https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz#patches/react-native.patch",
     "react-native-webview": "11.6.2",
     "@svgr/webpack": "5.5.0",
     "@svgr/babel-preset": "5.5.0",

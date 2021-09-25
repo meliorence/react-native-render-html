@@ -1,0 +1,14 @@
+diff --git a/jest/setup.js b/jest/setup.js
+index 5f85d8602f5a91880d78177c0cfac94eeb530327..6034f5f89b8b0130b463f70097cb22c602fff432 100644
+--- a/jest/setup.js
++++ b/jest/setup.js
+@@ -17,7 +17,8 @@ jest.requireActual('../Libraries/polyfills/error-guard');
+ 
+ global.__DEV__ = true;
+ 
+-global.Promise = jest.requireActual('promise');
++// See https://github.com/callstack/react-native-testing-library/issues/379#issuecomment-714341282
++// global.Promise = jest.requireActual('promise');
+ global.regeneratorRuntime = jest.requireActual('regenerator-runtime/runtime');
+ 
+ global.requestAnimationFrame = function(callback) {

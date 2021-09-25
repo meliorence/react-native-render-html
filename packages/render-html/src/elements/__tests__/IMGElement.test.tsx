@@ -7,7 +7,7 @@ import {
   NativeSyntheticEvent,
   StyleSheet
 } from 'react-native';
-import { act, render, waitFor } from '@testing-library/react-native';
+import { act, render } from '@testing-library/react-native';
 import IMGElement from '../IMGElement';
 import HTMLImgElement from '../IMGElement';
 
@@ -29,7 +29,7 @@ describe('IMGElement', () => {
     const source = { uri: 'http://via.placeholder.com/640x360' };
     const { findByTestId } = render(<IMGElement source={source} />);
     const imageSuccess = await findByTestId('image-success');
-    await act(() =>
+    act(() =>
       (imageSuccess.props.onError as Required<ImageProps>['onError']).call(
         null,
         {
@@ -435,7 +435,7 @@ describe('IMGElement', () => {
     it('should update uri and fetch new dimensions when source changes', async () => {
       const initialSource = { uri: 'http://via.placeholder.com/640x360' };
       const nextSource = { uri: 'http://via.placeholder.com/1920x1080' };
-      const { findByTestId, update, getByTestId } = render(
+      const { findByTestId, update } = render(
         <HTMLImgElement source={initialSource} />
       );
       const image1 = await findByTestId('image-success');
@@ -445,8 +445,8 @@ describe('IMGElement', () => {
         height: 360
       });
       update(<HTMLImgElement source={nextSource} />);
-      await waitFor(() => findByTestId('image-success'));
-      const image2 = getByTestId('image-success');
+      await findByTestId('image-loading');
+      const image2 = await findByTestId('image-success');
       expect(image2).toBeTruthy();
       expect(StyleSheet.flatten(image2.props.style)).toMatchObject({
         width: 1920,
@@ -454,7 +454,7 @@ describe('IMGElement', () => {
       });
     });
     it('should retain inline style prior to attributes width and height to compute concrete dimensions', async () => {
-      const { findByTestId, getByTestId } = render(
+      const { findByTestId } = render(
         <HTMLImgElement
           width="1200"
           height="800"
@@ -467,8 +467,7 @@ describe('IMGElement', () => {
           source={{ uri: 'http://via.placeholder.com/1200x800' }}
         />
       );
-      await waitFor(() => findByTestId('image-success'));
-      const image2 = getByTestId('image-success');
+      const image2 = await findByTestId('image-success');
       expect(image2).toBeTruthy();
       expect(StyleSheet.flatten(image2.props.style)).toMatchObject({
         width: 250,
