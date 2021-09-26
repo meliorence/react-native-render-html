@@ -1,0 +1,80 @@
+---
+title: Announcing the 6.2 Release, Featuring Enhanced Model Rendering and Accessibility!
+author: Jules Sam. Randolph
+author_title: Developer of React Native Render HTML v6
+author_url: https://github.com/jsamr/
+author_image_url: https://avatars.githubusercontent.com/u/3646758?v=4
+tags: [foundry, announcement]
+description: A version focused on accessibility and enhanced model rendering.
+image: img/foundry-announcement.png
+hide_table_of_contents: false
+draft: true
+---
+
+It has been over two months since the first final version of the Foundry
+released has been made public.
+
+## You Might not Need a Custom Component Renderer Anymore
+
+Model-based custom rendering via `customHTMLElementModels` prop has been a
+lightweight alternative to custom (component) renderers since the early stages
+of the Foundry release. However, it was limited to setting user agent styles
+(`mixedUAStyles`), although those styles could be derived from the DOM node
+element attributes (`getUADerivedStyleFromAttributes`).
+
+```js title="An Example of Model-Based Rendering"
+const customHTMLElementModels = {
+  'blue-circle': HTMLElementModel.fromCustomModel({
+    tagName: 'blue-circle',
+    mixedUAStyles: {
+      width: 50,
+      height: 50,
+      borderRadius: 25,
+      alignSelf: 'center',
+      backgroundColor: 'blue'
+    },
+    contentModel: HTMLContentModel.block
+  })
+};
+```
+
+Version 6.2 ships with a bunch of new properties for HTML element models which
+should make model-based custom rendering much more prevalent. Let's take a tour!
+
+### `getUADynamicMixedStyles`
+
+### `reactNativeProps`
+
+### `getDynamicReactNativeProps`
+
+## Don't Forget you can Mix Model-Based and Component-Based Custom Rendering
+
+## A Focus on Accessibility
+
+### Support for `aria-label` and `aria-role` Attributes
+
+### Accessible `<a>` Tags
+
+### Accessible `<img>` Tags
+
+### Accessible `<h1-60>` Tags
+
+### Other tags
+
+## Other Enhancements
+
+### Support for `user-select` CSS property
+
+### `getNativePropsForTnode` Function
+
+## Bonus: Notes on Version 6.1
+
+### `renderIndex` and `renderLength` Props to `TDefaultRenderer`
+
+### `enableExperimentalBRCollapsing` Prop
+
+### `enableExperimentalGhostLinesPrevention` Prop
+
+### `provideEmbeddedHeaders` Prop
+
+### `bypassAnonymousTPhrasingNodes` Prop
