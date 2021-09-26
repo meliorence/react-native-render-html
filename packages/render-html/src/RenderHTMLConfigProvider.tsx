@@ -61,7 +61,7 @@ export default function RenderHTMLConfigProvider(
   const engine = useAmbientTRenderEngine();
   const profile = useProfiler({ prop: 'remoteErrorView or remoteLoadingView' });
   const sourceLoaderConfig = useMemo(() => {
-    __DEV__ && profile();
+    typeof __DEV__ === 'boolean' && __DEV__ && profile();
     return {
       remoteErrorView: remoteErrorView || defaultRenderError,
       remoteLoadingView: remoteLoadingView || defaultRenderLoading

@@ -63,7 +63,7 @@ function RawSourceLoader({
 }: SourceLoaderProps): ReactElement | null {
   if (isEmptySource(source)) {
     /* istanbul ignore next */
-    if (__DEV__) {
+    if (typeof __DEV__ === 'boolean' && __DEV__) {
       console.warn(debugMessage.noSource);
     }
     return null;
@@ -111,13 +111,13 @@ const RenderHTMLSource = memo(
       prop: 'onDocumentMetadataLoaded or onTTreeChange'
     });
     const ttreeEvents: TTreeEvents = useMemo(() => {
-      __DEV__ && profile();
+      typeof __DEV__ === 'boolean' && __DEV__ && profile();
       return {
         onDocumentMetadataLoaded,
         onTTreeChange
       };
     }, [onDocumentMetadataLoaded, onTTreeChange, profile]);
-    if (__DEV__) {
+    if (typeof __DEV__ === 'boolean' && __DEV__) {
       if (!(typeof contentWidth === 'number')) {
         console.warn(debugMessage.contentWidth);
       }

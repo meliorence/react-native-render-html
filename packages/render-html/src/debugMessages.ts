@@ -18,7 +18,7 @@ let debugMessage: Record<DebugType, string>;
 
 export type DebugMessages = typeof debugMessage;
 /* istanbul ignore next */
-if (__DEV__) {
+if (typeof __DEV__ === 'boolean' && __DEV__) {
   debugMessage = {
     outdatedComputeImagesMaxWidth:
       "You're attempting to use an outdated prop, 'computeImagesMaxWidth'. This prop has been replaced in version 6 with 'computeEmbeddedMaxWidth'.",

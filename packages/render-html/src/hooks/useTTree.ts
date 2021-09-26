@@ -11,7 +11,7 @@ function useTTreeChangeEffect(ttree: TDocument) {
   const updateNumber = useRef(0);
   useEffect(() => {
     onTTreeChange?.call(null, ttree);
-    if (debug && __DEV__) {
+    if (debug && typeof __DEV__ === 'boolean' && __DEV__) {
       console.info(
         `Transient Render Tree update ${++updateNumber.current}:\n${ttree.snapshot(
           {

@@ -5,7 +5,7 @@ import { RenderHTMLProps } from './shared-types';
 const RenderHTMLDebug = function RenderHTMLDebug(
   props: PropsWithChildren<RenderHTMLProps>
 ) {
-  if (__DEV__) {
+  if (typeof __DEV__ === 'boolean' && __DEV__) {
     if (typeof props.contentWidth !== 'number') {
       console.warn(debugMessage.contentWidth);
     }

@@ -33,7 +33,7 @@ export default function RenderersPropsProvider(
 ) {
   const profile = useProfiler({ prop: 'renderersProps' });
   const mergedRenderersProps = useMemo(() => {
-    __DEV__ && profile();
+    typeof __DEV__ === 'boolean' && __DEV__ && profile();
     return mergeDeepRight(defaultRendererProps, props.renderersProps || {});
   }, [props.renderersProps, profile]);
   return React.createElement(

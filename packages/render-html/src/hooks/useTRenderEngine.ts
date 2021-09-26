@@ -30,7 +30,7 @@ export default function useTRenderEngine({
 }: TRenderEngineConfig) {
   const profile = useProfiler({ name: 'TRenderEngineProvider' });
   return useMemo(() => {
-    __DEV__ && profile();
+    typeof __DEV__ === 'boolean' && __DEV__ && profile();
     return buildTREFromConfig({
       allowedStyles,
       baseStyle,

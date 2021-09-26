@@ -110,7 +110,11 @@ export default function ListElement({
     ownListType ||
     listStyleTypeFallbackRecord[listType];
   const listStyleType = ownListType || selectedListType;
-  if (__DEV__ && !(listStyleType in listStyleSpecs)) {
+  if (
+    typeof __DEV__ === 'boolean' &&
+    __DEV__ &&
+    !(listStyleType in listStyleSpecs)
+  ) {
     if (listStyleType.match(/^("|')/)) {
       console.warn(
         "This library doesn't support strings for list-style-type CSS properties."

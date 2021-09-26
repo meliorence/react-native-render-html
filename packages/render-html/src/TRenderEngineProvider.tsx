@@ -77,7 +77,11 @@ export const defaultTRenderEngineProviderProps: TRenderEngineConfig = {
  */
 export function useAmbientTRenderEngine() {
   const engine = React.useContext(TRenderEngineContext);
-  if (__DEV__ && engine === defaultTRenderEngine) {
+  if (
+    typeof __DEV__ === 'boolean' &&
+    __DEV__ &&
+    engine === defaultTRenderEngine
+  ) {
     console.error('TRenderEngineProvider is missing in the render tree.');
   }
   return engine;

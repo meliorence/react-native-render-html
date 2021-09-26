@@ -31,7 +31,7 @@ export default function RenderRegistryProvider({
 }>) {
   const profile = useProfiler({ prop: 'renderers' });
   const registry = useMemo(() => {
-    __DEV__ && profile();
+    typeof __DEV__ === 'boolean' && __DEV__ && profile();
     return new RenderRegistry(renderers, elementModels);
   }, [renderers, elementModels, profile]);
   return (
