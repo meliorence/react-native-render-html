@@ -1,3 +1,10 @@
+# [6.2.0-alpha.2](https://github.com/meliorence/react-native-render-html/compare/v6.2.0-alpha.1...v6.2.0-alpha.2) (2021-10-13)
+
+
+### Bug Fixes
+
+* never assume the definition of `__DEV__` in the global scope ([f9bb9e9](https://github.com/meliorence/react-native-render-html/commit/f9bb9e969ad6b169ee60940daf1409630589f548))
+
 # [6.2.0-alpha.1](https://github.com/meliorence/react-native-render-html/compare/v6.2.0-alpha.0...v6.2.0-alpha.1) (2021-09-11)
 
 
