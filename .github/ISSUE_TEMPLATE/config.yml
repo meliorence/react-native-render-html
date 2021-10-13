@@ -1,4 +1,4 @@
-blank_issues_enabled: false
+blank_issues_enabled: true
 contact_links:
   - name: 📝 Feature Requests and Enhancements
     url: https://native-html.canny.io/features
@@ -6,3 +6,6 @@ contact_links:
   - name: 🆘 Getting Help
     url: https://github.com/meliorence/react-native-render-html/blob/master/HELP.adoc
     about: A resource which describes all the steps you should go through when you're facing an issue with this library.
+  - name: 🌐 Official Website
+    url: https://meliorence.github.io/react-native-render-html/
+    about: The official website with plenty of guides, blog posts and documentation!
