@@ -59,5 +59,6 @@
     "packages/*",
     "apps/*",
     "doc-tools/*"
-  ]
+  ],
+  "packageManager": "yarn@3.0.2"
 }
