@@ -20,15 +20,11 @@ export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
       propsForChildren={props.propsForChildren}
     />
   );
-  const commonProps = getNativePropsForTNode(props);
-  if (typeof onPress === 'function') {
-    return React.createElement(
-      GenericPressable,
-      { onPress, ...commonProps },
-      children
-    );
+  const nativeProps = getNativePropsForTNode(props);
+  if (typeof nativeProps.onPress === 'function') {
+    return React.createElement(GenericPressable, nativeProps, children);
   }
-  return React.createElement(View, commonProps, children);
+  return React.createElement(View, nativeProps, children);
 };
 
 const TBlockRenderer = (props: TNodeSubRendererProps<TBlock>) => {

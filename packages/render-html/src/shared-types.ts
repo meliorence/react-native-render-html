@@ -1061,8 +1061,8 @@ export interface RendererBaseProps<T extends TNode>
    * nativeProps.style, viewProps.style]}`.
    *
    */
-
   nativeProps?: StylessReactNativeProps & { style?: StyleProp<ViewStyle> };
+
   /**
    * Any default renderer should be able to handle press.
    */
