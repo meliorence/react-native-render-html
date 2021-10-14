@@ -18,7 +18,10 @@ export default function GenericPressable({
     useSharedProps();
   if (UserProvidedPressable) {
     return (
-      <UserProvidedPressable style={style} {...(otherProps as any)}>
+      <UserProvidedPressable
+        style={style}
+        borderless={borderless}
+        {...(otherProps as any)}>
         {children}
       </UserProvidedPressable>
     );
