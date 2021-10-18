@@ -2,6 +2,8 @@ import { TNode } from '@native-html/transient-render-engine';
 import {
   CustomRenderer,
   CustomRendererProps,
+  InternalRenderer,
+  InternalRendererProps,
   TDefaultRenderer,
   TDefaultRendererProps
 } from '../shared-types';
@@ -19,12 +21,15 @@ export default function useAssembledCommonProps<T extends TNode>(
     propsFromParent,
     sharedProps,
     renderIndex,
-    renderLength
+    renderLength,
+    TNodeChildrenRenderer
   }: TNodeSubRendererProps<T>,
-  TDefault: TDefaultRenderer<T>
+  TDefault: TDefaultRenderer<T> | null
 ): {
-  Renderer: CustomRenderer<T>;
-  assembledProps: CustomRendererProps<T> & TDefaultRendererProps<T>;
+  Renderer: CustomRenderer<T> | InternalRenderer<T> | null;
+  assembledProps: CustomRendererProps<T> &
+    TDefaultRendererProps<T> &
+    InternalRendererProps<T>;
 } {
   const { Default, Custom } = useRendererConfig(tnode);
   const containerProps = useDefaultContainerProps();
@@ -32,7 +37,8 @@ export default function useAssembledCommonProps<T extends TNode>(
     tnode,
     propsFromParent,
     sharedProps,
-    TDefaultRenderer: TDefault,
+    TDefaultRenderer: TDefault as TDefaultRenderer<T>,
+    TNodeChildrenRenderer,
     style: mergeCollapsedMargins(
       propsFromParent?.collapsedMarginTop,
       tnode.getNativeStyles()
@@ -46,6 +52,6 @@ export default function useAssembledCommonProps<T extends TNode>(
   };
   return {
     assembledProps,
-    Renderer: (Custom ?? Default ?? TDefault) as any
+    Renderer: Custom || Default || null
   };
 }

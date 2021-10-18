@@ -1,11 +1,42 @@
 import React, { memo, ReactElement } from 'react';
-import TBlockRenderer from './TBlockRenderer';
-import TPhrasingRenderer from './TPhrasingRenderer';
-import TTextRenderer from './TTextRenderer';
-import { TNodeRendererProps } from './shared-types';
+import { TDefaultRenderer, TNodeRendererProps } from './shared-types';
 import { useSharedProps } from './context/SharedPropsProvider';
+import {
+  TText,
+  TBlock,
+  TNode,
+  TPhrasing
+} from '@native-html/transient-render-engine';
+import useAssembledCommonProps from './hooks/useAssembledCommonProps';
+import { useTNodeChildrenRenderer } from './context/TChildrenRendererContext';
+import renderTextualContent from './renderTextualContent';
+import { useRendererRegistry } from './context/RenderRegistryProvider';
+import renderBlockContent from './renderBlockContent';
+import renderEmptyContent from './renderEmptyContent';
 
 export type { TNodeRendererProps } from './shared-types';
+
+const TDefaultBlockRenderer: TDefaultRenderer<TBlock> =
+  renderBlockContent.bind(null);
+
+TDefaultBlockRenderer.displayName = 'TDefaultBlockRenderer';
+
+const TDefaultPhrasingRenderer: TDefaultRenderer<TPhrasing> =
+  renderTextualContent.bind(null);
+
+TDefaultPhrasingRenderer.displayName = 'TDefaultPhrasingRenderer';
+
+const TDefaultTextRenderer: TDefaultRenderer<TText> =
+  renderTextualContent.bind(null);
+
+TDefaultTextRenderer.displayName = 'TDefaultTextRenderer';
+
+function isGhostTNode(tnode: TNode) {
+  return (
+    (tnode.type === 'text' && (tnode.data === '' || tnode.data === ' ')) ||
+    tnode.type === 'empty'
+  );
+}
 
 /**
  * A component to render any {@link TNode}.
@@ -15,33 +46,78 @@ const TNodeRenderer = memo(function MemoizedTNodeRenderer(
 ): ReactElement | null {
   const { tnode } = props;
   const sharedProps = useSharedProps();
+  const renderRegistry = useRendererRegistry();
+  const TNodeChildrenRenderer = useTNodeChildrenRenderer();
   const tnodeProps = {
     ...props,
+    TNodeChildrenRenderer,
     sharedProps
   };
-  if (tnode.type === 'block' || tnode.type === 'document') {
-    return React.createElement(TBlockRenderer, tnodeProps);
-  }
-  if (tnode.type === 'phrasing') {
-    return React.createElement(TPhrasingRenderer, tnodeProps);
-  }
-  if (tnode.type === 'text') {
-    return React.createElement(TTextRenderer, tnodeProps);
-  }
-  if (typeof __DEV__ === 'boolean' && __DEV__ && tnode.type === 'empty') {
-    if (tnode.isUnregistered) {
-      console.warn(
-        `There is no custom renderer registered for tag "${tnode.tagName}" which is not part of the HTML5 standard. The tag will not be rendered.` +
-          ' If you don\'t want this tag to be rendered, add it to "ignoredTags" prop array. If you do, register an HTMLElementModel for this tag with "customHTMLElementModels" prop.'
+  const renderer =
+    tnode.type === 'block' || tnode.type === 'document'
+      ? TDefaultBlockRenderer
+      : tnode.type === 'text'
+      ? TDefaultTextRenderer
+      : tnode.type === 'phrasing'
+      ? TDefaultPhrasingRenderer
+      : renderEmptyContent;
+
+  const { assembledProps, Renderer } = useAssembledCommonProps(
+    tnodeProps,
+    renderer as any
+  );
+  switch (tnode.type) {
+    case 'empty':
+      return renderEmptyContent(assembledProps);
+    case 'text':
+      const InternalTextRenderer = renderRegistry.getInternalTextRenderer(
+        props.tnode.tagName
       );
-    } else if (tnode.tagName !== 'head') {
-      console.warn(
-        `The "${tnode.tagName}" tag is a valid HTML element but is not handled by this library. You must extend the default HTMLElementModel for this tag with "customHTMLElementModels" prop and make sure its content model is not set to "none".` +
-          ' If you don\'t want this tag to be rendered, add it to "ignoredTags" prop array.'
-      );
-    }
+
+      if (InternalTextRenderer) {
+        return React.createElement(InternalTextRenderer, tnodeProps);
+      }
+      // If ghost line prevention is enabled and the text data is empty, render
+      // nothing to avoid React Native painting a 20px height line.
+      // See also https://git.io/JErwX
+      if (
+        tnodeProps.tnode.data === '' &&
+        tnodeProps.sharedProps.enableExperimentalGhostLinesPrevention
+      ) {
+        return null;
+      }
+      break;
+    case 'phrasing':
+      // When a TPhrasing node is anonymous and has only one child, its
+      // rendering amounts to rendering its only child.
+      if (
+        tnodeProps.sharedProps.bypassAnonymousTPhrasingNodes &&
+        tnodeProps.tnode.tagName == null &&
+        tnodeProps.tnode.children.length <= 1
+      ) {
+        return React.createElement(TNodeChildrenRenderer, {
+          tnode: props.tnode
+        });
+      }
+      // If ghost line prevention is enabled and the tnode is an anonymous empty
+      // phrasing node, render nothing to avoid React Native painting a 20px
+      // height line. See also https://git.io/JErwX
+      if (
+        tnodeProps.sharedProps.enableExperimentalGhostLinesPrevention &&
+        tnodeProps.tnode.tagName == null &&
+        tnodeProps.tnode.children.every(isGhostTNode)
+      ) {
+        return null;
+      }
+      break;
   }
-  return null;
+  const renderFn =
+    tnode.type === 'block' || tnode.type === 'document'
+      ? renderBlockContent
+      : renderTextualContent;
+  return Renderer === null
+    ? renderFn(assembledProps)
+    : React.createElement(Renderer as any, assembledProps);
 });
 
 const defaultProps: Required<Pick<TNodeRendererProps<any>, 'propsFromParent'>> =
@@ -53,5 +129,11 @@ const defaultProps: Required<Pick<TNodeRendererProps<any>, 'propsFromParent'>> =
 
 // @ts-expect-error default props must be defined
 TNodeRenderer.defaultProps = defaultProps;
+
+export {
+  TDefaultBlockRenderer,
+  TDefaultPhrasingRenderer,
+  TDefaultTextRenderer
+};
 
 export default TNodeRenderer;

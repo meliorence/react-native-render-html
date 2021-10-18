@@ -7,13 +7,13 @@ import { perf, wait } from 'react-performance-testing';
 import buildTREFromConfig from '../../helpers/buildTREFromConfig';
 import RenderHTMLConfigProvider from '../../RenderHTMLConfigProvider';
 import { DefaultSupportedListStyleType } from '../../shared-types';
-import { TDefaultBlockRenderer } from '../../TBlockRenderer';
 import TRenderEngineProvider from '../../TRenderEngineProvider';
-import defaultListStyleSpecs from '../defaultListStyleSpecs';
 import ListElement, {
   getMarkerBoxStyle,
   ListElementProps
 } from '../ListElement';
+import { TDefaultBlockRenderer } from '../../TNodeRenderer';
+import TNodeChildrenRenderer from '../../TNodeChildrenRenderer';
 
 function makeListElementProps<T extends 'ol' | 'ul'>(
   html: string,
@@ -26,8 +26,9 @@ function makeListElementProps<T extends 'ol' | 'ul'>(
   const list = tdocument.children[0].children[0] as TBlock;
   expect(list.type).toBe('block');
   expect(list.tagName).toBe(type);
-  return Object.freeze({
+  return {
     TDefaultRenderer: TDefaultBlockRenderer,
+    TNodeChildrenRenderer: TNodeChildrenRenderer,
     listType: type,
     propsFromParent: { collapsedMarginTop: 0 },
     sharedProps: {} as any,
@@ -40,10 +41,9 @@ function makeListElementProps<T extends 'ol' | 'ul'>(
     textProps: {},
     viewProps: {},
     ...extraProps,
-    listStyleSpecs: defaultListStyleSpecs,
     renderIndex: 0,
     renderLength: 1
-  });
+  };
 }
 
 describe('getMarkerBoxStyle', () => {

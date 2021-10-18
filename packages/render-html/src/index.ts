@@ -120,10 +120,7 @@ export * from './shared-types';
 export * from './render/render-types';
 export { RenderHTML };
 export default RenderHTML;
-export {
-  default as TChildrenRenderer,
-  collapseTopMarginForChild
-} from './TChildrenRenderer';
+export { default as TChildrenRenderer } from './TChildrenRenderer';
 export {
   default as TNodeChildrenRenderer,
   useTNodeChildrenProps
@@ -139,6 +136,7 @@ export { default as RenderHTMLSource } from './RenderHTMLSource';
 export { default as useInternalRenderer } from './hooks/useInternalRenderer';
 export { default as useNormalizedUrl } from './hooks/useNormalizedUrl';
 export { default as getNativePropsForTNode } from './helpers/getNativePropsForTNode';
+export { default as collapseTopMarginForChild } from './helpers/collapseTopMarginForChild';
 export type {
   InternalSpecialRenderedTag,
   InternalRendererConfig

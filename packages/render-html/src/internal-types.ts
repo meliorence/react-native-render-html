@@ -1,9 +1,11 @@
 import { TNode } from '@native-html/transient-render-engine';
 import { Document, Element } from '@native-html/transient-render-engine';
+import { ComponentType } from 'react';
 import {
   RenderHTMLProps,
   TNodeRendererProps,
-  RenderHTMLAmbiantSharedProps
+  RenderHTMLAmbiantSharedProps,
+  TNodeChildrenRendererProps
 } from './shared-types';
 
 export type SourceLoaderProps = Pick<
@@ -23,6 +25,7 @@ export type TTreeEvents = Pick<
 
 export interface TNodeSubRendererProps<T extends TNode>
   extends TNodeRendererProps<T> {
+  TNodeChildrenRenderer: ComponentType<TNodeChildrenRendererProps>;
   /**
    * Props shared across the whole render tree.
    */

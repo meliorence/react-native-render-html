@@ -2,7 +2,6 @@ import React from 'react';
 import { act, render, waitFor } from '@testing-library/react-native';
 import RenderHTML from '../RenderHTML';
 import ImgTag from '../elements/IMGElement';
-import TTextRenderer from '../TTextRenderer';
 import {
   CustomBlockRenderer,
   CustomTextualRenderer
@@ -248,7 +247,7 @@ describe('RenderHTML', () => {
           contentWidth={100}
         />
       );
-      const ttext = UNSAFE_getByType(TTextRenderer);
+      const ttext = UNSAFE_getByType(Text).parent!;
       expect(ttext.props.tnode.markers.anchor).toBe(true);
     });
     it('should set `edits` marker to "ins" for `ins` tags', () => {
@@ -259,7 +258,7 @@ describe('RenderHTML', () => {
           contentWidth={100}
         />
       );
-      const ttext = UNSAFE_getByType(TTextRenderer);
+      const ttext = UNSAFE_getByType(Text).parent!;
       expect(ttext.props.tnode.markers.edits).toBe('ins');
     });
     it('should set `edits` marker to "del" for `del` tags', () => {
@@ -270,7 +269,7 @@ describe('RenderHTML', () => {
           contentWidth={100}
         />
       );
-      const ttext = UNSAFE_getByType(TTextRenderer);
+      const ttext = UNSAFE_getByType(Text).parent!;
       expect(ttext.props.tnode.markers.edits).toBe('del');
     });
     it('should set `lang` marker for `lang` attributes', () => {
@@ -281,7 +280,7 @@ describe('RenderHTML', () => {
           contentWidth={100}
         />
       );
-      const ttext = UNSAFE_getByType(TTextRenderer);
+      const ttext = UNSAFE_getByType(Text).parent!;
       expect(ttext.props.tnode.markers.lang).toBe('fr');
     });
     it('should set `dir` marker for `dir` attributes', () => {
@@ -292,7 +291,7 @@ describe('RenderHTML', () => {
           contentWidth={100}
         />
       );
-      const ttext = UNSAFE_getByType(TTextRenderer);
+      const ttext = UNSAFE_getByType(Text).parent!;
       expect(ttext.props.tnode.markers.direction).toBe('rtl');
     });
     it('should pass markers deep down in the tree', () => {
@@ -329,7 +328,7 @@ describe('RenderHTML', () => {
           contentWidth={100}
         />
       );
-      const em = UNSAFE_getByType(TTextRenderer);
+      const em = UNSAFE_getByType(Text).parent!;
       expect(em.props.tnode.markers.em).toBe(true);
     });
   });

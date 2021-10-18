@@ -3,8 +3,7 @@ import RenderHTML from '../RenderHTML';
 import IMGElement from '../elements/IMGElement';
 import { render } from '@testing-library/react-native';
 import { elementHasAncestorOfType } from './utils';
-import { TDefaultPhrasingRenderer } from '../TPhrasingRenderer';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 describe('RenderHTML component should honor formatting context of the DOM tree', () => {
   it('should wrap text elements into a box formed by a View component', () => {
@@ -22,9 +21,7 @@ describe('RenderHTML component should honor formatting context of the DOM tree',
       />
     );
     const span1 = getByText('hello world');
-    expect(elementHasAncestorOfType(span1, TDefaultPhrasingRenderer)).toBe(
-      true
-    );
+    expect(elementHasAncestorOfType(span1, Text)).toBe(true);
   });
   /*
    * We're asserting the following structure:

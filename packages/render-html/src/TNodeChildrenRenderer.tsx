@@ -1,13 +1,12 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { TNode } from '@native-html/transient-render-engine';
 import { useSharedProps } from './context/SharedPropsProvider';
-import TChildrenRenderer, {
-  tchildrenRendererDefaultProps
-} from './TChildrenRenderer';
+import { tchildrenRendererDefaultProps } from './TChildrenRenderer';
 import {
   TChildrenRendererProps,
   TNodeChildrenRendererProps
 } from './shared-types';
+import renderChildren from './renderChildren';
 
 function isCollapsible(tnode: TNode) {
   return tnode.type === 'block' || tnode.type === 'phrasing';
@@ -58,12 +57,6 @@ export function useTNodeChildrenProps({
   };
 }
 
-const TNodeWithChildrenRenderer = function TNodeWithChildrenRenderer(
-  props: TNodeChildrenRendererProps
-) {
-  return React.createElement(TChildrenRenderer, useTNodeChildrenProps(props));
-};
-
 /**
  * A component to render all children of a {@link TNode}.
  */
@@ -74,7 +67,10 @@ function TNodeChildrenRenderer(
     // see https://github.com/DefinitelyTyped/DefinitelyTyped/issues/20544
     return props.tnode.data as unknown as ReactElement;
   }
-  return React.createElement(TNodeWithChildrenRenderer, props);
+  // A tnode type will never change. We can safely
+  // ignore the non-conditional rule of hooks.
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  return renderChildren(useTNodeChildrenProps(props));
 }
 
 /**

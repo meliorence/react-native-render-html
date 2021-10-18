@@ -9,6 +9,10 @@ export const RenderRegistryContext = React.createContext<RenderRegistry>(
   null as any
 );
 
+export function useRendererRegistry() {
+  return React.useContext(RenderRegistryContext);
+}
+
 export function useRendererConfig<T extends TNode>(tnode: T) {
   return React.useContext(RenderRegistryContext).getRendererConfigForTNode<T>(
     tnode
