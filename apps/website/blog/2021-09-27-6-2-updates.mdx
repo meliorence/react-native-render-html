@@ -11,18 +11,25 @@ hide_table_of_contents: false
 draft: true
 ---
 
+import APIReference from '@site/src/components/APIReference';
+
 It has been over two months since the first final version of the Foundry
 released has been made public.
 
-## You Might not Need a Custom Component Renderer Anymore
+## You Might not Need a Custom Component Renderer
 
-Model-based custom rendering via `customHTMLElementModels` prop has been a
-lightweight alternative to custom (component) renderers since the early stages
-of the Foundry release. However, it was limited to setting user agent styles
-(`mixedUAStyles`), although those styles could be derived from the DOM node
-element attributes (`getUADerivedStyleFromAttributes`).
+Model-based custom rendering via <APIReference name="RenderHTMLProps"
+member="customHTMLElementModels"/> prop has been a lightweight alternative to
+custom (component) renderers since the early stages of the Foundry release.
+However, it was limited to setting user agent styles (<APIReference
+name="HTMLElementModel" member="mixedUAStyles" />),
+although those styles could be derived from the DOM node element attributes
+(<APIReference name="HTMLElementModel" member="getUADerivedStyleFromAttributes" />).
 
 ```js title="An Example of Model-Based Rendering"
+import RenderHTML, { HTMLElementModel } from 'react-native-render-html';
+
+// The eponym prop to pass to RenderHTML
 const customHTMLElementModels = {
   'blue-circle': HTMLElementModel.fromCustomModel({
     tagName: 'blue-circle',
@@ -38,32 +45,237 @@ const customHTMLElementModels = {
 };
 ```
 
-Version 6.2 ships with a bunch of new properties for HTML element models which
-should make model-based custom rendering much more prevalent. Let's take a tour!
+:::important
+Keep in mind that <APIReference name="HTMLElementModel" member="mixedUAStyles"
+/> has a lower specificity than styles passed to `RenderHTML` such as
+&ZeroWidthSpace;<APIReference name="RenderHTMLProps" member="tagsStyles" />.
+:::
 
-### `getUADynamicMixedStyles`
+Version 6.2 ships with a bunch of new fields for HTML element models which
+should make model-based custom rendering more popular. Let's take a tour!
+
+### `getMixedUAStyles` almost features CSS selectors!
+
+This field deprecates <APIReference name="HTMLElementModel" member="getUADerivedStyleFromAttributes"/>; it's basically the same
+but its signature has changed: it receives the target `tnode` and DOM `element`, which lets us implement CSS-selector-like behaviors:
+
+```js title="Conditionnaly remove margins of 'ol' direct descendents of 'p' elements."
+import RenderHTML, {
+  defaultHTMLElementModels,
+  isDomElement
+} from 'react-native-render-html';
+
+// The eponym prop to pass to RenderHTML
+const customHTMLElementModels = {
+  ol: defaultHTMLElementModels.ol.extend({
+    getMixedUAStyles(tnode, element) {
+      if (isDomElement(element.parent) && element.parent.tagName === 'p') {
+        // This is equivalent to targetting a "p > ol" CSS selector.
+        return {
+          marginTop: 0,
+          marginBottom: 0
+        };
+      }
+    }
+  })
+};
+```
+
+:::warning
+Beware that this `tnode` is an instance of <APIReference name="TNodeDescriptor"
+/>, which is a minimal `tnode` shape available during the Transient Render
+Engine creation. You will not have access to `parent` or `children` fields,
+since the hierarchy is yet in the making. This is why we are using the second
+argument, `element`, to query the DOM hierarchy instead. For this very reason,
+you are advised to use [`domutils`](https://github.com/fb55/domutils) library
+to query the DOM and create your conditional styling rules.
+:::
 
 ### `reactNativeProps`
 
-### `getDynamicReactNativeProps`
+This field will set props to the native component during the rendering phase. It is an object with three optional properties:
 
-## Don't Forget you can Mix Model-Based and Component-Based Custom Rendering
+1. `text`, to pass native props to the `Text` component when the renderer is textual;
+2. `view`, to pass native props to the `View` component when the renderer is block;
+3. `native`, to pass props to either `View` or `Text` components, irrespective of the renderer type.
+
+The type definition for this object is <APIReference name="ReactNativePropsDefinitions" />.
+
+In the below example, we are defining a custom tag, `nav-widget`, and setting
+accessibility props to any underlying native component for the render phase. We
+can also define `onPress`, which will cause the renderer to use the
+&ZeroWidthSpace;<APIReference name="RenderHTMLProps" member="GenericPressable" /> instead of
+default `View` for block renderers.
+
+```js title="Defining React Native props in an HTML element model"
+import RenderHTML, {
+  HTMLContentModel,
+  HTMLElementModel
+} from 'react-native-render-html';
+
+// The eponym prop to pass to RenderHTML
+const customHTMLElementModels = {
+  'nav-widget': HTMLElementModel.fromCustomModel({
+    tagName: 'nav-widget',
+    contentModel: HTMLContentModel.block,
+    reactNativeProps: {
+      native: {
+        accessibilityRole: 'link',
+        onPress() {
+          console.info('Pressed the nav widget!');
+        }
+      }
+    }
+  })
+};
+```
+
+However, this field is somehow limited in that it cannot depend on `tnode` attributes.
+This is where <APIReference name="HTMLElementModel" member="getReactNativeProps" /> comes to the rescue!
+
+### `getReactNativeProps`
+
+The purpose of this field is identical to <APIReference name="HTMLElementModel"
+member="reactNativeProps" /> field. It only differs in that instead of a plain
+object, it is a method which takes two arguments, `tnode` (the Transient Node)
+and `element` (the DOM node) and returns a plain object (see <APIReference
+name="ReactNativePropsDefinitions" />).
+
+In the example below, a custom `nav-widget` tag is registered. This time, we
+are handling `onPress` events conditionally, based on attributes of the
+`tnode`. The snippets uses a phony API, `appNavigatorControler`, to navigate
+between screens. Such API is easy to implement with a globally-defined ref to a
+`react-navigation` "navigation" object.
+
+:::important
+It is worth noting that you cannot use React hooks in any of element models functions. But you can use
+any ad-hoc API to emit events. If you really need React hooks, add a custom component renderer.
+:::
+
+```js title="Defining React Native props based on the TNode in an HTML element model"
+import RenderHTML, {
+  HTMLContentModel,
+  HTMLElementModel
+} from 'react-native-render-html';
+import appNavigatorControler from './appNavigatorControler';
+
+// The eponym prop to pass to RenderHTML
+const customHTMLElementModels = {
+  'nav-widget': HTMLElementModel.fromCustomModel({
+    tagName: 'nav-widget',
+    contentModel: HTMLContentModel.block,
+    getReactNativeProps(tnode) {
+      return {
+        native: {
+          accessibilityRole: 'link',
+          onPress() {
+            const targetScreen = tnode.attributes['data-target'];
+            const targetParams = tnode.attributes['data-params'];
+            appNavigatorControler.navigate(
+              targetScreen,
+              targetParams ? JSON.parse(targetParams) : null
+            );
+          }
+        }
+      };
+    }
+  })
+};
+```
+
+:::tip
+Don't forget that you can mix model-based and component-based rendering!
+:::
 
 ## A Focus on Accessibility
 
 ### Support for `aria-label` and `aria-role` Attributes
 
+`aria-label` and `aria-role` HTML attributes roughly map to
+`accessibilityLabel` and `accessibilityRole` React Native props. The new
+Transient Render Engine which features React Native props generation will from now on
+translate both attributes to their React Native counterparts. The mapping rules
+for `aria-role` have been extracted from `react-native-web`.
+
 ### Accessible `<a>` Tags
 
-### Accessible `<img>` Tags
+`<a>` tags now receive an `accessibilityRole="link"` prop when their `href`
+attribute is non-empty. Let's see now how we could set a custom generic hint by
+extending the HTML model:
 
-### Accessible `<h1-60>` Tags
+```ts
+import RenderHTML, { defaultHTMLElementModels } from 'react-native-render-html';
 
-### Other tags
+// The eponym prop to pass to RenderHTML
+const customHTMLElementModels = {
+  a: defaultHTMLElementModels.a.extend((aModel) => ({
+    nativeProps: {
+      ...aModel.nativeProps,
+      accessibilityHint: 'Open in your system web browser.'
+    }
+  }))
+};
+```
+
+:::warning
+Because of a [React Native
+limitation](https://github.com/facebook/react-native/issues/32004), nested
+`Text` elements are not accessible, which means that the screen reader will not
+be able to identify `<a>` tags as links when grouped with other textual
+elements. Below is an example:
+
+```html
+<p>
+  Unfortunately,
+  <a href="https://domain.com">this hyperlink is not accessible</a>
+</p>
+```
+
+Luke Walczak from Callstack [explains how to circumvent this issue in a great
+post](https://callstack.com/blog/react-native-android-accessibility-tips/).
+Unfortunately, this workaround is not generalizable and we will have to wait
+for an upstream fix.
+
+:::
+
+### Enhanced Accessibility for `<img>` Tags
+
+`<img>` tags have been accessible since the Foundry beta. But the accessibility
+props were set after the loading was complete. We have found that changing
+accessibility annotations depending on loading state can degrade aural
+experience. We have thus replaced this behavior by moving those props to the
+image container, to make it independent of the internal state.
+
+:::info
+`accessibilityRole="image"` will be set for `<img>` only when either `alt` or
+`aria-label` attribute is present.
+:::
+
+### Accessible `<h1-6>` Tags
+
+React Native has a “header” accessibility role which screen reader users depend
+on a lot to identify efficiently the content hierarchy of a screen. Until this
+release, `react-native-render-html` did not pass this role to heading tags.
 
 ## Other Enhancements
 
 ### Support for `user-select` CSS property
+
+With the new Transient Render Engine featuring React Native prop generation, it
+has become very easy to pass the `selectable` prop to React Native `Text`
+components based on the presence of `user-select` CSS property. Usage example:
+
+```html
+<p style="user-select: none">
+  This line is not selectable.<br />
+  <span>Neither is that one.</span>
+</p>
+```
+
+:::important
+Please not that this is not full support. The TRE will map `user-select: none;` to `selectable={false}` and
+any other value to `selectable={true}`.
+:::
 
 ### `getNativePropsForTnode` Function
 
@@ -76,5 +288,9 @@ should make model-based custom rendering much more prevalent. Let's take a tour!
 ### `enableExperimentalGhostLinesPrevention` Prop
 
 ### `provideEmbeddedHeaders` Prop
+
+This is a function prop which allows consumer to generate HTTP headers for
+remote resources. It currently works with `<img>` and `<iframe>` tags (from the
+`@native-html/iframe-plugin` lib).
 
 ### `bypassAnonymousTPhrasingNodes` Prop
