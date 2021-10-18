@@ -29,7 +29,7 @@ export default function getNativePropsForTNode<
     ...propsFromModel,
     ...nativeProps,
     ...switchProp,
-    onPress,
+    onPress: syntheticOnPress,
     style: [style, nativeProps?.style, switchProp.style],
     testID: tnode.tagName || undefined
   };

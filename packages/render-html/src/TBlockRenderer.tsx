@@ -10,7 +10,6 @@ import getNativePropsForTNode from './helpers/getNativePropsForTNode';
 
 export const TDefaultBlockRenderer: TDefaultRenderer<TBlock> = ({
   children: overridingChildren,
-  onPress,
   ...props
 }) => {
   const TNodeChildrenRenderer = useTNodeChildrenRenderer();
