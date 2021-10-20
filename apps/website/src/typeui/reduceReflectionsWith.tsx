@@ -7,10 +7,7 @@ import Indent from './Indent';
 export default function reduceReflectionsWith(
   punct: string | null,
   params: Params,
-  renderCurrent: (
-    curr: JSONOutput.DeclarationReflection,
-    params: Params
-  ) => any,
+  renderCurrent: (curr: JSONOutput.DeclarationReflection, p: Params) => any,
   shouldBreak?: boolean
 ) {
   return (prev: any, curr: JSONOutput.DeclarationReflection) => (

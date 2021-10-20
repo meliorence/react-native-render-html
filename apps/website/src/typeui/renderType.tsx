@@ -127,7 +127,7 @@ export default function renderType(pt: DeclarationType, params: Params) {
         </>
       );
     case 'mapped':
-      const mapped = (pt as unknown) as JSONOutput.MappedType;
+      const mapped = pt as unknown as JSONOutput.MappedType;
       nextParams = params.withIndent();
       return (
         <>
@@ -192,7 +192,7 @@ export default function renderType(pt: DeclarationType, params: Params) {
         </>
       );
     case 'indexedAccess':
-      const acc = (pt as unknown) as JSONOutput.IndexedAccessType;
+      const acc = pt as unknown as JSONOutput.IndexedAccessType;
       return (
         <>
           {renderType(acc.objectType, params)}

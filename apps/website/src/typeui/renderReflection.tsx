@@ -257,15 +257,14 @@ export default function renderReflection(
       }
       return ret;
     case ReflectionKind.Method:
-      return renderAttribute(
-        reflection.name,
-        renderArrowSignatures(
-          reflection.signatures,
-          params.withoutMemberLinks()
-        ),
-        reflection.flags,
-        params
-      );
+      return reflection.signatures.map((s) => {
+        return renderAttribute(
+          reflection.name,
+          renderArrowSignatures([s], params.withoutMemberLinks()),
+          reflection.flags,
+          params
+        );
+      });
     case ReflectionKind.Function:
       return renderArrowSignatures(
         (reflection as JSONOutput.DeclarationReflection).signatures,

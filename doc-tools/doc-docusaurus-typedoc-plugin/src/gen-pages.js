@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 const { ReflectionKind } = require('typedoc');
 const { writeFile, readdir, unlink } = require('fs/promises');
@@ -89,6 +90,21 @@ ${parseLinks(remarks.text)}
 
 /**
  *
+ * @param {import('typedoc').JSONOutput.CommentTag} remarks
+ */
+function extractDeprecated(deprecated) {
+  return `
+:::warning Deprecated
+
+This feature will be removed in the next major release.
+${parseLinks(deprecated.text)}
+
+:::  
+`;
+}
+
+/**
+ *
  * @param {import('typedoc').JSONOutput.CommentTag} warnings
  */
 function extractWarning(warnings) {
@@ -136,9 +152,13 @@ function extractAdmonitions(comment, isHeader) {
   const remarks = comment.tags && comment.tags.find((t) => t.tag === 'remarks');
   const warning = comment.tags && comment.tags.find((t) => t.tag === 'warning');
   const example = comment.tags && comment.tags.find((t) => t.tag === 'example');
-  return `\n${remarks ? extractRemarks(remarks) : ''}${
-    warning ? extractWarning(warning) : ''
-  }${example ? extractExample(example, isHeader) : ''}\n\n`;
+  const deprecated =
+    comment.tags && comment.tags.find((t) => t.tag === 'deprecated');
+  return `\n${deprecated ? extractDeprecated(deprecated) : ''}${
+    remarks ? extractRemarks(remarks) : ''
+  }${warning ? extractWarning(warning) : ''}${
+    example ? extractExample(example, isHeader) : ''
+  }\n\n`;
 }
 
 /**
