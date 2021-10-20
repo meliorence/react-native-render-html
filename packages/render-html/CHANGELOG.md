@@ -1,3 +1,17 @@
+# [6.2.0-alpha.3](https://github.com/meliorence/react-native-render-html/compare/v6.2.0-alpha.2...v6.2.0-alpha.3) (2021-10-20)
+
+
+### Bug Fixes
+
+* pass `borderless` prop to custom `GenericPressable` ([f06af7a](https://github.com/meliorence/react-native-render-html/commit/f06af7a54294275bbaff21baeacdba56fa8bc3c4))
+* select `onPress` according to announced merging specifications ([8a88457](https://github.com/meliorence/react-native-render-html/commit/8a8845734887b07c0a8c2ebd573eaf5fcb9d9f23))
+
+
+### Features
+
+* allow `HTMLElementModel.extend` to take a merge function ([9b3a007](https://github.com/meliorence/react-native-render-html/commit/9b3a007cf984c477d851000ac6812f5a91b17a89))
+* support `onPress` from element models native props ([7dc5577](https://github.com/meliorence/react-native-render-html/commit/7dc5577405f09e577808172ec4aa4d99c913f5c7))
+
 # [6.2.0-alpha.2](https://github.com/meliorence/react-native-render-html/compare/v6.2.0-alpha.1...v6.2.0-alpha.2) (2021-10-13)
 
 
