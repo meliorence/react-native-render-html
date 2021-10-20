@@ -299,10 +299,6 @@ export default function PageGuideCustomRenderers() {
             </DListTitle>
             <DListItem>
               The position relative to the parent React element, starting at 0.
-              Not to be confused with{' '}
-              <RefRenderHTMLExport name="TNodeShape" member="index" full /> the
-              position of the <RefRenderHTMLExport name="TNode" /> before
-              hoisting, which is much closer to the position in the DOM.
             </DListItem>
             <DListTitle>
               <RefRenderHTMLExport

@@ -218,6 +218,34 @@ export default function PageFAQ() {
             image.
           </Paragraph>
         </Section>
+        <Section title="Some anchors (<a>) are not accessible to screen readers">
+          <Paragraph>
+            Because of a{' '}
+            <Hyperlink url="https://github.com/facebook/react-native/issues/32004">
+              React Native bug
+            </Hyperlink>
+            , nested `Text` elements are not accessible, which means that the
+            screen reader will not be able to identify{' '}
+            <RefHtmlElement name="a" /> tags as links when grouped with other
+            textual elements. Below is an example:
+          </Paragraph>
+          <SourceDisplay
+            lang="html"
+            showLineNumbers={false}
+            content={`<p>
+            Unfortunately,
+            <a href="https://domain.com">this hyperlink is not accessible</a>
+          </p>`}
+          />
+          <Paragraph>
+            Luke Walczak from Callstack{' '}
+            <Hyperlink url="https://callstack.com/blog/react-native-android-accessibility-tips/">
+              explains how to circumvent this issue in a great post
+            </Hyperlink>
+            . Unfortunately, this workaround cannot be genericized and we will
+            have to wait for a fix in React Native codebase.
+          </Paragraph>
+        </Section>
       </Chapter>
     </Page>
   );

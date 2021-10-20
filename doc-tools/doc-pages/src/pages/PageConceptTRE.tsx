@@ -76,7 +76,25 @@ export default function PageConceptTRE() {
             To each standard tag is attached an <Bold>element model</Bold>,
             instance of the <RefTRE name="HTMLElementModel" /> class. Such model
             has multiple fields describing different behaviors related to
-            translation of those DOM elements:
+            translation of those DOM elements. There are two ways to instantiate
+            an element model:
+          </Paragraph>
+          <List>
+            <ListItem>
+              When changing an existing tag model with the{' '}
+              <RefTRE name="HTMLElementModel" member="extend" full /> method;
+            </ListItem>
+            <ListItem>
+              When registering a new tag with the{' '}
+              <RefTRE name="HTMLElementModel" member="fromCustomModel" full />{' '}
+              static method.
+            </ListItem>
+          </List>
+          <Paragraph>
+            You will have to register custom and extended models with the{' '}
+            <RefRenderHtmlProp name="customHTMLElementModels" /> prop. Below is
+            a list of fields that can be set when defining or extending HTML
+            element models:
           </Paragraph>
           <DList>
             <DListTitle>
@@ -111,15 +129,35 @@ export default function PageConceptTRE() {
               This is how default styles are set for tags.
             </DListItem>
             <DListTitle>
-              <RefTRE
-                name="HTMLElementModel"
-                member="getUADerivedStyleFromAttributes"
-              />
+              <RefTRE name="HTMLElementModel" member="getMixedUAStyles" />
             </DListTitle>
             <DListItem>
-              A function which returns mixed UA styles given the DOM node{' '}
-              <Bold>attributes</Bold> and <RefTRE name="TNode" />{' '}
-              <RefTRE name="Markers" />.
+              A function which returns mixed UA styles given a minimal{' '}
+              <RefTRE name="TNodeDescriptor" /> and a DOM <RefTRE name="Node" />
+              .
+            </DListItem>
+            <DListTitle>
+              <RefTRE name="HTMLElementModel" member="reactNativeProps" />
+            </DListTitle>
+            <DListItem>
+              An object with three fields, <InlineCode>text</InlineCode>,{' '}
+              <InlineCode>view</InlineCode> and <InlineCode>native</InlineCode>.
+              Each field value is a props object that will be passed to the
+              underlying native component at render time. Respecively, for
+              <RefRNSymbol name="Text" />, <RefRNSymbol name="View" /> and all
+              (catch-all).
+            </DListItem>
+            <DListTitle>
+              <RefTRE name="HTMLElementModel" member="getReactNativeProps" />
+            </DListTitle>
+            <DListItem>
+              Serves the same purpose as{' '}
+              <InlineCode>reactNativeProps</InlineCode>, but it's a function
+              taking a <RefTRE name="TNode" /> as first argument, pre-generated
+              props as second argument (such as{' '}
+              <InlineCode>accessibilityLabel</InlineCode> derived from{' '}
+              <RefHtmlAttr name="aria-label" />) and the DOM{' '}
+              <RefTRE name="Element" /> as a third argument.
             </DListItem>
           </DList>
         </Section>

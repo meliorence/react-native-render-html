@@ -4,7 +4,7 @@ author: Jules Sam. Randolph
 author_title: Developer of React Native Render HTML v6
 author_url: https://github.com/jsamr/
 author_image_url: https://avatars.githubusercontent.com/u/3646758?v=4
-tags: [foundry, announcement]
+tags: [foundry, "release notes"]
 description: A version focused on accessibility and enhanced model rendering.
 image: img/foundry-announcement.png
 hide_table_of_contents: false
@@ -15,11 +15,12 @@ import APIReference from '@site/src/components/APIReference';
 import Reference from '@site/src/components/Reference';
 
 It has been over two months since the first final version of the Foundry
-released has been made public. This new release focuses on two areas of
+release has been made public. This new version focuses on two areas of
 improvements:
 
-1. Accessibility;
-2. Richer model-based rendering.
+1. Accessibility, and more specifically integration with screen readers;
+2. Richer model-based rendering, and the feature to define React Native props from
+within those models.
 
 As you will discover through this reading, both are somehow related. Let's find out how!
 
@@ -34,7 +35,7 @@ However, it was limited to setting user agent styles (<APIReference
 name="HTMLElementModel" member="mixedUAStyles" />),
 although those styles could be derived from the DOM node element attributes
 (the now-deprecated <APIReference name="HTMLElementModel" member="getUADerivedStyleFromAttributes" />).
-The below example is a reminder of how those element models can be defined, for instance to
+The below example is a reminder on how those element models can be defined, for instance to
 register a new `<blue-circle>` tag which renders to a 50 by 50 blue circle!
 
 ```js title="An Example of Model-Based Rendering"
@@ -70,10 +71,13 @@ related to specificity for a refresher.
 Version 6.2 ships with a bunch of new fields for HTML element models which
 should make model-based rendering more popular. Let's take a tour!
 
-### `getMixedUAStyles` Tickles CSS Selectors!
+### `getMixedUAStyles`
 
-This field deprecates <APIReference name="HTMLElementModel" member="getUADerivedStyleFromAttributes"/>; it's basically the same
-but its signature has changed: it receives the target `tnode` and DOM `element`, which lets us implement CSS-selector-like behaviors:
+This field deprecates <APIReference name="HTMLElementModel"
+member="getUADerivedStyleFromAttributes"/>; it serves the same purpose but its
+signature has changed. It now receives the target `tnode` and DOM `element`,
+which lets us implement more fine-grained logic such as CSS-selector-like
+behaviors:
 
 ```js title="Conditionnaly remove margins of 'ol' direct descendents of 'p' elements."
 import RenderHTML, {
@@ -114,9 +118,10 @@ to query the DOM and create your conditional styling rules.
 
 ### `reactNativeProps`
 
-This field will set props to the native component during the rendering phase.
-It is an object with three optional properties (for reference, the shape of
-this object is a <APIReference name="ReactNativePropsDefinitions" />):
+This field holds props that will be passed to the native component during the
+rendering phase. It is an object with three optional properties (for reference,
+the shape of this object is a <APIReference name="ReactNativePropsDefinitions"
+/>):
 
 1. `text`, to pass native props to the `Text` component when the renderer is textual;
 2. `view`, to pass native props to the `View` component when the renderer is block;
@@ -241,13 +246,6 @@ Nevertheless, those interactive element models are already shipped with the appr
 The new Transient Render Engine will from now on
 translate both attributes to their React Native counterparts.
 
-:::info Midly relevant
-The mapping rules from the `role` HTML attribute to React Native props has
-been greatly influenced by those of
-[`react-native-web`](https://github.com/necolas/react-native-web/blob/66d01734ce3ffcfea61e05aa1b45015658b3f2af/packages/react-native-web/src/modules/AccessibilityUtil/propsToAriaRole.js),
-the other way round!
-:::
-
 ### Accessible `<a>` Tags
 
 `<a>` tags now receive an `accessibilityRole="link"` prop when their `href`
@@ -333,18 +331,16 @@ any other value to `selectable={true}`.
 
 ## Bonus: Version 6.1 Features
 
-
-### `renderIndex` and `renderLength` Props to Custom Component Renderers
-
-Those props passed to custom component renderers give you positional
-information regarding this element in the render tree. `renderIndex` will often
-coincide with `tnode.index` but there are subtle differences.
+I didn't publish a release notes post for this version; I'm catching up
+here! From now on, I will try to write up a post for each minor and major
+release.
 
 ### `enableExperimentalBRCollapsing` Prop
 
 This **recommended prop** allows consumers to circumvent a bug in the Foundry
 release where line breaks (`<br>`) would be printed erroneously, such
-as at the end of a paragraph. It will be enabled by default in the next major
+as at the end of a paragraph. Its default it yet `false` to avoid introducing
+breaking changes but it will be enabled by default in the next major
 release.
 
 :::tip learn more
@@ -353,8 +349,11 @@ Read the complete explanation for this prop [in the textual content guide](/docs
 
 ### `enableExperimentalGhostLinesPrevention` Prop
 
-This **recommended prop** allows to circumvent [a React Native bug](https://github.com/facebook/react-native/issues/32062) where empty
-`Text` elements would be printed as ghost lines of fixed height (around 20 dpi).
+This **recommended prop** allows to circumvent [a React Native
+bug](https://github.com/facebook/react-native/issues/32062) where empty `Text`
+elements would be printed as ghost lines of fixed height (around 20 dpi). Its
+default it yet `false` to avoid introducing breaking changes but it will be
+enabled by default in the next major release.
 
 :::tip learn more
 Read the complete explanation for this prop [in the textual content guide](/docs/content/textual#empty-tags).
@@ -362,9 +361,9 @@ Read the complete explanation for this prop [in the textual content guide](/docs
 
 ### `provideEmbeddedHeaders` Prop
 
-This is a function prop which allows consumer to generate HTTP headers for
-remote resources. It currently works with `<img>` and `<iframe>` tags (from the
-`@native-html/iframe-plugin` lib).
+A function prop which allows to generate HTTP headers for
+remote resources. It currently works with `<img>` and `<iframe>` tags (since version 2.6 of the
+[`@native-html/iframe-plugin`](https://github.com/native-html/plugins/tree/master/packages/iframe-plugin#readme) library).
 
 :::tip learn more
 See for example how it can be used with images [in the image content guide](/docs/content/images#providing-headers).
@@ -372,9 +371,9 @@ See for example how it can be used with images [in the image content guide](/doc
 
 ### `bypassAnonymousTPhrasingNodes` Prop
 
-This prop makes the React rendering layer omit grouping (anonymous) `TPhrasing`
-nodes which have only one child. It is best learn by example. For instance, the
-following HTML snippet:
+This prop, `true` by default, makes the React rendering layer bypass grouping
+(anonymous) `TPhrasing` nodes which have only one child. It is best understood by
+example. For instance, the following HTML snippet:
 
 ```html
 <p>A sentence.</p>
@@ -410,7 +409,7 @@ the render tree will be simplified to:
 ```
 
 This behavior is preferred for many reasons. The most simple one is that it
-simplifies the render tree. The less React element there is, the best it is
-performance-wise. Moreover, there are a lot of React Native bugs implying
+simplifies the render tree. The less React elements there are, the best it is
+performance-wise. Moreover, there are a lot of React Native bugs related to
 nested `Text` nodes, so this simplification limits the number of occurrences
 of those bugs.
