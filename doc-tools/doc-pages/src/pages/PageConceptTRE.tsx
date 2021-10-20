@@ -44,6 +44,7 @@ export default function PageConceptTRE() {
     RefHtmlElement,
     RefCssProperty,
     RefRenderHtmlProp,
+    RefRenderHTMLExport,
     RefHtmlAttr,
     RefDoc,
     RefTRE,
@@ -82,7 +83,9 @@ export default function PageConceptTRE() {
           <List>
             <ListItem>
               When changing an existing tag model with the{' '}
-              <RefTRE name="HTMLElementModel" member="extend" full /> method;
+              <RefTRE name="HTMLElementModel" member="extend" full /> method.
+              You can access default models via{' '}
+              <RefRenderHTMLExport name="defaultHTMLElementModels" />;
             </ListItem>
             <ListItem>
               When registering a new tag with the{' '}

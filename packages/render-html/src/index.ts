@@ -71,6 +71,7 @@ export type {
   ExtraNativeUntranslatedLongStyles,
   ExtraNativeViewStyle,
   GroupingTagNames,
+  HTMLElementModelShape,
   HTMLModelRecord,
   InteractiveTagNames,
   Markers,
