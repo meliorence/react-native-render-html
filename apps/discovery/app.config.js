@@ -19,7 +19,13 @@ module.exports = {
     },
     assetBundlePatterns: ['**/*'],
     ios: {
-      supportsTablet: true
+      supportsTablet: false,
+      bundleIdentifier: 'org.nativehtml.discovery',
+      buildNumber: '1.0.0'
+    },
+    android: {
+      package: 'org.nativehtml.discovery',
+      versionCode: 1
     },
     web: {
       favicon: './assets/images/favicon.png'
