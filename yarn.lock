@@ -4380,22 +4380,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@native-html/transient-render-engine@npm:11.2.0":
-  version: 11.2.0
-  resolution: "@native-html/transient-render-engine@npm:11.2.0"
+"@native-html/transient-render-engine@npm:11.2.1":
+  version: 11.2.1
+  resolution: "@native-html/transient-render-engine@npm:11.2.1"
   dependencies:
     "@native-html/css-processor": 1.11.0
     "@types/ramda": ^0.27.44
-    csstype: ^3.0.8
+    csstype: ^3.0.9
     domelementtype: ^2.2.0
-    domhandler: ^4.2.0
+    domhandler: ^4.2.2
     domutils: ^2.8.0
-    htmlparser2: ^7.1.1
+    htmlparser2: ^7.1.2
     ramda: ^0.27.1
   peerDependencies:
     "@types/react-native": "*"
     react-native: ^*
-  checksum: f79f0c25f2e6d0b59220a0945bde20a597d69f68a2db5b9b902f1ef6e3a37deeafa1d04973c0f4ea0e551e0d324388148dbe8721c90dd4ce8d3bd503a7122cbd
+  checksum: cb36d059e86a1bbf2848a0912134959487efc548b8ed35167a6e605c9abad8321f06bd4f09e2656e727e1704b666539d115fcb5849b7a2192342d6b88a563ea7
   languageName: node
   linkType: hard
 
@@ -9442,6 +9442,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"csstype@npm:^3.0.9":
+  version: 3.0.9
+  resolution: "csstype@npm:3.0.9"
+  checksum: 199f9af7e673f9f188525c3102a329d637ff46c52f6385a4427ff5cb17adcb736189150170a7af7c5701d18d7704bdad130273f4aa7e44c6c4f9967e6115dc93
+  languageName: node
+  linkType: hard
+
 "currently-unhandled@npm:^0.4.1":
   version: 0.4.1
   resolution: "currently-unhandled@npm:0.4.1"
@@ -10122,6 +10129,15 @@ __metadata:
   dependencies:
     domelementtype: ^2.2.0
   checksum: 7921ac317d6899525a4e6a6038137307271522175a73db58233e13c7860987e15e86654583b2c0fd02fc46a602f9bd86fd2671af13b9068b72e8b229f07b3d03
+  languageName: node
+  linkType: hard
+
+"domhandler@npm:^4.2.2":
+  version: 4.2.2
+  resolution: "domhandler@npm:4.2.2"
+  dependencies:
+    domelementtype: ^2.2.0
+  checksum: ad782fef984eca5a6fdd4ce70b90c38aff335ae4d6a51223ac82bd371b6674614efdcfff2dbb1126a7395634357906781f179e4ec028c7c578bb7f2beef8a4a5
   languageName: node
   linkType: hard
 
@@ -12961,6 +12977,18 @@ fsevents@^1.2.7:
     domutils: ^2.8.0
     entities: ^3.0.1
   checksum: f12b42188c608c582dd9f92ad7655fb5701ba85fb11a36a1ea1294921e8a9d5a3a961f9d9cc00da89a2cfeb8bc62f57f43ebfc27855e22ecab8a60009dcf2648
+  languageName: node
+  linkType: hard
+
+"htmlparser2@npm:^7.1.2":
+  version: 7.1.2
+  resolution: "htmlparser2@npm:7.1.2"
+  dependencies:
+    domelementtype: ^2.0.1
+    domhandler: ^4.2.2
+    domutils: ^2.8.0
+    entities: ^3.0.1
+  checksum: 80374dce981d94ff03155733cda289534878e2d05cb435cc9eddc64716e617abf720938d813f18a16878254c8eb5873c7d9e2964bf240202f0a5b71b8e06069f
   languageName: node
   linkType: hard
 
@@ -20045,7 +20073,7 @@ fsevents@^1.2.7:
     "@jsamr/counter-style": ^2.0.1
     "@jsamr/react-native-li": ^2.3.0
     "@microsoft/api-extractor": ^7.14.0
-    "@native-html/transient-render-engine": 11.2.0
+    "@native-html/transient-render-engine": 11.2.1
     "@release-it/conventional-changelog": ^2.0.1
     "@testing-library/jest-native": ^4.0.2
     "@testing-library/react-hooks": ^7.0.0
