@@ -11,10 +11,8 @@
   "homepage": "https://github.com/meliorence/react-native-render-html",
   "scripts": {
     "render-html": "yarn workspace react-native-render-html",
-    "demo": "yarn workspace demo",
+    "discovery": "yarn workspace discovery",
     "website": "yarn workspace website",
-    "start:demo": "yarn workspace demo start",
-    "start:website": "yarn workspace website start",
     "@doc/pages": "yarn workspace @doc/pages",
     "@doc/mdx-gen-cli": "yarn workspace @doc/mdx-gen-cli",
     "doc-docusaurus-rfg-plugin": "yarn workspace doc-docusaurus-rfg-plugin",
@@ -23,7 +21,7 @@
     "process-svg-assets": "node scripts/processSvgAssets.js",
     "postinstall": "husky install",
     "publish:website": "yarn build:docs && GIT_USER=$USER USE_SSH=true yarn workspace website deploy",
-    "publish:discovery": "yarn workspace demo publish"
+    "publish:discovery": "yarn workspace discovery publish"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",

@@ -9761,73 +9761,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"demo@workspace:apps/demo":
-  version: 0.0.0-use.local
-  resolution: "demo@workspace:apps/demo"
-  dependencies:
-    "@babel/core": ~7.9.0
-    "@doc/constants": "workspace:*"
-    "@doc/svg-component": "workspace:*"
-    "@doc/svgr-conf": "workspace:*"
-    "@expo-google-fonts/raleway": ^0.1.0
-    "@expo-google-fonts/source-code-pro": ^0.1.0
-    "@expo-google-fonts/space-mono": ^0.1.0
-    "@expo/vector-icons": ^12.0.0
-    "@gorhom/bottom-sheet": ^3.6.4
-    "@jsamr/react-native-li": ^2.3.0
-    "@mobily/stacks": ^1.1.3
-    "@react-native-community/masked-view": 0.1.10
-    "@react-native-community/slider": 3.0.3
-    "@react-native-picker/picker": 1.16.1
-    "@react-navigation/bottom-tabs": ^5.11.10
-    "@react-navigation/drawer": ^5.12.5
-    "@react-navigation/native": ^5.9.4
-    "@react-navigation/stack": ^5.14.4
-    "@types/color": ^3.0.1
-    "@types/lowlight": ^0.0.1
-    "@types/react": ~16.9.35
-    "@types/react-native": ~0.63.2
-    "@types/react-syntax-highlighter": ^13.5.0
-    babel-preset-expo: 8.3.0
-    color: ^3.1.3
-    deepmerge: ^4.2.2
-    expo: ^42.0.0
-    expo-asset: ~8.3.3
-    expo-constants: ~11.0.1
-    expo-font: ~9.2.1
-    expo-linking: ~2.3.1
-    expo-splash-screen: ~0.11.2
-    expo-status-bar: ~1.0.4
-    expo-web-browser: ~9.2.0
-    ignore-loader: ^0.1.2
-    jest-expo: ^42.0.0
-    lowlight: ^1.20.0
-    param-case: ^3.0.4
-    react: 16.13.1
-    react-dom: 16.13.1
-    react-native: "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz"
-    react-native-gesture-handler: ~1.10.2
-    react-native-hsv-color-picker: ^1.0.2
-    react-native-pager-view: 5.0.12
-    react-native-paper: ^4.8.1
-    react-native-reanimated: ~2.2.0
-    react-native-render-html: "workspace:*"
-    react-native-safe-area-context: 3.2.0
-    react-native-screens: ~3.4.0
-    react-native-svg: 12.1.1
-    react-native-svg-transformer: ^0.14.3
-    react-native-tab-view: ^3.0.1
-    react-native-web: ~0.13.12
-    react-native-webview: 11.6.2
-    react-syntax-highlighter: ^15.4.3
-    scheduler: ^0.20.2
-    typescript: 4.2.2
-    urijs: "*"
-    use-context-selector: ^1.3.7
-    zustand: ^3.4.2
-  languageName: unknown
-  linkType: soft
-
 "denodeify@npm:^1.2.1":
   version: 1.2.1
   resolution: "denodeify@npm:1.2.1"
@@ -9953,6 +9886,73 @@ __metadata:
   checksum: fa05e18324510d7283f55862f3161c6759a3f2f8dbce491a2fc14c8324c498286c54282c1f0e933cb930da8419b30679389499b919122952a4f8592362ef4615
   languageName: node
   linkType: hard
+
+"discovery@workspace:apps/discovery":
+  version: 0.0.0-use.local
+  resolution: "discovery@workspace:apps/discovery"
+  dependencies:
+    "@babel/core": ~7.9.0
+    "@doc/constants": "workspace:*"
+    "@doc/svg-component": "workspace:*"
+    "@doc/svgr-conf": "workspace:*"
+    "@expo-google-fonts/raleway": ^0.1.0
+    "@expo-google-fonts/source-code-pro": ^0.1.0
+    "@expo-google-fonts/space-mono": ^0.1.0
+    "@expo/vector-icons": ^12.0.0
+    "@gorhom/bottom-sheet": ^3.6.4
+    "@jsamr/react-native-li": ^2.3.0
+    "@mobily/stacks": ^1.1.3
+    "@react-native-community/masked-view": 0.1.10
+    "@react-native-community/slider": 3.0.3
+    "@react-native-picker/picker": 1.16.1
+    "@react-navigation/bottom-tabs": ^5.11.10
+    "@react-navigation/drawer": ^5.12.5
+    "@react-navigation/native": ^5.9.4
+    "@react-navigation/stack": ^5.14.4
+    "@types/color": ^3.0.1
+    "@types/lowlight": ^0.0.1
+    "@types/react": ~16.9.35
+    "@types/react-native": ~0.63.2
+    "@types/react-syntax-highlighter": ^13.5.0
+    babel-preset-expo: 8.3.0
+    color: ^3.1.3
+    deepmerge: ^4.2.2
+    expo: ^42.0.0
+    expo-asset: ~8.3.3
+    expo-constants: ~11.0.1
+    expo-font: ~9.2.1
+    expo-linking: ~2.3.1
+    expo-splash-screen: ~0.11.2
+    expo-status-bar: ~1.0.4
+    expo-web-browser: ~9.2.0
+    ignore-loader: ^0.1.2
+    jest-expo: ^42.0.0
+    lowlight: ^1.20.0
+    param-case: ^3.0.4
+    react: 16.13.1
+    react-dom: 16.13.1
+    react-native: "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz"
+    react-native-gesture-handler: ~1.10.2
+    react-native-hsv-color-picker: ^1.0.2
+    react-native-pager-view: 5.0.12
+    react-native-paper: ^4.8.1
+    react-native-reanimated: ~2.2.0
+    react-native-render-html: "workspace:*"
+    react-native-safe-area-context: 3.2.0
+    react-native-screens: ~3.4.0
+    react-native-svg: 12.1.1
+    react-native-svg-transformer: ^0.14.3
+    react-native-tab-view: ^3.0.1
+    react-native-web: ~0.13.12
+    react-native-webview: 11.6.2
+    react-syntax-highlighter: ^15.4.3
+    scheduler: ^0.20.2
+    typescript: 4.2.2
+    urijs: "*"
+    use-context-selector: ^1.3.7
+    zustand: ^3.4.2
+  languageName: unknown
+  linkType: soft
 
 "dns-equal@npm:^1.0.0":
   version: 1.0.0

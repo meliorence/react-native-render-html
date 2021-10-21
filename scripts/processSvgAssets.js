@@ -4,7 +4,7 @@ const { extendDefaultPlugins, optimize } = require('svgo');
 const processSvgWithInkscape = require('./processSvgWithInkscape.js');
 
 const sourceDir = 'assets/doc/svg';
-const targetDemoDir = 'apps/demo/assets/svg';
+const targetDemoDir = 'apps/discovery/assets/svg';
 const targetWebsiteDir = 'apps/website/src/svg';
 
 const configPluginsFirstPass = extendDefaultPlugins([

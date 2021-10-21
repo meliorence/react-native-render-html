@@ -37,5 +37,5 @@ jobs:
       name: Build documentation
     - run: yarn website build
       name: Build website
-    - run: yarn demo test:ts
+    - run: yarn discovery test:ts
       name: Discovery TS
