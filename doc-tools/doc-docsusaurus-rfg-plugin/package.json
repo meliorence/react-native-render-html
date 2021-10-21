@@ -6,7 +6,7 @@
     "build": "tsc -p ."
   },
   "dependencies": {
-    "htmlparser2": "^7.1.1",
+    "htmlparser2": "^7.1.2",
     "rfg-api": "^0.5.2"
   },
   "devDependencies": {
