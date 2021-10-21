@@ -4,7 +4,7 @@ author: Jules Sam. Randolph
 author_title: Developer of React Native Render HTML v6
 author_url: https://github.com/jsamr/
 author_image_url: https://avatars.githubusercontent.com/u/3646758?v=4
-tags: [foundry, "release notes"]
+tags: [foundry, 'release notes']
 description: A version focused on accessibility and enhanced model rendering.
 image: img/foundry-announcement.png
 hide_table_of_contents: false
@@ -18,11 +18,16 @@ It has been over two months since the first final version of the Foundry
 release has been made public. This new version focuses on two areas of
 improvements:
 
-1. Accessibility, and more specifically integration with screen readers;
-2. Richer model-based rendering, and the feature to define React Native props from
-within those models.
+1. [Accessibility](https://en.wikipedia.org/wiki/Computer_accessibility), and more specifically integration with _VoiceOver_ and _TalkBack_ screen readers;
+2. Richer [model-based
+   rendering](/docs/guides/custom-renderers#model-based-custom-rendering), and the
+   feature to define React Native props from those models.
 
 As you will discover through this reading, both are somehow related. Let's find out how!
+
+:::info bonus
+This post also covers a due overview of features introduced in the previous 6.1 minor release.
+:::
 
 <!--truncate-->
 
@@ -69,7 +74,7 @@ related to specificity for a refresher.
 :::
 
 Version 6.2 ships with a bunch of new fields for HTML element models which
-should make model-based rendering more popular. Let's take a tour!
+should increase model-based rendering adoption. Let's take a tour!
 
 ### `getMixedUAStyles`
 
@@ -123,9 +128,9 @@ rendering phase. It is an object with three optional properties (for reference,
 the shape of this object is a <APIReference name="ReactNativePropsDefinitions"
 />):
 
-1. `text`, to pass native props to the `Text` component when the renderer is textual;
-2. `view`, to pass native props to the `View` component when the renderer is block;
-3. `native`, to pass props to either `View` or `Text` components, irrespective of the renderer type.
+1. `text`, to pass native props to `Text`-backed renderers;
+2. `view`, to pass native props to `View`-backed renderers;
+3. `native`, to pass props to either `View` or `Text`-backed renderers.
 
 In the next snippet, we are defining a custom tag, `<nav-widget>`, and setting
 accessibility props to any underlying native component for the render phase. We
@@ -249,7 +254,9 @@ translate both attributes to their React Native counterparts.
 ### Accessible `<a>` Tags
 
 `<a>` tags now receive an `accessibilityRole="link"` prop when their `href`
-attribute is non-empty. Let's see now how we could set [an accessibility hint](https://reactnative.dev/docs/accessibility#accessibilityhint) by
+attribute is non-empty. To link that part with model enhancements seen in
+the previous section, let's see now how we could set [an accessibility
+hint](https://reactnative.dev/docs/accessibility#accessibilityhint) by
 extending the HTML model:
 
 ```ts
@@ -258,9 +265,11 @@ import RenderHTML, { defaultHTMLElementModels } from 'react-native-render-html';
 // The eponym prop to pass to RenderHTML
 const customHTMLElementModels = {
   a: defaultHTMLElementModels.a.extend((aModel) => ({
-    nativeProps: {
-      ...aModel.nativeProps,
-      accessibilityHint: 'Open in your system web browser.'
+    reactNativeProps: {
+      native: {
+        ...aModel.reactNativeProps,
+        accessibilityHint: 'Open in your system web browser.'
+      }
     }
   }))
 };
@@ -294,9 +303,8 @@ for an upstream fix.
 
 `<img>` tags have been accessible since the Foundry beta. But the accessibility
 props were set after the loading was complete. We have found that changing
-accessibility annotations depending on loading state can degrade aural
-experience. We have thus replaced this behavior by moving those props to the
-image container, to make it independent of the internal state.
+accessibility annotations on the fly can degrade aural
+experiences and have provided a fix.
 
 :::info
 `accessibilityRole="image"` will be set for `<img>` only when either `alt` or
@@ -307,7 +315,8 @@ image container, to make it independent of the internal state.
 
 React Native has a “header” accessibility role which screen reader users depend
 on widely to identify quickly the content hierarchy of a screen. Until this
-release, `react-native-render-html` did not pass this role to heading tags.
+release, `react-native-render-html` did not pass the appropriate role to
+heading tags.
 
 ## Other Enhancements
 

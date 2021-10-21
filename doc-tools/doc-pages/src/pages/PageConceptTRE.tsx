@@ -410,8 +410,7 @@ export default function PageConceptTRE() {
           </DListTitle>
           <DListItem>
             The position of this element relative to its parent,{' '}
-            <Bold>before hoisting</Bold> and{' '}
-            <Bold>after whitespace collapsing</Bold>.
+            <Bold>after hoisting and collapsing</Bold>.
           </DListItem>
           <DListTitle>
             <RefTRE name="TNodeShape" member="children" />
@@ -471,7 +470,8 @@ export default function PageConceptTRE() {
           Markers can also be derived from attributes. This is the case with{' '}
           <RefHtmlAttr name="dir" /> and <RefHtmlAttr name="lang" /> attributes.
           Finally, you can customize the markers extraction logic with{' '}
-          <RefRenderHtmlProp name="setMarkersForTNode" /> prop.
+          <RefRenderHtmlProp name="setMarkersForTNode" /> prop and the eponym
+          HTML model field.
         </Paragraph>
       </Chapter>
     </Page>
