@@ -50,7 +50,7 @@
     "@svgr/webpack": "5.5.0",
     "@svgr/babel-preset": "5.5.0",
     "@svgr/core": "5.5.0",
-    "@svgr/hast-util-to-babel-ast": "5.5.0",
+    "@svgr/hast-util-to-babel-ast": "https://github.com/Droppers/hast-util-to-babel-ast.git",
     "@svgr/plugin-svgo": "5.5.0"
   },
   "workspaces": [

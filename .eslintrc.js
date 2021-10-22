@@ -7,7 +7,7 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
-  ignorePatterns: ['lib/', 'types/'],
+  ignorePatterns: ['lib/', 'types/', '*.js'],
   rules: {
     'comma-dangle': ['error', 'never'],
     'no-eval': 'off',

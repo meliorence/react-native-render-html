@@ -1,7 +1,6 @@
 const fs = require('fs/promises');
 const path = require('path');
 const { extendDefaultPlugins, optimize } = require('svgo');
-const processSvgWithInkscape = require('./processSvgWithInkscape.js');
 
 const sourceDir = 'assets/doc/svg';
 const targetDemoDir = 'apps/discovery/assets/svg';
@@ -27,8 +26,7 @@ const configPluginsFirstPass = extendDefaultPlugins([
 async function optimizeSvgFile(assetName) {
   const sourceFile = path.join(sourceDir, assetName);
   const svg = await fs.readFile(sourceFile);
-  const inkscapeSvg = await processSvgWithInkscape(svg);
-  const resultPass1 = optimize(inkscapeSvg, {
+  const resultPass1 = optimize(svg, {
     multipass: true,
     plugins: configPluginsFirstPass
   });

@@ -5096,12 +5096,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@svgr/hast-util-to-babel-ast@npm:5.5.0":
+"@svgr/hast-util-to-babel-ast@https://github.com/Droppers/hast-util-to-babel-ast.git":
   version: 5.5.0
-  resolution: "@svgr/hast-util-to-babel-ast@npm:5.5.0"
+  resolution: "@svgr/hast-util-to-babel-ast@https://github.com/Droppers/hast-util-to-babel-ast.git#commit=29729bd53973ea51eb86a8fcc1ddc1651ce51013"
   dependencies:
     "@babel/types": ^7.12.6
-  checksum: a03c1c7ab92b1a6dbd7671b0b78df4c07e8d808ff092671554a78752ec0c0425c03b6c82569a5f33903d191c73379eedf631f23aeb30b7a70185f5f2fc67fae6
+    entities: ^2.2.0
+  checksum: 34ae091ab7260208dec4ee13ce75517b9939b50b788dfd9801a2ed4c284f8d562da10c438bb2e6c12422b58199e78070d4e032013b6b6cc5315cf919aab3cab6
   languageName: node
   linkType: hard
 
@@ -10330,7 +10331,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"entities@npm:^2.0.0":
+"entities@npm:^2.0.0, entities@npm:^2.2.0":
   version: 2.2.0
   resolution: "entities@npm:2.2.0"
   checksum: 19010dacaf0912c895ea262b4f6128574f9ccf8d4b3b65c7e8334ad0079b3706376360e28d8843ff50a78aabcb8f08f0a32dbfacdc77e47ed77ca08b713669b3
