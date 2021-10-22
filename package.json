@@ -19,7 +19,7 @@
     "build:tools": "yarn @doc/pages build && yarn @doc/mdx-gen-cli build && yarn doc-docusaurus-rfg-plugin build",
     "build:docs": "yarn build:tools && yarn website build-docs",
     "process-svg-assets": "node scripts/processSvgAssets.js",
-    "postinstall": "husky install",
+    "postinstall": "yarn process-svg-assets",
     "publish:website": "yarn build:docs && GIT_USER=$USER USE_SSH=true yarn workspace website deploy",
     "publish:discovery": "yarn workspace discovery publish"
   },

@@ -9,7 +9,8 @@
     "publish": "expo publish",
     "test": "jest --watchAll",
     "test:ts": "tsc --noEmit",
-    "test:lint": "eslint --ext ts,tsx src/"
+    "test:lint": "eslint --ext ts,tsx src/",
+    "postinstall": "cd ../.. && yarn install"
   },
   "jest": {
     "preset": "jest-expo"
