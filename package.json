@@ -42,16 +42,17 @@
     "svgo": "^2.3.0"
   },
   "resolutions": {
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
     "@mdx-js/react": "2.0.0-next.9",
-    "react-native": "patch:react-native@https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz#patches/react-native.patch",
-    "react-native-webview": "11.6.2",
+    "react-native": "0.64.2",
+    "react-native-webview": "11.13.0",
     "@svgr/webpack": "5.5.0",
     "@svgr/babel-preset": "5.5.0",
     "@svgr/core": "5.5.0",
     "@svgr/hast-util-to-babel-ast": "https://github.com/Droppers/hast-util-to-babel-ast.git",
-    "@svgr/plugin-svgo": "5.5.0"
+    "@svgr/plugin-svgo": "5.5.0",
+    "expo-linear-gradient": "10.0.3"
   },
   "workspaces": [
     "packages/*",
