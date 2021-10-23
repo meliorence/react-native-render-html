@@ -10,7 +10,6 @@ import type {
 } from 'react-native';
 import type {
   CSSPropertyNameList,
-  CustomElementModel,
   Document,
   DocumentContext as TREDocumentContext,
   DomVisitorCallbacks,
@@ -44,8 +43,7 @@ import type { ParserOptions as HtmlParserOptions } from 'htmlparser2';
  */
 export type HTMLElementModelRecord = Record<
   string,
-  | CustomElementModel<string, HTMLContentModel>
-  | HTMLElementModel<string, HTMLContentModel>
+  HTMLElementModel<string, HTMLContentModel>
 >;
 
 /**
