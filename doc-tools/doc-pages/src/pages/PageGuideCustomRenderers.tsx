@@ -113,6 +113,19 @@ export default function PageGuideCustomRenderers() {
             We <Bold>may</Bold> register a custom component renderer, but this
             is not mandatory (see next chapter).
           </Admonition>
+          <Paragraph>
+            For a more detailed explanation of the allowed parameters for the
+            <RefRenderHTMLExport
+              name="HTMLElementModel"
+              member="fromCustomModel"
+            />
+            static method, see{' '}
+            <RefDoc
+              target="transient-render-engine"
+              fragment="htmlelementmodel"
+            />
+            .
+          </Paragraph>
           <RenderHtmlCard {...bluecircleConfig} />
         </Section>
         <Section title="Example: Displaying Inline Images">

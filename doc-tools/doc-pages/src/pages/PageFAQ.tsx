@@ -233,9 +233,9 @@ export default function PageFAQ() {
             lang="html"
             showLineNumbers={false}
             content={`<p>
-            Unfortunately,
-            <a href="https://domain.com">this hyperlink is not accessible</a>
-          </p>`}
+  Unfortunately,
+  <a href="https://domain.com">this hyperlink is not accessible</a>
+</p>`}
           />
           <Paragraph>
             Luke Walczak from Callstack{' '}

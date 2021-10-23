@@ -95,9 +95,14 @@ export default function PageConceptTRE() {
           </List>
           <Paragraph>
             You will have to register custom and extended models with the{' '}
-            <RefRenderHtmlProp name="customHTMLElementModels" /> prop. Below is
-            a list of fields that can be set when defining or extending HTML
-            element models:
+            <RefRenderHtmlProp name="customHTMLElementModels" /> prop, please
+            refer to{' '}
+            <RefDoc
+              target="custom-renderers"
+              fragment="model-based-custom-rendering"
+            />{' '}
+            for examples. Below is a list of fields that can be set when
+            defining or extending HTML element models:
           </Paragraph>
           <DList>
             <DListTitle>
