@@ -1,1 +1,0 @@
-(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[3766],{6750:function(e){"use strict";e.exports=JSON.parse('{"allTagsPath":"/react-native-render-html/blog/tags","slug":"foundry","name":"foundry","count":4,"permalink":"/react-native-render-html/blog/tags/foundry"}')}}]);

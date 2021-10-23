@@ -1,1 +1,0 @@
-(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[5445],{440:function(e){"use strict";e.exports=JSON.parse('{"allTagsPath":"/react-native-render-html/blog/tags","slug":"announcement","name":"announcement","count":1,"permalink":"/react-native-render-html/blog/tags/announcement"}')}}]);

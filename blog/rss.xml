@@ -4,10 +4,17 @@
         <title>React Native Render HTML Official Blog</title>
         <link>https://meliorence.github.io/react-native-render-html/blog</link>
         <description>React Native Render HTML Blog</description>
-        <lastBuildDate>Tue, 29 Jun 2021 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 23 Oct 2021 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <copyright>Copyright © 2021 Meliorence, Inc. and Jules Sam. Randolph</copyright>
+        <item>
+            <title><![CDATA[What's New in v6.2?]]></title>
+            <link>https://meliorence.github.io/react-native-render-html/blog/2021/10/23/6-2-updates</link>
+            <guid>What's New in v6.2?</guid>
+            <pubDate>Sat, 23 Oct 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[A version focused on accessibility and enhanced model rendering.]]></description>
+        </item>
         <item>
             <title><![CDATA[Create A WebView-free Blog App with React Native Render HTML, Part III]]></title>
             <link>https://meliorence.github.io/react-native-render-html/blog/2021/06/29/create-blog-app-rnrh-III</link>
