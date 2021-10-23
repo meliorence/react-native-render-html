@@ -1,55 +1,28 @@
-# [6.2.0-alpha.3](https://github.com/meliorence/react-native-render-html/compare/v6.2.0-alpha.2...v6.2.0-alpha.3) (2021-10-20)
-
-
-### Bug Fixes
-
-* pass `borderless` prop to custom `GenericPressable` ([f06af7a](https://github.com/meliorence/react-native-render-html/commit/f06af7a54294275bbaff21baeacdba56fa8bc3c4))
-* select `onPress` according to announced merging specifications ([8a88457](https://github.com/meliorence/react-native-render-html/commit/8a8845734887b07c0a8c2ebd573eaf5fcb9d9f23))
-
-
-### Features
-
-* allow `HTMLElementModel.extend` to take a merge function ([9b3a007](https://github.com/meliorence/react-native-render-html/commit/9b3a007cf984c477d851000ac6812f5a91b17a89))
-* support `onPress` from element models native props ([7dc5577](https://github.com/meliorence/react-native-render-html/commit/7dc5577405f09e577808172ec4aa4d99c913f5c7))
-
-# [6.2.0-alpha.2](https://github.com/meliorence/react-native-render-html/compare/v6.2.0-alpha.1...v6.2.0-alpha.2) (2021-10-13)
-
-
-### Bug Fixes
-
-* never assume the definition of `__DEV__` in the global scope ([f9bb9e9](https://github.com/meliorence/react-native-render-html/commit/f9bb9e969ad6b169ee60940daf1409630589f548))
-
-# [6.2.0-alpha.1](https://github.com/meliorence/react-native-render-html/compare/v6.2.0-alpha.0...v6.2.0-alpha.1) (2021-09-11)
-
-
-### Bug Fixes
-
-* **a11y:** anchors should not be set with a11y role "link" when empty href ([dd988fc](https://github.com/meliorence/react-native-render-html/commit/dd988fcc9c9f03aecb1bc20f904cf19e0c5f6ff6))
-* **a11y:** set accessibilityLabel for headings (h1..h6) to bypass RN limitation ([bc37d88](https://github.com/meliorence/react-native-render-html/commit/bc37d888144ebf0e9206a85c70dfb94551670a75))
-
-
-### Features
-
-* new `getNativePropsForTnode` util method ([d983d0d](https://github.com/meliorence/react-native-render-html/commit/d983d0d768580307f41d38b70bda06e70122b970))
-* **a11y:** custom renderers passed `onPress` prop now have a11y roles ([11723f0](https://github.com/meliorence/react-native-render-html/commit/11723f0b841fa72a739e75b2c7576231e6ad7662))
-* **a11y:** support aria-role="search" and aria-role="presentation" attributes ([c552fe4](https://github.com/meliorence/react-native-render-html/commit/c552fe46667c06ff65312f2c273c0b94f930916d))
-
-# [6.2.0-alpha.0](https://github.com/meliorence/react-native-render-html/compare/v6.1.0...v6.2.0-alpha.0) (2021-09-05)
+# [6.2.0](https://github.com/meliorence/react-native-render-html/compare/v6.1.0...v6.2.0) (2021-10-23)
 
 This release is focused on accessibility! Moreover, it empowers [model-based custom rendering](https://meliorence.github.io/react-native-render-html/docs/guides/custom-renderers#model-based-custom-rendering) which can now define props passed to `Text` and `View` elements of renderers.
 
 ### Bug Fixes
 
+* inaccurate typing for HTMLElementModelRecord ([bd5dfa6](https://github.com/meliorence/react-native-render-html/commit/bd5dfa6f5a6b403c99045720f175e64d884f4742))
+* pass `borderless` prop to custom `GenericPressable` ([f06af7a](https://github.com/meliorence/react-native-render-html/commit/f06af7a54294275bbaff21baeacdba56fa8bc3c4))
+* never assume the definition of `__DEV__` in the global scope ([f9bb9e9](https://github.com/meliorence/react-native-render-html/commit/f9bb9e969ad6b169ee60940daf1409630589f548))
+* **a11y:** anchors should not be set with a11y role "link" when empty href ([dd988fc](https://github.com/meliorence/react-native-render-html/commit/dd988fcc9c9f03aecb1bc20f904cf19e0c5f6ff6))
 * **a11y:** anchors are not accessible anymore when `href` is empty or absent ([4e1f2f4](https://github.com/meliorence/react-native-render-html/commit/4e1f2f4b6b46186b564a7ccbf53fecf0877795e0))
 
 ### Features
 
-* **a11y:** support `aria-label` and `aria-role` HTML attributes ([2b27f00](https://github.com/meliorence/react-native-render-html/commit/2b27f00c118eae76dec21f0f9cc2af20c9cd6747))
-* **a11y:** whatwg-compliant accessibility for images ([7fc2907](https://github.com/meliorence/react-native-render-html/commit/7fc2907e38b37398314eadc9ec0200092c4a2304))
+* new `getNativePropsForTnode` util method ([d983d0d](https://github.com/meliorence/react-native-render-html/commit/d983d0d768580307f41d38b70bda06e70122b970))
 * **css:** support `user-select` CSS property ([8442b2f](https://github.com/meliorence/react-native-render-html/commit/8442b2fa655a1332035beca99a7fbbdc1d483ec4))
+* **a11y:** support `aria-label` and `aria-role` HTML attributes ([2b27f00](https://github.com/meliorence/react-native-render-html/commit/2b27f00c118eae76dec21f0f9cc2af20c9cd6747))
 * **a11y:** add accessibilityRole="header" to headings elements (h1...h6) ([1c79bc3](https://github.com/meliorence/react-native-render-html/commit/1c79bc35146f311468d9a69165e813151e2603e1))
 * new `reactNativeProps` and `getReactNativeProps` in `HTMLElementModel`, this little change gives model-based custom rendering considerably more leverage. ([4ee1646](https://github.com/meliorence/react-native-render-html/commit/4ee1646b26f8c9e3ea1cd45527f7228dd4a9892b))
 * deprecate `getUADerivedStyleFromAttributes` in favor of `getMixedUAStyles` in `HTMLElementModel`, which allows access to the underlying `TNode` and again empowers model-based custom rendering.
+* **a11y:** whatwg-compliant accessibility for images ([7fc2907](https://github.com/meliorence/react-native-render-html/commit/7fc2907e38b37398314eadc9ec0200092c4a2304))
+* **a11y:** custom renderers passed `onPress` prop now have a11y roles ([11723f0](https://github.com/meliorence/react-native-render-html/commit/11723f0b841fa72a739e75b2c7576231e6ad7662))
+* **a11y:** support aria-role="search" and aria-role="presentation" attributes ([c552fe4](https://github.com/meliorence/react-native-render-html/commit/c552fe46667c06ff65312f2c273c0b94f930916d))
+* allow `HTMLElementModel.extend` to take a merge function ([9b3a007](https://github.com/meliorence/react-native-render-html/commit/9b3a007cf984c477d851000ac6812f5a91b17a89))
+* support `onPress` from element models native props ([7dc5577](https://github.com/meliorence/react-native-render-html/commit/7dc5577405f09e577808172ec4aa4d99c913f5c7))
 
 # [6.1.0](https://github.com/meliorence/react-native-render-html/compare/v6.0.5...v6.1.0) (2021-08-29)
 
