@@ -1103,6 +1103,11 @@ export interface RendererBaseProps<T extends TNode>
 export interface TDefaultRendererProps<T extends TNode>
   extends RendererBaseProps<T> {
   /**
+   * A component to render children of a `tnode`.
+   */
+  TNodeChildrenRenderer: ComponentType<TNodeChildrenRendererProps>;
+
+  /**
    * When children is present, renderChildren will not be invoked.
    */
   children?: ReactNode;
@@ -1134,6 +1139,11 @@ export interface InternalRendererProps<T extends TNode>
    * Default renderer for this {@link TNode}.
    */
   TDefaultRenderer: TDefaultRenderer<T>;
+
+  /**
+   * A component to render children of a `tnode`.
+   */
+  TNodeChildrenRenderer: ComponentType<TNodeChildrenRendererProps>;
 
   /**
    * Props shared across the whole render tree.
