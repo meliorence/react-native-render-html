@@ -13,6 +13,7 @@ draft: false
 
 import APIReference from '@site/src/components/APIReference';
 import Reference from '@site/src/components/Reference';
+import SocialLinks from '@site/src/components/SocialLinks';
 
 It has been over three months since the first final version of the Foundry
 release has been made public. Today, I am glad to announce the release of the 6.2 version! This new version focuses on two areas of
@@ -267,7 +268,9 @@ import RenderHTML, { defaultHTMLElementModels } from 'react-native-render-html';
 const customHTMLElementModels = {
   a: defaultHTMLElementModels.a.extend((aModel) => ({
     reactNativeProps: {
+      ...aModel.reactNativeProps,
       native: {
+        ...aModel.reactNativeProps?.native,
         accessibilityHint: 'Open in your system web browser.'
       }
     }
@@ -426,3 +429,6 @@ of those bugs.
 ## Learn More
 
 Check out [the release notes in the official repository](https://github.com/meliorence/react-native-render-html/releases/tag/v6.2.0).
+Moreover, if you encounter any issue while upgrading from a lower minor (6.0.x, 6.1.x), you are welcome to [comment this Github issue](https://github.com/meliorence/react-native-render-html/issues/526)!
+
+<SocialLinks twitterUrl="https://twitter.com/jsamrn/status/1452137777508667397" redditUrl="https://www.reddit.com/r/reactnative/comments/qe9pam/checkout_whats_new_in_react_native_render_html_v62/" />
