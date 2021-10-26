@@ -23,7 +23,7 @@ describe('RenderHTML a11y', () => {
           const element = (
             <RenderHTML
               source={{
-                html: `<a href="https://domain.com">test</a>`
+                html: snippet
               }}
               debug={false}
               contentWidth={0}
