@@ -94,7 +94,7 @@ for those who are coming from v5 and below.
 | Minor | Branch                                                                                   | Documentation                                                                                              | Latest                                                                         |
 | ----- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | next  | master                                                                                   | -                                                                                                          | [![npm](https://img.shields.io/npm/v/react-native-render-html/next)](#)        |
-| 6.1   | [release/6.1](https://github.com/meliorence/react-native-render-html/tree/release/6.1)   | [Official Website](https://meliorence.github.io/react-native-render-html/)                                 | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/6.1)](#) |
+| 6.2   | [release/6.2](https://github.com/meliorence/react-native-render-html/tree/release/6.2)   | [Official Website](https://meliorence.github.io/react-native-render-html/)                                 | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/6.2)](#) |
 | 5.1   | [release/5.1](https://github.com/meliorence/react-native-render-html/tree/release/5.1)   | [release/5.1/README.md](https://github.com/meliorence/react-native-render-html/blob/release/5.1/README.md) | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/5.1)](#) |
 | 4.2   | [release/4.2](https://github.com/meliorence/react-native-render-html/tree/release/4.2)   | [release/4.2/README.md](https://github.com/meliorence/react-native-render-html/blob/release/4.2/README.md) | [![npm](https://img.shields.io/npm/v/react-native-render-html/release/4.2)](#) |
 
@@ -108,6 +108,31 @@ npm install react-native-render-html
 
 ```bash
 yarn add react-native-render-html
+```
+
+## :speedboat: Basic Usage
+
+```jsx
+import React from 'react';
+import { useWindowDimensions } from 'react-native';
+import RenderHtml from 'react-native-render-html';
+
+const source = {
+  html: `
+<p style='text-align:center;'>
+  Hello World!
+</p>`
+};
+
+export default function App() {
+  const { width } = useWindowDimensions();
+  return (
+    <RenderHtml
+      contentWidth={width}
+      source={source}
+    />
+  );
+}
 ```
 
 ## :blue_book: Documentation
