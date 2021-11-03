@@ -1,13 +1,16 @@
 import { useMemo } from 'react';
+import { ImageStyle } from 'react-native';
 import { ImageDimensions } from '../shared-types';
-import { UseIMGElementStateProps } from './img-types';
-import useImageNaturalDimensions from './useImageNaturalDimensions';
+import {
+  IncompleteImageDimensions,
+  UseIMGElementStateProps
+} from './img-types';
 
-export type ConcreteDimensionsProps = Pick<
-  ReturnType<typeof useImageNaturalDimensions>,
-  'flatStyle' | 'naturalDimensions' | 'specifiedDimensions'
-> &
-  Pick<UseIMGElementStateProps, 'computeMaxWidth' | 'contentWidth'>;
+export type ConcreteDimensionsProps = {
+  flatStyle: ImageStyle;
+  naturalDimensions: ImageDimensions | null;
+  specifiedDimensions: IncompleteImageDimensions;
+} & Pick<UseIMGElementStateProps, 'computeMaxWidth' | 'contentWidth'>;
 
 function extractHorizontalSpace({
   marginHorizontal,

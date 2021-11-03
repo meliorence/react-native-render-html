@@ -1,21 +1,23 @@
 import { useMemo, useRef } from 'react';
 import { useSharedProps } from '../context/SharedPropsProvider';
-import { ImageDimensions } from '../shared-types';
-import { UseIMGElementStateProps } from './img-types';
+import {
+  IncompleteImageDimensions,
+  UseIMGElementStateProps
+} from './img-types';
 
 export default function useIMGNormalizedSource({
   source,
-  concreteDimensions
+  specifiedDimensions
 }: Pick<UseIMGElementStateProps, 'source'> & {
-  concreteDimensions: ImageDimensions | null;
+  specifiedDimensions: IncompleteImageDimensions;
 }) {
-  const cachedDimensions = useRef(concreteDimensions);
+  const cachedDimensions = useRef(specifiedDimensions);
   const { provideEmbeddedHeaders } = useSharedProps();
   return useMemo(() => {
     if (source.uri && typeof provideEmbeddedHeaders === 'function') {
       const headers = provideEmbeddedHeaders(source.uri, 'img', {
-        printWidth: cachedDimensions.current?.width,
-        printHeight: cachedDimensions.current?.height
+        printWidth: cachedDimensions.current?.width || undefined,
+        printHeight: cachedDimensions.current?.height || undefined
       });
       if (headers) {
         return {

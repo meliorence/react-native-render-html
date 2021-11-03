@@ -154,3 +154,11 @@ export interface IMGElementStateError extends IMGElementStateBase {
   error: Error;
   type: 'error';
 }
+
+/**
+ * Partial image dimensions.
+ */
+export interface IncompleteImageDimensions {
+  height: number | null;
+  width: number | null;
+}

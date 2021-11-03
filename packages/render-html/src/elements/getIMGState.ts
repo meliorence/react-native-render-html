@@ -14,7 +14,7 @@ interface GetStateProps<C> extends Omit<IMGElementStateBase, 'dimensions'> {
   error: Error | null;
   initialDimensions: ImageDimensions;
   objectFit: UseIMGElementStateProps['objectFit'];
-  onError: (e: Error) => void;
+  onError?: (e: Error) => void;
 }
 
 export function getIMGState(

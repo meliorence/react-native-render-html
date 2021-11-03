@@ -856,7 +856,9 @@ describe('RenderHTML', () => {
       expect(image.props.source.headers).toBe(headers);
       expect(getSizeWithHeaders).toHaveBeenCalledWith(
         'https://custom.domain/',
-        headers
+        headers,
+        expect.anything(),
+        expect.anything()
       );
     });
   });

@@ -32,11 +32,11 @@ export class Image extends RNImage {
    * be extracted, it will use 640x360.
    */
   static getSizeWithHeaders(uri, headers, success, failure) {
-    getSizeWithHeaders(uri, headers, callback, failure);
+    getSizeWithHeaders(uri, headers, success, failure);
   }
 
-  static getSize(uri, callback, failure) {
-    getSizeWithHeaders(uri, undefined, callback, failure);
+  static getSize(uri, success, failure) {
+    getSizeWithHeaders(uri, undefined, success, failure);
   }
 }
 

@@ -1,12 +1,16 @@
-import { useEffect } from 'react';
-import { Image } from 'react-native';
-import type { UseIMGElementStateProps, IMGElementState } from './img-types';
-import useImageNaturalDimensions from './useImageNaturalDimensions';
-import useImageConcreteDimensions from './useImageConcreteDimensions';
+import { useEffect, useState } from 'react';
+import { Image, ImageURISource } from 'react-native';
+import {
+  UseIMGElementStateProps,
+  IMGElementState,
+  IncompleteImageDimensions
+} from './img-types';
 import defaultImageInitialDimensions from './defaultInitialImageDimensions';
-import { ImageDimensions } from '../shared-types';
-import { getIMGState } from './getIMGState';
 import useIMGNormalizedSource from './useIMGNormalizedSource';
+import { ImageDimensions } from '../shared-types';
+import useImageConcreteDimensions from './useImageConcreteDimensions';
+import { getIMGState } from './getIMGState';
+import useImageSpecifiedDimensions from './useImageSpecifiedDimensions';
 
 function getImageSizeAsync({
   uri,
@@ -26,16 +30,47 @@ function getImageSizeAsync({
   });
 }
 
-function useFetchedNaturalDimensions(props: UseIMGElementStateProps) {
+function useImageNaturalDimensions<P extends UseIMGElementStateProps>(props: {
+  cachedNaturalDimensions?: ImageDimensions;
+  source: ImageURISource;
+  specifiedDimensions: IncompleteImageDimensions;
+}) {
   const { source, cachedNaturalDimensions } = props;
-  const {
-    error,
-    flatStyle,
+  const [naturalDimensions, setNaturalDimensions] = useState<
+    P['cachedNaturalDimensions'] extends ImageDimensions
+      ? ImageDimensions
+      : ImageDimensions | null
+  >((cachedNaturalDimensions as any) || null);
+  const { width: cachedNaturalWidth, height: cachedNaturalHeight } =
+    cachedNaturalDimensions || {};
+  const [error, setError] = useState<null | Error>(null);
+  useEffect(
+    function resetOnURIChange() {
+      setNaturalDimensions(
+        (cachedNaturalWidth != null && cachedNaturalHeight != null
+          ? { width: cachedNaturalWidth, height: cachedNaturalHeight }
+          : null) as any
+      );
+      setError(null);
+    },
+    [cachedNaturalHeight, cachedNaturalWidth, source.uri]
+  );
+  return {
+    onNaturalDimensions: setNaturalDimensions,
+    onError: setError,
     naturalDimensions,
-    specifiedDimensions,
-    onError,
-    onNaturalDimensions
-  } = useImageNaturalDimensions(props);
+    error
+  };
+}
+
+function useFetchedNaturalDimensions(props: {
+  cachedNaturalDimensions?: ImageDimensions;
+  source: ImageURISource;
+  specifiedDimensions: IncompleteImageDimensions;
+}) {
+  const { source, cachedNaturalDimensions } = props;
+  const { error, naturalDimensions, onError, onNaturalDimensions } =
+    useImageNaturalDimensions(props);
   const hasCachedDimensions = !!cachedNaturalDimensions;
   useEffect(
     function fetchPhysicalDimensions() {
@@ -58,8 +93,6 @@ function useFetchedNaturalDimensions(props: UseIMGElementStateProps) {
     ]
   );
   return {
-    specifiedDimensions,
-    flatStyle,
     naturalDimensions,
     error,
     onError,
@@ -85,10 +118,19 @@ export default function useIMGElementState(
     contentWidth,
     computeMaxWidth,
     objectFit,
-    initialDimensions = defaultImageInitialDimensions
+    initialDimensions = defaultImageInitialDimensions,
+    cachedNaturalDimensions
   } = props;
-  const { naturalDimensions, specifiedDimensions, flatStyle, onError, error } =
-    useFetchedNaturalDimensions(props);
+  const { flatStyle, specifiedDimensions } = useImageSpecifiedDimensions(props);
+  const nomalizedSource = useIMGNormalizedSource({
+    specifiedDimensions,
+    source
+  });
+  const { naturalDimensions, onError, error } = useFetchedNaturalDimensions({
+    source: nomalizedSource,
+    specifiedDimensions,
+    cachedNaturalDimensions
+  });
   const concreteDimensions = useImageConcreteDimensions({
     flatStyle,
     naturalDimensions,
@@ -96,10 +138,7 @@ export default function useIMGElementState(
     computeMaxWidth,
     contentWidth
   });
-  const nomalizedSource = useIMGNormalizedSource({
-    concreteDimensions,
-    source
-  });
+
   return getIMGState({
     error,
     alt,

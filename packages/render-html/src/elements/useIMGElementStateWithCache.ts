@@ -6,7 +6,7 @@ import type {
   IMGElementStateSuccess
 } from './img-types';
 import useImageConcreteDimensions from './useImageConcreteDimensions';
-import useImageNaturalDimensions from './useImageNaturalDimensions';
+import useImageSpecifiedDimensions from './useImageSpecifiedDimensions';
 import useIMGNormalizedSource from './useIMGNormalizedSource';
 
 /**
@@ -24,28 +24,28 @@ export default function useIMGElementStateWithCache(
     contentWidth,
     computeMaxWidth,
     objectFit,
-    initialDimensions = defaultImageInitialDimensions
+    initialDimensions = defaultImageInitialDimensions,
+    cachedNaturalDimensions
   } = props;
-  const { naturalDimensions, specifiedDimensions, flatStyle, error, onError } =
-    useImageNaturalDimensions(props);
+  const { flatStyle, specifiedDimensions } = useImageSpecifiedDimensions(props);
+  const nomalizedSource = useIMGNormalizedSource({
+    specifiedDimensions,
+    source
+  });
   const concreteDimensions = useImageConcreteDimensions({
     flatStyle,
-    naturalDimensions,
+    naturalDimensions: cachedNaturalDimensions,
     specifiedDimensions,
     computeMaxWidth,
     contentWidth
   });
-  const nomalizedSource = useIMGNormalizedSource({
-    concreteDimensions,
-    source
-  });
+
   return getIMGState({
-    error,
+    error: null,
     concreteDimensions,
     containerStyle: flatStyle,
     initialDimensions,
     objectFit,
-    onError,
     source: nomalizedSource,
     alt,
     altColor

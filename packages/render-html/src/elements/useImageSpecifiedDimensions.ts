@@ -1,13 +1,10 @@
-import { useState, useMemo, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
-import { ImageDimensions } from '../shared-types';
+import { useMemo } from 'react';
+import {
+  UseIMGElementStateProps,
+  IncompleteImageDimensions
+} from './img-types';
 import getDimensionsWithAspectRatio from './getDimensionsWithAspectRatio';
-import { UseIMGElementStateProps } from './img-types';
-
-interface IncompleteImageDimensions {
-  height: number | null;
-  width: number | null;
-}
+import { StyleSheet } from 'react-native';
 
 function normalizeSize(
   dimension: string | number | null | undefined,
@@ -71,26 +68,12 @@ function deriveSpecifiedDimensionsFromProps({
   );
 }
 
-export default function useImageNaturalDimensions<
-  P extends UseIMGElementStateProps
->(props: P) {
-  const {
-    source,
-    contentWidth,
-    enableExperimentalPercentWidth,
-    width,
-    height,
-    style,
-    cachedNaturalDimensions
-  } = props;
-  const [naturalDimensions, setNaturalDimensions] = useState<
-    P['cachedNaturalDimensions'] extends ImageDimensions
-      ? ImageDimensions
-      : ImageDimensions | null
-  >((cachedNaturalDimensions as any) || null);
+export default function useImageSpecifiedDimensions(
+  props: UseIMGElementStateProps
+) {
+  const { contentWidth, enableExperimentalPercentWidth, style, width, height } =
+    props;
   const flatStyle = useMemo(() => StyleSheet.flatten(style) || {}, [style]);
-  const { width: cachedNaturalWidth, height: cachedNaturalHeight } =
-    cachedNaturalDimensions || {};
   const specifiedDimensions = useMemo(
     () =>
       deriveSpecifiedDimensionsFromProps({
@@ -102,24 +85,5 @@ export default function useImageNaturalDimensions<
       }),
     [contentWidth, enableExperimentalPercentWidth, flatStyle, height, width]
   );
-  const [error, setError] = useState<null | Error>(null);
-  useEffect(
-    function resetOnURIChange() {
-      setNaturalDimensions(
-        (cachedNaturalWidth != null && cachedNaturalHeight != null
-          ? { width: cachedNaturalWidth, height: cachedNaturalHeight }
-          : null) as any
-      );
-      setError(null);
-    },
-    [cachedNaturalHeight, cachedNaturalWidth, source.uri]
-  );
-  return {
-    onNaturalDimensions: setNaturalDimensions,
-    onError: setError,
-    naturalDimensions,
-    specifiedDimensions,
-    flatStyle,
-    error
-  };
+  return { flatStyle, specifiedDimensions };
 }
