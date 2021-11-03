@@ -1,3 +1,15 @@
+# [6.3.0](https://github.com/meliorence/react-native-render-html/compare/v6.2.0...v6.3.0) (2021-11-03)
+
+
+### Bug Fixes
+
+* `provideEmbeddedHeaders` results in failing fetch for img ([5488259](https://github.com/meliorence/react-native-render-html/commit/54882596c78a7f66aa5f1766820de646866f6bd8)), closes [#533](https://github.com/meliorence/react-native-render-html/issues/533)
+
+
+### Features
+
+* pass `TNodeChildrenRenderer` as a prop to custom renderers ([9dd2bf1](https://github.com/meliorence/react-native-render-html/commit/9dd2bf15de3e7f30858451a8daed5d3c0973a6e6))
+
 # [6.2.0](https://github.com/meliorence/react-native-render-html/compare/v6.1.0...v6.2.0) (2021-10-23)
 
 This release is focused on accessibility! Moreover, it empowers [model-based custom rendering](https://meliorence.github.io/react-native-render-html/docs/guides/custom-renderers#model-based-custom-rendering) which can now define props passed to `Text` and `View` elements of renderers.
