@@ -2,6 +2,25 @@ import { Image as RNImage } from 'react-native';
 
 export * from 'react-native';
 
+function getSizeWithHeaders(uri, headers, success, failure) {
+  setTimeout(() => {
+    let dimensions = [0, 0];
+    if (typeof uri === 'string') {
+      if (uri === 'error') {
+        failure?.apply(null, new Error('Could not fetch image dimensions'));
+        return;
+      }
+      const match = /(\d+)x(\d+)/gi.exec(uri);
+      if (!match) {
+        dimensions = [640, 360];
+      } else {
+        dimensions = [parseInt(match[1], 10), parseInt(match[2], 10)];
+      }
+    }
+    success.apply(null, dimensions);
+  }, 50);
+}
+
 export class Image extends RNImage {
   /**
    * This mock function will parse the uri to find a dimension pattern
@@ -13,26 +32,11 @@ export class Image extends RNImage {
    * be extracted, it will use 640x360.
    */
   static getSizeWithHeaders(uri, headers, success, failure) {
-    setTimeout(() => {
-      let dimensions = [0, 0];
-      if (typeof uri === 'string') {
-        if (uri === 'error') {
-          failure?.apply(null, new Error('Could not fetch image dimensions'));
-          return;
-        }
-        const match = /(\d+)x(\d+)/gi.exec(uri);
-        if (!match) {
-          dimensions = [640, 360];
-        } else {
-          dimensions = [parseInt(match[1], 10), parseInt(match[2], 10)];
-        }
-      }
-      success.apply(null, dimensions);
-    }, 50);
+    getSizeWithHeaders(uri, headers, callback, failure);
   }
 
   static getSize(uri, callback, failure) {
-    Image.getSizeWithHeaders(uri, undefined, callback, failure);
+    getSizeWithHeaders(uri, undefined, callback, failure);
   }
 }
 

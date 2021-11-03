@@ -836,6 +836,7 @@ describe('RenderHTML', () => {
       const headers = {
         Authorization: 'Bearer XXX'
       };
+      const getSizeWithHeaders = jest.spyOn(Image, 'getSizeWithHeaders');
       function provideEmbeddedHeaders(uri: string, tag: string) {
         expect(tag).toBe('img');
         return headers;
@@ -853,6 +854,10 @@ describe('RenderHTML', () => {
       await findByTestId('image-success');
       const image = UNSAFE_getByType(Image);
       expect(image.props.source.headers).toBe(headers);
+      expect(getSizeWithHeaders).toHaveBeenCalledWith(
+        'https://custom.domain/',
+        headers
+      );
     });
   });
   describe('regarding enableExperimentalBRCollapsing', () => {
