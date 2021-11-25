@@ -4157,9 +4157,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@native-html/transient-render-engine@npm:11.2.1":
-  version: 11.2.1
-  resolution: "@native-html/transient-render-engine@npm:11.2.1"
+"@native-html/transient-render-engine@npm:11.2.2":
+  version: 11.2.2
+  resolution: "@native-html/transient-render-engine@npm:11.2.2"
   dependencies:
     "@native-html/css-processor": 1.11.0
     "@types/ramda": ^0.27.44
@@ -4172,7 +4172,7 @@ __metadata:
   peerDependencies:
     "@types/react-native": "*"
     react-native: ^*
-  checksum: cb36d059e86a1bbf2848a0912134959487efc548b8ed35167a6e605c9abad8321f06bd4f09e2656e727e1704b666539d115fcb5849b7a2192342d6b88a563ea7
+  checksum: 3c9181dd4f8b25f0d7bd2f781cb7bd554910c914b440b092960c86cde826672bd0f77da9a1c2d80c9def290a4a3e74570cce12d0580eec10395116dcc2c13406
   languageName: node
   linkType: hard
 
@@ -19531,7 +19531,7 @@ fsevents@^1.2.7:
     "@jsamr/counter-style": ^2.0.1
     "@jsamr/react-native-li": ^2.3.0
     "@microsoft/api-extractor": ^7.14.0
-    "@native-html/transient-render-engine": 11.2.1
+    "@native-html/transient-render-engine": 11.2.2
     "@release-it/conventional-changelog": ^2.0.1
     "@testing-library/jest-native": ^4.0.2
     "@testing-library/react-hooks": ^7.0.0
