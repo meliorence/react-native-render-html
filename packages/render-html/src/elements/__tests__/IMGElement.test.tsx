@@ -313,10 +313,11 @@ describe('IMGElement', () => {
       const image = await findByTestId('image-success');
       expect(image).toBeTruthy();
       expect(image).toHaveStyle({
-        width: 640
+        width: 640,
+        height: 360
       });
     });
-    it('should support strings for width and height which can be parsed to floats', async () => {
+    it('should support strings for width and height which can be parsed to numbers', async () => {
       const source = { uri: 'http://via.placeholder.com/640x360' };
       const style = {
         width: '50'
@@ -340,7 +341,7 @@ describe('IMGElement', () => {
         const { findByTestId } = render(
           <HTMLImgElement
             enableExperimentalPercentWidth
-            contentWidth={250}
+            contentWidth={contentWidth}
             {...style}
             source={source}
           />
