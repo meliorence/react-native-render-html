@@ -1,3 +1,11 @@
+## [6.3.1](https://github.com/meliorence/react-native-render-html/compare/v6.3.0...v6.3.1) (2021-12-03)
+
+
+### Bug Fixes
+
+* bold style not applied to `<b>` tags ([7bd5045](https://github.com/meliorence/react-native-render-html/commit/7bd5045bd6458681e7e6d875cb89c9ee67f8c402)), closes [#539](https://github.com/meliorence/react-native-render-html/issues/539)
+* wrong prop reference in warning message ([e03b0ac](https://github.com/meliorence/react-native-render-html/commit/e03b0acda71ac305f983d252875e34f035d605c0)), closes [#541](https://github.com/meliorence/react-native-render-html/issues/541)
+
 # [6.3.0](https://github.com/meliorence/react-native-render-html/compare/v6.2.0...v6.3.0) (2021-11-03)
 
 
