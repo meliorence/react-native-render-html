@@ -26,7 +26,38 @@ yarn install
 
 Package sources are located in `packages/render-html`.
 
-== Build libraries
+
+== Scripts
+
+The project is using
+Yarn Berry's workspaces. There is an alias to work from
+`react-native-render-html` workspace:
+
+```
+yarn render-html
+```
+
+You can then run the following commands:
+
+[cols="1,1"]
+|===
+| Most significant scripts
+| Description
+
+| `yarn render-html test:jest --watch`
+| Launch jest test in watch mode
+
+| `yarn render-html test:ts`
+| Run Typescript typechecking
+
+| `yarn render-html test:lint`
+| Run linter
+
+| `yarn render-html build`
+| Transpile TS → ES
+|===
+
+== Demo app
 
 ```
 yarn build:tools
@@ -36,12 +67,6 @@ yarn render-html build
 From now-on, you should be able to try-out the demo app with
 ```
 yarn demo start
-```
-
-== Run tests
-
-```
-yarn render-html test:jest --watch
 ```
 
 == Documentation
