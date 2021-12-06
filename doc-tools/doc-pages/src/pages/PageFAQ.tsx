@@ -132,6 +132,21 @@ export default function PageFAQ() {
             </RefDoc>
             .
           </Paragraph>
+          <Paragraph>
+            Also note that <InlineCode>fontWeight</InlineCode> and{' '}
+            <InlineCode>fontStyle</InlineCode> typefaces modifiers, which might
+            be set by default for some tags such as <RefHtmlElement name="h1" />
+            , will cause the font to be missed on Android if you haven't
+            registered your font with typefaces, e.g. via{' '}
+            <Hyperlink url="https://developer.android.com/guide/topics/ui/look-and-feel/fonts-in-xml">
+              XML fonts
+            </Hyperlink>
+            . See{' '}
+            <Hyperlink url="https://stackoverflow.com/a/70247374/2779871">
+              this StackOverflow answer for a step-by-step guide
+            </Hyperlink>
+            .
+          </Paragraph>
         </Section>
         <Section title="Line breaks (<br>) seem to take up too much vertical space">
           <Paragraph>
