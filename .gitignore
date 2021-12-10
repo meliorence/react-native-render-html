@@ -32,6 +32,7 @@ local.properties
 #
 .vscode/*
 !.vscode/extensions.json
+!.vscode/ltex.dictionary.en-US.txt
 
 # node.js
 #
