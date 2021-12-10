@@ -30,7 +30,8 @@ local.properties
 
 # Vscode
 #
-.vscode
+.vscode/*
+!.vscode/extensions.json
 
 # node.js
 #
