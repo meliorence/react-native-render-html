@@ -141,7 +141,7 @@ See our [official website](https://meliorence.github.io/react-native-render-html
 
 ## :iphone: Example
 
-You like to learn by example? We have a tutorial from which the demo Gif has been extracted: [A WebView-free Blog App with React Native Render HTML](https://meliorence.github.io/react-native-render-html/blog/2021/06/27/create-blog-app-rnrh-I).
+You like to learn by example? We have a tutorial from which the demo GIF has been extracted: [A WebView-free Blog App with React Native Render HTML](https://meliorence.github.io/react-native-render-html/blog/2021/06/27/create-blog-app-rnrh-I).
 
 ## :notebook: Changelog
 

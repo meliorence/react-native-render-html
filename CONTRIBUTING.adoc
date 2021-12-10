@@ -21,7 +21,7 @@ this project! Your effort will be very much appreciated.
 == Opening Tickets
 
 After you've read the relevant sections of this document, you can open a ticket
-through Github here:
+through GitHub here:
 https://github.com/meliorence/react-native-render-html/issues/new/choose. Make
 sure you follow the appropriate template.
 
@@ -106,7 +106,7 @@ npm install "github:meliorence/react-native-render-html#master"
 === Proposing a Feature or Enhancement
 
 * Feature requests and enhancements **must** be submitted https://native-html.canny.io/features[in our Canny feature tracker].
-* You can, *in addition*, consider <<rfc,writing a RFC>> and offering it as a PR.
+* You can, *in addition*, consider <<rfc,writing an RFC>> and offering it as a PR.
 
 [TIP]
 You or your company need a feature? Consider https://github.com/sponsors/jsamr[sponsorship or consultancy] and it will be delivered ASAP.
@@ -119,7 +119,7 @@ willing to help. You're encouraged to start a
 https://github.blog/2019-02-14-introducing-draft-pull-requests/[Github draft]
 and we will be glad to help you build it and make it comply with our
 requirements. If you have any question or need advise regarding your
-contribution, you can also ping us in our our https://discord.gg/MwrZmBb[Discord
+contribution, you can also ping us in our https://discord.gg/MwrZmBb[Discord
 #contributing channel].
 
 === Bug Fixes
@@ -147,10 +147,10 @@ We recommend you use the
 https://github.blog/2019-02-14-introducing-draft-pull-requests/[draft Github option]
 when you start a Feature PR!
 
-If you PR provides new features, it means that the API of this library will
+If your PR provides new features, it means that the API of this library will
 likely change. You will be required to test the new
 feature.  Take a look at {rnrh-test-folder}[our test folder]. You are also advised to read our <<DEVELOPING.adoc#, developing guide>>. If you're lost, we will be glad to help you, either on
-discord or within the PR on Github.
+discord or within the PR on GitHub.
 
 
 [[rfc]]
@@ -159,13 +159,13 @@ discord or within the PR on Github.
 [NOTE]
 RFC are propositions for new methods, behaviors and other API capabilities, or
 the exploration of an algorithmic challenge that is specific to this library.
-These are not Internet Society's RFCs! We don't have a rich multi-stage process. A
+These are not Internet Society's RFCs! We don't have a rich multi-stage process. An
 RFC is either a draft, in discussion, or adopted (merged). We thereafter use
 versioning to polish and enhance those specifications.
 
 RFC purpose is to offer drafts for new ideas which goes relatively in depth
 regarding the issues, consequences and caveats of a peculiar feature. We don't
-have strict requirements, but the structure should loosely resembles the
+have strict requirements, but the structure should loosely resemble the
 following:
 
 1. Problem Frame (what is the context and which issues this enhancement or

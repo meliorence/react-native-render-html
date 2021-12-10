@@ -64,7 +64,7 @@ yarn build:tools
 yarn render-html build
 ```
 
-From now-on, you should be able to try-out the demo app with
+From now-on, you should be able to try out the demo app with
 ```
 yarn demo start
 ```

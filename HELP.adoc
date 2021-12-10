@@ -137,6 +137,6 @@ https://meliorence.github.io/react-native-render-html/docs/intro[read
 the docs].
 2. Read the https://meliorence.github.io/react-native-render-html/docs/faq[FAQ].
 3. If you still find difficult to use this feature, then we are lacking good
-documentation and we should fix it. Go to https://discord.gg/dbEMMJM[our
+documentation, and we should fix it. Go to https://discord.gg/dbEMMJM[our
 Discord #support channel] and we will help you out.
 --
