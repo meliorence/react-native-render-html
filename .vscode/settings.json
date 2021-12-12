@@ -1,0 +1,5 @@
+{
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "ltex.enabled": ["html", "markdown", "asciidoc"],
+    "ltex.language": "en-US",
+}
