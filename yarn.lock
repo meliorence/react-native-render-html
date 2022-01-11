@@ -4157,9 +4157,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@native-html/transient-render-engine@npm:11.2.2":
-  version: 11.2.2
-  resolution: "@native-html/transient-render-engine@npm:11.2.2"
+"@native-html/transient-render-engine@npm:11.2.3":
+  version: 11.2.3
+  resolution: "@native-html/transient-render-engine@npm:11.2.3"
   dependencies:
     "@native-html/css-processor": 1.11.0
     "@types/ramda": ^0.27.44
@@ -4168,11 +4168,11 @@ __metadata:
     domhandler: ^4.2.2
     domutils: ^2.8.0
     htmlparser2: ^7.1.2
-    ramda: ^0.27.1
+    ramda: ^0.27.2
   peerDependencies:
     "@types/react-native": "*"
     react-native: ^*
-  checksum: 3c9181dd4f8b25f0d7bd2f781cb7bd554910c914b440b092960c86cde826672bd0f77da9a1c2d80c9def290a4a3e74570cce12d0580eec10395116dcc2c13406
+  checksum: 13248216b19c07703fa5ff9942889ea7dc669d6fd9c944d3d5cf2757088c3e66a5b760f194ac0193ddbbb3f4556655fe10c6e4e5a5efd030da8ec1360b08a605
   languageName: node
   linkType: hard
 
@@ -19096,13 +19096,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"ramda@npm:^0.27.1":
-  version: 0.27.1
-  resolution: "ramda@npm:0.27.1"
-  checksum: 31a0c0ef739b2525d7615f84cbb5d3cb89ee0c795469b711f729ea1d8df0dccc3cd75d3717a1e9742d42315ce86435680b7c87743eb7618111c60c144a5b8059
-  languageName: node
-  linkType: hard
-
 "ramda@npm:^0.27.2":
   version: 0.27.2
   resolution: "ramda@npm:0.27.2"
@@ -19538,7 +19531,7 @@ fsevents@^1.2.7:
     "@jsamr/counter-style": ^2.0.1
     "@jsamr/react-native-li": ^2.3.0
     "@microsoft/api-extractor": ^7.14.0
-    "@native-html/transient-render-engine": 11.2.2
+    "@native-html/transient-render-engine": 11.2.3
     "@release-it/conventional-changelog": ^2.0.1
     "@testing-library/jest-native": ^4.0.2
     "@testing-library/react-hooks": ^7.0.0
