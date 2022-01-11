@@ -7122,7 +7122,7 @@ __metadata:
     expo: ^43.0.0
     expo-keep-awake: ~10.0.0
     expo-status-bar: ~1.1.0
-    ramda: ^0.27.1
+    ramda: ^0.27.2
     react: 17.0.1
     react-dom: 17.0.1
     react-native: 0.64.2
@@ -19103,6 +19103,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"ramda@npm:^0.27.2":
+  version: 0.27.2
+  resolution: "ramda@npm:0.27.2"
+  checksum: 28d6735dd1eea1a796c56cf6111f3673c6105bbd736e521cdd7826c46a18eeff337c2dba4668f6eed990d539b9961fd6db19aa46ccc1530ba67a396c0a9f580d
+  languageName: node
+  linkType: hard
+
 "randombytes@npm:^2.1.0":
   version: 2.1.0
   resolution: "randombytes@npm:2.1.0"
@@ -19548,7 +19555,7 @@ fsevents@^1.2.7:
     metro-react-native-babel-preset: ^0.66.0
     prettier: ^2.3.1
     prop-types: ^15.5.7
-    ramda: ^0.27.1
+    ramda: ^0.27.2
     react: 17.0.2
     react-native: ^0.64.0
     react-native-accessibility-engine: ^0.4.1

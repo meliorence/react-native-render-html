@@ -95,7 +95,7 @@
     "@types/ramda": "^0.27.40",
     "@types/urijs": "^1.19.15",
     "prop-types": "^15.5.7",
-    "ramda": "^0.27.1",
+    "ramda": "^0.27.2",
     "stringify-entities": "^3.1.0",
     "urijs": "^1.19.6"
   }
