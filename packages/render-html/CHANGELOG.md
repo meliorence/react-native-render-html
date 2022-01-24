@@ -1,3 +1,10 @@
+## [6.3.4](https://github.com/meliorence/react-native-render-html/compare/v6.3.3...v6.3.4) (2022-01-24)
+
+
+### Bug Fixes
+
+* link press on Android doesn't work ([1a429f4](https://github.com/meliorence/react-native-render-html/commit/1a429f4ef7d9677884cb914d5ee93183a7c4367d)), closes [#546](https://github.com/meliorence/react-native-render-html/issues/546)
+
 ## [6.3.3](https://github.com/meliorence/react-native-render-html/compare/v6.3.2...v6.3.3) (2022-01-11)
 
 ## [6.3.2](https://github.com/meliorence/react-native-render-html/compare/v6.3.1...v6.3.2) (2022-01-11)
