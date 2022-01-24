@@ -2,9 +2,12 @@ import { Linking } from 'react-native';
 import { RenderersProps } from '../shared-types';
 
 export async function defaultAOnPress(_e: any, href: string): Promise<unknown> {
-  if (await Linking.canOpenURL(href)) {
-    return Linking.openURL(href);
+  try {
+    await Linking.openURL(href);
+  } catch (e) {
+    console.warn(`Could not open URL "${href}".`, e);
   }
+  return null;
 }
 
 const defaultRendererProps: Required<RenderersProps> = {
