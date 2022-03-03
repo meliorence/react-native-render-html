@@ -19558,7 +19558,7 @@ fsevents@^1.2.7:
     release-it: 14.11.0-next.1
     stringify-entities: ^3.1.0
     typescript: 4.2.2
-    urijs: ^1.19.6
+    urijs: ^1.19.9
   peerDependencies:
     react: "*"
     react-native: "*"
@@ -23143,10 +23143,17 @@ typescript@~4.3.5:
   languageName: node
   linkType: hard
 
-"urijs@npm:*, urijs@npm:^1.19.6":
+"urijs@npm:*":
   version: 1.19.6
   resolution: "urijs@npm:1.19.6"
   checksum: 78b841e6f6a4abfad8c75e9e497fa5ea51527ea484cb24d3ac9f26338a57dcd41c10d14e11a94fe4699706350d2f03502a02ad712b3940fc6efe2178d9082f00
+  languageName: node
+  linkType: hard
+
+"urijs@npm:^1.19.9":
+  version: 1.19.9
+  resolution: "urijs@npm:1.19.9"
+  checksum: 9be08c5cf4fb822d6bb62652640fd42e09985a081a205c0d5bf7edc416ff3e4073c5780c4eae46ab9277f4112908b7f79fd5199659214a94df90c73b2033e3ce
   languageName: node
   linkType: hard
 
