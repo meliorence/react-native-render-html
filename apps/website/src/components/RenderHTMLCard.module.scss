@@ -71,7 +71,7 @@
   margin: var(--modal-inset);
   padding: 0;
   z-index: 1000;
-  width: calc(100vw - var(--modal-inset) * 2) - var(--scrollbar-width);
+  width: calc(calc(100vw - var(--modal-inset) * 2) - var(--scrollbar-width));
   height: calc(100vh - var(--modal-inset) * 2);
 }
 
