@@ -24,8 +24,8 @@
     "publish:discovery": "yarn workspace discovery publish"
   },
   "devDependencies": {
-    "@commitlint/cli": "^12.1.1",
-    "@commitlint/config-conventional": "^12.1.1",
+    "@commitlint/cli": "^16.2.1",
+    "@commitlint/config-conventional": "^16.2.1",
     "@react-native-community/eslint-config": "^3.0.0",
     "@tsconfig/react-native": "^1.0.3",
     "@typescript-eslint/eslint-plugin": "^4.29.2",
