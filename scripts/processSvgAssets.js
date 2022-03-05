@@ -1,27 +1,30 @@
 const fs = require('fs/promises');
 const path = require('path');
-const { extendDefaultPlugins, optimize } = require('svgo');
+const { optimize } = require('svgo');
 
 const sourceDir = 'assets/doc/svg';
 const targetDemoDir = 'apps/discovery/assets/svg';
 const targetWebsiteDir = 'apps/website/src/svg';
 
-const configPluginsFirstPass = extendDefaultPlugins([
-  { name: 'convertColors', active: true },
-  { name: 'minifyStyles', active: true },
+const configPluginsFirstPass = [
+  {
+    name: 'preset-default',
+  },
+  'convertColors',
+  'minifyStyles',
   {
     name: 'inlineStyles',
-    active: true,
     params: {
       onlyMatchedOnce: false
     }
   },
   {
     name: 'convertStyleToAttrs',
-    active: true,
-    params: {}
+    params: {
+      convertArcs: true
+    }
   }
-]);
+]
 
 async function optimizeSvgFile(assetName) {
   const sourceFile = path.join(sourceDir, assetName);

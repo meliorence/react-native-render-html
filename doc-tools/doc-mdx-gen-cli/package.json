@@ -14,18 +14,18 @@
     "@types/fbjs": "^3.0.2",
     "@types/react-reconciler": "^0.26.4",
     "commander": "^7.2.0",
-    "fbjs": "^3.0.0",
+    "fbjs": "^3.0.4",
     "html-entities": "^2.3.2",
     "react-reconciler": "^0.26.2"
   },
   "devDependencies": {
-    "@tsconfig/react-native": "^1.0.3",
+    "@tsconfig/react-native": "^1.0.4",
     "@types/react": "^17.0.39",
     "esbuild": "^0.14.25",
     "esbuild-plugin-alias": "^0.2.1",
-    "eslint": "^7.0.0",
+    "eslint": "^7.32.0",
     "react": "^17.0.2",
-    "react-native-web": "^0.16.3",
+    "react-native-web": "^0.17.7",
     "react-test-renderer": "17.0.2",
     "typescript": "4.2.2"
   }

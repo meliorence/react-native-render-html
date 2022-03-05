@@ -5,7 +5,6 @@ import {
   TBlock
 } from '@native-html/transient-render-engine';
 import { render } from '@testing-library/react-native';
-import AccessibilityEngine from 'react-native-accessibility-engine';
 import RenderHTML from '../RenderHTML';
 import { CustomRendererProps } from '../shared-types';
 
@@ -33,7 +32,7 @@ describe('RenderHTML a11y', () => {
           const anchor = getByTestId('a');
           expect(anchor).toHaveProp('accessibilityRole', 'link');
           expect(anchor).toHaveProp('accessible', true);
-          expect(() => AccessibilityEngine.check(element)).not.toThrow();
+          expect(element).toBeAccessible();
         });
       }
     });
@@ -51,7 +50,7 @@ describe('RenderHTML a11y', () => {
       const anchor = getByTestId('a');
       expect(anchor).not.toHaveProp('accessibilityRole');
       expect(anchor).not.toHaveProp('accessible');
-      expect(() => AccessibilityEngine.check(element)).not.toThrow();
+      expect(element).toBeAccessible();
     });
   });
   describe('regarding headings', () => {
@@ -68,7 +67,7 @@ describe('RenderHTML a11y', () => {
         );
         const { getByTestId } = render(element);
         expect(getByTestId(header)).toHaveProp('accessibilityRole', 'header');
-        expect(() => AccessibilityEngine.check(element)).not.toThrow();
+        expect(element).toBeAccessible();
       }
     });
   });
@@ -146,13 +145,13 @@ describe('RenderHTML a11y', () => {
       const { getByA11yRole } = render(element);
       const button = getByA11yRole('button');
       expect(button).toHaveProp('accessibilityRole', 'button');
-      expect(() => AccessibilityEngine.check(element)).not.toThrow();
+      expect(element).toBeAccessible();
     });
     it('should add a button role if onPress is defined for custom renderers with a textual content model', () => {
       const element = (
         <RenderHTML
           source={{
-            html: '<span><customlink aria-label="Click me!"></customlink></span>'
+            html: '<span><customlink aria-label="Click me!">Foo</customlink></span>'
           }}
           customHTMLElementModels={{
             ...defaultHTMLElementModels,
@@ -173,7 +172,7 @@ describe('RenderHTML a11y', () => {
       const { getByA11yRole } = render(element);
       const button = getByA11yRole('link');
       expect(button).toHaveProp('accessibilityRole', 'link');
-      expect(() => AccessibilityEngine.check(element)).not.toThrow();
+      expect(element).toBeAccessible();
     });
   });
 });

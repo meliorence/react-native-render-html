@@ -25,7 +25,7 @@
     "docusaurus-plugin-sass": "^0.2.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-modal": "^3.13.1"
+    "react-modal": "^3.14.4"
   },
   "browserslist": {
     "production": [
@@ -44,7 +44,7 @@
     "@doc/pages": "workspace:*",
     "@doc/svgr-conf": "workspace:*",
     "@docusaurus/module-type-aliases": "2.0.0-beta.759298296",
-    "@tsconfig/docusaurus": "^1.0.2",
+    "@tsconfig/docusaurus": "^1.0.4",
     "@types/react": "^17.0.39",
     "@types/react-helmet": "^6.1.5",
     "@types/react-modal": "^3.13.1",
@@ -52,7 +52,7 @@
     "doc-docusaurus-rfg-plugin": "workspace:*",
     "doc-docusaurus-typedoc-plugin": "workspace:*",
     "sass": "^1.49.9",
-    "typedoc": "^0.20.36",
+    "typedoc": "^0.20.37",
     "typescript": "4.2.2"
   }
 }
