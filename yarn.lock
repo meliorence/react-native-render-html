@@ -10256,8 +10256,8 @@ __metadata:
     scheduler: ^0.20.2
     typescript: ~4.3.5
     urijs: "*"
-    use-context-selector: ^1.3.7
-    zustand: ^3.4.2
+    use-context-selector: ^1.3.9
+    zustand: ^3.7.1
   languageName: unknown
   linkType: soft
 
@@ -13316,6 +13316,13 @@ fsevents@^1.2.7:
   version: 8.0.1
   resolution: "immer@npm:8.0.1"
   checksum: 63d875c04882b862481a0a692816e5982975a47a57619698bc1bb52963ad3b624911991708b2b81a7af6fdac15083d408e43932d83a6a61216e5a4503efd4095
+  languageName: node
+  linkType: hard
+
+"immutable@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "immutable@npm:4.0.0"
+  checksum: 4b5e9181e4d5fa06728a481835ec09c86367e5d03268666c95b522b7644ab891098022e4479a43c4c81a68f2ed82f10751ce5d33e208d7b873b6e7f9dfaf4d87
   languageName: node
   linkType: hard
 
@@ -20955,14 +20962,16 @@ resolve@~1.19.0:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.32.13":
-  version: 1.35.1
-  resolution: "sass@npm:1.35.1"
+"sass@npm:^1.49.9":
+  version: 1.49.9
+  resolution: "sass@npm:1.49.9"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
+    immutable: ^4.0.0
+    source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: f49e738d637971f5985ab07aeda79629a9b555cca5e414ae2750b90bc9ce94703beada7f8cb5cbf972942e4c6ea941457846846618f2c6a8cd138087ee0502b2
+  checksum: e5653e3499274c5127dcb5c9e7c5f6930378fc61764d999a5d8965782e027181ed09714f94836dec74ef55e3a858107fe6c571954c0cab0ad0be5ab8e586829c
   languageName: node
   linkType: hard
 
@@ -21556,6 +21565,13 @@ resolve@~1.19.0:
   version: 2.0.1
   resolution: "source-list-map@npm:2.0.1"
   checksum: 806efc6f75e7cd31e4815e7a3aaf75a45c704871ea4075cb2eb49882c6fca28998f44fc5ac91adb6de03b2882ee6fb02f951fdc85e6a22b338c32bfe19557938
+  languageName: node
+  linkType: hard
+
+"source-map-js@npm:>=0.6.2 <2.0.0":
+  version: 1.0.2
+  resolution: "source-map-js@npm:1.0.2"
+  checksum: c049a7fc4deb9a7e9b481ae3d424cc793cb4845daa690bc5a05d428bf41bf231ced49b4cf0c9e77f9d42fdb3d20d6187619fc586605f5eabe995a316da8d377c
   languageName: node
   linkType: hard
 
@@ -23436,9 +23452,9 @@ typescript@~4.3.5:
   languageName: node
   linkType: hard
 
-"use-context-selector@npm:^1.3.7":
-  version: 1.3.7
-  resolution: "use-context-selector@npm:1.3.7"
+"use-context-selector@npm:^1.3.9":
+  version: 1.3.9
+  resolution: "use-context-selector@npm:1.3.9"
   peerDependencies:
     react: ">=16.8.0"
     react-dom: "*"
@@ -23449,7 +23465,7 @@ typescript@~4.3.5:
       optional: true
     react-native:
       optional: true
-  checksum: 1d6c8c6cab8aa78d4c5752a3227317464123423e85565353dedd05451978f489acc872c85fa05fbc6cb16c0ce40a8b2f2cc1fee8d08418edb87d334190ef570e
+  checksum: e8f12926817034da2434c464f7ca7c0a04eb4f1725dc86d092a6662fe42bccd55c627b0b33cf0f1159989698db4378413d51a8a3f76cd173a79ff179564a2178
   languageName: node
   linkType: hard
 
@@ -23987,7 +24003,7 @@ typescript@~4.3.5:
     react: ^17.0.2
     react-dom: ^17.0.2
     react-modal: ^3.13.1
-    sass: ^1.32.13
+    sass: ^1.49.9
     typedoc: ^0.20.36
     typescript: 4.2.2
   languageName: unknown
@@ -24528,15 +24544,15 @@ typescript@~4.3.5:
   languageName: node
   linkType: hard
 
-"zustand@npm:^3.4.2":
-  version: 3.5.4
-  resolution: "zustand@npm:3.5.4"
+"zustand@npm:^3.7.1":
+  version: 3.7.1
+  resolution: "zustand@npm:3.7.1"
   peerDependencies:
     react: ">=16.8"
   peerDependenciesMeta:
     react:
       optional: true
-  checksum: c78cb4f811b0356a4e72e23f26764671f051ffcaf76c809bb76fdd47154df645edc9f0fb582cbce4626058cc0ad4bb4cc0873f95475864a03a83378be58e3b43
+  checksum: 987a2cee95e0fd085c3556d21289a34bb1e9727155837c480617dee839453858523d6321abf3b18de4867fb07d14f5ff7abf9a8404357baa7ec73dffec6dd4f7
   languageName: node
   linkType: hard
 
