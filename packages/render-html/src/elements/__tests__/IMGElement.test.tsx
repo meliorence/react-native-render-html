@@ -36,7 +36,7 @@ describe('IMGElement', () => {
         } as NativeSyntheticEvent<ImageErrorEventData>
       )
     );
-    await findByTestId('image-error', { timeout: 50 });
+    await findByTestId('image-error');
   });
   describe('object-fit support', () => {
     const defaultRM = 'cover' as const;

@@ -3282,7 +3282,7 @@ __metadata:
     "@babel/plugin-transform-react-jsx": ^7.17.3
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.2
-    "@testing-library/react-native": ^7.2.0
+    "@testing-library/react-native": ^9.0.0
     "@tsconfig/react-native": ^1.0.3
     "@types/jest": ^27.4.1
     "@types/react": ^17.0.39
@@ -5460,23 +5460,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/jest-native@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "@testing-library/jest-native@npm:4.0.2"
+"@testing-library/jest-native@npm:^4.0.4":
+  version: 4.0.4
+  resolution: "@testing-library/jest-native@npm:4.0.4"
   dependencies:
     chalk: ^2.4.1
     jest-diff: ^24.0.0
     jest-matcher-utils: ^24.0.0
-    pretty-format: ^24.0.0
+    pretty-format: ^27.3.1
     ramda: ^0.26.1
     redent: ^2.0.0
-  checksum: 7bd7c1a3bc69dc96f9dfad09f99650343a41048ed155748f393884669db37b5539887332a29deb263bde506dd7fe0df451a3e0555fffaf8866bb9a358bbb9590
+  checksum: 03b2d1917102b175f460c8448a6cbd14d5384b8bf53d5bfeef5469b11789dc50db93a9438b4dabf7e712af65ce1452295bedece9c806c32c5ea1cf287e8a7ce0
   languageName: node
   linkType: hard
 
-"@testing-library/react-hooks@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "@testing-library/react-hooks@npm:7.0.0"
+"@testing-library/react-hooks@npm:^7.0.2":
+  version: 7.0.2
+  resolution: "@testing-library/react-hooks@npm:7.0.2"
   dependencies:
     "@babel/runtime": ^7.12.5
     "@types/react": ">=16.9.0"
@@ -5492,20 +5492,20 @@ __metadata:
       optional: true
     react-test-renderer:
       optional: true
-  checksum: 3c5e91459b2b939276bfa383cc73f40a2e5abec781d33b13db7dc1efd4796e7341ecbac638526623e8868ba23e4266b88bc537298931066797b11b3c0053e3d2
+  checksum: 27c6169b5c9832bd02dcea232e6a0a3cd8d4504e13ecb49d57eb5ab6bea5e2f1bff65f3102068b7e57eec3cbd671326dc0b277335014b0edfbdedf11a1fe6db5
   languageName: node
   linkType: hard
 
-"@testing-library/react-native@npm:^7.2.0":
-  version: 7.2.0
-  resolution: "@testing-library/react-native@npm:7.2.0"
+"@testing-library/react-native@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "@testing-library/react-native@npm:9.0.0"
   dependencies:
-    pretty-format: ^26.0.1
+    pretty-format: ^27.0.0
   peerDependencies:
     react: ">=16.0.0"
     react-native: ">=0.59"
     react-test-renderer: ">=16.0.0"
-  checksum: 9cc50fbce6003131e62e96291445a19b6bb68889ed5a0167d988cd02cffe373febc52830cfdf033dc914b63bf850cbb1c1884dfd196cbc8c22536a5889fb47ee
+  checksum: f30ba0ada3901185063397585d4c76a4822b9f03a5a40dad46468104c9a62f3fdc62eb66179cdec5f9a08f5bbc6f940e9d7d0424d3faff17f5fee5702f7fda4c
   languageName: node
   linkType: hard
 
@@ -18879,7 +18879,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"pretty-format@npm:^24.0.0, pretty-format@npm:^24.9.0":
+"pretty-format@npm:^24.9.0":
   version: 24.9.0
   resolution: "pretty-format@npm:24.9.0"
   dependencies:
@@ -18891,7 +18891,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"pretty-format@npm:^26.0.1, pretty-format@npm:^26.5.2, pretty-format@npm:^26.6.2":
+"pretty-format@npm:^26.5.2, pretty-format@npm:^26.6.2":
   version: 26.6.2
   resolution: "pretty-format@npm:26.6.2"
   dependencies:
@@ -19691,9 +19691,9 @@ fsevents@^1.2.7:
     "@microsoft/api-extractor": ^7.14.0
     "@native-html/transient-render-engine": 11.2.3
     "@release-it/conventional-changelog": ^2.0.1
-    "@testing-library/jest-native": ^4.0.2
-    "@testing-library/react-hooks": ^7.0.0
-    "@testing-library/react-native": ^7.2.0
+    "@testing-library/jest-native": ^4.0.4
+    "@testing-library/react-hooks": ^7.0.2
+    "@testing-library/react-native": ^9.0.0
     "@types/jest": ^27.4.1
     "@types/ramda": ^0.27.66
     "@types/react-native": ^0.64.24
