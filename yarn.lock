@@ -3833,24 +3833,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo-google-fonts/raleway@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@expo-google-fonts/raleway@npm:0.1.0"
-  checksum: cbe83e0c06564f980250943aa0fd511d69c56224ec5c84e0b51266bee5d8831ce1aae62537b9ccf819ae00c0ced4a60de9ed49d6e19e8ecac3c9137a9298e0f5
+"@expo-google-fonts/raleway@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "@expo-google-fonts/raleway@npm:0.2.2"
+  checksum: bce2f77404ad80485d3d9d5fa7eddef94977768002b16491c5c17ce094b699b4ea21f1a052597241787abbb9fd50a68cbd9fb72d23e802736ae76d0acb8f80d5
   languageName: node
   linkType: hard
 
-"@expo-google-fonts/source-code-pro@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@expo-google-fonts/source-code-pro@npm:0.1.0"
-  checksum: b36d3b6ae888eaa56587d7a29ff2f41e8cbd74dc91afb813f78384b3cc8b356c6f1698f09ae11249ac4209415a56e186c5a3555911add562ff3d10887e15644e
+"@expo-google-fonts/source-code-pro@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "@expo-google-fonts/source-code-pro@npm:0.2.2"
+  checksum: 28b4ee5ac199341dfc7b6dc8cc696538fec6c0cdbb4785e272c81476f97cd5756d784042beb1cc98787f0a7c347a8df818c85b56ce19e8424d102c0ecb1d0432
   languageName: node
   linkType: hard
 
-"@expo-google-fonts/space-mono@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@expo-google-fonts/space-mono@npm:0.1.0"
-  checksum: 5f2e2da6efd8a7a2ea6ea3f46b78c8ec0d3fbfa477efba63e13fb7fb44a0fe5c5a0e335e4f59b872e13350cad5fb37381491420fa64c1d1061b30712a87a7898
+"@expo-google-fonts/space-mono@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "@expo-google-fonts/space-mono@npm:0.2.2"
+  checksum: cd7b87fdeefa090f300d9770d728b882e5c4dd6a4258fad184a298bcc6ef2639a548edb108d6a40380095ffc33bd802c1089450ac95198b03c583a5369244b71
   languageName: node
   linkType: hard
 
@@ -4113,7 +4113,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/vector-icons@npm:^12.0.0, @expo/vector-icons@npm:^12.0.4":
+"@expo/vector-icons@npm:^12.0.4, @expo/vector-icons@npm:^12.0.5":
   version: 12.0.5
   resolution: "@expo/vector-icons@npm:12.0.5"
   dependencies:
@@ -10200,10 +10200,10 @@ __metadata:
     "@doc/constants": "workspace:*"
     "@doc/svg-component": "workspace:*"
     "@doc/svgr-conf": "workspace:*"
-    "@expo-google-fonts/raleway": ^0.1.0
-    "@expo-google-fonts/source-code-pro": ^0.1.0
-    "@expo-google-fonts/space-mono": ^0.1.0
-    "@expo/vector-icons": ^12.0.0
+    "@expo-google-fonts/raleway": ^0.2.2
+    "@expo-google-fonts/source-code-pro": ^0.2.2
+    "@expo-google-fonts/space-mono": ^0.2.2
+    "@expo/vector-icons": ^12.0.5
     "@gorhom/bottom-sheet": ^3.6.4
     "@jsamr/react-native-li": ^2.3.1
     "@mobily/stacks": ^1.1.3
