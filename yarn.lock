@@ -4127,33 +4127,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gorhom/bottom-sheet@npm:^3.6.4":
-  version: 3.6.5
-  resolution: "@gorhom/bottom-sheet@npm:3.6.5"
+"@gorhom/bottom-sheet@npm:^4.1.5":
+  version: 4.1.5
+  resolution: "@gorhom/bottom-sheet@npm:4.1.5"
   dependencies:
-    "@gorhom/portal": ^1.0.4
+    "@gorhom/portal": ^1.0.11
     invariant: ^2.2.4
     nanoid: ^3.1.20
-    react-native-redash: ^16.0.10
+    react-native-redash: ^16.1.1
   peerDependencies:
     react: "*"
     react-native: "*"
     react-native-gesture-handler: ">=1.10.1"
-    react-native-reanimated: ">=2.1.0"
-  checksum: 825bdb120568ba616749dac347013d392df5fdcf502d2cbcd9a84182771c1a590942d6dcfcf430c8110b0def87d35a1bd0009807b9dbba241988b5ad1265b367
+    react-native-reanimated: ">=2.2.0"
+  checksum: 493084ffbe07980ea3afde6a1eed33070941a99b4e0352cb9cdffcf955f23abd9c03230684b40f908e44197adb289d597ea7fcd2867db0679c7d887311988c63
   languageName: node
   linkType: hard
 
-"@gorhom/portal@npm:^1.0.4":
-  version: 1.0.7
-  resolution: "@gorhom/portal@npm:1.0.7"
+"@gorhom/portal@npm:^1.0.11":
+  version: 1.0.12
+  resolution: "@gorhom/portal@npm:1.0.12"
   dependencies:
-    immer: ^9.0.3
     nanoid: ^3.1.23
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 195db05b72b3f8eb7d3625bf4fab6b9f6e30307d7eaeb2eb788ff8b956a1d2dfe46f11169a4bf22be4af98777e2491883d820b0b9aad76bd3a0f4dc288d27710
+  checksum: 90fc512879ab674b051c253654e3a26ea729ef8d48c31db18dcd266a64ba8a1059b6ad963f39037a1878eaf04ea2cd3df4b343c11da23b50a06c40a2cd9d0b4c
   languageName: node
   linkType: hard
 
@@ -4642,13 +4641,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mobily/stacks@npm:^1.1.3":
-  version: 1.2.1
-  resolution: "@mobily/stacks@npm:1.2.1"
+"@mobily/stacks@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@mobily/stacks@npm:2.0.0"
+  dependencies:
+    wonka: ~4.0.15
   peerDependencies:
     react: ">=16.8.0"
     react-native: ">=0.59.0"
-  checksum: 35221b66b05b0e1f63e883c60361a8e03edc9768fa7bfc2d9df9f2f19205d38a4f562d2ed4f252f9c78694998ceaede706911905c1767022ecf07a18d97f07d9
+  checksum: 50a566dfa9b01d55ee498ed68d65dd9b4177619b9dda6d00570f3b11a93df40468050147ce5021a8e045798c745df136f910217ff2a3eb9272dae994c2f6a4ae
   languageName: node
   linkType: hard
 
@@ -10204,9 +10205,9 @@ __metadata:
     "@expo-google-fonts/source-code-pro": ^0.2.2
     "@expo-google-fonts/space-mono": ^0.2.2
     "@expo/vector-icons": ^12.0.5
-    "@gorhom/bottom-sheet": ^3.6.4
+    "@gorhom/bottom-sheet": ^4.1.5
     "@jsamr/react-native-li": ^2.3.1
-    "@mobily/stacks": ^1.1.3
+    "@mobily/stacks": ^2.0.0
     "@react-native-community/masked-view": 0.1.10
     "@react-native-community/slider": 4.1.12
     "@react-native-picker/picker": 2.2.1
@@ -13315,13 +13316,6 @@ fsevents@^1.2.7:
   version: 8.0.1
   resolution: "immer@npm:8.0.1"
   checksum: 63d875c04882b862481a0a692816e5982975a47a57619698bc1bb52963ad3b624911991708b2b81a7af6fdac15083d408e43932d83a6a61216e5a4503efd4095
-  languageName: node
-  linkType: hard
-
-"immer@npm:^9.0.3":
-  version: 9.0.3
-  resolution: "immer@npm:9.0.3"
-  checksum: 1af2c642efc91988feb0a635a727a782c52dd8d92b14a87f73fc9432c326b6a46a08084f249faf1252b9b390d993080de42a968b3892f8ab1a5e270910f5638f
   languageName: node
   linkType: hard
 
@@ -19593,9 +19587,9 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-native-redash@npm:^16.0.10":
-  version: 16.0.11
-  resolution: "react-native-redash@npm:16.0.11"
+"react-native-redash@npm:^16.1.1":
+  version: 16.2.3
+  resolution: "react-native-redash@npm:16.2.3"
   dependencies:
     abs-svg-path: ^0.1.1
     normalize-svg-path: ^1.0.1
@@ -19604,8 +19598,8 @@ fsevents@^1.2.7:
     react: "*"
     react-native: "*"
     react-native-gesture-handler: "*"
-    react-native-reanimated: ">=2.0.0-rc.0"
-  checksum: a01788123cd88edefba4733f4676ad0acefe6f330ce4baa7107834ed446ce2b214b7ba2f95af1d4f95e72b1138201a25077cf9dd670cf6095d036f862d2b1d31
+    react-native-reanimated: ">=2.0.0"
+  checksum: 5d2ff28b03efad62fa23046ecdc5aa3f628dec30aaedcb86eb6b33a7cf225917ecf06454eeb328fe53c3251f875bd6654292f9789637c574794885d51a5aa4c3
   languageName: node
   linkType: hard
 
@@ -24124,6 +24118,13 @@ typescript@~4.3.5:
   dependencies:
     execa: ^4.0.2
   checksum: 77c87d332d9e8ad94a72844c0bee169babd63ab06636521fc6ffacb2f1fb2ec3f38b81bc3fcb53ec76b57c1add33348c16660a38ac6aed381190d9c2b95c39e6
+  languageName: node
+  linkType: hard
+
+"wonka@npm:~4.0.15":
+  version: 4.0.15
+  resolution: "wonka@npm:4.0.15"
+  checksum: afbee7359ed2d0a9146bf682f3953cb093f47d5f827e767e6ef33cb70ca6f30631afe5fe31dbb8d6c7eaed26c4ac6426e7c13568917c017ef6f42c71139b38f7
   languageName: node
   linkType: hard
 
