@@ -6,26 +6,25 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  test:
-    name: Testing
+  render-html:
+    name: react-native-render-html
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x]
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
     - name: Cache .dts
       id: cache-dts
       uses: actions/cache@v2
       with:
         path: .dts
         key: ${{ runner.os }}-dts
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+    - name: Use Node.js LTS
+      uses: actions/setup-node@v2
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: lts/*
+        cache: 'yarn'
     - run: yarn install --immutable
     - run: yarn workspace react-native-render-html test:ts
       name: Typescript Tests
@@ -41,3 +40,28 @@ jobs:
       with:
         file: ./packages/render-html/coverage/clover.xml # optional
         fail_ci_if_error: true # optional (default = false)
+  website:
+    name: Documentation Website
+    needs: render-html
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+    - name: Use Node.js LTS
+      uses: actions/setup-node@v2
+      with:
+        node-version: lts/*
+        cache: 'yarn'
+    - run: yarn install --immutable
+    - run: yarn workspace react-native-render-html build
+      name: Build sources
+    - run: yarn process-svg-assets
+      name: Process SVG assets
+    - run: yarn build:tools
+      name: Build Tooling Libraries
+    - run: yarn build:docs
+      name: Build documentation
+    - run: yarn website build
+      name: Build website
