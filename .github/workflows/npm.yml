@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14, 15, 16]
+        node-version: [14, 15, 16, 17]
     
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
