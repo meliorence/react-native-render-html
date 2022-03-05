@@ -9,7 +9,8 @@
     "publish": "expo publish",
     "test": "jest --watchAll",
     "test:ts": "tsc --noEmit",
-    "test:lint": "eslint --ext ts,tsx src/"
+    "test:lint": "eslint --ext ts,tsx src/",
+    "test:build": "eas build --local --platform android --profile preview"
   },
   "jest": {
     "preset": "jest-expo"
@@ -75,6 +76,7 @@
     "@types/react": "~17.0.39",
     "@types/react-native": "~0.64.24",
     "babel-preset-expo": "9.0.2",
+    "eas-cli": "^0.47.0",
     "ignore-loader": "^0.1.2",
     "jest-expo": "^44.0.0",
     "typescript": "~4.3.5"
