@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
 
 /**
  * Container for the {@link IMGElement} component.
+ *
+ * @public
  */
 export default function IMGElementContainer({
   style,

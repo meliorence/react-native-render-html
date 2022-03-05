@@ -13,6 +13,8 @@ import useIMGNormalizedSource from './useIMGNormalizedSource';
  * This hook is useful when one has access to image natural dimensions prior to
  * loading. The `cachedNaturalDimensions` prop must be passed to immediately
  * compute concrete dimensions.
+ *
+ * @public
  */
 export default function useIMGElementStateWithCache(
   props: UseIMGElementStateWithCacheProps

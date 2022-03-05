@@ -15,6 +15,8 @@ const DocumentMetadataProvider = DocumentMetadataContext.Provider;
 
 /**
  * Get access to the parsed HTML metadata anywhere in the render tree.
+ *
+ * @public
  */
 export function useDocumentMetadata() {
   return useContext(DocumentMetadataContext);

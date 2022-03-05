@@ -5,6 +5,8 @@ import renderChildren from './renderChildren';
 /**
  * A component to render collections of tnodes.
  * Especially useful when used with {@link useTNodeChildrenProps}.
+ *
+ * @public
  */
 const TChildrenRenderer: FunctionComponent<TChildrenRendererProps> =
   renderChildren.bind(null);

@@ -40,6 +40,8 @@ function isGhostTNode(tnode: TNode) {
 
 /**
  * A component to render any {@link TNode}.
+ *
+ * @public
  */
 const TNodeRenderer = memo(function MemoizedTNodeRenderer(
   props: TNodeRendererProps<any>

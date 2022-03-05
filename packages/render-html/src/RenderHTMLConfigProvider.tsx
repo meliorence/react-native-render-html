@@ -20,6 +20,9 @@ const childrenRendererContext = {
   TNodeChildrenRenderer
 };
 
+/**
+ * @public
+ */
 export type RenderHTMLConfigPropTypes = Record<keyof RenderHTMLConfig, any>;
 
 export const renderHTMLConfigPropTypes: RenderHTMLConfigPropTypes = {
@@ -46,6 +49,8 @@ export const renderHTMLConfigPropTypes: RenderHTMLConfigPropTypes = {
 /**
  * A component to provide configuration for {@link RenderHTMLSource}
  * descendants, to be used in conjunction with {@link TRenderEngineProvider}.
+ *
+ * @public
  */
 export default function RenderHTMLConfigProvider(
   props: PropsWithChildren<RenderHTMLConfig>
@@ -86,7 +91,7 @@ export default function RenderHTMLConfigProvider(
   );
 }
 
-/**
- * @ignore
- */
-RenderHTMLConfigProvider.propTypes = renderHTMLConfigPropTypes;
+// Don't emit TS types for this property.
+Object.defineProperty(RenderHTMLConfigProvider, 'propTypes', {
+  value: renderHTMLConfigPropTypes
+});

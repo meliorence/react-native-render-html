@@ -40,6 +40,8 @@ jobs:
       with:
         file: ./packages/render-html/coverage/clover.xml # optional
         fail_ci_if_error: true # optional (default = false)
+    - run: "[ -z '$(git status --porcelain)' ] || echo 'Working directory is not clean.'"
+      name: Working directory consistency
   website:
     name: apps/website
     needs: render-html

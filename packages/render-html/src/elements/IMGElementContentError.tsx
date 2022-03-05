@@ -4,6 +4,8 @@ import IMGElementContentAlt from './IMGElementContentAlt';
 
 /**
  * Default error view for the {@link IMGElement} component.
+ *
+ * @public
  */
 export default function IMGElementContentError(
   props: IMGElementStateError

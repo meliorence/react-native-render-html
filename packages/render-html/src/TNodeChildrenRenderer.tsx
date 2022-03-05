@@ -37,6 +37,8 @@ function isCollapsible(tnode: TNode) {
  *   );
  * };
  * ```
+ *
+ * @public
  */
 export function useTNodeChildrenProps({
   tnode,
@@ -59,6 +61,8 @@ export function useTNodeChildrenProps({
 
 /**
  * A component to render all children of a {@link TNode}.
+ *
+ * @public
  */
 function TNodeChildrenRenderer(
   props: TNodeChildrenRendererProps
@@ -73,9 +77,9 @@ function TNodeChildrenRenderer(
   return renderChildren(useTNodeChildrenProps(props));
 }
 
-/**
- * @ignore
- */
-TNodeChildrenRenderer.defaultProps = tchildrenRendererDefaultProps;
+// Don't emit TS types for this property.
+Object.defineProperty(TNodeChildrenRenderer, 'defaultProps', {
+  value: tchildrenRendererDefaultProps
+});
 
 export default TNodeChildrenRenderer;

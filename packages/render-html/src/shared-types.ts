@@ -160,6 +160,8 @@ export interface ListElementConfig {
  *     };
  *   }
  * }
+ * ```
+ *
  * @public
  */
 export interface RenderersProps extends Record<string, any> {
@@ -231,6 +233,8 @@ export interface RenderHTMLPassedProps {
 /**
  * A map which defines the type of parameters passed as third argument
  * of {@link EmbeddedHeadersProvider}.
+ *
+ * @public
  */
 export interface EmbeddedWithHeadersParamsMap
   extends Record<EmbeddedWithHeadersTagName, Record<string, unknown>> {
@@ -250,6 +254,8 @@ export interface EmbeddedWithHeadersParamsMap
 
 /**
  * Tag names eligible for headers provision.
+ *
+ * @public
  */
 export type EmbeddedWithHeadersTagName = Exclude<
   EmbeddedTagNames,
@@ -258,6 +264,8 @@ export type EmbeddedWithHeadersTagName = Exclude<
 
 /**
  * A function to provide headers to a peculiar embedded element.
+ *
+ * @public
  */
 export type EmbeddedHeadersProvider = <T extends EmbeddedWithHeadersTagName>(
   uri: string,
@@ -488,7 +496,10 @@ export interface RenderHTMLSharedProps {
   provideEmbeddedHeaders?: EmbeddedHeadersProvider;
 }
 
-type SharedPropsWithoutFallback = Exclude<
+/**
+ * @public
+ */
+export type SharedPropsWithoutFallback = Exclude<
   keyof RenderHTMLSharedProps,
   'provideEmbeddedHeaders' | 'GenericPressable' | 'customListStyleSpecs'
 >;
@@ -496,6 +507,8 @@ type SharedPropsWithoutFallback = Exclude<
 /**
  * Shared props available with {@link useSharedProps} hook or `sharedProp`
  * custom renderers prop.
+ *
+ * @public
  */
 export type RenderHTMLAmbiantSharedProps = Required<
   Pick<RenderHTMLSharedProps, SharedPropsWithoutFallback>
@@ -922,6 +935,7 @@ export interface FallbackFontsDefinitions {
  * @remarks Anonymous nodes will pass those props from their parents to
  * children.
  *
+ * @public
  */
 export interface PropsFromParent extends Record<string, any> {
   collapsedMarginTop: number | null;
@@ -1013,6 +1027,8 @@ export interface TNodeChildrenRendererProps extends TChildrenBaseProps {
  * Props for {@link TNodeRenderer} component.
  *
  * @typeParam T - The concrete type of {@link TNode}.
+ *
+ * @public
  */
 export interface TNodeRendererProps<T extends TNode> {
   /**
@@ -1046,6 +1062,8 @@ export interface TNodeRendererProps<T extends TNode> {
  * Abstract interface for renderers.
  *
  * @typeParam T - The concrete type of {@link TNode}.
+ *
+ * @public
  */
 export interface RendererBaseProps<T extends TNode>
   extends TNodeRendererProps<T> {
@@ -1055,8 +1073,10 @@ export interface RendererBaseProps<T extends TNode>
    * {@link RendererBaseProps.viewProps}.
    *
    * @remarks The `prop.style` property will have a greater specificity
-   * than computed styles for this {@link TNode}. E.g. `style={[computedStyle,
-   * nativeProps.style, viewProps.style]}`.
+   * than computed styles for this {@link TNode}. E.g.:
+   * ```ts
+   * style=[computedStyle, nativeProps.style, viewProps.style]
+   * ```
    *
    */
   nativeProps?: StylessReactNativeProps & { style?: StyleProp<ViewStyle> };
@@ -1072,8 +1092,10 @@ export interface RendererBaseProps<T extends TNode>
    * {@link RendererBaseProps.viewProps}.
    *
    * @remarks The `textProps.style` property will have a greater specificity than
-   * computed styles for this {@link TNode}. E.g. `style={[computedStyle,
-   * nativeProps.style, textProps.style]}`.
+   * computed styles for this {@link TNode}. E.g.:
+   * ```ts
+   * style=[computedStyle, nativeProps.style, textProps.style]
+   * ```
    */
   textProps: TextProps;
 
@@ -1088,8 +1110,10 @@ export interface RendererBaseProps<T extends TNode>
    * {@link RendererBaseProps.textProps}.
    *
    * @remarks The `viewProps.style` property will have a greater specificity than
-   * computed styles for this {@link TNode}. E.g. `style={[computedStyle,
-   * nativeProps.style, viewProps.style]}`.
+   * computed styles for this {@link TNode}. E.g.:
+   * ```ts
+   * style=[computedStyle, nativeProps.style, viewProps.style]
+   * ```
    */
   viewProps: ViewProps;
 }
@@ -1098,6 +1122,7 @@ export interface RendererBaseProps<T extends TNode>
  * Props for {@link TDefaultRenderer}.
  *
  * @typeParam T - The concrete type of {@link TNode}.
+ *
  * @public
  */
 export interface TDefaultRendererProps<T extends TNode>
@@ -1131,6 +1156,7 @@ export interface TDefaultRendererProps<T extends TNode>
  * Props for {@link InternalRenderer} components.
  *
  * @typeParam T - The concrete type of {@link TNode}.
+ *
  * @public
  */
 export interface InternalRendererProps<T extends TNode>
@@ -1160,6 +1186,7 @@ export interface InternalRendererProps<T extends TNode>
  * Props for custom renderers, such as provided in the `renderers` prop.
  *
  * @typeParam T - The concrete type of {@link TNode}.
+ *
  * @public
  */
 export interface CustomRendererProps<T extends TNode>
@@ -1182,6 +1209,7 @@ export interface CustomRendererProps<T extends TNode>
  * change given the {@link TNodeType | type} of the {@link TNode}.
  *
  * @typeParam T - The concrete type of {@link TNode}.
+ *
  * @public
  */
 export type TDefaultRenderer<T extends TNode> = ComponentType<
@@ -1194,9 +1222,9 @@ export type TDefaultRenderer<T extends TNode> = ComponentType<
  * be rendered via an internal renderer, while `<div>` will fallback to a
  * {@link TDefaultRenderer}.
  *
- * @public
- *
  * @typeParam T - The concrete type of {@link TNode}.
+ *
+ * @public
  */
 export type InternalRenderer<T extends TNode> = ComponentType<
   InternalRendererProps<T>
@@ -1206,6 +1234,7 @@ export type InternalRenderer<T extends TNode> = ComponentType<
  * A custom renderer, such as provided in the {@link RenderHTMLProps.renderers} prop.
  *
  * @typeParam T - The concrete type of {@link TNode}.
+ *
  * @public
  */
 export type CustomRenderer<T extends TNode> = ComponentType<

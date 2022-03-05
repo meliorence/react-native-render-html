@@ -5,11 +5,12 @@
   "license": "BSD-2-Clause",
   "description": "The hackable, full-featured Open Source HTML rendering solution for React Native.",
   "main": "lib/commonjs/index.js",
-  "types": "lib/typescript/index.d.ts",
+  "types": "types/render-html/index.d.ts",
   "react-native": "src/",
   "files": [
     "lib",
     "src",
+    "types",
     "react-native-render-html.podspec"
   ],
   "homepage": "https://meliorence.github.io/react-native-render-html/",
@@ -33,7 +34,7 @@
     "test:jest": "jest src/",
     "test:ts": "tsc --noEmit",
     "test:lint": "eslint --ext ts,tsx src/",
-    "build": "bob build",
+    "build": "bob build && yarn build:defs",
     "build:defs": "api-extractor run --local --verbose",
     "prepack": "yarn run prepack:readme && yarn run build",
     "prepack:readme": "./scripts/prepack.sh"
@@ -45,7 +46,7 @@
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
     "@babel/runtime": "^7.17.2",
-    "@microsoft/api-extractor": "^7.14.0",
+    "@microsoft/api-extractor": "^7.19.4",
     "@release-it/conventional-changelog": "^2.0.1",
     "@testing-library/jest-native": "^4.0.4",
     "@testing-library/react-hooks": "^7.0.2",

@@ -13,6 +13,8 @@ const styles = StyleSheet.create({
 
 /**
  * Alt view for the {@link IMGElement} component.
+ *
+ * @public
  */
 export default function IMGElementContentAlt({
   dimensions,

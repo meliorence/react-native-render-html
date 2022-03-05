@@ -9,7 +9,27 @@ import { useOLElementProps } from '../renderers/OLRenderer';
 import { useULElementProps } from '../renderers/ULRenderer';
 import { InternalRendererProps, TDefaultRendererProps } from '../shared-types';
 
-const specialRenderersConfig = {
+/**
+ * @public
+ */
+export interface InternalRendererConfig<P> {
+  Renderer: ComponentType<P>;
+  rendererProps: P;
+}
+
+/**
+ * @public
+ */
+export type InternalRenderersConfigMap = typeof internalRenderersConfigMap;
+
+/**
+ * The name of tags which are rendered by special renderers internally.
+ *
+ * @public
+ */
+export type InternalRendererTag = keyof InternalRenderersConfigMap;
+
+const internalRenderersConfigMap = {
   img: {
     hook: useIMGElementProps,
     Element: IMGElement
@@ -28,18 +48,12 @@ const specialRenderersConfig = {
   }
 };
 
-export type InternalSpecialRenderedTag = keyof typeof specialRenderersConfig;
-
 function hasSpecialInternalRenderer(
   tagName: TagName
-): tagName is keyof typeof specialRenderersConfig {
-  return tagName in specialRenderersConfig;
+): tagName is keyof InternalRenderersConfigMap {
+  return tagName in internalRenderersConfigMap;
 }
 
-export interface InternalRendererConfig<P> {
-  Renderer: ComponentType<P>;
-  rendererProps: P;
-}
 /**
  * Resuse internal renderers logic for infinite customization!
  *
@@ -57,14 +71,14 @@ export interface InternalRendererConfig<P> {
 export default function useInternalRenderer<T extends TagName>(
   tagName: T,
   props: InternalRendererProps<any>
-): T extends InternalSpecialRenderedTag
-  ? InternalRendererConfig<ReturnType<typeof specialRenderersConfig[T]['hook']>>
+): T extends InternalRendererTag
+  ? InternalRendererConfig<ReturnType<InternalRenderersConfigMap[T]['hook']>>
   : InternalRendererConfig<TDefaultRendererProps<any>> {
   const { TDefaultRenderer, ...rendererProps } = props;
   if (hasSpecialInternalRenderer(tagName)) {
     return {
-      Renderer: specialRenderersConfig[tagName].Element || TDefaultRenderer,
-      rendererProps: specialRenderersConfig[tagName].hook(props as any)
+      Renderer: internalRenderersConfigMap[tagName].Element || TDefaultRenderer,
+      rendererProps: internalRenderersConfigMap[tagName].hook(props as any)
     } as any;
   }
   return {

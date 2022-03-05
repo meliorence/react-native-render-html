@@ -13,6 +13,8 @@ import getNativePropsForTNode from '../helpers/getNativePropsForTNode';
 /**
  * A hook to produce props consumable by {@link IMGElement} component
  * from custom renderer props.
+ *
+ * @public
  */
 export function useIMGElementProps(
   props: InternalRendererProps<TBlock>

@@ -11,6 +11,8 @@ import TRenderEngine, {
  * application.
  *
  * @param props - The configuration from which a TRE should be built.
+ *
+ * @public
  */
 export default function buildTREFromConfig(props: TRenderEngineConfig) {
   const {

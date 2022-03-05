@@ -31,21 +31,29 @@ export type InternalTextualRenderer = InternalRenderer<TPhrasing | TText>;
 
 /**
  * Block renderers can only render tnodes of type TBlock.
+ *
+ * @public
  */
 export type CustomBlockRenderer = CustomRenderer<TBlock>;
 
 /**
  * Textual renderers can render tnodes of type TText or TPhrasing.
+ *
+ * @public
  */
 export type CustomTextualRenderer = CustomRenderer<TText | TPhrasing>;
 
 /**
  * Mixed renderers can can render tnodes of type TText, TPhrasing or TBlock.
+ *
+ * @public
  */
 export type CustomMixedRenderer = CustomRenderer<TBlock | TPhrasing | TText>;
 
 /**
  * A record of custom renderers.
+ *
+ * @public
  */
 export type CustomTagRendererRecord = Record<
   string,

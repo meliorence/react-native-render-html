@@ -107,6 +107,8 @@ function useFetchedNaturalDimensions(props: {
  * @remarks If you know the dimensions beforehand, use
  * {@link useIMGElementStateWithCache} instead to save a network request and
  * prevent a layout shift.
+ *
+ * @public
  */
 export default function useIMGElementState(
   props: UseIMGElementStateProps

@@ -20,6 +20,8 @@ function renderOpeningTag(tag: string, attributes: Record<string, string>) {
  * @param reporter - An optional function which will receive every
  * parsed node as 1st argument, the depth as 2d argument and the converted html
  * as 3d argument.
+ *
+ * @public
  */
 export default function domNodeToHTMLString(
   root: Node | null,

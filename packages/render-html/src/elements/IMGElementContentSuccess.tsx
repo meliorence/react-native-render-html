@@ -11,6 +11,8 @@ const defaultImageStyle: ImageStyle = { resizeMode: 'cover' };
 
 /**
  * Default success "image" view for the {@link IMGElement} component.
+ *
+ * @public
  */
 export default function IMGElementContentSuccess({
   source,

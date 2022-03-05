@@ -11,12 +11,16 @@ import { WebBlockStyles } from '@native-html/transient-render-engine';
 
 /**
  * Props for {@link useIMGElementStateWithCache} hook.
+ *
+ * @public
  */
 export type UseIMGElementStateWithCacheProps = UseIMGElementStateProps &
   Required<Pick<UseIMGElementStateProps, 'cachedNaturalDimensions'>>;
 
 /**
  * Props for {@link useIMGElementState} hook.
+ *
+ * @public
  */
 export interface UseIMGElementStateProps {
   /**
@@ -75,6 +79,8 @@ export interface UseIMGElementStateProps {
 
 /**
  * Props for the {@link IMGElement} component.
+ *
+ * @public
  */
 export interface IMGElementProps extends UseIMGElementStateProps {
   containerProps?: Omit<ViewProps, 'style'>;
@@ -87,6 +93,8 @@ export interface IMGElementProps extends UseIMGElementStateProps {
 
 /**
  * The internal state used by {@link IMGElement}.
+ *
+ * @public
  */
 export type IMGElementState =
   | IMGElementStateError
@@ -95,6 +103,8 @@ export type IMGElementState =
 
 /**
  * Base fields for all {@link IMGElementState}.
+ *
+ * @public
  */
 export interface IMGElementStateBase {
   /**
@@ -121,6 +131,8 @@ export interface IMGElementStateBase {
 
 /**
  * State when the image has been successfully loaded.
+ *
+ * @public
  */
 export interface IMGElementStateSuccess extends IMGElementStateBase {
   /**
@@ -142,6 +154,8 @@ export interface IMGElementStateSuccess extends IMGElementStateBase {
 
 /**
  * State when the image is loading.
+ *
+ * @public
  */
 export interface IMGElementStateLoading extends IMGElementStateBase {
   type: 'loading';
@@ -149,6 +163,8 @@ export interface IMGElementStateLoading extends IMGElementStateBase {
 
 /**
  * State when the image could not be loaded.
+ *
+ * @public
  */
 export interface IMGElementStateError extends IMGElementStateBase {
   error: Error;
@@ -157,6 +173,8 @@ export interface IMGElementStateError extends IMGElementStateBase {
 
 /**
  * Partial image dimensions.
+ *
+ * @public
  */
 export interface IncompleteImageDimensions {
   height: number | null;

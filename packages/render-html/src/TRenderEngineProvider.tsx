@@ -44,6 +44,8 @@ export const tRenderEngineProviderPropTypes: Record<
 /**
  * Default fallback font for special keys such as 'sans-serif', 'monospace',
  * 'serif', based on current platform.
+ *
+ * @public
  */
 export const defaultFallbackFonts = {
   'sans-serif': Platform.select({ ios: 'system', default: 'sans-serif' }),
@@ -94,6 +96,8 @@ export function useAmbientTRenderEngine() {
  * rendered snippets such as chat apps.
  *
  * @param props - Pass engine config here.
+ *
+ * @public
  */
 export default function TRenderEngineProvider({
   children,
@@ -107,12 +111,8 @@ export default function TRenderEngineProvider({
   );
 }
 
-/**
- * @ignore
- */
-TRenderEngineProvider.defaultProps = defaultTRenderEngineProviderProps;
-
-/**
- * @ignore
- */
-TRenderEngineProvider.propTypes = tRenderEngineProviderPropTypes;
+// Don't emit TS types for those properties.
+Object.defineProperties(TRenderEngineProvider, {
+  defaultProps: { value: defaultTRenderEngineProviderProps },
+  propTypes: { value: tRenderEngineProviderPropTypes }
+});

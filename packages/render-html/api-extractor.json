@@ -329,6 +329,12 @@
     "extractorMessageReporting": {
       "default": {
         "logLevel": "error"
+      },
+      "ae-forgotten-export": {
+        "logLevel": "error"
+      },
+      "ae-unresolved-link": {
+        "logLevel": "none"
       }
     },
 
@@ -342,6 +348,9 @@
     "tsdocMessageReporting": {
       "default": {
         "logLevel": "error"
+      },
+      "tsdoc-undefined-tag": {
+        "logLevel": "none"
       }
     }
   }

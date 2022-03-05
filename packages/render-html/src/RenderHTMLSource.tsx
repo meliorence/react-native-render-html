@@ -99,6 +99,8 @@ function shallowEqual(prop1: any, prop2: any) {
  *
  * @warning This component requires to have {@link TRenderEngineProvider}
  * and {@link RenderHTMLConfigProvider} as parents.
+ *
+ * @public
  */
 const RenderHTMLSource = memo(
   function RenderHtmlSource({

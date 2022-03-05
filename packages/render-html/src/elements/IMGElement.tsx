@@ -22,6 +22,8 @@ function identity(arg: any) {
  * shifts. See also {@link useIMGElementState}, {@link IMGElementContainer},
  * {@link IMGElementContentSuccess}, {@link IMGElementContentLoading}
  * and {@link IMGElementContentError} for customization.
+ *
+ * @public
  */
 function IMGElement(props: IMGElementProps): ReactElement {
   const state = useIMGElementState(props);
@@ -67,19 +69,19 @@ const propTypes: Record<keyof IMGElementProps, any> = {
   containerProps: PropTypes.object
 };
 
-/**
- * @ignore
- */
-IMGElement.propTypes = propTypes;
-
-/**
- * @ignore
- */
-IMGElement.defaultProps = {
-  enableExperimentalPercentWidth: false,
-  computeMaxWidth: identity,
-  imagesInitialDimensions: defaultImageInitialDimensions,
-  style: {}
-};
+// Don't emit TS types for those properties.
+Object.defineProperties(IMGElement, {
+  propTypes: {
+    value: propTypes
+  },
+  defaultProps: {
+    value: {
+      enableExperimentalPercentWidth: false,
+      computeMaxWidth: identity,
+      imagesInitialDimensions: defaultImageInitialDimensions,
+      style: {}
+    }
+  }
+});
 
 export default IMGElement;

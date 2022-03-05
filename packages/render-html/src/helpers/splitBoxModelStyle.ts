@@ -36,6 +36,8 @@ const omitBorderBox = omit(borderBoxProps);
  * borders... etc.
  *
  * @param styles - The native styles to split.
+ *
+ * @public
  */
 export default function splitBoxModelStyle(
   style: ReturnType<TNodeShape<TNodeType>['getNativeStyles']>

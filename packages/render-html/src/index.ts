@@ -117,7 +117,12 @@ export type {
   WebTextStyles
 } from '@native-html/transient-render-engine';
 export * from './shared-types';
-export * from './render/render-types';
+export type {
+  CustomBlockRenderer,
+  CustomMixedRenderer,
+  CustomTagRendererRecord,
+  CustomTextualRenderer
+} from './render/render-types';
 export { RenderHTML };
 export default RenderHTML;
 export { default as TChildrenRenderer } from './TChildrenRenderer';
@@ -138,8 +143,9 @@ export { default as useNormalizedUrl } from './hooks/useNormalizedUrl';
 export { default as getNativePropsForTNode } from './helpers/getNativePropsForTNode';
 export { default as collapseTopMarginForChild } from './helpers/collapseTopMarginForChild';
 export type {
-  InternalSpecialRenderedTag,
-  InternalRendererConfig
+  InternalRendererTag,
+  InternalRendererConfig,
+  InternalRenderersConfigMap
 } from './hooks/useInternalRenderer';
 
 // HELPERS

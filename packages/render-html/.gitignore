@@ -1,1 +1,4 @@
-README.md
+/README.md
+/temp/
+/types/
+!/types/render-html/index.d.ts

@@ -4,6 +4,8 @@ import { IMGElementStateLoading } from './img-types';
 
 /**
  * Default loading view for the {@link IMGElement} component.
+ *
+ * @public
  */
 export default function IMGElementContentLoading({
   dimensions,
