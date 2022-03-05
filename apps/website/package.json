@@ -22,7 +22,7 @@
     "@docusaurus/preset-classic": "2.0.0-beta.759298296",
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.1.1",
-    "docusaurus-plugin-sass": "frilox042/docusaurus-plugin-sass#fix-css-module-identName-dev",
+    "docusaurus-plugin-sass": "^0.2.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-modal": "^3.13.1"

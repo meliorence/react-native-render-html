@@ -59,7 +59,7 @@
     "jest": "^27.0.4",
     "metro-react-native-babel-preset": "^0.66.0",
     "prettier": "^2.3.1",
-    "react": "17.0.2",
+    "react": "^17.0.2",
     "react-native": "^0.64.0",
     "react-native-accessibility-engine": "^0.4.1",
     "react-native-builder-bob": "^0.18.1",
@@ -89,8 +89,8 @@
     ]
   },
   "dependencies": {
-    "@jsamr/counter-style": "^2.0.1",
-    "@jsamr/react-native-li": "^2.3.0",
+    "@jsamr/counter-style": "^2.0.2",
+    "@jsamr/react-native-li": "^2.3.1",
     "@native-html/transient-render-engine": "11.2.3",
     "@types/ramda": "^0.27.40",
     "@types/urijs": "^1.19.15",
