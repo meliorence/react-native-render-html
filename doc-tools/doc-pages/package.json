@@ -18,11 +18,11 @@
     "prepack": "yarn build"
   },
   "devDependencies": {
-    "@babel/cli": "^7.13.16",
-    "@babel/core": "^7.13.16",
-    "@babel/plugin-transform-react-jsx": "^7.13.12",
-    "@babel/preset-typescript": "^7.13.0",
-    "@babel/runtime": "^7.13.17",
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.5",
+    "@babel/plugin-transform-react-jsx": "^7.17.3",
+    "@babel/preset-typescript": "^7.16.7",
+    "@babel/runtime": "^7.17.2",
     "@testing-library/react-native": "^7.2.0",
     "@tsconfig/react-native": "^1.0.3",
     "@types/jest": "^26.0.23",

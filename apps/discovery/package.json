@@ -70,7 +70,7 @@
     "zustand": "^3.4.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
+    "@babel/core": "^7.17.5",
     "@doc/svgr-conf": "workspace:*",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.64.12",

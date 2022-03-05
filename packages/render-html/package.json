@@ -39,12 +39,12 @@
     "prepack:readme": "./scripts/prepack.sh"
   },
   "devDependencies": {
-    "@babel/cli": "^7.13.16",
-    "@babel/core": "^7.13.16",
-    "@babel/plugin-transform-react-jsx": "^7.13.12",
-    "@babel/preset-react": "^7.13.13",
-    "@babel/preset-typescript": "^7.13.0",
-    "@babel/runtime": "^7.13.17",
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.5",
+    "@babel/plugin-transform-react-jsx": "^7.17.3",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "@babel/runtime": "^7.17.2",
     "@microsoft/api-extractor": "^7.14.0",
     "@release-it/conventional-changelog": "^2.0.1",
     "@testing-library/jest-native": "^4.0.2",

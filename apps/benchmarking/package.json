@@ -23,7 +23,7 @@
     "react-states": "^5.4.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.17.5"
   },
   "private": true,
   "installConfig": {
