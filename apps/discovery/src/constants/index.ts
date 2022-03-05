@@ -4,10 +4,10 @@ import uniq from 'ramda/es/uniq';
 import pipe from 'ramda/es/pipe';
 import filter from 'ramda/es/filter';
 
-const normalizeFonts = pipe<string[], string[], string[]>(
-  uniq,
-  filter(
-    (c: string) =>
+const normalizeFonts = pipe(
+  uniq as (t: string[]) => string[],
+  filter<string>(
+    (c) =>
       !c.match(
         /bold|italic|semi|regular|extra|ultra|light|black|medium|thin|-/i
       )
