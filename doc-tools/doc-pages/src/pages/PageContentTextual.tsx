@@ -126,7 +126,7 @@ export default function PageContentTextual() {
           By default, a handful of fonts supported by the current platform are
           pre-registered (Android, iOS, MacOS and Windows). If you are using
           expo, just set this prop to{' '}
-          <Hyperlink url="https://docs.expo.io/versions/latest/sdk/constants/#constantssystemfonts">
+          <Hyperlink url="https://docs.expo.dev/versions/latest/sdk/constants/#constantssystemfonts">
             Constants.systemFonts
           </Hyperlink>
           . You can also define how{' '}

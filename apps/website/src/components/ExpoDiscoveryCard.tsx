@@ -11,7 +11,7 @@ export default function ExpoDiscoveryCard({
       white
       className={className}
       name="Discovery"
-      projectUrl={'https://expo.io/@jsamr/react-native-render-html-discovery'}
+      projectUrl={'https://expo.dev/@jsamr/react-native-render-html-discovery'}
       imagePath="/img/discovery-expo-qr.png"
     />
   );

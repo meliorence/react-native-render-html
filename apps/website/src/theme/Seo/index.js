@@ -9,7 +9,7 @@ import Head from '@docusaurus/Head';
 import { useThemeConfig, useTitleFormatter } from '@docusaurus/theme-common';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-export default function Seo({ title, description, keywords, image }) {
+export default function Seo({ title, description, keywords, image, children }) {
   const { image: defaultImage } = useThemeConfig();
   const pageTitle = useTitleFormatter(title);
   const pageImage = useBaseUrl(image || defaultImage, {
@@ -37,6 +37,8 @@ export default function Seo({ title, description, keywords, image }) {
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:creator" content="@jsamrn" />
       <meta name="twitter:site" content="@jsamrn" />
+
+      {children}
     </Head>
   );
 }

@@ -137,7 +137,7 @@ export default function App() {
 
 ## :blue_book: Documentation
 
-See our [official website](https://meliorence.github.io/react-native-render-html/) and [the official Discovery App](https://expo.io/@jsamr/react-native-render-html-discovery).
+See our [official website](https://meliorence.github.io/react-native-render-html/) and [the official Discovery App](https://expo.dev/@jsamr/react-native-render-html-discovery).
 
 ## :iphone: Example
 

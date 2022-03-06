@@ -5,7 +5,8 @@ import React, {
   useMemo,
   useRef
 } from 'react';
-import useThemeContext from '@theme/hooks/useThemeContext';
+import { useColorMode } from '@docusaurus/theme-common';
+
 import styles from './ExpoSnippet.module.scss';
 
 function makeIframeSrcParamsQuery({
@@ -49,8 +50,8 @@ function installIframeListener({
   extraneousDeps: string[];
 }) {
   const listener = function (event: MessageEvent) {
-    var eventName = event.data[0];
-    var data = event.data[1];
+    const eventName = event.data[0];
+    const data = event.data[1];
     const deps = [
       `react-native-render-html@${version}`,
       'react-native-safe-area-context',
@@ -104,7 +105,7 @@ const ExpoIframe = memo(function ExpoIframe({
       }),
     [description, name, theme]
   );
-  const src = `https://snack.expo.io/embedded?${params}`;
+  const src = `https://snack.expo.dev/embedded?${params}`;
   useEffect(
     function postIframeMessage() {
       const cleanup = installIframeListener({
@@ -145,7 +146,7 @@ export default function ExpoSnippet({
   className?: string;
   extraneousDeps: string[];
 }>) {
-  const { isDarkTheme } = useThemeContext();
+  const { isDarkTheme } = useColorMode();
   const style: React.CSSProperties = {
     backgroundColor: isDarkTheme ? '#212121' : '#f9f9f9'
   };

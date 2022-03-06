@@ -54,26 +54,19 @@ module.exports = {
   baseUrl: WEBSITE_BASE,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
-  // TODO remove when this issue is resolved
-  // https://github.com/facebook/docusaurus/issues/4923
-  // Also remove the swizzled LayoutHead
-  favicon: 'favicons/favicon-32x32.png',
   organizationName: 'meliorence',
   projectName: 'react-native-render-html',
   plugins: plugins,
   trailingSlash: false,
   themeConfig: {
     algolia: {
-      apiKey: '4f9905bd301a15034820905263f47dda',
+      appId: 'BQVYN6DAUS',
+      apiKey: 'de8bb248912c69bf68cdef705ae6d6c0',
       indexName: 'meliorence',
       // Should be set to true for versioned sites
       contextualSearch: false,
       // Optional: Algolia search parameters
       searchParameters: {}
-    },
-    gtag: {
-      trackingID: 'G-CYR1XDV25N',
-      anonymizeIP: true
     },
     prism: {
       theme: require('prism-react-renderer/themes/dracula')
@@ -251,7 +244,8 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // editUrl: null,
-          disableVersioning: false
+          disableVersioning: false,
+          sidebarCollapsed: false,
         },
         blog: {
           showReadingTime: true,
@@ -260,6 +254,10 @@ module.exports = {
             title: 'React Native Render HTML Official Blog',
             copyright: `Copyright © ${new Date().getFullYear()} Meliorence, Inc. and Jules Sam. Randolph`
           }
+        },
+        gtag: {
+          trackingID: 'G-CYR1XDV25N',
+          anonymizeIP: true
         },
         theme: {
           customCss: require.resolve('./src/css/custom.scss')

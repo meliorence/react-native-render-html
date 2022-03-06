@@ -7,7 +7,7 @@ export default function ExpoBlogCard({ className }: { className?: string }) {
       themed={true}
       className={className}
       name="React Native Blog"
-      projectUrl={'https://expo.io/@jsamr/react-native-blog'}
+      projectUrl={'https://expo.dev/@jsamr/react-native-blog'}
       imagePath="/img/blog-expo-qr.png"
     />
   );

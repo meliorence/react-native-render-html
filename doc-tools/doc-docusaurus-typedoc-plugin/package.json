@@ -6,9 +6,9 @@
     "typedoc": "^0.20.37"
   },
   "devDependencies": {
-    "@docusaurus/core": "2.0.0-beta.759298296",
-    "@docusaurus/plugin-content-docs": "2.0.0-beta.759298296",
-    "@docusaurus/types": "2.0.0-beta.759298296",
+    "@docusaurus/core": "^2.0.0-beta.17",
+    "@docusaurus/plugin-content-docs": "^2.0.0-beta.17",
+    "@docusaurus/types": "^2.0.0-beta.17",
     "typescript": "4.2.2"
   }
 }

@@ -76,7 +76,7 @@ to skip many steps.
 |Snack
 |:zap::zap::zap:
 |A *Snack* is very convenient for you and for us. You can
-https://snack.expo.io/@jsamr/rnrhtml-template[*start from
+https://snack.expo.dev/@jsamr/rnrhtml-template[*start from
 our template*]. *Make sure you set the appropriate version of this library.*
 
 |Git
