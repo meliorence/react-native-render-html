@@ -52,7 +52,7 @@
     "doc-docusaurus-rfg-plugin": "workspace:*",
     "doc-docusaurus-typedoc-plugin": "workspace:*",
     "sass": "^1.49.9",
-    "typedoc": "^0.20.37",
-    "typescript": "4.2.2"
+    "typedoc": "^0.22.12",
+    "typescript": "4.6.2"
   }
 }

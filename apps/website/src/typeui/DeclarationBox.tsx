@@ -1,8 +1,8 @@
 import React from 'react';
 import type { JSONOutput } from 'typedoc';
-import { ReflectionKind } from 'typedoc/dist/lib/models/reflections/abstract';
 import clsx from 'clsx';
 import styles from './styles.module.scss';
+import { ReflectionKind } from './typedoc';
 import renderReflection from './renderReflection';
 import Params from './Params';
 import Badges from './Badges';

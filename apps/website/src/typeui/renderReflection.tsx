@@ -1,6 +1,6 @@
-import React from 'react';
-import { ReflectionKind } from 'typedoc/dist/lib/models/reflections/abstract';
+import React, { Fragment } from 'react';
 import type { JSONOutput } from 'typedoc';
+import { ReflectionKind } from './typedoc';
 import {
   TokenPunctuation,
   TokenAttrName,
@@ -30,7 +30,15 @@ function renderFunctionSignatures(
   signatures: JSONOutput.SignatureReflection[],
   params: Params
 ) {
-  return <>{signatures.map((s) => renderFunctionSignature(s, params))}</>;
+  return (
+    <>
+      {signatures.map((s, i) => (
+        <Fragment key={`signature-${i}`}>
+          {renderFunctionSignature(s, params)}
+        </Fragment>
+      ))}
+    </>
+  );
 }
 
 function renderConst(name: string) {
@@ -274,7 +282,10 @@ export default function renderReflection(
       return (
         <>
           {renderConst(reflection.name)}
-          {renderArrowSignature(reflection, params)}
+          {renderArrowSignature(
+            reflection as JSONOutput.SignatureReflection,
+            params
+          )}
         </>
       );
     case ReflectionKind.Variable:
