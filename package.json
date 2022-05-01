@@ -47,6 +47,7 @@
     "@mdx-js/react": "2.0.0-next.9",
     "react-native": "0.64.3",
     "expo-linear-gradient": "~11.0.3",
+    "@types/react": "17.0.39",
     "@svgr/webpack": "6.2.1",
     "@svgr/babel-preset": "6.2.0",
     "@svgr/core": "6.2.1",

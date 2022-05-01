@@ -1,4 +1,4 @@
-import { SvgAssetType } from './toolkit/toolkit-types';
+import { SvgAssetType } from './toolkit/exported-types';
 
 const figuresIndex: Record<
   SvgAssetType,

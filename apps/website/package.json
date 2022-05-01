@@ -11,6 +11,7 @@
     "deploy": "docusaurus api:gen && docusaurus deploy",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
+    "test:ts": "tsc -p . --noEmit",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "api-gendoc": "docusaurus api:gen"

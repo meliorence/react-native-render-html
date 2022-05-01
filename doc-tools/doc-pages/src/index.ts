@@ -1,6 +1,6 @@
 export * from './pages-types';
 export { default as ToolkitProvider } from './toolkit/ToolkitProvider';
-export * from './toolkit/toolkit-types';
+export * from './toolkit/exported-types';
 export { default as useToolkit } from './toolkit/useToolkit';
 export { default as pagesSpecs } from './pagesSpecs';
 

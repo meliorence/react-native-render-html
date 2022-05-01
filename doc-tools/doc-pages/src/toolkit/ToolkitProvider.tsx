@@ -2,18 +2,13 @@ import React, { PropsWithChildren, useMemo } from 'react';
 import acronymsIndex from '../acronymsIndex';
 import figuresIndex from '../figuresIndex';
 import pagesSpecs from '../pagesSpecs';
-import {
-  UIToolkit,
-  UIToolkitConfig,
-  UIToolkitRefs,
-  ImportStmt,
-  RendererCardConfig
-} from './toolkit-types';
+import { UIToolkit, UIToolkitRefs, RendererCardConfig } from './toolkit-types';
 import toolkitContext from './toolkitContext';
 import makeSnippet from './makeSnippet';
 import defaultImports from './defaultImports';
 import { TRenderEngine } from '@native-html/transient-render-engine';
 import { HTMLSourceInline } from 'react-native-render-html';
+import { ImportStmt, UIToolkitConfig } from './exported-types';
 
 function buildRefs(Builder: UIToolkitConfig['RefBuilder']): UIToolkitRefs {
   return {

@@ -115,10 +115,7 @@ export default function RenderHTMLCard({
         <div className={styles.sourceContainer}>
           <div className={styles.sourceContainer__code}>
             <div className={styles.sourceContainer__fixRadius}>
-              <Tabs
-                defaultValue={preferHtmlSrc ? 'html' : 'jsx'}
-                title={title}
-                values={tabs}>
+              <Tabs defaultValue={preferHtmlSrc ? 'html' : 'jsx'} values={tabs}>
                 <TabItem value="html">
                   <div className="codeblock--with-line-numbers">
                     <CodeBlock className="html">{normalHtml}</CodeBlock>

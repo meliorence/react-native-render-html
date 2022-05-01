@@ -1,5 +1,4 @@
-declare module '*.svg' {
-  import { SvgComponent } from '@doc/svg-component';
-  const content: SvgComponent;
+declare module '*.scss' {
+  const content: Record<string, any>;
   export default content;
 }

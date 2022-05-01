@@ -1,4 +1,4 @@
-import { ImportStmt } from './toolkit-types';
+import { ImportStmt } from './exported-types';
 
 const defaultImports: Record<string, ImportStmt> = {
   react: {
