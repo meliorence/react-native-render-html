@@ -70,7 +70,7 @@ export default function getNativePropsForTNode<
     children,
     onPress: syntheticOnPress,
     style: [style, passedNativeProps?.style, switchProp.style],
-    testID: tnode.tagName || undefined
+    testID: switchProp.testID || tnode.tagName || undefined
   };
   return nativeProps as any;
 }
