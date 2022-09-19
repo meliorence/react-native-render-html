@@ -61,6 +61,12 @@
         src="https://badges.openbase.com/js/rating/react-native-render-html.svg"
         alt="Rate on Openbase"
     /></a>
+    <a
+      href="https://kandi.openweaver.com/typescript/meliorence/react-native-render-html"
+      ><img
+        src="https://kandi.openweaver.com/badges/xray.svg"
+        alt="kandi X-Ray"
+    /></a>
   </div>
 </p>
 <br/>
