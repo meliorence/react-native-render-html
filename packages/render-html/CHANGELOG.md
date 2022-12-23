@@ -1,3 +1,11 @@
+# [6.4.0](https://github.com/meliorence/react-native-render-html/compare/v6.3.4...v6.4.0) (2022-12-23)
+
+
+### Features
+
+* add switchProp testID value to nativeProps testID attribute ([#574](https://github.com/meliorence/react-native-render-html/issues/574)) ([299b852](https://github.com/meliorence/react-native-render-html/commit/299b852eeb6ec5ce2b08d84fa230408fe21753f3))
+* move config for 'img' and 'a' into named interface ([2bd0ba1](https://github.com/meliorence/react-native-render-html/commit/2bd0ba1a6f463fdc095dd4c1cadad9cc3a0a9a6b))
+
 ## [6.3.4](https://github.com/meliorence/react-native-render-html/compare/v6.3.3...v6.3.4) (2022-01-24)
 
 
