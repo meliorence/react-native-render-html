@@ -164,7 +164,7 @@ export interface ImgElementConfig {
    * memoize it.
    */
   initialDimensions?: ImageDimensions;
-};
+}
 
 /**
  * Configuration for a.
