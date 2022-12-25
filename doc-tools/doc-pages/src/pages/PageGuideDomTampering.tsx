@@ -240,7 +240,7 @@ export default function PageGuideDomTampering() {
           The general recommendation for this three-layers rendering
           architecture is that the engine and configuration should be put near
           the top of your App to factor the cost of instantiating the engine.
-          This is especially usefull for apps which will render hundreds to
+          This is especially usefuld for apps which will render hundreds to
           thousands of small snippets such as chat apps.
         </ListItem>
       </List>

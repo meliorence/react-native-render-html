@@ -78,7 +78,7 @@ export default function PageConceptRendering() {
           The great benefit of using <Bold>explicitly</Bold> this composite
           rendering architecture is that the engine and configuration can be put
           near the top of your App to factor the cost of instantiating the
-          engine. This is <Bold>especially usefull</Bold> for apps which will
+          engine. This is <Bold>especially useful</Bold> for apps which will
           render hundreds to thousands of small snippets such as chat apps.
         </Admonition>
         <Paragraph>
