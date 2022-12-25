@@ -82,7 +82,7 @@ export default function PageReinventTheWheel() {
         <Paragraph>
           To do so, we will need an HTML parsing library which will give us some
           sort of proxy DOM representation of the HTML source. In this very
-          example, we will use <RefHtmlparser2 /> libarary:
+          example, we will use <RefHtmlparser2 /> library:
         </Paragraph>
         <SourceDisplay
           lang="jsx"
@@ -116,7 +116,7 @@ export default function PageReinventTheWheel() {
         </List>
         <Paragraph>
           Although the <InlineCode>renderTextNode</InlineCode> implementation is
-          pretty straightforward,
+          pretty straightforward,{' '}
           <InlineCode>renderElement</InlineCode> has some conditional logic to
           render the element either in a React Native{' '}
           <RefRNSymbol name="Text" /> or <RefRNSymbol name="View" />. This is to
@@ -126,7 +126,7 @@ export default function PageReinventTheWheel() {
         </Paragraph>
         <Admonition type="note">
           We allude to the DOM an DOM nodes while <RefHtmlparser2 /> only
-          provides a substet of the DOM API for lightweightness!
+          provides a subset of the DOM API for lightweightness!
         </Admonition>
       </Chapter>
       <Chapter title="Discussion">

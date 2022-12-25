@@ -85,7 +85,7 @@ export default function PageFAQ() {
         </Section>
         <Section title="Aren't there better renderers for tables?">
           <Paragraph>
-            Sure! The default renderer is very limitted. Check-out{' '}
+            Sure! The default renderer is very limited. Check-out{' '}
             <Hyperlink url="https://github.com/native-html/plugins/tree/master/packages/table-plugin#readme">
               @native-html/table-plugin
             </Hyperlink>{' '}
