@@ -6,7 +6,6 @@
  * @Date 06/03/2022
  */
 
-import {decode} from 'html-entities'
 import {Node, parser} from 'posthtml-parser'
 
 interface NodeElement {

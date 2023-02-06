@@ -43,7 +43,6 @@ const {width} = Dimensions.get('window')
 const vw = width / 100
 
 const styles = StyleSheet.create({
-  bannerAds: {alignItems: 'center', marginTop: 20},
   blockQuoteContainer: {
     paddingBottom: 0,
     paddingRight: 10,
