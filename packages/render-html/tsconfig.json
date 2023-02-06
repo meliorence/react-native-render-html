@@ -3,7 +3,8 @@
   "extends": "../../tsconfig-base.json",
   "compilerOptions": {
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "jsx": "react"
   },
   "include": ["src", "jest"]
 }
