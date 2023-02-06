@@ -134,7 +134,7 @@ const RenderHtmlElement: React.FC<RenderHtmlElementProps> = ({
 
 const RenderHtmlContent: React.FC<RenderHtmlContentComponentProps> = ({
                                                                         content,
-                                                                        readMore = null,
+                                                                        ...props,
                                                                       }) => {
   /**
    * INITIALIZATION
@@ -190,6 +190,7 @@ const RenderHtmlContent: React.FC<RenderHtmlContentComponentProps> = ({
                         <RenderHtmlElement
                             contentWidth={width}
                             element={element}
+                            {...props}
                         />
                   </React.Fragment>
               )}
