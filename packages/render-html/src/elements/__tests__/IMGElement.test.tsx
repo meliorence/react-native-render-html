@@ -474,5 +474,25 @@ describe('IMGElement', () => {
         height: 100
       });
     });
+    it('should retain border-related style', async () => {
+      const source = { uri: 'http://via.placeholder.com/640x360' };
+      const style = {
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10
+      };
+      const { findByTestId } = render(
+        <HTMLImgElement source={source} style={style} />
+      );
+      const image = await findByTestId('image-success');
+      expect(image).toBeTruthy();
+      expect(image).toHaveStyle({
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10
+      });
+    });
   });
 });
