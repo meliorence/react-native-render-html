@@ -1,5 +1,4 @@
 import React, { PropsWithChildren, ReactElement, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import RenderersPropsProvider from './context/RenderersPropsProvider';
 import SharedPropsProvider from './context/SharedPropsProvider';
 import TChildrenRenderersContext from './context/TChildrenRendererContext';
@@ -18,29 +17,6 @@ import ListStyleSpecsProvider from './context/ListStyleSpecsProvider';
 const childrenRendererContext = {
   TChildrenRenderer,
   TNodeChildrenRenderer
-};
-
-export type RenderHTMLConfigPropTypes = Record<keyof RenderHTMLConfig, any>;
-
-export const renderHTMLConfigPropTypes: RenderHTMLConfigPropTypes = {
-  bypassAnonymousTPhrasingNodes: PropTypes.bool,
-  defaultTextProps: PropTypes.object,
-  defaultViewProps: PropTypes.object,
-  enableExperimentalBRCollapsing: PropTypes.bool,
-  enableExperimentalGhostLinesPrevention: PropTypes.bool,
-  enableExperimentalMarginCollapsing: PropTypes.bool,
-  remoteErrorView: PropTypes.func,
-  remoteLoadingView: PropTypes.func,
-  debug: PropTypes.bool,
-  computeEmbeddedMaxWidth: PropTypes.func,
-  renderersProps: PropTypes.object,
-  WebView: PropTypes.any,
-  GenericPressable: PropTypes.any,
-  defaultWebViewProps: PropTypes.object,
-  pressableHightlightColor: PropTypes.string,
-  customListStyleSpecs: PropTypes.object,
-  renderers: PropTypes.object,
-  provideEmbeddedHeaders: PropTypes.func
 };
 
 /**
@@ -85,8 +61,3 @@ export default function RenderHTMLConfigProvider(
     </RenderRegistryProvider>
   );
 }
-
-/**
- * @ignore
- */
-RenderHTMLConfigProvider.propTypes = renderHTMLConfigPropTypes;

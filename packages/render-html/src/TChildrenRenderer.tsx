@@ -9,16 +9,4 @@ import renderChildren from './renderChildren';
 const TChildrenRenderer: FunctionComponent<TChildrenRendererProps> =
   renderChildren.bind(null);
 
-export const tchildrenRendererDefaultProps: Pick<
-  TChildrenRendererProps,
-  'propsForChildren'
-> = {
-  propsForChildren: {}
-};
-
-/**
- * @ignore
- */
-TChildrenRenderer.defaultProps = tchildrenRendererDefaultProps;
-
 export default TChildrenRenderer;
