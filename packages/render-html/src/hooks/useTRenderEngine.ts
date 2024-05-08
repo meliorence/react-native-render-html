@@ -15,30 +15,45 @@ export const defaultFallbackFonts = {
   serif: Platform.select({ ios: 'Times New Roman', default: 'serif' })
 };
 
+const defaultConfig = {
+  baseStyle: { fontSize: 14 },
+  classesStyles: {},
+  customHTMLElementModels: {},
+  emSize: 14,
+  enableCSSInlineProcessing: true,
+  enableUserAgentStyles: true,
+  fallbackFonts: defaultFallbackFonts,
+  htmlParserOptions: { decodeEntities: true },
+  ignoredDomTags: [],
+  ignoredStyles: [],
+  systemFonts: defaultSystemFonts,
+  tagsStyles: {}
+}
+
 /**
  * @internal
  */
 export default function useTRenderEngine({
   allowedStyles,
-  baseStyle = { fontSize: 14 },
-  classesStyles = {},
-  customHTMLElementModels = {},
+  baseStyle = defaultConfig.baseStyle,
+  classesStyles = defaultConfig.classesStyles,
+  customHTMLElementModels = defaultConfig.customHTMLElementModels,
   dangerouslyDisableHoisting,
   dangerouslyDisableWhitespaceCollapsing,
   domVisitors,
-  emSize = 14,
-  enableCSSInlineProcessing = true,
-  enableUserAgentStyles = true,
-  fallbackFonts = defaultFallbackFonts,
-  htmlParserOptions = { decodeEntities: true },
+  emSize = defaultConfig.emSize,
+  enableCSSInlineProcessing = defaultConfig.enableCSSInlineProcessing,
+  enableUserAgentStyles = defaultConfig.enableUserAgentStyles,
+  fallbackFonts = defaultConfig.fallbackFonts,
+  htmlParserOptions = defaultConfig.htmlParserOptions,
   idsStyles,
   ignoreDomNode,
-  ignoredDomTags = [],
-  ignoredStyles = [],
+  ignoredDomTags = defaultConfig.ignoredDomTags,
+  ignoredStyles = defaultConfig.ignoredStyles,
   selectDomRoot,
   setMarkersForTNode,
-  systemFonts = defaultSystemFonts,
-  tagsStyles = {}
+  systemFonts = defaultConfig.systemFonts,
+  tagsStyles = defaultConfig.tagsStyles
 }: TRenderEngineConfig) {
   const profile = useProfiler({ name: 'TRenderEngineProvider' });
   return useMemo(() => {
