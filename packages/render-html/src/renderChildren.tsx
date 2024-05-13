@@ -39,7 +39,7 @@ const mapCollapsibleChildren = (
 
 export default function renderChildren({
   tchildren,
-  propsForChildren = empty,
+  propsForChildren = {},
   disableMarginCollapsing,
   renderChild
 }: TChildrenRendererProps): ReactElement {

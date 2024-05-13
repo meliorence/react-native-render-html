@@ -1,7 +1,6 @@
 import { ReactElement } from 'react';
 import { TNode } from '@native-html/transient-render-engine';
 import { useSharedProps } from './context/SharedPropsProvider';
-import { tchildrenRendererDefaultProps } from './TChildrenRenderer';
 import {
   TChildrenRendererProps,
   TNodeChildrenRendererProps
@@ -72,10 +71,5 @@ function TNodeChildrenRenderer(
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return renderChildren(useTNodeChildrenProps(props));
 }
-
-/**
- * @ignore
- */
-TNodeChildrenRenderer.defaultProps = tchildrenRendererDefaultProps;
 
 export default TNodeChildrenRenderer;

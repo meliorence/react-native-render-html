@@ -49,6 +49,7 @@ const TNodeRenderer = memo(function MemoizedTNodeRenderer(
   const renderRegistry = useRendererRegistry();
   const TNodeChildrenRenderer = useTNodeChildrenRenderer();
   const tnodeProps = {
+    propsFromParent: { collapsedMarginTop: null },
     ...props,
     TNodeChildrenRenderer,
     sharedProps
@@ -119,16 +120,6 @@ const TNodeRenderer = memo(function MemoizedTNodeRenderer(
     ? renderFn(assembledProps)
     : React.createElement(Renderer as any, assembledProps);
 });
-
-const defaultProps: Required<Pick<TNodeRendererProps<any>, 'propsFromParent'>> =
-  {
-    propsFromParent: {
-      collapsedMarginTop: null
-    }
-  };
-
-// @ts-expect-error default props must be defined
-TNodeRenderer.defaultProps = defaultProps;
 
 export {
   TDefaultBlockRenderer,
