@@ -4,8 +4,6 @@ import TNodeRenderer from './TNodeRenderer';
 import { TChildrenRendererProps } from './shared-types';
 import collapseTopMarginForChild from './helpers/collapseTopMarginForChild';
 
-const empty = {};
-
 const mapCollapsibleChildren = (
   propsForChildren: TChildrenRendererProps['propsForChildren'],
   renderChild: TChildrenRendererProps['renderChild'],
