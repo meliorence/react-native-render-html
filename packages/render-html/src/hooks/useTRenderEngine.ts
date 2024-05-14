@@ -28,7 +28,7 @@ const defaultConfig = {
   ignoredStyles: [],
   systemFonts: defaultSystemFonts,
   tagsStyles: {}
-}
+};
 
 /**
  * @internal

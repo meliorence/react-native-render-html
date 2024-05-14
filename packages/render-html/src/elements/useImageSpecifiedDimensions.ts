@@ -71,8 +71,13 @@ function deriveSpecifiedDimensionsFromProps({
 export default function useImageSpecifiedDimensions(
   props: UseIMGElementStateProps
 ) {
-  const { contentWidth, enableExperimentalPercentWidth = false, style = {}, width, height } =
-    props;
+  const {
+    contentWidth,
+    enableExperimentalPercentWidth = false,
+    style = {},
+    width,
+    height
+  } = props;
   const flatStyle = useMemo(() => StyleSheet.flatten(style) || {}, [style]);
   const specifiedDimensions = useMemo(
     () =>
