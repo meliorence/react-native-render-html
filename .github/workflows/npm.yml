@@ -6,17 +6,16 @@ on:
         description: 'NPM exact version'
         required: true
   schedule:
-    - cron:  '0 0 * * *'
+    - cron: '0 0 * * *'
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [14, 15, 16]
-    
+        node-version: [18, 20, 22]
+
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
@@ -29,5 +28,5 @@ jobs:
         run: npm install -g @react-native-community/cli
       - name: Init new project
         run: react-native init --npm test; cd test
-      - name: "Install version ${{ github.event.inputs.version }}"
-        run: "npm install react-native-render-html@${{ github.event.inputs.version }}"
+      - name: 'Install version ${{ github.event.inputs.version }}'
+        run: 'npm install react-native-render-html@${{ github.event.inputs.version }}'

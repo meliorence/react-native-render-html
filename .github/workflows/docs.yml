@@ -12,24 +12,24 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [20.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: yarn install --immutable
-    - run: yarn workspace react-native-render-html build
-      name: Build sources
-    - run: yarn process-svg-assets
-      name: Process SVG assets
-    - run: yarn build:tools
-      name: Build Tooling Libraries
-    - run: yarn build:docs
-      name: Build documentation
-    - run: yarn website build
-      name: Build website
-    - run: yarn discovery test:ts
-      name: Discovery TS
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn install --immutable
+      - run: yarn workspace react-native-render-html build
+        name: Build sources
+      - run: yarn process-svg-assets
+        name: Process SVG assets
+      - run: yarn build:tools
+        name: Build Tooling Libraries
+      - run: yarn build:docs
+        name: Build documentation
+      - run: yarn website build
+        name: Build website
+      - run: yarn discovery test:ts
+        name: Discovery TS
