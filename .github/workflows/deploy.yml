@@ -1,0 +1,30 @@
+name: Deploy
+
+on:
+  release:
+    types: [created]
+
+env:
+  NODE_VERSION: '20.x'
+
+jobs:
+  deploy:
+    name: NPM
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Prepare for release
+        run: yarn workspace react-native-render-html prepack
+      - name: Publish to NPM
+        run: npm publish
+        working-directory: ./packages/render-html
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
