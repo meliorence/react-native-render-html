@@ -1,15 +1,14 @@
 name: Deploy
 
 on:
-  release:
-    types: [created]
+  workflow_dispatch:
 
 env:
   NODE_VERSION: '20.x'
 
 jobs:
-  deploy:
-    name: NPM
+  Deploy:
+    name: Deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -23,8 +22,13 @@ jobs:
         run: yarn install --immutable
       - name: Prepare for release
         run: yarn workspace react-native-render-html prepack
-      - name: Publish to NPM
-        run: npm publish
-        working-directory: ./packages/render-html
+      - name: Set Git Credentials
+        run: |
+          git config user.name "${GITHUB_ACTOR}" 
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+      - name: Release It 🚀
+        run: yarn workspace react-native-render-html ci:release
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
