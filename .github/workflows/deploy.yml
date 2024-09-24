@@ -7,7 +7,7 @@ env:
   NODE_VERSION: '20.x'
 
 jobs:
-  Deploy:
+  deploy:
     name: Deploy
     runs-on: ubuntu-latest
 
