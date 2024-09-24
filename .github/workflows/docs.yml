@@ -29,7 +29,9 @@ jobs:
         name: Build Tooling Libraries
       - run: yarn build:docs
         name: Build documentation
-      - run: yarn website build
-        name: Build website
+      - name: Build website
+        env:
+          NODE_OPTIONS: '--openssl-legacy-provider'
+        run: yarn website build
       - run: yarn discovery test:ts
         name: Discovery TS
