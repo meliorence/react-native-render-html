@@ -37,7 +37,8 @@
     "build:defs": "api-extractor run --local --verbose",
     "prepack": "yarn run prepack:readme && yarn run build",
     "prepack:readme": "./scripts/prepack.sh",
-    "ci:release": "release-it --ci --no-git.requireUpstream"
+    "release:ci": "release-it --ci --no-git.requireUpstream",
+    "release:dry": "release-it --dry --no-git.requireUpstream"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.16",
