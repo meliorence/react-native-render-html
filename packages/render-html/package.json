@@ -36,7 +36,9 @@
     "build": "bob build",
     "build:defs": "api-extractor run --local --verbose",
     "prepack": "yarn run prepack:readme && yarn run build",
-    "prepack:readme": "./scripts/prepack.sh"
+    "prepack:readme": "./scripts/prepack.sh",
+    "release:ci": "release-it --ci --no-git.requireUpstream",
+    "release:dry": "release-it --dry-run --no-git.requireUpstream"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.16",
@@ -46,7 +48,7 @@
     "@babel/preset-typescript": "^7.13.0",
     "@babel/runtime": "^7.13.17",
     "@microsoft/api-extractor": "^7.14.0",
-    "@release-it/conventional-changelog": "^2.0.1",
+    "@release-it/conventional-changelog": "^8.0.2",
     "@testing-library/jest-native": "^4.0.2",
     "@testing-library/react-hooks": "^7.0.0",
     "@testing-library/react-native": "^7.2.0",
@@ -65,7 +67,7 @@
     "react-native-builder-bob": "^0.18.1",
     "react-performance-testing": "^1.2.3",
     "react-test-renderer": "^17.0.2",
-    "release-it": "14.11.0-next.1",
+    "release-it": "^17.6.0",
     "typescript": "4.2.2"
   },
   "peerDependencies": {
