@@ -37,7 +37,7 @@ jobs:
         name: Build
       - run: yarn build:tools
         name: Build Tooling Libraries
-      - uses: codecov/codecov-action@v2
+      - uses: codecov/codecov-action@v4
         with:
           file: ./packages/render-html/coverage/clover.xml # optional
-          fail_ci_if_error: true # optional (default = false)
+          fail_ci_if_error: false # optional (default = false)
