@@ -1,19 +1,8 @@
 > [!IMPORTANT]
-> # The project has been moved to [native-html/render](https://github.com/native-html/render). 
+> ### The project has been moved to [native-html/render](https://github.com/native-html/render). 
 > This repository is now archived and there won't be any active development.
 
 ### 🗃️ Releases
-
-**The Foundry (v6) release is finally stable, and is now-on the recommended
-version.** [Check out **the announcement blog post** in our brand new
-website](https://meliorence.github.io/react-native-render-html/blog/2021/06/07/foundry-announcement).
-We also have a [**migration
-guide**](https://meliorence.github.io/react-native-render-html/docs/migration-guide)
-for those who are coming from v5 and below.
-
-> :warning: **You are on the master branch which is home for the latest development.**
-> Check the table bellow to get documentation for your exact
-> version.
 
 | Minor | Branch                                                                                   | Documentation                                                                                              | Latest                                                                         |
 | ----- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
